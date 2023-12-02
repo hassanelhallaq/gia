@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('is_certificate',['yes','no']);
             $table->enum('language',['english','arabic']);
             $table->integer('percentage_certificate');
+            $table->string('coordinator')->nullable();
             $table->tinyInteger('attendance_questionnaire')->default('0');
             $table->tinyInteger('image')->default('0');
             $table->tinyInteger('study')->default('0');
