@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('image');
             $table->string('color');
             $table->enum('show_invited',['yes','no'])->default('yes');
+            $table->integer('client_id')->unsigned();
+            $table->foreign('client_id')->references('id')->on('clients');
             $table->timestamps();
         });
     }
