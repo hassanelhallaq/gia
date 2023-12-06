@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::prefix('dashboard')->middleware('guest:admin,client')->group(function () {
+    Route::get('{guard}/login', [App\Http\Controllers\UserAuthController::class, 'showLogin'])->name('dashboard.login');
+    Route::post('{guard}/login', [App\Http\Controllers\UserAuthController::class, 'login']);
+});
+Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
+    function () {
+});

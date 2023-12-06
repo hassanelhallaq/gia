@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('street')->nullable();
             $table->string('email');
             $table->string('phone_number');
+            $table->string('password');
             $table->timestamps();
         });
     }
