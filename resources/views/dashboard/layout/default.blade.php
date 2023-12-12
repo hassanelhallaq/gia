@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="Author" content="Mohammed Technologies Private Limited">
-    <!-- Title -->
+     <!-- Title -->
     <title>Dashboard</title>
     <!-- Favicon -->
     <link rel="icon" href="{{asset('assets/img/brand/favicon.png')}}" type="image/x-icon" />
@@ -45,14 +44,10 @@
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar sidebar-scroll">
         <div class="main-sidebar-header active">
-            <a class="desktop-logo logo-light active" href="index.html"><img src="{{asset('assets/img/brand/logo.png')}}"
-                    class="main-logo" alt="logo"></a>
-            <a class="desktop-logo logo-dark active" href="index.html"><img src="{{asset('assets/img/brand/logo-white.png')}}"
-                    class="main-logo dark-theme" alt="logo"></a>
-            <a class="logo-icon mobile-logo icon-light active" href="index.html"><img src="{{asset('assets/img/brand/favicon.png')}}"
-                    class="logo-icon" alt="logo"></a>
-            <a class="logo-icon mobile-logo icon-dark active" href="index.html"><img
-                    src="{{asset('assets/img/brand/favicon-white.png')}}" class="logo-icon dark-theme" alt="logo"></a>
+            <a class="desktop-logo logo-light active" href=""><img src="{{asset('assets/img/brand/logo.png')}}" class="main-logo" alt="logo"></a>
+            <a class="desktop-logo logo-dark active" href="{{ url('/' . $page='index') }}"><img src="{{asset('assets/img/brand/logo-white.png')}}" class="main-logo dark-theme" alt="logo"></a>
+            <a class="logo-icon mobile-logo icon-light active" href="{{ url('/' . $page='index') }}"><img src="{{asset('assets/img/brand/favicon.png')}}" class="logo-icon" alt="logo"></a>
+            <a class="logo-icon mobile-logo icon-dark active" href="{{ url('/' . $page='index') }}"><img src="{{asset('assets/img/brand/favicon-white.png')}}" class="logo-icon dark-theme" alt="logo"></a>
         </div>
         <div class="main-sidemenu">
             <div class="d-block pos-relative">
