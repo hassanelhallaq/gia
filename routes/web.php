@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,4 +23,7 @@ Route::prefix('dashboard')->middleware('guest:admin,client')->group(function () 
 });
 Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
     function () {
+        Route::get('logout', [App\Http\Controllers\UserAuthController::class, 'logout'])->name('dashboard.auth.logout');
+        Route::get('/', [PagesController::class , 'index'])->name('admin.dashboard');
+
 });

@@ -26,10 +26,10 @@ return new class extends Migration
             $table->tinyInteger('attendance_questionnaire')->default('0');
             $table->tinyInteger('image')->default('0');
             $table->tinyInteger('study')->default('0');
-            $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->integer('program_id')->unsigned();
-            $table->foreign('program_id')->references('id')->on('programs');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('program_id');
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             $table->timestamps();
         });
     }
