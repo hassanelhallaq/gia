@@ -19,11 +19,13 @@ return new class extends Migration
             $table->date('start');
             $table->date('end');
             $table->string('content_one')->nullable();
-            $table->string('content_two')->nullable();
+            $table->text('content_two')->nullable();
             $table->enum('contact_type',['whatsapp','sms','email'])->default('email');
             $table->enum('register',['qr','on_place'])->default('qr');
             $table->string('image');
             $table->string('color');
+            $table->string('file');
+            $table->string('attendance_method');
             $table->enum('show_invited',['yes','no'])->default('yes');
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');

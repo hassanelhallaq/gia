@@ -35,5 +35,10 @@
 {{-- <script src="{{ URL::asset('assets/js/apexcharts.js') }}"></script> --}}
 <!-- custom js -->
 <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
+<script src="{{ asset('crudjs/crud.js') }}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {{-- <script src="{{ URL::asset('assets/js/chart.chartjs.js') }}"></script> --}}
 @yield('js')
