@@ -1,6 +1,5 @@
 @extends('dashboard.layouts.master')
 @section('content')
-    <div class="container-fluid mt-3">
         <!-- row -->
         <div class="row row">
 
@@ -137,5 +136,5 @@
 
 
 
-    </div>
+    </>
 @endsection

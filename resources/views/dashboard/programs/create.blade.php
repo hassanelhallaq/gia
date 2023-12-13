@@ -1,16 +1,17 @@
 @extends('dashboard.layouts.master')
+@section('css')
+<!-- Internal Select2 css -->
+<link rel="stylesheet" href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}">
+<!--Internal  Datetimepicker-slider css -->
+<link rel="stylesheet" href="{{ URL::asset('assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css') }}">
+<!-- Internal Spectrum-colorpicker css -->
+<link rel="stylesheet" href="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('assets/plugins/wizards/css/form-elements.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('assets/plugins/wizards/css/style.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('assets/plugins/select_mul/css/style.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('assets/plugins/select_mul/css/semantic.min.css') }}">
+@endsection
 @section('content')
-<link href="{{asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
-<link rel="stylesheet" href="{{asset('assets/plugins/wizards/css/form-elements.css')}}">
-<link rel="stylesheet" href="{{asset('assets/plugins/wizards/css/style.css')}}">
-
-<link rel="stylesheet" href="{{asset('assets/plugins/select_mul/css/style.css')}}">
-<link rel="stylesheet" href="{{asset('assets/plugins/select_mul/css/semantic.min.css')}}">
-
-<link href="{{asset('assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css')}}" rel="stylesheet">
-<link href="{{asset('assets/plugins/spectrum-colorpicker/spectrum.css')}}" rel="stylesheet">
-
-<div class="container-fluid mt-5">
     <!-- row -->
     <div class="row">
         <div class="col-lg-12 col-md-12">
@@ -378,17 +379,31 @@
     </div>
     <!-- closed row -->
 
-</div>
+
 @endsection
 @section('js')
-<script src="{{asset('assets/plugins/pickerjs/picker.min.js')}}"></script>
-<script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
-<script src="{{asset('assets/js/form-elements.js')}}"></script>
-<script src="{{asset('assets/plugins/wizards/js/jquery.backstretch.min.js')}}"></script>
-<script src="{{asset('assets/js/jquery.backstretch.min.js')}}"></script>
-<script src="{{asset('assets/plugins/wizards/js/retina-1.1.0.min.js')}}"></script>
-<script src="{{asset('assets/plugins/wizards/js/scripts.js')}}"></script>
+<!-- JQuery min js -->
+<script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
+<!--Internal  jquery.maskedinput date js -->
+<script src="{{ URL::asset('assets/plugins/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
+<!--Internal  spectrum-colorpicker js -->
+<script src="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.js') }}"></script>
+<!--Internal  jquery-simple-datetimepicker js -->
+<script src="{{ URL::asset('assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js') }}"></script>
+<!--Internal  pickerjs js -->
+<script src="{{ URL::asset('assets/plugins/pickerjs/picker.min.js') }}"></script>
+<!-- Internal Select2.min js -->
+<script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+<!-- Internal form-elements js -->
+<script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
+<!-- wizard -->
+<script src="{{ URL::asset('assets/plugins/wizards/js/jquery.backstretch.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/jquery.backstretch.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/wizards/js/retina-1.1.0.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/wizards/js/scripts.js') }}"></script>
 <!-- select mul -->
-<script src="{{asset('assets/plugins/select_mul/js/semantic.min.js')}}"></script>
-<script src="{{asset('assets/plugins/select_mul/js/main.js')}}"></script>
+<script src="{{ URL::asset('assets/plugins/select_mul/js/semantic.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/select_mul/js/main.js') }}"></script>
+
+
 @endsection
