@@ -9,6 +9,6 @@ class PagesController extends Controller
     //
     public function index()
     {
-        return view("dashboard.layout.dashboard");
+        return view('dashboard.index');
     }
 }
