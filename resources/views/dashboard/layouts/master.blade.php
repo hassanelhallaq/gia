@@ -30,6 +30,8 @@
             </div>
         </div>
         @include('dashboard.layouts.footer')
+        @yield('js')
+
 		@include('dashboard.layouts.footer-scripts')
 	</body>
 </html>

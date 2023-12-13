@@ -12,7 +12,8 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        //
+         $programs = Program::orderBy("id","desc")->withCount('courses')->paginate(10);
+        return view("dashboard.programs.index", compact("programs"));
     }
 
     /**
@@ -20,7 +21,7 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        //
+        return view("dashboard.programs.create");
     }
 
     /**

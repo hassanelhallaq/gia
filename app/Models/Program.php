@@ -9,5 +9,11 @@ class Program extends Model
 {
     use HasFactory;
 
-    
+    public function courses(){
+        return $this->hasMany(Course::class);
+    }
+
+    public function client(){
+        return $this->belongsTo(Client::class);
+    }
 }

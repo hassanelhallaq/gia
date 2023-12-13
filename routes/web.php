@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,5 +26,5 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
     function () {
         Route::get('logout', [App\Http\Controllers\UserAuthController::class, 'logout'])->name('dashboard.auth.logout');
         Route::get('/', [PagesController::class , 'index'])->name('admin.dashboard');
-
+        Route::resource('programs', ProgramController::class);
 });
