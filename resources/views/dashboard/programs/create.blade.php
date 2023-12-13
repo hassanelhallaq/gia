@@ -173,7 +173,7 @@
 
                                 <div class="col-lg-6">
                                     <p class="mg-b-10"> طريقة  الحضور</p>
-                                    <select class="form-control select2">
+                                    <select class="form-control select2" id="attendance_method">
                                         <option value="remote">
                                             عن بعد
                                         </option>
@@ -414,11 +414,33 @@
     <script>
         function performStore() {
             let formData = new FormData();
-            formData.append('mobile', document.getElementById('mobile').value);
+            formData.append('name', document.getElementById('name').value);
+            formData.append('content_one', document.getElementById('content_one').value);
+            formData.append('client_name', document.getElementById('client_name').value);
+            formData.append('username', document.getElementById('username').value);
+            formData.append('content_two', document.getElementById('mobile').value);
+            formData.append('start', document.getElementById('start').value);
+            formData.append('end', document.getElementById('end').value);
+            formData.append('theme_name', document.getElementById('theme_name').value);
+            formData.append('contact_type', document.getElementById('contact_type').value);
+            formData.append('register', document.getElementById('register').value);
+            formData.append('show_invited', document.getElementById('show_invited').value);
+            formData.append('color', document.getElementById('color').value);
+            formData.append('register', document.getElementById('register').value);
+            formData.append('attendance_method', document.getElementById('attendance_method').value);
             formData.append('image', document.getElementById('image').files[0]);
             formData.append('file', document.getElementById('file').files[0]);
-
-            store('/dashboard/admin/companies', formData)
+            formData.append('course_name', document.getElementById('course_name').value);
+            formData.append('language', document.getElementById('language').value);
+            formData.append('seat_count', document.getElementById('seat_count').value);
+            formData.append('coruse_start', document.getElementById('coruse_start').value);
+            formData.append('is_exam', document.getElementById('is_exam').value);
+            formData.append('duration', document.getElementById('duration').value);
+            formData.append('is_certificate', document.getElementById('is_certificate').value);
+            formData.append('trainer', document.getElementById('trainer').value);
+            formData.append('percentage_certificate', document.getElementById('percentage_certificate').value);
+            formData.append('coordinator', document.getElementById('coordinator').value);
+            store('/dashboard/admin/programs', formData)
 
 
         }
