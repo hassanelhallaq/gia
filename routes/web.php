@@ -27,4 +27,6 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::get('logout', [App\Http\Controllers\UserAuthController::class, 'logout'])->name('dashboard.auth.logout');
         Route::get('/', [PagesController::class , 'index'])->name('admin.dashboard');
         Route::resource('programs', ProgramController::class);
+        Route::get('/programs-grid', [ProgramController::class , 'gridView'])->name('programs.grid');
+
 });

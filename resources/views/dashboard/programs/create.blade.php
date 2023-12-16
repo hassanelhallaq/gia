@@ -40,7 +40,7 @@
                             <div class="row row-sm mb-3">
                                 <div class="col-lg-3">
                                     <label for="exampleInputEmail1">اسم العميل</label>
-                                    <input class="form-control" required="" type="text" id="client_name" value="This is input">
+                                    <input class="form-control" required="" type="text" id="client_name" placeholder="This is input">
                                 </div>
                                 <div class="col-lg-3">
                                     <label for="exampleInputEmail1">اسم المستخدم</label>
@@ -286,8 +286,14 @@
                                 <div class="col-lg-6">
                                     <div class="form-group has-success mg-b-0">
                                         <label for="example"> الفئة </label>
-                                        <input class="form-control" required="" type="text" >
-                                    </div>
+                                        <select id="category_id" class="form-control select2" >
+                                            <option value="arabic">
+                                                العربية
+                                            </option>
+                                            <option value="english">
+                                                الانجليزية
+                                            </option>
+                                        </select>                                    </div>
                                 </div>
                                 <div class="col-lg-6 mg-t-20 mg-lg-t-0">
                                     <label for="example"> عدد المقاعد المتاحة </label>
@@ -327,7 +333,7 @@
                             <div class="row mb-3">
                                 <div class="col-lg-6">
                                     <label for="example"> المدة </label>
-                                    <input class="form-control" id="duration" required="" type="text" value="This is input">
+                                    <input class="form-control" id="duration" required="" type="text" placeholder="This is input">
                                 </div>
                                 <div class="col-lg-6 mb-3">
                                     <p class="mg-b-10"> هل يوجد شهادة</p>
@@ -369,15 +375,15 @@
                                     <label for="example"> شروط اضافية </label>
                                     <div class="row">
                                         <div class="col-lg-5">
-                                            <label class="ckbox"><input type="checkbox"><span>ملى استبيان
+                                            <label class="ckbox"><input id="attendance_questionnaire" type="checkbox"><span>ملى استبيان
                                                     الحضور</span></label>
                                         </div>
                                         <div class="col-lg-4 mg-t-20 mg-lg-t-0">
-                                            <label class="ckbox"><input checked="" type="checkbox"><span> صورة شخصية
+                                            <label class="ckbox"><input checked="" id="image" type="checkbox"><span> صورة شخصية
                                                 </span></label>
                                         </div>
                                         <div class="col-lg-3 mg-t-20 mg-lg-t-0">
-                                            <label class="ckbox"><input disabled="" type="checkbox"><span> دراسة
+                                            <label class="ckbox"><input disabled="" id="study" type="checkbox"><span> دراسة
                                                 </span></label>
                                         </div>
                                     </div>
@@ -399,7 +405,7 @@
                                     </div>
                                 </div>
                                 <!-- point steps closed -->
-                                <button class="btn-next btn btn-warning-gradient btn-with-icon mr-1">التالي</button>
+                                <button class="btn-next btn btn-warning-gradient btn-with-icon mr-1" onclick="performStore()" type="button">التالي</button>
                             </div>
                         </fieldset>
                         <!--closed pag tow   -->
@@ -418,7 +424,7 @@
             formData.append('content_one', document.getElementById('content_one').value);
             formData.append('client_name', document.getElementById('client_name').value);
             formData.append('username', document.getElementById('username').value);
-            formData.append('content_two', document.getElementById('mobile').value);
+            formData.append('content_two', document.getElementById('content_two').value);
             formData.append('start', document.getElementById('start').value);
             formData.append('end', document.getElementById('end').value);
             formData.append('theme_name', document.getElementById('theme_name').value);
@@ -439,7 +445,10 @@
             formData.append('is_certificate', document.getElementById('is_certificate').value);
             formData.append('trainer', document.getElementById('trainer').value);
             formData.append('percentage_certificate', document.getElementById('percentage_certificate').value);
+            formData.append('study', document.getElementById('study').value);
             formData.append('coordinator', document.getElementById('coordinator').value);
+            formData.append('category_id', document.getElementById('category_id').value);
+            formData.append('attendance_questionnaire', document.getElementById('attendance_questionnaire').value);
             store('/dashboard/admin/programs', formData)
 
 

@@ -41,8 +41,8 @@
                         </div> --}}
 
                         <div class="mr-auto d-block tx-20">
-                            <a href=""><i class="typcn typcn-calendar-outline"></i></a>
-                            <a href=""><i class="bi bi-grid"></i></a>
+                            <a href=""{{route('programs.grid')}}><i class="typcn typcn-calendar-outline"></i></a>
+                            <a href="{{route('programs.grid')}}"><i class="bi bi-grid"></i></a>
                             <a href=""><i class="bi bi-list bg-black-9 text-white"></i></a>
                         </div>
                     </div>
