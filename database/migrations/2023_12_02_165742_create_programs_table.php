@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('file');
             $table->string('attendance_method');
             $table->enum('show_invited',['yes','no'])->default('yes');
+            $table->string('theme_name');
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->timestamps();

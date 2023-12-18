@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
@@ -28,5 +29,6 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::get('/', [PagesController::class , 'index'])->name('admin.dashboard');
         Route::resource('programs', ProgramController::class);
         Route::get('/programs-grid', [ProgramController::class , 'gridView'])->name('programs.grid');
+        Route::resource('categories', CategoryController::class);
 
 });

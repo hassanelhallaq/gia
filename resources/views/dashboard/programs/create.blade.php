@@ -40,7 +40,8 @@
                             <div class="row row-sm mb-3">
                                 <div class="col-lg-3">
                                     <label for="exampleInputEmail1">اسم العميل</label>
-                                    <input class="form-control" required="" type="text" id="client_name" placeholder="This is input">
+                                    <input class="form-control" required="" type="text" id="client_name"
+                                        placeholder="This is input">
                                 </div>
                                 <div class="col-lg-3">
                                     <label for="exampleInputEmail1">اسم المستخدم</label>
@@ -49,7 +50,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1"><i
                                                     class="mdi mdi-account-search"></i></span>
-                                        </div><input aria-describedby="basic-addon1" aria-label="Username"  id="username"
+                                        </div><input aria-describedby="basic-addon1" aria-label="Username" id="username"
                                             class="form-control" type="text">
                                     </div>
                                 </div>
@@ -71,8 +72,8 @@
                                             <div class="input-group-text">
                                                 <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                             </div>
-                                        </div><input class="form-control fc-datepicker" id="start" placeholder="MM/DD/YYYY"
-                                            type="text">
+                                        </div><input class="form-control fc-datepicker" id="start"
+                                            placeholder="MM/DD/YYYY" type="text">
                                     </div>
                                 </div>
 
@@ -83,8 +84,8 @@
                                             <div class="input-group-text">
                                                 <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                             </div>
-                                        </div><input class="form-control fc-datepicker" id="end" placeholder="MM/DD/YYYY"
-                                            type="text">
+                                        </div><input class="form-control fc-datepicker" id="end"
+                                            placeholder="MM/DD/YYYY" type="text">
                                     </div>
                                 </div>
 
@@ -106,14 +107,14 @@
                                         </select>
                                     </div>
                                     <!-- <p class="mg-b-10">صلاحيات الوصول 1</p>
-                                        <select class="form-control select2" multiple="multiple">
-                                            <option selected value="Firefox">
-                                                محمد سعيد
-                                            </option>
-                                            <option value="Chrome">
-                                                احمد علي
-                                            </option>
-                                        </select> -->
+                                            <select class="form-control select2" multiple="multiple">
+                                                <option selected value="Firefox">
+                                                    محمد سعيد
+                                                </option>
+                                                <option value="Chrome">
+                                                    احمد علي
+                                                </option>
+                                            </select> -->
                                 </div>
                             </div>
                             <!-- closed row -->
@@ -140,7 +141,7 @@
                                             رسائل نصية
                                         </option>
                                         <option value="email">
-                                          بريد الكتروني
+                                            بريد الكتروني
                                         </option>
                                         <option value="whatsapp&sms">
                                             واتس اب و رسائل نصية
@@ -163,16 +164,16 @@
                                             كيو ان عند الحضور
                                         </option>
                                         <option value="visit">
-                                           حضور
+                                            حضور
                                         </option>
                                         <option value="selfie">
-                                           كيو ار و صوره شخصيه
+                                            كيو ار و صوره شخصيه
                                         </option>
                                     </select>
                                 </div>
 
                                 <div class="col-lg-6">
-                                    <p class="mg-b-10"> طريقة  الحضور</p>
+                                    <p class="mg-b-10"> طريقة الحضور</p>
                                     <select class="form-control select2" id="attendance_method">
                                         <option value="remote">
                                             عن بعد
@@ -194,7 +195,7 @@
                                             نعم
                                         </option>
                                         <option value="no">
-                                          لا
+                                            لا
                                         </option>
                                     </select>
                                 </div>
@@ -214,7 +215,8 @@
 
                                 <div class="col-lg-6 mb-3">
                                     <label for="exampleInputEmail1"> اللون </label>
-                                    <input class="form-control" required="" type="color" id="color" type="text">
+                                    <input class="form-control" required="" type="color" id="color"
+                                        type="text">
                                 </div>
 
                                 <div class="col-lg-3 mb-3">
@@ -286,18 +288,18 @@
                                 <div class="col-lg-6">
                                     <div class="form-group has-success mg-b-0">
                                         <label for="example"> الفئة </label>
-                                        <select id="category_id" class="form-control select2" >
-                                            <option value="arabic">
-                                                العربية
-                                            </option>
-                                            <option value="english">
-                                                الانجليزية
-                                            </option>
-                                        </select>                                    </div>
+                                        <select id="category_id" class="form-control select2">
+                                            @foreach ($categories as $item)
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6 mg-t-20 mg-lg-t-0">
                                     <label for="example"> عدد المقاعد المتاحة </label>
-                                    <input class="form-control" required="" type="text" id="seat_count">
+                                    <input class="form-control" required="" type="number" id="seat_count">
                                 </div>
                             </div>
                             <!-- closed row -->
@@ -311,8 +313,8 @@
                                             <div class="input-group-text">
                                                 <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                             </div>
-                                        </div><input class="form-control fc-datepicker" id="coruse_start" placeholder="MM/DD/YYYY"
-                                            type="text">
+                                        </div><input class="form-control fc-datepicker" id="coruse_start"
+                                            placeholder="MM/DD/YYYY" type="text">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mb-3">
@@ -333,7 +335,8 @@
                             <div class="row mb-3">
                                 <div class="col-lg-6">
                                     <label for="example"> المدة </label>
-                                    <input class="form-control" id="duration" required="" type="text" placeholder="This is input">
+                                    <input class="form-control" id="duration" required="" type="number"
+                                        placeholder="This is input">
                                 </div>
                                 <div class="col-lg-6 mb-3">
                                     <p class="mg-b-10"> هل يوجد شهادة</p>
@@ -359,7 +362,8 @@
                                 </div>
                                 <div class="col-lg-6 mg-t-20 mg-lg-t-0">
                                     <label for="example"> نسبة الحصول على الشهادة </label>
-                                    <input class="form-control" required="" id="percentage_certificate" type="number">
+                                    <input class="form-control" required="" id="percentage_certificate"
+                                        type="number">
                                 </div>
                             </div>
                             <!-- closed row -->
@@ -375,15 +379,17 @@
                                     <label for="example"> شروط اضافية </label>
                                     <div class="row">
                                         <div class="col-lg-5">
-                                            <label class="ckbox"><input id="attendance_questionnaire" type="checkbox"><span>ملى استبيان
+                                            <label class="ckbox"><input id="attendance_questionnaire"
+                                                    type="checkbox"><span>ملى استبيان
                                                     الحضور</span></label>
                                         </div>
                                         <div class="col-lg-4 mg-t-20 mg-lg-t-0">
-                                            <label class="ckbox"><input checked="" id="image" type="checkbox"><span> صورة شخصية
+                                            <label class="ckbox"><input checked="" id="image_check"
+                                                    type="checkbox"><span> صورة شخصية
                                                 </span></label>
                                         </div>
                                         <div class="col-lg-3 mg-t-20 mg-lg-t-0">
-                                            <label class="ckbox"><input disabled="" id="study" type="checkbox"><span> دراسة
+                                            <label class="ckbox"><input id="study" type="checkbox"><span> دراسة
                                                 </span></label>
                                         </div>
                                     </div>
@@ -405,7 +411,8 @@
                                     </div>
                                 </div>
                                 <!-- point steps closed -->
-                                <button class="btn-next btn btn-warning-gradient btn-with-icon mr-1" onclick="performStore()" type="button">التالي</button>
+                                <button class=" btn btn-warning-gradient btn-with-icon mr-1" onclick="performStore()"
+                                    type="button">التالي</button>
                             </div>
                         </fieldset>
                         <!--closed pag tow   -->
@@ -448,8 +455,9 @@
             formData.append('study', document.getElementById('study').value);
             formData.append('coordinator', document.getElementById('coordinator').value);
             formData.append('category_id', document.getElementById('category_id').value);
+            formData.append('image_check', document.getElementById('image_check').value);
             formData.append('attendance_questionnaire', document.getElementById('attendance_questionnaire').value);
-            store('/dashboard/admin/programs', formData)
+            storeRoute('/dashboard/admin/programs', formData)
 
 
         }

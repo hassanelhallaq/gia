@@ -170,7 +170,7 @@
 
 
                                 <div class="d-flex justify-content-between mt-4">
-                                    <p><i class="mdi mdi-account-outline tx-15"></i><span class="tx-11"> اسم العميل :  {{$item->client_name}}</span></p>
+                                    <p><i class="mdi mdi-account-outline tx-15"></i><span class="tx-11"> اسم العميل :  {{$item->clinet_name}}</span></p>
                                     <div class="wrapper d-flex image-group pb-3">
                                         <img src="../assets/img/faces/1.jpg" alt="profile" class="img-xs rounded-circle">
                                         <img src="../assets/img/faces/2.jpg" alt="profile" class="img-xs rounded-circle">

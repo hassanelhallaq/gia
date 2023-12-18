@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Course;
 use App\Models\Program;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +25,8 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        return view("dashboard.programs.create");
+        $categories = Category::all();
+        return view("dashboard.programs.create", compact('categories'));
     }
 
     /**
@@ -38,7 +41,7 @@ class ProgramController extends Controller
             'image' => 'required',
             'content_one' => 'required',
             'client_name' => 'required',
-            'username' => 'required',
+            'username' => 'required|unique:programs',
             'content_two' => 'required',
             'start' => 'required',
             'end' => 'required',
@@ -62,6 +65,7 @@ class ProgramController extends Controller
             'coordinator'=> 'required',
             'attendance_questionnaire'=> 'required',
             'category_id'=> 'required',
+            'image_check'=> 'required',
 
 
         ]);
@@ -74,8 +78,10 @@ class ProgramController extends Controller
         $program->clinet_name = $request->client_name;
         $program->username = $request->username;
         $program->content_two = $request->content_two;
-        $program->start = $request->start;
-        $program->end = $request->end;
+        $start = Carbon::parse($request->start)->format('y-m-d');
+        $end = Carbon::parse($request->end)->format('y-m-d');
+        $program->start = $start;
+        $program->end = $end ;
         $program->theme_name = $request->theme_name;
         $program->contact_type = $request->contact_type;
         $program->register = $request->register;
@@ -101,20 +107,24 @@ class ProgramController extends Controller
             $course->name = $request->course_name;
             $course->language = $request->language;
             $course->seat_count = $request->seat_count;
-            $course->start = $request->coruse_start;
+            $coruseStart = Carbon::parse($request->coruse_start)->format('y-m-d');
+            $course->start = $coruseStart;
             $course->is_exam = $request->is_exam;
             $course->duration = $request->duration;
             $course->is_certificate = $request->is_certificate;
             $course->trainer = $request->trainer;
             $course->percentage_certificate = $request->percentage_certificate;
-            $course->study = $request->study;
+            $course->study = $request->study == 'on' ? 1 : 0;
             $course->coordinator = $request->coordinator;
-            $course->attendance_questionnaire = $request->attendance_questionnaire;
+            $course->attendance_questionnaire = $request->attendance_questionnaire == 'on' ? 1 : 0;
+            $course->image = $request->image_check == 'on' ? 1 : 0;
             $course->program_id = $program->id;
-            $course->category_id = $program->category_id;
+            $course->category_id =$request->category_id;
             $course->save();
         }
-        return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $isSaved ? 201 : 400);
+        return response()->json(['redirect' => route('programs.grid')]);
+
+        // return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $isSaved ? 201 : 400);
 
     }
 

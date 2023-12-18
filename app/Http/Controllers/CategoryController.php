@@ -12,7 +12,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::orderBy("id", "desc")->paginate(10);
+        return view("dashboard.categories.index", compact("categories"));
     }
 
     /**
@@ -20,7 +21,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view("dashboard.categories.create");
     }
 
     /**
@@ -28,7 +29,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $validator = Validator($data, [
+            'name' => 'required|string',
+
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
+        }
+        $cateory = Category::create($data);
+        return response()->json(['redirect' => route('categories.index')]);
+
     }
 
     /**
@@ -44,7 +56,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view("dashboard.categories.edit", compact("category"));
+
     }
 
     /**
@@ -52,7 +65,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $data = $request->all();
+
+        $validator = Validator($data, [
+            'name' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
+        }
+        $cateory = $category->update($data);
+        return response()->json(['redirect' => route('categories.index')]);
     }
 
     /**

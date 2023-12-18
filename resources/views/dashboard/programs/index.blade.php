@@ -41,6 +41,7 @@
                         </div> --}}
 
                         <div class="mr-auto d-block tx-20">
+                            <a href="{{route('programs.create')}}" class="btn btn-warning-gradient btn-with-icon" type="button" > اضف <i class="bi bi-floppy"></i></a>
                             <a href=""{{route('programs.grid')}}><i class="typcn typcn-calendar-outline"></i></a>
                             <a href="{{route('programs.grid')}}"><i class="bi bi-grid"></i></a>
                             <a href=""><i class="bi bi-list bg-black-9 text-white"></i></a>
@@ -98,13 +99,17 @@
                                                     <td scope="row">{{$item->name}}</td>
                                                     <td>{{$item->courses_count}}</td>
                                                     <td class="client-name">{{$item->client->name ?? ''}}</td>
-                                                    <td>{{$item->start}}</td>
-                                                    <td>{{$item->end}}</td>
+                                                    @php
+                                                     $start = Carbon\Carbon::parse($item->start)->format('y-m-d');
+                                                     $end = Carbon\Carbon::parse($item->end)->format('y-m-d');
+
+                                                    @endphp
+                                                    <td>{{$start }}</td>
+                                                    <td>{{$end }}</td>
                                                     <td><span class="tag tag-rounded bg-success-transparent text-success">
                                                         {{$item->show_invited}} </span></td>
                                                 </tr>
-                                                <td><i class="mdi mdi-dots-horizontal text-gray"></i></td>
-                                            </tbody>
+                                             </tbody>
                                         @endforeach
                                     </table>
                                 </div>
