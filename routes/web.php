@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
@@ -30,5 +33,8 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::resource('programs', ProgramController::class);
         Route::get('/programs-grid', [ProgramController::class , 'gridView'])->name('programs.grid');
         Route::resource('categories', CategoryController::class);
+        Route::get('/get-cities/{id}', [CityController::class , 'getCities']);
+        Route::resource('clients', ClientController::class);
+        Route::resource('courses', CourseController::class);
 
 });

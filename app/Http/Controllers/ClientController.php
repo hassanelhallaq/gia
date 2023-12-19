@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Country;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -12,7 +13,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::paginate(10);
+        return view("dashboard.client.index", compact("clients"));
+
     }
 
     /**
@@ -20,7 +23,9 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        $countries = Country::all();
+        return view("dashboard.client.create",compact("countries"));
+
     }
 
     /**
@@ -28,7 +33,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+           $data = $request->all();
         $validator = Validator($data, [
             'name' => 'required|string',
             'phone_number' => 'required|string|unique:clients',
@@ -36,6 +41,8 @@ class ClientController extends Controller
             'country_id' => 'required|string',
             'city_id' => 'required|string',
             'street' => 'required',
+            'password' => 'required',
+
 
         ], [
             'name.required' => ' اسم الشركة مطلوب',
@@ -45,15 +52,15 @@ class ClientController extends Controller
             'country_id.required' => ' دولد الشركة مطلوب',
             'city_id.required' => 'المدينه  مطلوب',
             'street.required' => 'الشارع العمل مطلوب',
-    ,
         ]);
 
         if ($validator->fails()) {
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
-        $clinet = Client::creeate();
+        $isSaved = Client::create($data);
+        return response()->json(['redirect' => route('clients.index')]);
 
-        return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $isSaved ? 201 : 400);
+        // return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $isSaved ? 201 : 400);
 
     }
 

@@ -15,33 +15,6 @@
                      <span class="right-pan"><i class="bi bi-sliders"></i></span>
                  </div>
 
-                 <div class="d-flex">
-                     <p class="mt-2 mr-2 d-flex"> عرض: </p>
-                     <select class="form-control select2-no-search mr-0 table-rows-number">
-                         <option value="all">
-                             الكل
-                         </option>
-                         <option value="1">
-                             1
-                         </option>
-                         <option value="2">
-                             2
-                         </option>
-                         <option value="3">
-                             3
-                         </option>
-                         <option value="10" selected>
-                             10
-                         </option>
-                         <option value="50">
-                             50
-                         </option>
-                         <option value="100">
-                             100
-                         </option>
-                     </select>
-                 </div>
-
                  <div class="mr-auto d-block tx-20">
                      <a href=""><i class="typcn typcn-calendar-outline"></i></a>
                      <a href=""><i class="bi bi-grid"></i></a>
@@ -93,12 +66,17 @@
                                     @foreach ($courses as $item)
                                     <tr class="table-rows">
                                         <td scope="row">{{$item->name}}</td>
-                                        <td>{{$item->category_id}}</td>
+                                        <td>{{$item->category->name ?? ''}}</td>
                                         <td class="client-name">{{$item->coordinator}}</td>
                                         <td> مستوي اول </td>
                                         <td>{{$item->start}}</td>
                                         <td>{{$item->duration}}ايام</td>
-                                        <td> {{$item->language}} </td>
+                                        <td> @if($item->language == 'arabic')
+                                            عربي
+                                            @else
+                                            انجليزيه
+                                            @endif
+                                        </td>
                                         <td><i class="far fa-eye tx-15"></i></td>
                                         <td><i class="mdi mdi-dots-horizontal text-gray tx-15"></i></td>
                                         @endforeach
@@ -119,40 +97,11 @@
          <div class="card mg-b-20">
              <div class="card-body d-flex p-3">
                  <ul class="pagination mb-0">
-                     <li class="page-item"><button class="btn btn-previous" id="table-paganite-next"><i class="ti-angle-double-right"></i></button></li>
-                     <li class="page-item m-2" id="table-pages">1/10</li>
-                     <li class="page-item"><button class="btn btn-previous"  id="table-paganite-prev"><i class="ti-angle-double-left"></i></button>
-                     </li>
+                    {!! $courses->links() !!}
+
                  </ul>
-                 <div class="d-flex">
-                     <div class="d-block mt-2"> عرض</div>
-                     <select class="form-control select2-no-search mr-0 table-rows-number">
-                         <option value="all">
-                             الكل
-                         </option>
-                         <option value="1">
-                             1
-                         </option>
-                         <option value="2">
-                             2
-                         </option>
-                         <option value="3">
-                             3
-                         </option>
-                         <option value="10" selected>
-                             10
-                         </option>
-                         <option value="50">
-                             50
-                         </option>
-                         <option value="100">
-                             100
-                         </option>
-                     </select>
-                 </div>
-                 <div class="mr-auto tx-15 mt-2">
-                     <span id="table-status">1-6 of 100</span>
-                 </div>
+
+
              </div>
          </div>
      </div>

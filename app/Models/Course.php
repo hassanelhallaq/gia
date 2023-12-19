@@ -26,4 +26,8 @@ class Course extends Model
         'category_id',
         'program_id',
     ];
+
+    public function category(){
+            return $this->belongsTo(Category::class);
+    }
 }

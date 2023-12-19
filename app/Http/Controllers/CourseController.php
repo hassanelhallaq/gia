@@ -12,7 +12,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::paginate(10);
+        return view("dashboard.courses.index", compact("courses"));
     }
 
     /**

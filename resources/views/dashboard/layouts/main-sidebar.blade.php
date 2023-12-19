@@ -19,7 +19,7 @@
                     <ul class="slide-menu  ">
                         <li class=""><a class="slide-item" href="{{route('categories.index')}}"> الفئات </a></li>
                         <li class=""><a class="slide-item" href="{{route('programs.index')}}"> البرامج </a></li>
-                        <li class=""><a class="slide-item" href="Program_management/view_programmes.html"> الدورات التدريبية </a></li>
+                        <li class=""><a class="slide-item" href="{{route('courses.index')}}"> الدورات التدريبية </a></li>
                     </ul>
                 </li>
                 <li class="slide">
@@ -30,7 +30,7 @@
                     <a class="side-menu__item" data-toggle="slide" href="#"><i class="si si-people tx-22"></i><span class="side-menu__label mr-3">اصحاب المصلحة</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
                         <li><a class="slide-item" href="#">الادارة </a></li>
-                        <li><a class="slide-item" href="#">العملاء</a></li>
+                        <li><a class="slide-item" href="{{route('clients.index')}}">العملاء</a></li>
                     </ul>
                 </li>
                 <li class="slide">

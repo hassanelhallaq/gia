@@ -15,6 +15,15 @@ class Client extends Model
         'city_id',
         'street',
         'email',
-        'phone_number'
+        'phone_number','password'
     ];
+    protected $casts = [
+         'password' => 'hashed',
+    ];
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
+    public function city(){
+        return $this->belongsTo(City::class);
+    }
 }
