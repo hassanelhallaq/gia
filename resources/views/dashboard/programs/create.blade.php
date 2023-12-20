@@ -40,8 +40,13 @@
                             <div class="row row-sm mb-3">
                                 <div class="col-lg-3">
                                     <label for="exampleInputEmail1">اسم العميل</label>
-                                    <input class="form-control" required="" type="text" id="client_name"
-                                        placeholder="This is input">
+                                    <select id="client_id" class="form-control select2">
+                                    @foreach ($clients as $item)
+                                    <option value="{{ $item->id }}">
+                                        {{ $item->name }}
+                                    </option>
+                                @endforeach
+                                </select>
                                 </div>
                                 <div class="col-lg-3">
                                     <label for="exampleInputEmail1">اسم المستخدم</label>
@@ -429,8 +434,7 @@
             let formData = new FormData();
             formData.append('name', document.getElementById('name').value);
             formData.append('content_one', document.getElementById('content_one').value);
-            formData.append('client_name', document.getElementById('client_name').value);
-            formData.append('username', document.getElementById('username').value);
+             formData.append('username', document.getElementById('username').value);
             formData.append('content_two', document.getElementById('content_two').value);
             formData.append('start', document.getElementById('start').value);
             formData.append('end', document.getElementById('end').value);
@@ -452,11 +456,12 @@
             formData.append('is_certificate', document.getElementById('is_certificate').value);
             formData.append('trainer', document.getElementById('trainer').value);
             formData.append('percentage_certificate', document.getElementById('percentage_certificate').value);
-            formData.append('study', document.getElementById('study').value);
+            formData.append('study', document.getElementById('study').checked);
             formData.append('coordinator', document.getElementById('coordinator').value);
             formData.append('category_id', document.getElementById('category_id').value);
-            formData.append('image_check', document.getElementById('image_check').value);
-            formData.append('attendance_questionnaire', document.getElementById('attendance_questionnaire').value);
+            formData.append('image_check', document.getElementById('image_check').checked);
+            formData.append('client_id', document.getElementById('client_id').value);
+            formData.append('attendance_questionnaire', document.getElementById('attendance_questionnaire').checked);
             storeRoute('/dashboard/admin/programs', formData)
 
 

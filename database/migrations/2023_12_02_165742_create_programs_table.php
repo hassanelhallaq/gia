@@ -14,14 +14,13 @@ return new class extends Migration
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('clinet_name');
             $table->string('username')->unique();
             $table->date('start');
             $table->date('end');
             $table->string('content_one')->nullable();
             $table->text('content_two')->nullable();
-            $table->enum('contact_type',['whatsapp','sms','email'])->default('email');
-            $table->enum('register',['qr','on_place'])->default('qr');
+            $table->enum('contact_type',['whatsapp','sms','email','whatsapp&sms','sms&email'])->default('email');
+            $table->enum('register',['qr','visit','selfie'])->default('qr');
             $table->string('image');
             $table->string('color');
             $table->string('file');

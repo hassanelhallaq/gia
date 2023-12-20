@@ -9,10 +9,10 @@
         <div class="d-block pos-relative">
             <ul class="side-menu pos-absolutee top-0 start-0">
                 <li class="slide  ">
-                    <button class="side-menu__item bg-warning-gradient m-3 ml- p-1  rounded text-white tx-24 h-100"  data-toggle="slide" href="#" style="width: 80%; border: 1px;">
+                    <a class="side-menu__item bg-warning-gradient m-3 ml- p-1  rounded text-white tx-24 h-100"   href="{{route('admin.dashboard')}}" style="width: 80%; border: 1px;">
                         <i class="icon ion-ios-home ml-4"></i>
                         <span class="side-menu__label text-white tx-18"> الرئيسية </span><i class=""></i>
-                    </button>
+                    </a>
                 </li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="#"><i class="typcn typcn-folder tx-22"></i><span class="side-menu__label mr-3">ادارة البرامج</span><i class="angle fe fe-chevron-down"></i></a>
@@ -34,7 +34,7 @@
                     </ul>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item" data-toggle="slide" href="#"><i class="typcn typcn-group-outline tx-22"></i><span class="side-menu__label mr-3">ادارة المشتركين</span><i class=""></i></a>
+                    <a class="side-menu__item"   href="{{route('attendance.index')}}"><i class="typcn typcn-group-outline tx-22"></i><span class="side-menu__label mr-3">ادارة المشتركين</span><i class=""></i></a>
 
                 </li>
                 <li class="slide">

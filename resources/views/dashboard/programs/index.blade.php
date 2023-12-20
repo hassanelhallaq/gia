@@ -97,7 +97,8 @@
                                                 </tr>
                                                 <tr class="table-rows">
                                                     <td scope="row">{{$item->name}}</td>
-                                                    <td>{{$item->courses_count}}</td>
+                                                    <td>{{$item->courses_count}} <a href="{{route('program.course',[$item->id])}}"><i class="far fa-eye tx-15"></i></a>
+                                                </td>
                                                     <td class="client-name">{{$item->client->name ?? ''}}</td>
                                                     @php
                                                      $start = Carbon\Carbon::parse($item->start)->format('y-m-d');
