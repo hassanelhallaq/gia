@@ -30,22 +30,33 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
 
-       return $data = $request->all();
-        $validator = Validator($data, [
-            'name' => 'required|string',
-            'type' => 'required',
-            'answer' => 'required',
-            'is_corect' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
+        foreach ($request->all() as $key => $value) {
+            // Extract the index from the key
+            preg_match('/\d+/', $key, $matches);
+            $index = $matches[0];
+
+            // Process the data for each section
+            $questionName = $request->input('question_name_' . $index);
+            $questionType = $request->input('type_' . $index);
+            $optionOne = $request->input('option_one_' . $index);
+            // ... process other fields accordingly
+
+            // Example: Save to the database
+            // Assuming you have a model named YourModel
+            Question::create([
+                'question_name' => $questionName,
+                'type' => $questionType,
+                // ... other fields
+            ]);
+            QuestionOption::create([
+                'option_one' => $optionOne,
+                'option_cor' => $optionOne,
+                'option_one' => $optionOne,
+
+                // ... other fields
+            ]);
+
         }
-        $question = Question::create($data);
-        $option = new QuestionOption();
-        $option->question_id = $question->id;
-        $option->answer = $request->answer;
-        $option->is_corect = $request->is_corect;
-        $option->save();
         return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $question ? 201 : 400);
     }
 

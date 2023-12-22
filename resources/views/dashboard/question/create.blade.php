@@ -31,10 +31,9 @@
         <div class="row mb-5">
             <div class="col-lg-10 col-sm-12 m-auto mb-5 pos-relative">
                 <form action="" method="post" id="parentElement">
-                    @csrf
-                    <div class="card pos-relative">
-                        <div class="card-body">
-                            <div class="row " id="questions">
+                     <div class="card pos-relative">
+                        <div class="card-body" id="questions">
+                            <div class="row " id="question" >
                                 <div class="col-8 mb-4">
                                     <label for="example"> السؤال </label>
                                     <input class="form-control" id="question" name="question_name" required=""
@@ -134,30 +133,37 @@
     <script src="{{ asset('assets/js/RepeatTest.js') }}"></script>
     <script>
         function performStore() {
-            var questions = [];
-            $('#questions').find('[question]').each(function() {
-                var $question = $(this);
-                var question = {
-                    question_name: $question.find('[name="question_name"]').val(),
-                    type: $question.find('[name="type"]').val(),
-                    options: []
-                };
-                $question.find('[options] [option]').each(function() {
-                    var $option = $(this);
-                    var option = {
-                        option: $option.find('[name="option"]').val(),
-                        correct: ($option.find('[correct-input]').prop('checked') ? 1 : 0)
-                    };
-                    question.options.push(option);
+            var form = document.getElementById('parentElement');
+            var formData = new FormData(form);
+
+            // Loop through the repeated sections
+            var questionElements = document.getElementsByClassName('question');
+            for (var i = 0; i < questionElements.length; i++) {
+                var questionElement = questionElements[i];
+                var questionFormData = new FormData(questionElement);
+
+                // Append data for each repeated section
+                questionFormData.forEach(function(value, key) {
+                    formData.append(key + '_' + i, value);
                 });
-                questions.push(question);
+            }
+
+            $.ajax({
+                url: '/dashbaord/admin/questions', // Replace with your Laravel route
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    console.log(response);
+                    // Handle the response from the server
+                },
+                error: function(error) {
+                    console.log(error);
+                    // Handle the error
+                }
             });
-            let formData = new FormData();
+        }
+    </script>
 
-            formData.append('questions', JSON.stringify(questions))
-
-            store('/dashboard/admin/questions', formData);
-
-        } <
-        script >
         @endsection
