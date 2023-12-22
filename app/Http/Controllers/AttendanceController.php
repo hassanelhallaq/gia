@@ -66,7 +66,19 @@ class AttendanceController extends Controller
      */
     public function update(Request $request, Attendance $attendance)
     {
-        //
+        $data = $request->all();
+        $validator = Validator($data, [
+            'name' => 'required|string',
+            'phone_number' => 'required',
+            'work_place' => 'required',
+            'id_number' => 'required',
+            'job' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
+        }
+        $attendance->update($data);
+         return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $attendance ? 201 : 400);
     }
 
     /**

@@ -8,6 +8,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,5 +42,6 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::get('/program.courses/{id}', [CourseController::class , 'programCourses'])->name('program.course');
         Route::get('/courses.attendances/{id}', [AttendanceCourseController::class , 'coursesAttendance'])->name('course.attendance');
         Route::resource('attendance', AttendanceController::class);
+        Route::resource('questions', QuestionController::class);
 
 });

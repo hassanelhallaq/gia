@@ -51,32 +51,6 @@
                             <span class="right-pan"><i class="bi bi-sliders"></i></span>
                         </div>
 
-                        <div class="d-flex">
-                            <p class="mt-2 mr-2 d-flex"> عرض: </p>
-                            <select class="form-control select2-no-search mr-0 table-rows-number">
-                                <option value="all">
-                                    الكل
-                                </option>
-                                <option value="1">
-                                    1
-                                </option>
-                                <option value="2">
-                                    2
-                                </option>
-                                <option value="3">
-                                    3
-                                </option>
-                                <option value="10" selected>
-                                    10
-                                </option>
-                                <option value="50">
-                                    50
-                                </option>
-                                <option value="100">
-                                    100
-                                </option>
-                            </select>
-                        </div>
                         <button class="btn btn-danger mr-1 text-white btnSelectDelete" data-target="#modalDelete"
                             data-toggle="modal" style="display: none;">حذف الصفوف المختارة <i
                                 class="bi bi-trash tx-12"></i></button>
@@ -147,11 +121,11 @@
                                                     <td>{{ $item->id_number }} </td>
                                                     <td>{{ $item->job }} </td>
                                                     <td class="d-flex">
-                                                        <span class="ml-3 examBefor attendance_afterـ{{ $item->id }}"
+                                                        <span class="ml-3 examBefor "
                                                             data-toggle="sidebar-left" data-target=".sidebar-left">
                                                             قبلي</span>
-                                                        <span class="ml-3 examBefor attendance_{{ $item->id }}"
-                                                            onclick="openSideDrawer()">بعدي</span>
+                                                        <span class="ml-3 examBefor "
+                                                            onclick="openSideDrawer({{$item->id }})">بعدي</span>
                                                     </td>
                                                     <td> 60% </td>
                                                     <td class="d-flex filter-col-cell">
@@ -161,7 +135,7 @@
                                                                 class="si si-options-vertical text-gray tx-13"></i></button>
                                                         <div class="dropdown-menu">
                                                             <a href="#" class="dropdown-item"
-                                                                data-target="#modaledit" data-toggle="modal"> تحرير </a>
+                                                                data-target="#modaledit_{{$item->id}}" data-toggle="modal"> تحرير </a>
                                                             <a href="#"
                                                                 class="dropdown-item text-danger"data-target="#modalDelete"
                                                                 data-toggle="modal"> حذف </a>
@@ -251,7 +225,9 @@
 
 
     <!-- add modal -->
-    <div class="modal" id="modaledit">
+    @foreach ($attendance as $item)
+
+    <div class="modal" id="modaledit_{{$item->id}}">
         <div class="modal-dialog " role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
@@ -263,28 +239,28 @@
                         <div class="row">
                             <div class="col-12">
                                 <label for="example"> الأسم </label>
-                                <input class="form-control" value="محمد عبده" required="" type="text">
+                                <input class="form-control" value="{{$item->name}}" id="name_{{$item->id}}" required="" type="text">
                             </div>
                             <div class="col-6 mt-4">
                                 <label for="example"> رقم الهاتف </label>
-                                <input class="form-control" value="967775163208" required="" type="number">
+                                <input class="form-control" value="{{$item->phone_number}}" id="phone_number_{{$item->id}}"  required="" type="number">
                             </div>
                             <div class="col-6 mt-4">
                                 <label for="example"> الرقم الوظيفي </label>
-                                <input class="form-control"value="787890787" required="" type="number">
+                                <input class="form-control" value="{{$item->id_number}}" id="id_number_{{$item->id}}" required="" type="number">
                             </div>
                             <div class="col-12 mt-4">
                                 <label for="example"> المهنة </label>
-                                <input class="form-control" value="اداري" required="" type="text">
+                                <input class="form-control" value="{{$item->job}}" id="job_{{$item->id}}" required="" type="text">
                             </div>
                             <div class="col-12 mt-4">
                                 <label for="example"> جهة العمل </label>
-                                <input class="form-control" value="--------" required="" type="text">
+                                <input class="form-control" value="{{$item->work_place}}"required="" id="work_place_{{$item->id}}" type="text">
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer border-0">
-                        <button class="btn btn-warning-gradient btn-with-icon" type="submit"> حفظ <i
+                        <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="performUpdate({{$item->id}})"> حفظ <i
                                 class="bi bi-floppy"></i></button>
                         <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
                     </div>
@@ -292,6 +268,7 @@
             </div>
         </div>
     </div>
+    @endforeach
     <!-- End add modal -->
 
     <!-- delete modal -->
@@ -325,7 +302,7 @@
     <!-- قبلي-->
     <!-- Begin Side Drawer before-->
     @foreach ($attendance as $item)
-        <div class="sidebar sidebar-left sidebar-animate bg-light attendance_afterـ{{ $item->id }}">
+        <div class="sidebar sidebar-left sidebar-animate bg-light "id="fterـ{{ $item->id }}">
             <div class="panel-body tabs-menu-body latest-tasks p-0 border-0 h-100 mt-0 bg-light">
                 <div class="tab-content d-flex align-items-start flex-column mb-3 justify-content-between bg-light">
                     <div class="list imgUser">
@@ -408,7 +385,7 @@
     <!--  بعدي-->
     <!-- Begin Side Drawer after -->
     @foreach ($attendance as $item)
-        <div id="side-drawer" class="position-fixed attendance_{{ $item->id }}">
+        <div id="side-drawer" class="position-fixed ">
             <div class="panel-body tabs-menu-body latest-tasks p-0 border-0 h-100 mt-0 bg-light">
                 <div class="tab-content d-flex align-items-start flex-column mb-3 justify-content-between bg-light">
                     <div class="list imgUser">
@@ -479,6 +456,22 @@
 @section('js')
 
 <script>
+
+function openSideDrawer() {
+    document.getElementById("side-drawer").style.left = "0";
+    document.getElementById("side-drawer-void").classList.add("d-block");
+    document.getElementById("side-drawer-void").classList.remove("d-none");
+}
+
+function closeSideDrawer() {
+    document.getElementById("side-drawer").style.left = "-336px";
+    document.getElementById("side-drawer-void").classList.add("d-none");
+    document.getElementById("side-drawer-void").classList.remove("d-block");
+}
+
+window.openSideDrawer = openSideDrawer;
+window.closeSideDrawer = closeSideDrawer;
+
     function performStore(id) {
         let formData = new FormData();
         formData.append('name', document.getElementById('name').value);
@@ -488,6 +481,17 @@
         formData.append('job', document.getElementById('job').value);
         formData.append('course_id', id);
         storepart('/dashboard/admin/attendance', formData)
+}
+
+function performUpdate(id) {
+        let formData = new FormData();
+        formData.append("_method", "PUT")
+        formData.append('name', document.getElementById('name_'+id).value);
+        formData.append('phone_number', document.getElementById('phone_number_'+id).value);
+        formData.append('work_place', document.getElementById('work_place_'+id).value);
+        formData.append('id_number', document.getElementById('id_number_'+id).value);
+        formData.append('job', document.getElementById('job_'+id).value);
+        storepart('/dashboard/admin/attendance/'+id, formData)
 }
 </script>
 
