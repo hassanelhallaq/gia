@@ -65,8 +65,8 @@
 
                             <div class="col-lg-6">
                                 <p class="mg-b-10">محتوي 2</p>
-                                <input class="form-control" required="" id="content_two"
-                                    value="{{ $program->content_two }}" type="text">
+                                <textarea class="form-control" required="" id="content_two"
+                                    value="{{ $program->content_two }}" type="text">{{ $program->content_two }}</textarea>
 
                             </div>
                         </div>
@@ -228,7 +228,7 @@
                                     id="color" type="text">
                             </div>
 
-                           
+
                             <div class="col-lg-3 mb-3">
                                 <label for="exampleInputEmail1"> ملف الشعار </label>
                                     <input type="file" class="dropify" data-default-file="{{ asset($program->image) }}" data-height="65"  />

@@ -914,7 +914,7 @@ slide is-expanded side-menu__item {
 
   .app.sidenav-toggled {
     .side-menu__item {
-      display: block;
+      display: flex;
       padding: 8px 0 9px 0;
       margin: 0 auto;
       text-align: center;

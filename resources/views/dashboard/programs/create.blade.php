@@ -62,7 +62,7 @@
 
                                 <div class="col-lg-6">
                                     <p class="mg-b-10">محتوي 2</p>
-                                    <input class="form-control" required="" id="content_two" type="text">
+                                    <textarea class="form-control" required="" id="content_two" type="text"></textarea>
 
                                 </div>
                             </div>
