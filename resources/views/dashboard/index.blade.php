@@ -1,4 +1,11 @@
 @extends('dashboard.layouts.master')
+@section('header')
+<div>
+    <p class="mg-b-0">مرحبا بك مجددا</p>
+    <h4 class="main-content-title tx-18 mg-b-1 mg-b-lg-1">سلمي أحمد علي</h4>
+
+  </div>
+@endsection
 @section('content')
 
 

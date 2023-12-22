@@ -1,6 +1,6 @@
 $(function() {
   'use strict';
-  
+
   // Date& time
 	var datetime = null,
 	datetime2 = null,
@@ -17,7 +17,7 @@ $(function() {
         update();
         setInterval(update, 1000);
     });
-	
+
 
 });
 

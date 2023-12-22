@@ -77,7 +77,7 @@
                                             انجليزيه
                                             @endif
                                         </td>
-                                        <td><i class="far fa-eye tx-15"></i></td>
+                                        <td><a href="{{route('course.attendance',[$item->id])}}"><i class="far fa-eye tx-15"></i></a></td>
                                         <td><i class="mdi mdi-dots-horizontal text-gray tx-15"></i></td>
                                         @endforeach
                                     </tr>

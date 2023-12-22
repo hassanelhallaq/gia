@@ -240,19 +240,9 @@
     <!-- breadcrumb -->
     <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0" style="border-top: 1px solid #00000030;">
         <div class="left-content">
-            <div>
-              <p class="mg-b-0">مرحبا بك مجددا</p>
-              <h4 class="main-content-title tx-18 mg-b-1 mg-b-lg-1">سلمي أحمد علي</h4>
-
-            </div>
+         
         </div>
-        <div class="main-dashboard-header-right">
-            <div class=" d-flex">
-                <a href="{{route('programs.create')}}" class="btn btn-warning-gradient btn-with-icon mr-1"> +  انشاء برنامج</a>
-                <button class="btn btn-warning-gradient btn-with-icon mr-1 "> +  اضافة مشاركين </button>
-                <button class="btn btn-warning-gradient btn-icon mr-1"><i class="si si-options-vertical"></i></button>
-            </div>
-        </div>
+       @yield('header')
     </div>
     <!-- /breadcrumb -->
 </div>

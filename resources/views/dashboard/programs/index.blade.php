@@ -1,5 +1,15 @@
 @extends('dashboard.layouts.master')
+@section('header')
+<div class="main-dashboard-header-right">
+    <div class=" d-flex">
+        <a href="{{route('programs.create')}}" class="btn btn-warning-gradient btn-with-icon mr-1"> +  انشاء برنامج</a>
+        <button class="btn btn-warning-gradient btn-with-icon mr-1 "> +  اضافة مشاركين </button>
+        <button class="btn btn-warning-gradient btn-icon mr-1"><i class="si si-options-vertical"></i></button>
+    </div>
+</div>
+@endsection
 @section('content')
+
         <!-- row -->
         <div class="row row">
 

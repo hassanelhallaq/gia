@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/plugins/select_mul/css/style.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('assets/plugins/select_mul/css/semantic.min.css') }}">
 @endsection
+
 @section('content')
     <!-- row -->
     <div class="row">

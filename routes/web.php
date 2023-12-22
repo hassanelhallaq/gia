@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\AttendanceCourseController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
@@ -38,7 +39,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::resource('clients', ClientController::class);
         Route::resource('courses', CourseController::class);
         Route::get('/program.courses/{id}', [CourseController::class , 'programCourses'])->name('program.course');
-        Route::get('/attendance', [AttendanceController::class , 'index'])->name('attendance.index');
-
+        Route::get('/courses.attendances/{id}', [AttendanceCourseController::class , 'coursesAttendance'])->name('course.attendance');
+        Route::resource('attendance', AttendanceController::class);
 
 });
