@@ -38,17 +38,21 @@ class QuestionController extends Controller
                 'option_one' => 'required|string|min:3',
                 'option_two' => 'required|string|min:3',
                 'option_three' => 'required|string|min:3',
+                'quiz_id'=> 'required',
             ], [
                 'name.required' => 'name is required',
                 'type.required' => 'type is required',
                 'option_one.required' => 'option 1 is required',
                 'option_two.required' => 'option 2 is required',
                 'option_three.required' => 'option 3 is required',
+                'quiz_id.required' => 'quiz is required',
+
             ]);
             if (!$validator->fails()) {
                 $question = new question();
                 $question->name = $request->get('name');
                 $question->type = $request->get('type');
+                $question->quiz_id = $request->get('quiz_id');
                 $isSaved = $question->save();
                 $isQuestionOption = $this->questionOption($request, $question);
                  return response()->json(['icon' => 'success', 'title' => 'Question created successfully'], 200);

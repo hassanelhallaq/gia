@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="modal-footer btnSaveTest border-0">
-                        <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="createQuestions()"> حفظ
+                        <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="createQuestions({{$id}})"> حفظ
                             الأسئلة<i class="bi bi-floppy"></i></button>
                     </div>
                 </form>
@@ -132,7 +132,7 @@
 @section('js')
     <script src="{{ asset('assets/js/RepeatTest.js') }}"></script>
     <script>
-        function createQuestions() {
+        function createQuestions(id) {
             let data = {
                 name: document.getElementById("name").value,
                 type: document.getElementById("type").value,
@@ -142,6 +142,8 @@
                 correct_one: document.getElementById("correct_one").checked,
                 correct_two: document.getElementById("correct_two").checked,
                 correct_three: document.getElementById("correct_three").checked,
+                quiz_id: id,
+
             };
 
             store('/dashboard/admin/questions', data);

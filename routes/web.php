@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceCourseController;
 use App\Http\Controllers\CategoryController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,5 +45,11 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::get('/courses.attendances/{id}', [AttendanceCourseController::class , 'coursesAttendance'])->name('course.attendance');
         Route::resource('attendance', AttendanceController::class);
         Route::resource('questions', QuestionController::class);
+        Route::resource('admins', AdminController::class);
+        Route::get('/quiz.questions/{id}', [QuizController::class , 'question'])->name('quiz.questions');
+        Route::resource('quizes', QuizController::class);
+
+
+
 
 });

@@ -25,7 +25,7 @@
             <button class="btn btn-outline-light btn-with-icon btn-sm ml-1">  المدربين <i class="bi bi-award-fill"></i></button>
             <button class="btn btn-outline-light btn-with-icon btn-sm ml-1">  العملاء <i class="bi bi-award-fill"></i></button>
             <a href="../Program_management/members.html" class="btn btn-outline-light btn-with-icon btn-sm ml-1">  المشاركين <i class="bi bi-award-fill"></i></a>
-            <button class="btn btn-warning-gradient btn-with-icon btn-sm"> اضافة حساب جديد <i class="bi bi-plus"></i></button>
+            <a href="{{route('admins.create')}}" class="btn btn-warning-gradient btn-with-icon btn-sm"> اضافة حساب جديد <i class="bi bi-plus"></i></a>
         </div>
     </div>
 </div>
@@ -99,7 +99,7 @@
                                 <td> {{$admin->phone}} </td>
                                 <td> {{$admin->email}} </td>
                                 <td> تحكم كامل </td>
-                                <td> مدير ادارة </td>
+                                <td> {{$admin->job}}</td>
                                 <td class="d-flex filter-col-cell">
                                     <!-- dropdown-menu -->
                                     <button data-toggle="dropdown" class="btn btn-previous btn-sm"><i class="si si-options-vertical text-gray tx-12"></i></button>

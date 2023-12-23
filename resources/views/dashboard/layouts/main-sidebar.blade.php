@@ -23,13 +23,13 @@
                     </ul>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item" data-toggle="slide" href="#"><i class="far fa-file-alt tx-22"></i><span class="side-menu__label mr-3">الأسئلة والاستبيانات</span><i class=""></i></a>
+                    <a class="side-menu__item"  href="{{route('quizes.index')}}"><i class="far fa-file-alt tx-22"></i><span class="side-menu__label mr-3">الأسئلة والاستبيانات</span><i class=""></i></a>
 
                 </li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="#"><i class="si si-people tx-22"></i><span class="side-menu__label mr-3">اصحاب المصلحة</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
-                        <li><a class="slide-item" href="#">الادارة </a></li>
+                        <li><a class="slide-item" href="{{route('admins.index')}}">الادارة </a></li>
                         <li><a class="slide-item" href="{{route('clients.index')}}">العملاء</a></li>
                     </ul>
                 </li>

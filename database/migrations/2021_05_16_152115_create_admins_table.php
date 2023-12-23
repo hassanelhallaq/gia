@@ -21,6 +21,8 @@ class CreateAdminsTable extends Migration
             $table->string('password');
             $table->enum('status',['active','deactive']);
             $table->string('phone');
+            $table->string('job');
+
 
             $table->softDeletes();
 

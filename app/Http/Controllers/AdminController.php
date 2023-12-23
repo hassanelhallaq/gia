@@ -73,24 +73,17 @@ class AdminController extends Controller
         //
         // if (ControllersService::checkPermission('index-admin', 'admin')) {
 
-        $page_title = 'Admins';
-
-        $page_description = '';
-
-            $role = Role::where('name', 'Super-Admin')->get();
 
 
-            $admins = Admin::where('id','!=',Auth::user()->id);
 
-
-                if ($request->get('search')) {
-                    $admins = $admins->where('email', 'like', '%' . $request->search . '%');
+                 if ($request->get('search')) {
+                    $admins = Admin::where('email', 'like', '%' . $request->search . '%');
                 }
                 if ($request->get('Status') != '') {
-                    $admins = $admins->where('status', $request->get('Status'));
+                    $admins = Admin::wwhere('status', $request->get('Status'));
                 }
-                $admins = $admins->paginate(10);
-                return response()->view('dashboard.admins.index', compact('admins', 'page_title', 'page_description'));
+                $admins = Admin::paginate(10);
+                return response()->view('dashboard.admin.index', compact('admins'));
 
 
     // } else {
@@ -119,7 +112,7 @@ class AdminController extends Controller
 
         $roles = Role::where('guard_name', 'admin')->get();
 
-        return response()->view('dashboard.admins.create', compact('roles'));
+        return response()->view('dashboard.admin.create', compact('roles'));
 
         // } else {
         //     return response()->view('error-6');
@@ -148,6 +141,7 @@ class AdminController extends Controller
 
             'role_id' => 'required|numeric|exists:roles,id',
             'name' => 'required|string|min:3|max:35',
+            'job' => 'required|string|min:3|max:35',
             'phone' => 'required|numeric',
             'email' => 'required|email|unique:admins,email',
             'password' => 'required|string',
@@ -159,6 +153,7 @@ class AdminController extends Controller
 
             $admin = new Admin();
             $admin->email = $request->get('email');
+            $admin->job = $request->get('job');
             $admin->password = Hash::make($request->get('password'));
             $admin->name = $request->get('name');
             $admin->phone = $request->get('phone');
