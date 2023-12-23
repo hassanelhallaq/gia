@@ -49,7 +49,7 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        //
+         return view("dashboard.courses.index", compact("course"));
     }
 
     /**

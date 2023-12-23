@@ -84,6 +84,11 @@
                                                 <th> المهنة </th>
                                                 <th> الاختبارات </th>
                                                 <th> الاكتمال </th>
+                                                @if ($id)
+                                                <th> الدعوه </th>
+
+                                                @endif
+
                                                 <!-- Filter -->
                                                 <th>
                                                     <div class="dropdown">
@@ -125,9 +130,11 @@
                                                         <span class="ml-3 examBefor" data-bs-toggle="offcanvas" data-bs-target="#drawerbefore_{{$item->id}}" aria-controls="offcanvasWithBothOptions"> قبلي</span>
                                                         <!-- <span class="ml-3 examBefor" onclick="openSideDrawer()">بعدي</span> -->
                                                         <span class="ml-3 examBefor" data-bs-toggle="offcanvas" data-bs-target="#drawerafter_{{$item->id}}" aria-controls="offcanvasWithBothOptions"> بعدي </span>
-
                                                     </td>
                                                     <td> 60% </td>
+                                                    @if ($id)
+                                                    <td><a href="{{route('invitation.index',[$item->id,'course_id'=>$id])}}" target=”_blank” ><i class="far fa-eye tx-15"></i></a></td>
+                                                    @endif
                                                     <td class="d-flex filter-col-cell">
                                                         <!-- dropdown-menu -->
                                                         <button data-toggle="dropdown"

@@ -11,6 +11,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,3 +54,4 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
 
 
 });
+Route::get('/invitation/{id}/{course_id}', [SiteController::class , 'index'])->name('invitation.index');

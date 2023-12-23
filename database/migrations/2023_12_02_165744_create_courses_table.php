@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('duration');
             $table->string('trainer');
             $table->integer('seat_count');
+            $table->string('subject');
             $table->enum('is_exam',['yes','no']);
             $table->enum('is_certificate',['yes','no']);
             $table->enum('language',['english','arabic']);

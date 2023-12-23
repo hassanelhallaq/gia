@@ -29,8 +29,10 @@ class Course extends Model
     public function attendances(){
         return $this->belongsToMany(Attendance::class);
     }
-    
 
+    public function program(){
+            return $this->belongsTo(Program::class);
+    }
     public function category(){
             return $this->belongsTo(Category::class);
     }
