@@ -30,13 +30,13 @@
         <!-- row -->
         <div class="row mb-5">
             <div class="col-lg-10 col-sm-12 m-auto mb-5 pos-relative">
-                <form action="" method="post" id="parentElement">
-                     <div class="card pos-relative">
-                        <div class="card-body" id="questions">
-                            <div class="row " id="question" >
+                <form action="" method="post" id="create_form">
+                    <div class="card pos-relative">
+                        <div class="card-body" >
+                            <div class="row " >
                                 <div class="col-8 mb-4">
                                     <label for="example"> السؤال </label>
-                                    <input class="form-control" id="question" name="question_name" required=""
+                                    <input class="form-control" id="name" name="question_name" required=""
                                         type="text">
                                 </div>
 
@@ -102,10 +102,10 @@
                                     </div>
                                 </div>
 
-                                <div
+                                {{-- <div
                                     class="btnAddtest card-chart wd-25 ht-25 bg-warning-gradient brround ml-2 mt-1 pos-absolute b-0 l-100">
                                     <i class="bi bi-plus text-white tx-36"></i>
-                                </div>
+                                </div> --}}
 
                             </div>
 
@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="modal-footer btnSaveTest border-0">
-                        <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="performStore()"> حفظ
+                        <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="createQuestions()"> حفظ
                             الأسئلة<i class="bi bi-floppy"></i></button>
                     </div>
                 </form>
@@ -132,38 +132,20 @@
 @section('js')
     <script src="{{ asset('assets/js/RepeatTest.js') }}"></script>
     <script>
-        function performStore() {
-            var form = document.getElementById('parentElement');
-            var formData = new FormData(form);
+        function createQuestions() {
+            let data = {
+                name: document.getElementById("name").value,
+                type: document.getElementById("type").value,
+                option_one: document.getElementById("option_one").value,
+                option_two: document.getElementById("option_two").value,
+                option_three: document.getElementById("option_three").value,
+                correct_one: document.getElementById("correct_one").checked,
+                correct_two: document.getElementById("correct_two").checked,
+                correct_three: document.getElementById("correct_three").checked,
+            };
 
-            // Loop through the repeated sections
-            var questionElements = document.getElementsByClassName('question');
-            for (var i = 0; i < questionElements.length; i++) {
-                var questionElement = questionElements[i];
-                var questionFormData = new FormData(questionElement);
+            store('/dashboard/admin/questions', data);
 
-                // Append data for each repeated section
-                questionFormData.forEach(function(value, key) {
-                    formData.append(key + '_' + i, value);
-                });
-            }
-
-            $.ajax({
-                url: '/dashbaord/admin/questions', // Replace with your Laravel route
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    console.log(response);
-                    // Handle the response from the server
-                },
-                error: function(error) {
-                    console.log(error);
-                    // Handle the error
-                }
-            });
         }
     </script>
-
-        @endsection
+@endsection

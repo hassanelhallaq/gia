@@ -27,37 +27,62 @@ class QuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
-
-        foreach ($request->all() as $key => $value) {
-            // Extract the index from the key
-            preg_match('/\d+/', $key, $matches);
-            $index = $matches[0];
-
-            // Process the data for each section
-            $questionName = $request->input('question_name_' . $index);
-            $questionType = $request->input('type_' . $index);
-            $optionOne = $request->input('option_one_' . $index);
-            // ... process other fields accordingly
-
-            // Example: Save to the database
-            // Assuming you have a model named YourModel
-            Question::create([
-                'question_name' => $questionName,
-                'type' => $questionType,
-                // ... other fields
+        if (!empty($request->all())) {
+            $validator = Validator($request->all(),
+            [
+                'name' => 'required|string|min:3',
+                'type' => 'required|string',
+                'option_one' => 'required|string|min:3',
+                'option_two' => 'required|string|min:3',
+                'option_three' => 'required|string|min:3',
+            ], [
+                'name.required' => 'name is required',
+                'type.required' => 'type is required',
+                'option_one.required' => 'option 1 is required',
+                'option_two.required' => 'option 2 is required',
+                'option_three.required' => 'option 3 is required',
             ]);
-            QuestionOption::create([
-                'option_one' => $optionOne,
-                'option_cor' => $optionOne,
-                'option_one' => $optionOne,
+            if (!$validator->fails()) {
+                $question = new question();
+                $question->name = $request->get('name');
+                $question->type = $request->get('type');
+                $isSaved = $question->save();
+                $isQuestionOption = $this->questionOption($request, $question);
+                 return response()->json(['icon' => 'success', 'title' => 'Question created successfully'], 200);
 
-                // ... other fields
-            ]);
+            } else {
+
+                return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
+
+            }
 
         }
-        return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $question ? 201 : 400);
+
+    }
+
+    private function questionOption(Request $request, question $question)
+    {
+             // save options
+           return  QuestionOption::insert([
+                [
+                    'question_id' => $question->id,
+                    'answer' => $request->get('option_one'),
+                    'is_corect' => $request->get('correct_one') == 'on' ? 1 : 0,
+                ],
+                [
+                    'question_id' => $question->id,
+                    'answer' => $request->get('option_two'),
+                    'is_corect' => $request->get('correct_two') == 'on' ? 1 : 0,
+                ],
+                [
+                    'question_id' => $question->id,
+                    'answer' => $request->get('option_three'),
+                    'is_corect' => $request->get('correct_three') == 'on' ? 1 : 0,
+                ],
+            ]);
     }
 
     /**
