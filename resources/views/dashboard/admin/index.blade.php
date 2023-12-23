@@ -125,40 +125,11 @@
          <div class="card mg-b-20">
              <div class="card-body d-flex p-3">
                  <ul class="pagination mb-0">
-                     <li class="page-item"><button class="btn btn-previous" id="table-paganite-next"><i class="ti-angle-double-right"></i></button></li>
-                     <li class="page-item m-2" id="table-pages">1/10</li>
-                     <li class="page-item"><button class="btn btn-previous"  id="table-paganite-prev"><i class="ti-angle-double-left"></i></button>
-                     </li>
+                    {!! $admins->links() !!}
+
                  </ul>
-                 <div class="d-flex">
-                     <div class="d-block mt-2"> عرض</div>
-                     <select class="form-control select2-no-search mr-0 table-rows-number">
-                         <option value="all">
-                             الكل
-                         </option>
-                         <option value="1">
-                             1
-                         </option>
-                         <option value="2">
-                             2
-                         </option>
-                         <option value="3">
-                             3
-                         </option>
-                         <option value="10" selected>
-                             10
-                         </option>
-                         <option value="50">
-                             50
-                         </option>
-                         <option value="100">
-                             100
-                         </option>
-                     </select>
-                 </div>
-                 <div class="mr-auto tx-15 mt-2">
-                     <span id="table-status">1-6 of 100</span>
-                 </div>
+
+
              </div>
          </div>
      </div>

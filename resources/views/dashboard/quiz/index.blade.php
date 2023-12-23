@@ -85,14 +85,17 @@
                                             <th></th>
                                         </tr>
                                     </thead>
+                                    @foreach ($quizesBefor as $index => $item)
+
+
                                     <tbody class="table-body">
                                         <tr>
                                             <p class="p-5 text-center d-none empty-message"> لايوجد  </p>
                                         </tr>
                                         <tr class="table-rows">
                                             <td><input type="checkbox" class="checkChild"></td>
-                                            <td>1</td>
-                                            <td scope="row"> مادة </td>
+                                            <td>{{$index + 1}}</td>
+                                            <td scope="row"> {{$item->name}} </td>
                                             <td>6 دورات</td>
                                             <td> اختبار قبلي </td>
                                             <td>12</td>
@@ -111,6 +114,7 @@
 
                                         </tr>
                                     </tbody>
+                                    @endforeach
                                 </table>
                             </div>
                         </div>
@@ -144,14 +148,17 @@
                                             <th></th>
                                         </tr>
                                     </thead>
+                                    @foreach ($quizesAfter as $index => $item)
+
+
                                     <tbody class="table-body">
                                         <tr>
                                             <p class="p-5 text-center d-none empty-message"> لايوجد  </p>
                                         </tr>
                                         <tr class="table-rows">
                                             <td><input type="checkbox" class="checkChild"></td>
-                                            <td>1</td>
-                                            <td scope="row"> مادة </td>
+                                            <td>{{$index + 1}}</td>
+                                            <td scope="row"> {{$item->name}} </td>
                                             <td>6 دورات</td>
                                             <td> اختبار بعدي </td>
                                             <td>12</td>
@@ -169,10 +176,8 @@
                                             </td>
 
                                         </tr>
-
-
-
                                     </tbody>
+                                    @endforeach
                                 </table>
                             </div>
                         </div>
@@ -206,15 +211,17 @@
                                             <th></th>
                                         </tr>
                                     </thead>
+                                    @foreach ($quizesInteractive as $index => $item)
+
+
                                     <tbody class="table-body">
                                         <tr>
                                             <p class="p-5 text-center d-none empty-message"> لايوجد  </p>
                                         </tr>
-
                                         <tr class="table-rows">
                                             <td><input type="checkbox" class="checkChild"></td>
-                                            <td>1</td>
-                                            <td scope="row"> مادة </td>
+                                            <td>{{$index + 1}}</td>
+                                            <td scope="row"> {{$item->name}} </td>
                                             <td>6 دورات</td>
                                             <td> اختبار تفاعلي </td>
                                             <td>12</td>
@@ -233,6 +240,7 @@
 
                                         </tr>
                                     </tbody>
+                                    @endforeach
                                 </table>
                             </div>
                         </div>
@@ -249,7 +257,7 @@
             <div class="card mg-b-20">
                 <div class="card-body d-flex p-3">
                     <ul class="pagination mb-0">
-                        
+
                     </ul>
 
                 </div>

@@ -32,6 +32,7 @@
 @endsection
 @section('content')
     <!-- main-header opened -->
+    <link href="{{asset('assets/css/drawar-user.css')}}" rel="stylesheet">
 
     <!-- /main-header -->
 
@@ -121,11 +122,10 @@
                                                     <td>{{ $item->id_number }} </td>
                                                     <td>{{ $item->job }} </td>
                                                     <td class="d-flex">
-                                                        <span class="ml-3 examBefor "
-                                                            data-toggle="sidebar-left" data-target=".sidebar-left">
-                                                            قبلي</span>
-                                                        <span class="ml-3 examBefor "
-                                                            onclick="openSideDrawer({{$item->id }})">بعدي</span>
+                                                        <span class="ml-3 examBefor" data-bs-toggle="offcanvas" data-bs-target="#drawerbefore_{{$item->id}}" aria-controls="offcanvasWithBothOptions"> قبلي</span>
+                                                        <!-- <span class="ml-3 examBefor" onclick="openSideDrawer()">بعدي</span> -->
+                                                        <span class="ml-3 examBefor" data-bs-toggle="offcanvas" data-bs-target="#drawerafter_{{$item->id}}" aria-controls="offcanvasWithBothOptions"> بعدي </span>
+
                                                     </td>
                                                     <td> 60% </td>
                                                     <td class="d-flex filter-col-cell">
@@ -302,158 +302,147 @@
     <!-- قبلي-->
     <!-- Begin Side Drawer before-->
     @foreach ($attendance as $item)
-        <div class="sidebar sidebar-left sidebar-animate bg-light "id="fterـ{{ $item->id }}">
-            <div class="panel-body tabs-menu-body latest-tasks p-0 border-0 h-100 mt-0 bg-light">
-                <div class="tab-content d-flex align-items-start flex-column mb-3 justify-content-between bg-light">
-                    <div class="list imgUser">
-                        <i class="bi bi-person-circle tx-80"></i>
-                        <!-- <a class="profile-user" href=""><img alt="" src="../assets/img/1.jpg" class="rounded-circle"></a> -->
-                        <p class="wrapper">
-                            <b class="text-center">{{ $item->name }} </b>
-                        </p>
-                    </div>
-                    <div class="list p-3">
-                        <div class="row row-sm">
-                            <div class="col-6">
-                                <a class="card text-center" href="View_test_results.html">
-                                    <div class="card-body p-2">
-                                        <div class="feature widget-2 text-center mb-3">
-                                            <i
-                                                class="bi bi-clipboard2-data-fill project bg-warning-transparent mx-auto text-warning "></i>
-                                        </div>
-                                        <p class="mb-1 text-muted "> عرض نموذج الاجابات </p>
+    <div class="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabindex="-1" id="drawerbefore_{{$item->id}}" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-body d-flex align-items-start flex-column mb-3 justify-content-between bg-light p-0">
+            <div class="list m-auto text-center">
+                <i class="bi bi-person-circle tx-80"></i>
+                <p class="wrapper">
+                    <b class="text-center"> {{$item->name}}</b>
+                </p>
+            </div>
+            <div class="list p-3">
+                <div class="row row-sm">
+                        <div class="col-6">
+                            <a class="card text-center" href="View_test_results.html">
+                                <div class="card-body p-2">
+                                    <div class="feature widget-2 text-center mb-3">
+                                        <i class="bi bi-clipboard2-data-fill project bg-warning-transparent mx-auto text-warning "></i>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="col-6">
-                                <div class="card text-center">
-                                    <div class="card-body p-2">
-                                        <div class="feature widget-2 text-center mt-0 mb-3">
-                                            <i
-                                                class="icon ion-md-paper project bg-warning-transparent mx-auto text-warning "></i>
-                                        </div>
-                                        <p class="mb-1 text-muted tx-13"> تحميل نموذج الاجابات </p>
+                                    <p class="mb-1 text-muted tx-13"> عرض نموذج الاجابات </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <div class="card text-center">
+                                <div class="card-body p-2">
+                                    <div class="feature widget-2 text-center mt-0 mb-3">
+                                        <i class="icon ion-md-paper project bg-warning-transparent mx-auto text-warning "></i>
                                     </div>
+                                    <p class="mb-1 text-muted tx-13"> تحميل نموذج الاجابات </p>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="card text-center">
-                                    <div class="card-body p-2">
-                                        <div class="feature widget-2 text-center mt-0 mb-3">
-                                            <i
-                                                class="bi bi-pencil-fill  project bg-warning-transparent mx-auto text-warning "></i>
-                                        </div>
-                                        <p class="mb-1 text-muted"> الأختبار القبلي </p>
+                        </div>
+                        <div class="col-6">
+                            <div class="card text-center">
+                                <div class="card-body p-2">
+                                    <div class="feature widget-2 text-center mt-0 mb-3">
+                                        <i class="bi bi-pencil-fill  project bg-warning-transparent mx-auto text-warning "></i>
                                     </div>
+                                    <p class="mb-1 text-muted"> الأختبار القبلي </p>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <a class="card text-center">
-                                    <div class="card-body p-2">
-                                        <div class="feature widget-2 text-center mt-0 mb-3">
+                        </div>
+                        <div class="col-6">
+                            <a class="card text-center">
+                                <div class="card-body p-2">
+                                    <div class="feature widget-2 text-center mt-0 mb-3">
 
-                                            <i
-                                                class="icon ion-md-paper-plane project bg-warning-transparent mx-auto text-warning "></i>
-                                        </div>
-                                        <p class="mb-1 text-muted"> استلام الاختبار </p>
+                                        <i class="icon ion-md-paper-plane project bg-warning-transparent mx-auto text-warning "></i>
                                     </div>
-                                </a>
-                            </div>
+                                    <p class="mb-1 text-muted"> استلام الاختبار </p>
+                                </div>
+                            </a>
                         </div>
-                    </div>
-                    <div class="list p-3 w-100">
-                        <div class="d-flex justify-content-between w-100 align-items-center">
-                            <h6 class=""> الحالة </h6>
-                            <p> تم التقدم </p>
-                        </div>
-                        <div class="d-flex justify-content-between w-100 align-items-center">
-                            <h6 class=""> تاريخ التقدم </h6>
-                            <p> 12 اكتوبر 23 </p>
-                        </div>
-                        <div class="d-flex justify-content-between w-100 align-items-center">
-                            <h6 class=""> الوقت </h6>
-                            <p> 12:23 </p>
-                        </div>
-                    </div>
-
+                </div>
+            </div>
+            <div class="list p-3 w-100">
+                <div class="d-flex justify-content-between w-100 align-items-center">
+                    <h6 class=""> الحالة </h6>
+                    <p> تم التقدم </p>
+                </div>
+                <div class="d-flex justify-content-between w-100 align-items-center">
+                    <h6 class=""> تاريخ التقدم </h6>
+                    <p> 12 اكتوبر 23  </p>
+                </div>
+                <div class="d-flex justify-content-between w-100 align-items-center">
+                    <h6 class=""> الوقت </h6>
+                    <p> 12:23  </p>
                 </div>
             </div>
         </div>
+    </div>
     @endforeach
     <!--/Sidebar-right-->
 
     <!--  بعدي-->
     <!-- Begin Side Drawer after -->
     @foreach ($attendance as $item)
-        <div id="side-drawer" class="position-fixed ">
-            <div class="panel-body tabs-menu-body latest-tasks p-0 border-0 h-100 mt-0 bg-light">
-                <div class="tab-content d-flex align-items-start flex-column mb-3 justify-content-between bg-light">
-                    <div class="list imgUser">
-                        <i class="bi bi-person-circle tx-80"></i>
-                        <!-- <a class="profile-user" href=""><img alt="" src="../assets/img/1.jpg" class="rounded-circle"></a> -->
-                        <p class="wrapper">
-                            <b class="text-center">{{ $item->name }} </b>
-                        </p>
-                    </div>
-                    <div class="list p-3">
-                        <div class="row row-sm">
-                            <div class="col-6">
-                                <a class="card text-center" href="">
-                                    <div class="card-body p-2">
-                                        <div class="feature widget-2 text-center mb-3">
-                                            <i
-                                                class="bi bi-box-arrow-in-down project bg-warning-transparent mx-auto text-warning "></i>
-                                        </div>
-                                        <p class="mb-1 text-muted tx-13 "> تحميل ملف المشارك </p>
+    <div class="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabindex="-1" id="drawerafter_{{$item->id}}" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-body d-flex align-items-start flex-column mb-3 justify-content-between bg-light p-0">
+            <div class="list m-auto text-center">
+                <i class="bi bi-person-circle tx-80"></i>
+                <!-- <a class="profile-user" href=""><img alt="" src="../assets/img/1.jpg" class="rounded-circle"></a> -->
+                <p class="wrapper">
+                    <b class="text-center"> {{$item->name}}</b>
+                </p>
+            </div>
+            <div class="list p-3">
+                <div class="row row-sm">
+                        <div class="col-6">
+                            <a class="card text-center" href="">
+                                <div class="card-body p-2">
+                                    <div class="feature widget-2 text-center mb-3">
+                                        <i class="bi bi-box-arrow-in-down project bg-warning-transparent mx-auto text-warning "></i>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="col-6">
-                                <div class="card text-center">
-                                    <div class="card-body p-2">
-                                        <div class="feature widget-2 text-center mt-0 mb-3">
-                                            <i
-                                                class="bi bi-box-arrow-in-down project bg-warning-transparent mx-auto text-warning "></i>
-                                        </div>
-                                        <p class="mb-1 text-muted tx-13"> تحميل ملف التكليف </p>
+                                    <p class="mb-1 text-muted tx-13 "> تحميل ملف المشارك </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <div class="card text-center">
+                                <div class="card-body p-2">
+                                    <div class="feature widget-2 text-center mt-0 mb-3">
+                                        <i class="bi bi-box-arrow-in-down project bg-warning-transparent mx-auto text-warning "></i>
                                     </div>
+                                    <p class="mb-1 text-muted tx-13"> تحميل ملف التكليف </p>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="card text-center">
-                                    <div class="card-body p-2">
-                                        <div class="feature widget-2 text-center mt-0 mb-3">
-                                            <i
-                                                class="bi bi-send  project bg-warning-transparent mx-auto text-warning "></i>
-                                        </div>
-                                        <p class="mb-1 text-muted"> استلام التكليف </p>
+                        </div>
+                        <div class="col-12">
+                            <div class="card text-center">
+                                <div class="card-body p-2">
+                                    <div class="feature widget-2 text-center mt-0 mb-3">
+                                        <i class="bi bi-send  project bg-warning-transparent mx-auto text-warning "></i>
                                     </div>
+                                    <p class="mb-1 text-muted"> استلام التكليف </p>
                                 </div>
                             </div>
-
                         </div>
-                    </div>
-                    <div class="list p-3 w-100">
-                        <div class="d-flex justify-content-between w-100 align-items-center">
-                            <h6 class=""> الحالة </h6>
-                            <p> تم التقدم </p>
-                        </div>
-                        <div class="d-flex justify-content-between w-100 align-items-center">
-                            <h6 class=""> تاريخ التقدم </h6>
-                            <p> 12 اكتوبر 23 </p>
-                        </div>
-                        <div class="d-flex justify-content-between w-100 align-items-center">
-                            <h6 class=""> الوقت </h6>
-                            <p> 12:23 </p>
-                        </div>
-                    </div>
 
                 </div>
             </div>
+            <div class="list p-3 w-100">
+                <div class="d-flex justify-content-between w-100 align-items-center">
+                    <h6 class=""> الحالة </h6>
+                    <p> تم التقدم </p>
+                </div>
+                <div class="d-flex justify-content-between w-100 align-items-center">
+                    <h6 class=""> تاريخ التقدم </h6>
+                    <p> 12 اكتوبر 23  </p>
+                </div>
+                <div class="d-flex justify-content-between w-100 align-items-center">
+                    <h6 class=""> الوقت </h6>
+                    <p> 12:23  </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @endforeach
     <div id="side-drawer-void" class="position-fixed d-none" onclick="closeSideDrawer()"></div>
 @endsection
 @section('js')
+<script src="{{asset('assets/js/drawar-user.js')}}"></script>
 
 <script>
 

@@ -12,8 +12,9 @@ class AttendanceController extends Controller
      */
     public function index()
     {
+        $id = null;
         $attendance = Attendance::paginate(10);
-        return view("dashboard.attendance.index", compact("attendance"));
+        return view("dashboard.attendance.index", compact("attendance",'id'));
     }
 
     /**
@@ -41,7 +42,9 @@ class AttendanceController extends Controller
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
         $attendance = Attendance::create($data);
-        $attendance->courses()->attach($request->course_id);
+        if ($request->course_id) {
+            $attendance->courses()->attach($request->course_id);
+        }
         return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $attendance ? 201 : 400);
     }
 
@@ -78,7 +81,7 @@ class AttendanceController extends Controller
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
         $attendance->update($data);
-         return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $attendance ? 201 : 400);
+        return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $attendance ? 201 : 400);
     }
 
     /**
