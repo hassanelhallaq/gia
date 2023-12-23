@@ -20,6 +20,8 @@ class CreateAdminsTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('status',['active','deactive']);
+            $table->string('phone');
+
             $table->softDeletes();
 
             $table->rememberToken();
