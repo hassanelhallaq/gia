@@ -55,3 +55,6 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
 
 });
 Route::get('/invitation/{id}/{course_id}', [SiteController::class , 'index'])->name('invitation.index');
+Route::get('/accept/{id}/{course_id}', [SiteController::class , 'second'])->name('invitation.second');
+
+Route::post('/invitation/reply', [SiteController::class , 'storeReply']);
