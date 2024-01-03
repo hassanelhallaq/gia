@@ -35,6 +35,6 @@ class LandingPageController extends Controller
             ];
         }
 
-        return view('landing_page.timeline', compact('program'));
+        return view('landing_page.timeline', compact('groupedCourses'));
     }
 }
