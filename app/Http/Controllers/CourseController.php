@@ -43,6 +43,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
+        $course = $course->withCount("attendances")->with('attendances');
         return view("dashboard.courses.show", compact("course"));
     }
 
@@ -51,7 +52,7 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        $course = $course->withCount();
+
          return view("dashboard.courses.index", compact("course"));
     }
 
