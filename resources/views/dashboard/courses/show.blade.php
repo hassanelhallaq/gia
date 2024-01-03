@@ -1,8 +1,7 @@
 @extends('dashboard.layouts.master')
 @section('header')
 
-<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0" style="border-top: 1px solid #00000030;">
-    <div class="left-content mt-2">
+     <div class="left-content mt-2">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb breadcrumb-style1">
                 <li class="breadcrumb-item">
@@ -28,8 +27,7 @@
         </div>
     </div>
 </div>
-</div>
-@endsection
+ @endsection
 @section('content')
 
     <div class="container-fluid mt-5">
