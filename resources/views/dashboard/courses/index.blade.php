@@ -137,7 +137,7 @@ overflow-x: hidden;
                                                 class="btn btn-previous btn-sm btn-block"><i
                                                     class="si si-options-vertical text-gray tx-12"></i></button>
                                             <div class="dropdown-menu">
-                                                <a href="edit_course.html" class="dropdown-item"> تحرير </a>
+                                                <a href="{{route('courses.edit',[$item->id])}}" class="dropdown-item"> تحرير </a>
                                                 <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
                                             </div>
                                         </td>
