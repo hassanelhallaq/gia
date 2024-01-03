@@ -41,9 +41,9 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Course $course)
+    public function show($id)
     {
-        $course = $course->withCount("attendances")->with('attendances');
+         $course = Course::withCount("attendances")->with('attendances')->find($id);
         return view("dashboard.courses.show", compact("course"));
     }
 
