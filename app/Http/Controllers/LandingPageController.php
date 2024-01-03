@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
 {
-   
+
     public function home($id){
-        $program = Program::find($id);
+        $program = Program::where('username',$id)->first();
         return view('landing_page.home',compact('program'));
     }
 }
