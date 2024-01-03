@@ -59,8 +59,9 @@
         </div>
         <div class="header_content">
             <div class="img">
-                <img src="assets/Rectangle 8.png" alt="">
+                <img src="{{asset('landingPage/assets/Rectangle 8.png')}}" alt="">
             </div>
+            
             <div class="txt">
                 <div class="title">
                     برنامج التدريب الجماعى
