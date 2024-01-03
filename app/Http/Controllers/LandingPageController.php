@@ -12,4 +12,10 @@ class LandingPageController extends Controller
         $program = Program::where('username',$id)->first();
         return view('landing_page.home',compact('program'));
     }
+
+    public function timeLine($id){
+        $program = Program::where('username',$id)->first();
+        return view('landing_page.timeline',compact('program'));
+    }
 }
+
