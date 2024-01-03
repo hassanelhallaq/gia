@@ -13,11 +13,11 @@
        <div class="wrap">
         <div class="sub_header">
             <div class="mh-logo">
-                <img src="assets/mh-logo 1.png" alt="">
+                <img src="{{asset('assets/mh-logo 1.png')}}" alt="">
 
             </div>
             <div class="logo2">
-                <img src="assets/logo2.png" alt="">
+                <img src="{{asset('assets/logo2.png')}}" alt="">
             </div>
         </div>
         <div class="navigation">
