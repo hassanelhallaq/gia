@@ -17,7 +17,7 @@
         <div class=" d-flex">
             <button class="btn btn-outline-light btn-print"> طباعة <i class="icon ion-ios-print"></i></button>
             <button class="btn btn-outline-light mr-1 btn-export"> تصدير <i class="ti-stats-up project"></i></button>
-            <a class="btn btn-warning-gradient btn-with-icon mr-1" href="create_programme.html">  انشاء برنامج <i class="bi bi-plus"></i></a>
+            <a class="btn btn-warning-gradient btn-with-icon mr-1" href="{{route('programs.create')}}">  انشاء برنامج <i class="bi bi-plus"></i></a>
         </div>
     </div>
 </div>
@@ -65,7 +65,7 @@
                         </div> --}}
 
                         <div class="mr-auto d-block tx-20">
-                            <a href="{{route('programs.create')}}" class="btn btn-warning-gradient btn-with-icon" type="button" > اضف <i class="bi bi-floppy"></i></a>
+                            {{-- <a href="{{route('programs.create')}}" class="btn btn-warning-gradient btn-with-icon" type="button" > اضف <i class="bi bi-floppy"></i></a> --}}
                             <a href=""{{route('programs.grid')}}><i class="typcn typcn-calendar-outline"></i></a>
                             <a href="{{route('programs.grid')}}"><i class="bi bi-grid"></i></a>
                             <a href=""><i class="bi bi-list bg-black-9 text-white"></i></a>
@@ -176,5 +176,5 @@
 
 
 
-    </>
+   
 @endsection
