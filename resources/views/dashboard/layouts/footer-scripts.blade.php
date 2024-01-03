@@ -3,7 +3,7 @@
 <!-- Bootstrap Bundle js -->
 <script src="{{ URL::asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!--Internal  Chart.bundle js -->
-{{-- <script src="{{ URL::asset('assets/plugins/chart.js/Chart.bundle.min.js') }}"></script> --}}
+<script src="{{ URL::asset('assets/plugins/chart.js/Chart.bundle.min.js') }}"></script>
 <!-- Ionicons js -->
 <script src="{{ URL::asset('assets/plugins/ionicons/ionicons.js') }}"></script>
 
@@ -30,9 +30,9 @@
 <!-- Left-menu js-->
 <script src="{{ URL::asset('assets/plugins/side-menu/sidemenu.js') }}"></script>
 <!--Internal  index js -->
-{{-- <script src="{{ URL::asset('assets/js/index.js') }}"></script> --}}
+<script src="{{ URL::asset('assets/js/index.js') }}"></script>
 <!-- Apexchart js-->
-{{-- <script src="{{ URL::asset('assets/js/apexcharts.js') }}"></script> --}}
+<script src="{{ URL::asset('assets/js/apexcharts.js') }}"></script>
 <!-- custom js -->
 <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
 <script src="{{ asset('crudjs/crud.js') }}"></script>
@@ -40,5 +40,5 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-{{-- <script src="{{ URL::asset('assets/js/chart.chartjs.js') }}"></script> --}}
+<script src="{{ URL::asset('assets/js/chart.chartjs.js') }}"></script>
 @yield('js')
