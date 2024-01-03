@@ -22,8 +22,9 @@
                                     data-translate="{{ strtolower($month) }}">{{ $month }}</div>
                             @endforeach
                         </div>
+                        @foreach ($groupedCourses as $month => $courses)
+
                         <div class="dates">
-                            @foreach ($groupedCourses as $month => $courses)
                                 <div class="date{{ $loop->first ? ' active' : '' }}">
                                     @foreach ($courses as $course)
                                         <div class="df g1 jc-sb">
@@ -36,8 +37,9 @@
                                         </div>
                                     @endforeach
                                 </div>
-                            @endforeach
                         </div>
+                        @endforeach
+
                     </div>
                     <!-- your.blade.view.blade.php -->
 
