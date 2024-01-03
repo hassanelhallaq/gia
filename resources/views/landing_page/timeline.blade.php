@@ -42,18 +42,18 @@
                     <!-- your.blade.view.blade.php -->
 
                     <div class="events">
-                        @foreach ($programs as $program)
+
                             @foreach ($program->courses as $course)
-                                <div class="event {{ strtolower(date('F', strtotime($course->start_date))) }}">
+                                <div class="event {{ strtolower(date('F', strtotime($course->start))) }}">
                                     <div class="event_img">
                                         <img src="assets/event1.png" alt="">
-                                        <div class="event_overlay">{{ $course->title }}</div>
+                                        <div class="event_overlay">{{ $course->name }}</div>
                                     </div>
                                     <div class="event_btn" data-translate="review"
                                         onclick="redirectToCoursePage('{{ $course->id }}')">استعراض</div>
                                 </div>
                             @endforeach
-                        @endforeach
+
                     </div>
 
                 </div>
