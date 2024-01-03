@@ -139,7 +139,7 @@
                                                         <a href="{{route('program.course',[$item->id])}}"><i class="far fa-eye tx-15"></i></a>                                                        <!-- dropdown-menu -->
                                                         <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i class="si si-options-vertical text-gray tx-13" ></i></button>
                                                         <div class="dropdown-menu">
-                                                            <a href="edit_programme.html" class="dropdown-item"> تحرير </a>
+                                                            <a href="{{route('course.edit',[$item->id])}}" class="dropdown-item"> تحرير </a>
                                                             <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
                                                         </div>
                                                     </td>
@@ -176,5 +176,5 @@
 
 
 
-   
+
 @endsection
