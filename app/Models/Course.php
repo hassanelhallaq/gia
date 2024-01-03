@@ -27,7 +27,7 @@ class Course extends Model
         'program_id',
     ];
     public function attendances(){
-        return $this->belongsToMany(Attendance::class);
+        return $this->belongsToMany(Attendance::class,AttendanceCourse::class);
     }
 
     public function program(){
