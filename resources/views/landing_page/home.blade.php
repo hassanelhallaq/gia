@@ -1,5 +1,21 @@
 @extends('landing_page.master')
 @section('content')
+@section('header_content')
+<div class="header_content">
+    <div class="img">
+        <img src="{{asset('landingPage/assets/Rectangle 8.png')}}" alt="">
+    </div>
+
+    <div class="txt">
+        <div class="title">
+          {{$program->name}}  برنامج
+        </div>
+        <div class="text">
+            {{$program->content_two}}                </div>
+    </div>
+
+</div>
+@endsection
 <section id="home_section">
     <div class="wrap">
         <div class="icons_container">

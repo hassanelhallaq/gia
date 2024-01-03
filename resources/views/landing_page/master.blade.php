@@ -57,20 +57,8 @@
 
             </div>
         </div>
-        <div class="header_content">
-            <div class="img">
-                <img src="{{asset('landingPage/assets/Rectangle 8.png')}}" alt="">
-            </div>
 
-            <div class="txt">
-                <div class="title">
-                  {{$program->name}}  برنامج
-                </div>
-                <div class="text">
-                    {{$program->content_two}}                </div>
-            </div>
-
-        </div>
+       @yield('header_content')
 
        </div>
     </header>
