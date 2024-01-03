@@ -1,10 +1,24 @@
 @extends('dashboard.layouts.master')
 @section('header')
-<div class="main-dashboard-header-right">
-    <div class=" d-flex">
-        <a href="{{route('programs.create')}}" class="btn btn-warning-gradient btn-with-icon mr-1"> +  انشاء برنامج</a>
-        <button class="btn btn-warning-gradient btn-with-icon mr-1 "> +  اضافة مشاركين </button>
-        <button class="btn btn-warning-gradient btn-icon mr-1"><i class="si si-options-vertical"></i></button>
+<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0" style="border-top: 1px solid #00000030;">
+    <div class="left-content mt-2">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-style1">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" >الرئيسية</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="view_programmes.html" class="text-muted">البرامج</a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+    <div class="main-dashboard-header-right">
+        <div class=" d-flex">
+            <button class="btn btn-outline-light btn-print"> طباعة <i class="icon ion-ios-print"></i></button>
+            <button class="btn btn-outline-light mr-1 btn-export"> تصدير <i class="ti-stats-up project"></i></button>
+            <a class="btn btn-warning-gradient btn-with-icon mr-1" href="create_programme.html">  انشاء برنامج <i class="bi bi-plus"></i></a>
+        </div>
     </div>
 </div>
 @endsection
@@ -70,34 +84,35 @@
                                 <div class="table-responsive">
                                     <table class="table table-striped mg-b-0 text-md-nowrap">
                                         <thead>
-                                            <tr class="list-unstyled">
-                                                <th>
-                                                    <i class="typcn typcn-folder"></i>
-                                                    اسم البرنامج
-                                                </th>
-                                                <th>
-                                                    <i class="si si-layers"></i>
-                                                    عدد الدورات
-                                                </th>
-                                                <th>
-                                                    <i class="mdi mdi-account-outline"></i>
-                                                    العميل
-                                                </th>
-                                                <th><i class="far fa-calendar"></i> تاريخ البداية </th>
-                                                <th><i class="far fa-calendar"></i> تاريخ النهاية </th>
-                                                <th>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                        <path
-                                                            d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05" />
-                                                    </svg>
-                                                    الحالة
-                                                </th>
-                                                <th></th>
+                                            <tr class="tableHead">
+                                                <th><input type="checkbox" class="checkParent"></th>
+                                                <th>#</th>
+                                                 <th>
+                                                     <i class="typcn typcn-folder"></i>
+                                                     اسم البرنامج
+                                                 </th>
+                                                 <th>
+                                                     <i class="si si-layers"></i>
+                                                     عدد الدورات
+                                                 </th>
+                                                 <th>
+                                                     <i class="mdi mdi-account-outline"></i>
+                                                     العميل
+                                                 </th>
+                                                 <th><i class="far fa-calendar"></i> تاريخ البداية </th>
+                                                 <th><i class="far fa-calendar"></i> تاريخ النهاية </th>
+
+                                                 <th> الحالة </th>
+                                                 <td class="col-filter">
+                                                    <!-- dropdown-menu -->
+                                                    <button data-toggle="dropdown"
+                                                        class="btn btn-previous p-0"><i
+                                                            class="bi bi-filter-square tx-20"></i></button>
+                                                    <div class="dropdown-menu">
+                                                    </div>
+                                                </td>
                                             </tr>
-                                        </thead>
+                                         </thead>
                                         @foreach ($programs as $item)
                                             <tbody id="table-body">
                                                 <tr>
@@ -106,19 +121,28 @@
                                                     </p>
                                                 </tr>
                                                 <tr class="table-rows">
-                                                    <td scope="row">{{$item->name}}</td>
-                                                    <td>{{$item->courses_count}} <a href="{{route('program.course',[$item->id])}}"><i class="far fa-eye tx-15"></i></a>
-                                                </td>
-                                                    <td class="client-name">{{$item->client->name ?? ''}}</td>
-                                                    @php
+                                                    <td><input type="checkbox" class="checkChild"></td>
+                                                    <td>3</td>
+                                                     <td scope="row">{{$item->name}} </td>
+                                                     <td>{{$item->courses_count}}</td>
+                                                     <td class="client-name">{{$item->client->name ?? ''}}</td>
+                                                     @php
                                                      $start = Carbon\Carbon::parse($item->start)->format('y-m-d');
                                                      $end = Carbon\Carbon::parse($item->end)->format('y-m-d');
-
                                                     @endphp
-                                                    <td>{{$start }}</td>
-                                                    <td>{{$end }}</td>
-                                                    <td><span class="tag tag-rounded bg-success-transparent text-success">
-                                                        {{$item->show_invited}} </span></td>
+                                                       <td>{{$start }}</td>
+                                                       <td>{{$end }}</td>
+                                                     <td>
+                                                         <span class="tag tag-rounded bg-primary-transparent text-primary">في المعالجة</span>
+                                                     </td>
+                                                     <td class="d-flex filter-col-cell">
+                                                        <a href="{{route('program.course',[$item->id])}}"><i class="far fa-eye tx-15"></i></a>                                                        <!-- dropdown-menu -->
+                                                        <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i class="si si-options-vertical text-gray tx-13" ></i></button>
+                                                        <div class="dropdown-menu">
+                                                            <a href="edit_programme.html" class="dropdown-item"> تحرير </a>
+                                                            <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                              </tbody>
                                         @endforeach
