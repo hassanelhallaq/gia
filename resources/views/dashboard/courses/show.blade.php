@@ -31,12 +31,7 @@
 </div>
 @endsection
 @section('content')
-<div class="main-content app-content">
-    <!-- main-header opened -->
 
-    <!-- /main-header -->
-    <!-- container opened -->
-    <br><br><br>
     <div class="container-fluid mt-5">
         <!-- row -->
         <div class="row row-sm sales-cardSmall">
@@ -678,8 +673,7 @@
 
     </div>
     <!-- Container closed -->
-</div>
-<!-- main-content closed -->
+ <!-- main-content closed -->
 
 
 
