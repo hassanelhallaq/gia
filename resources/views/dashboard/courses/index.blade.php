@@ -103,7 +103,7 @@
                                     <tr class="table-rows">
                                         <td><input type="checkbox" class="checkChild"></td>
                                         <td>1</td>
-                                        <td scope="row">{{$item->name}}<</td>
+                                        <td scope="row">{{$item->name}}</td>
                                         <td>{{$item->category->name}}</td>
                                         <td class="client-name">  {{$item->trainer}}</td>
                                         <td> مستوي اول </td>
@@ -168,4 +168,9 @@
 
 
 </div>
+@endsection
+@section('js')
+<script src="{{asset('assets/js/xlsx.full.min.js')}}"></script>
+<script src="{{asset('assets/js/table.js')}}"></script>
+
 @endsection
