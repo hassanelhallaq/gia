@@ -51,6 +51,7 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
+        $course = $course->withCount();
          return view("dashboard.courses.index", compact("course"));
     }
 

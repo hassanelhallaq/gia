@@ -14,7 +14,7 @@
                     <a href="programme_detales.html" class="text-muted"> برنامج تطوير المهارات الشخصية </a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="#" class="text-muted"> دورة مبادئ الأعمال </a>
+                    <a href="#" class="text-muted"> {{$course->name}}</a>
                 </li>
             </ol>
         </nav>
@@ -28,7 +28,7 @@
     </div>
   @endsection
 @section('content')
- 
+
          <!-- row -->
         <div class="row row-sm sales-cardSmall">
             <div class="col-xl-part">
@@ -41,7 +41,7 @@
                             <div class="">
                                 <p class="mb-2 tx-12 text-muted"> عدد المشاركين </p>
                                 <div class="">
-                                    <h4 class="mb-1 font-weight-bold">20</h4>
+                                    <h4 class="mb-1 font-weight-bold">{{$course->attendances_count}}</h4>
                                 </div>
                             </div>
                         </div>
@@ -176,7 +176,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="main-content-label mg-b-5 d-flex justify-content-between">
-                             <h5>معدل حضور دورة مبادئ الأعمال</h5>
+                             <h5>معدل حضور دورة {{$course->name}}</h5>
                         </div>
                         <div class="ht-200 ht-sm-300" id="flotArea1"></div>
                     </div>
@@ -219,7 +219,7 @@
 
                      <div class="d-flex">
                          <p class="mt-2 mr-2 d-flex"> عرض: </p>
-                         <select class="form-control select2-no-search mr-0 table-rows-number">
+                         {{-- <select class="form-control select2-no-search mr-0 table-rows-number">
                              <option value="all">
                                  الكل
                              </option>
@@ -241,7 +241,7 @@
                              <option value="100">
                                  100
                              </option>
-                         </select>
+                         </select> --}}
                      </div>
                      <button class="btn btn-danger mr-1 text-white btnSelectDelete" data-target="#modalDelete" data-toggle="modal" style="display: none;">حذف الصفوف المختارة <i class="bi bi-trash tx-12"></i></button>
                      <div class="mr-auto d-block tx-20">
@@ -290,149 +290,37 @@
                                 <tr>
                                    <p class="p-5 text-center d-none" id="empty-message">لا توجد بيانات لعرضها</p>
                                </tr>
-                                <tr class="table-rows">
-                                    <td><input type="checkbox" class="checkChild"></td>
-                                    <td>1</td>
-                                    <td scope="row"> محمد عبده عبدالرحمن ناصر </td>
-                                    <td>نقطة استفهام</td>
-                                    <td class="client-name"> 0545255177 </td>
-                                    <td>  8451654 </td>
-                                    <td>مدير ادارة</td>
-                                    <td class="d-flex">
-                                       <span class="ml-3 examBefor" data-toggle="sidebar-left" data-target=".sidebar-left"> قبلي</span>
-                                       <span class="ml-3 examBefor" onclick="openSideDrawer()">بعدي</span>
-                                    </td>
-                                    <td>
-                                        <span class="ml-2 dropdown"> 4 ايام </span>
-
-                                        <button class=" btn btn-previous p-0" data-toggle="dropdown"><i class="bi bi-exclamation-circle"></i></button>
-                                        <div class="Attendance dropdown-menu scrollable-menu">
-                                            <span class="dropdown-item"> اليوم الاول  </span>
-                                            <span class="dropdown-item text-danger"> اليوم الثاني </span>
-                                            <span class="dropdown-item"> اليوم الثالث</span>
-                                            <span class="dropdown-item text-danger"> اليوم الرابع</span>
-                                            <span class="dropdown-item"> اليوم الخامس </span>
-                                        </div>
-                                    </td>
-                                    <td>60%</td>
-                                    <td> # </td>
-                                    <td class="d-flex filter-col-cell">
-                                        <!-- dropdown-menu -->
-                                        <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i class="si si-options-vertical text-gray tx-13" ></i></button>
-                                        <div class="dropdown-menu">
-                                            <a href="" class="dropdown-item"> تحرير </a>
-                                            <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="table-rows">
-                                    <td><input type="checkbox" class="checkChild"></td>
-                                    <td>1</td>
-                                    <td scope="row"> محمد عبده عبدالرحمن ناصر </td>
-                                    <td>نقطة استفهام</td>
-                                    <td class="client-name"> 0545255177 </td>
-                                    <td>  8451654 </td>
-                                    <td>مدير ادارة</td>
-                                    <td class="d-flex">
-                                       <span class="ml-3 examBefor" data-toggle="sidebar-left" data-target=".sidebar-left"> قبلي</span>
-                                       <span class="ml-3 examBefor" onclick="openSideDrawer()">بعدي</span>
-                                    </td>
-                                    <td>
-                                        <span class="ml-2 dropdown"> 4 ايام </span>
-
-                                        <button class=" btn btn-previous p-0" data-toggle="dropdown"><i class="bi bi-exclamation-circle"></i></button>
-                                        <div class="Attendance dropdown-menu scrollable-menu">
-                                            <span class="dropdown-item"> اليوم الاول  </span>
-                                            <span class="dropdown-item text-danger"> اليوم الثاني </span>
-                                            <span class="dropdown-item"> اليوم الثالث</span>
-                                            <span class="dropdown-item text-danger"> اليوم الرابع</span>
-                                            <span class="dropdown-item"> اليوم الخامس </span>
-                                        </div>
-                                    </td>
-                                    <td>60%</td>
-                                    <td> # </td>
-                                    <td class="d-flex filter-col-cell">
-                                        <!-- dropdown-menu -->
-                                        <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i class="si si-options-vertical text-gray tx-13" ></i></button>
-                                        <div class="dropdown-menu">
-                                            <a href="" class="dropdown-item"> تحرير </a>
-                                            <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="table-rows">
-                                    <td><input type="checkbox" class="checkChild"></td>
-                                    <td>1</td>
-                                    <td scope="row"> محمد عبده عبدالرحمن ناصر </td>
-                                    <td>نقطة استفهام</td>
-                                    <td class="client-name"> 0545255177 </td>
-                                    <td>  8451654 </td>
-                                    <td>مدير ادارة</td>
-                                    <td class="d-flex">
-                                       <span class="ml-3 examBefor" data-toggle="sidebar-left" data-target=".sidebar-left"> قبلي</span>
-                                       <span class="ml-3 examBefor" onclick="openSideDrawer()">بعدي</span>
-                                    </td>
-                                    <td>
-                                        <span class="ml-2 dropdown"> 4 ايام </span>
-
-                                        <button class=" btn btn-previous p-0" data-toggle="dropdown"><i class="bi bi-exclamation-circle"></i></button>
-                                        <div class="Attendance dropdown-menu scrollable-menu">
-                                            <span class="dropdown-item"> اليوم الاول  </span>
-                                            <span class="dropdown-item text-danger"> اليوم الثاني </span>
-                                            <span class="dropdown-item"> اليوم الثالث</span>
-                                            <span class="dropdown-item text-danger"> اليوم الرابع</span>
-                                            <span class="dropdown-item"> اليوم الخامس </span>
-                                        </div>
-                                    </td>
-                                    <td>60%</td>
-                                    <td> # </td>
-                                    <td class="d-flex filter-col-cell">
-                                        <!-- dropdown-menu -->
-                                        <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i class="si si-options-vertical text-gray tx-13" ></i></button>
-                                        <div class="dropdown-menu">
-                                            <a href="" class="dropdown-item"> تحرير </a>
-                                            <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="table-rows">
-                                    <td><input type="checkbox" class="checkChild"></td>
-                                    <td>1</td>
-                                    <td scope="row"> محمد عبده عبدالرحمن ناصر </td>
-                                    <td>نقطة استفهام</td>
-                                    <td class="client-name"> 0545255177 </td>
-                                    <td>  8451654 </td>
-                                    <td>مدير ادارة</td>
-                                    <td class="d-flex">
-                                       <span class="ml-3 examBefor" data-toggle="sidebar-left" data-target=".sidebar-left"> قبلي</span>
-                                       <span class="ml-3 examBefor" onclick="openSideDrawer()">بعدي</span>
-                                    </td>
-                                    <td>
-                                        <span class="ml-2 dropdown"> 4 ايام </span>
-
-                                        <button class=" btn btn-previous p-0" data-toggle="dropdown"><i class="bi bi-exclamation-circle"></i></button>
-                                        <div class="Attendance dropdown-menu scrollable-menu">
-                                            <span class="dropdown-item"> اليوم الاول  </span>
-                                            <span class="dropdown-item text-danger"> اليوم الثاني </span>
-                                            <span class="dropdown-item"> اليوم الثالث</span>
-                                            <span class="dropdown-item text-danger"> اليوم الرابع</span>
-                                            <span class="dropdown-item"> اليوم الخامس </span>
-                                        </div>
-                                    </td>
-                                    <td>60%</td>
-                                    <td> # </td>
-                                    <td class="d-flex filter-col-cell">
-                                        <!-- dropdown-menu -->
-                                        <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i class="si si-options-vertical text-gray tx-13" ></i></button>
-                                        <div class="dropdown-menu">
-                                            <a href="" class="dropdown-item"> تحرير </a>
-                                            <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                               @foreach ($course->attendances as $item)
+                               <tr class="table-rows">
+                                   <td scope="row"> {{ $item->name }} </td>
+                                   <td>{{ $item->work_place }} </td>
+                                   <td class="client-name"> {{ $item->phone_number }} </td>
+                                   <td>{{ $item->id_number }} </td>
+                                   <td>{{ $item->job }} </td>
+                                   <td class="d-flex">
+                                       <span class="ml-3 examBefor" data-bs-toggle="offcanvas" data-bs-target="#drawerbefore_{{$item->id}}" aria-controls="offcanvasWithBothOptions"> قبلي</span>
+                                       <!-- <span class="ml-3 examBefor" onclick="openSideDrawer()">بعدي</span> -->
+                                       <span class="ml-3 examBefor" data-bs-toggle="offcanvas" data-bs-target="#drawerafter_{{$item->id}}" aria-controls="offcanvasWithBothOptions"> بعدي </span>
+                                   </td>
+                                   <td> 60% </td>
+                                   @if ($id)
+                                   <td><a href="{{route('invitation.index',[$item->id,'course_id'=>$id])}}" target=”_blank” ><i class="far fa-eye tx-15"></i></a></td>
+                                   @endif
+                                   <td class="d-flex filter-col-cell">
+                                       <!-- dropdown-menu -->
+                                       <button data-toggle="dropdown"
+                                           class="btn btn-previous btn-sm btn-block"><i
+                                               class="si si-options-vertical text-gray tx-13"></i></button>
+                                       <div class="dropdown-menu">
+                                           <a href="#" class="dropdown-item"
+                                               data-target="#modaledit_{{$item->id}}" data-toggle="modal"> تحرير </a>
+                                           <a href="#"
+                                               class="dropdown-item text-danger"data-target="#modalDelete"
+                                               data-toggle="modal"> حذف </a>
+                                       </div>
+                                   </td>
+                               </tr>
+                           @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -452,7 +340,7 @@
                          <li class="page-item"><button class="btn btn-previous"  id="table-paganite-prev"><i class="ti-angle-double-left"></i></button>
                          </li>
                      </ul>
-                     <div class="d-flex">
+                     {{-- <div class="d-flex">
                          <div class="d-block mt-2"> عرض</div>
                          <select class="form-control select2-no-search mr-0 table-rows-number">
                              <option value="all">
@@ -477,10 +365,10 @@
                                  100
                              </option>
                          </select>
-                     </div>
-                     <div class="mr-auto tx-15 mt-2">
+                     </div> --}}
+                     {{-- <div class="mr-auto tx-15 mt-2">
                          <span id="table-status">1-6 of 100</span>
-                     </div>
+                     </div> --}}
                  </div>
              </div>
          </div>
