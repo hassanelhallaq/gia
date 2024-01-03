@@ -8,12 +8,12 @@
                 <li class="breadcrumb-item">
                     <a href="../index.html" >الرئيسية</a>
                 </li>
-                <li class="breadcrumb-item">
+                {{-- <li class="breadcrumb-item">
                     <a href="table_program_management.html"class="text-muted">البرامج</a>
                 </li>
                 <li class="breadcrumb-item">
                     <a href="#" class="text-muted"> {{$program->name}}</a>
-                </li>
+                </li> --}}
             </ol>
         </nav>
     </div>
