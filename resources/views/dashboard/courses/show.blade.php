@@ -26,13 +26,10 @@
             <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركة  <i class="bi bi-box-arrow-in-down"></i></button>
         </div>
     </div>
-</div>
- @endsection
+  @endsection
 @section('content')
-<div class="main-content app-content">
-
-    <div class="container-fluid mt-5">
-        <!-- row -->
+ 
+         <!-- row -->
         <div class="row row-sm sales-cardSmall">
             <div class="col-xl-part">
                 <div class="card">
@@ -670,10 +667,8 @@
 
 
 
-    </div>
-    <!-- Container closed -->
-</div>
-<!-- main-content closed -->
+     <!-- Container closed -->
+ <!-- main-content closed -->
 
 
 
