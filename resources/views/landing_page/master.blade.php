@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{asset('landingPage/style.css')}}" />
-
-
-
-
     <title>Home </title>
 </head>
 <body>
@@ -101,7 +97,7 @@
         <span id="englishMobile" class="lang" >English |</span> <span  class="lang" id="arabicMobile">العربية | </span>
       </div>
   </div>
-  @section('content')
+  @yield('content')
   <footer>
     <div class="wrap">
         <div class="footer_container">
