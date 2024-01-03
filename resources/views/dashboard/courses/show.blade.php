@@ -1018,3 +1018,15 @@
     </div>
 </div>
 @endsection
+@section('js')
+<script src="{{asset('assets/js/chart.flot.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery.flot/jquery.flot.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery.flot/jquery.flot.pie.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery.flot/jquery.flot.resize.js')}}"></script>
+<!--chart round js -->
+<script src="{{asset('assets/plugins/jquery-sparkline/jquery.sparkline.min.js"')}}"></script>
+<script src="{{asset('assets/js/index.js')}}"></script>
+<script src="{{asset('assets/js/apexcharts.js')}}"></script>
+<script src="{{asset('assets/js/custom.js')}}"></script>
+<script src="{{asset('assets/js/table.js')}}"></script>
+@endsection
