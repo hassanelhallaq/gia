@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.master')
 @section('header')
 
-<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0" style="border-top: 1px solid #00000030;">
+{{-- <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0" style="border-top: 1px solid #00000030;"> --}}
     <div class="left-content mt-2">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb breadcrumb-style1">
@@ -17,7 +17,7 @@
             </ol>
         </nav>
     </div>
-    {{-- <div class="main-dashboard-header-right ">
+    <div class="main-dashboard-header-right ">
         <div class=" d-flex flex-wrap">
             <button class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i class="ti-stats-up project"></i></button>
             <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات صفحة الويب  <i class="icon ion-ios-settings"></i></button>
@@ -25,8 +25,8 @@
             <a href="create_programme.html" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">   اضافة دورة جديدة  <i class="bi bi-plus"></i></a>
             <button class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">  عرض صفحة الويب <i class="icon ion-ios-share-alt"></i></button>
         </div>
-    </div> --}}
-</div>
+    </div>
+{{-- </div> --}}
 @endsection
 @section('css')
 <style>
@@ -81,7 +81,7 @@ overflow-x: hidden;
                                         <th> تاريخ البداية </th>
                                         <th>المدة </th>
                                         <th>لغة الدورة</th>
-                                        <th> عدد المسجلين </th>
+                                        {{-- <th> عدد المسجلين </th>
                                         <th> اسم المنسق </th>
                                         <th>  شهادة  </th>
                                         <th> نسبة الشهادة </th>
@@ -89,7 +89,7 @@ overflow-x: hidden;
                                         <th> الاختبار القبلي </th>
                                         <th> الاختبار البعدي </th>
                                         <th> تحميل المادة </th>
-                                        <th> AS </th>
+                                        <th> AS </th> --}}
 
 
                                         <!-- Filter -->
@@ -121,7 +121,7 @@ overflow-x: hidden;
                                             انجليزيه
                                             @endif
                                         </td>
-                                        <th> # </th>
+                                        {{-- <th> # </th>
                                         <th>{{$item->coordinator}} </th>
                                         <th>{{$item->is_certificate == 1 ? "نعم" : "لا"}}</th>
                                         <th> # </th>
@@ -129,7 +129,7 @@ overflow-x: hidden;
                                         <th> # </th>
                                         <th> # </th>
                                         <th> # </th>
-                                        <th> # </th>
+                                        <th> # </th> --}}
                                         <td class="d-flex filter-col-cell">
                                             <a href="{{route('courses.show',[$item->id])}}"><i	class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
                                             <!-- dropdown-menu -->
