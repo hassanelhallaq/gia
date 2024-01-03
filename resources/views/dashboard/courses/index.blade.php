@@ -23,7 +23,7 @@
             <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات صفحة الويب  <i class="icon ion-ios-settings"></i></button>
             <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات  <i class="icon ion-ios-settings"></i></button>
             <a href="create_programme.html" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">   اضافة دورة جديدة  <i class="bi bi-plus"></i></a>
-            <button class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">  عرض صفحة الويب <i class="icon ion-ios-share-alt"></i></button>
+            <a href="{{route('home',[$program->username])}}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">  عرض صفحة الويب <i class="icon ion-ios-share-alt"></i></a>
         </div>
     </div>
 {{-- </div> --}}

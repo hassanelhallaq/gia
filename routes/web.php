@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\QuestionController;
@@ -58,3 +59,7 @@ Route::get('/invitation/{id}/{course_id}', [SiteController::class , 'index'])->n
 Route::get('/accept/{id}/{course_id}', [SiteController::class , 'second'])->name('invitation.second');
 
 Route::post('/invitation/reply', [SiteController::class , 'storeReply']);
+Route::prefix('/{username}')->group(
+    function () {
+        Route::get('/home', [LandingPageController::class , 'home'])->name('home');
+    });

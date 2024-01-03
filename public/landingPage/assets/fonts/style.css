@@ -1,0 +1,189 @@
+/*fonts */
+@font-face {
+  font-family: "Lama Sans";
+  src: url(../../assets/fonts/LamaSans-Light.woff2) format("woff2"),
+    url(../../assets/fonts/LamaSans-Light.woff) format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lama Sans";
+  src: url(../../assets/fonts/LamaSans-Regular.woff2) format("woff2"),
+    url(../../assets/fonts/LamaSans-Regular.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lama Sans";
+  src: url(../../assets/fonts/LamaSans-Medium.woff2) format("woff2"),
+    url(../../assets/fonts/LamaSans-Medium.woff) format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lama Sans";
+  src: url(../../assets/fonts/LamaSans-SemiBold.woff2) format("woff2"),
+    url(../../assets/fonts/LamaSans-SemiBold.woff) format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: TheSansArabic;
+  src: url(../../assets/fonts/TheSansArabic-Bold.woff2) format("woff2"),
+    url(../../assets/fonts/TheSansArabic-Bold.woff) format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+/*reset css */
+
+html{
+    direction: rtl;
+  }
+  *, *::before, *::after {
+      box-sizing: border-box;
+    }
+   html * {
+      margin: 0;
+     
+      direction: inherit;
+      font-family: 'Lama Sans', sans-serif;
+     
+    }
+    body {
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+     
+      background: #fcfcfc;
+      color: #ffffff;  
+      height: 100vh;
+      height: 100dvh!important;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      
+    }
+    img, picture, video, canvas, svg {
+      display: block;
+      max-width: 100%;
+    }
+    a{
+      text-decoration: none;
+    }
+    ul,
+    ul li{
+       margin:0;
+       padding: 0;
+       text-indent: 0;
+       list-style-type: none;
+    }
+    button{
+      cursor: pointer;
+    }
+    input, button, textarea, select {
+      font: inherit;
+    }
+    p, h1, h2, h3, h4, h5, h6 {
+      overflow-wrap: break-word;
+    }
+    #root, #__next {
+      isolation: isolate;
+    }
+    .df{
+      display: flex;
+    }
+    .jc-c{
+      justify-content: center;
+    }
+    .jc-sb{
+      justify-content: space-between;
+    }
+    .ai-c{
+      align-items: center;
+    }
+    .g1{
+      gap: 1rem;
+    }
+    .f-c{
+      flex-direction: column;
+    }
+    .wrap {
+      margin-right: auto; /* 1 */
+      margin-left:  auto; /* 1 */
+    
+      max-width: 960px; /* 2 */
+    
+      padding-right: 10px; /* 3 */
+      padding-left:  10px; /* 3 */
+    }
+    /*header styles*/
+    header{
+       
+        height: 604px;
+        width: 100%;
+        background: linear-gradient(182deg, rgba(3, 51, 53, 0.90) 80.6%, rgba(127, 190, 65, 0.90) 138.64%),url(assets/Rectangle\ 1.png);
+      
+
+    }
+    .sub_header{
+        border-bottom: 1px solid rgba(215, 215, 215, 0.50);
+        height: 95px;
+        display: flex;
+        align-items: center;
+
+        
+    }
+    header .mh-logo{
+        width: 144px;
+        height: 53px;
+        
+      
+    }
+    header .logo2{
+        position: absolute;
+        object-fit: contain;
+        top: 0;
+        left: 0 ;
+        width: 240.068px;
+        height: 95px;
+        border-right: 2px solid #7FBE41;
+        border-bottom: 2px solid #7FBE41;      
+        
+    }
+    .navigation{
+        margin-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .list_nav ul {
+        display: flex;
+        gap: 2rem;
+    }
+    .header_content{
+        display: flex;
+        justify-content: space-between;
+      
+        gap: 2rem ;
+        margin-top: 3rem;
+    }
+    .header_content>div{
+        flex: 1;
+    }
+    .header_content .txt .title{
+        color: #FFF;
+      
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal; 
+    }
+    .header_content .txt .text{
+      color: #FFF;
+      text-align: right;
+      margin-top: 2rem;
+      font-size: 16px;
+      font-style: normal !important;
+      font-weight: 400;
+      line-height: 32px; /* 200% */
+    }
+    
