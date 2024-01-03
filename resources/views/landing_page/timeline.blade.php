@@ -44,7 +44,7 @@
                     <div class="events">
 
                             @foreach ($program->courses as $course)
-                                <div class="event {{ strtolower(date('F', strtotime($course->start))) }}">
+                                <div class="event {{ strtolower(date('F', strtotime($course->start_date))) }}">
                                     <div class="event_img">
                                         <img src="assets/event1.png" alt="">
                                         <div class="event_overlay">{{ $course->name }}</div>
@@ -53,7 +53,7 @@
                                         onclick="redirectToCoursePage('{{ $course->id }}')">استعراض</div>
                                 </div>
                             @endforeach
-
+                     
                     </div>
 
                 </div>
