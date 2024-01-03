@@ -41,4 +41,20 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="{{ URL::asset('assets/js/chart.chartjs.js') }}"></script>
+<script>
+    const menuItems = document.querySelectorAll('.side-menu__item'); // تحديد جميع عناصر القائمة الجانبية
+
+menuItems.forEach(item => {
+item.addEventListener('click', function() {
+// إزالة الكلاس "active" من العناصر السابقة
+const activeItem = document.querySelector('.side-menu__item.active');
+if (activeItem) {
+activeItem.classList.remove('active');
+}
+
+// إضافة الكلاس "active" إلى العنصر الحالي
+this.classList.add('active');
+});
+});
+</script>
 @yield('js')
