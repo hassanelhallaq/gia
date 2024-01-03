@@ -28,6 +28,15 @@
     </div> --}}
 </div>
 @endsection
+@section('css')
+<style>
+    .scrollable-menu {
+height: auto;
+max-height: 100%;
+overflow-x: hidden;
+}
+</style>
+@endsection
 @section('content')
      <!-- row -->
 <div class="row row">
@@ -55,248 +64,91 @@
 
      <!-- table -->
      <div class="col-lg-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped mg-b-0 text-md-nowrap">
-                        <thead>
-                            <tr class="tableHead">
-                                <th><input type="checkbox" class="checkParent"></th>
-                                <th>#</th>
-                                <th>
-                                    اسم الدورة
-                                </th>
-                                <th>الفئة</th>
-                                <th> اسم المدرب</th>
-                                <th> المستوى </th>
-                                <th> تاريخ البداية </th>
-                                <th>المدة </th>
-                                <th>لغة الدورة</th>
-                                <th> عدد المسجلين </th>
-                                <th> اسم المنسق </th>
-                                <th>  شهادة  </th>
-                                <th> نسبة الشهادة </th>
-                                <th> المقاعد المتاحة </th>
-                                <th> الاختبار القبلي </th>
-                                <th> الاختبار البعدي </th>
-                                <th> تحميل المادة </th>
-                                <th> AS </th>
+         <div class="card">
+             <div class="card-body">
+                         <div class="table-responsive">
+                            <table class="table table-striped mg-b-0 text-md-nowrap">
+                                <thead>
+                                    <tr class="tableHead">
+                                        <th><input type="checkbox" class="checkParent"></th>
+                                        <th>#</th>
+                                        <th>
+                                            اسم الدورة
+                                        </th>
+                                        <th>الفئة</th>
+                                        <th> اسم المدرب</th>
+                                        <th> المستوى </th>
+                                        <th> تاريخ البداية </th>
+                                        <th>المدة </th>
+                                        <th>لغة الدورة</th>
+                                        <th> عدد المسجلين </th>
+                                        <th> اسم المنسق </th>
+                                        <th>  شهادة  </th>
+                                        <th> نسبة الشهادة </th>
+                                        <th> المقاعد المتاحة </th>
+                                        <th> الاختبار القبلي </th>
+                                        <th> الاختبار البعدي </th>
+                                        <th> تحميل المادة </th>
+                                        <th> AS </th>
 
 
-                                <!-- Filter -->
-                                <td class="col-filter">
-                                    <!-- dropdown-menu -->
-                                    <button data-toggle="dropdown" class="btn btn-previous p-0"><i class="bi bi-filter-square tx-20"></i></button>
-                                    <div class="dropdown-menu scrollable-menu" role="menu">
-                                    </div>
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody id="table-body">
-                            <tr>
-                                <p class="p-5 text-center d-none" id="empty-message">لا توجد
-                                    بيانات لعرضها</p>
-                            </tr>
-                            <tr class="table-rows">
-                                <td><input type="checkbox" class="checkChild"></td>
-                                <td>1</td>
-                                <td scope="row">برنامج التدريب الأساسي.</td>
-                                <td>3</td>
-                                <td class="client-name">على حسن على</td>
-                                <td> مستوي اول </td>
-                                <td>12/06/2023</td>
-                                <td>5ايام</td>
-                                <td> عربي </td>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <td class="d-flex filter-col-cell">
-                                    <a href="course_detales.html"><i	class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
-                                    <!-- dropdown-menu -->
-                                    <button data-toggle="dropdown"
-                                        class="btn btn-previous btn-sm btn-block"><i
-                                            class="si si-options-vertical text-gray tx-12"></i></button>
-                                    <div class="dropdown-menu">
-                                        <a href="edit_course.html" class="dropdown-item"> تحرير </a>
-                                        <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
-                                    </div>
-                                </td>
-                            </tr>
-
-
-                            <tr class="table-rows">
-                                <td><input type="checkbox" class="checkChild"></td>
-                                <td>1</td>
-                                <td scope="row">برنامج التدريب الأساسي.</td>
-                                <td>3</td>
-                                <td class="client-name">على حسن على</td>
-                                <td> مستوي اول </td>
-                                <td>12/06/2023</td>
-                                <td>5ايام</td>
-                                <td> عربي </td>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <td class="d-flex filter-col-cell">
-                                    <a href="course_detales.html"><i	class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
-                                    <!-- dropdown-menu -->
-                                    <button data-toggle="dropdown"
-                                        class="btn btn-previous btn-sm btn-block"><i
-                                            class="si si-options-vertical text-gray tx-12"></i></button>
-                                    <div class="dropdown-menu">
-                                        <a href="edit_course.html" class="dropdown-item"> تحرير </a>
-                                        <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="table-rows">
-                                <td><input type="checkbox" class="checkChild"></td>
-                                <td>1</td>
-                                <td scope="row">برنامج التدريب الأساسي.</td>
-                                <td>3</td>
-                                <td class="client-name">على حسن على</td>
-                                <td> مستوي اول </td>
-                                <td>12/06/2023</td>
-                                <td>5ايام</td>
-                                <td> عربي </td>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <td class="d-flex filter-col-cell">
-                                    <a href="course_detales.html"><i	class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
-                                    <!-- dropdown-menu -->
-                                    <button data-toggle="dropdown"
-                                        class="btn btn-previous btn-sm btn-block"><i
-                                            class="si si-options-vertical text-gray tx-12"></i></button>
-                                    <div class="dropdown-menu">
-                                        <a href="edit_course.html" class="dropdown-item"> تحرير </a>
-                                        <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="table-rows">
-                                <td><input type="checkbox" class="checkChild"></td>
-                                <td>1</td>
-                                <td scope="row">برنامج التدريب الأساسي.</td>
-                                <td>3</td>
-                                <td class="client-name">على حسن على</td>
-                                <td> مستوي اول </td>
-                                <td>12/06/2023</td>
-                                <td>5ايام</td>
-                                <td> عربي </td>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <td class="d-flex filter-col-cell">
-                                    <a href="course_detales.html"><i	class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
-                                    <!-- dropdown-menu -->
-                                    <button data-toggle="dropdown"
-                                        class="btn btn-previous btn-sm btn-block"><i
-                                            class="si si-options-vertical text-gray tx-12"></i></button>
-                                    <div class="dropdown-menu">
-                                        <a href="edit_course.html" class="dropdown-item"> تحرير </a>
-                                        <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
-                                    </div>
-                                </td>
-                            </tr>
-
-
-                            <tr class="table-rows">
-                                <td><input type="checkbox" class="checkChild"></td>
-                                <td>1</td>
-                                <td scope="row">برنامج التدريب الأساسي.</td>
-                                <td>3</td>
-                                <td class="client-name">على حسن على</td>
-                                <td> مستوي اول </td>
-                                <td>12/06/2023</td>
-                                <td>5ايام</td>
-                                <td> عربي </td>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <td class="d-flex filter-col-cell">
-                                    <a href="course_detales.html"><i	class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
-                                    <!-- dropdown-menu -->
-                                    <button data-toggle="dropdown"
-                                        class="btn btn-previous btn-sm btn-block"><i
-                                            class="si si-options-vertical text-gray tx-12"></i></button>
-                                    <div class="dropdown-menu">
-                                        <a href="edit_course.html" class="dropdown-item"> تحرير </a>
-                                        <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
-                                    </div>
-                                </td>
-                            </tr>
-
-
-                            <tr class="table-rows">
-                                <td><input type="checkbox" class="checkChild"></td>
-                                <td>1</td>
-                                <td scope="row">برنامج التدريب الأساسي.</td>
-                                <td>3</td>
-                                <td class="client-name">على حسن على</td>
-                                <td> مستوي اول </td>
-                                <td>12/06/2023</td>
-                                <td>5ايام</td>
-                                <td> عربي </td>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <th> # </th>
-                                <td class="d-flex filter-col-cell">
-                                    <a href="course_detales.html"><i	class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
-                                    <!-- dropdown-menu -->
-                                    <button data-toggle="dropdown"
-                                        class="btn btn-previous btn-sm btn-block"><i
-                                            class="si si-options-vertical text-gray tx-12"></i></button>
-                                    <div class="dropdown-menu">
-                                        <a href="edit_course.html" class="dropdown-item"> تحرير </a>
-                                        <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+                                        <!-- Filter -->
+                                        <td class="col-filter">
+                                            <!-- dropdown-menu -->
+                                            <button data-toggle="dropdown" class="btn btn-previous p-0"><i class="bi bi-filter-square tx-20"></i></button>
+                                            <div class="dropdown-menu scrollable-menu" role="menu">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                 <tbody id="table-body">
+                                    <tr>
+                                        <p class="p-5 text-center d-none" id="empty-message">لا توجد بيانات لعرضها</p>
+                                    </tr>
+                                    @foreach ($courses as $i => $item)
+                                    <tr class="table-rows">
+                                        <td><input type="checkbox" class="checkChild"></td>
+                                        <td>1</td>
+                                        <td scope="row">{{$item->name}}</td>
+                                        <td>{{$item->category->name}}</td>
+                                        <td class="client-name">  {{$item->trainer}}</td>
+                                        <td> مستوي اول </td>
+                                        <td>{{$item->start}}</td>
+                                        <td>{{$item->duration}}ايام</td>
+                                          <td> @if($item->language == 'arabic')
+                                            عربي
+                                            @else
+                                            انجليزيه
+                                            @endif
+                                        </td>
+                                        <th> # </th>
+                                        <th>{{$item->coordinator}} </th>
+                                        <th>{{$item->is_certificate == 1 ? "نعم" : "لا"}}</th>
+                                        <th> # </th>
+                                        <th> # </th>
+                                        <th> # </th>
+                                        <th> # </th>
+                                        <th> # </th>
+                                        <th> # </th>
+                                        <td class="d-flex filter-col-cell">
+                                            <a href="{{route('courses.show',[$item->id])}}"><i	class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
+                                            <!-- dropdown-menu -->
+                                            <button data-toggle="dropdown"
+                                                class="btn btn-previous btn-sm btn-block"><i
+                                                    class="si si-options-vertical text-gray tx-12"></i></button>
+                                            <div class="dropdown-menu">
+                                                <a href="edit_course.html" class="dropdown-item"> تحرير </a>
+                                                <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                 </tbody>
+                             </table>
+                         </div>
+               </div>
+         </div>
+     </div>
      <!-- table -->
 
 
