@@ -29,6 +29,7 @@
 </div>
  @endsection
 @section('content')
+<div class="main-content app-content">
 
     <div class="container-fluid mt-5">
         <!-- row -->
@@ -671,7 +672,8 @@
 
     </div>
     <!-- Container closed -->
- <!-- main-content closed -->
+</div>
+<!-- main-content closed -->
 
 
 
