@@ -114,8 +114,8 @@
                                             @endif
                                         </td>
                                         <th> # </th>
-                                        <th> # </th>
-                                        <th> # </th>
+                                        <th>{{$item->coordinator}} </th>
+                                        <th>{{$item->is_certificate == 1 ? "نعم" : "لا"}}</th>
                                         <th> # </th>
                                         <th> # </th>
                                         <th> # </th>
@@ -123,7 +123,7 @@
                                         <th> # </th>
                                         <th> # </th>
                                         <td class="d-flex filter-col-cell">
-                                            <a href="course_detales.html"><i	class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
+                                            <a href="{{route('courses.show',[$item->id])}}"><i	class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
                                             <!-- dropdown-menu -->
                                             <button data-toggle="dropdown"
                                                 class="btn btn-previous btn-sm btn-block"><i
