@@ -29,8 +29,7 @@
 </div>
 @endsection
 @section('content')
-<div class="container-fluid mt-3">
-    <!-- row -->
+     <!-- row -->
 <div class="row row">
 
     <!--open filter Top  -->
@@ -163,7 +162,7 @@
 
 
 
-</div>
+
 @endsection
 @section('js')
 <script src="{{asset('assets/js/xlsx.full.min.js')}}"></script>
