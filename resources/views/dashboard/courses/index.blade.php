@@ -1,4 +1,33 @@
 @extends('dashboard.layouts.master')
+@section('header')
+
+<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0" style="border-top: 1px solid #00000030;">
+    <div class="left-content mt-2">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-style1">
+                <li class="breadcrumb-item">
+                    <a href="../index.html" >الرئيسية</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="table_program_management.html"class="text-muted">البرامج</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#" class="text-muted"> {{$program->name}}</a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+    {{-- <div class="main-dashboard-header-right ">
+        <div class=" d-flex flex-wrap">
+            <button class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i class="ti-stats-up project"></i></button>
+            <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات صفحة الويب  <i class="icon ion-ios-settings"></i></button>
+            <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات  <i class="icon ion-ios-settings"></i></button>
+            <a href="create_programme.html" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">   اضافة دورة جديدة  <i class="bi bi-plus"></i></a>
+            <button class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">  عرض صفحة الويب <i class="icon ion-ios-share-alt"></i></button>
+        </div>
+    </div> --}}
+</div>
+@endsection
 @section('content')
 <div class="container-fluid mt-3">
     <!-- row -->
@@ -33,53 +62,79 @@
                      <div class="tab-pane active" id="tab11">
                          <div class="table-responsive">
                              <table class="table table-striped mg-b-0 text-md-nowrap">
-                                 <thead>
-                                     <tr>
+                                <thead>
+                                    <tr class="tableHead">
+                                        <th><input type="checkbox" class="checkParent"></th>
+                                        <th>#</th>
                                         <th>
                                             اسم الدورة
                                         </th>
                                         <th>الفئة</th>
-                                        <th>اسم المدرب</th>
+                                        <th> اسم المدرب</th>
                                         <th> المستوى </th>
                                         <th> تاريخ البداية </th>
                                         <th>المدة </th>
                                         <th>لغة الدورة</th>
+                                        <th> عدد المسجلين </th>
+                                        <th> اسم المنسق </th>
+                                        <th>  شهادة  </th>
+                                        <th> نسبة الشهادة </th>
+                                        <th> المقاعد المتاحة </th>
+                                        <th> الاختبار القبلي </th>
+                                        <th> الاختبار البعدي </th>
+                                        <th> تحميل المادة </th>
+                                        <th> AS </th>
+
+
                                         <!-- Filter -->
-                                        <th>
-                                            <div class="dropdown">
-                                                <i aria-expanded="false" aria-haspopup="true" class="bi bi-filter-square-fill tx-"data-toggle="dropdown" id="dropdownMenuButton" type="button"></i></i>
-                                                <div  class="dropdown-menu tx-13">
-                                                    <p class="dropdown-item" href="#"><label class="ckbox"><input type="checkbox"><span>Checkbox Unchecked</span></label></p>
-                                                    <p class="dropdown-item" href="#"><label class="ckbox"><input type="checkbox"><span>Checkbox Unchecked</span></label></p>
-                                                    <p class="dropdown-item" href="#"><label class="ckbox"><input type="checkbox"><span>Checkbox Unchecked</span></label></p>
-                                                    <p class="dropdown-item" href="#"><label class="ckbox"><input type="checkbox"><span>Checkbox Unchecked</span></label></p>
-                                                                                                        </div>
+                                        <td class="col-filter">
+                                            <!-- dropdown-menu -->
+                                            <button data-toggle="dropdown" class="btn btn-previous p-0"><i class="bi bi-filter-square tx-20"></i></button>
+                                            <div class="dropdown-menu scrollable-menu" role="menu">
                                             </div>
-                                        </th>
-                                         <th></th>
+                                        </td>
                                     </tr>
-                                 </thead>
+                                </thead>
                                  <tbody id="table-body">
                                     <tr>
                                         <p class="p-5 text-center d-none" id="empty-message">لا توجد بيانات لعرضها</p>
                                     </tr>
-                                    @foreach ($courses as $item)
+                                    @foreach ($courses as $i => $item)
                                     <tr class="table-rows">
-                                        <td scope="row">{{$item->name}}</td>
-                                        <td>{{$item->category->name ?? ''}}</td>
-                                        <td class="client-name">{{$item->coordinator}}</td>
+                                        <td><input type="checkbox" class="checkChild"></td>
+                                        <td>1</td>
+                                        <td scope="row">{{$item->name}}<</td>
+                                        <td>{{$item->category->name}}</td>
+                                        <td class="client-name">  {{$item->trainer}}</td>
                                         <td> مستوي اول </td>
                                         <td>{{$item->start}}</td>
                                         <td>{{$item->duration}}ايام</td>
-                                        <td> @if($item->language == 'arabic')
+                                          <td> @if($item->language == 'arabic')
                                             عربي
                                             @else
                                             انجليزيه
                                             @endif
                                         </td>
-                                        <td><a href="{{route('course.attendance',[$item->id])}}"><i class="far fa-eye tx-15"></i></a></td>
-                                        <td><i class="mdi mdi-dots-horizontal text-gray tx-15"></i></td>
-                                        @endforeach
+                                        <th> # </th>
+                                        <th> # </th>
+                                        <th> # </th>
+                                        <th> # </th>
+                                        <th> # </th>
+                                        <th> # </th>
+                                        <th> # </th>
+                                        <th> # </th>
+                                        <th> # </th>
+                                        <td class="d-flex filter-col-cell">
+                                            <a href="course_detales.html"><i	class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
+                                            <!-- dropdown-menu -->
+                                            <button data-toggle="dropdown"
+                                                class="btn btn-previous btn-sm btn-block"><i
+                                                    class="si si-options-vertical text-gray tx-12"></i></button>
+                                            <div class="dropdown-menu">
+                                                <a href="edit_course.html" class="dropdown-item"> تحرير </a>
+                                                <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
+                                            </div>
+                                        </td>
                                     </tr>
                                  </tbody>
                              </table>

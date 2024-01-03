@@ -113,7 +113,7 @@
                                                 </td>
                                             </tr>
                                          </thead>
-                                        @foreach ($programs as $item)
+                                        @foreach ($programs as $i => $item)
                                             <tbody id="table-body">
                                                 <tr>
                                                     <p class="p-5 text-center d-none" id="empty-message">لا توجد بيانات
@@ -122,7 +122,7 @@
                                                 </tr>
                                                 <tr class="table-rows">
                                                     <td><input type="checkbox" class="checkChild"></td>
-                                                    <td>3</td>
+                                                    <td>{{$i + 1}}</td>
                                                      <td scope="row">{{$item->name}} </td>
                                                      <td>{{$item->courses_count}}</td>
                                                      <td class="client-name">{{$item->client->name ?? ''}}</td>

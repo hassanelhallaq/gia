@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Program;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -17,8 +18,9 @@ class CourseController extends Controller
     }
     public function programCourses($id)
     {
+        $program = Program::find($id);
         $courses = Course::where('program_id',$id)->paginate(10);
-        return view("dashboard.courses.index", compact("courses"));
+        return view("dashboard.courses.index", compact("courses",'program'));
     }
     /**
      * Show the form for creating a new resource.
