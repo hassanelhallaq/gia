@@ -29,9 +29,11 @@ class LandingPageController extends Controller
 
             // Add days to the initial date
             $newDate = $initialDate->addDays($daysToAdd);
+            $formattedDate = $newDate->format('Y-m-d');
+
             $groupedCourses[$month][] = [
                 'start_date' => $course->start,
-                'end_date' => $newDate,
+                'end_date' => $formattedDate,
             ];
         }
 

@@ -39,24 +39,23 @@
                             @endforeach
                         </div>
                     </div>
+                    <!-- your.blade.view.blade.php -->
+
                     <div class="events">
-                        <div class="event">
-                            <div class="event_img">
-                                <img src="assets/event2.png" alt="">
-                                <div class="event_overlay">بروشور برنامج مؤشرات الأداء</div>
-                            </div>
-                            <div class="event_btn" data-translate="review" onclick="redirectToCoursePage('event_one')">استعراض</div>
-                        </div>
-                        <div class="event">
-                            <div class="event_img">
-                                <img src="assets/event1.png" alt="">
-                                <div class="event_overlay">بروشور برنامج تحليل البيانات وإعداد التقارير   </div>
-                            </div>
-                            <div class="event_btn" data-translate="review" onclick="redirectToCoursePage('event_two')" >استعراض</div>
-                        </div>
-
-
+                        @foreach ($programs as $program)
+                            @foreach ($program->courses as $course)
+                                <div class="event {{ strtolower(date('F', strtotime($course->start_date))) }}">
+                                    <div class="event_img">
+                                        <img src="assets/event1.png" alt="">
+                                        <div class="event_overlay">{{ $course->title }}</div>
+                                    </div>
+                                    <div class="event_btn" data-translate="review"
+                                        onclick="redirectToCoursePage('{{ $course->id }}')">استعراض</div>
+                                </div>
+                            @endforeach
+                        @endforeach
                     </div>
+
                 </div>
 
 
@@ -65,4 +64,24 @@
             </div>
         </div>
     </section>
+@endsection
+@section('js')
+<script>
+    $(document).ready(function() {
+        // Hide all events initially
+        $('.events .event').hide();
+
+        // Handle click event on dates
+        $('.dates .date').click(function() {
+            // Get the month associated with the clicked date
+            var month = $(this).attr('id');
+
+            // Hide all events
+            $('.events .event').hide();
+
+            // Show events related to the clicked month
+            $('.events .event.' + month).show();
+        });
+    });
+</script>
 @endsection

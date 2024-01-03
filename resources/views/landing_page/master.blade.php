@@ -173,6 +173,7 @@
 
     </div>
 </footer>
+@yield('js')
     <script src="{{asset('landingPage/js/translate.js')}}"></script>
     <script src="{{asset('landingPage/js/main.js')}}"></script>
 </body>
