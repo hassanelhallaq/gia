@@ -100,7 +100,7 @@
                                                                 </div>
 
                                                             </div>
-                                                        </div><button onclick="login()" class="btn btn-dark-gradient btn-block">تسجيل دخول
+                                                        </div><button onclick="login()" class="btn btn-dark-gradient btn-block" type="button">تسجيل دخول
                                                         </button>
 
                                                 </form>
