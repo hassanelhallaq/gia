@@ -58,10 +58,8 @@
      <div class="col-lg-12">
          <div class="card">
              <div class="card-body">
-                 <div class="tab-content">
-                     <div class="tab-pane active" id="tab11">
                          <div class="table-responsive">
-                             <table class="table table-striped mg-b-0 text-md-nowrap">
+                            <table class="table table-striped mg-b-0 text-md-nowrap">
                                 <thead>
                                     <tr class="tableHead">
                                         <th><input type="checkbox" class="checkParent"></th>
@@ -140,9 +138,7 @@
                                  </tbody>
                              </table>
                          </div>
-                     </div>
-                 </div>
-             </div>
+               </div>
          </div>
      </div>
      <!-- table -->
