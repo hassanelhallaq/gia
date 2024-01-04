@@ -194,8 +194,7 @@
             formData.append('coordinator', document.getElementById('coordinator').value);
             formData.append('category_id', document.getElementById('category_id').value);
             formData.append('image_check', document.getElementById('image_check').checked);
-            formData.append('client_id', document.getElementById('client_id').value);
-            formData.append('attendance_questionnaire', document.getElementById('attendance_questionnaire').checked);
+             formData.append('attendance_questionnaire', document.getElementById('attendance_questionnaire').checked);
             storeRoute('/dashboard/admin/courses', formData)
 
 
