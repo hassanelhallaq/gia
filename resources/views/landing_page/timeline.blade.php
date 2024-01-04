@@ -47,7 +47,7 @@
                         @foreach ($program->courses as $course)
                             <div class="event {{ strtolower(date('F', strtotime($course->start))) }}">
                                 <div class="event_img">
-                                    <img src="assets/event1.png" alt="">
+                                    <img src="{{asset('landingPage/assets/event1.png')}}" alt="">
                                     <div class="event_overlay">{{ $course->name }}</div>
                                 </div>
                                 <div class="event_btn" data-translate="review"
@@ -68,25 +68,48 @@
 @endsection
 @section('js')
 <!-- Include jQuery library -->
+<!-- Include jQuery library -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+<!-- your.blade.view.blade.php -->
+
+<!-- Include Moment.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Hide all events initially
         $('.events .event').hide();
 
         // Handle click event on dates
-        $('.dates .date').click(function() {
-            // Get the month associated with the clicked date
-            var month = $(this).data('month');
+        $('.dates .date').click(function () {
+            // Get the clicked date
+            var clickedDate = $(this).find('p[data-translate="starts_in"]').next().text();
+
+            // Parse the clicked date using Moment.js
+            var clickedDateObject = moment(clickedDate, 'M/D/YYYY');
 
             // Hide all events
             $('.events .event').hide();
 
-            // Show events related to the clicked month
-            $('.events .event.' + month).show();
+            // Show events related to the clicked date
+            $('.events .event').each(function () {
+                var startDate = $(this).find('p[data-translate="starts_in"]').next().text();
+                var endDate = $(this).find('p[data-translate="ends_in"]').next().text();
+
+                // Parse the start and end dates using Moment.js
+                var startDateObject = moment(startDate, 'M/D/YYYY');
+                var endDateObject = moment(endDate, 'M/D/YYYY');
+
+                // Check if the clicked date is within the course date range
+                if (clickedDateObject.isSameOrAfter(startDateObject) && clickedDateObject.isSameOrBefore(endDateObject)) {
+                    $(this).show();
+                }
+            });
         });
     });
 </script>
+
+
 
 @endsection

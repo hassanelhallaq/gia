@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Client;
 use App\Models\Course;
 use App\Models\Program;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -13,21 +16,25 @@ class CourseController extends Controller
      */
     public function index()
     {
+        $program = null;
         $courses = Course::paginate(10);
-        return view("dashboard.courses.index", compact("courses"));
+        return view("dashboard.courses.index", compact("courses", 'program'));
     }
     public function programCourses($id)
     {
         $program = Program::find($id);
-        $courses = Course::where('program_id',$id)->paginate(10);
-        return view("dashboard.courses.index", compact("courses",'program'));
+        $courses = Course::where('program_id', $id)->paginate(10);
+        return view("dashboard.courses.index", compact("courses", 'program'));
     }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $clients = Client::all();
+        $program = Program::all();
+        return view("dashboard.courses.create", compact('program','categories','clients'));
     }
 
     /**
@@ -35,7 +42,46 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $validator = Validator($data, [
+            'course_name' => 'required',
+            'language' => 'required',
+            'seat_count' => 'required',
+            'coruse_start' => 'required',
+            'is_exam' => 'required',
+            'duration' => 'required',
+            'is_certificate' => 'required',
+            'trainer' => 'required',
+            'percentage_certificate' => 'required',
+            'study' => 'required',
+            'coordinator' => 'required',
+            'attendance_questionnaire' => 'required',
+            'category_id' => 'required',
+            'image_check' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
+        }
+        $course = new Course();
+        $course->name = $request->course_name;
+        $course->language = $request->language;
+        $course->seat_count = $request->seat_count;
+        $coruseStart = Carbon::parse($request->coruse_start)->format('y-m-d');
+        $course->start = $coruseStart;
+        $course->is_exam = $request->is_exam;
+        $course->duration = $request->duration;
+        $course->is_certificate = $request->is_certificate;
+        $course->trainer = $request->trainer;
+        $course->percentage_certificate = $request->percentage_certificate;
+        $course->study = $request->study == true ? 1 : 0;
+        $course->coordinator = $request->coordinator;
+        $course->attendance_questionnaire = $request->attendance_questionnaire == true ? 1 : 0;
+        $course->image = $request->image_check == true ? 1 : 0;
+        $course->program_id = $request->program_id;
+        $course->category_id = $request->category_id;
+        $course->save();
+        return response()->json(['redirect' => route('programs.grid')]);
+
     }
 
     /**
@@ -43,7 +89,7 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-         $course = Course::withCount("attendances")->with('attendances')->find($id);
+        $course = Course::withCount("attendances")->with('attendances')->find($id);
         return view("dashboard.courses.show", compact("course"));
     }
 
@@ -53,7 +99,7 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
 
-         return view("dashboard.courses.index", compact("course"));
+        return view("dashboard.courses.index", compact("course"));
     }
 
     /**
