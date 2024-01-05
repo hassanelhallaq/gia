@@ -1,16 +1,5 @@
 @extends('dashboard.layouts.master')
-@section('css')
-    <!-- Internal Select2 css -->
-    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}">
-    <!--Internal  Datetimepicker-slider css -->
-    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css') }}">
-    <!-- Internal Spectrum-colorpicker css -->
-    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/wizards/css/form-elements.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/wizards/css/style.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/select_mul/css/style.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/select_mul/css/semantic.min.css') }}">
-@endsection
+
 @section('content')
     <!-- row -->
     <div class="row">
@@ -98,7 +87,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6">
+                            {{-- <div class="col-lg-6">
                                 <div class="inline w-100 field">
                                     <label> محتوي 2 </label>
                                     <select name="skills" multiple="" class="label ui selection fluid dropdown">
@@ -124,7 +113,7 @@
                                                         احمد علي
                                                     </option>
                                                 </select> -->
-                            </div>
+                            </div> --}}
                         </div>
                         <!-- closed row -->
 
@@ -231,7 +220,7 @@
 
                             <div class="col-lg-3 mb-3">
                                 <label for="exampleInputEmail1"> ملف الشعار </label>
-                                    <input type="file" class="dropify" data-default-file="{{ asset($program->image) }}" data-height="65"  />
+                                    <input type="file" class="dropify" data-default-file="{{ asset($program->image) }}" value="{{$program->file}}" data-height="65"  />
                                 <!-- <div class="custom-file">
                                     <input class="custom-file-input" id="customFile" type="file">
                                     <label class="custom-file-label" for="customFile">Drop files here⇬</label>
@@ -241,7 +230,7 @@
                                 <label for="exampleInputEmail1"> ملف البرنامج </label>
                                 <div class="custom-file">
                                     <input class="custom-file-input" class="dropify"
-                                        data-default-file="{{ asset($program->file) }}" id="file" type="file">
+                                        data-default-file="{{ asset($program->file) }}" value="{{$program->file}}" id="file" type="file">
                                     <label class="custom-file-label" for="customFile">Drop files here⇬</label>
                                 </div>
                             </div>
@@ -252,9 +241,8 @@
 
                         <div class="f1-buttons d-flex justify-content-between mt-5">
                             <div class="d-flex">
-                                <button class="btn btn-warning-gradient btn-with-icon btn-sm" type="button"
-                                    onclick="performUpdate({{ $program->id }})"> حفظ الاعدادات <i
-                                        class="bi bi-floppy"></i></button>
+                                <button class="btn btn-warning-gradient btn-with-icon btn-sm" onclick="update({{$program->id}})" type="button" > حفظ الاعدادات <i class="bi bi-floppy"></i></button>
+
                                 <a class="btn btn-outline-light btn-with-icon btn-sm mr-1 " id="copyButton"> استنساخ
                                     البرنامج <i class="far fa-clone"></i></a>
                             </div>
@@ -272,52 +260,32 @@
     </div>
     <!-- closed row -->
 @endsection
+
+
 @section('js')
-    <script>
-        function performUpdate(id) {
-            let formData = new FormData();
-            formData.append('name', document.getElementById('name').value);
-            formData.append('content_one', document.getElementById('content_one').value);
-            formData.append('username', document.getElementById('username').value);
-            formData.append('content_two', document.getElementById('content_two').value);
-            formData.append('start', document.getElementById('start').value);
-            formData.append('end', document.getElementById('end').value);
-            formData.append('theme_name', document.getElementById('theme_name').value);
-            formData.append('contact_type', document.getElementById('contact_type').value);
-            formData.append('register', document.getElementById('register').value);
-            formData.append('show_invited', document.getElementById('show_invited').value);
-            formData.append('color', document.getElementById('color').value);
-            formData.append('register', document.getElementById('register').value);
-            formData.append('attendance_method', document.getElementById('attendance_method').value);
-            formData.append('image', document.getElementById('image').files[0]);
-            formData.append('file', document.getElementById('file').files[0]);
-            update('/dashboard/admin/programs/'
-                id, formData, '/dashboard/admin/programs')
+<script>
+    function update(id) {
+        let formData = new FormData();
+        formData.append("_method", "PUT")
+        formData.append('name', document.getElementById('name').value);
+        formData.append('content_one', document.getElementById('content_one').value);
+        formData.append('username', document.getElementById('username').value);
+        formData.append('content_two', document.getElementById('content_two').value);
+        formData.append('start', document.getElementById('start').value);
+        formData.append('end', document.getElementById('end').value);
+        formData.append('theme_name', document.getElementById('theme_name').value);
+        formData.append('contact_type', document.getElementById('contact_type').value);
+        formData.append('register', document.getElementById('register').value);
+        formData.append('show_invited', document.getElementById('show_invited').value);
+        formData.append('color', document.getElementById('color').value);
+        formData.append('register', document.getElementById('register').value);
+        formData.append('client_id', document.getElementById('client_id').value);
 
 
-        }
-    </script>
+        formData.append('attendance_method', document.getElementById('attendance_method').value);
+          storeRoute('/dashboard/admin/programs/'+id, formData)
+    }
+</script>
 
-    <!-- JQuery min js -->
-    <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
-    <!--Internal  jquery.maskedinput date js -->
-    <script src="{{ URL::asset('assets/plugins/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
-    <!--Internal  spectrum-colorpicker js -->
-    <script src="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.js') }}"></script>
-    <!--Internal  jquery-simple-datetimepicker js -->
-    <script src="{{ URL::asset('assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js') }}"></script>
-    <!--Internal  pickerjs js -->
-    <script src="{{ URL::asset('assets/plugins/pickerjs/picker.min.js') }}"></script>
-    <!-- Internal Select2.min js -->
-    <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
-    <!-- Internal form-elements js -->
-    <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
-    <!-- wizard -->
-    <script src="{{ URL::asset('assets/plugins/wizards/js/jquery.backstretch.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/js/jquery.backstretch.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/wizards/js/retina-1.1.0.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/wizards/js/scripts.js') }}"></script>
-    <!-- select mul -->
-    <script src="{{ URL::asset('assets/plugins/select_mul/js/semantic.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/select_mul/js/main.js') }}"></script>
+
 @endsection

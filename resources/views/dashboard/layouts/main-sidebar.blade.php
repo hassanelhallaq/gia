@@ -23,7 +23,7 @@
                     </ul>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item"  href="{{route('quizes.index')}}"><i class="far fa-file-alt tx-22"></i><span class="side-menu__label mr-3">الأسئلة والاستبيانات</span><i class=""></i></a>
+                    <a class="side-menu__item"  href=""><i class="far fa-file-alt tx-22"></i><span class="side-menu__label mr-3">الأسئلة والاستبيانات</span><i class=""></i></a>
 
                 </li>
                 <li class="slide">
@@ -31,6 +31,8 @@
                     <ul class="slide-menu">
                         <li><a class="slide-item" href="{{route('admins.index')}}">الادارة </a></li>
                         <li><a class="slide-item" href="{{route('clients.index')}}">العملاء</a></li>
+                        <li><a class="slide-item" href="{{route('trainers.index')}}">المدربين</a></li>
+
                     </ul>
                 </li>
                 <li class="slide">

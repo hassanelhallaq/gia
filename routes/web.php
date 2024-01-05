@@ -13,6 +13,7 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\TrainerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,7 +51,10 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::resource('admins', AdminController::class);
         Route::get('/quiz.questions/{id}', [QuizController::class , 'question'])->name('quiz.questions');
         Route::resource('quizes', QuizController::class);
+        Route::get('/get-courses/{id}', [CourseController::class , 'getCoureses']);
 
+        Route::get('/program.courses/{id}/create', [CourseController::class , 'createCourse'])->name('program.course.create');
+        Route::resource('trainers', TrainerController::class);
 
 
 

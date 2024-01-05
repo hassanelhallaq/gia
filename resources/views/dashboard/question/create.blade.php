@@ -91,7 +91,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 mb-4">
+                                {{-- <div class="col-lg-12 mb-4">
                                     <div
                                         class=" ht-lg-45 ht-sm-70 bd bd-gray-40 pl-2 rounded-5  d-flex justify-content-between">
                                         <input class="form-control border-0" placeholder=" اكتب اجابة هنا " type="text">
@@ -100,7 +100,7 @@
                                                 <i class="bi bi-plus tx-24"></i></button>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 {{-- <div
                                     class="btnAddtest card-chart wd-25 ht-25 bg-warning-gradient brround ml-2 mt-1 pos-absolute b-0 l-100">

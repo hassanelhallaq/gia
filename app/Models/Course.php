@@ -26,14 +26,21 @@ class Course extends Model
         'category_id',
         'program_id',
     ];
-    public function attendances(){
-        return $this->belongsToMany(Attendance::class,AttendanceCourse::class);
+    public function attendances()
+    {
+        return $this->belongsToMany(Attendance::class, AttendanceCourse::class);
     }
 
-    public function program(){
-            return $this->belongsTo(Program::class);
+    public function program()
+    {
+        return $this->belongsTo(Program::class);
     }
-    public function category(){
-            return $this->belongsTo(Category::class);
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function trainer()
+    {
+        return $this->belongsTo(Trainer::class);
     }
 }

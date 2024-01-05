@@ -6,7 +6,7 @@
                 <div class="card-body">
                     <form role="form" action="" method="post" class="f1">
                         <!-- row -->
-                        <div class="row row-sm mb-3">
+                        {{-- <div class="row row-sm mb-3">
                             <div class="col-lg-6">
                                 <div class="form-group has-success mg-b-0">
                                     <label for="example"> البرامج </label>
@@ -19,7 +19,7 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row row-sm mb-3">
                             <div class="col-lg-6">
                                 <div class="form-group has-success mg-b-0">
@@ -174,7 +174,7 @@
                                 </div>
                             </div>
                             <!-- point steps closed -->
-                            <button class=" btn btn-warning-gradient btn-with-icon mr-1" onclick="performStore()"
+                            <button class=" btn btn-warning-gradient btn-with-icon mr-1" onclick="performStore({{$id}})"
                                 type="button">حفظ</button>
                         </div>
                     </form>
@@ -185,7 +185,7 @@
 @endsection
 @section('js')
     <script>
-        function performStore() {
+        function performStore(id) {
             let formData = new FormData();
             formData.append('course_name', document.getElementById('course_name').value);
             formData.append('language', document.getElementById('language').value);
@@ -201,7 +201,7 @@
             formData.append('category_id', document.getElementById('category_id').value);
             formData.append('image_check', document.getElementById('image_check').checked);
              formData.append('attendance_questionnaire', document.getElementById('attendance_questionnaire').checked);
-             formData.append('program_id', document.getElementById('program_id').value);
+             formData.append('program_id', id);
 
 
             storeRoute('/dashboard/admin/courses', formData)

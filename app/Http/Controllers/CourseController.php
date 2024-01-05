@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Client;
 use App\Models\Course;
 use App\Models\Program;
+use App\Models\Trainer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -17,14 +18,15 @@ class CourseController extends Controller
     public function index()
     {
         $program = null;
+        $id = null;
         $courses = Course::paginate(10);
-        return view("dashboard.courses.index", compact("courses", 'program'));
+        return view("dashboard.courses.index", compact("courses", 'program','id'));
     }
     public function programCourses($id)
     {
         $program = Program::find($id);
         $courses = Course::where('program_id', $id)->paginate(10);
-        return view("dashboard.courses.index", compact("courses", 'program'));
+        return view("dashboard.courses.index", compact("courses", 'program','id'));
     }
     /**
      * Show the form for creating a new resource.
@@ -34,9 +36,17 @@ class CourseController extends Controller
         $categories = Category::all();
         $clients = Client::all();
         $program = Program::all();
-        return view("dashboard.courses.create", compact('program','categories','clients'));
+        $trainers = Trainer::all();
+        return view("dashboard.courses.create", compact('program','categories','clients','trainers'));
     }
+    public function createCourse($id)
+    {
+        $categories = Category::all();
+        $clients = Client::all();
+        $trainers = Trainer::all();
 
+         return view("dashboard.courses.createCourse", compact('categories','clients','id','trainers'));
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -80,7 +90,7 @@ class CourseController extends Controller
         $course->program_id = $request->program_id;
         $course->category_id = $request->category_id;
         $course->save();
-        return response()->json(['redirect' => route('programs.grid')]);
+        return response()->json(['redirect' => route('program.courses',[$request->program_id])]);
 
     }
 
@@ -116,5 +126,10 @@ class CourseController extends Controller
     public function destroy(Course $course)
     {
         //
+    }
+
+    public function getCoureses($id){
+        $courses = Course::where('program', $id)->get();
+        return response()->json($courses);
     }
 }

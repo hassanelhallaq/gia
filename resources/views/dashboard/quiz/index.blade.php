@@ -286,15 +286,21 @@
                             <input class="form-control" required="" id="name" type="text">
                         </div>
                         <div class="col-12 mt-4">
-                            <p class="mg-b-10"> الدوره </p>
-                            <select class="form-control select2" id="course_id">
+                            <p class="mg-b-10"> البرنامج </p>
+                            <select class="form-control select2" id="program_id">
                                 <option value="">
                                 </option>
-                                @foreach ($courses as $item)
+                                @foreach ($programs as $item)
                                     <option value="{{ $item->id }}">
                                         {{ $item->name }}
                                     </option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <p class="mg-b-10"> الدوره </p>
+                            <select class="form-control select2" id="course_id">
+                                <!-- Cities will be populated dynamically using JavaScript -->
                             </select>
                         </div>
                     </div>
@@ -324,5 +330,32 @@
 
             storeRoute('/dashboard/admin/quizes', formData)
         }
+
+        $(document).ready(function () {
+        // Triggered when the country selection changes
+        $('#program_id').change(function () {
+            // Get the selected country ID
+            var programId = $(this).val();
+
+            // Make an Ajax request to get cities for the selected country
+            $.ajax({
+                url: '/dashboard/admin/get-courses/' + programId, // Replace with the actual endpoint on your server
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    // Clear existing options in the city dropdown
+                    $('#course_id').empty();
+
+                    // Populate the city dropdown with the received data
+                    $.each(data, function (key, value) {
+                        $('#course_id').append('<option value="' + value.id + '">' + value.name_ar + '</option>');
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching cities: ' + error);
+                }
+            });
+        });
+    });
 </script>
 @endsection

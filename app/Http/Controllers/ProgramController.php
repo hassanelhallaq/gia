@@ -155,9 +155,9 @@ class ProgramController extends Controller
         $data = $request->all();
         $validator = Validator($data, [
             'name' => 'required|string',
-            'image' => 'required',
+            // 'image' => 'required',
             'content_one' => 'required',
-            'username' => 'required|unique:programs',
+            'username' => 'required||unique:programs,username,' .$program->id,
             'content_two' => 'required',
             'start' => 'required',
             'end' => 'required',
@@ -167,7 +167,7 @@ class ProgramController extends Controller
             'show_invited' => 'required',
             'color' => 'required',
             'attendance_method' => 'required',
-            'file' => 'required',
+            // 'file' => 'required',
 
         ]);
         if ($validator->fails()) {
@@ -201,7 +201,7 @@ class ProgramController extends Controller
             $program->file = '/files/' . 'program' . '/' . $imageName;
         }
         $isSaved =  $program->update();
-        return response()->json(['icon' => 'success', 'title' => 'تم التعديل بنجاح'], $isSaved ? 201 : 400);
+        return response()->json(['redirect' => route('programs.grid')]);
     }
 
     /**

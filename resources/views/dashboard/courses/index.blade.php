@@ -22,7 +22,12 @@
             <button class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i class="ti-stats-up project"></i></button>
             <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات صفحة الويب  <i class="icon ion-ios-settings"></i></button>
             <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات  <i class="icon ion-ios-settings"></i></button>
+            @if($id)
+            <a href="{{route('program.course.create',[$id])}}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">   اضافة دورة جديدة  <i class="bi bi-plus"></i></a>
+            @else
             <a href="{{route('courses.create')}}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">   اضافة دورة جديدة  <i class="bi bi-plus"></i></a>
+
+            @endif
             @if($program)
             <a href="{{route('home',[$program->username])}}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">  عرض صفحة الويب <i class="icon ion-ios-share-alt"></i></a>
             @endif
@@ -113,7 +118,7 @@ overflow-x: hidden;
                                         <td>1</td>
                                         <td scope="row">{{$item->name}}</td>
                                         <td>{{$item->category->name}}</td>
-                                        <td class="client-name">  {{$item->trainer}}</td>
+                                        <td class="client-name">  {{$item->trainer->name ?? ''}}</td>
                                         <td> مستوي اول </td>
                                         <td>{{$item->start}}</td>
                                         <td>{{$item->duration}}ايام</td>

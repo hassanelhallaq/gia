@@ -33,18 +33,18 @@ class QuestionController extends Controller
         if (!empty($request->all())) {
             $validator = Validator($request->all(),
             [
-                'name' => 'required|string|min:3',
+                'name' => 'required|string',
                 'type' => 'required|string',
-                'option_one' => 'required|string|min:3',
-                'option_two' => 'required|string|min:3',
-                'option_three' => 'required|string|min:3',
+                'option_one' => 'required|string',
+                'option_two' => 'required|string',
+                'option_three' => 'required|string',
                 'quiz_id'=> 'required',
             ], [
-                'name.required' => 'name is required',
-                'type.required' => 'type is required',
-                'option_one.required' => 'option 1 is required',
-                'option_two.required' => 'option 2 is required',
-                'option_three.required' => 'option 3 is required',
+                'name.required' => 'الاسم مطلوب',
+                'type.required' => 'نوع السؤال مطلوب',
+                'option_one.required' => 'الخيار الاول مطلوب',
+                'option_two.required' => 'الخيار الثاني مطلوب',
+                'option_three.required' => 'الخيار الثالث مطلوب',
                 'quiz_id.required' => 'quiz is required',
 
             ]);
@@ -55,7 +55,7 @@ class QuestionController extends Controller
                 $question->quiz_id = $request->get('quiz_id');
                 $isSaved = $question->save();
                 $isQuestionOption = $this->questionOption($request, $question);
-                 return response()->json(['icon' => 'success', 'title' => 'Question created successfully'], 200);
+                 return response()->json(['icon' => 'success', 'title' => 'تم الانشاء بنجاح '], 200);
 
             } else {
 
