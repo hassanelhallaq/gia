@@ -10,20 +10,20 @@ html{
     font-family: 'Cairo', sans-serif;
    color: #033335;
    direction: inherit;
-   
+
   }
   body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     font-family: 'Cairo', sans-serif;
     background: #fcfcfc;
-   
+
     height: 100vh;
     height: 100dvh!important;
     display: flex;
     flex-direction: column;
     justify-content: start;
-    
+
   }
   img, picture, video, canvas, svg {
     display: block;
@@ -72,9 +72,9 @@ html{
   .wrap {
     margin-right: auto; /* 1 */
     margin-left:  auto; /* 1 */
-  
+
     max-width: 960px; /* 2 */
-  
+
     padding-right: 10px; /* 3 */
     padding-left:  10px; /* 3 */
   }
@@ -136,7 +136,7 @@ html{
   }
   .links{
     padding-block: 1rem;
-    
+
   }
   .links a {
     color: #076f6d;
@@ -152,20 +152,20 @@ html{
     display: flex;
     align-items: center;
     gap: 1rem;
-   
+
   }
   .btn_secondary input{
    width: 20px !important;
    height: 20px !important;
-   
+
   }
- 
+
   .btn_secondary div{
     border: 1px solid gray;
     border-radius: 20px;
     width: fit-content;
     padding: .4rem 2rem;
-    
+
   }
   .btn_primery button{
     width: 100% ;
@@ -174,7 +174,7 @@ html{
     color: white;
     border-radius: 10px;
     padding-block: .6rem;
-   
+
   }
   span.accepted{
     background: #7fbe41;
@@ -190,7 +190,7 @@ html{
     gap: 1rem;
     margin-top: .8rem;
   }
-  .btn_links button{
+  .btn_links a{
     background: #076f6d;
     color: white;
     border: none;
@@ -256,11 +256,11 @@ html{
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
-        
+
   }
-  .qr_container .btn_links button{
+  .qr_container .btn_links a{
     padding: 1rem 3rem;
-    
+
   }
   .qr_container p{
     text-align: center;
@@ -281,7 +281,7 @@ html{
     z-index: 99;
     display: none;
   }
-  
+
 .close {
   position: absolute;
   top: 10px;

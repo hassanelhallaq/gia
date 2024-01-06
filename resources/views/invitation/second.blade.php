@@ -19,19 +19,15 @@
                     </div>
                 </div>
                 <div class="btn_links">
+                    <a href="{{ asset($course->subject) }}" download class="download-link">
+                        <button data-translate="btn_1">المادة التدريبية</button>
+                    </a>
 
-                         <a href="{{ asset($course->subject) }}" download>
-                            <span data-translate="download_project_file" data-translate="btn_1" style="color: white">
-                               المادة التدريبية
-                            </span>
-                        </a>
+                    <a href="{{ asset($course->assignment) }}" download class="download-link">
+                        <button data-translate="btn_2">الانشطة</button>
+                    </a>
 
-                        <a href="{{ asset($course->assignment) }}" download>
-                            <span data-translate="download_project_file" data-translate="btn_1" style="color: white">
-                                الانشطة
-                            </span>
-                        </a>
-                 </div>
+                </div>
             </div>
         </div>
     </section>
