@@ -21,7 +21,8 @@ class AttendanceCourseController extends Controller
            $attendance = Attendance::with('courses')->whereHas('courses',function($q)use($id){
             $q->where('course_id',$id);
         })->paginate(10);
-        return view("dashboard.attendance.index", compact("attendance","id"));
+        $course = Course::find($id);
+        return view("dashboard.attendance.index", compact("attendance","id",'course'));
     }
     /**
      * Show the form for creating a new resource.

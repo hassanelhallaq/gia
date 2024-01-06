@@ -95,7 +95,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
+                                {{-- <div class="col-lg-6">
                                     <div class="inline w-100 field">
                                         <label> محتوي 2 </label>
                                         <select name="skills" multiple="" class="label ui selection fluid dropdown">
@@ -112,16 +112,8 @@
 
                                         </select>
                                     </div>
-                                    <!-- <p class="mg-b-10">صلاحيات الوصول 1</p>
-                                            <select class="form-control select2" multiple="multiple">
-                                                <option selected value="Firefox">
-                                                    محمد سعيد
-                                                </option>
-                                                <option value="Chrome">
-                                                    احمد علي
-                                                </option>
-                                            </select> -->
-                                </div>
+
+                                </div> --}}
                             </div>
                             <!-- closed row -->
 

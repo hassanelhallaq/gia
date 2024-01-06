@@ -1,5 +1,6 @@
 @extends('dashboard.layouts.master')
 @section('header')
+<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
 
      <div class="left-content mt-2">
         <nav aria-label="breadcrumb">
@@ -8,10 +9,10 @@
                     <a href="../index.html" >الرئيسية</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="table_program_management.html"class="text-muted">البرامج</a>
+                    <a href="{{route('programs.index')}}"class="text-muted">البرامج</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="programme_detales.html" class="text-muted"> برنامج تطوير المهارات الشخصية </a>
+                    <a href="{{route('program.course',[$course->program->id])}}" class="text-muted"> برنامج {{$course->program->name}} </a>
                 </li>
                 <li class="breadcrumb-item">
                     <a href="#" class="text-muted"> {{$course->name}}</a>
@@ -21,11 +22,13 @@
     </div>
     <div class="main-dashboard-header-right flex-wrap">
         <div class=" d-flex">
-            <a href="members.html" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> ادارة المشاركين  <i class="la la-cog"></i></a>
+            <a href="{{route('course.attendance',[$course->id])}}" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> ادارة المشاركين  <i class="la la-cog"></i></a>
             <a href="View_test_results.html" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج الاختبار  <i class="bi bi-box-arrow-in-down"></i></a>
             <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركة  <i class="bi bi-box-arrow-in-down"></i></button>
         </div>
     </div>
+</div>
+
   @endsection
 @section('content')
 
@@ -303,7 +306,7 @@
                                        <span class="ml-3 examBefor" data-bs-toggle="offcanvas" data-bs-target="#drawerafter_{{$item->id}}" aria-controls="offcanvasWithBothOptions"> بعدي </span>
                                    </td>
                                    <td> 60% </td>
-                                  
+
                                    <td class="d-flex filter-col-cell">
                                        <!-- dropdown-menu -->
                                        <button data-toggle="dropdown"
