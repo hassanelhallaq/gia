@@ -34,9 +34,17 @@
             <div class="btn_nav">
               <button onclick="toggleMenu()" id="menu_button_open"><?xml version="1.0" ?> <svg width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" id="Editable-line" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><line fill="none" id="XMLID_103_" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" x1="7" x2="25" y1="16" y2="16"/><line fill="none" id="XMLID_102_" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" x1="7" x2="25" y1="25" y2="25"/><line fill="none" id="XMLID_101_" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" x1="7" x2="25" y1="7" y2="7"/></svg></button>
               <button id="btn_download" >
-                <span data-translate="download_project_file">
-                  تحميل ملف المشروع
-                </span>
+                @php
+                            $program = App\Models\Program::where('username', request()->username)->first();
+
+                @endphp
+                @if ($program)
+                <a href="{{ asset($program->file) }}" download>
+                    <span data-translate="download_project_file" style="color: white">
+                        تحميل ملف المشروع
+                    </span>
+                </a>
+            @endif
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                   <g clip-path="url(#clip0_0_358)">
                     <path d="M14.2501 13.5C14.9463 13.5 15.614 13.2235 16.1063 12.7312C16.5985 12.2389 16.8751 11.5712 16.8751 10.875C16.8751 10.1788 16.5985 9.51115 16.1063 9.01887C15.614 8.52659 14.9463 8.25003 14.2501 8.25003H13.5001C13.6095 7.76249 13.6112 7.26033 13.505 6.77222C13.3988 6.28411 13.1868 5.8196 12.8812 5.40522C12.5755 4.99084 12.1822 4.6347 11.7236 4.35713C11.265 4.07957 10.7501 3.88602 10.2084 3.78752C9.66674 3.68903 9.10879 3.68753 8.56644 3.78311C8.0241 3.87869 7.50798 4.06947 7.04755 4.34456C6.11769 4.90014 5.47113 5.76541 5.25011 6.75003C4.45058 6.718 3.66427 6.95283 3.02582 7.4143C2.38736 7.87577 1.93648 8.53519 1.75037 9.27964C1.56425 10.0241 1.65449 10.8073 2.00561 11.4951C2.35674 12.1829 2.94693 12.7326 3.67511 13.05" stroke="#7FBE41" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

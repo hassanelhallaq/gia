@@ -67,5 +67,7 @@ Route::prefix('/{username}')->group(
     function () {
         Route::get('/home', [LandingPageController::class , 'home'])->name('home');
         Route::get('/time-line', [LandingPageController::class , 'timeLine'])->name('timeLine');
+        Route::get('/get-events', [LandingPageController::class , 'getEvent'])->name('get.events');
+
 
     });
