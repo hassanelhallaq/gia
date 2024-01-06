@@ -34,9 +34,13 @@
         </div>
     </div>
 @endsection
+@section('css')
+
+<link href="{{ asset('assets/css-rtl/drawar-user.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
     <!-- main-header opened -->
-    <link href="{{ asset('assets/css/drawar-user.css') }}" rel="stylesheet">
 
     <!-- /main-header -->
 
