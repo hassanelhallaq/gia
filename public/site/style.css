@@ -190,7 +190,7 @@ html{
     gap: 1rem;
     margin-top: .8rem;
   }
-  .btn_links a{
+  .btn_links button{
     background: #076f6d;
     color: white;
     border: none;
@@ -258,7 +258,7 @@ html{
     padding: 20px;
 
   }
-  .qr_container .btn_links a{
+  .qr_container .btn_links button{
     padding: 1rem 3rem;
 
   }
