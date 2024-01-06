@@ -20,13 +20,13 @@ class CourseController extends Controller
         $program = null;
         $id = null;
         $courses = Course::paginate(10);
-        return view("dashboard.courses.index", compact("courses", 'program','id'));
+        return view("dashboard.courses.index", compact("courses", 'program', 'id'));
     }
     public function programCourses($id)
     {
         $program = Program::find($id);
         $courses = Course::where('program_id', $id)->paginate(10);
-        return view("dashboard.courses.index", compact("courses", 'program','id'));
+        return view("dashboard.courses.index", compact("courses", 'program', 'id'));
     }
     /**
      * Show the form for creating a new resource.
@@ -37,7 +37,7 @@ class CourseController extends Controller
         $clients = Client::all();
         $program = Program::all();
         $trainers = Trainer::all();
-        return view("dashboard.courses.create", compact('program','categories','clients','trainers'));
+        return view("dashboard.courses.create", compact('program', 'categories', 'clients', 'trainers'));
     }
     public function createCourse($id)
     {
@@ -45,7 +45,7 @@ class CourseController extends Controller
         $clients = Client::all();
         $trainers = Trainer::all();
 
-         return view("dashboard.courses.createCourse", compact('categories','clients','id','trainers'));
+        return view("dashboard.courses.createCourse", compact('categories', 'clients', 'id', 'trainers'));
     }
     /**
      * Store a newly created resource in storage.
@@ -90,8 +90,7 @@ class CourseController extends Controller
         $course->program_id = $request->program_id;
         $course->category_id = $request->category_id;
         $course->save();
-        return response()->json(['redirect' => route('program.course',[$request->program_id])]);
-
+        return response()->json(['redirect' => route('program.course', [$request->program_id])]);
     }
 
     /**
@@ -109,7 +108,7 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
 
-        return view("dashboard.courses.index", compact("course"));
+        return view("dashboard.courses.edit", compact("course"));
     }
 
     /**
@@ -117,7 +116,49 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        //
+        $data = $request->all();
+        $validator = Validator($data, [
+            'course_name' => 'required',
+            'language' => 'required',
+            'seat_count' => 'required',
+            'coruse_start' => 'required',
+            'is_exam' => 'required',
+            'duration' => 'required',
+            'is_certificate' => 'required',
+            'trainer' => 'required',
+            'percentage_certificate' => 'required',
+            'study' => 'required',
+            'coordinator' => 'required',
+            'attendance_questionnaire' => 'required',
+            'category_id' => 'required',
+            'image_check' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
+        }
+        $course->name = $request->course_name;
+        $course->language = $request->language;
+        $course->seat_count = $request->seat_count;
+        $coruseStart = Carbon::parse($request->coruse_start)->format('y-m-d');
+        $course->start = $coruseStart;
+        $course->is_exam = $request->is_exam;
+        $course->duration = $request->duration;
+        $course->is_certificate = $request->is_certificate;
+        $course->trainer = $request->trainer;
+        $course->level = $request->level;
+        $course->subject = $request->subject;
+
+        $course->percentage_certificate = $request->percentage_certificate;
+        $course->coordinator = $request->coordinator;
+        $course->category_id = $request->category_id;
+        if ($request->hasFile('assignment')) {
+            $adminImage = $request->file('assignment');
+            $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
+            $adminImage->move('images/program', $imageName);
+            $course->image = '/images/' . 'program' . '/' . $imageName;
+        }
+        $course->update();
+        return response()->json(['redirect' => route('program.course', [$request->program_id])]);
     }
 
     /**
@@ -128,7 +169,8 @@ class CourseController extends Controller
         //
     }
 
-    public function getCoureses($id){
+    public function getCoureses($id)
+    {
         $courses = Course::where('program_id', $id)->get();
         return response()->json($courses);
     }
