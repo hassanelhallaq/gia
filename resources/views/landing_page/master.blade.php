@@ -23,8 +23,8 @@
         <div class="navigation">
             <div class="list_nav">
                 <ul>
-                  <li class="nav_items"><a class="c-gn" href="" data-translate="home">الرئيسية</a></li>
-                  <li class="nav_items"><a href="" data-translate="timeline">الجدول الزمني</a></li>
+                  <li class="nav_items"><a class="c-gn" href="{{route('home',[request()->username])}}" data-translate="home">الرئيسية</a></li>
+                  <li class="nav_items"><a href="{{route('timeLine',[request()->username])}}" data-translate="timeline">الجدول الزمني</a></li>
                   <li class="nav_items"><a href="#" data-translate="important_instructions">تعليمات مهمة</a></li>
                   <li class="nav_items"><a href="contact.html" data-translate="contact">التواصل</a></li>
                   <li class="nav_items"><a href="stream.html" data-translate="live_stream">بث مباشر</a></li>

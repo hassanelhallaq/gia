@@ -134,12 +134,12 @@
                                                        <td>{{$start }}</td>
                                                        <td>{{$end }}</td>
                                                      <td>
-                                                        @if (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($start))) {
+                                                        @if (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($start)))
                                                             <span class="tag tag-rounded bg-primary-transparent text-primary">متآخره</span>
-
-                                                        @else
+                                                        @elseif($item->status == 'active')
+                                                        <span class="tag tag-rounded bg-primary-transparent text-primary">فعال</span>
+                                                        @elseif($item->status == 'pending')
                                                         <span class="tag tag-rounded bg-primary-transparent text-primary">في المعالجة</span>
-
                                                         @endif
                                                      </td>
                                                      <td class="d-flex filter-col-cell">

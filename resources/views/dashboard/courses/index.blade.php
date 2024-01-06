@@ -1,41 +1,40 @@
 @extends('dashboard.layouts.master')
 @section('header')
 
-<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
-    <div class="left-content mt-2">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb breadcrumb-style1">
-                <li class="breadcrumb-item">
-                    <a href="../index.html" >الرئيسية</a>
-                </li>
-                {{-- <li class="breadcrumb-item">
-                    <a href="table_program_management.html"class="text-muted">البرامج</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="#" class="text-muted"> {{$program->name}}</a>
-                </li> --}}
-            </ol>
-        </nav>
-    </div>
-</div>
 
-    <div class="main-dashboard-header-right ">
-        <div class=" d-flex flex-wrap">
-            <button class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i class="ti-stats-up project"></i></button>
-            <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات صفحة الويب  <i class="icon ion-ios-settings"></i></button>
-            <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات  <i class="icon ion-ios-settings"></i></button>
-            @if($id)
-            <a href="{{route('program.course.create',[$id])}}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">   اضافة دورة جديدة  <i class="bi bi-plus"></i></a>
-            @else
-            <a href="{{route('courses.create')}}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">   اضافة دورة جديدة  <i class="bi bi-plus"></i></a>
+    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0" >
+        <div class="left-content mt-2">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-style1">
+                    <li class="breadcrumb-item">
+                        <a href="../index.html" >الرئيسية</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="table_program_management.html"class="text-muted">البرامج</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#" class="text-muted"> برنامج تطوير المهارات الشخصية </a>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <div class="main-dashboard-header-right ">
+            <div class=" d-flex flex-wrap">
+                <button class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i class="ti-stats-up project"></i></button>
+                <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات صفحة الويب  <i class="icon ion-ios-settings"></i></button>
+                <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات  <i class="icon ion-ios-settings"></i></button>
+                @if($id)
+                <a href="{{route('program.course.create',[$id])}}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">   اضافة دورة جديدة  <i class="bi bi-plus"></i></a>
+                @else
+                <a href="{{route('courses.create')}}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">   اضافة دورة جديدة  <i class="bi bi-plus"></i></a>
 
-            @endif
-            @if($program)
-            <a href="{{route('home',[$program->username])}}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">  عرض صفحة الويب <i class="icon ion-ios-share-alt"></i></a>
-            @endif
+                @endif
+                @if($program)
+                <a href="{{route('home',[$program->username])}}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1" target=”_blank>  عرض صفحة الويب <i class="icon ion-ios-share-alt"></i></a>
+                @endif
+            </div>
         </div>
     </div>
-{{-- </div> --}}
 @endsection
 @section('css')
 <style>

@@ -265,7 +265,7 @@
                         <table class="table table-striped mg-b-0 text-md-nowrap">
                             <thead>
                                 <tr class="tableHead">
-                                    <th><input type="checkbox" class="checkParent"></th>
+                                    {{-- <th><input type="checkbox" class="checkParent"></th> --}}
                                     <th>#</th>
                                    <th>
                                        الأسم
@@ -277,7 +277,7 @@
                                    <th> الاختبارات </th>
                                    <th> الحضور </th>
                                    <th> الاكتمال </th>
-                                   <th> الشهادة </th>
+                                   {{-- <th> الشهادة </th> --}}
                                     <td class="col-filter">
                                     <!-- dropdown-menu -->
                                         <button data-toggle="dropdown"
@@ -293,8 +293,9 @@
                                 <tr>
                                    <p class="p-5 text-center d-none" id="empty-message">لا توجد بيانات لعرضها</p>
                                </tr>
-                               @foreach ($course->attendances as $item)
+                               @foreach ($course->attendances as $i => $item)
                                <tr class="table-rows">
+                                <td scope="row"> {{ $i + 1 }} </td>
                                    <td scope="row"> {{ $item->name }} </td>
                                    <td>{{ $item->work_place }} </td>
                                    <td class="client-name"> {{ $item->phone_number }} </td>
@@ -305,7 +306,19 @@
                                        <!-- <span class="ml-3 examBefor" onclick="openSideDrawer()">بعدي</span> -->
                                        <span class="ml-3 examBefor" data-bs-toggle="offcanvas" data-bs-target="#drawerafter_{{$item->id}}" aria-controls="offcanvasWithBothOptions"> بعدي </span>
                                    </td>
-                                   <td> 60% </td>
+                                   <td>
+                                    <span class="ml-2 dropdown"> 4 ايام </span>
+
+                                    <button class=" btn btn-previous p-0" data-toggle="dropdown"><i class="bi bi-exclamation-circle"></i></button>
+                                    <div class="Attendance dropdown-menu scrollable-menu">
+                                        <span class="dropdown-item"> اليوم الاول  </span>
+                                        <span class="dropdown-item text-danger"> اليوم الثاني </span>
+                                        <span class="dropdown-item"> اليوم الثالث</span>
+                                        <span class="dropdown-item text-danger"> اليوم الرابع</span>
+                                        <span class="dropdown-item"> اليوم الخامس </span>
+                                    </div>
+                                </td>
+														   <td> 60% </td>
 
                                    <td class="d-flex filter-col-cell">
                                        <!-- dropdown-menu -->
