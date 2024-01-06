@@ -90,7 +90,7 @@ class CourseController extends Controller
         $course->program_id = $request->program_id;
         $course->category_id = $request->category_id;
         $course->save();
-        return response()->json(['redirect' => route('program.courses',[$request->program_id])]);
+        return response()->json(['redirect' => route('program.course',[$request->program_id])]);
 
     }
 
