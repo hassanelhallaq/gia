@@ -13,4 +13,9 @@ class Quiz extends Model
         'type','course_id'
          // ... add other fields accordingly
     ];
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
 }

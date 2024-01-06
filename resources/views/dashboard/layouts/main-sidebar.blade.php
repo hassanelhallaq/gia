@@ -23,7 +23,7 @@
                     </ul>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item"   href=""><i class="far fa-file-alt tx-22"></i><span class="side-menu__label mr-3">الأسئلة والاستبيانات</span><i class=""></i></a>
+                    <a class="side-menu__item"   href="{{route('quizes.index')}}"><i class="far fa-file-alt tx-22"></i><span class="side-menu__label mr-3">الأسئلة والاستبيانات</span><i class=""></i></a>
 
                 </li>
                 <li class="slide">

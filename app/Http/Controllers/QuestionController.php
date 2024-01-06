@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\QuestionOption;
+use App\Models\Quiz;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -13,7 +14,9 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        $quzies = Quiz::paginate(10);
+        return view("dashboard.question.index",compact('quzies'));
+
     }
 
     /**

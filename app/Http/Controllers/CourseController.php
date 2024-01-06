@@ -129,7 +129,7 @@ class CourseController extends Controller
     }
 
     public function getCoureses($id){
-        $courses = Course::where('program', $id)->get();
+        $courses = Course::where('program_id', $id)->get();
         return response()->json($courses);
     }
 }

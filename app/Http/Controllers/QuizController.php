@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Program;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 
@@ -13,14 +14,13 @@ class QuizController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
+        $programs = Program::all();
         $quizesBefor = Quiz::orderBy("created_at", "desc")->where('type','befor')->paginate(10);
         $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type','after')->paginate(10);
         $quizesInteractive = Quiz::orderBy("created_at", "desc")->where('type','interactive')->paginate(10);
 
-        return view("dashboard.quiz.index", compact("quizesBefor", 'quizesAfter','quizesInteractive','courses'));
+        return view("dashboard.quiz.index", compact("quizesBefor", 'quizesAfter','quizesInteractive','programs'));
     }
-
     /**
      * Show the form for creating a new resource.
      */

@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 @section('header')
-<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0" style="border-top: 1px solid #00000030;">
+<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0" >
     <div class="left-content mt-2">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb breadcrumb-style1">
@@ -10,15 +10,15 @@
                 <li class="breadcrumb-item">
                     <a href="table_program_management.html"class="text-muted">البرامج</a>
                 </li>
-                <li class="breadcrumb-item">
+                {{-- <li class="breadcrumb-item">
                     <a href="#" class="text-muted"> برنامج تطوير المهارات الشخصية </a>
-                </li>
+                </li> --}}
             </ol>
         </nav>
     </div>
     <div class="main-dashboard-header-right">
         <div class=" d-flex">
-            <a href="add_tests.html" class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> اضافة اسئلة <i class="bi bi-plus"></i></a>
+            {{-- <a href="add_tests.html" class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> اضافة اسئلة <i class="bi bi-plus"></i></a> --}}
             <button class="btn btn-warning-gradient btn-with-icon btn-md mr-1" data-target="#select2modal" data-toggle="modal"> اضافة اختبار جديد <i class="bi bi-plus"></i></button>
         </div>
     </div>
@@ -348,7 +348,7 @@
 
                     // Populate the city dropdown with the received data
                     $.each(data, function (key, value) {
-                        $('#course_id').append('<option value="' + value.id + '">' + value.name_ar + '</option>');
+                        $('#course_id').append('<option value="' + value.id + '">' + value.name + '</option>');
                     });
                 },
                 error: function (xhr, status, error) {
