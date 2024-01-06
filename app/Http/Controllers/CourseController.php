@@ -107,8 +107,11 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-
-        return view("dashboard.courses.edit", compact("course"));
+        $categories = Category::all();
+        $clients = Client::all();
+        $program = Program::all();
+        $trainers = Trainer::all();
+        return view("dashboard.courses.edit", compact("course",'program', 'categories', 'clients', 'trainers'));
     }
 
     /**
@@ -146,8 +149,6 @@ class CourseController extends Controller
         $course->is_certificate = $request->is_certificate;
         $course->trainer = $request->trainer;
         $course->level = $request->level;
-        $course->subject = $request->subject;
-
         $course->percentage_certificate = $request->percentage_certificate;
         $course->coordinator = $request->coordinator;
         $course->category_id = $request->category_id;
@@ -155,7 +156,13 @@ class CourseController extends Controller
             $adminImage = $request->file('assignment');
             $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
             $adminImage->move('images/program', $imageName);
-            $course->image = '/images/' . 'program' . '/' . $imageName;
+            $course->assignment = '/images/' . 'program' . '/' . $imageName;
+        }
+        if ($request->hasFile('subject')) {
+            $adminImage = $request->file('subject');
+            $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
+            $adminImage->move('images/program', $imageName);
+            $course->subject = '/images/' . 'program' . '/' . $imageName;
         }
         $course->update();
         return response()->json(['redirect' => route('program.course', [$request->program_id])]);
