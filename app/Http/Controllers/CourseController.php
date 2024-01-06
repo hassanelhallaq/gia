@@ -111,7 +111,7 @@ class CourseController extends Controller
         $clients = Client::all();
         $program = Program::all();
         $trainers = Trainer::all();
-        return view("dashboard.courses.edit", compact("course",'program', 'categories', 'clients', 'trainers'));
+        return view("dashboard.courses.edit", compact("course", 'program', 'categories', 'clients', 'trainers'));
     }
 
     /**
@@ -126,26 +126,20 @@ class CourseController extends Controller
             'seat_count' => 'required',
             'coruse_start' => 'required',
             'is_exam' => 'required',
-            'duration' => 'required',
             'is_certificate' => 'required',
             'trainer' => 'required',
             'percentage_certificate' => 'required',
-            'study' => 'required',
             'coordinator' => 'required',
-            'attendance_questionnaire' => 'required',
             'category_id' => 'required',
-            'image_check' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
         $course->name = $request->course_name;
-        $course->language = $request->language;
-        $course->seat_count = $request->seat_count;
+         $course->seat_count = $request->seat_count;
         $coruseStart = Carbon::parse($request->coruse_start)->format('y-m-d');
         $course->start = $coruseStart;
         $course->is_exam = $request->is_exam;
-        $course->duration = $request->duration;
         $course->is_certificate = $request->is_certificate;
         $course->trainer = $request->trainer;
         $course->level = $request->level;
@@ -165,7 +159,7 @@ class CourseController extends Controller
             $course->subject = '/images/' . 'program' . '/' . $imageName;
         }
         $course->update();
-        return response()->json(['redirect' => route('program.course', [$request->program_id])]);
+        return response()->json(['redirect' => route('program.course', [$course->program_id])]);
     }
 
     /**
