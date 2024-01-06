@@ -17,8 +17,8 @@
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="#"><i class="typcn typcn-folder tx-22"></i><span class="side-menu__label mr-3">ادارة البرامج</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu  ">
-                        <li class=""><a class="slide-item" href="{{route('categories.index')}}"> الفئات </a></li>
                         <li class=""><a class="slide-item" href="{{route('programs.index')}}"> البرامج </a></li>
+                        <li class=""><a class="slide-item" href="{{route('categories.index')}}"> الفئات </a></li>
                         <li class=""><a class="slide-item" href="{{route('courses.index')}}"> الدورات التدريبية </a></li>
                     </ul>
                 </li>

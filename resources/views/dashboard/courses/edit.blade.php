@@ -249,13 +249,12 @@
     function performStore() {
         let formData = new FormData();
         formData.append("_method", "PUT")
-
         formData.append('course_name', document.getElementById('name').value);
         formData.append('language', document.getElementById('language').value);
         formData.append('seat_count', document.getElementById('seat_count').value);
         formData.append('coruse_start', document.getElementById('start').value);
         formData.append('is_exam', document.getElementById('is_exam').value);
-         formData.append('is_certificate', document.getElementById('is_certificate').value);
+        formData.append('is_certificate', document.getElementById('is_certificate').value);
         formData.append('trainer', document.getElementById('trainer').value);
         formData.append('percentage_certificate', document.getElementById('percentage_certificate').value);
          formData.append('coordinator', document.getElementById('coordinator').value);

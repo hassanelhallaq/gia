@@ -133,7 +133,13 @@
                                                        <td>{{$start }}</td>
                                                        <td>{{$end }}</td>
                                                      <td>
-                                                         <span class="tag tag-rounded bg-primary-transparent text-primary">في المعالجة</span>
+                                                        @if (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($start))) {
+                                                            <span class="tag tag-rounded bg-primary-transparent text-primary">متآخره</span>
+
+                                                        @else
+                                                        <span class="tag tag-rounded bg-primary-transparent text-primary">في المعالجة</span>
+
+                                                        @endif
                                                      </td>
                                                      <td class="d-flex filter-col-cell">
                                                         <a href="{{route('program.course',[$item->id])}}"><i class="far fa-eye tx-15"></i></a>                                                        <!-- dropdown-menu -->
