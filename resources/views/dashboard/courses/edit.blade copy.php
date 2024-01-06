@@ -39,7 +39,7 @@
                                 <div class="col-lg-6">
                                     <label for="example"> أسم الدورة </label>
                                     <div class="webflow-style-input">
-                                        <input class="input_no_border readonly" type="text" value="another value" readonly></input>
+                                        <input class="input_no_border readonly" type="text" id="name" value="{{$course->name}}" readonly></input>
                                         <div class="d-flex ml-2">
                                           <p class="ml-3"> تحرير </p>
                                           <i class="bi bi-pen edit-button" ></i>
@@ -49,7 +49,7 @@
                                 <div class="col-lg-6 mg-t-20 mg-lg-t-0">
                                     <label for="example"> المقاعد </label>
                                     <div class="webflow-style-input">
-                                        <input class="input_no_border readonly" type="text" value="another value" readonly></input>
+                                        <input class="input_no_border readonly" type="text" id="seat_count" value="{{$course->seat_count}}" id="seat_count" readonly></input>
                                         <div class="d-flex ml-2">
                                           <p class="ml-3"> تحرير </p>
                                           <i class="bi bi-pen edit-button" ></i>
@@ -61,7 +61,7 @@
 
                             <!-- row -->
                             <div class="row row-sm mb-3">
-                                <div class="col-lg-6 mb-3">
+                                <div class="col-lg-6">
                                     <label for="example"> الفئة </label>
                                     <div class="webflow-style-input">
                                         <input class="input_no_border readonly" type="text" value="another value" readonly></input>
@@ -71,23 +71,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 mb-3">
+                                <div class="col-lg-6">
                                     <label for="example"> هل يوجد إختبار </label>
                                     <div class="webflow-style-input">
-                                        <select class="form-control select2 input_no_border custom-select" disabled>
-                                            <option selected value="Firefox">
-                                                نعم
-                                            </option>
-                                            <option value="Firefox">
-                                                لا
-                                            </option>
-                                        </select>
-                                        <!-- <input class="input_no_border readonly" type="text" value="another value" readonly></input> -->
-                                        <div class="d-flex ml-2 mb-0">
+                                        <input class="input_no_border readonly" id="is_exam"  type="text" value="{{$course->is_exam == 'yes' ? "نعم" : "لا"}}" readonly></input>
+                                        <div class="d-flex ml-2">
                                           <p class="ml-3"> تحرير </p>
-                                          <i class="bi bi-pen edit-buttonSelect" ></i>
-                                        </div>														<div class="d-flex ml-2">
-
+                                          <i class="bi bi-pen edit-button" ></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +89,7 @@
                                 <div class="col-lg-6 mb-3">
                                     <label for="example"> يبدأ في </label>
                                     <div class="webflow-style-input">
-                                        <input class="input_no_border readonly" type="date" value="another value" readonly></input>
+                                        <input class="input_no_border readonly" id="start"  type="text" value="{{$course->start}}" id="start" readonly></input>
                                         <div class="d-flex ml-2">
                                           <p class="ml-3"> تحرير </p>
                                           <i class="bi bi-pen edit-button" ></i>
@@ -109,23 +100,15 @@
                                 <div class="col-lg-6 mb-3">
                                     <label for="example"> هل يوجد شهادة </label>
                                     <div class="webflow-style-input">
-                                        <select class="form-control select2 input_no_border custom-select" disabled>
-                                            <option selected value="Firefox">
-                                                نعم
-                                            </option>
-                                            <option value="Firefox">
-                                                لا
-                                            </option>
-                                        </select>
-                                        <!-- <input class="input_no_border readonly" type="text" value="another value" readonly></input> -->
-                                        <div class="d-flex ml-2 mb-0">
+                                        <input class="input_no_border readonly" id="is_certificate"  type="text" value="{{$course->is_certificate == 'yes' ? "نعم" : "لا"}}" value="another value" readonly></input>
+                                        <div class="d-flex ml-2">
                                           <p class="ml-3"> تحرير </p>
-                                          <i class="bi bi-pen edit-buttonSelect" ></i>
+                                          <i class="bi bi-pen edit-button" ></i>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6 mb-3">
+                                <div class="col-lg-6">
                                     <label for="example"> أسم المدرب </label>
                                     <div class="webflow-style-input">
                                         <input class="input_no_border readonly" type="text" value="another value" readonly></input>
@@ -140,7 +123,7 @@
                                 <div class="col-lg-6 mb-3">
                                     <label for="example"> نسبة الحصول على الشهادة </label>
                                     <div class="webflow-style-input">
-                                        <input class="input_no_border readonly" type="text" value="another value" readonly></input>
+                                        <input class="input_no_border readonly" id="percentage_certificate"  type="text" value="{{$course->percentage_certificate}}" id="percentage_certificate"  readonly></input>
                                         <div class="d-flex ml-2">
                                           <p class="ml-3"> تحرير </p>
                                           <i class="bi bi-pen edit-button" ></i>
@@ -150,7 +133,7 @@
                                 <div class="col-lg-6 mb-3">
                                     <label for="example"> أسم المنسق </label>
                                     <div class="webflow-style-input">
-                                        <input class="input_no_border readonly" type="text" value="another value" readonly></input>
+                                        <input class="input_no_border readonly" id="coordinator" type="text" value="{{$course->coordinator}}" value="another value" readonly></input>
                                         <div class="d-flex ml-2">
                                           <p class="ml-3"> تحرير </p>
                                           <i class="bi bi-pen edit-button" ></i>
@@ -174,18 +157,10 @@
                                 <div class="col-lg-6 mb-3">
                                     <label for="example"> المستوى </label>
                                     <div class="webflow-style-input">
-                                        <select class="form-control select2 input_no_border custom-select" disabled>
-                                            <option selected value="Firefox">
-                                                اول
-                                            </option>
-                                            <option value="Firefox">
-                                                ثاني
-                                            </option>
-                                        </select>
-                                        <!-- <input class="input_no_border readonly" type="text" value="another value" readonly></input> -->
-                                        <div class="d-flex ml-2 mb-0">
+                                        <input class="input_no_border readonly" id="level"  type="text" value="{{$course->level}}" value="another value" readonly></input>
+                                        <div class="d-flex ml-2">
                                           <p class="ml-3"> تحرير </p>
-                                          <i class="bi bi-pen edit-buttonSelect" ></i>
+                                          <i class="bi bi-pen edit-button" ></i>
                                         </div>
                                     </div>
                                 </div>
@@ -193,6 +168,7 @@
                                 <div class="col-lg-6 mb-3">
                                     <label for="example"> الأختبار البعدي </label>
                                     <div class="webflow-style-input">
+                                        <input class="input_no_border readonly" type="text" value="another value" readonly></input>
                                         <input class="input_no_border readonly" type="text" value="another value" readonly></input>
                                         <div class="d-flex ml-2">
                                             <p class="ml-1"> تحرير </p>
@@ -206,18 +182,10 @@
                                 <div class="col-lg-6 mb-3">
                                     <label for="example"> لغة الدورة </label>
                                     <div class="webflow-style-input">
-                                        <select class="form-control select2 input_no_border custom-select" disabled>
-                                            <option selected value="Firefox">
-                                                العربية
-                                            </option>
-                                            <option value="Firefox">
-                                                الانجليزية
-                                            </option>
-                                        </select>
-                                        <!-- <input class="input_no_border readonly" type="text" value="another value" readonly></input> -->
-                                        <div class="d-flex ml-2 mb-0">
+                                        <input class="input_no_border readonly" id="language" type="text" value="{{$course->language == 'arabic' ? "عربي" : "انجليزي"}}" value="another value" readonly></input>
+                                        <div class="d-flex ml-2">
                                           <p class="ml-3"> تحرير </p>
-                                          <i class="bi bi-pen edit-buttonSelect" ></i>
+                                          <i class="bi bi-pen edit-button" ></i>
                                         </div>
                                     </div>
                                 </div>
@@ -225,7 +193,7 @@
                                 <div class="col-lg-6 mb-3">
                                     <label for="example"> المادة </label>
                                     <div class="webflow-style-input">
-                                        <input class="input_no_border readonly" type="text" value="another value" readonly></input>
+                                        <input class="input_no_border readonly" id="subject"  type="text" value="{{$course->subject}}" value="another value" readonly></input>
                                         <div class="d-flex ml-2">
                                           <p class="ml-3"> تحميل المادة </p>
                                           <i class="bi bi-box-arrow-in-down"></i>
@@ -236,7 +204,7 @@
                                 <div class="col-lg-6 mb-3">
                                     <label for="example"> تسجيل الحضور </label>
                                     <div class="webflow-style-input">
-                                        <input class="input_no_border readonly" type="text" value="another value" readonly></input>
+                                        <input class="input_no_border readonly" type="text" value="another value" readonly>
                                         <div class="d-flex ml-2">
                                           <p class="ml-3"> تحرير </p>
                                           <i class="bi bi-pen edit-button" ></i>
@@ -247,7 +215,7 @@
                                 <div class="col-lg-6 mb-3">
                                     <label for="example"> Assignment </label>
                                     <div class="webflow-style-input">
-                                        <input class="input_no_border readonly" type="text" value="another value" readonly></input>
+                                        <input class="input_no_border readonly" type="text" id="assignment" value="{{$course->assignment}}" value="another value" readonly>
                                         <div class="d-flex ml-2">
                                           <p class="ml-3"> تحميل Assignment </p>
                                           <i class="bi bi-box-arrow-in-down"></i>
@@ -260,14 +228,13 @@
                             </div>
                             <!-- closed row -->
                             <br>
-                            <div class="f1-buttons d-flex justify-content-between w-100  mt-5">
+                            <div class="f1-buttons d-flex justify-content-between mt-5">
                                 <div class="d-flex">
                                     <button class="btn btn-warning-gradient btn-with-icon btn-sm"> حفظ الاعدادات  <i class="bi bi-floppy"></i></button>
                                     <a class="btn btn-outline-light btn-with-icon btn-sm mr-1 " id="copyButton"> استنساخ البرنامج <i class="far fa-clone" ></i></a>
                                 </div>
-                                <a class="btn btn-danger btn-with-icon btn-sm mr-1">  حذف الدورة <i class="bi bi-trash3"></i></a>
+                                <a class="btn btn-danger btn-with-icon btn-sm ">  حذف الدورة <i class="bi bi-trash3"></i></a>
                             </div>
-
                     </form>
                     <!-- closed form -->
                 </div>
