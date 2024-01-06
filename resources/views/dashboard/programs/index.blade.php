@@ -129,6 +129,7 @@
                                                      @php
                                                      $start = Carbon\Carbon::parse($item->start)->format('y-m-d');
                                                      $end = Carbon\Carbon::parse($item->end)->format('y-m-d');
+                                                    $today = Carbon\Carbon::today()->format('Y-m-d');
                                                     @endphp
                                                        <td>{{$start }}</td>
                                                        <td>{{$end }}</td>
