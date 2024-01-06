@@ -120,7 +120,7 @@ overflow-x: hidden;
                                         <td scope="row">{{$item->name}}</td>
                                         <td>{{$item->category->name}}</td>
                                         <td class="client-name">  {{$item->trainer->name ?? ''}}</td>
-                                        <td> مستوي اول </td>
+                                        <td> {{$item->level ?? ''}}</td>
                                         <td>{{$item->start}}</td>
                                         <td>{{$item->duration}}ايام</td>
                                           <td> @if($item->language == 'arabic')
