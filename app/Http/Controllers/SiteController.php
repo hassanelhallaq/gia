@@ -43,7 +43,8 @@ class SiteController extends Controller
 
     public function third($id, $course_id)
     {
-        $course = Course::findOrFail($course_id);
+
+          $course = Course::findOrFail($course_id);
         $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();

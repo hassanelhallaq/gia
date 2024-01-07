@@ -355,7 +355,13 @@
                                 <div class="col-lg-6">
                                     <div class="form-group has-success mg-b-0">
                                         <label for="example"> اسم المدرب </label>
-                                        <input class="form-control" required="" id="trainer" type="text">
+                                         <select id="trainer" class="form-control select2">
+                                            @foreach ($trainers as $item)
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mg-t-20 mg-lg-t-0">

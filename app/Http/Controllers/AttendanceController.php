@@ -13,7 +13,7 @@ class AttendanceController extends Controller
     public function index()
     {
         $id = null;
-        $attendance = Attendance::paginate(10);
+        $attendance = Attendance::orderBy('created_at','desc')->paginate(10);
         return view("dashboard.attendance.index", compact("attendance",'id'));
     }
 

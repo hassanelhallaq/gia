@@ -116,7 +116,7 @@ overflow-x: hidden;
                                     @foreach ($courses as $i => $item)
                                     <tr class="table-rows">
                                         <td><input type="checkbox" class="checkChild"></td>
-                                        <td>1</td>
+                                        <td>{{$i + 1}}</td>
                                         <td scope="row">{{$item->name}}</td>
                                         <td>{{$item->category->name}}</td>
                                         <td class="client-name">  {{$item->trainer->name ?? ''}}</td>

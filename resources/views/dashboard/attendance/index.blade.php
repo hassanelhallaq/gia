@@ -11,9 +11,11 @@
                     <li class="breadcrumb-item">
                         <a href="{{route('programs.index')}}" class="text-muted">البرامج</a>
                     </li>
+                    {{-- @if($course)
                     <li class="breadcrumb-item">
                         <a href="{{route('program.course',[$course->program->id])}}" class="text-muted"> برنامج {{$course->program->name}} </a>
                     </li>
+                    @endif --}}
                     <li class="breadcrumb-item">
                         <a href="#" class="text-muted"> المشتركين </a>
                     </li>

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->date('start');
             $table->integer('duration');
-            $table->string('trainer');
+            $table->integer('trainer_id');
             $table->integer('seat_count');
             $table->string('subject')->nullable();
             $table->enum('is_exam',['yes','no']);

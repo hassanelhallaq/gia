@@ -52,15 +52,12 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::get('/quiz.questions/{id}', [QuizController::class , 'question'])->name('quiz.questions');
         Route::resource('quizes', QuizController::class);
         Route::get('/get-courses/{id}', [CourseController::class , 'getCoureses']);
-
         Route::get('/program.courses/{id}/create', [CourseController::class , 'createCourse'])->name('program.course.create');
         Route::resource('trainers', TrainerController::class);
-
-
-
 });
 Route::get('/invitation/{id}/{course_id}', [SiteController::class , 'index'])->name('invitation.index');
 Route::get('/accept/{id}/{course_id}', [SiteController::class , 'second'])->name('invitation.second');
+Route::get('/third/{id}/{course_id}', [SiteController::class , 'third'])->name('invitation.third');
 
 Route::post('/invitation/reply', [SiteController::class , 'storeReply']);
 Route::prefix('/{username}')->group(

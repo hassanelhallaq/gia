@@ -41,6 +41,6 @@ class Course extends Model
     }
     public function trainer()
     {
-        return $this->belongsTo(Trainer::class);
+        return $this->belongsTo(Trainer::class,'trainer_id');
     }
 }

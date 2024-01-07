@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Client;
 use App\Models\Course;
 use App\Models\Program;
+use App\Models\Trainer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,8 +29,9 @@ class ProgramController extends Controller
     {
         $categories = Category::all();
         $clients = Client::all();
+        $trainers = Trainer::all();
 
-        return view("dashboard.programs.create", compact('categories', 'clients'));
+        return view("dashboard.programs.create", compact('categories', 'clients','trainers'));
     }
 
     /**
