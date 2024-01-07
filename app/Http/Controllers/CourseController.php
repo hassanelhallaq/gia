@@ -81,7 +81,7 @@ class CourseController extends Controller
         $course->is_exam = $request->is_exam;
         $course->duration = $request->duration;
         $course->is_certificate = $request->is_certificate;
-        $course->trainer = $request->trainer;
+        $course->trainer_id = $request->trainer;
         $course->percentage_certificate = $request->percentage_certificate;
         $course->study = $request->study == true ? 1 : 0;
         $course->coordinator = $request->coordinator;
@@ -141,7 +141,7 @@ class CourseController extends Controller
         $course->start = $coruseStart;
         $course->is_exam = $request->is_exam;
         $course->is_certificate = $request->is_certificate;
-        $course->trainer = $request->trainer;
+        $course->trainer_id = $request->trainer;
         $course->level = $request->level;
         $course->percentage_certificate = $request->percentage_certificate;
         $course->coordinator = $request->coordinator;
