@@ -36,7 +36,6 @@ Route::prefix('dashboard')->middleware('guest:admin,client')->group(function () 
 });
 Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
     function () {
-        Route::get('/', [PagesController::class, 'index'])->name('admin.dashboard');
         Route::resource('courses', CourseController::class);
         Route::get('/program.courses/{id}', [CourseController::class, 'programCourses'])->name('program.course');
         Route::get('/program.courses/{id}/create', [CourseController::class, 'createCourse'])->name('program.course.create');
@@ -50,6 +49,11 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::resource('quizes', QuizController::class);
 
     }
+);
+Route::prefix('dashboard/client')->middleware('auth:client')->group(
+    function () {
+Route::get('/', [PagesController::class, 'index'])->name('client.dashboard');
+}
 );
 Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
     function () {

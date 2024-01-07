@@ -68,7 +68,7 @@
                 @endif
 
                 <li class="slide">
-                    <a class="side-menu__item" data-toggle="slide" href="{{route('dashboard.auth.logout')}}"><i class="bx bx-log-out tx-22"></i><span class="side-menu__label mr-3">تسجيل الخروج</span></a>
+                    <a class="side-menu__item"  href="{{route('dashboard.auth.logout')}}"><i class="bx bx-log-out tx-22"></i><span class="side-menu__label mr-3">تسجيل الخروج</span></a>
                 </li>
             </ul>
         </div>
