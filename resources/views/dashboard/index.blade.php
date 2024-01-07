@@ -293,7 +293,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($programsActice->take(3) as $item)
+                                                @foreach ($programsActice->take(3) as $itam)
 
 
                                                 <tr>
