@@ -47,7 +47,7 @@
                                 <div class="">
                                     <p class="mb-2 tx-12 text-muted">عدد البرامج الكلي</p>
                                     <div class="">
-                                        <h4 class="mb-1 font-weight-bold">20</h4>
+                                        <h4 class="mb-1 font-weight-bold">{{$programs}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                 <div class="">
                                     <p class="mb-2 tx-12 text-muted">عدد البرامج القائمة</p>
                                     <div class="">
-                                        <h4 class="mb-1 font-weight-bold">13</h4>
+                                        <h4 class="mb-1 font-weight-bold">{{$programsActice->count()}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                 <div class="">
                                     <p class="mb-2 tx-12 text-muted">عدد الدورات الكلي</p>
                                     <div class="">
-                                        <h4 class="mb-1 font-weight-bold">75</h4>
+                                        <h4 class="mb-1 font-weight-bold">{{$courses}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +130,7 @@
                                 <div class="">
                                     <p class="mb-2 tx-12 text-muted">عدد الدورات القائمة</p>
                                     <div class="">
-                                        <h4 class="mb-1 font-weight-bold">500</h4>
+                                        <h4 class="mb-1 font-weight-bold">{{$events->count()}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@
                                 <div class="">
                                     <p class="mb-2 tx-12 text-muted">عددالمسجلين</p>
                                     <div class="">
-                                        <h4 class="mb-1 font-weight-bold">500</h4>
+                                        <h4 class="mb-1 font-weight-bold">{{$attendance}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -293,51 +293,20 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach ($programsActice->take(3) as $item)
+
+
                                                 <tr>
-                                                    <td scope="row">برنامج التدريب الأساسي.</td>
-                                                    <td>3</td>
-                                                    <td>على حسن على</td>
-                                                    <td>12/06/2023</td>
-                                                    <td>12/06/2023</td>
+                                                    <td scope="row">برنامج {{$itam->name}}</td>
+                                                    <td>{{$itam->courses_count}}</td>
+                                                    <td>{{$itam->client->name}}</td>
+                                                    <td>{{$itam->start}}</td>
+                                                    <td>{{$itam->end}}</td>
                                                     <td><span class="tag tag-rounded bg-success-transparent text-success">
                                                             فعال </span></td>
                                                     <td><i class="mdi mdi-dots-horizontal text-gray"></i></td>
                                                 </tr>
-                                                <tr>
-                                                    <td scope="row">برنامج التدريب الأساسي.</td>
-                                                    <td>3</td>
-                                                    <td>على حسن على</td>
-                                                    <td>12/06/2023</td>
-                                                    <td>12/06/2023</td>
-                                                    <td><span
-                                                            class="tag tag-rounded bg-warning-transparent text-warning">تحت
-                                                            المراجعة</span>
-                                                    <td><i class="mdi mdi-dots-horizontal text-gray"></i></td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td scope="row">برنامج التدريب الأساسي.</td>
-                                                    <td>3</td>
-                                                    <td>على حسن على</td>
-                                                    <td>12/06/2023</td>
-                                                    <td>12/06/2023</td>
-                                                    <td>
-                                                        <span
-                                                            class="tag tag-rounded bg-primary-transparent text-primary">في
-                                                            المعالجة</span>
-                                                    </td>
-                                                    <td><i class="mdi mdi-dots-horizontal text-gray"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td scope="row">برنامج التدريب الأساسي.</td>
-                                                    <td>3</td>
-                                                    <td>على حسن على</td>
-                                                    <td>12/06/2023</td>
-                                                    <td>12/06/2023</td>
-                                                    <td><span class="tag tag-rounded bg-primary-transparent text-primary">
-                                                            في المعالجة </span>
-                                                    <td><i class="mdi mdi-dots-horizontal text-gray"></i></td>
-                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -349,19 +318,19 @@
                                                 <tr class="list-unstyled">
                                                     <th>
                                                         <i class="typcn typcn-folder"></i>
-                                                        اسم البرنامج
+                                                        اسم الدوره
                                                     </th>
                                                     <th>
                                                         <i class="si si-layers"></i>
-                                                        عدد الدورات
+                                                        عدد المتقدمين
                                                     </th>
                                                     <th>
                                                         <i class="mdi mdi-account-outline"></i>
-                                                        العميل
+                                                        البرنامج
                                                     </th>
                                                     <th><i class="far fa-calendar"></i> تاريخ البداية </th>
-                                                    <th><i class="far fa-calendar"></i> تاريخ النهاية </th>
-                                                    <th>
+                                                    <th><i class="far fa-calendar"></i> عدد الايام </th>
+                                                    {{-- <th>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                             height="16" fill="currentColor" class="bi bi-check-circle"
                                                             viewBox="0 0 16 16">
@@ -371,63 +340,28 @@
                                                                 d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05" />
                                                         </svg>
                                                         الحالة
-                                                    </th>
+                                                    </th> --}}
                                                     <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach ($events->take(3) as $item)
+
+
                                                 <tr>
-                                                    <td scope="row">الدورات القائمة</td>
-                                                    <td>3</td>
-                                                    <td>على حسن على</td>
-                                                    <td>12/06/2023</td>
-                                                    <td>12/06/2023</td>
-                                                    <td>
+                                                    <td scope="row">{{$item->name}}</td>
+                                                    <td>{{$item->attendances_count}}</td>
+                                                    <td>{{$item->program->name}}</td>
+                                                    <td>{{$item->start}}</td>
+                                                    <td>{{$item->duration}}ايام</td>
+                                                    {{-- <td>
                                                         <span
                                                             class="tag tag-rounded bg-primary-transparent text-success">Third
                                                             tag</span>
                                                         <i class="mdi mdi-dots-horizontal text-gray"></i>
-                                                    </td>
+                                                    </td> --}}
                                                 </tr>
-                                                <tr>
-                                                    <td scope="row">الدورات القائمة</td>
-                                                    <td>3</td>
-                                                    <td>على حسن على</td>
-                                                    <td>12/06/2023</td>
-                                                    <td>12/06/2023</td>
-                                                    <td>
-                                                        <span
-                                                            class="tag tag-rounded bg-warning-transparent text-warning">Third
-                                                            tag</span>
-                                                        <i class="mdi mdi-dots-horizontal text-gray"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td scope="row">الدورات القائمة</td>
-                                                    <td>3</td>
-                                                    <td>على حسن على</td>
-                                                    <td>12/06/2023</td>
-                                                    <td>12/06/2023</td>
-                                                    <td>
-                                                        <span
-                                                            class="tag tag-rounded bg-primary-transparent text-primary">Third
-                                                            tag</span>
-                                                        <i class="mdi mdi-dots-horizontal text-gray"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td scope="row">الدورات القائمة</td>
-                                                    <td>3</td>
-                                                    <td>على حسن على</td>
-                                                    <td>12/06/2023</td>
-                                                    <td>12/06/2023</td>
-                                                    <td>
-                                                        <span
-                                                            class="tag tag-rounded bg-primary-transparent text-primary">Third
-                                                            tag</span>
-                                                        <i class="mdi mdi-dots-horizontal text-gray"></i>
-                                                    </td>
-                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -534,49 +468,7 @@
 
             <!-- row opened -->
             <div class="row row-sm">
-                <div class="col-md-12 col-xl-4 col-xs-12 col-sm-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="feature2">
-
-                                <i
-                                    class="icon ion-ios-rocket ht-50 wd-50 text-center brround card-chart text-purple  bg-purple-transparent  brround"></i>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <h5 class="mb-2 tx-16">برنامج التسويق الرقمي</h5>
-                                <li class="mdi mdi-dots-vertical"></li>
-                            </div>
-                            <hr>
-                            <span class="fs-14 text-muted">
-                                برنامج التسويق الرقمي هو أكثر البرامج نشاطا حاليا خلال تطبيقنا
-                                الأدراة تسجيل حضور الدورات الرقمية
-                            </span>
-                            <hr>
-                            <div class="demo-avatar-group">
-
-                                <div class="main-img-user avatar-sm">
-                                    <img alt="avatar" class="rounded-circle  mr-2" src="assets/img/faces/5.jpg">
-                                </div>
-                                <div class="main-img-user avatar-sm">
-                                    <img alt="avatar" class="rounded-circle" src="assets/img/faces/3.jpg">
-                                </div>
-                                <div class="main-img-user avatar-sm">
-                                    <img alt="avatar" class="rounded-circle" src="assets/img/faces/4.jpg">
-                                </div>
-                                <div class="main-img-user avatar-sm">
-                                    <img alt="avatar" class="rounded-circle" src="assets/img/faces/5.jpg">
-                                </div>
-
-
-                                <div class="mr-3">
-                                    <span class="badge badge-success">+</span>
-                                    <span class="label mr-1">دعوة</span>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @foreach ($programsActice->take(3) as $item)
                 <div class="col-md-12 col-xl-4 col-xs-12 col-sm-12">
                     <div class="card">
                         <div class="card-body">
@@ -586,28 +478,27 @@
                                     class="fe fe-award ht-50 wd-50 text-center card-chart text-purple bg-purple-transparent brround"></i>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <h5 class="mb-2 tx-16">برنامج الابتكار وريادة الأعمال</h5>
+                                <h5 class="mb-2 tx-16">برنامج {{$item->name}}</h5>
                                 <li class="mdi mdi-dots-vertical"></li>
                             </div>
                             <hr>
                             <span class="fs-14 text-muted">
-                                برنامج التسويق الرقمي هو أكثر البرامج نشاطا حاليا خلال تطبيقنا
-                                الادراة تسجيل حضور الدورات الرقمية
+                               {{$item->content_two}}
                             </span>
                             <hr>
                             <div class="demo-avatar-group">
 
                                 <div class="main-img-user avatar-sm">
-                                    <img alt="avatar" class="rounded-circle  mr-2" src="assets/img/faces/5.jpg">
+                                    <img alt="avatar" class="rounded-circle  mr-2" src="{{asset('assets/img/faces/5.jpg')}}">
                                 </div>
                                 <div class="main-img-user avatar-sm">
-                                    <img alt="avatar" class="rounded-circle" src="assets/img/faces/3.jpg">
+                                    <img alt="avatar" class="rounded-circle" src="{{asset('assets/img/faces/3.jpg')}}">
                                 </div>
                                 <div class="main-img-user avatar-sm">
-                                    <img alt="avatar" class="rounded-circle" src="assets/img/faces/4.jpg">
+                                    <img alt="avatar" class="rounded-circle" src="{{asset('assets/img/faces/4.jpg')}}">
                                 </div>
                                 <div class="main-img-user avatar-sm">
-                                    <img alt="avatar" class="rounded-circle" src="assets/img/faces/5.jpg">
+                                    <img alt="avatar" class="rounded-circle" src="{{asset('assets/img/faces/5.jpg')}}">
                                 </div>
 
 
@@ -620,49 +511,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 col-xl-4 col-xs-12 col-sm-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="feature2">
-
-                                <i
-                                    class="cf cf-xrp ht-50 wd-50 text-center brround text-purple bg-purple-transparent card-chart"></i>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <h5 class="mb-2 tx-16">برنامج تطوير المهارات الشخصية</h5>
-                                <li class="mdi mdi-dots-vertical"></li>
-                            </div>
-                            <hr>
-                            <span class="fs-14 text-muted">
-                                برنامج التسويق الرقمي هو أكثر البرامج نشاطا حاليا خلال تطبيقنا
-                                الادراة تسجيل حصور الدورات الرقمية.
-                            </span>
-                            <hr>
-                            <div class="demo-avatar-group">
-
-                                <div class="main-img-user avatar-sm">
-                                    <img alt="avatar" class="rounded-circle  mr-2" src="assets/img/faces/5.jpg">
-                                </div>
-                                <div class="main-img-user avatar-sm">
-                                    <img alt="avatar" class="rounded-circle" src="assets/img/faces/3.jpg">
-                                </div>
-                                <div class="main-img-user avatar-sm">
-                                    <img alt="avatar" class="rounded-circle" src="assets/img/faces/4.jpg">
-                                </div>
-                                <div class="main-img-user avatar-sm">
-                                    <img alt="avatar" class="rounded-circle" src="assets/img/faces/5.jpg">
-                                </div>
-
-
-                                <div class="mr-3">
-                                    <span class="badge badge-success">+</span>
-                                    <span class="label mr-1">دعوة</span>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <!-- /row -->
          <!-- container closed -->

@@ -21,11 +21,11 @@ class CourseController extends Controller
         $program = null;
         $id = null;
         $courses = Course::paginate(10);
-        if(Auth::guard('admin')->check()){
+        if (Auth::guard('admin')->check()) {
             $courses = Course::orderBy("created_at", "desc")->paginate(10);
-         }elseif(Auth::guard('client')->check()){
-            $courses = Course::with('program')->whereHas('program',function($q){
-                $q->where('client_id',Auth::user()->id);
+        } elseif (Auth::guard('client')->check()) {
+            $courses = Course::with('program')->whereHas('program', function ($q) {
+                $q->where('client_id', Auth::user()->id);
             })->orderBy("created_at", "desc")->paginate(10);
         }
         return view("dashboard.courses.index", compact("courses", 'program', 'id'));
@@ -42,8 +42,13 @@ class CourseController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $clients = Client::all();
-        $program = Program::all();
+        if (Auth::guard('admin')->check()) {
+            $clients = Client::all();
+            $program = Program::all();
+        } elseif (Auth::guard('client')->check()) {
+            $clients = null;
+            $program = Program::where('client_id', Auth::user()->id)->get();
+        }
         $trainers = Trainer::all();
         return view("dashboard.courses.create", compact('program', 'categories', 'clients', 'trainers'));
     }
@@ -144,7 +149,7 @@ class CourseController extends Controller
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
         $course->name = $request->course_name;
-         $course->seat_count = $request->seat_count;
+        $course->seat_count = $request->seat_count;
         $coruseStart = Carbon::parse($request->coruse_start)->format('y-m-d');
         $course->start = $coruseStart;
         $course->is_exam = $request->is_exam;

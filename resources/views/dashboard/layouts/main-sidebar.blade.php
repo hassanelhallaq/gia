@@ -9,7 +9,13 @@
         <div class="h-100 flex-column  d-inline-flex justify-content-between">
             <ul class="side-menu pos-absolutee top-0 start-0">
                 <li class="slide">
+                    @if(Auth::guard('admin')->check())
+
                     <a class="side-menu__item" href="{{route('admin.dashboard')}}"><i class="icon ion-ios-home tx-22"></i><span class="side-menu__label mr-3"> الرئيسية </span><i class=""></i></a>
+                    @elseif (Auth::guard('client')->check())
+                    <a class="side-menu__item" href="{{route('client.dashboard')}}"><i class="icon ion-ios-home tx-22"></i><span class="side-menu__label mr-3"> الرئيسية </span><i class=""></i></a>
+
+                    @endif
                 </li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="#"><i class="typcn typcn-folder tx-22"></i><span class="side-menu__label mr-3">ادارة البرامج</span><i class="angle fe fe-chevron-down"></i></a>

@@ -94,7 +94,11 @@ class ProgramController extends Controller
         $program->register = $request->register;
         $program->show_invited = $request->show_invited;
         $program->color = $request->color;
+        if(Auth::guard('admin')->check()){
         $program->client_id = $request->client_id;
+        }else if(Auth::guard('client')->check()){
+        $program->client_id = Auth::user()->id;
+        }
         $program->attendance_method = $request->attendance_method;
         if ($request->hasFile('image')) {
             $adminImage = $request->file('image');
