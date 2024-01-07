@@ -37,34 +37,34 @@ Route::prefix('dashboard')->middleware('guest:admin,client')->group(function () 
 Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
     function () {
         Route::get('logout', [App\Http\Controllers\UserAuthController::class, 'logout'])->name('dashboard.auth.logout');
-        Route::get('/', [PagesController::class , 'index'])->name('admin.dashboard');
+        Route::get('/', [PagesController::class, 'index'])->name('admin.dashboard');
         Route::resource('programs', ProgramController::class);
-        Route::get('/programs-grid', [ProgramController::class , 'gridView'])->name('programs.grid');
+        Route::get('/programs-grid', [ProgramController::class, 'gridView'])->name('programs.grid');
         Route::resource('categories', CategoryController::class);
-        Route::get('/get-cities/{id}', [CityController::class , 'getCities']);
+        Route::get('/get-cities/{id}', [CityController::class, 'getCities']);
         Route::resource('clients', ClientController::class);
         Route::resource('courses', CourseController::class);
-        Route::get('/program.courses/{id}', [CourseController::class , 'programCourses'])->name('program.course');
-        Route::get('/courses.attendances/{id}', [AttendanceCourseController::class , 'coursesAttendance'])->name('course.attendance');
+        Route::get('/program.courses/{id}', [CourseController::class, 'programCourses'])->name('program.course');
+        Route::get('/courses.attendances/{id}', [AttendanceCourseController::class, 'coursesAttendance'])->name('course.attendance');
         Route::resource('attendance', AttendanceController::class);
         Route::resource('questions', QuestionController::class);
         Route::resource('admins', AdminController::class);
-        Route::get('/quiz.questions/{id}', [QuizController::class , 'question'])->name('quiz.questions');
+        Route::get('/quiz.questions/{id}', [QuizController::class, 'question'])->name('quiz.questions');
         Route::resource('quizes', QuizController::class);
-        Route::get('/get-courses/{id}', [CourseController::class , 'getCoureses']);
-        Route::get('/program.courses/{id}/create', [CourseController::class , 'createCourse'])->name('program.course.create');
+        Route::get('/get-courses/{id}', [CourseController::class, 'getCoureses']);
+        Route::get('/program.courses/{id}/create', [CourseController::class, 'createCourse'])->name('program.course.create');
         Route::resource('trainers', TrainerController::class);
-});
-Route::get('/invitation/{id}/{course_id}', [SiteController::class , 'index'])->name('invitation.index');
-Route::get('/accept/{id}/{course_id}', [SiteController::class , 'second'])->name('invitation.second');
-Route::get('/third/{id}/{course_id}', [SiteController::class , 'third'])->name('invitation.third');
+    }
+);
+Route::get('/invitation/{id}/{course_id}', [SiteController::class, 'index'])->name('invitation.index');
+Route::get('/accept/{id}/{course_id}', [SiteController::class, 'second'])->name('invitation.second');
+Route::get('/third/{id}/{course_id}', [SiteController::class, 'third'])->name('invitation.third');
 
-Route::post('/invitation/reply', [SiteController::class , 'storeReply']);
+Route::post('/invitation/reply', [SiteController::class, 'storeReply']);
 Route::prefix('/{username}')->group(
     function () {
-        Route::get('/home', [LandingPageController::class , 'home'])->name('home');
-        Route::get('/time-line', [LandingPageController::class , 'timeLine'])->name('timeLine');
-        Route::get('/get-events', [LandingPageController::class , 'getEvent'])->name('get.events');
-
-
-    });
+        Route::get('/home', [LandingPageController::class, 'home'])->name('home');
+        Route::get('/time-line', [LandingPageController::class, 'timeLine'])->name('timeLine');
+        Route::get('/get-events', [LandingPageController::class, 'getEvent'])->name('get.events');
+    }
+);

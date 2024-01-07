@@ -15,7 +15,7 @@
             </div>
             <div class="main-dashboard-header-right">
                 <div class=" d-flex">
-                    <a href="Program_management/create_programme.html"
+                    <a href="{{route('programs.create')}}"
                         class="btn btn-warning-gradient btn-with-icon mr-1"> انشاء برنامج <i
                             class="bi bi-plus"></i></a>
                     <button class="btn btn-warning-gradient btn-with-icon mr-1"data-target="#modaladd"

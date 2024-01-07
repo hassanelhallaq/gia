@@ -9,6 +9,7 @@ use App\Models\Program;
 use App\Models\Trainer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -20,6 +21,13 @@ class CourseController extends Controller
         $program = null;
         $id = null;
         $courses = Course::paginate(10);
+        if(Auth::guard('admin')->check()){
+            $courses = Course::orderBy("created_at", "desc")->paginate(10);
+         }elseif(Auth::guard('client')->check()){
+            $courses = Course::with('program')->whereHas('program',function($q){
+                $q->where('client_id',Auth::user()->id);
+            })->orderBy("created_at", "desc")->paginate(10);
+        }
         return view("dashboard.courses.index", compact("courses", 'program', 'id'));
     }
     public function programCourses($id)

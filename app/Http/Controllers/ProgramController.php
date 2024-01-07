@@ -18,7 +18,11 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $programs = Program::orderBy("id", "desc")->withCount('courses')->paginate(10);
+        if(Auth::guard('admin')->check()){
+            $programs = Program::orderBy("id", "desc")->withCount('courses')->paginate(10);
+        }elseif(Auth::guard('client')->check()){
+            $programs = Program::where('client_id',Auth::user()->id)->orderBy("id", "desc")->withCount('courses')->paginate(10);
+        }
         return view("dashboard.programs.index", compact("programs"));
     }
 
