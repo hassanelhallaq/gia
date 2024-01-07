@@ -116,8 +116,10 @@ class TrainerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Trainer $trainer)
+    public function destroy( $id)
     {
-        //
+        $tra = Trainer::destroy($id);
+        return response()->json(['icon' => 'success' , 'title' => 'تم الحذف  بنجاح'] , $tra ? 200 : 400);
+
     }
 }

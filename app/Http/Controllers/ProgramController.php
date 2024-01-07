@@ -217,9 +217,11 @@ class ProgramController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Program $program)
+    public function destroy( $id)
     {
-        //
+        $prog = Program::destroy($id);
+        return response()->json(['icon' => 'success' , 'title' => 'تم الحذف  بنجاح'] , $prog ? 200 : 400);
+
     }
 
     public function gridView(Request $request)

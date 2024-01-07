@@ -146,7 +146,7 @@ overflow-x: hidden;
                                                     class="si si-options-vertical text-gray tx-12"></i></button>
                                             <div class="dropdown-menu">
                                                 <a href="{{route('courses.edit',[$item->id])}}" class="dropdown-item"> تحرير </a>
-                                                <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
+                                                <button  class="dropdown-item"  onclick="performDestroy({{ $item->id }} , this)" > حذف </button>
                                             </div>
                                         </td>
                                     </tr>
@@ -184,5 +184,14 @@ overflow-x: hidden;
 @section('js')
 <script src="{{asset('assets/js/xlsx.full.min.js')}}"></script>
 <script src="{{asset('assets/js/table.js')}}"></script>
+
+<script>
+    function performDestroy(id, reference) {
+
+        let url = '/dashboard/admin/courses/' + id;
+
+        confirmDestroy(url, reference);
+    }
+</script>
 
 @endsection

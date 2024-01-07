@@ -157,9 +157,8 @@
                                                         <a href="#" class="dropdown-item"
                                                             data-target="#modaledit_{{ $item->id }}"
                                                             data-toggle="modal"> تحرير </a>
-                                                        <a href="#"
-                                                            class="dropdown-item text-danger"data-target="#modalDelete"
-                                                            data-toggle="modal"> حذف </a>
+                                                            <button  class="dropdown-item"  onclick="performDestroy({{ $item->id }} , this)" > حذف </button>
+
                                                     </div>
                                                 </td>
                                             </tr>
@@ -505,4 +504,13 @@
             storepart('/dashboard/admin/attendance/' + id, formData)
         }
     </script>
+
+<script>
+    function performDestroy(id, reference) {
+
+        let url = '/dashboard/admin/attendance/' + id;
+
+        confirmDestroy(url, reference);
+    }
+</script>
 @endsection

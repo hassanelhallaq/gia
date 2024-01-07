@@ -293,15 +293,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($programsActice->take(3) as $itam)
+                                                @foreach ($programsActice->take(3) as $item)
 
 
                                                 <tr>
-                                                    <td scope="row">برنامج {{$itam->name}}</td>
-                                                    <td>{{$itam->courses_count}}</td>
-                                                    <td>{{$itam->client->name}}</td>
-                                                    <td>{{$itam->start}}</td>
-                                                    <td>{{$itam->end}}</td>
+                                                    <td scope="row">برنامج {{$item->name}}</td>
+                                                    <td>{{$item->courses_count}}</td>
+                                                    <td>{{$item->client->name}}</td>
+                                                    <td>{{$item->start}}</td>
+                                                    <td>{{$item->end}}</td>
                                                     <td><span class="tag tag-rounded bg-success-transparent text-success">
                                                             فعال </span></td>
                                                     <td><i class="mdi mdi-dots-horizontal text-gray"></i></td>

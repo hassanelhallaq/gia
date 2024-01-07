@@ -125,7 +125,7 @@
                                     <button data-toggle="dropdown" class="btn btn-previous btn-sm"><i class="si si-options-vertical text-gray tx-12"></i></button>
                                     <div class="dropdown-menu">
                                         <a href="#" class="dropdown-item" data-target="#modaledit_{{$item->id}}" data-toggle="modal"> تحرير </a>
-                                        <a href="#" class="dropdown-item text-danger"data-target="#modalDelete" data-toggle="modal"> حذف  مدرب</a>
+                                        <button  class="dropdown-item"data-target="#modalDelete" onclick="performDestroy({{ $item->id }} , this)" > حذف </button>
                                     </div>
                                 </td>
                             </tr>
@@ -305,4 +305,14 @@
         storepart('/dashboard/admin/trainers/'+id, formData)
 }
     </script>
+
+<script>
+    function performDestroy(id, reference) {
+
+        let url = '/dashboard/admin/trainers/' + id;
+
+        confirmDestroy(url, reference);
+    }
+</script>
+
 @endsection

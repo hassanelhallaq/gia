@@ -86,8 +86,10 @@ class QuizController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Quiz $quiz)
+    public function destroy( $id)
     {
-        //
+        $qu = Quiz::destroy($id);
+        return response()->json(['icon' => 'success' , 'title' => 'تم الحذف  بنجاح'] , $qu ? 200 : 400);
+
     }
 }

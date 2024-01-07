@@ -113,3 +113,13 @@
 
     </div>
 @endsection
+@section('js')
+<script>
+    function performDestroy(id, reference) {
+
+        let url = '/dashboard/admin/client/' + id;
+
+        confirmDestroy(url, reference);
+    }
+</script>
+@endsection

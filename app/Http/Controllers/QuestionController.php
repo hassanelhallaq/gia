@@ -119,8 +119,10 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Question $question)
+    public function destroy( $id)
     {
-        //
+        $q = Question::destroy($id);
+        return response()->json(['icon' => 'success' , 'title' => 'تم الحذف  بنجاح'] , $q ? 200 : 400);
+
     }
 }

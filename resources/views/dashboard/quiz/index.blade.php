@@ -234,7 +234,7 @@
                                                 <div class="dropdown-menu">
                                                     <a href="#" class="dropdown-item" data-target="#modaledit" data-toggle="modal"> تحرير </a>
                                                     <a href="questions_and_tests_management.html" class="dropdown-item" > عرض </a>
-                                                    <a href="#" class="dropdown-item text-danger"data-target="#modalDelete" data-toggle="modal"> حذف </a>
+                                                    <button  class="dropdown-item"data-target="#modalDelete" onclick="performDestroy({{ $item->id }} , this)" > حذف </button>
                                                 </div>
                                             </td>
 
@@ -358,4 +358,16 @@
         });
     });
 </script>
-@endsection
+
+
+
+<script>
+    function performDestroy(id, reference) {
+
+        let url = '/dashboard/admin/quizes/' + id;
+
+        confirmDestroy(url, reference);
+    }
+</script>
+
+ @endsection

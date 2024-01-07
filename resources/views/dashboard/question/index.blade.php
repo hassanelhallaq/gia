@@ -35,7 +35,7 @@
                      <span class="right-pan"><i class="bi bi-sliders"></i></span>
                  </div>
 
-                 
+
 
                  <button class="btn btn-danger btn-sm btn-with-icon mr-1 text-white btnSelectDelete"data-target="#modalDelete" data-toggle="modal" style="display: none;">حذف الصفوف المختارة <i class="bi bi-trash tx-12"></i></button>
 
@@ -106,7 +106,7 @@
                                     <div class="dropdown-menu">
                                         <a href="" class="dropdown-item"> تحرير </a>
                                         <a href="" class="dropdown-item"> عرض </a>
-                                        <a href="" class="dropdown-item text-danger"data-target="#modalDelete" data-toggle="modal"> حذف </a>
+                                        <button  class="dropdown-item"data-target="#modalDelete" onclick="performDestroy({{ $item->id }} , this)" > حذف </button>
                                     </div>
                                 </td>
                             </tr>
@@ -140,4 +140,17 @@
      </div>
      <!--closed filter bottom  -->
 </div>
+@endsection
+@section('js')
+
+
+<script>
+    function performDestroy(id, reference) {
+
+        let url = '/dashboard/admin/questions/' + id;
+
+        confirmDestroy(url, reference);
+    }
+</script>
+
 @endsection

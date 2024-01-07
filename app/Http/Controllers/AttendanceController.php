@@ -87,8 +87,10 @@ class AttendanceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Attendance $attendance)
+    public function destroy( $id)
     {
-        //
+        $attendance = Attendance::destroy($id);
+        return response()->json(['icon' => 'success' , 'title' => 'تم الحذف  بنجاح'] , $attendance ? 200 : 400);
+
     }
 }

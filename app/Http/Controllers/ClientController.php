@@ -91,8 +91,10 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Client $client)
+    public function destroy( $id)
     {
-        //
+        $client = Client::destroy($id);
+        return response()->json(['icon' => 'success' , 'title' => 'تم الحذف  بنجاح'] , $client ? 200 : 400);
+
     }
 }

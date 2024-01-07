@@ -147,7 +147,7 @@
                                                         <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i class="si si-options-vertical text-gray tx-13" ></i></button>
                                                         <div class="dropdown-menu">
                                                             <a href="{{route('programs.edit',[$item->id])}}" class="dropdown-item"> تحرير </a>
-                                                            <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
+                                                            <button  class="dropdown-item"data-target="#modalDelete" onclick="performDestroy({{ $item->id }} , this)" > حذف </button>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -183,5 +183,18 @@
 
 
 
+
+@endsection
+@section('js')
+
+
+<script>
+    function performDestroy(id, reference) {
+
+        let url = '/dashboard/admin/programs/' + id;
+
+        confirmDestroy(url, reference);
+    }
+</script>
 
 @endsection
