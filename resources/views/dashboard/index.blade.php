@@ -208,7 +208,7 @@
                     </div>
                 </div>
                 <div class="col-xl-5 col-sm-12 " style="height: 100% !important;">
-                    <div class="card">
+                    <div class="card pb-5">
                         <div class="card-header pb-0">
                             <div class="d-flex justify-content-between mb-3">
                                 <div class="main-content-label mg-b-2">
@@ -668,3 +668,11 @@
          <!-- container closed -->
 
 @endsection
+@section('js')
+{{-- chartjs --}}
+<script src="{{ asset('assets/js/apexcharts.js') }}"></script>
+<script src="{{ URL::asset('assets/js/chart.chartjs.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/chart.js/Chart.bundle.min.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+@endsection
+

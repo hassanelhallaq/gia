@@ -4,7 +4,7 @@
 Project        :  Mohammed - HTML5 Bootstrap Admin Template
 Version        :   V.1
 Create Date    :   09/05/20
-Copyright      :   Mohammed Technologies Private Limited 
+Copyright      :   Mohammed Technologies Private Limited
 Author         :   MohammedSoft
 Author URL     :   https://themeforest.net/user/Mohammedsoft
 Support	       :   support@Mohammed.com
@@ -4422,7 +4422,7 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
     color: #737f9e;
     opacity: 1; }
   .form-control:disabled, .form-control[readonly] {
-  
+
     opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -6908,7 +6908,7 @@ textarea.form-control.is-invalid, textarea.form-control.parsley-error {
     text-align: center;
     display: block;
     color: #14112d; }
-    
+
   .tabs-style-3 .tabs-menu-body {
     margin-top: 20px; }
   .tabs-style-3 .nav.panel-tabs li a.active {
@@ -21540,7 +21540,7 @@ object, embed, video {
     padding-right: 31px; }
 
 .app-sidebar .slide.active .side-menu__item {
-  background: transparent; 
+  background: transparent;
 }
 
 .app-sidebar__user .user-pro-body {
@@ -52590,18 +52590,18 @@ flex-wrap: wrap; } }
     margin: auto;
       /* padding: 20px; */
     flex-wrap: wrap; }
-   
+
    }
    @media (max-width: 658px) {
     .signup{
     width: 100% !important;
-      
+
     ; } }
 
     @media (max-width: 600px) {
       .signup{
       width: 100% !important;
-        
+
       ; } }
 
 
@@ -52609,19 +52609,19 @@ flex-wrap: wrap; } }
   .canvas{
     padding-left: 30% ;
     padding-bottom: 60% !important;
-    
+
   ; } }
 
   @media (max-width: 331px) {
     .canvas{
       padding-left: 80px !important;
       padding-bottom: 60% !important;
-      
+
     ; } }
-  
+
   canvas{width: 100% !important;
     height: 100% !important;
-    
+
   }
 
   a{color:#000000c2;}
@@ -52634,7 +52634,7 @@ flex-wrap: wrap; } }
     fill: #000 !important;
 } */
 .item:hover, .slide-item:focus {
-  
+
   color: #e4611d !important;
 }
 .item:hover, .slide-item.active ,.slide-item:hover {  color: #e4611d !important;}
@@ -52647,25 +52647,25 @@ flex-wrap: wrap; } }
 
 
 @media (max-width: 424px) {
-  
-       
-  
+
+
+
 }
 
 @media (max-width: 920px) {
-  
+
 }
 
 @media (max-width: 2000px) {
   .w-lg-40{width:40% ;}
-  
+
 }
 
 @media (max-width: 992px) {
   .w-lg-40{width:100% ;}
-  
+
 }
-  
+
 .row-sm > div {
   padding-left: 5px !important;
   padding-right: 5px !important;
@@ -52686,7 +52686,7 @@ flex-wrap: wrap; } }
     }
    }
 
-  
+
 
   .widget-user-header {
     background-color: #e9f3e9;
@@ -52745,11 +52745,11 @@ fieldset {
   border: 0 !important;}
 
 
-  
+
   .page{min-height: auto !important;}
 
   /* input searsh */
-  
+
 .form{
 
   position: relative;
@@ -52778,7 +52778,7 @@ fieldset {
   height: 40px;
   text-indent: 33px;
   border-radius: 10px;
-  } 
+  }
   .select2-no-search{
     border-radius: 0px !important;
     border: 0px !important;
@@ -52787,15 +52787,15 @@ fieldset {
 
 
   .pageSignup{
-   
-     
+
+
    margin: auto;
       align-items: center;
       flex-direction: column;
       /* justify-content: flex-start; */
       position: relative;
       direction: rtl;
-  
+
   }
 
 
@@ -52803,12 +52803,14 @@ fieldset {
 
 
 
-.input_no_border {
-  border-style: none;
-  background: transparent;
-  outline: none;
-  
-}
+
+
+  .input_no_border {
+    border-style: none !important;
+    background: transparent !important;
+    outline: none !important;
+
+  }
 
 /* button {
   padding: 0;
@@ -52955,10 +52957,10 @@ a.demo {
 @media (min-width: 768px){
 .app .sidenav-toggled .side-menu__item {
     display: flex !important;
-   
+
 }}
 
-/* 
+/*
 
 .dropdown:hover>.dropdown-menu {
   display: block;
@@ -53059,65 +53061,65 @@ a.demo {
   :root {
     /*Background color when it's turned off*/
     --vc-off-color: #d1d3d4;
-  
+
     /*Background color when it's turned on*/
     --vc-on-color: #38cf5b;
-    
+
     /*Animation speed and type*/
     --vc-animation-speed: 0.15s ease-out;
-  
+
     /*Font used by the text*/
     --vc-font-family: Arial;
-  
+
     /*The size used*/
     --vc-font-size: 11px;
-  
+
     /*The font weight*/
     --vc-font-weight: 300;
-    
+
     /*Font color when the switch is on*/
     --vc-on-font-color: white;
-  
+
     /*Font color when the switch is off*/
     --vc-off-font-color: white;
-  
+
     /*How far the OFF text is from the right side*/
     --vc-label-position-off: 12px;
-  
+
     /*How far the ON text is from the left side*/
     --vc-label-position-on: 11px;
-  
+
     /*Small switch width*/
     --vc-width: 50px;
-  
+
     /*Small switch height*/
     --vc-height: 25px;
-  
+
     /*Border radius for the handle*/
     --vc-handle-border-radius: 20px;
-  
+
     /*Border radius for the box*/
     --vc-box-border-radius: 18px;
-  
+
     /*Shadow for the handle*/
     --vc-handle-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-    
+
     /*Handle color*/
     --vc-handle-color: white;
-  
+
     /*Handle width*/
     --vc-handle-width: 15px;
-  
+
     /*Handle height*/
     --vc-handle-height: 15px;
-  
+
     /*The handle's width while the toggle is clicked*/
     --vc-onclick-width: 30px;
-  
+
     /*Handle's distance from the top*/
     --vc-handle-top: 5px;
   }
-  
+
   .vc-toggle-container * {
     font-family: var(--vc-font-family);
     -webkit-transition: var(--vc-animation-speed);
@@ -53125,12 +53127,12 @@ a.demo {
     -o-transition: var(--vc-animation-speed);
     transition: var(--vc-animation-speed);
   }
-  
+
   .vc-switch {
     width: var(--vc-width);
     height: var(--vc-height);
   }
-  
+
   .vc-toggle-container label {
     position: relative;
     display: inline-block;
@@ -53138,13 +53140,13 @@ a.demo {
     border-radius: var(--vc-box-border-radius);
     cursor: pointer;
   }
-  
+
   .vc-switch-input {
     display: none;
     position: absolute;
     transform: translate3d(5px, 5px, 0);
   }
-  
+
   .vc-switch-label {
     position: relative;
     display: block;
@@ -53154,7 +53156,7 @@ a.demo {
     background: var(--vc-off-color);
     border-radius: inherit;
   }
-  
+
   .vc-switch-label:before,
   .vc-switch-label:after {
     position: absolute;
@@ -53162,38 +53164,38 @@ a.demo {
     margin-top: -0.5em;
     line-height: 1.1;
   }
-  
+
   .vc-switch-label:before {
     content: attr(data-off);
     color: var(--vc-on-font-color);
   }
-  
+
   .vc-switch-label:after {
     content: attr(data-on);
     color: var(--vc-off-font-color);
     opacity: 0;
   }
-  
+
   .vc-switch-label:before {
     right: var(--vc-label-position-off);;
   }
-  
+
   .vc-switch-label:after {
     left: var(--vc-label-position-on);;
   }
-  
+
   .vc-switch-input:checked ~ .vc-switch-label {
     background: var(--vc-on-color);
   }
-  
+
   .vc-switch-input:checked ~ .vc-switch-label:before {
     opacity: 0;
   }
-  
+
   .vc-switch-input:checked ~ .vc-switch-label:after {
     opacity: 1;
   }
-  
+
   .vc-handle {
     position: absolute !important;
     top: var(--vc-handle-top);
@@ -53202,12 +53204,12 @@ a.demo {
     border-radius: var(--vc-handle-border-radius);
     box-shadow: var(--vc-handle-shadow);
   }
-  
+
   .vc-handle {
     width: var(--vc-handle-width);
     height: var(--vc-handle-height);
   }
-  
+
   .vc-handle:before {
     content: "";
     top: 50%;
@@ -53218,11 +53220,11 @@ a.demo {
     height: 12px;
     border-radius: 6px;
   }
-  
+
   .vc-switch-label:active ~ .vc-handle, .vc-handle:active {
     width: var(--vc-onclick-width);
   }
-  
+
   .vc-switch-input:checked ~ .vc-handle {
     left: unset;
     right: 5px;

@@ -41,7 +41,7 @@
                                 <label for="example"> أسم الدورة </label>
                                 <div class="webflow-style-input">
                                     <input class="input_no_border readonly" type="text" id="name"
-                                        value="{{ $course->name }}" readonly>
+                                        value="{{ $course->name }}" readonly></input>
                                     <div class="d-flex ml-2">
                                         <p class="ml-3"> تحرير </p>
                                         <i class="bi bi-pen edit-button"></i>
@@ -52,7 +52,7 @@
                                 <label for="example"> المقاعد </label>
                                 <div class="webflow-style-input">
                                     <input class="input_no_border readonly" type="text" id="seat_count"
-                                        value="{{ $course->seat_count }}" id="seat_count" readonly>
+                                        value="{{ $course->seat_count }}" id="seat_count" readonly></input>
                                     <div class="d-flex ml-2">
                                         <p class="ml-3"> تحرير </p>
                                         <i class="bi bi-pen edit-button"></i>
@@ -67,7 +67,7 @@
                             <div class="col-lg-6">
                                 <label for="example"> الفئة </label>
                                 <div class="webflow-style-input">
-                                    <select id="category_id" class="form-control select2 input_no_border custom-select" disabled>
+                                    <select id="category_id" class="form-control select2">
                                         @foreach ($categories as $item)
                                             <option value="{{ $item->id }}">
                                                 {{ $item->name }}
@@ -76,15 +76,14 @@
                                     </select>
                                     <div class="d-flex ml-2">
                                         <p class="ml-3"> تحرير </p>
-                                        <i class="bi bi-pen edit-buttonSelect"></i>
+                                        <i class="bi bi-pen edit-button"></i>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-lg-6">
                                 <label for="example"> هل يوجد إختبار </label>
                                 <div class="webflow-style-input">
-                                    <select class="form-control select2 input_no_border custom-select" id="is_exam" disabled>
+                                    <select class="form-control select2" id="is_exam">
                                         <option value="1">
                                             نعم
                                         </option>
@@ -94,7 +93,7 @@
                                     </select>
                                     <div class="d-flex ml-2">
                                         <p class="ml-3"> تحرير </p>
-                                        <i class="bi bi-pen edit-buttonSelect"></i>
+                                        <i class="bi bi-pen edit-button"></i>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +106,7 @@
                                 <label for="example"> يبدأ في </label>
                                 <div class="webflow-style-input">
                                     <input class="input_no_border readonly" id="start" type="text"
-                                        value="{{ $course->start }}" id="start" readonly>
+                                        value="{{ $course->start }}" id="start" readonly></input>
                                     <div class="d-flex ml-2">
                                         <p class="ml-3"> تحرير </p>
                                         <i class="bi bi-pen edit-button"></i>
@@ -118,7 +117,7 @@
                             <div class="col-lg-6 mb-3">
                                 <label for="example"> هل يوجد شهادة </label>
                                 <div class="webflow-style-input">
-                                    <select class="form-control select2 input_no_border custom-select" id="is_certificate" disabled>
+                                    <select class="form-control select2" id="is_certificate">
                                         <option value="1">
                                             نعم
                                         </option>
@@ -128,25 +127,24 @@
                                     </select>
                                     <div class="d-flex ml-2">
                                         <p class="ml-3"> تحرير </p>
-                                        <i class="bi bi-pen edit-buttonSelect"></i>
+                                        <i class="bi bi-pen edit-button"></i>
                                     </div>
                                 </div>
                             </div>
 
-
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-lg-6">
                                 <label for="example"> أسم المدرب </label>
                                 <div class="webflow-style-input">
-                                    <select id="trainer" class="form-control select2 input_no_border custom-select" disabled>
+                                    <select id="trainer" class="form-control select2">
                                         @foreach ($trainers as $item)
                                             <option value="{{ $item->id }}">
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    <div class="d-flex ml-2 mb-0">
+                                    <div class="d-flex ml-2">
                                         <p class="ml-3"> تحرير </p>
-                                        <i class="bi bi-pen edit-buttonSelect"></i>
+                                        <i class="bi bi-pen edit-button"></i>
                                     </div>
                                 </div>
 
@@ -157,7 +155,7 @@
                                 <div class="webflow-style-input">
                                     <input class="input_no_border readonly" id="percentage_certificate" type="text"
                                         value="{{ $course->percentage_certificate }}" id="percentage_certificate"
-                                        readonly>
+                                        readonly></input>
                                     <div class="d-flex ml-2">
                                         <p class="ml-3"> تحرير </p>
                                         <i class="bi bi-pen edit-button"></i>
@@ -168,7 +166,7 @@
                                 <label for="example"> أسم المنسق </label>
                                 <div class="webflow-style-input">
                                     <input class="input_no_border readonly" id="coordinator" type="text"
-                                        value="{{ $course->coordinator }}" value="another value" readonly>
+                                        value="{{ $course->coordinator }}" value="another value" readonly></input>
                                     <div class="d-flex ml-2">
                                         <p class="ml-3"> تحرير </p>
                                         <i class="bi bi-pen edit-button"></i>
@@ -180,7 +178,7 @@
                                 <label for="example"> الاختبار القبلي </label>
                                 <div class="webflow-style-input">
                                     <input class="input_no_border readonly" type="text" value="another value"
-                                        readonly>
+                                        readonly></input>
                                     <div class="d-flex ml-2">
                                         <p class="ml-1"> تحرير </p>
                                         <i class="bi bi-pen edit-button ml-2"></i>
@@ -194,7 +192,7 @@
                                 <label for="example"> المستوى </label>
                                 <div class="webflow-style-input">
                                     <input class="input_no_border readonly" id="level" type="text"
-                                        value="{{ $course->level }}" value="another value" readonly>
+                                        value="{{ $course->level }}" value="another value" readonly></input>
                                     <div class="d-flex ml-2">
                                         <p class="ml-3"> تحرير </p>
                                         <i class="bi bi-pen edit-button"></i>
@@ -206,9 +204,9 @@
                                 <label for="example"> الأختبار البعدي </label>
                                 <div class="webflow-style-input">
                                     <input class="input_no_border readonly" type="text" value="another value"
-                                        readonly>
+                                        readonly></input>
                                     <input class="input_no_border readonly" type="text" value="another value"
-                                        readonly>
+                                        readonly></input>
                                     <div class="d-flex ml-2">
                                         <p class="ml-1"> تحرير </p>
                                         <i class="bi bi-pen edit-button ml-2"></i>
@@ -223,7 +221,7 @@
                                 <div class="webflow-style-input">
                                     <input class="input_no_border readonly" id="language" type="text"
                                         value="{{ $course->language == 'arabic' ? 'عربي' : 'انجليزي' }}"
-                                        value="another value" readonly>
+                                        value="another value" readonly></input>
                                     <div class="d-flex ml-2">
                                         <p class="ml-3"> تحرير </p>
                                         <i class="bi bi-pen edit-button"></i>
@@ -235,7 +233,7 @@
                                 <label for="example"> المادة </label>
                                 <div class="webflow-style-input">
                                     <input class="input_no_border readonly" id="subject" type="text"
-                                        value="{{ $course->subject }}" value="another value" readonly>
+                                        value="{{ $course->subject }}" value="another value" readonly></input>
                                     <div class="d-flex ml-2">
                                         <p class="ml-3"> تحميل المادة </p>
                                         <i class="bi bi-box-arrow-in-down"></i>

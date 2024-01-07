@@ -8,7 +8,7 @@
 /* .side-menu__item.active .side-menu__label {
   background-color: #E4611D !important;
 } */
-.side-menu__item{margin: 8px 20px 10px 20px !important; border-radius: 8px !important;padding: 20px 9px !important;}
+.side-menu__item{margin: 8px 20px 0px 20px !important; border-radius: 8px !important;padding: 20px 9px !important;}
 .side-menu__label:hover{color: #000 !important;}
 .side-menu__item .side-menu__label:hover{color: #000 !important;}
 .slide .side-menu__item.active {
