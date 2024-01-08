@@ -190,4 +190,14 @@ class CourseController extends Controller
         $courses = Course::where('program_id', $id)->get();
         return response()->json($courses);
     }
+
+    public function duplicate($id)
+    {
+        $courses = Course::find($id);
+        $newCourses= $courses->replicate();
+        $newCourses->created_at = Carbon::now();
+        $save = $newCourses->save();
+        return response()->json(['icon' => 'success' , 'title' => 'تم الحفط  بنجاح'] , $save ? 200 : 400);
+
+    }
 }

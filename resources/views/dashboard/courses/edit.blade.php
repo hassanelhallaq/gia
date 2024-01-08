@@ -277,8 +277,8 @@
                                 <button class="btn btn-warning-gradient btn-with-icon btn-sm" type="button"
                                     onclick="performUpdate({{ $course->id }})"> حفظ الاعدادات <i
                                         class="bi bi-floppy"></i></button>
-                                <a class="btn btn-outline-light btn-with-icon btn-sm mr-1 " id="copyButton"> استنساخ
-                                    البرنامج <i class="far fa-clone"></i></a>
+                                <button onclick="duplicate({{ $course->id }})" type="button" class="btn btn-outline-light btn-with-icon btn-sm mr-1 " id="copyButton"> استنساخ
+                                    البرنامج <i class="far fa-clone"></i></button>
                             </div>
                             <a class="btn btn-danger btn-with-icon btn-sm "> حذف الدورة <i class="bi bi-trash3"></i></a>
                         </div>
@@ -331,6 +331,10 @@
             storeRoute('/dashboard/admin/courses/' + id, formData)
 
 
+        }
+        function duplicate(id) {
+            let formData = new FormData();
+            storeRoute('/dashboard/admin/duplicate/' + id, formData)
         }
     </script>
     <script src="{{ asset('assets/plugins/select_mul/js/semantic.min.js') }}"></script>

@@ -47,6 +47,8 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/courses.attendances/{id}', [AttendanceCourseController::class, 'coursesAttendance'])->name('course.attendance');
         Route::get('/quiz.questions/{id}', [QuizController::class, 'question'])->name('quiz.questions');
         Route::resource('quizes', QuizController::class);
+        Route::get('/duplicate/{id}', [CourseController::class, 'question'])->name('duplicate.courses');
+
 
     }
 );
@@ -65,6 +67,8 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::resource('attendance', AttendanceController::class);
         Route::resource('admins', AdminController::class);
         Route::resource('trainers', TrainerController::class);
+
+
     }
 );
 Route::get('/invitation/{id}/{course_id}', [SiteController::class, 'index'])->name('invitation.index');
