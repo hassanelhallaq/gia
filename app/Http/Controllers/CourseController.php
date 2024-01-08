@@ -126,9 +126,9 @@ class CourseController extends Controller
         $clients = Client::all();
         $program = Program::all();
         $trainers = Trainer::all();
-        $quizesBefor = Quiz::orderBy("created_at", "desc")->where('type','befor')->paginate(10);
-        $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type','after')->paginate(10);
-        return view("dashboard.courses.edit", compact("course", 'program', 'categories', 'clients', 'trainers','quizesBefor','quizesAfter'));
+        $quizesBefor = Quiz::orderBy("created_at", "desc")->where('type', 'befor')->paginate(10);
+        $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type', 'after')->paginate(10);
+        return view("dashboard.courses.edit", compact("course", 'program', 'categories', 'clients', 'trainers', 'quizesBefor', 'quizesAfter'));
     }
 
     /**
@@ -176,13 +176,27 @@ class CourseController extends Controller
             $course->subject = '/images/' . 'program' . '/' . $imageName;
         }
         $course->update();
-        $quizBef = new QuizCourse();
-        $quizBef->quiz_id =$request->quiz_befor_id;
-        $quizBef->course_id =$course->id;
+        $id = $course->id;
+        // $quizesBefor = Quiz::orderBy("created_at", "desc")->where('type','befor')->with('courses')
+        // ->whereHas('courses',function($q)use($id){
+        //     $q->where('course_id',$id);
+        // })->paginate(10);
+        $quizbefCheck = QuizCourse::where('quiz_id', $request->quiz_befor_id)->where('course_id', $course->id)->first();
+        if($quizbefCheck){
+            $quizBef =$quizbefCheck;
+        }else{
+            $quizBef = new QuizCourse();
+        }
+        $quizBef->quiz_id = $request->quiz_befor_id;
+        $quizBef->course_id = $course->id;
         $quizBef->save();
-        $quizAft = new QuizCourse();
-        $quizAft->course_id =$course->id;
-        $quizAft->quiz_id =$request->quiz_after_id;
+        if($quizbefCheck){
+            $quizAft =$quizbefCheck;
+        }else{
+            $quizAft = new QuizCourse();
+        }
+        $quizAft->course_id = $course->id;
+        $quizAft->quiz_id = $request->quiz_after_id;
         $quizAft->save();
 
         return response()->json(['redirect' => route('program.course', [$course->program_id])]);
@@ -191,11 +205,10 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
         $course = Course::destroy($id);
-        return response()->json(['icon' => 'success' , 'title' => 'تم الحذف  بنجاح'] , $course ? 200 : 400);
-
+        return response()->json(['icon' => 'success', 'title' => 'تم الحذف  بنجاح'], $course ? 200 : 400);
     }
 
     public function getCoureses($id)
@@ -207,10 +220,9 @@ class CourseController extends Controller
     public function duplicate($id)
     {
         $courses = Course::find($id);
-        $newCourses= $courses->replicate();
+        $newCourses = $courses->replicate();
         $newCourses->created_at = Carbon::now();
         $save = $newCourses->save();
-        return response()->json(['icon' => 'success' , 'title' => 'تم الحفط  بنجاح'] , $save ? 200 : 400);
-
+        return response()->json(['icon' => 'success', 'title' => 'تم الحفط  بنجاح'], $save ? 200 : 400);
     }
 }

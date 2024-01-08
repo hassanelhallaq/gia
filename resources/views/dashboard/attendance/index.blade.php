@@ -90,6 +90,7 @@
                                             <th>جهة العمل</th>
                                             <th> رقم الهاتف </th>
                                             <th> الرقم الوظيفي </th>
+                                            <th> قبول الدعوه </th>
                                             <th> المهنة </th>
                                             <th> الاختبارات </th>
                                             <th> الاكتمال </th>
@@ -133,6 +134,7 @@
                                                 <td>{{ $item->work_place }} </td>
                                                 <td class="client-name"> {{ $item->phone_number }} </td>
                                                 <td>{{ $item->id_number }} </td>
+                                                <td>{{ $item->is_accepted == 1 ? "تم القبول" : "تم الرفض" }} </td>
                                                 <td>{{ $item->job }} </td>
                                                 <td class="d-flex">
                                                     <span class="ml-3 examBefor" data-bs-toggle="offcanvas"

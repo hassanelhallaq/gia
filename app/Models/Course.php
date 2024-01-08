@@ -49,6 +49,6 @@ class Course extends Model
     }
     public function quizes()
     {
-        return $this->belongsToMany(QuizCourse::class);
+        return $this->belongsToMany(Quiz::class,QuizCourse::class);
     }
 }
