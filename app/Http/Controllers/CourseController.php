@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\Client;
 use App\Models\Course;
 use App\Models\Program;
+use App\Models\Quiz;
+use App\Models\QuizCourse;
 use App\Models\Trainer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -124,7 +126,9 @@ class CourseController extends Controller
         $clients = Client::all();
         $program = Program::all();
         $trainers = Trainer::all();
-        return view("dashboard.courses.edit", compact("course", 'program', 'categories', 'clients', 'trainers'));
+        $quizesBefor = Quiz::orderBy("created_at", "desc")->where('type','befor')->paginate(10);
+        $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type','after')->paginate(10);
+        return view("dashboard.courses.edit", compact("course", 'program', 'categories', 'clients', 'trainers','quizesBefor','quizesAfter'));
     }
 
     /**
@@ -172,6 +176,15 @@ class CourseController extends Controller
             $course->subject = '/images/' . 'program' . '/' . $imageName;
         }
         $course->update();
+        $quizBef = new QuizCourse();
+        $quizBef->quiz_id =$request->quiz_befor_id;
+        $quizBef->course_id =$course->id;
+        $quizBef->save();
+        $quizAft = new QuizCourse();
+        $quizAft->course_id =$course->id;
+        $quizAft->quiz_id =$request->quiz_after_id;
+        $quizAft->save();
+
         return response()->json(['redirect' => route('program.course', [$course->program_id])]);
     }
 

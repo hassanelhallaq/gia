@@ -179,8 +179,20 @@
                             <div class="col-lg-6 mb-3">
                                 <label for="example"> الاختبار القبلي </label>
                                 <div class="webflow-style-input">
-                                    <input class="input_no_border readonly" type="text" value="another value"
-                                        readonly>
+                                    <select id="quiz_befor_id" class="form-control select2 input_no_border custom-select" disabled>
+                                        @php
+                                            $quizBef =$course->quiz->where('type','befor')->first();
+                                        @endphp
+                                        @foreach ($quizesBefor as $item)
+                                            <option @foreach ($course->quizes->where('type','befor') as $quiz)
+
+                                            @if ($item->id == $quiz->id) selected @endforeach
+                                            @endif value="{{ $item->id }}">
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
                                     <div class="d-flex ml-2">
                                         <p class="ml-1"> تحرير </p>
                                         <i class="bi bi-pen edit-button ml-2"></i>
@@ -205,10 +217,19 @@
                             <div class="col-lg-6 mb-3">
                                 <label for="example"> الأختبار البعدي </label>
                                 <div class="webflow-style-input">
-                                    <input class="input_no_border readonly" type="text" value="another value"
-                                        readonly>
-                                    <input class="input_no_border readonly" type="text" value="another value"
-                                        readonly>
+                                    <select id="quiz_after_id" class="form-control select2 input_no_border custom-select" disabled>
+                                        @php
+                                            $quizAft =$course->quiz->where('type','after')->first();
+                                        @endphp
+                                          @foreach ($quizesBefor as $item)
+                                          <option @foreach ($course->quizes->where('type','after') as $quiz)
+
+                                          @if ($item->id == $quiz->id) selected @endforeach
+                                          @endif value="{{ $item->id }}">
+                                              {{ $item->name }}
+                                          </option>
+                                      @endforeach
+                                    </select>
                                     <div class="d-flex ml-2">
                                         <p class="ml-1"> تحرير </p>
                                         <i class="bi bi-pen edit-button ml-2"></i>
@@ -306,6 +327,11 @@
             formData.append('coordinator', document.getElementById('coordinator').value);
             formData.append('category_id', document.getElementById('category_id').value);
             formData.append('level', document.getElementById('level').value);
+            formData.append('quiz_befor_id', document.getElementById('quiz_befor_id').value);
+            formData.append('quiz_after_id', document.getElementById('quiz_after_id').value);
+
+
+
             let assignmentInput = document.getElementById('assignment');
 
 
