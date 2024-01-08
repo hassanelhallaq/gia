@@ -4,7 +4,7 @@
         <div class="wrap">
             <div class="vedio_container">
                 <div class="vedio">
-                    <img src="{{ asset($course->program->image) }}" alt="" />
+                    <img src="{{ asset($course->image) }}" alt="" />
                 </div>
                 <div class="vedio_discription">
                     <div class="title">
