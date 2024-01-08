@@ -108,7 +108,7 @@ class CourseController extends Controller
             $adminImage = $request->file('image_course');
             $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
             $adminImage->move('images/program', $imageName);
-            $course->image = '/images/' . 'program' . '/' . $imageName;
+            $course->profile = '/images/' . 'program' . '/' . $imageName;
         }
         $course->save();
         return response()->json(['redirect' => route('program.course', [$request->program_id])]);
@@ -185,7 +185,7 @@ class CourseController extends Controller
             $adminImage = $request->file('image_course');
             $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
             $adminImage->move('images/program', $imageName);
-            $course->image = '/images/' . 'program' . '/' . $imageName;
+            $course->profile = '/images/' . 'program' . '/' . $imageName;
         }
         $course->update();
         $id = $course->id;

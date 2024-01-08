@@ -135,7 +135,7 @@ class ProgramController extends Controller
                 $adminImage = $request->file('image_course');
                 $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
                 $adminImage->move('images/program', $imageName);
-                $course->image = '/images/' . 'program' . '/' . $imageName;
+                $course->profile = '/images/' . 'program' . '/' . $imageName;
             }
             $course->save();
         }
