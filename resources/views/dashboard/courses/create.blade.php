@@ -138,6 +138,13 @@
                                 <label for="example"> اسم المنسق </label>
                                 <input class="form-control" required="" id="coordinator" type="text">
                             </div>
+                            <div class="col-lg-3 mb-3">
+                                <label for="exampleInputEmail1">  صوره </label>
+                                <div class="custom-file">
+                                    <input class="custom-file-input" id="image_course" type="file">
+                                    <label class="custom-file-label" for="customFile">Drop files here⇬</label>
+                                </div>
+                            </div>
                             <div class="col-lg-6">
                                 <label for="example"> شروط اضافية </label>
                                 <div class="row">
@@ -202,6 +209,7 @@
             formData.append('image_check', document.getElementById('image_check').checked);
              formData.append('attendance_questionnaire', document.getElementById('attendance_questionnaire').checked);
              formData.append('program_id', document.getElementById('program_id').value);
+             formData.append('image_course', document.getElementById('image_course').files[0]);
 
 
             storeRoute('/dashboard/admin/courses', formData)

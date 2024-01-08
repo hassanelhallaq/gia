@@ -283,8 +283,16 @@
 
                                         </div>
                                     </div>
-                                </div>
 
+
+                                </div>
+                                <div class="col-lg-3 mb-3">
+                                    <label for="exampleInputEmail1">  صوره </label>
+                                    <div class="custom-file">
+                                        <input class="custom-file-input" id="image_course" type="file">
+                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
+                                    </div>
+                                </div>
 
                             </div>
                             <!-- closed row -->
@@ -325,6 +333,7 @@
                 formData.append('level', document.getElementById('level').value);
                 formData.append('quiz_befor_id', document.getElementById('quiz_befor_id').value);
                 formData.append('quiz_after_id', document.getElementById('quiz_after_id').value);
+                formData.append('image_course', document.getElementById('image_course').files[0]);
 
 
 

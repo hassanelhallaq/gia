@@ -104,6 +104,12 @@ class CourseController extends Controller
         $course->image = $request->image_check == true ? 1 : 0;
         $course->program_id = $request->program_id;
         $course->category_id = $request->category_id;
+        if ($request->hasFile('image_course')) {
+            $adminImage = $request->file('image_course');
+            $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
+            $adminImage->move('images/program', $imageName);
+            $course->image = '/images/' . 'program' . '/' . $imageName;
+        }
         $course->save();
         return response()->json(['redirect' => route('program.course', [$request->program_id])]);
     }
@@ -174,6 +180,12 @@ class CourseController extends Controller
             $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
             $adminImage->move('images/program', $imageName);
             $course->subject = '/images/' . 'program' . '/' . $imageName;
+        }
+        if ($request->hasFile('image_course')) {
+            $adminImage = $request->file('image_course');
+            $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
+            $adminImage->move('images/program', $imageName);
+            $course->image = '/images/' . 'program' . '/' . $imageName;
         }
         $course->update();
         $id = $course->id;

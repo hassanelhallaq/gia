@@ -396,6 +396,13 @@
                                             <label class="ckbox"><input id="study" type="checkbox"><span> دراسة
                                                 </span></label>
                                         </div>
+                                        <div class="col-lg-3 mb-3">
+                                            <label for="exampleInputEmail1">  صوره </label>
+                                            <div class="custom-file">
+                                                <input class="custom-file-input" id="image_course" type="file">
+                                                <label class="custom-file-label" for="customFile">Drop files here⇬</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -460,6 +467,9 @@
             formData.append('category_id', document.getElementById('category_id').value);
             formData.append('image_check', document.getElementById('image_check').checked);
             formData.append('client_id', document.getElementById('client_id').value);
+            formData.append('image_course', document.getElementById('image_course').files[0]);
+
+
             formData.append('attendance_questionnaire', document.getElementById('attendance_questionnaire').checked);
             storeRoute('/dashboard/admin/programs', formData)
 

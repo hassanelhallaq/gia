@@ -131,6 +131,12 @@ class ProgramController extends Controller
             $course->image = $request->image_check == true ? 1 : 0;
             $course->program_id = $program->id;
             $course->category_id = $request->category_id;
+            if ($request->hasFile('image_course')) {
+                $adminImage = $request->file('image_course');
+                $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
+                $adminImage->move('images/program', $imageName);
+                $course->image = '/images/' . 'program' . '/' . $imageName;
+            }
             $course->save();
         }
         return response()->json(['redirect' => route('programs.grid')]);
