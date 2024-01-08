@@ -30,7 +30,7 @@
     <div class="wrap">
       <div class="btn_primery">
         <button    onclick="togglePopup()"
-            type="button"        class="df ai-c jc-c g1" data-translate="signup">
+            type="button" class="df ai-c jc-c g1" data-translate="signup">
 
           <i class="fa fa-qrcode" style="font-size:24px;color:white;"></i>
           تسجيل الدخول
@@ -43,7 +43,7 @@
     <div class="wrap">
       <div class="qr_container df f-c  ai-c g1">
         <span class="close" onclick="togglePopup()">&times;</span>
-          <img src="assets/logo.png" alt="">
+          <img src="{{asset('site/assets/logo.png')}}" alt="">
           <img src="{{asset($attendance->qr)}}" alt="">
           <p  data-translate="qr_text">برجاء عرض رمز الدخول السريع للمنسق حتى يتم تسجيل القبول بالدورة </p>
           <div class="btn_links">

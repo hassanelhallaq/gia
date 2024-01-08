@@ -44,13 +44,15 @@ class AttendanceController extends Controller
         }
 
         $attendance = Attendance::create($data);
-        $qrImage = 'images' .  $attendance->id . '.svg';
-        $url =  'https://giaelites.com/dashboard/admin/' . $attendance->id .'/login';
-        QrCode::format('svg');
-        QrCode::generate($url, $qrImage);
-        $attendance->qr = $qrImage;
-        $attendance->update();
+
         if ($request->course_id) {
+
+            $qrImage = 'images' .  $attendance->id . '.svg';
+            $url =  'https://giaelites.com/dashboard/admin/' . $attendance->id .'/'.$request->course_id.'/login';
+            QrCode::format('svg');
+            QrCode::generate($url, $qrImage);
+            $attendance->qr = $qrImage;
+            $attendance->update();
             $attendance->courses()->attach($request->course_id);
         }
         return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $attendance ? 201 : 400);
@@ -99,6 +101,5 @@ class AttendanceController extends Controller
     {
         $attendance = Attendance::destroy($id);
         return response()->json(['icon' => 'success' , 'title' => 'تم الحذف  بنجاح'] , $attendance ? 200 : 400);
-
     }
 }

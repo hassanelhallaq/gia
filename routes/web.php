@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceCourseController;
+use App\Http\Controllers\AttendanceLoginController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
@@ -48,8 +49,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/quiz.questions/{id}', [QuizController::class, 'question'])->name('quiz.questions');
         Route::resource('quizes', QuizController::class);
         Route::get('/duplicate/{id}', [CourseController::class, 'question'])->name('duplicate.courses');
-
-
+        Route::get('/{id}/{course_id}/login', [AttendanceLoginController::class, 'login'])->name('attendance.login');
     }
 );
 Route::prefix('dashboard/client')->middleware('auth:client')->group(
