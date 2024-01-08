@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AttendanceController extends Controller
 {
@@ -41,7 +42,14 @@ class AttendanceController extends Controller
         if ($validator->fails()) {
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
+
         $attendance = Attendance::create($data);
+        $qrImage = 'images' .  $attendance->id . '.svg';
+        $url =  'https://giaelites.com/dashboard/admin/' . $attendance->id .'/login';
+        QrCode::format('svg');
+        QrCode::generate($url, $qrImage);
+        $attendance->qr = $qrImage;
+        $attendance->update();
         if ($request->course_id) {
             $attendance->courses()->attach($request->course_id);
         }

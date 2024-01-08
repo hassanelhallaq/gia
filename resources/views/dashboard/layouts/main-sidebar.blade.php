@@ -43,7 +43,7 @@
                     </ul>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item" href="members.html"><i class="typcn typcn-group-outline tx-22"></i><span class="side-menu__label mr-3">ادارة المشتركين</span><i class=""></i></a>
+                    <a class="side-menu__item" href="{{route('attendance.index')}}"><i class="typcn typcn-group-outline tx-22"></i><span class="side-menu__label mr-3">ادارة المشتركين</span><i class=""></i></a>
 
                 </li>
                 <li class="slide">
