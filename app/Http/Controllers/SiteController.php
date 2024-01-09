@@ -6,6 +6,7 @@ use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Question;
 use App\Models\Quiz;
+use App\Models\QuizCourse;
 use App\Models\UserAnswer;
 use Illuminate\Http\Request;
 
@@ -57,7 +58,7 @@ class SiteController extends Controller
         $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
-        $quiz = Quiz::where('course_id',$course_id)->first();
+        $quiz = QuizCourse::where('course_id',$course_id)->first();
         return view("invitation.third", compact("attendance", "course",'quiz'));
     }
     public function quizView($id,$clientId){
