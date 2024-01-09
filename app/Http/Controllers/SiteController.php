@@ -6,6 +6,7 @@ use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Question;
 use App\Models\Quiz;
+use App\Models\UserAnswer;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -61,5 +62,25 @@ class SiteController extends Controller
 
     public function quizView($id){
         return view('invitation.quiz');
+    }
+
+    public function saveAnswer(Request $request)
+    {
+        // Validate the incoming request data (you can customize this based on your needs)
+        $request->validate([
+            'question_id' => 'required|integer',
+            'user_id' => 'required|integer',
+            'chosen_option' => 'required|string',
+        ]);
+
+        // Save the user's chosen answer to the database
+        $userAnswer = new UserAnswer();
+        $userAnswer->question_id = $request->input('question_id');
+        $userAnswer->option_id = $request->input('chosen_option');
+        $userAnswer->question_id = $request->input('question_id');
+
+       
+
+        return response()->json(['message' => 'Answer saved successfully']);
     }
 }

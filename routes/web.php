@@ -87,3 +87,4 @@ Route::prefix('/{username}')->group(
 );
 Route::get('/quiz/index/{quizId}', [SiteController::class, 'quiz'])->name('quiz.questions.index');
 Route::get('/quiz/questions/{quizId}', [SiteController::class, 'quizView']);
+Route::get('/quiz/save-answer', [SiteController::class, 'quizView']);
