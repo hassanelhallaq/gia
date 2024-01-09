@@ -29,7 +29,7 @@
             </div>
           </div>
           <div class="menu_icon">
-            <img src="{{asset('site/assets/icons8-hamburger-menu-50.png')}}" alt="" />
+           <a href="{{route('invitation.third',[$attendance->id,request()->course_id])}}"> <img src="{{asset('site/assets/icons8-hamburger-menu-50.png')}}" alt="" /></a>
           </div>
         </div>
       </div>
