@@ -58,4 +58,8 @@ class SiteController extends Controller
 
         return response()->json(['questions' => $questions]);
     }
+
+    public function quizView($id){
+        return view('invitation.quiz');
+    }
 }

@@ -69,11 +69,14 @@ next_btn.onclick = ()=>{
 }
 document.addEventListener("DOMContentLoaded", function () {
     // Extract quiz ID from the URL (you can use any method to get the ID)
-    const urlParams = new URLSearchParams(window.location.search);
-    const quizId = urlParams.get('quizId');
-    
+    const currentPath = window.location.pathname;
+
+    // Extract quiz ID from the URL path
+    const pathSegments = currentPath.split('/');
+    const quizId = pathSegments[pathSegments.length - 1];
+
     // Fetch quiz data from Laravel backend with the quiz ID
-    fetch(`/quiz/questions/${quizId}`)
+    fetch(`/quiz/index/${quizId}`)
         .then(response => response.json())
         .then(data => {
             // Process the retrieved data
@@ -87,36 +90,26 @@ document.addEventListener("DOMContentLoaded", function () {
 // Other quiz-related JavaScript code...
 
 // getting questions and options from array
-function showQuetions(index) {
+function showQuestions(index) {
     const que_text = document.querySelector(".que_text");
+    const option_list = document.querySelector(".option_list");
 
-    // Check if the question is a fill-in-the-blank question
-    if (!questions[index].options || questions[index].options.length === 0) {
-        // Fill-in-the-blank question
-        let que_tag = '<span>' + questions[index].numb + '. ' + questions[index].question + '</span>';
-        que_text.innerHTML = que_tag; // adding new span tag inside que_tag
-        option_list.innerHTML = ''; // Clear options
+    let que_tag = '<span>' + questions[index].name + '</span>';
+    que_text.innerHTML = que_tag;
 
-        // Creating input for user to fill in the blank
-        let input_tag = '<input type="text" class="inputanswer" placeholder="Your Answer">';
-        // option_list.innerHTML = input_tag; // Add input element
-    } else {
-        // Multiple-choice question
-        let que_tag = '<span>' + questions[index].numb + '. ' + questions[index].question + '</span>';
-        let option_tag = '<div class="option"><span>' + questions[index].options[0] + '</span></div>' +
-            '<div class="option"><span>' + questions[index].options[1] + '</span></div>' +
-            '<div class="option"><span>' + questions[index].options[2] + '</span></div>' +
-            '<div class="option"><span>' + questions[index].options[3] + '</span></div>';
-        que_text.innerHTML = que_tag; // adding new span tag inside que_tag
-        option_list.innerHTML = option_tag; // adding new div tag inside option_tag
+    let option_tag = '';
+    questions[index].options.forEach(option => {
+        option_tag += '<div class="option" data-is-correct="' + option.is_correct + '"><span>' + option.answer + '</span></div>';
+    });
 
-        const option = option_list.querySelectorAll(".option");
+    option_list.innerHTML = option_tag;
 
-        // set onclick attribute to all available options
-        for (i = 0; i < option.length; i++) {
-            option[i].setAttribute("onclick", "optionSelected(this)");
-        }
-    }
+    const options = option_list.querySelectorAll(".option");
+    options.forEach(option => {
+        option.addEventListener("click", function () {
+            optionSelected(this);
+        });
+    });
 }
 
 // creating the new div tags which for icons

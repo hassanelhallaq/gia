@@ -67,8 +67,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::resource('attendance', AttendanceController::class);
         Route::resource('admins', AdminController::class);
         Route::resource('trainers', TrainerController::class);
-        // Route::get('/quiz', [SiteController::class, 'quiz'])->name('quiz');
-        Route::get('/quiz/questions/{quizId}', [SiteController::class, 'quiz']);
+
 
 
     }
@@ -86,3 +85,5 @@ Route::prefix('/{username}')->group(
         Route::get('/get-events', [LandingPageController::class, 'getEvent'])->name('get.events');
     }
 );
+Route::get('/quiz/index/{quizId}', [SiteController::class, 'quiz'])->name('quiz.questions.index');
+Route::get('/quiz/questions/{quizId}', [SiteController::class, 'quizView']);
