@@ -8,7 +8,7 @@
         </div>
         <div class="vedio_discription">
           <div class="title">
-            <h3>{{ $course->program->name }}</h3>
+            <h3>{{ $course->name }}</h3>
           </div>
           <span class="accepted" data-translate="accepted"> تم القبول </span>
           <div class="disc">
