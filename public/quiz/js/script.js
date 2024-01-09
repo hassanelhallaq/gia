@@ -69,14 +69,15 @@ next_btn.onclick = ()=>{
 }
 document.addEventListener("DOMContentLoaded", function () {
     // Extract quiz ID from the URL (you can use any method to get the ID)
-    const currentPath = window.location.pathname;
 
     // Extract quiz ID from the URL path
+    const currentPath = window.location.pathname;
     const pathSegments = currentPath.split('/');
-    const quizId = pathSegments[pathSegments.length - 1];
+    const quizId = pathSegments[pathSegments.length - 2]; // Assuming quizId is the second-to-last segment
+    const clientId = pathSegments[pathSegments.length - 1];
 
     // Fetch quiz data from Laravel backend with the quiz ID
-    fetch(`/quiz/index/${quizId}`)
+    fetch(`/quiz/index/${quizId}/${clientId}`)
         .then(response => response.json())
         .then(data => {
             // Process the retrieved data
@@ -99,7 +100,7 @@ function showQuestions(index) {
 
     let option_tag = '';
     questions[index].options.forEach(option => {
-        option_tag += '<div class="option" data-is-correct="' + option.is_correct + '"><span>' + option.answer + '</span></div>';
+        option_tag += '<div class="option" data-is-correct="' + option.is_correct + '" data-option-id="' + option.id + '"><span>' + option.answer + '</span></div>';
     });
 
     option_list.innerHTML = option_tag;
@@ -124,6 +125,7 @@ function optionSelected(answer) {
     let userAns = answer.textContent; //getting user selected option
     let isCorrect = answer.getAttribute("data-is-correct") === "1"; //check if the selected option is correct
     const allOptions = option_list.children.length; //getting all option items
+    let chosenOptionId = answer.getAttribute("data-option-id");
 
     if (isCorrect) {
         userScore += 1; //upgrading score value with 1
@@ -148,17 +150,23 @@ function optionSelected(answer) {
     for (i = 0; i < allOptions; i++) {
         option_list.children[i].classList.add("disabled"); //once user selects an option, disable all options
     }
-
+    const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
     next_btn.classList.add("show");
+    const currentPath = window.location.pathname;
+    const pathSegments = currentPath.split('/');
+    const quizId = pathSegments[pathSegments.length - 2]; // Assuming quizId is the second-to-last segment
+    const clientId = pathSegments[pathSegments.length - 1];
     fetch('/quiz/save-answer', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken, // Include the CSRF token in the headers
+
         },
         body: JSON.stringify({
             question_id: questions[que_count].id, // Assuming you have an 'id' property in your question object
-            user_id: 1, // Replace with the actual user ID (you can get it from your authentication system)
-            chosen_option: userAns,
+            user_id: clientId, // Replace with the actual user ID (you can get it from your authentication system)
+            chosen_option: chosenOptionId,
         }),
     })
     .then(response => response.json())

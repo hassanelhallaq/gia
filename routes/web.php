@@ -85,6 +85,7 @@ Route::prefix('/{username}')->group(
         Route::get('/get-events', [LandingPageController::class, 'getEvent'])->name('get.events');
     }
 );
-Route::get('/quiz/index/{quizId}', [SiteController::class, 'quiz'])->name('quiz.questions.index');
-Route::get('/quiz/questions/{quizId}', [SiteController::class, 'quizView']);
+Route::get('/quiz/index/{quizId}/{clientId}', [SiteController::class, 'quiz'])->name('quiz.questions.index');
+Route::get('/quiz/questions/{quizId}/{clientId}', [SiteController::class, 'quizView'])->name('quiz.view');
 Route::get('/quiz/save-answer', [SiteController::class, 'quizView']);
+Route::post('/quiz/save-answer', [SiteController::class, 'saveAnswer']);

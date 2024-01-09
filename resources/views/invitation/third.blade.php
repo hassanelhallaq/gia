@@ -9,10 +9,11 @@
               <p>الاختبار القبلى</p>
             </div>
             <div class="card_text">
-              <span  data-translate="submit">تم التقديم </span>
+              <a href="{{route('quiz.view',['quizId'=>$quiz->id,'clientId'=>$attendance->id])}}"  data-translate="submit">تم التقديم </a>
             </div>
           </div>
-          <div class="card_icon">&#10140;</div>
+          <div class="card_icon"><a href="{{route('quiz.view',['quizId'=>$quiz->id,'clientId'=>$attendance->id])}}"  data-translate="submit">&#10140;  </a>
+         </div>
         </div>
 
         <div class="card">

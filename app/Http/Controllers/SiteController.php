@@ -44,23 +44,23 @@ class SiteController extends Controller
         return view("invitation.second", compact("attendance", "course"));
     }
 
-    public function third($id, $course_id)
-    {
 
-          $course = Course::findOrFail($course_id);
-        $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
-            $q->where('course_id', $course_id);
-        })->first();
-        return view("invitation.third", compact("attendance", "course"));
-    }
 
-    public function quiz($id){
+    public function quiz($id,$clientId){
         $questions = Question::with('options')->where('quiz_id', 9)->get();
 
         return response()->json(['questions' => $questions]);
     }
-
-    public function quizView($id){
+    public function third($id, $course_id)
+    {
+        $course = Course::findOrFail($course_id);
+        $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
+            $q->where('course_id', $course_id);
+        })->first();
+        $quiz = Quiz::where('course_id',$course_id)->first();
+        return view("invitation.third", compact("attendance", "course",'quiz'));
+    }
+    public function quizView($id,$clientId){
         return view('invitation.quiz');
     }
 
@@ -72,15 +72,14 @@ class SiteController extends Controller
             'user_id' => 'required|integer',
             'chosen_option' => 'required|string',
         ]);
-
         // Save the user's chosen answer to the database
+        $question = Question::find($request->input('question_id'));
         $userAnswer = new UserAnswer();
         $userAnswer->question_id = $request->input('question_id');
         $userAnswer->option_id = $request->input('chosen_option');
-        $userAnswer->question_id = $request->input('question_id');
-
-       
-
+        $userAnswer->quiz_id = $question->quiz_id;
+        $userAnswer->attendance_id = $request->user_id;
+        $userAnswer->save();
         return response()->json(['message' => 'Answer saved successfully']);
     }
 }
