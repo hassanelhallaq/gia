@@ -67,6 +67,8 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::resource('attendance', AttendanceController::class);
         Route::resource('admins', AdminController::class);
         Route::resource('trainers', TrainerController::class);
+        // Route::get('/quiz', [SiteController::class, 'quiz'])->name('quiz');
+        Route::get('/quiz/questions/{quizId}', [SiteController::class, 'quiz']);
 
 
     }
@@ -74,6 +76,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
 Route::get('/invitation/{id}/{course_id}', [SiteController::class, 'index'])->name('invitation.index');
 Route::get('/accept/{id}/{course_id}', [SiteController::class, 'second'])->name('invitation.second');
 Route::get('/third/{id}/{course_id}', [SiteController::class, 'third'])->name('invitation.third');
+
 
 Route::post('/invitation/reply', [SiteController::class, 'storeReply']);
 Route::prefix('/{username}')->group(

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use App\Models\Course;
+use App\Models\Question;
+use App\Models\Quiz;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
@@ -49,5 +51,11 @@ class SiteController extends Controller
             $q->where('course_id', $course_id);
         })->first();
         return view("invitation.third", compact("attendance", "course"));
+    }
+
+    public function quiz($id){
+        $questions = Question::with('options')->where('quiz_id', 9)->get();
+
+        return response()->json(['questions' => $questions]);
     }
 }
