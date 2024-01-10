@@ -57,7 +57,16 @@ class SiteController extends Controller
         $quiz = QuizCourse::where('course_id',$course_id)->first();
         return view("invitation.third", compact("attendance", "course",'quiz'));
     }
-
+    public function backInvetaion($id, $auizId)
+    {
+        $course = QuizCourse::where('quiz_id',$auizId)->first();
+        $course_id = $course->id;
+        $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
+            $q->where('course_id', $course_id);
+        })->first();
+        $quiz = QuizCourse::where('course_id',$course_id)->first();
+        return view("invitation.third", compact("attendance", "course",'quiz'));
+    }
      public function quiz($id,$clientId){
         $questions = Question::with('options')->where('quiz_id',$id)->get();
         return response()->json(['questions' => $questions]);

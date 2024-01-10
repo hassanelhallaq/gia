@@ -42,6 +42,13 @@ const quit_quiz = result_box.querySelector(".buttons .quit");
 
 // if quitQuiz button clicked
 quit_quiz.onclick = ()=>{
+    const currentPath = window.location.pathname;
+    const pathSegments = currentPath.split('/');
+    const quizId = pathSegments[pathSegments.length - 2]; // Assuming quizId is the second-to-last segment
+    const clientId = pathSegments[pathSegments.length - 1];
+    let redirectUrl = '{{route("invitation.back",["id"=> '+clientId+',"quiz_id"=>'+quizId+'])}}'
+    window.location.href = redirectUrl;
+
     window.location.reload(); //reload the current window
 }
 

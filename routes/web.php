@@ -75,6 +75,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
 Route::get('/invitation/{id}/{course_id}', [SiteController::class, 'index'])->name('invitation.index');
 Route::get('/accept/{id}/{course_id}', [SiteController::class, 'second'])->name('invitation.second');
 Route::get('/third/{id}/{course_id}', [SiteController::class, 'third'])->name('invitation.third');
+Route::get('/back/{id}/{quiz_id}', [SiteController::class, 'backInvetaion'])->name('invitation.back');
 
 
 Route::post('/invitation/reply', [SiteController::class, 'storeReply']);
