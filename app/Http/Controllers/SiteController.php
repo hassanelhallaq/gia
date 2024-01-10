@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\AttendanceCourse;
 use App\Models\Course;
 use App\Models\Question;
 use App\Models\Quiz;
@@ -23,7 +24,7 @@ class SiteController extends Controller
             return view("invitation.index", compact("attendance", "course"));
         } elseif ($attendance->is_accepted == 1) {
             return view("invitation.second", compact("attendance", "course"));
-        }else{
+        } else {
             return view("invitation.index", compact("attendance", "course"));
         }
     }
@@ -55,26 +56,36 @@ class SiteController extends Controller
         $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
-        $quiz = QuizCourse::where('course_id',$course_id)->first();
-        $quizAtten = QuizAttendance::where('quiz_id',$quiz->quiz_id)->first();
-        return view("invitation.third", compact("attendance", "course",'quiz','quizAtten'));
+        $quiz = QuizCourse::where('course_id', $course_id)->first();
+        $quizAtten = QuizAttendance::where('quiz_id', $quiz->quiz_id)->first();
+        return view("invitation.third", compact("attendance", "course", 'quiz', 'quizAtten'));
     }
     public function backInvetaion($id, $auizId)
     {
-        $course = QuizCourse::where('quiz_id',$auizId)->first();
-        $course_id = $course->id;
-        $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
+        $courses = AttendanceCourse::where('attendance_id', $id)->first();
+        $course_id = $courses->course_id;
+        $course = Course::find($course_id);
+          $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
-        $quiz = QuizCourse::where('course_id',$course_id)->first();
-        return view("invitation.third", compact("attendance", "course",'quiz'));
+        $quiz = QuizCourse::where('quiz_id', $auizId)->first();
+        $quizAtten = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $id)->first();
+        return redirect()->route('invitation.third',['id'=>$id,'course_id'=>$course_id]);
+        // return view("invitation.third", compact("attendance", "course", 'quiz','quizAtten'));
     }
-     public function quiz($id,$clientId){
-        $questions = Question::with('options')->where('quiz_id',$id)->get();
+    public function quiz($id, $clientId)
+    {
+        $questions = Question::with('options')->where('quiz_id', $id)->get();
         return response()->json(['questions' => $questions]);
     }
-    public function quizView($id,$clientId){
-        return view('invitation.quiz');
+    public function quizView($id, $clientId)
+    {
+        $quizAtend = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $clientId)->first();
+        // if ($quizAtend == null) {
+            return view('invitation.quiz');
+        // } else {
+        //     return redirect()->back();
+        // }
     }
 
     public function saveAnswer(Request $request)
@@ -87,9 +98,9 @@ class SiteController extends Controller
         ]);
         // Save the user's chosen answer to the database
         $question = Question::find($request->input('question_id'));
-        $quzAtte= QuizAttendance::where('attendance_id',$request->user_id)->where('quiz_id', $question->quiz_id)->first();
-        if($quzAtte == null){
-        $quzAtte = new QuizAttendance();
+        $quzAtte = QuizAttendance::where('attendance_id', $request->user_id)->where('quiz_id', $question->quiz_id)->first();
+        if ($quzAtte == null) {
+            $quzAtte = new QuizAttendance();
         }
         $quzAtte->quiz_id = $question->quiz_id;
         $quzAtte->attendance_id = $request->user_id;
