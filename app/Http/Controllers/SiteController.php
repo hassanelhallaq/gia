@@ -6,6 +6,7 @@ use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Question;
 use App\Models\Quiz;
+use App\Models\QuizAttendance;
 use App\Models\QuizCourse;
 use App\Models\UserAnswer;
 use Illuminate\Http\Request;
@@ -55,7 +56,8 @@ class SiteController extends Controller
             $q->where('course_id', $course_id);
         })->first();
         $quiz = QuizCourse::where('course_id',$course_id)->first();
-        return view("invitation.third", compact("attendance", "course",'quiz'));
+        $quizAtten = QuizAttendance::where('quiz_id',$quiz->quiz_id)->first();
+        return view("invitation.third", compact("attendance", "course",'quiz','quizAtten'));
     }
     public function backInvetaion($id, $auizId)
     {
@@ -85,6 +87,13 @@ class SiteController extends Controller
         ]);
         // Save the user's chosen answer to the database
         $question = Question::find($request->input('question_id'));
+        $quzAtte= QuizAttendance::where('attendance_id',$request->user_id)->where('quiz_id', $question->quiz_id)->first();
+        if($quzAtte == null){
+        $quzAtte = new QuizAttendance();
+        }
+        $quzAtte->quiz_id = $question->quiz_id;
+        $quzAtte->attendance_id = $request->user_id;
+        $quzAtte->save();
         $userAnswer = new UserAnswer();
         $userAnswer->question_id = $request->input('question_id');
         $userAnswer->question_option_id = $request->input('chosen_option');
