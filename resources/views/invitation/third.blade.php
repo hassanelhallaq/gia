@@ -57,8 +57,8 @@
         </div>
       </div>
       <div class="btn_links">
-        <button  data-translate="show_results">عرض النتائج</button>
-        <button  data-translate="contact_coach">التواصل مع المدرب</button>
+        <a  data-translate="show_results" href="#"><i class="bi bi-arrow-right tx-white"></i> الرجوع الى الرئيسية </a>
+        <button class="btn_primery"  data-translate="contact_coach" disabled><i class="bi bi-star tx-white"></i> تقييم المدرب </button>
       </div>
     </div>
   </section>
