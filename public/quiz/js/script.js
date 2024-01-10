@@ -53,7 +53,7 @@ next_btn.onclick = ()=>{
     if(que_count < questions.length - 1){ //if question count is less than total question length
         que_count++; //increment the que_count value
         que_numb++; //increment the que_numb value
-        showQuetions(que_count); //calling showQestions function
+        showQuestions(que_count); //calling showQestions function
         queCounter(que_numb); //passing que_numb value to queCounter
         clearInterval(counter); //clear counter
         clearInterval(counterLine); //clear counterLine
@@ -93,14 +93,13 @@ document.addEventListener("DOMContentLoaded", function () {
 // getting questions and options from array
 function showQuestions(index) {
     const que_text = document.querySelector(".que_text");
-    const option_list = document.querySelector(".option_list");
 
     let que_tag = '<span>' + questions[index].name + '</span>';
     que_text.innerHTML = que_tag;
 
     let option_tag = '';
     questions[index].options.forEach(option => {
-        option_tag += '<div class="option" data-is-correct="' + option.is_correct + '" data-option-id="' + option.id + '"><span>' + option.answer + '</span></div>';
+        option_tag += '<div class="option" data-is-correct="' + option.is_corect + '" data-option-id="' + option.id + '"><span>' + option.answer + '</span></div>';
     });
 
     option_list.innerHTML = option_tag;
@@ -112,6 +111,18 @@ function showQuestions(index) {
         });
     });
 }
+next_btn.addEventListener("click", function () {
+    que_count++;
+    if (que_count < questions.length) {
+        showQuestions(que_count);
+        next_btn.classList.remove("show");
+        // You may want to reset any styles or icons applied to the options in the previous question
+    } else {
+        // Handle the end of the quiz (no more questions)
+        console.log("End of quiz");
+        // You can redirect, show a summary, etc.
+    }
+});
 
 // creating the new div tags which for icons
 let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
@@ -126,6 +137,8 @@ function optionSelected(answer) {
     let isCorrect = answer.getAttribute("data-is-correct") === "1"; //check if the selected option is correct
     const allOptions = option_list.children.length; //getting all option items
     let chosenOptionId = answer.getAttribute("data-option-id");
+
+    console.log(isCorrect);
 
     if (isCorrect) {
         userScore += 1; //upgrading score value with 1
@@ -172,6 +185,8 @@ function optionSelected(answer) {
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.error('Error saving answer:', error));
+    next_btn.classList.add("show");
+
 }
 
 

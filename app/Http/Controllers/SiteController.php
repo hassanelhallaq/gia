@@ -47,11 +47,7 @@ class SiteController extends Controller
 
 
 
-    public function quiz($id,$clientId){
-        $questions = Question::with('options')->where('quiz_id', 9)->get();
 
-        return response()->json(['questions' => $questions]);
-    }
     public function third($id, $course_id)
     {
         $course = Course::findOrFail($course_id);
@@ -60,6 +56,11 @@ class SiteController extends Controller
         })->first();
         $quiz = QuizCourse::where('course_id',$course_id)->first();
         return view("invitation.third", compact("attendance", "course",'quiz'));
+    }
+
+     public function quiz($id,$clientId){
+        $questions = Question::with('options')->where('quiz_id',$id)->get();
+        return response()->json(['questions' => $questions]);
     }
     public function quizView($id,$clientId){
         return view('invitation.quiz');
@@ -77,7 +78,7 @@ class SiteController extends Controller
         $question = Question::find($request->input('question_id'));
         $userAnswer = new UserAnswer();
         $userAnswer->question_id = $request->input('question_id');
-        $userAnswer->option_id = $request->input('chosen_option');
+        $userAnswer->question_option_id = $request->input('chosen_option');
         $userAnswer->quiz_id = $question->quiz_id;
         $userAnswer->attendance_id = $request->user_id;
         $userAnswer->save();

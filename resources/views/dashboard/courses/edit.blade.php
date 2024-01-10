@@ -180,6 +180,7 @@
                                     <label for="example"> الاختبار القبلي </label>
                                     <div class="webflow-style-input">
                                         <select id="quiz_befor_id" class="form-control select2 input_no_border custom-select" >
+                                            <option></option>
 
                                             @foreach ($quizesBefor as $item)
                                                 <option @foreach ($course->quizes->where('type','befor') as $quiz)
@@ -216,7 +217,7 @@
                                     <label for="example"> الأختبار البعدي </label>
                                     <div class="webflow-style-input">
                                         <select id="quiz_after_id" class="form-control select2 input_no_border custom-select" >
-
+                                            <option></option>
                                             @foreach ($quizesBefor as $item)
                                             <option @foreach ($course->quizes->where('type','after') as $quiz)
 
