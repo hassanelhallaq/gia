@@ -49,7 +49,7 @@ quit_quiz.onclick = ()=>{
     let redirectUrl = '{{route("invitation.back",["id"=> '+clientId+',"quiz_id"=>'+quizId+'])}}'
     window.location.href = redirectUrl;
 
-    window.location.reload(); //reload the current window
+    // window.location.reload(); //reload the current window
 }
 
 const next_btn = document.querySelector("footer .next_btn");
