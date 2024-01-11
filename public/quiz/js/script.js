@@ -1,4 +1,3 @@
-//selecting all required elements
 const start_btn = document.querySelector(".start_btn button");
 const info_box = document.querySelector(".info_box");
 const exit_btn = info_box.querySelector(".buttons .quit");
@@ -21,14 +20,16 @@ exit_btn.onclick = () => {
 }
 
 // if continueQuiz button clicked
+// if continueQuiz button clicked
 continue_btn.onclick = () => {
-    info_box.classList.remove("activeInfo"); //hide info box
-    quiz_box.classList.add("activeQuiz"); //show quiz box
-    showQuetions(0); //calling showQestions function
-    queCounter(1); //passing 1 parameter to queCounter
-    startTimer(15); //calling startTimer function
-    startTimerLine(0); //calling startTimerLine function
+    info_box.classList.remove("activeInfo"); // hide info box
+    quiz_box.classList.add("activeQuiz"); // show quiz box
+    showQuestions(0); // calling showQuestions function instead of showQuetions
+    queCounter(1); // passing 1 parameter to queCounter
+    startTimer(15); // calling startTimer function
+    startTimerLine(0); // calling startTimerLine function
 }
+
 
 let timeValue = 15;
 let que_count = 0;
@@ -76,6 +77,8 @@ next_btn.onclick = () => {
         clearInterval(counter); //clear counter
         clearInterval(counterLine); //clear counterLine
         showResult(); //calling showResult function
+        moveToNextQuestion();
+
     }
 }
 document.addEventListener("DOMContentLoaded", function () {
@@ -121,6 +124,8 @@ function showQuestions(index) {
             optionSelected(this);
         });
     });
+
+    next_btn.classList.remove("show"); // هذا يفترض بإخفاء زر "التالي"
 }
 next_btn.addEventListener("click", function () {
     que_count++;
@@ -180,15 +185,9 @@ function optionSelected(answer) {
         option_list.children[i].classList.add("disabled"); // Once user selects an option, disable all options
     }
 
-    // Add user's answer to the array
-    userAnswers.push({
-        question_id: questions[que_count].id,
-        user_id: clientId, // Replace with the actual user ID (you can get it from your authentication system)
-        chosen_option: chosenOptionId,
-    });
-
-    next_btn.classList.add("show");
+    next_btn.classList.add("show"); // هذا يفترض بإظهار زر "التالي"
 }
+
 
 // Function to move to the next question
 function moveToNextQuestion() {
@@ -196,15 +195,15 @@ function moveToNextQuestion() {
     // Reset some state or perform actions for the next question
 
     // If all questions are answered, send the array of user answers to the server
-    if (que_count === questions.length) {
+
         saveUserAnswers();
-    }
+
 }
 
 // Function to save all user answers
 function saveUserAnswers() {
     const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-    fetch('/quiz/save-answers', {
+    fetch('/quiz/save-answer', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -285,4 +284,4 @@ function queCounter(index) {
     //creating a new span tag and passing the question number and total question
     let totalQueCounTag = '<span><p>' + index + '</p> of <p>' + questions.length + '</p> Questions</span>';
     bottom_ques_counter.innerHTML = totalQueCounTag;  //adding new span tag inside bottom_ques_counter
-} س
+}

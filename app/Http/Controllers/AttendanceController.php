@@ -35,9 +35,9 @@ class AttendanceController extends Controller
         $validator = Validator($data, [
             'name' => 'required|string',
             'phone_number' => 'required',
-            'work_place' => 'required',
-            'id_number' => 'required',
-            'job' => 'required'
+            // 'work_place' => 'required',
+            // 'id_number' => 'required',
+            // 'job' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
@@ -83,9 +83,9 @@ class AttendanceController extends Controller
         $validator = Validator($data, [
             'name' => 'required|string',
             'phone_number' => 'required',
-            'work_place' => 'required',
-            'id_number' => 'required',
-            'job' => 'required'
+            // 'work_place' => 'required',
+            // 'id_number' => 'required',
+            // 'job' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);

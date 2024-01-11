@@ -32,11 +32,15 @@ class SiteController extends Controller
 
     public function storeReply(Request $request)
     {
-
+        // dd($request->is_accepted);
         $attendance =   Attendance::find($request->attendance_id);
-        $attendance->is_accepted = $request->is_accepted == true ? 1 : 0;
+        $attendance->is_accepted = $request->is_accepted == "true" ? 1 : 0;
         $attendance->save();
+        if($request->is_accepted == "true"){
         return response()->json(['redirect' => route('invitation.second', [$attendance->id, $request->course_id])]);
+       }else{
+        return redirect()->back();
+       }
     }
 
     public function second($id, $course_id)
