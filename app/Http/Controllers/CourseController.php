@@ -197,24 +197,29 @@ class CourseController extends Controller
         // ->whereHas('courses',function($q)use($id){
         //     $q->where('course_id',$id);
         // })->paginate(10);
-        $quizbefCheck = QuizCourse::where('quiz_id', $request->quiz_befor_id)->where('course_id', $course->id)->first();
-        if($quizbefCheck){
-            $quizBef =$quizbefCheck;
-        }else{
-            $quizBef = new QuizCourse();
-        }
-        $quizBef->quiz_id = $request->quiz_befor_id;
-        $quizBef->course_id = $course->id;
-        $quizBef->save();
-        if($quizbefCheck){
-            $quizAft =$quizbefCheck;
-        }else{
-            $quizAft = new QuizCourse();
-        }
-        $quizAft->course_id = $course->id;
-        $quizAft->quiz_id = $request->quiz_after_id;
-        $quizAft->save();
 
+        $quizbefCheck = QuizCourse::where('quiz_id', $request->quiz_befor_id)->where('course_id', $course->id)->first();
+        if ($request->quiz_befor_id) {
+            if ($quizbefCheck) {
+                $quizBef = $quizbefCheck;
+            } else {
+                $quizBef = new QuizCourse();
+            }
+            $quizBef->quiz_id = $request->quiz_befor_id;
+            $quizBef->course_id = $course->id;
+            $quizBef->save();
+        }
+        $quizAftCheck = QuizCourse::where('quiz_id', $request->quiz_after_id)->where('course_id', $course->id)->first();
+        if ($request->quiz_after_id) {
+            if ($quizbefCheck) {
+                $quizAft = $quizAftCheck;
+            } else {
+                $quizAft = new QuizCourse();
+            }
+            $quizAft->course_id = $course->id;
+            $quizAft->quiz_id = $request->quiz_after_id;
+            $quizAft->save();
+        }
         return response()->json(['redirect' => route('program.course', [$course->program_id])]);
     }
 
