@@ -13,7 +13,7 @@
           <span class="accepted" data-translate="accepted"> تم القبول </span>
           <div class="disc">
             <p>
-                {{ $course->program->content_two }}
+                {{ $course->desc }}
 
             </p>
           </div>

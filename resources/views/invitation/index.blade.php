@@ -12,7 +12,7 @@
                     </div>
                     <div class="disc">
                         <p>
-                            {{ $course->program->content_two }}
+                            {{ $course->desc }}
                         </p>
                     </div>
                 </div>

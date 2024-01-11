@@ -15,6 +15,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TrainerController;
+use App\Http\Controllers\UserAnswerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +51,8 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::resource('quizes', QuizController::class);
         Route::get('/duplicate/{id}', [CourseController::class, 'question'])->name('duplicate.courses');
         Route::get('/{id}/{course_id}/login', [AttendanceLoginController::class, 'login'])->name('attendance.login');
+        Route::get('/attendance-summery/{id}', [UserAnswerController::class, 'userAswers'])->name('attendance.summery');
+
     }
 );
 Route::prefix('dashboard/client')->middleware('auth:client')->group(

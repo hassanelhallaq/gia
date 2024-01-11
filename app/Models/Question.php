@@ -18,4 +18,12 @@ class Question extends Model
     {
         return $this->hasMany(QuestionOption::class);
     }
+    public function optionTrue()
+    {
+        return $this->hasOne(QuestionOption::class)->where('is_corect',1);
+    }
+    public function userAswes()
+    {
+        return $this->hasOne(UserAnswer::class);
+    }
 }

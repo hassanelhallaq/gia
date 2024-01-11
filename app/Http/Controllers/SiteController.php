@@ -6,6 +6,7 @@ use App\Models\Attendance;
 use App\Models\AttendanceCourse;
 use App\Models\Course;
 use App\Models\Question;
+use App\Models\QuestionOption;
 use App\Models\Quiz;
 use App\Models\QuizAttendance;
 use App\Models\QuizCourse;
@@ -65,12 +66,12 @@ class SiteController extends Controller
         $courses = AttendanceCourse::where('attendance_id', $id)->first();
         $course_id = $courses->course_id;
         $course = Course::find($course_id);
-          $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
+        $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
         $quiz = QuizCourse::where('quiz_id', $auizId)->first();
         $quizAtten = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $id)->first();
-        return redirect()->route('invitation.third',['id'=>$id,'course_id'=>$course_id]);
+        return redirect()->route('invitation.third', ['id' => $id, 'course_id' => $course_id]);
         // return view("invitation.third", compact("attendance", "course", 'quiz','quizAtten'));
     }
     public function quiz($id, $clientId)
@@ -82,7 +83,7 @@ class SiteController extends Controller
     {
         $quizAtend = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $clientId)->first();
         // if ($quizAtend == null) {
-            return view('invitation.quiz');
+        return view('invitation.quiz');
         // } else {
         //     return redirect()->back();
         // }
@@ -105,11 +106,17 @@ class SiteController extends Controller
         $quzAtte->quiz_id = $question->quiz_id;
         $quzAtte->attendance_id = $request->user_id;
         $quzAtte->save();
+        $option = QuestionOption::find($request->chosen_option);
         $userAnswer = new UserAnswer();
         $userAnswer->question_id = $request->input('question_id');
         $userAnswer->question_option_id = $request->input('chosen_option');
         $userAnswer->quiz_id = $question->quiz_id;
         $userAnswer->attendance_id = $request->user_id;
+        if ($option->is_corect == 1) {
+            $userAnswer->is_true = 1;
+        } else {
+            $userAnswer->is_true = 0;
+        }
         $userAnswer->save();
         return response()->json(['message' => 'Answer saved successfully']);
     }

@@ -12,7 +12,10 @@
       href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;700&family=Montserrat:wght@500;700&family=Poppins:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <title>Course Landing Page</title>
+    @php
+      $course =  App\Models\Course::find(request()->course_id);
+    @endphp
+    <title>{{ $course->name}}</title>
   </head>
   <body>
     <!-- header -->

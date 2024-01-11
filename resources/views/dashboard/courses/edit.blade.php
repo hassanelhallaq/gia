@@ -48,6 +48,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <p class="mg-b-10">الوصف</p>
+                                    <textarea class="form-control" required="" id="desc" type="text">{{$course->desc}}</textarea>
+
+                                </div>
                                 <div class="col-lg-6 mg-t-20 mg-lg-t-0">
                                     <label for="example"> المقاعد </label>
                                     <div class="webflow-style-input">
@@ -335,6 +340,7 @@
                 formData.append('quiz_befor_id', document.getElementById('quiz_befor_id').value);
                 formData.append('quiz_after_id', document.getElementById('quiz_after_id').value);
                 formData.append('image_course', document.getElementById('image_course').files[0]);
+                formData.append('desc', document.getElementById('desc').value);
 
 
 

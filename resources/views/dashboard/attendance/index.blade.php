@@ -331,7 +331,7 @@
                 <div class="list p-3">
                     <div class="row row-sm">
                         <div class="col-6">
-                            <a class="card text-center" href="View_test_results.html">
+                            <a class="card text-center" href="{{route('attendance.summery',[$id])}}">
                                 <div class="card-body p-2">
                                     <div class="feature widget-2 text-center mb-3">
                                         <i

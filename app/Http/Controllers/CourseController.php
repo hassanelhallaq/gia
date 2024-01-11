@@ -94,6 +94,8 @@ class CourseController extends Controller
         $coruseStart = Carbon::parse($request->coruse_start)->format('y-m-d');
         $course->start = $coruseStart;
         $course->is_exam = $request->is_exam;
+        $course->desc = $request->desc;
+
         $course->duration = $request->duration;
         $course->is_certificate = $request->is_certificate;
         $course->trainer_id = $request->trainer;
@@ -166,6 +168,8 @@ class CourseController extends Controller
         $course->is_certificate = $request->is_certificate;
         $course->trainer_id = $request->trainer;
         $course->level = $request->level;
+        $course->desc = $request->desc;
+
         $course->percentage_certificate = $request->percentage_certificate;
         $course->coordinator = $request->coordinator;
         $course->category_id = $request->category_id;
