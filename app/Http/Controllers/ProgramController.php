@@ -123,6 +123,9 @@ class ProgramController extends Controller
             $course->is_exam = $request->is_exam;
             $course->duration = $request->duration;
             $course->desc = $request->desc;
+            $course->location = $request->location;
+
+
             $course->is_certificate = $request->is_certificate;
             $course->trainer_id = $request->trainer;
             $course->percentage_certificate = $request->percentage_certificate;
