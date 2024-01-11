@@ -1,7 +1,7 @@
 @extends('invitation.master')
 @section('content')
 <section>
-    <div class="wrap">
+    <div class="wrap  mb-5">
       <div class="vedio_container">
         <div class="vedio">
           <img src="{{ asset($course->profile) }}" alt="" />
@@ -19,28 +19,20 @@
           </div>
         </div>
         <div class="btn_links">
-          <button data-translate="btn_1" href="{{ asset($course->subject) }}" download>المادة التدريبية</button>
-
-          <button data-translate="btn_2" href="{{ asset($course->assignment) }}" download>الانشطة</button>
+          <a data-translate="btn_1" href="{{ asset($course->subject) }}">المادة التدريبية</a>
+          <a data-translate="btn_2" href="{{ asset($course->assignment) }}" >الانشطة</a>
+        </div>
+        <div class="btn_links">
+            <button class="btn_primery" onclick="togglePopup()" type="button" class="df ai-c jc-c g1 w-25" data-translate="signup"> تسجيل الدخول</button>
+            <a class="btn-border-block" data-translate="btn_2" href="{{ asset($course->assignment) }}"> موقع التدريب <i class="bi bi-geo-alt ml-3"></i></a>
         </div>
       </div>
     </div>
   </section>
-  <footer>
-    <div class="wrap">
-      <div class="btn_primery">
-        <button    onclick="togglePopup()"
-            type="button" class="df ai-c jc-c g1" data-translate="signup">
 
-          <i class="fa fa-qrcode" style="font-size:24px;color:white;"></i>
-          تسجيل الدخول
-        </button>
-      </div>
-    </div>
-  </footer>
 
-  <div class="overlay">
-    <div class="wrap">
+<div class="overlay">
+    <div class="wrap ">
       <div class="qr_container df f-c  ai-c g1">
         <span class="close" onclick="togglePopup()">&times;</span>
           <img src="{{asset('site/assets/logo.png')}}" alt="">
@@ -51,5 +43,5 @@
           </div>
       </div>
     </div>
-  </div>
+</div>
 @endsection
