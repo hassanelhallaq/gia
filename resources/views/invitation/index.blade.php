@@ -30,6 +30,11 @@
                         <label for="refuse" data-translate="refuse">رفض</label>
                     </div>
                 </div>
+                <div class="wrap ">
+                    <div class="btn_links mt-2">
+                        <button data-translate="send" class="btn_primery" type="button" onclick="performStore({{$attendance->id}},{{$course->id}})">ارسال</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -46,15 +51,10 @@
                 </div>
             </div>
         </div>
+
     </div>
 
-    <footer>
-        <div class="wrap">
-            <div class="btn_primery">
-                <button data-translate="send" type="button" onclick="performStore({{$attendance->id}},{{$course->id}})">ارسال</button>
-            </div>
-        </div>
-    </footer>
+
 @endsection
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

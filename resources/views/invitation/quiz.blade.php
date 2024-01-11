@@ -68,12 +68,12 @@
             <!-- Here I've inserted Score Result from JavaScript -->
         </div>
         <div class="buttons">
-             <a  href="https://github.com" class="quit">العودة الى الرئيسية</a>
+             <button  href="https://github.com" class="quit">العودة الى الرئيسية</button>
         </div>
     </div>
 
     <!-- Inside this JavaScript file I've inserted Questions and Options only -->
-    <script src="{{asset('quiz/js/questions.js')}}"></script>
+    {{-- <script src="{{asset('quiz/js/questions.js')}}"></script> --}}
 
     <!-- Inside this JavaScript file I've coded all Quiz Codes -->
     <script src="{{asset('quiz/js/script.js')}}"></script>
