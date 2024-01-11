@@ -75,7 +75,13 @@ class UserAnswerController extends Controller
         $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
         $responseAnswers = $responseAnswers->get();
         $questions = Question::where('quiz_id', $quiz->id)->with('userAswes', 'optionTrue')->get();
+        if($responseAnswersTrue != 0){
+
+
         $total = ($responseAnswersTrue / $responseAnswers->count()) * 100;
+    }else{
+        $total = 0;
+    }
         return view('dashboard.answers.index', compact('responseAnswers', 'responseAnswersTrue', 'responseAnswersFalse', 'questions','total'));
     }
 }

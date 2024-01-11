@@ -82,11 +82,11 @@ class SiteController extends Controller
     public function quizView($id, $clientId)
     {
         $quizAtend = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $clientId)->first();
-        // if ($quizAtend == null) {
+        if ($quizAtend == null) {
         return view('invitation.quiz');
-        // } else {
-        //     return redirect()->back();
-        // }
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function saveAnswer(Request $request)

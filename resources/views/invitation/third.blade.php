@@ -18,9 +18,9 @@
             </a>
             </div>
           </div>
-          @if($quizAtten == null)
+          {{-- @if($quizAtten == null) --}}
           <div class="card_icon"><a href="{{route('quiz.view',['quizId'=>$quiz->quiz_id,'clientId'=>$attendance->id])}}"  data-translate="submit">&#10140;  </a>
-            @endif
+            {{-- @endif --}}
          </div>
         </div>
 
