@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Client;
 use App\Models\Course;
+use App\Models\CourseFile;
 use App\Models\Program;
 use App\Models\Quiz;
 use App\Models\QuizCourse;
@@ -122,7 +123,8 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::withCount("attendances")->with('attendances')->find($id);
-        return view("dashboard.courses.show", compact("course"));
+        $courseFile = CourseFile::where('course_id',$id)->get();
+        return view("dashboard.courses.show", compact("course",'courseFile'));
     }
 
     /**

@@ -425,23 +425,12 @@
 
                             <div class="tab-pane active" id="tab11">
                                 <div class="table-responsive d-flex">
+                                    @foreach ($courseFile as $item)
                                     <div class="ml-4">
                                         <i class="bi bi-file-earmark-word-fill tx-26"></i>
-                                        <p>ملف 1</p>
+                                        <p class="tx-10">{{$item->name}} </p>
                                     </div>
-
-                                    <div class="ml-4">
-                                        <i class="bi bi-file-earmark-word-fill tx-24"></i>
-                                        <p>ملف2</p>
-                                    </div>
-                                    <div class="ml-4">
-                                        <i class="bi bi-file-earmark-word-fill tx-24"></i>
-                                        <p>ملف4</p>
-                                    </div>
-                                    <div class="ml-4">
-                                        <i class="bi bi-file-earmark-word-fill tx-24"></i>
-                                        <p>ملف5</p>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab12">
@@ -557,23 +546,12 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab11">
                                 <div class="table-responsive d-flex">
+                                    @foreach ($courseFile as $item)
                                     <div class="ml-4">
                                         <i class="bi bi-file-earmark-word-fill tx-26"></i>
                                         <p class="tx-10">نسخ الرابط</p>
                                     </div>
-
-                                    <div class="ml-4">
-                                        <i class="bi bi-file-earmark-word-fill tx-24"></i>
-                                        <p class="tx-10">نسخ الرابط</p>
-                                    </div>
-                                    <div class="ml-4">
-                                        <i class="bi bi-file-earmark-word-fill tx-24"></i>
-                                        <p class="tx-10">نسخ الرابط</p>
-                                    </div>
-                                    <div class="ml-4">
-                                        <i class="bi bi-file-earmark-word-fill tx-24 text-center"></i>
-                                        <p class="tx-10">نسخ الرابط</p>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -933,6 +911,16 @@
 </div>
 @endsection
 @section('js')
+<script>
+    function performStore(id) {
+        let formData = new FormData();
+        formData.append('name', document.getElementById('name').value);
+        formData.append('type', document.getElementById('type').value);
+        formData.append('course_id',id);
+        formData.append('file', document.getElementById('file').files[0]);
+        storeRoute('/dashboard/admin/courses-files', formData)
+    }
+</script>
 <script src="{{asset('assets/js/chart.flot.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery.flot/jquery.flot.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery.flot/jquery.flot.pie.js')}}"></script>

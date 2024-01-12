@@ -20,7 +20,7 @@
         </div>
         <div class="btn_links">
           <a data-translate="btn_1" href="{{ asset($course->subject) }}">المادة التدريبية</a>
-          <a data-translate="btn_2" href="{{ asset($course->assignment) }}" >الانشطة</a>
+          <a data-translate="btn_2" href="{{ route('invitation.files',[$attendance->id,request()->course_id]) }}" >الانشطة</a>
         </div>
         <div class="btn_links">
             <button class="btn_primery" onclick="togglePopup()" type="button" class="df ai-c jc-c g1 " data-translate="signup"> تسجيل الدخول</button>

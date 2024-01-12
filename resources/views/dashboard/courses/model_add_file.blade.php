@@ -14,24 +14,24 @@
                         </div>
                         <div class="col-12 form-group">
                             <label class=""> نوع الملف </label>
-                            <select class="form-control select2" id="program_id">
+                            <select class="form-control select2" id="type">
                                 <option value="">اختار نوع الملف</option>
-                                <option value=""> word </option>
-                                <option value=""> Execl </option>
-                                <option value=""> pdf </option>
+                                <option value="word"> word </option>
+                                <option value="Execl"> Execl </option>
+                                <option value="pdf"> pdf </option>
                             </select>
                         </div>
 
                         <div class="col-12 form-group">
                             <label for="exampleInputEmail1"> ادراج ملف </label>
-                            <input type="file" class="dropify" data-default-file="../assets/img/photos/1.pdf" data-height="70"  />
+                            <input type="file" id="file" class="dropify" data-default-file="../assets/img/photos/1.pdf" data-height="70"  />
                             <p class="tx-11">الحد الاقصى لحجم الملف 8 MB</p>
                         </div>
 
                     </div>
                 </div>
                 <div class="modal-footer border-0">
-                    <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="performStore()"> حفظ <i class="bi bi-floppy"></i></button>
+                    <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="performStore({{$course->id}})"> حفظ <i class="bi bi-floppy"></i></button>
                     <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
                 </div>
             </form>
