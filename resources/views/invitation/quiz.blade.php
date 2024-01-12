@@ -42,7 +42,7 @@
     <!-- Quiz Box -->
     <div class="quiz_box">
         <header>
-            <div class="title">اجب على الاسئلة الاتية ↶</div>
+            <div class="title">اجب على الاسئلة الاتية</div>
             <div class="timer">
                 <div class="time_left_txt"> وقت الاختبار </div>
                 <div class="timer_sec">15</div>
