@@ -323,5 +323,6 @@ html{
 .w-25{width: 50% !important;}
 .tx-white{color: white !important;}
 button .disabled{background-color:red !important;}
-button .btn_primery .disabled {opacity: .5px !important;}
-button:disabled {opacity: .5}
+.btn_links .disabled {opacity: 0.5 !important;    pointer-events: none !important;
+}
+

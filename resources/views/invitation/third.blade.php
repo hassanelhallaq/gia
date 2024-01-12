@@ -61,7 +61,7 @@
 
         <div class="btn_links">
             <a  data-translate="show_results" href="{{ route('invitation.second',[$attendance->id,request()->course_id]) }}"><i class="bi bi-arrow-right tx-white"></i> الرجوع الى الرئيسية </a>
-            <a class="btn_primery" href="{{$course->rate}}"  data-translate="contact_coach" disabled><i class="bi bi-star tx-white"></i> تقييم المدرب </a>
+            <a class="btn_primery disabled" href="{{$course->rate}}"  data-translate="contact_coach" ><i class="bi bi-star tx-white"></i> تقييم المدرب </a>
           </div>
       </div>
 
