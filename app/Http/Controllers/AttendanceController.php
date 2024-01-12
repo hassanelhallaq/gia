@@ -102,4 +102,8 @@ class AttendanceController extends Controller
         $attendance = Attendance::destroy($id);
         return response()->json(['icon' => 'success' , 'title' => 'تم الحذف  بنجاح'] , $attendance ? 200 : 400);
     }
+
+    public function sendInv(){
+        
+    }
 }

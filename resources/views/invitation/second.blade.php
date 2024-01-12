@@ -24,7 +24,7 @@
         </div>
         <div class="btn_links">
             <button class="btn_primery" onclick="togglePopup()" type="button" class="df ai-c jc-c g1 w-25" data-translate="signup"> تسجيل الدخول</button>
-            <a class="btn-border-block" data-translate="btn_2" href="{{ $course->location }}"> موقع التدريب <i class="bi bi-geo-alt ml-3"></i></a>
+            <a class="btn-border-block" data-translate="btn_2" target="_blank" href="{{ $course->location }}"> موقع التدريب <i class="bi bi-geo-alt ml-3"></i></a>
         </div>
       </div>
     </div>
