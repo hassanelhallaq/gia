@@ -308,6 +308,11 @@
                                     <label for="example">الموقع</label>
                                     <input class="form-control" required="" type="text" id="location">
                                 </div>
+                                <div class="col-lg-6">
+                                    <label for="example"> التقيم </label>
+                                    <input class="form-control" id="link" required="" type="text"
+                                        placeholder="This is input">
+                                </div>
                             </div>
                             <!-- closed row -->
 
@@ -479,6 +484,9 @@
             formData.append('image_course', document.getElementById('image_course').files[0]);
             formData.append('desc', document.getElementById('desc').value);
             formData.append('location', document.getElementById('location').value);
+            formData.append('link', document.getElementById('link').value);
+
+
             formData.append('attendance_questionnaire', document.getElementById('attendance_questionnaire').checked);
             storeRoute('/dashboard/admin/programs', formData)
 

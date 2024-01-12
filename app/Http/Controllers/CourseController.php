@@ -107,6 +107,7 @@ class CourseController extends Controller
         $course->image = $request->image_check == true ? 1 : 0;
         $course->program_id = $request->program_id;
         $course->category_id = $request->category_id;
+        $course->rate = $request->link;
         if ($request->hasFile('image_course')) {
             $adminImage = $request->file('image_course');
             $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
@@ -171,7 +172,8 @@ class CourseController extends Controller
         $course->trainer_id = $request->trainer;
         $course->level = $request->level;
         $course->desc = $request->desc;
-        $course->location = $request->location;
+        $course->rate = $request->location;
+        $course->link = $request->link;
 
         $course->percentage_certificate = $request->percentage_certificate;
         $course->coordinator = $request->coordinator;
