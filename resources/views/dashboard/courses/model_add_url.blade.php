@@ -15,12 +15,12 @@
 
                         <div class="col-12 form-group">
                             <label for="example">  الرابط (URL) </label>
-                            <input class="form-control" required="" id="name" type="url">
+                            <input class="form-control" required="" id="link" type="url">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer border-0">
-                    <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="performStore()"> حفظ <i class="bi bi-floppy"></i></button>
+                    <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="performStoreLink()"> حفظ <i class="bi bi-floppy"></i></button>
                     <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
                 </div>
             </form>

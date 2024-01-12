@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Client;
 use App\Models\Course;
 use App\Models\CourseFile;
+use App\Models\CourseLink;
 use App\Models\Program;
 use App\Models\Quiz;
 use App\Models\QuizCourse;
@@ -125,6 +126,9 @@ class CourseController extends Controller
     {
         $course = Course::withCount("attendances")->with('attendances')->find($id);
         $courseFile = CourseFile::where('course_id',$id)->get();
+        $courseLinks = CourseLink::where('course_id',$id)->get();
+
+
         return view("dashboard.courses.show", compact("course",'courseFile'));
     }
 

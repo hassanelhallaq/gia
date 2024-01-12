@@ -530,7 +530,7 @@
             <div class="col-lg-6 col-sm-12">
                 <div class="panel panel-primary tabs-style-3 bg-white card card-dashboard-eight ">
                     <div class="d-flex justify-content-between mb-2">
-                        <h5 class="">ملفات الدورة</h5>
+                        <h5 class="">روابط الدورة</h5>
                         <button class="btn btn-secondary btn-sm btn-light-icon mr-2 p-1" data-target="#modalurl" data-toggle="modal"> اضافة رابط <i class="bi bi-plus-circle"></i></button>
                         @include('dashboard.courses.model_add_url')
                     </div>
@@ -546,10 +546,10 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab11">
                                 <div class="table-responsive d-flex">
-                                    @foreach ($courseFile as $item)
+                                    @foreach ($courseLinks as $item)
                                     <div class="ml-4">
                                         <i class="bi bi-file-earmark-word-fill tx-26"></i>
-                                        <p class="tx-10">نسخ الرابط</p>
+                                        <a href="{{route($item->link)}}" target="_blank">     <p class="tx-10"> نسخ الرابط</p></a>
                                     </div>
                                     @endforeach
                                 </div>
@@ -919,6 +919,13 @@
         formData.append('course_id',id);
         formData.append('file', document.getElementById('file').files[0]);
         storeRoute('/dashboard/admin/courses-files', formData)
+    }
+    function performStoreLink(id) {
+        let formData = new FormData();
+        formData.append('name', document.getElementById('name').value);
+        formData.append('link', document.getElementById('link').value);
+        formData.append('course_id',id);
+        storeRoute('/dashboard/admin/courses-links', formData)
     }
 </script>
 <script src="{{asset('assets/js/chart.flot.js')}}"></script>
