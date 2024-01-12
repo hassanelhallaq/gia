@@ -304,6 +304,10 @@
                                     <label for="example"> عدد المقاعد المتاحة </label>
                                     <input class="form-control" required="" type="number" id="seat_count">
                                 </div>
+                                <div class="col-lg-6 mg-t-20 mg-lg-t-0">
+                                    <label for="example">الموقع</label>
+                                    <input class="form-control" required="" type="text" id="location">
+                                </div>
                             </div>
                             <!-- closed row -->
 
@@ -474,8 +478,7 @@
             formData.append('client_id', document.getElementById('client_id').value);
             formData.append('image_course', document.getElementById('image_course').files[0]);
             formData.append('desc', document.getElementById('desc').value);
-
-
+            formData.append('location', document.getElementById('location').value);
             formData.append('attendance_questionnaire', document.getElementById('attendance_questionnaire').checked);
             storeRoute('/dashboard/admin/programs', formData)
 

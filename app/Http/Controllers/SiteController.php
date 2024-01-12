@@ -33,11 +33,15 @@ class SiteController extends Controller
 
     public function storeReply(Request $request)
     {
-
+        // dd($request->is_accepted);
         $attendance =   Attendance::find($request->attendance_id);
-        $attendance->is_accepted = $request->is_accepted == true ? 1 : 0;
+        $attendance->is_accepted = $request->is_accepted == "true" ? 1 : 0;
         $attendance->save();
+        if($request->is_accepted == "true"){
         return response()->json(['redirect' => route('invitation.second', [$attendance->id, $request->course_id])]);
+       }else{
+        return redirect()->back();
+       }
     }
 
     public function second($id, $course_id)
@@ -82,9 +86,9 @@ class SiteController extends Controller
     }
     public function quizView($id, $clientId)
     {
-        $quizAtend = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $clientId)->first();
+          $quizAtend = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $clientId)->first();
         if ($quizAtend == null) {
-        return view('invitation.quiz');
+        return view('invitation.quiz',compact('id','clientId'));
         } else {
             return redirect()->back();
         }
@@ -92,6 +96,7 @@ class SiteController extends Controller
 
     public function saveAnswer(Request $request)
     {
+        // dd($request->all());
         // Validate the incoming request data (you can customize this based on your needs)
         $request->validate([
             'question_id' => 'required|integer',

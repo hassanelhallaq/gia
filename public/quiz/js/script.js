@@ -1,4 +1,3 @@
-//selecting all required elements
 const start_btn = document.querySelector(".start_btn button");
 const info_box = document.querySelector(".info_box");
 const exit_btn = info_box.querySelector(".buttons .quit");
@@ -161,18 +160,58 @@ function optionSelected(answer) {
     let chosenOptionId = answer.getAttribute("data-option-id");
 
     console.log(isCorrect);
-
+    const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
     if (isCorrect) {
         userScore += 1; // Upgrade score value by 1
         answer.classList.add("correct"); // Add green color to correct selected option
         answer.insertAdjacentHTML("beforeend", tickIconTag); // Add tick icon to correct selected option
         console.log("Correct Answer");
         console.log("Your correct answers = " + userScore);
+        const currentPath = window.location.pathname;
+        const pathSegments = currentPath.split('/');
+        const quizId = pathSegments[pathSegments.length - 2]; // Assuming quizId is the second-to-last segment
+        const clientId = pathSegments[pathSegments.length - 1];
+        fetch('/quiz/save-answer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken, // Include the CSRF token in the headers
+
+            },
+            body: JSON.stringify({
+                question_id: questions[que_count].id, // Assuming you have an 'id' property in your question object
+                user_id: clientId, // Replace with the actual user ID (you can get it from your authentication system)
+                chosen_option: chosenOptionId,
+            }),
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error saving answer:', error));
+
     } else {
         answer.classList.add("incorrect"); // Add red color to incorrect selected option
         answer.insertAdjacentHTML("beforeend", crossIconTag); // Add cross icon to incorrect selected option
         console.log("Wrong Answer");
+        const currentPath = window.location.pathname;
+        const pathSegments = currentPath.split('/');
+        const quizId = pathSegments[pathSegments.length - 2]; // Assuming quizId is the second-to-last segment
+        const clientId = pathSegments[pathSegments.length - 1];
+        fetch('/quiz/save-answer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken, // Include the CSRF token in the headers
 
+            },
+            body: JSON.stringify({
+                question_id: questions[que_count].id, // Assuming you have an 'id' property in your question object
+                user_id: clientId, // Replace with the actual user ID (you can get it from your authentication system)
+                chosen_option: chosenOptionId,
+            }),
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error saving answer:', error));
         for (let i = 0; i < allOptions; i++) {
             if (option_list.children[i].getAttribute("data-is-correct") === "1") {
                 option_list.children[i].setAttribute("class", "option correct"); // Add green color to correct option
@@ -197,14 +236,15 @@ function moveToNextQuestion() {
 
     // If all questions are answered, send the array of user answers to the server
 
-        saveUserAnswers();
+    saveUserAnswers();
+
 
 }
 
 // Function to save all user answers
 function saveUserAnswers() {
     const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-    fetch('/quiz/save-answers', {
+    fetch('/quiz/save-answer', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -286,5 +326,4 @@ function queCounter(index) {
     let totalQueCounTag = '<span><p>' + index + '</p> of <p>' + questions.length + '</p> Questions</span>';
     bottom_ques_counter.innerHTML = totalQueCounTag;  //adding new span tag inside bottom_ques_counter
 }
-
 

@@ -68,7 +68,9 @@
             <!-- Here I've inserted Score Result from JavaScript -->
         </div>
         <div class="buttons">
-             <button  href="https://github.com" class="quit">العودة الى الرئيسية</button>
+
+             <a  href="{{route('invitation.back',[$id,$clientId])}}" class="quit">العودة الى الرئيسية</a>
+
         </div>
     </div>
 
