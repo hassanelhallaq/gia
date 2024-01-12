@@ -1,4 +1,9 @@
 @extends('dashboard.layouts.master')
+@section('css')
+<!---Internal Fileupload css-->
+<link href="{{ URL::asset('assets/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
+<link href="{{ URL::asset('assets/plugins/fancyuploder/fancy_fileupload.css')}}" rel="stylesheet" />
+@endsection
 @section('header')
 <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
 
@@ -398,7 +403,12 @@
         <div class="row mb-5">
             <div class="col-lg-6 col-sm-12">
                 <div class="panel panel-primary tabs-style-3 bg-white card card-dashboard-eight ">
-                    <h5 class="mb-2">ملفات الدورة</h5>
+                    <div class="d-flex justify-content-between mb-2 ">
+                        <h5 class="">ملفات الدورة</h5>
+                        <button class="btn btn-secondary btn-sm btn-light-icon mr-2 p-1" data-target="#select2modal" data-toggle="modal"> اضافة ملف <i class="bi bi-plus-circle"></i></button>
+                        @include('dashboard.courses.model_add_file')
+
+                    </div>
                     <div class="tab-menu-heading">
                         <div class="tabs-menu ">
                             <!-- Tabs -->
@@ -415,23 +425,12 @@
 
                             <div class="tab-pane active" id="tab11">
                                 <div class="table-responsive d-flex">
+                                    @foreach ($courseFile as $item)
                                     <div class="ml-4">
                                         <i class="bi bi-file-earmark-word-fill tx-26"></i>
-                                        <p>ملف 1</p>
+                                        <p class="tx-10">{{$item->name}} </p>
                                     </div>
-
-                                    <div class="ml-4">
-                                        <i class="bi bi-file-earmark-word-fill tx-24"></i>
-                                        <p>ملف2</p>
-                                    </div>
-                                    <div class="ml-4">
-                                        <i class="bi bi-file-earmark-word-fill tx-24"></i>
-                                        <p>ملف4</p>
-                                    </div>
-                                    <div class="ml-4">
-                                        <i class="bi bi-file-earmark-word-fill tx-24"></i>
-                                        <p>ملف5</p>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab12">
@@ -530,9 +529,13 @@
 
             <div class="col-lg-6 col-sm-12">
                 <div class="panel panel-primary tabs-style-3 bg-white card card-dashboard-eight ">
-                    <h5 class="mb-3">روابط الدورة</h5>
+                    <div class="d-flex justify-content-between mb-2">
+                        <h5 class="">ملفات الدورة</h5>
+                        <button class="btn btn-secondary btn-sm btn-light-icon mr-2 p-1" data-target="#modalurl" data-toggle="modal"> اضافة رابط <i class="bi bi-plus-circle"></i></button>
+                        @include('dashboard.courses.model_add_url')
+                    </div>
                     <div class="tab-menu-heading">
-                        <div class="tabs-menu ">
+                        <div class="tabs-menu mb-1">
                             <!-- Tabs -->
                             <ul class="nav panel-tabs">
                                 <li><a href="#tab11" data-toggle="tab" class="d-flex active"> الكل  <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li>
@@ -543,23 +546,12 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab11">
                                 <div class="table-responsive d-flex">
+                                    @foreach ($courseFile as $item)
                                     <div class="ml-4">
                                         <i class="bi bi-file-earmark-word-fill tx-26"></i>
                                         <p class="tx-10">نسخ الرابط</p>
                                     </div>
-
-                                    <div class="ml-4">
-                                        <i class="bi bi-file-earmark-word-fill tx-24"></i>
-                                        <p class="tx-10">نسخ الرابط</p>
-                                    </div>
-                                    <div class="ml-4">
-                                        <i class="bi bi-file-earmark-word-fill tx-24"></i>
-                                        <p class="tx-10">نسخ الرابط</p>
-                                    </div>
-                                    <div class="ml-4">
-                                        <i class="bi bi-file-earmark-word-fill tx-24 text-center"></i>
-                                        <p class="tx-10">نسخ الرابط</p>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -919,12 +911,25 @@
 </div>
 @endsection
 @section('js')
+<script>
+    function performStore(id) {
+        let formData = new FormData();
+        formData.append('name', document.getElementById('name').value);
+        formData.append('type', document.getElementById('type').value);
+        formData.append('course_id',id);
+        formData.append('file', document.getElementById('file').files[0]);
+        storeRoute('/dashboard/admin/courses-files', formData)
+    }
+</script>
 <script src="{{asset('assets/js/chart.flot.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery.flot/jquery.flot.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery.flot/jquery.flot.pie.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery.flot/jquery.flot.resize.js')}}"></script>
-
 <script src="{{ asset('assets/js/apexcharts.js') }}"></script>
 <script src="{{ URL::asset('assets/plugins/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+
+<!--Internal Fileuploads js-->
+<script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js')}}"></script>
+<script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js')}}"></script>
 <!--chart round js -->
 @endsection

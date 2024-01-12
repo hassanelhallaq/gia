@@ -1,3 +1,4 @@
+//selecting all required elements
 const start_btn = document.querySelector(".start_btn button");
 const info_box = document.querySelector(".info_box");
 const exit_btn = info_box.querySelector(".buttons .quit");
@@ -20,16 +21,14 @@ exit_btn.onclick = () => {
 }
 
 // if continueQuiz button clicked
-// if continueQuiz button clicked
 continue_btn.onclick = () => {
-    info_box.classList.remove("activeInfo"); // hide info box
-    quiz_box.classList.add("activeQuiz"); // show quiz box
-    showQuestions(0); // calling showQuestions function instead of showQuetions
-    queCounter(1); // passing 1 parameter to queCounter
-    startTimer(15); // calling startTimer function
-    startTimerLine(0); // calling startTimerLine function
+    info_box.classList.remove("activeInfo"); //hide info box
+    quiz_box.classList.add("activeQuiz"); //show quiz box
+    showQuetions(0); //calling showQestions function
+    queCounter(1); //passing 1 parameter to queCounter
+    startTimer(15); //calling startTimer function
+    startTimerLine(0); //calling startTimerLine function
 }
-
 
 let timeValue = 15;
 let que_count = 0;
@@ -42,16 +41,12 @@ let widthValue = 0;
 const quit_quiz = result_box.querySelector(".buttons .quit");
 
 // if quitQuiz button clicked
-quit_quiz.onclick = () => {
+quit_quiz.onclick = ()=>{
     const currentPath = window.location.pathname;
     const pathSegments = currentPath.split('/');
-    const quizId = pathSegments[pathSegments.length - 2];
+    const quizId = pathSegments[pathSegments.length - 2]; // Assuming quizId is the second-to-last segment
     const clientId = pathSegments[pathSegments.length - 1];
-
-    // Construct the redirect URL using raw JavaScript
-    let redirectUrl = '/back/' + clientId + '/' + quizId;
-
-    // Perform the redirection
+    let redirectUrl = '{{route("invitation.back",["id"=> '+clientId+',"quiz_id"=>'+quizId+'])}}'
     window.location.href = redirectUrl;
 
     // window.location.reload(); //reload the current window
@@ -77,8 +72,6 @@ next_btn.onclick = () => {
         clearInterval(counter); //clear counter
         clearInterval(counterLine); //clear counterLine
         showResult(); //calling showResult function
-        moveToNextQuestion();
-
     }
 }
 document.addEventListener("DOMContentLoaded", function () {
@@ -124,9 +117,9 @@ function showQuestions(index) {
             optionSelected(this);
         });
     });
-
-    next_btn.classList.remove("show"); // هذا يفترض بإخفاء زر "التالي"
 }
+
+
 next_btn.addEventListener("click", function () {
     que_count++;
     if (que_count < questions.length) {
@@ -160,58 +153,18 @@ function optionSelected(answer) {
     let chosenOptionId = answer.getAttribute("data-option-id");
 
     console.log(isCorrect);
-    const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+
     if (isCorrect) {
         userScore += 1; // Upgrade score value by 1
         answer.classList.add("correct"); // Add green color to correct selected option
         answer.insertAdjacentHTML("beforeend", tickIconTag); // Add tick icon to correct selected option
         console.log("Correct Answer");
         console.log("Your correct answers = " + userScore);
-        const currentPath = window.location.pathname;
-        const pathSegments = currentPath.split('/');
-        const quizId = pathSegments[pathSegments.length - 2]; // Assuming quizId is the second-to-last segment
-        const clientId = pathSegments[pathSegments.length - 1];
-        fetch('/quiz/save-answer', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken, // Include the CSRF token in the headers
-
-            },
-            body: JSON.stringify({
-                question_id: questions[que_count].id, // Assuming you have an 'id' property in your question object
-                user_id: clientId, // Replace with the actual user ID (you can get it from your authentication system)
-                chosen_option: chosenOptionId,
-            }),
-        })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error saving answer:', error));
-
     } else {
         answer.classList.add("incorrect"); // Add red color to incorrect selected option
         answer.insertAdjacentHTML("beforeend", crossIconTag); // Add cross icon to incorrect selected option
         console.log("Wrong Answer");
-        const currentPath = window.location.pathname;
-        const pathSegments = currentPath.split('/');
-        const quizId = pathSegments[pathSegments.length - 2]; // Assuming quizId is the second-to-last segment
-        const clientId = pathSegments[pathSegments.length - 1];
-        fetch('/quiz/save-answer', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken, // Include the CSRF token in the headers
 
-            },
-            body: JSON.stringify({
-                question_id: questions[que_count].id, // Assuming you have an 'id' property in your question object
-                user_id: clientId, // Replace with the actual user ID (you can get it from your authentication system)
-                chosen_option: chosenOptionId,
-            }),
-        })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error saving answer:', error));
         for (let i = 0; i < allOptions; i++) {
             if (option_list.children[i].getAttribute("data-is-correct") === "1") {
                 option_list.children[i].setAttribute("class", "option correct"); // Add green color to correct option
@@ -225,9 +178,15 @@ function optionSelected(answer) {
         option_list.children[i].classList.add("disabled"); // Once user selects an option, disable all options
     }
 
-    next_btn.classList.add("show"); // هذا يفترض بإظهار زر "التالي"
-}
+    // Add user's answer to the array
+    userAnswers.push({
+        question_id: questions[que_count].id,
+        user_id: clientId, // Replace with the actual user ID (you can get it from your authentication system)
+        chosen_option: chosenOptionId,
+    });
 
+    next_btn.classList.add("show");
+}
 
 // Function to move to the next question
 function moveToNextQuestion() {
@@ -235,19 +194,19 @@ function moveToNextQuestion() {
     // Reset some state or perform actions for the next question
 
     // If all questions are answered, send the array of user answers to the server
-
-    saveUserAnswers();
-
-
+    if (que_count === questions.length) {
+        saveUserAnswers();
+    }
 }
 
 // Function to save all user answers
 function saveUserAnswers() {
     const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-    fetch('/quiz/save-answer', {
+    fetch('/quiz/save-answers', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+
+       'Content-Type': 'application/json',
             'X-CSRF-TOKEN': csrfToken,
         },
         body: JSON.stringify({
@@ -326,4 +285,3 @@ function queCounter(index) {
     let totalQueCounTag = '<span><p>' + index + '</p> of <p>' + questions.length + '</p> Questions</span>';
     bottom_ques_counter.innerHTML = totalQueCounTag;  //adding new span tag inside bottom_ques_counter
 }
-

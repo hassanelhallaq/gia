@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CourseFileController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProgramController;
@@ -70,6 +71,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::resource('attendance', AttendanceController::class);
         Route::resource('admins', AdminController::class);
         Route::resource('trainers', TrainerController::class);
+        Route::post('/courses-files', [CourseFileController::class, 'store']);
 
 
 
@@ -79,6 +81,7 @@ Route::get('/invitation/{id}/{course_id}', [SiteController::class, 'index'])->na
 Route::get('/accept/{id}/{course_id}', [SiteController::class, 'second'])->name('invitation.second');
 Route::get('/third/{id}/{course_id}', [SiteController::class, 'third'])->name('invitation.third');
 Route::get('/back/{id}/{quiz_id}', [SiteController::class, 'backInvetaion'])->name('invitation.back');
+Route::get('/files/{id}/{course_id}', [SiteController::class, 'files'])->name('invitation.files');
 
 
 Route::post('/invitation/reply', [SiteController::class, 'storeReply']);

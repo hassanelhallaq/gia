@@ -126,7 +126,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group has-success mg-b-0">
                                     <label for="example"> اسم المدرب </label>
-                                     <select id="trainer" class="form-control select2">
+                                    <select id="trainer" class="form-control select2">
                                         @foreach ($trainers as $item)
                                             <option value="{{ $item->id }}">
                                                 {{ $item->name }}
@@ -150,7 +150,7 @@
                                 <input class="form-control" required="" id="coordinator" type="text">
                             </div>
                             <div class="col-lg-3 mb-3">
-                                <label for="exampleInputEmail1">  صوره </label>
+                                <label for="exampleInputEmail1"> صوره </label>
                                 <div class="custom-file">
                                     <input class="custom-file-input" id="image_course" type="file">
                                     <label class="custom-file-label" for="customFile">Drop files here⇬</label>
@@ -160,12 +160,14 @@
                                 <label for="example"> شروط اضافية </label>
                                 <div class="row">
                                     <div class="col-lg-5">
-                                        <label class="ckbox"><input id="attendance_questionnaire" type="checkbox"><span>ملى
+                                        <label class="ckbox"><input id="attendance_questionnaire"
+                                                type="checkbox"><span>ملى
                                                 استبيان
                                                 الحضور</span></label>
                                     </div>
                                     <div class="col-lg-4 mg-t-20 mg-lg-t-0">
-                                        <label class="ckbox"><input checked="" id="image_check" type="checkbox"><span>
+                                        <label class="ckbox"><input checked="" id="image_check"
+                                                type="checkbox"><span>
                                                 صورة شخصية
                                             </span></label>
                                     </div>
@@ -218,13 +220,15 @@
             formData.append('coordinator', document.getElementById('coordinator').value);
             formData.append('category_id', document.getElementById('category_id').value);
             formData.append('image_check', document.getElementById('image_check').checked);
+
              formData.append('attendance_questionnaire', document.getElementById('attendance_questionnaire').checked);
              formData.append('program_id', document.getElementById('program_id').value);
              formData.append('image_course', document.getElementById('image_course').files[0]);
              formData.append('location', document.getElementById('location').value);
 
 
-             formData.append('desc', document.getElementById('desc').value);
+
+            formData.append('desc', document.getElementById('desc').value);
 
             storeRoute('/dashboard/admin/courses', formData)
 
