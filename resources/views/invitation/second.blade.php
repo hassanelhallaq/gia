@@ -19,8 +19,8 @@
           </div>
         </div>
         <div class="btn_links">
-          <a data-translate="btn_1" href="{{ asset($course->subject) }}">المادة التدريبية</a>
-          <a data-translate="btn_2" href="{{ route('invitation.files',[$attendance->id,request()->course_id]) }}" >الانشطة</a>
+          <a data-translate="btn_1" href="{{ route('invitation.files',[$attendance->id,request()->course_id]) }} ">المادة التدريبية</a>
+          <a data-translate="btn_2" href="{{route('invitation.third',[$attendance->id,request()->course_id])}}" >الانشطة</a>
         </div>
         <div class="btn_links">
 
