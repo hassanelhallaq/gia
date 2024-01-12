@@ -9,6 +9,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CourseFileController;
+use App\Http\Controllers\CourseLinkController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProgramController;
@@ -72,6 +73,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::resource('admins', AdminController::class);
         Route::resource('trainers', TrainerController::class);
         Route::post('/courses-files', [CourseFileController::class, 'store']);
+        Route::post('/courses-links', [CourseLinkController::class, 'store']);
 
 
 
