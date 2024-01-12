@@ -76,6 +76,17 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-6 mg-t-20 mg-lg-t-0">
+                                    <label for="example"> التقيم </label>
+                                    <div class="webflow-style-input">
+                                        <input class="input_no_border readonly" type="text"
+                                            value="{{ $course->rate }}" id="link" readonly>
+                                        <div class="d-flex ml-2">
+                                            <p class="ml-3"> تحرير </p>
+                                            <i class="bi bi-pen edit-button"></i>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!-- closed row -->
 
@@ -355,6 +366,7 @@
                 formData.append('desc', document.getElementById('desc').value);
                 formData.append('location', document.getElementById('location').value);
 
+                formData.append('link', document.getElementById('link').value);
 
 
                 let assignmentInput = document.getElementById('assignment');

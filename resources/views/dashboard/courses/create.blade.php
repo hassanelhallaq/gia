@@ -106,7 +106,11 @@
                                 <input class="form-control" id="location" required="" type="text"
                                     placeholder="This is input">
                             </div>
-
+                            <div class="col-lg-6">
+                                <label for="example"> التقيم </label>
+                                <input class="form-control" id="link" required="" type="text"
+                                    placeholder="This is input">
+                            </div>
                             <div class="col-lg-6 mb-3">
                                 <p class="mg-b-10"> هل يوجد شهادة</p>
                                 <select class="form-control select2" id="is_certificate">
@@ -225,6 +229,7 @@
              formData.append('program_id', document.getElementById('program_id').value);
              formData.append('image_course', document.getElementById('image_course').files[0]);
              formData.append('location', document.getElementById('location').value);
+             formData.append('link', document.getElementById('link').value);
 
 
 

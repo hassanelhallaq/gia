@@ -129,6 +129,9 @@ class SiteController extends Controller
 
     public function files($id, $course_id){
         $files = CourseFile::where('course_id',$course_id)->get();
-        return view('invitation.files',compact('files'));
+        $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
+            $q->where('course_id', $course_id);
+        })->first();
+        return view('invitation.files',compact('files','attendance'));
     }
 }
