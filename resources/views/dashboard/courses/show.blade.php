@@ -410,7 +410,6 @@
                         @include('dashboard.courses.model_add_file')
 
                     </div>
-                    {{-- <h5 class="mb-2">ملفات الدورة</h5> --}}
                     <div class="tab-menu-heading">
                         <div class="tabs-menu ">
                             <!-- Tabs -->
@@ -542,9 +541,13 @@
 
             <div class="col-lg-6 col-sm-12">
                 <div class="panel panel-primary tabs-style-3 bg-white card card-dashboard-eight ">
-                    <h5 class="">روابط الدورة</h5>
-                    <div class="tab-menu-heading mg-t-15">
-                        <div class="tabs-menu ">
+                    <div class="d-flex justify-content-between mb-2">
+                        <h5 class="">ملفات الدورة</h5>
+                        <button class="btn btn-secondary btn-sm btn-light-icon mr-2 p-1" data-target="#modalurl" data-toggle="modal"> اضافة رابط <i class="bi bi-plus-circle"></i></button>
+                        @include('dashboard.courses.model_add_url')
+                    </div>
+                    <div class="tab-menu-heading">
+                        <div class="tabs-menu mb-1">
                             <!-- Tabs -->
                             <ul class="nav panel-tabs">
                                 <li><a href="#tab11" data-toggle="tab" class="d-flex active"> الكل  <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li>
