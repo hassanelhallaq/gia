@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="menu_icon">
-           <a href="{{route('invitation.third',[$attendance->id,request()->course_id])}}"> <img src="{{asset('site/assets/icons8-hamburger-menu-50.png')}}" alt="" /></a>
+           {{-- <a href="{{route('invitation.third',[$attendance->id,request()->course_id])}}"> <img src="{{asset('site/assets/icons8-hamburger-menu-50.png')}}" alt="" /></a> --}}
           </div>
         </div>
       </div>
