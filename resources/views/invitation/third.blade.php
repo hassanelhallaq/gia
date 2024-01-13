@@ -28,7 +28,7 @@
         <div class="card">
           <div>
             <div class="card_title">
-              <p>التكليف</p>
+              <p>التكليف </p>
             </div>
             <div class="card_text not">
               <span  data-translate="not_submit">لم يقدم </span>
