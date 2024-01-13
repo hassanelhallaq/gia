@@ -24,7 +24,7 @@
         <div class="head_container">
           <div class="profile">
             <div class="profile_img">
-              <img src="{{asset('site/assets/profile.webp')}}" alt="" />
+              <img src="{{asset('site/assets/profile.jpg')}}" alt="" />
             </div>
             <div class="profile_txt">
               <span id=""  data-translate="profile_txt">مرحبا بك</span>
