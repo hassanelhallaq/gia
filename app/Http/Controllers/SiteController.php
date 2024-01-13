@@ -59,12 +59,13 @@ class SiteController extends Controller
 
     public function third($id, $course_id)
     {
-        $course = Course::findOrFail($course_id);
-        $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
+
+         $course = Course::findOrFail($course_id);
+          $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
-        $quiz = QuizCourse::where('course_id', $course_id)->first();
-        $quizAtten = QuizAttendance::where('quiz_id', $quiz->quiz_id)->first();
+         $quiz = QuizCourse::where('course_id', $course_id)->first();
+            $quizAtten = QuizAttendance::where('quiz_id', $quiz->quiz_id)->where('attendance_id',$id)->first();
         return view("invitation.third", compact("attendance", "course", 'quiz', 'quizAtten'));
     }
     public function backInvetaion($id, $auizId)
@@ -76,7 +77,7 @@ class SiteController extends Controller
             $q->where('course_id', $course_id);
         })->first();
         $quiz = QuizCourse::where('quiz_id', $auizId)->first();
-        $quizAtten = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $id)->first();
+          $quizAtten = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $id)->first();
         return redirect()->route('invitation.third', ['id' => $id, 'course_id' => $course_id]);
         // return view("invitation.third", compact("attendance", "course", 'quiz','quizAtten'));
     }
