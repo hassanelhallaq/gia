@@ -28,8 +28,12 @@
                     اضافة مشاركين جدد <i class="bi bi-plus"></i></button>
                 <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركين <i
                         class="bi bi-box-arrow-in-down"></i></i></button>
-                <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1"> ارسال دعوة جماعية <i
-                        class="icon ion-md-paper-plane"></i></button>
+                {{-- <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1"> ارسال دعوة جماعية <i
+                        class="icon ion-md-paper-plane"></i></button> --}}
+
+                        <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة جماعية <i
+                            class="icon ion-md-paper-plane"></i></button>
+
                 <a href="../index.html" class="btn btn-previous btn-sm text-warning mt-2"><i
                         class="ti-angle-double-right"></i> العودة </a>
             </div>
@@ -463,6 +467,29 @@
             </div>
         </div>
     @endforeach
+    <div class="modal" id="sendSms">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-content-demo">
+
+                <form action="">
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="col-12 form-group">
+                                <label for="example"> رساله </label>
+                                <textarea class="form-control" required="" id="massege" type="text"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="performStoreSms({{$id}})"> حفظ <i class="bi bi-floppy"></i></button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div id="side-drawer-void" class="position-fixed d-none" onclick="closeSideDrawer()"></div>
 @endsection
 @section('js')
@@ -494,7 +521,13 @@
             formData.append('course_id', id);
             storepart('/dashboard/admin/attendance', formData)
         }
+        function performStoreSms(id) {
+            let formData = new FormData();
+            formData.append('massege', document.getElementById('massege').value);
+            formData.append('course_id', id);
 
+             storepart('/dashboard/admin/attendance-sms', formData)
+        }
         function performUpdate(id) {
             let formData = new FormData();
             formData.append("_method", "PUT")

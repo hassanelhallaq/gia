@@ -54,6 +54,8 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/duplicate/{id}', [CourseController::class, 'question'])->name('duplicate.courses');
         Route::get('/{id}/{course_id}/login', [AttendanceLoginController::class, 'login'])->name('attendance.login');
         Route::get('/attendance-summery/{id}/{attendanceId}', [UserAnswerController::class, 'userAswers'])->name('attendance.summery');
+        Route::post('/attendance-sms', [CourseController::class, 'sendSms'])->name('attendance.sms');
+
 
     }
 );

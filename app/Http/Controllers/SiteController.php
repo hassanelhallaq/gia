@@ -6,6 +6,7 @@ use App\Models\Attendance;
 use App\Models\AttendanceCourse;
 use App\Models\Course;
 use App\Models\CourseFile;
+use App\Models\CourseLink;
 use App\Models\Question;
 use App\Models\QuestionOption;
 use App\Models\Quiz;
@@ -132,6 +133,8 @@ class SiteController extends Controller
         $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
-        return view('invitation.files',compact('files','attendance'));
+        $links = CourseLink::where('course_id',$course_id)->get();
+
+        return view('invitation.files',compact('files','attendance','links'));
     }
 }

@@ -129,7 +129,7 @@ class CourseController extends Controller
         $courseLinks = CourseLink::where('course_id',$id)->get();
 
 
-        return view("dashboard.courses.show", compact("course",'courseFile'));
+        return view("dashboard.courses.show", compact("course",'courseFile','courseLinks'));
     }
 
     /**
@@ -254,5 +254,13 @@ class CourseController extends Controller
         $newCourses->created_at = Carbon::now();
         $save = $newCourses->save();
         return response()->json(['icon' => 'success', 'title' => 'تم الحفط  بنجاح'], $save ? 200 : 400);
+    }
+
+    public function sendSms(Request $request){
+        $course = Course::with('attendances')->find($request->course_id);
+        foreach($course->attendances as $attendance){
+            $phone = $attendance->phone_number;
+            $massege = $request->massege ;
+        }
     }
 }
