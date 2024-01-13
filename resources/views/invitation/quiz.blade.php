@@ -7,15 +7,22 @@
     <title>Awesome Quiz App | CodingNepal</title>
     <link rel="stylesheet" href="{{asset('quiz/style.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- FontAweome CDN Link for Icons-->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&family=Tajawal:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 </head>
 <body>
+    <div class="logoquiz">
+        <img src="{{ URL::asset('assets/img/brand/logo.png') }}" class="fu" alt="">
+    </div>
     <!-- start Quiz button -->
-    <div class="start_btn"><button> ابدأ الاختبار </button></div>
 
     <!-- Info Box -->
+<div class="mainqu">
+    <div class="mainto">
+    <div class="start_btn"><button> ابدأ الاختبار </button></div>
+
     <div class="info_box">
+
         <div class="info-title"><span>Some Rules of this Quiz</span></div>
         <div class="info-list">
             <div class="info">1. You will have only <span>15 seconds</span> per each question.</div>
@@ -29,11 +36,13 @@
             <button class="restart">الاستمرار</button>
         </div>
     </div>
+    <br><br>
+
 
     <!-- Quiz Box -->
     <div class="quiz_box">
         <header>
-            <div class="title">اجب على الاسئلة الاتية ↶</div>
+            <div class="title">اجب على الاسئلة الاتية</div>
             <div class="timer">
                 <div class="time_left_txt"> وقت الاختبار </div>
                 <div class="timer_sec">15</div>
@@ -57,6 +66,8 @@
             <button class="next_btn">السؤال التالي</button>
         </footer>
     </div>
+    <br><br><br>
+
 
     <!-- Result Box -->
     <div class="result_box">
@@ -73,11 +84,10 @@
 
         </div>
     </div>
+    <br><br>
 
-    <!-- Inside this JavaScript file I've inserted Questions and Options only -->
-    {{-- <script src="{{asset('quiz/js/questions.js')}}"></script> --}}
-
-    <!-- Inside this JavaScript file I've coded all Quiz Codes -->
+</div>
+</div>
     <script src="{{asset('quiz/js/script.js')}}"></script>
 
 </body>
