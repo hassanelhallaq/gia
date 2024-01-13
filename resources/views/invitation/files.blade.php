@@ -16,7 +16,7 @@
               <span  data-translate="not_submit">{{$item->type}} </span>
             </div>
           </div>
-          <div class="card_icon"><a href="{{asset($item->file)}}"  data-translate="submit">&#10140;  </a></div>
+          <div class="card_icon"><a href="{{asset($item->file)}}"  data-translate="submit" download>&#10140;  </a></div>
         </div>
         @endforeach
 

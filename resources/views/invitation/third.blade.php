@@ -11,17 +11,19 @@
             </div>
             <div class="card_text">
               <a   data-translate="submit">
-                @if($quizAtten)
+                الرجاء تقديم الاختبار
+                {{-- @if($quizAtten)
                 تم التقديم
                 @else
                لم يقدم
-                @endif
+                @endif --}}
             </a>
             </div>
           </div>
-          @if($quizAtten == null)
-          <div class="card_icon"><a href="{{route('quiz.view',['quizId'=>$quiz->quiz_id,'clientId'=>$attendance->id])}}"  data-translate="submit">&#10140;  </a>
-            @endif
+          {{-- @if($quizAtten == null) --}}
+          {{-- <div class="card_icon"><a href="{{route('quiz.view',['quizId'=>$quiz->quiz_id,'clientId'=>$attendance->id])}}"  data-translate="submit">&#10140;  </a> --}}
+            <div class="card_icon"><a href="https://shorturl.at/osyB0 "  data-translate="submit">&#10140;  </a>
+            {{-- @endif --}}
          </div>
         </div>
 
@@ -31,7 +33,7 @@
               <p>التكليف </p>
             </div>
             <div class="card_text not">
-              <span  data-translate="not_submit">لم يقدم </span>
+                <span  data-translate="not_submit"> غير متوفر الان </span>
             </div>
           </div>
           <div class="card_icon">&#10140;</div>
@@ -41,8 +43,9 @@
             <div class="card_title">
               <p>الاختبار التفاعلي</p>
             </div>
-            <div class="card_text">
-              <span  data-translate="submit">تم التقديم </span>
+
+            <div class="card_text not">
+                <span  data-translate="not_submit"> غير متوفر الان </span>
             </div>
           </div>
           <div class="card_icon">&#10140;</div>
@@ -52,8 +55,8 @@
             <div class="card_title">
               <p>الاختبار البعدي</p>
             </div>
-            <div class="card_text">
-              <span  data-translate="submit">تم التقديم </span>
+            <div class="card_text not">
+                <span  data-translate="not_submit"> غير متوفر الان </span>
             </div>
           </div>
           <div class="card_icon">&#10140;</div>
