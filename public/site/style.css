@@ -327,3 +327,4 @@ button .disabled{background-color:red !important;}
 .btn_links .disabled {opacity: 0.5 !important;    pointer-events: none !important;
 }
 
+.p-40{padding: 40px;}
