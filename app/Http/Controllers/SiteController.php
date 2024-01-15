@@ -64,7 +64,9 @@ class SiteController extends Controller
           $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
-         $quiz = QuizCourse::where('course_id', $course_id)->first();
+           $quiz = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz',function($q){
+            $q->where('type','befor');
+         })->first();
             $quizAtten = QuizAttendance::where('quiz_id', $quiz->quiz_id)->where('attendance_id',$id)->first();
         return view("invitation.third", compact("attendance", "course", 'quiz', 'quizAtten'));
     }
@@ -83,12 +85,14 @@ class SiteController extends Controller
     }
     public function quiz($id, $clientId)
     {
-        $questions = Question::with('options')->where('quiz_id', $id)->get();
+         $questions = Question::with('options')->where('quiz_id', $id)->with('quiz')->whereHas('quiz',function($q){
+            $q->where('type','befor');
+        })->get();
         return response()->json(['questions' => $questions]);
     }
     public function quizView($id, $clientId)
     {
-          $quizAtend = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $clientId)->first();
+         $quizAtend = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $clientId)->first();
         if ($quizAtend == null) {
         return view('invitation.quiz',compact('id','clientId'));
         } else {

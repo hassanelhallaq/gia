@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Question extends Model
 {
@@ -26,4 +27,9 @@ class Question extends Model
     {
         return $this->hasOne(UserAnswer::class);
     }
-}
+
+      public function quiz()
+    {
+        return $this->BelongsTo(Quiz::class);
+    }
+ }
