@@ -12,14 +12,14 @@
           </div>
           <span class="accepted" data-translate="accepted"> تم القبول </span>
           <div class="disc">
-            <p>
+            <p class="tx-14">
                 {{ $course->desc }}
 
             </p>
           </div>
         </div>
         <div class="btn_links">
-          <a data-translate="btn_1" href="{{ route('invitation.files',[$attendance->id,request()->course_id]) }} ">المادة التدريبية</a>
+          <a data-translate="btn_1" href="{{ route('invitation.files',[$attendance->id,request()->course_id]) }} "> المادة العلمية للدورة </a>
           <a data-translate="btn_2" href="{{route('invitation.third',[$attendance->id,request()->course_id])}}" >الانشطة</a>
         </div>
         <div class="btn_links">
@@ -39,10 +39,11 @@
         <span class="close" onclick="togglePopup()">&times;</span>
           <img src="{{asset('site/assets/logo.png')}}" alt="">
           <img src="{{asset($attendance->qr)}}" alt="">
-          <p  data-translate="qr_text">برجاء عرض رمز الدخول السريع للمنسق حتى يتم تسجيل القبول بالدورة </p>
-          <div class="btn_links">
+          <p  data-translate="qr_text"> الرجاء عرض رمز الدخول السريع حتى يتم تسجيل الدخول بالدورة </p>
+          {{-- <div class="btn_links">
             <button  data-translate="enter">دخول </button>
-          </div>
+          </div> --}}
+
       </div>
     </div>
 </div>

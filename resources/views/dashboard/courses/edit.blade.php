@@ -205,6 +205,50 @@
                                 </div>
 
                                 <div class="col-lg-6 mb-3">
+                                    <label for="example"> حاله الاختبار القبلي</label>
+                                    <div class="webflow-style-input">
+                                        <select id="status_befor" class="form-control select2 input_no_border custom-select" >
+                                            <option></option>
+                                            <option value="active">
+                                                فعال
+                                            </option>
+                                            <option value="InActive">
+                                                غير مفعل
+                                            </option>
+                                            @endforeach
+                                        </select>
+
+                                        <div class="d-flex ml-2">
+                                            <p class="ml-1"> تحرير </p>
+                                            <i class="bi bi-pen edit-button ml-2"></i>
+                                            <p class="ml-3 "> البحث عن اختبار </p>
+                                            <i class="bi bi-box-arrow-in-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <label for="example"> حاله الاختبار البعدي</label>
+                                    <div class="webflow-style-input">
+                                        <select id="status_after" class="form-control select2 input_no_border custom-select" >
+                                            <option></option>
+                                            <option value="active">
+                                                فعال
+                                            </option>
+                                            <option value="InActive">
+                                                غير مفعل
+                                            </option>
+                                            @endforeach
+                                        </select>
+
+                                        <div class="d-flex ml-2">
+                                            <p class="ml-1"> تحرير </p>
+                                            <i class="bi bi-pen edit-button ml-2"></i>
+                                            <p class="ml-3 "> البحث عن اختبار </p>
+                                            <i class="bi bi-box-arrow-in-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
                                     <label for="example"> الاختبار القبلي </label>
                                     <div class="webflow-style-input">
                                         <select id="quiz_befor_id" class="form-control select2 input_no_border custom-select" >
@@ -365,8 +409,9 @@
                 formData.append('image_course', document.getElementById('image_course').files[0]);
                 formData.append('desc', document.getElementById('desc').value);
                 formData.append('location', document.getElementById('location').value);
-
                 formData.append('link', document.getElementById('link').value);
+                formData.append('status_befor', document.getElementById('status_befor').value);
+                formData.append('status_after', document.getElementById('status_after').value);
 
 
                 let assignmentInput = document.getElementById('assignment');

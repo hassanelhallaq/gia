@@ -126,11 +126,11 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::withCount("attendances")->with('attendances')->find($id);
-        $courseFile = CourseFile::where('course_id', $id)->get();
-        $courseLinks = CourseLink::where('course_id', $id)->get();
+        $courseFile = CourseFile::where('course_id',$id)->get();
+        $courseLinks = CourseLink::where('course_id',$id)->get();
 
 
-        return view("dashboard.courses.show", compact("course", 'courseFile', 'courseLinks'));
+        return view("dashboard.courses.show", compact("course",'courseFile','courseLinks'));
     }
 
     /**
@@ -177,9 +177,10 @@ class CourseController extends Controller
         $course->trainer_id = $request->trainer;
         $course->level = $request->level;
         $course->desc = $request->desc;
-        $course->rate = $request->location;
-        $course->link = $request->link;
-
+        $course->location = $request->location;
+        $course->rate = $request->link;
+        $course->status_befor = $request->status_befor;
+        $course->status_after = $request->status_after;
         $course->percentage_certificate = $request->percentage_certificate;
         $course->coordinator = $request->coordinator;
         $course->category_id = $request->category_id;
@@ -257,7 +258,7 @@ class CourseController extends Controller
         return response()->json(['icon' => 'success', 'title' => 'تم الحفط  بنجاح'], $save ? 200 : 400);
     }
 
-    public function sendSms(Request $request)
+public function sendSms(Request $request)
     {
         $course = Course::with('attendances')->find($request->course_id);
         foreach ($course->attendances as $attendance) {
@@ -292,7 +293,7 @@ class CourseController extends Controller
                 'response' => $response,
             ]);
             // Get the server response
-            return  $server_output = $response->body();
+             $server_output = $response->body();
 
             // Further processing...
             // if ($server_output == "OK") { echo "1"; } else { echo "0"; }

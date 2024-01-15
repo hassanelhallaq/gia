@@ -24,7 +24,7 @@
         <div class="head_container">
           <div class="profile">
             <div class="profile_img">
-              <img src="{{asset('site/assets/profile.webp')}}" alt="" />
+              <img src="{{asset('site/assets/profile.jpg')}}" alt="" />
             </div>
             <div class="profile_txt">
               <span id=""  data-translate="profile_txt">مرحبا بك</span>
@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="menu_icon">
-           <a href="{{route('invitation.third',[$attendance->id,request()->course_id])}}"> <img src="{{asset('site/assets/icons8-hamburger-menu-50.png')}}" alt="" /></a>
+           {{-- <a href="{{route('invitation.third',[$attendance->id,request()->course_id])}}"> <img src="{{asset('site/assets/icons8-hamburger-menu-50.png')}}" alt="" /></a> --}}
           </div>
         </div>
       </div>

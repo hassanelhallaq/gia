@@ -26,12 +26,12 @@ continue_btn.onclick = () => {
     quiz_box.classList.add("activeQuiz"); // show quiz box
     showQuestions(0); // calling showQuestions function instead of showQuetions
     queCounter(1); // passing 1 parameter to queCounter
-    startTimer(15); // calling startTimer function
+    startTimer(timeValue); // calling startTimer function
     startTimerLine(0); // calling startTimerLine function
 }
 
 
-let timeValue = 15;
+let timeValue = 120;
 let que_count = 0;
 let que_numb = 1;
 let userScore = 0;
@@ -144,9 +144,6 @@ next_btn.addEventListener("click", function () {
 let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
 let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
 
-//if user clicked on option
-//if user clicked on option
-// Assuming que_count is a variable tracking the current question
 
 let userAnswers = [];
 
@@ -232,13 +229,7 @@ function optionSelected(answer) {
 // Function to move to the next question
 function moveToNextQuestion() {
     que_count++;
-    // Reset some state or perform actions for the next question
-
-    // If all questions are answered, send the array of user answers to the server
-
     saveUserAnswers();
-
-
 }
 
 // Function to save all user answers
@@ -313,11 +304,11 @@ function startTimer(time) {
 function startTimerLine(time) {
     counterLine = setInterval(timer, 29);
     function timer() {
-        time += 1; //upgrading time value with 1
-        time_line.style.width = time + "px"; //increasing width of time_line with px by time value
-        if (time > 549) { //if time value is greater than 549
-            clearInterval(counterLine); //clear counterLine
-        }
+        // time += 1; //upgrading time value with 1
+        // time_line.style.width = time + "px"; //increasing width of time_line with px by time value
+        // if (time > 549) { //if time value is greater than 549
+        //     clearInterval(counterLine); //clear counterLine
+        // }
     }
 }
 

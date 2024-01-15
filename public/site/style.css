@@ -131,7 +131,7 @@ html{
     border-bottom: 1px solid grey;
     padding-block: .5rem;
   }
-
+.tx-14{font-size: 13px;}
   .vedio_discription .disc p{
     color: grey;
     line-height: 1.8;
@@ -283,6 +283,7 @@ html{
     bottom: 0;
     left: 0;
     right: 0;
+    height: 117%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 99;
     display: none;
@@ -323,5 +324,6 @@ html{
 .w-25{width: 50% !important;}
 .tx-white{color: white !important;}
 button .disabled{background-color:red !important;}
-button .btn_primery .disabled {opacity: .5px !important;}
-button:disabled {opacity: .5}
+.btn_links .disabled {opacity: 0.5 !important;    pointer-events: none !important;
+}
+

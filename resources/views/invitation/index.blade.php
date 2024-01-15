@@ -21,10 +21,12 @@
                     <p class="icon">&#8592;</p>
                 </div>
                 <div class="btn_secondary">
+                    @if($attendance->is_accepted == null || $attendance->is_accepted == 1)
                     <div>
                         <input type="radio" id="is_accepted" name="acceptance" value="1" />
                         <label for="accept" data-translate="accept">قبول</label>
                     </div>
+                    @endif
                     <div>
                         <input type="radio" id="is_accepted" name="acceptance" value="0" />
                         <label for="refuse" data-translate="refuse">رفض</label>

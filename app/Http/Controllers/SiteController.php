@@ -41,7 +41,7 @@ class SiteController extends Controller
         if($request->is_accepted == "true"){
         return response()->json(['redirect' => route('invitation.second', [$attendance->id, $request->course_id])]);
        }else{
-        return redirect()->back();
+        return response()->json(['redirect' => route('invitation.index', [$attendance->id, $request->course_id])]);
        }
     }
 
