@@ -32,7 +32,7 @@
                 </div>
                 <div class="wrap ">
                     <div class="btn_links mt-2">
-                        <button data-translate="send" class="btn_primery" type="button" onclick="performStore({{$attendance->id}},{{$course->id}})">ارسال</button>
+                        <button data-translate="send" class="btn_primery" type="button" onclick="performStore({{$attendance->id}},{{request()->course_id}})">ارسال</button>
                     </div>
                 </div>
             </div>
