@@ -25,22 +25,22 @@
                     {{-- <div class="card_icon"><a href="https://shorturl.at/osyB0 "  data-translate="submit">&#10140;  </a> --}}
                     {{-- @endif --}}
                     @if ($quizAtten == null)
-                    @if($course->status_befor == 'active')
-                        @if ($quiz->how_attend = 'questions')
-
-                            <div class="card_icon"><a
-                                    href="{{ route('quiz.view', ['quizId' => $quiz->quiz_id, 'clientId' => $attendance->id]) }}"
-                                    data-translate="submit">&#10140; </a>
-                            @elseif($quiz->how_attend = 'link')
-                                <div class="card_icon"><a href="{{ $quiz->link }}" data-translate="submit">&#10140; </a>
-                                @else
-                                    <div class="card_icon"><a href="https://shorturl.at/osyB0 "
-                                            data-translate="submit">&#10140; </a>
-                        @endif
+                        @if ($course->status_befor == 'active')
+                            @if ($quiz->how_attend = 'questions')
+                                <div class="card_icon"><a
+                                        href="{{ route('quiz.view', ['quizId' => $quiz->quiz_id, 'clientId' => $attendance->id]) }}"
+                                        data-translate="submit">&#10140; </a>
+                                @elseif($quiz->how_attend = 'link')
+                                    <div class="card_icon"><a href="{{ $quiz->link }}" data-translate="submit">&#10140;
+                                        </a>
+                                    @else
+                                        <div class="card_icon"><a href="https://shorturl.at/osyB0 "
+                                                data-translate="submit">&#10140; </a>
+                            @endif
                         @else
-                        <div class="card_text not">
-                            <span data-translate="not_submit"> غير متوفر الان </span>
-                        </div>
+                            <div class="card_text not">
+                                <span data-translate="not_submit"> غير متوفر الان </span>
+                            </div>
                         @endif
                     @endif
                 </div>
@@ -78,7 +78,24 @@
                         <span data-translate="not_submit"> غير متوفر الان </span>
                     </div>
                 </div>
-                <div class="card_icon">&#10140;</div>
+                @if ($quizAtten == null)
+                    @if ($course->status_after == 'active')
+                        @if ($quizAfter->how_attend = 'questions')
+                            <div class="card_icon"><a
+                                    href="{{ route('quiz.view', ['quizId' => $quizAfter->quiz_id, 'clientId' => $attendance->id]) }}"
+                                    data-translate="submit">&#10140; </a>
+                            @elseif($quizAfter->how_attend = 'link')
+                                <div class="card_icon"><a href="{{ $quizAfter->link }}" data-translate="submit">&#10140; </a>
+                                @else
+                                    <div class="card_icon"><a href="https://shorturl.at/osyB0 "
+                                            data-translate="submit">&#10140; </a>
+                        @endif
+                    @else
+                        <div class="card_text not">
+                            <span data-translate="not_submit"> غير متوفر الان </span>
+                        </div>
+                    @endif
+                @endif
             </div>
 
             <div class="btn_links">

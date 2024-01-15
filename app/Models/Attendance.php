@@ -16,6 +16,10 @@ class Attendance extends Model
         'job',
     ];
 
+
+    public function attendance_logins(){
+        return $this->hasMany(AttendanceLogin::class);
+    }
     public function courses(){
         return $this->belongsToMany(Course::class , AttendanceCourse::class );
     }

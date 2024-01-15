@@ -129,7 +129,6 @@ class CourseController extends Controller
         $courseFile = CourseFile::where('course_id',$id)->get();
         $courseLinks = CourseLink::where('course_id',$id)->get();
 
-
         return view("dashboard.courses.show", compact("course",'courseFile','courseLinks'));
     }
 

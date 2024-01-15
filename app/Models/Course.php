@@ -28,7 +28,7 @@ class Course extends Model
     ];
     public function attendances()
     {
-        return $this->belongsToMany(Attendance::class, AttendanceCourse::class);
+        return $this->belongsToMany(Attendance::class, AttendanceCourse::class)->withPivot('certficate');
     }
 
     public function program()

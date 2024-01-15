@@ -67,8 +67,11 @@ class SiteController extends Controller
            $quiz = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz',function($q){
             $q->where('type','befor');
          })->first();
+         $quizAfter= QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz',function($q){
+            $q->where('type','after');
+         })->first();
             $quizAtten = QuizAttendance::where('quiz_id', $quiz->quiz_id)->where('attendance_id',$id)->first();
-        return view("invitation.third", compact("attendance", "course", 'quiz', 'quizAtten'));
+        return view("invitation.third", compact("attendance", "course", 'quiz', 'quizAtten','quizAfter'));
     }
     public function backInvetaion($id, $auizId)
     {
@@ -85,9 +88,7 @@ class SiteController extends Controller
     }
     public function quiz($id, $clientId)
     {
-         $questions = Question::with('options')->where('quiz_id', $id)->with('quiz')->whereHas('quiz',function($q){
-            $q->where('type','befor');
-        })->get();
+         $questions = Question::with('options')->where('quiz_id', $id)->with('quiz')->get();
         return response()->json(['questions' => $questions]);
     }
     public function quizView($id, $clientId)
