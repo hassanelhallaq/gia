@@ -34,16 +34,12 @@
 
 
 <div class="overlay">
-    <div class="wrap ">
-      <div class="qr_container df f-c  ai-c g1">
+    <div class="wrap">
+      <div class="qr_container df f-c  ai-c g1 p-40">
         <span class="close" onclick="togglePopup()">&times;</span>
-          <img src="{{asset('site/assets/logo.png')}}" alt="">
+          {{-- <img src="{{asset('site/assets/logo.png')}}" alt=""> --}}
           <img src="{{asset($attendance->qr)}}" alt="">
           <p  data-translate="qr_text"> الرجاء عرض رمز الدخول السريع حتى يتم تسجيل الدخول بالدورة </p>
-          {{-- <div class="btn_links">
-            <button  data-translate="enter">دخول </button>
-          </div> --}}
-
       </div>
     </div>
 </div>

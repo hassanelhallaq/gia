@@ -3,7 +3,19 @@
 <section>
     <div class="wrap">
       <div class="container_cards">
-
+        @if($attendance->certficate)
+        <div class="card">
+            <div>
+              <div class="card_title">
+                <p>شهاده</p>
+              </div>
+              <div class="card_text not">
+                {{-- <span  data-translate="not_submit">{{$item->type}} </span> --}}
+              </div>
+            </div>
+            <div class="card_icon"><a href="{{asset($attendance->certficate)}}"  data-translate="submit" download>&#10140;  </a></div>
+          </div>
+          @endif
         @foreach ($files as $item)
         <div class="card">
           <div>
@@ -17,7 +29,7 @@
           <div class="card_icon"><a href="{{asset($item->file)}}"  data-translate="submit" download>&#10140;  </a></div>
         </div>
         @endforeach
-        @foreach ($$links as $item)
+        @foreach ($links as $item)
         <div class="card">
           <div>
             <div class="card_title">
