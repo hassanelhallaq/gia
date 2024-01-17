@@ -56,10 +56,14 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/attendance-summery/{id}/{attendanceId}', [UserAnswerController::class, 'userAswers'])->name('attendance.summery');
         Route::post('/attendance-sms', [CourseController::class, 'sendSms'])->name('attendance.sms');
 
-        // روت مؤقت للصفحة الاسئلة خاصة باختبار معين
+        // روت مؤقت
         Route::get('/quiz/detales', function () {
             return view('dashboard.quiz.detales');
         })->name('quiz_detales');
+
+        Route::get('/third_connect', function () {
+            return view('invitation.third_connect');
+        })->name('third_connect');
 
 
     }
