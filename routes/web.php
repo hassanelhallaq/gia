@@ -56,6 +56,11 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/attendance-summery/{id}/{attendanceId}', [UserAnswerController::class, 'userAswers'])->name('attendance.summery');
         Route::post('/attendance-sms', [CourseController::class, 'sendSms'])->name('attendance.sms');
 
+        // روت مؤقت للصفحة الاسئلة خاصة باختبار معين
+        Route::get('/quiz/detales', function () {
+            return view('dashboard.quiz.detales');
+        })->name('quiz_detales');
+
 
     }
 );
