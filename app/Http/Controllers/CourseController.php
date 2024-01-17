@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Client;
 use App\Models\Course;
 use App\Models\CourseFile;
+use App\Models\CourseLink;
 use App\Models\Program;
 use App\Models\Quiz;
 use App\Models\QuizCourse;
@@ -13,6 +14,7 @@ use App\Models\Trainer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class CourseController extends Controller
 {
@@ -125,7 +127,9 @@ class CourseController extends Controller
     {
         $course = Course::withCount("attendances")->with('attendances')->find($id);
         $courseFile = CourseFile::where('course_id',$id)->get();
-        return view("dashboard.courses.show", compact("course",'courseFile'));
+        $courseLinks = CourseLink::where('course_id',$id)->get();
+
+        return view("dashboard.courses.show", compact("course",'courseFile','courseLinks'));
     }
 
     /**
@@ -172,9 +176,10 @@ class CourseController extends Controller
         $course->trainer_id = $request->trainer;
         $course->level = $request->level;
         $course->desc = $request->desc;
-        $course->rate = $request->location;
-        $course->link = $request->link;
-
+        $course->location = $request->location;
+        $course->rate = $request->link;
+        $course->status_befor = $request->status_befor;
+        $course->status_after = $request->status_after;
         $course->percentage_certificate = $request->percentage_certificate;
         $course->coordinator = $request->coordinator;
         $course->category_id = $request->category_id;
@@ -250,5 +255,47 @@ class CourseController extends Controller
         $newCourses->created_at = Carbon::now();
         $save = $newCourses->save();
         return response()->json(['icon' => 'success', 'title' => 'تم الحفط  بنجاح'], $save ? 200 : 400);
+    }
+
+public function sendSms(Request $request)
+    {
+        $course = Course::with('attendances')->find($request->course_id);
+        foreach ($course->attendances as $attendance) {
+            $phone = $attendance->phone_number;
+            $massege = $request->massege;
+
+            // Retrieve POST parameters from the request
+            $sender = urlencode(request()->input('sender'));
+            $apikey = request()->input('api_key');
+            $username = request()->input('username');
+            $numbers = request()->input('numbers');
+            $response = request()->input('response');
+
+            // Process message for Unicode characters
+            if (request()->input('unicode') == 1) {
+                $mssg = request()->input('message');
+                $msg = str_replace("061B", "Ø", $mssg);
+                // ... (continue with your Unicode character replacements)
+            } else {
+                $msg = request()->input('message');
+            }
+
+            $lmsg = urlencode($msg);
+
+            // Make the HTTP request using Laravel HTTP client
+            $response = Http::post('https://www.mora-sa.com/api/v1/sendsms', [
+                'api_key' => "6052582b4d3853cae29fb67c8c9109f34c735af5",
+                'username' => "gialearning",
+                'message' => $massege . "\n" . route('invitation.index', [$attendance->id, 'course_id' => $request->course_id]),
+                'sender' => "GiaLearning",
+                'numbers' => $phone,
+                'response' => $response,
+            ]);
+            // Get the server response
+             $server_output = $response->body();
+
+            // Further processing...
+            // if ($server_output == "OK") { echo "1"; } else { echo "0"; }
+        }
     }
 }

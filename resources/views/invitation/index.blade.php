@@ -21,10 +21,12 @@
                     <p class="icon">&#8592;</p>
                 </div>
                 <div class="btn_secondary">
+                    @if($attendance->is_accepted == null || $attendance->is_accepted == 1)
                     <div>
                         <input type="radio" id="is_accepted" name="acceptance" value="1" />
                         <label for="accept" data-translate="accept">قبول</label>
                     </div>
+                    @endif
                     <div>
                         <input type="radio" id="is_accepted" name="acceptance" value="0" />
                         <label for="refuse" data-translate="refuse">رفض</label>
@@ -32,7 +34,7 @@
                 </div>
                 <div class="wrap ">
                     <div class="btn_links mt-2">
-                        <button data-translate="send" class="btn_primery" type="button" onclick="performStore({{$attendance->id}},{{$course->id}})">ارسال</button>
+                        <button data-translate="send" class="btn_primery" type="button" onclick="performStore({{$attendance->id}},{{request()->course_id}})">ارسال</button>
                     </div>
                 </div>
             </div>

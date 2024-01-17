@@ -284,6 +284,8 @@
                                    <th> الاختبارات </th>
                                    <th> الحضور </th>
                                    <th> الاكتمال </th>
+                                   <th> الدعوه </th>
+
                                    {{-- <th> الشهادة </th> --}}
                                     <td class="col-filter">
                                     <!-- dropdown-menu -->
@@ -315,27 +317,43 @@
                                        <span class="ml-3 examBefor" data-bs-toggle="offcanvas" data-bs-target="#drawerafter_{{$item->id}}" aria-controls="offcanvasWithBothOptions"> بعدي </span>
                                    </td>
                                    <td>
-                                    <span class="ml-2 dropdown"> 4 ايام </span>
+                                    <span class="ml-2 dropdown">
+                                        {{ $course->duration }} ايام
+                                    </span>
 
-                                    <button class=" btn btn-previous p-0" data-toggle="dropdown"><i class="bi bi-exclamation-circle"></i></button>
+                                    <button class="btn btn-previous p-0" data-toggle="dropdown"><i class="bi bi-exclamation-circle"></i></button>
+
                                     <div class="Attendance dropdown-menu scrollable-menu">
-                                        <span class="dropdown-item"> اليوم الاول  </span>
-                                        <span class="dropdown-item text-danger"> اليوم الثاني </span>
-                                        <span class="dropdown-item"> اليوم الثالث</span>
-                                        <span class="dropdown-item text-danger"> اليوم الرابع</span>
-                                        <span class="dropdown-item"> اليوم الخامس </span>
+                                        @php
+                                        $courseStartDate = \Carbon\Carbon::parse($course->start);
+                                        @endphp
+                                        @for ($day = 1; $day <= $course->duration; $day++)
+                                        @php
+                                        $log = $item->attendance_logins
+                                            ->whereBetween('created_at',[ $courseStartDate->copy()->addDays($day - 1)->startOfDay(),$courseStartDate->copy()->addDays($day)->startOfDay()])->where('course_id',$course->id)
+                                            ->first();
+                                        @endphp
+                                            @if ($log)
+                                                <span class="dropdown-item text-success"> اليوم {{ $day }} (حاضر)</span>
+                                            @else
+                                                <span class="dropdown-item text-danger"> اليوم {{  $day}} (غير حاضر)</span>
+                                            @endif
+                                        @endfor
                                     </div>
                                 </td>
-														   <td> 60% </td>
 
+									<td> 60% </td>
+                                    <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $course->id]) }}"
+                                        target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
                                    <td class="d-flex filter-col-cell">
                                        <!-- dropdown-menu -->
                                        <button data-toggle="dropdown"
                                            class="btn btn-previous btn-sm btn-block"><i
                                                class="si si-options-vertical text-gray tx-13"></i></button>
                                        <div class="dropdown-menu">
-                                           <a href="#" class="dropdown-item"
-                                               data-target="#modaledit_{{$item->id}}" data-toggle="modal"> تحرير </a>
+                                        <a href="#" class="dropdown-item"
+                                        data-target="#modaledit_{{ $item->id }}"
+                                        data-toggle="modal"> تحرير </a>
                                            <a href="#"
                                                class="dropdown-item text-danger"data-target="#modalDelete"
                                                data-toggle="modal"> حذف </a>
@@ -530,7 +548,7 @@
             <div class="col-lg-6 col-sm-12">
                 <div class="panel panel-primary tabs-style-3 bg-white card card-dashboard-eight ">
                     <div class="d-flex justify-content-between mb-2">
-                        <h5 class="">ملفات الدورة</h5>
+                        <h5 class="">روابط الدورة</h5>
                         <button class="btn btn-secondary btn-sm btn-light-icon mr-2 p-1" data-target="#modalurl" data-toggle="modal"> اضافة رابط <i class="bi bi-plus-circle"></i></button>
                         @include('dashboard.courses.model_add_url')
                     </div>
@@ -546,10 +564,10 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab11">
                                 <div class="table-responsive d-flex">
-                                    @foreach ($courseFile as $item)
+                                    @foreach ($courseLinks as $item)
                                     <div class="ml-4">
                                         <i class="bi bi-file-earmark-word-fill tx-26"></i>
-                                        <p class="tx-10">نسخ الرابط</p>
+                                        <a href="{{route($item->link)}}" target="_blank">     <p class="tx-10"> نسخ الرابط</p></a>
                                     </div>
                                     @endforeach
                                 </div>
@@ -567,7 +585,63 @@
      <!-- Container closed -->
  <!-- main-content closed -->
 
-
+ @foreach ($course->attendances as $item)
+ <div class="modal" id="modaledit_{{ $item->id }}">
+     <div class="modal-dialog " role="document">
+         <div class="modal-content modal-content-demo">
+             <div class="modal-header">
+                 <h5 class="modal-title"> تحرير مشارك </h5><button aria-label="Close" class="close"
+                     data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+             </div>
+             <form action="">
+                 <div class="modal-body">
+                     <div class="row">
+                         <div class="col-12">
+                             <label for="example"> الأسم </label>
+                             <input class="form-control" value="{{ $item->name }}"
+                                 id="name_{{ $item->id }}" required="" type="text">
+                         </div>
+                         <div class="col-6 mt-4">
+                             <label for="example"> رقم الهاتف </label>
+                             <input class="form-control" value="{{ $item->phone_number }}"
+                                 id="phone_number_{{ $item->id }}" required="" type="number">
+                         </div>
+                         <div class="col-6 mt-4">
+                             <label for="example"> الرقم الوظيفي </label>
+                             <input class="form-control" value="{{ $item->id_number }}"
+                                 id="id_number_{{ $item->id }}" required="" type="number">
+                         </div>
+                         <div class="col-12 mt-4">
+                             <label for="example"> المهنة </label>
+                             <input class="form-control" value="{{ $item->job }}"
+                                 id="job_{{ $item->id }}" required="" type="text">
+                         </div>
+                         <div class="col-12 mt-4">
+                             <label for="example"> جهة العمل </label>
+                             <input class="form-control" value="{{ $course->id }}"required="" hidden
+                                 id="course_id" type="text">
+                         </div>
+                         <input class="form-control" value="{{ $item->work_place }}"required=""
+                         id="work_place_{{ $item->id }}" type="text">
+                         <div class="col-lg-3 mb-3">
+                            <label for="exampleInputEmail1"> شهاده </label>
+                            <div class="custom-file">
+                                <input class="custom-file-input" id="certficate_{{ $item->id }}" type="file">
+                                <label class="custom-file-label" for="customFile">Drop files here⇬</label>
+                            </div>
+                        </div>
+                     </div>
+                 </div>
+                 <div class="modal-footer border-0">
+                     <button class="btn btn-warning-gradient btn-with-icon" type="button"
+                         onclick="performUpdate({{ $item->id }})"> حفظ <i class="bi bi-floppy"></i></button>
+                     <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
+                 </div>
+             </form>
+         </div>
+     </div>
+ </div>
+@endforeach
 
 <!-- Message Modal -->
 <div class="modal fade" id="chatmodel" tabindex="-1" role="dialog"  aria-hidden="true">
@@ -910,8 +984,7 @@
         </div>
     </div>
 </div>
-<div>jhhhhhhhhhhhhhhhhhhhhhhh</div>
-@endsection
+ @endsection
 @section('js')
 <script>
     function performStore(id) {
@@ -922,6 +995,28 @@
         formData.append('file', document.getElementById('file').files[0]);
         storeRoute('/dashboard/admin/courses-files', formData)
     }
+    function performStoreLink(id) {
+        let formData = new FormData();
+        formData.append('name', document.getElementById('name').value);
+        formData.append('link', document.getElementById('link').value);
+        formData.append('course_id',id);
+        storeRoute('/dashboard/admin/courses-links', formData)
+    }
+
+    function performUpdate(id) {
+            let formData = new FormData();
+            formData.append("_method", "PUT")
+            formData.append('name', document.getElementById('name_' + id).value);
+            formData.append('phone_number', document.getElementById('phone_number_' + id).value);
+            formData.append('work_place', document.getElementById('work_place_' + id).value);
+            formData.append('id_number', document.getElementById('id_number_' + id).value);
+            formData.append('job', document.getElementById('job_' + id).value);
+            formData.append('certficate', document.getElementById('certficate_' + id).files[0]);
+            formData.append('course_id', document.getElementById('course_id').value);
+
+
+            storepart('/dashboard/admin/attendance/' + id, formData)
+        }
 </script>
 <script src="{{asset('assets/js/chart.flot.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery.flot/jquery.flot.js')}}"></script>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\AttendanceCourse;
 use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -91,6 +92,14 @@ class AttendanceController extends Controller
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
         $attendance->update($data);
+        $attendanceCourse = AttendanceCourse::where('attendance_id',$attendance->id)->where('course_id',$request->course_id)->first();
+        if ($request->hasFile('certficate')) {
+            $adminImage = $request->file('certficate');
+            $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
+            $adminImage->move('images/program', $imageName);
+            $attendanceCourse->certficate = '/images/' . 'program' . '/' . $imageName;
+            $attendanceCourse->update();
+        }
         return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $attendance ? 201 : 400);
     }
 
@@ -104,6 +113,6 @@ class AttendanceController extends Controller
     }
 
     public function sendInv(){
-        
+
     }
 }

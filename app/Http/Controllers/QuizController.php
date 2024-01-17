@@ -15,11 +15,11 @@ class QuizController extends Controller
     public function index()
     {
         $programs = Program::all();
-        $quizesBefor = Quiz::orderBy("created_at", "desc")->where('type','befor')->paginate(10);
-        $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type','after')->paginate(10);
-        $quizesInteractive = Quiz::orderBy("created_at", "desc")->where('type','interactive')->paginate(10);
+        $quizesBefor = Quiz::orderBy("created_at", "desc")->where('type', 'befor')->paginate(10);
+        $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type', 'after')->paginate(10);
+        $quizesInteractive = Quiz::orderBy("created_at", "desc")->where('type', 'interactive')->paginate(10);
 
-        return view("dashboard.quiz.index", compact("quizesBefor", 'quizesAfter','quizesInteractive','programs'));
+        return view("dashboard.quiz.index", compact("quizesBefor", 'quizesAfter', 'quizesInteractive', 'programs'));
     }
     /**
      * Show the form for creating a new resource.
@@ -38,7 +38,7 @@ class QuizController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-         $validator = Validator($data, [
+        $validator = Validator($data, [
             'name' => 'required|string',
             'course_id' => 'required|string',
         ], [
@@ -49,14 +49,18 @@ class QuizController extends Controller
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
         if ($request->befor == 'true') {
-             $data['type'] = 'befor';
+            $data['type'] = 'befor';
         } elseif ($request->after == 'true') {
             $data['type'] = 'after';
         } elseif ($request->interactive == 'true') {
             $data['type'] = 'interactive';
         }
         $quiz = Quiz::create($data);
-        return response()->json(['redirect' => route('quiz.questions', [$quiz->id])]);
+        if ($request->how_attend == 'questions') {
+            return response()->json(['redirect' => route('quiz.questions', [$quiz->id])]);
+        } elseif ($request->how_attend == 'link') {
+            return response()->json(['redirect' => route('quizes.index')]);
+        }
     }
 
     /**
@@ -86,10 +90,9 @@ class QuizController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
         $qu = Quiz::destroy($id);
-        return response()->json(['icon' => 'success' , 'title' => 'تم الحذف  بنجاح'] , $qu ? 200 : 400);
-
+        return response()->json(['icon' => 'success', 'title' => 'تم الحذف  بنجاح'], $qu ? 200 : 400);
     }
 }

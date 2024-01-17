@@ -28,8 +28,12 @@
                     اضافة مشاركين جدد <i class="bi bi-plus"></i></button>
                 <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركين <i
                         class="bi bi-box-arrow-in-down"></i></i></button>
-                <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1"> ارسال دعوة جماعية <i
-                        class="icon ion-md-paper-plane"></i></button>
+                {{-- <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1"> ارسال دعوة جماعية <i
+                        class="icon ion-md-paper-plane"></i></button> --}}
+
+                        <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة جماعية <i
+                            class="icon ion-md-paper-plane"></i></button>
+
                 <a href="../index.html" class="btn btn-previous btn-sm text-warning mt-2"><i
                         class="ti-angle-double-right"></i> العودة </a>
             </div>
@@ -93,6 +97,7 @@
                                             <th> قبول الدعوه </th>
                                             <th> المهنة </th>
                                             <th> الاختبارات </th>
+                                            <th> الحضور </th>
                                             <th> الاكتمال </th>
                                             @if ($id)
                                                 <th> الدعوه </th>
@@ -144,6 +149,31 @@
                                                     <span class="ml-3 examBefor" data-bs-toggle="offcanvas"
                                                         data-bs-target="#drawerafter_{{ $item->id }}"
                                                         aria-controls="offcanvasWithBothOptions"> بعدي </span>
+                                                </td>
+                                                <td>
+                                                    <span class="ml-2 dropdown">
+                                                        {{ $course->duration }} ايام
+                                                    </span>
+
+                                                    <button class="btn btn-previous p-0" data-toggle="dropdown"><i class="bi bi-exclamation-circle"></i></button>
+
+                                                    <div class="Attendance dropdown-menu scrollable-menu">
+                                                        @php
+                                                        $courseStartDate = \Carbon\Carbon::parse($course->start);
+                                                        @endphp
+                                                        @for ($day = 1; $day <= $course->duration; $day++)
+                                                        @php
+                                                        $log = $item->attendance_logins
+                                                            ->whereBetween('created_at',[ $courseStartDate->copy()->addDays($day - 1)->startOfDay(),$courseStartDate->copy()->addDays($day)->startOfDay()])->where('course_id',$course->id)
+                                                            ->first();
+                                                        @endphp
+                                                            @if ($log)
+                                                                <span class="dropdown-item text-success"> اليوم {{ $day }} (حاضر)</span>
+                                                            @else
+                                                                <span class="dropdown-item text-danger"> اليوم {{  $day}} (غير حاضر)</span>
+                                                            @endif
+                                                        @endfor
+                                                    </div>
                                                 </td>
                                                 <td> 60% </td>
                                                 @if ($id)
@@ -273,6 +303,16 @@
                                     <label for="example"> جهة العمل </label>
                                     <input class="form-control" value="{{ $item->work_place }}"required=""
                                         id="work_place_{{ $item->id }}" type="text">
+                                </div>
+                                <input class="form-control" value="{{ $course->id}}"required="" hidden
+                                        id="course_id" type="text">
+
+                                <div class="col-lg-3 mb-3">
+                                    <label for="exampleInputEmail1"> شهاده </label>
+                                    <div class="custom-file">
+                                        <input class="custom-file-input" id="certficate_{{ $item->id }}" type="file">
+                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -463,6 +503,29 @@
             </div>
         </div>
     @endforeach
+    <div class="modal" id="sendSms">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-content-demo">
+
+                <form action="">
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="col-12 form-group">
+                                <label for="example"> رساله </label>
+                                <textarea class="form-control" required="" id="massege" type="text"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="performStoreSms({{$id}})"> حفظ <i class="bi bi-floppy"></i></button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div id="side-drawer-void" class="position-fixed d-none" onclick="closeSideDrawer()"></div>
 @endsection
 @section('js')
@@ -494,7 +557,13 @@
             formData.append('course_id', id);
             storepart('/dashboard/admin/attendance', formData)
         }
+        function performStoreSms(id) {
+            let formData = new FormData();
+            formData.append('massege', document.getElementById('massege').value);
+            formData.append('course_id', id);
 
+             storepart('/dashboard/admin/attendance-sms', formData)
+        }
         function performUpdate(id) {
             let formData = new FormData();
             formData.append("_method", "PUT")
@@ -503,6 +572,9 @@
             formData.append('work_place', document.getElementById('work_place_' + id).value);
             formData.append('id_number', document.getElementById('id_number_' + id).value);
             formData.append('job', document.getElementById('job_' + id).value);
+            formData.append('certficate', document.getElementById('certficate_' + id).files[0]);
+
+            formData.append('course_id', document.getElementById('course_id').value);
             storepart('/dashboard/admin/attendance/' + id, formData)
         }
     </script>
