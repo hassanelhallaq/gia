@@ -169,7 +169,18 @@
                                     </option>
                                 </select>
                             </div>
+                            <div class="col-lg-6 mb-3">
+                                <p class="mg-b-10"> الحاله</p>
+                                <select class="form-control select2" id="register">
+                                    <option  @if ($program->status == 'active') selected @endif  value="active">
+                                    فعال
+                                    </option>
+                                    <option  @if ($program->status == 'deactive') selected @endif  value="deactive">
+                                        غير فعال
+                                    </option>
 
+                                </select>
+                            </div>
                             <div class="col-lg-6">
                                 <p class="mg-b-10"> طريقة الحضور</p>
                                 <select class="form-control select2" id="attendance_method">

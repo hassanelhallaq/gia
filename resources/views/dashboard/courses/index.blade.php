@@ -1,95 +1,114 @@
 @extends('dashboard.layouts.master')
 @section('header')
-
-
-    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0" >
+    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
         <div class="left-content mt-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1">
                     <li class="breadcrumb-item">
-                        <a href="../index.html" >الرئيسية</a>
+                        <a href="{{ route('admin.dashboard') }}">الرئيسية</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="table_program_management.html"class="text-muted">البرامج</a>
+                        <a href="{{ route('programs.index') }}" class="text-muted">البرامج</a>
                     </li>
-                    <li class="breadcrumb-item">
-                        <a href="#" class="text-muted"> برنامج تطوير المهارات الشخصية </a>
-                    </li>
+                    @if ($program)
+                        <li class="breadcrumb-item">
+                            <a class="text-muted"> برنامج {{ $program->name }} </a>
+                        </li>
+                    @endif
                 </ol>
             </nav>
         </div>
         <div class="main-dashboard-header-right ">
             <div class=" d-flex flex-wrap">
-                <button class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i class="ti-stats-up project"></i></button>
-                <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات صفحة الويب  <i class="icon ion-ios-settings"></i></button>
-                <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات  <i class="icon ion-ios-settings"></i></button>
-                @if($id)
-                <a href="{{route('program.course.create',[$id])}}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">   اضافة دورة جديدة  <i class="bi bi-plus"></i></a>
+                <a href="{{ route('course.xlsx') }}"
+                    class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i
+                        class="ti-stats-up project"></i></a>
+                <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات صفحة الويب <i
+                        class="icon ion-ios-settings"></i></button>
+                <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات <i
+                        class="icon ion-ios-settings"></i></button>
+                @if ($id)
+                    <a href="{{ route('program.course.create', [$id]) }}"
+                        class="btn btn-warning-gradient btn-with-icon mr-1 mb-1"> اضافة دورة جديدة <i
+                            class="bi bi-plus"></i></a>
                 @else
-                <a href="{{route('courses.create')}}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">   اضافة دورة جديدة  <i class="bi bi-plus"></i></a>
-
+                    <a href="{{ route('courses.create') }}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1"> اضافة
+                        دورة جديدة <i class="bi bi-plus"></i></a>
                 @endif
-                @if($program)
-                <a href="{{route('home',[$program->username])}}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1" target=”_blank>  عرض صفحة الويب <i class="icon ion-ios-share-alt"></i></a>
+                @if ($program)
+                    <a href="{{ route('home', [$program->username]) }}"
+                        class="btn btn-warning-gradient btn-with-icon mr-1 mb-1" target=”_blank> عرض صفحة الويب <i
+                            class="icon ion-ios-share-alt"></i></a>
                 @endif
             </div>
         </div>
     </div>
 @endsection
 @section('css')
-<style>
-    .scrollable-menu {
-height: auto;
-max-height: 100%;
-overflow-x: hidden;
-}
-</style>
+    <style>
+        .scrollable-menu {
+            height: auto;
+            max-height: 100%;
+            overflow-x: hidden;
+        }
+    </style>
 @endsection
 @section('content')
-     <!-- row -->
-<div class="row row">
+    <!-- row -->
+    <div class="row row">
 
-    <!--open filter Top  -->
-     <div class="col-lg-12">
-         <div class="card mg-b-20">
-             <div class="card-body d-flex p-3">
-                 <div class="form">
-                     <i class="fa fa-search"></i>
-                     <input type="text" class="form-control form-input" id="search-table"
-                         placeholder="بحث">
-                     <span class="right-pan"><i class="bi bi-sliders"></i></span>
-                 </div>
+        <!--open filter Top  -->
+        <div class="col-lg-12">
+            <div class="card mg-b-20">
+                <div class="card-body d-flex p-3">
+                    <form method="get">
+                        <div class="form">
+                            <i class="fa fa-search"></i>
+                            {{-- <span class="right-pan"><i class="bi bi-sliders"></i></span> --}}
+                            <div class="row row-sm mb-3">
+                                <div class="col-lg-6">
+                                    <div class="form-group has-success mg-b-0">
+                                        <input type="text" class="form-control form-input" name="name"
+                                            value="{{ request()->name }}" id="name" placeholder="بحث">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mg-t-20 mg-lg-t-0">
+                                    <button class="btn btn-outline-light btn-print" type="submit"> بحث </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
 
-                 <div class="mr-auto d-block tx-20">
+                    {{-- <div class="mr-auto d-block tx-20">
                      <a href=""><i class="typcn typcn-calendar-outline"></i></a>
                      <a href=""><i class="bi bi-grid"></i></a>
                      <a href=""><i class="bi bi-list bg-black-9 text-white"></i></a>
-                 </div>
-             </div>
-         </div>
-     </div>
-     <!--closed filter Top  -->
+                 </div> --}}
+                </div>
+            </div>
+        </div>
+        <!--closed filter Top  -->
 
-     <!-- table -->
-     <div class="col-lg-12">
-         <div class="card">
-             <div class="card-body">
-                         <div class="table-responsive">
-                            <table class="table table-striped mg-b-0 text-md-nowrap">
-                                <thead>
-                                    <tr class="tableHead">
-                                        <th><input type="checkbox" class="checkParent"></th>
-                                        <th>#</th>
-                                        <th>
-                                            اسم الدورة
-                                        </th>
-                                        <th>الفئة</th>
-                                        <th> اسم المدرب</th>
-                                        <th> المستوى </th>
-                                        <th> تاريخ البداية </th>
-                                        <th>المدة </th>
-                                        <th>لغة الدورة</th>
-                                        {{-- <th> عدد المسجلين </th>
+        <!-- table -->
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped mg-b-0 text-md-nowrap">
+                            <thead>
+                                <tr class="tableHead">
+                                    <th><input type="checkbox" class="checkParent"></th>
+                                    <th>#</th>
+                                    <th>
+                                        اسم الدورة
+                                    </th>
+                                    <th>الفئة</th>
+                                    <th> اسم المدرب</th>
+                                    <th> المستوى </th>
+                                    <th> تاريخ البداية </th>
+                                    <th>المدة </th>
+                                    <th>لغة الدورة</th>
+                                    {{-- <th> عدد المسجلين </th>
                                         <th> اسم المنسق </th>
                                         <th>  شهادة  </th>
                                         <th> نسبة الشهادة </th>
@@ -100,33 +119,61 @@ overflow-x: hidden;
                                         <th> AS </th> --}}
 
 
-                                        <!-- Filter -->
-                                        <td class="col-filter">
-                                            <!-- dropdown-menu -->
-                                            <button data-toggle="dropdown" class="btn btn-previous p-0"><i class="bi bi-filter-square tx-20"></i></button>
-                                            <div class="dropdown-menu scrollable-menu" role="menu">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </thead>
-                                 <tbody id="table-body">
-                                    <tr>
-                                        <p class="p-5 text-center d-none" id="empty-message">لا توجد بيانات لعرضها</p>
-                                    </tr>
-                                    @foreach ($courses as $i => $item)
+                                    <!-- Filter -->
+                                    <td class="col-filter">
+                                        <!-- dropdown-menu -->
+                                        <button data-toggle="dropdown" class="btn btn-previous p-0"><i
+                                                class="bi bi-filter-square tx-20"></i></button>
+                                        <div class="dropdown-menu scrollable-menu" role="menu">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                                <tr>
+                                    <p class="p-5 text-center d-none" id="empty-message">لا توجد بيانات لعرضها</p>
+                                </tr>
+                                @foreach ($courses as $i => $item)
                                     <tr class="table-rows">
                                         <td><input type="checkbox" class="checkChild"></td>
-                                        <td>{{$i + 1}}</td>
-                                        <td scope="row">{{$item->name}}</td>
-                                        <td>{{$item->category->name}}</td>
-                                        <td class="client-name">  {{$item->trainer->name ?? ''}}</td>
-                                        <td> {{$item->level ?? ''}}</td>
-                                        <td>{{$item->start}}</td>
-                                        <td>{{$item->duration}}ايام</td>
-                                          <td> @if($item->language == 'arabic')
-                                            عربي
+                                        <td>{{ $i + 1 }}</td>
+                                        <td scope="row">{{ $item->name }}</td>
+                                        <td>{{ $item->category->name }}</td>
+                                        <td class="client-name"> {{ $item->trainer->name ?? '' }}</td>
+                                        <td> {{ $item->level ?? '' }}</td>
+                                        <td>{{ $item->start }}</td>
+                                        <td>{{ $item->duration }}ايام</td>
+                                        <td>
+                                            @if ($item->language == 'arabic')
+                                                عربي
                                             @else
-                                            انجليزيه
+                                                انجليزيه
+                                            @endif
+                                        </td>
+                                        @php
+                                            $start = Carbon\Carbon::parse($item->start)->format('y-m-d');
+                                            $courseStartDate = \Carbon\Carbon::parse($item->start);
+
+                                            $end = $courseStartDate
+                                                ->addDays($item->duration)
+                                                ->startOfDay();
+                                            $today = Carbon\Carbon::today()->format('Y-m-d');
+                                        @endphp
+                                        <td>
+                                            @if (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($start)) && $item->status != 'active')
+                                                <span
+                                                    class="tag tag-rounded bg-primary-transparent text-primary">متآخره</span>
+                                            @elseif (Carbon\Carbon::parse($start)->gt(Carbon\Carbon::parse($today)))
+                                                <span
+                                                    class="tag tag-rounded bg-primary-transparent text-primary">مجدوله</span>
+                                            @elseif($item->status == 'active')
+                                                <span
+                                                    class="tag tag-rounded bg-primary-transparent text-primary">فعال</span>
+                                            @elseif (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($end)))
+                                                <span class="tag tag-rounded bg-primary-transparent text-primary">منتهيه</span>
+                                                @elseif($item->status == 'Inactive')
+                                                <span
+                                                    class="tag tag-rounded bg-primary-transparent text-primary">غير فعال</span>
                                             @endif
                                         </td>
                                         {{-- <th> # </th>
@@ -139,59 +186,56 @@ overflow-x: hidden;
                                         <th> # </th>
                                         <th> # </th> --}}
                                         <td class="d-flex filter-col-cell">
-                                            <a href="{{route('courses.show',[$item->id])}}"><i	class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
+                                            <a href="{{ route('courses.show', [$item->id]) }}"><i
+                                                    class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
                                             <!-- dropdown-menu -->
-                                            <button data-toggle="dropdown"
-                                                class="btn btn-previous btn-sm btn-block"><i
+                                            <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i
                                                     class="si si-options-vertical text-gray tx-12"></i></button>
                                             <div class="dropdown-menu">
-                                                <a href="{{route('courses.edit',[$item->id])}}" class="dropdown-item"> تحرير </a>
-                                                <button  class="dropdown-item"  onclick="performDestroy({{ $item->id }} , this)" > حذف </button>
+                                                <a href="{{ route('courses.edit', [$item->id]) }}" class="dropdown-item">
+                                                    تحرير </a>
+                                                <button class="dropdown-item"
+                                                    onclick="performDestroy({{ $item->id }} , this)"> حذف </button>
                                             </div>
                                         </td>
                                     </tr>
-                                    @endforeach
-                                 </tbody>
-                             </table>
-                         </div>
-               </div>
-         </div>
-     </div>
-     <!-- table -->
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- table -->
 
 
-     <!--open filter bottom  -->
-     <div class="col-12">
-         <div class="card mg-b-20">
-             <div class="card-body d-flex p-3">
-                 <ul class="pagination mb-0">
-                    {!! $courses->links() !!}
+        <!--open filter bottom  -->
+        <div class="col-12">
+            <div class="card mg-b-20">
+                <div class="card-body d-flex p-3">
+                    <ul class="pagination mb-0">
+                        {!! $courses->links() !!}
 
-                 </ul>
-
-
-             </div>
-         </div>
-     </div>
-     <!--closed filter bottom  -->
- </div>
- <!-- row closed -->
+                    </ul>
 
 
-
-
+                </div>
+            </div>
+        </div>
+        <!--closed filter bottom  -->
+    </div>
+    <!-- row closed -->
 @endsection
 @section('js')
-<script src="{{asset('assets/js/xlsx.full.min.js')}}"></script>
-<script src="{{asset('assets/js/table.js')}}"></script>
+    <script src="{{ asset('assets/js/xlsx.full.min.js') }}"></script>
+    <script src="{{ asset('assets/js/table.js') }}"></script>
 
-<script>
-    function performDestroy(id, reference) {
+    <script>
+        function performDestroy(id, reference) {
 
-        let url = '/dashboard/admin/courses/' + id;
+            let url = '/dashboard/admin/courses/' + id;
 
-        confirmDestroy(url, reference);
-    }
-</script>
-
+            confirmDestroy(url, reference);
+        }
+    </script>
 @endsection

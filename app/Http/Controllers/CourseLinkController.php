@@ -29,6 +29,7 @@ class CourseLinkController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+
         $validator = Validator($data, [
             'name' => 'required',
             'link' => 'required',

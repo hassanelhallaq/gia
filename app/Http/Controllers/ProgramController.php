@@ -16,12 +16,15 @@ class ProgramController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $programs = Program::orderBy("id", "desc")->when($request->name,function($q)use($request){
+            $q->where('name','like', '%' . $request->name . '%');
+        });
         if(Auth::guard('admin')->check()){
-            $programs = Program::orderBy("id", "desc")->withCount('courses')->paginate(10);
+            $programs = $programs->withCount('courses')->paginate(10);
         }elseif(Auth::guard('client')->check()){
-            $programs = Program::where('client_id',Auth::user()->id)->orderBy("id", "desc")->withCount('courses')->paginate(10);
+            $programs = $programs->where('client_id',Auth::user()->id)->withCount('courses')->paginate(10);
         }
         return view("dashboard.programs.index", compact("programs"));
     }
@@ -237,5 +240,26 @@ class ProgramController extends Controller
     {
         $programs = Program::orderBy("id", "desc")->withCount('courses')->paginate(10);
         return view("dashboard.programs.view", compact("programs"));
+    }
+    public function programXlsx(Request $request)
+    {
+
+        $courses = Program::all();
+
+        foreach ($courses as $course) {
+
+
+            $data[] = [
+                'الاسم' => $course->name,
+                'عدد الدورات' => $course->courses_count,
+                'العميل' => $course->client->name ?? '' ,
+                'تاريخ البداية	' => $course->start,
+                'النهايه' => $course->end,
+            ];
+        }
+        if (empty($data))
+            return back();
+        $list = collect($data);
+        return (new \Rap2hpoutre\FastExcel\FastExcel($list))->download('file.xlsx');
     }
 }

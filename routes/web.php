@@ -55,6 +55,8 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/{id}/{course_id}/login', [AttendanceLoginController::class, 'login'])->name('attendance.login');
         Route::get('/attendance-summery/{id}/{attendanceId}', [UserAnswerController::class, 'userAswers'])->name('attendance.summery');
         Route::post('/attendance-sms', [CourseController::class, 'sendSms'])->name('attendance.sms');
+        Route::get('/course/xlsx', [CourseController::class, 'courseXlsx'])->name('course.xlsx');
+        Route::get('/program/xlsx', [ProgramController::class, 'programXlsx'])->name('programs.xlsx');
 
  
         // روت مؤقت

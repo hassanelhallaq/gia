@@ -219,45 +219,25 @@
         <div class="col-lg-12">
              <div class="card mg-b-20">
                  <div class="card-body d-flex p-3">
-                     <div class="form">
-                         <i class="fa fa-search"></i>
-                         <input type="text" class="form-control form-input" id="search-table"
-                             placeholder="بحث">
-                         <span class="right-pan"><i class="bi bi-sliders"></i></span>
-                     </div>
+                    <form method="get">
+                        <div class="form">
+                            <i class="fa fa-search"></i>
+                            {{-- <span class="right-pan"><i class="bi bi-sliders"></i></span> --}}
+                            <div class="row row-sm mb-3">
+                                <div class="col-lg-6">
+                                    <div class="form-group has-success mg-b-0">
+                                        <input type="text" class="form-control form-input" name="name"
+                                            value="{{ request()->name }}" id="name" placeholder="بحث">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mg-t-20 mg-lg-t-0">
+                                    <button class="btn btn-outline-light btn-print" type="submit"> بحث </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
 
-                     <div class="d-flex">
-                         <p class="mt-2 mr-2 d-flex"> عرض: </p>
-                         {{-- <select class="form-control select2-no-search mr-0 table-rows-number">
-                             <option value="all">
-                                 الكل
-                             </option>
-                             <option value="1">
-                                 1
-                             </option>
-                             <option value="2">
-                                 2
-                             </option>
-                             <option value="3">
-                                 3
-                             </option>
-                             <option value="10" selected>
-                                 10
-                             </option>
-                             <option value="50">
-                                 50
-                             </option>
-                             <option value="100">
-                                 100
-                             </option>
-                         </select> --}}
-                     </div>
-                     <button class="btn btn-danger mr-1 text-white btnSelectDelete" data-target="#modalDelete" data-toggle="modal" style="display: none;">حذف الصفوف المختارة <i class="bi bi-trash tx-12"></i></button>
-                     <div class="mr-auto d-block tx-20">
-                         <a href=""><i class="typcn typcn-calendar-outline"></i></a>
-                         <a href=""><i class="bi bi-grid"></i></a>
-                         <a href=""><i class="bi bi-list bg-black-9 text-white"></i></a>
-                     </div>
+
                  </div>
              </div>
          </div>
@@ -327,6 +307,7 @@
                                     <div class="Attendance dropdown-menu scrollable-menu">
                                         @php
                                         $courseStartDate = \Carbon\Carbon::parse($course->start);
+                                        $attendanceLogin = App\Models\AttendanceLogin::where([['attendance_id',$item->id],['course_id',$course->id]])->count();
                                         @endphp
                                         @for ($day = 1; $day <= $course->duration; $day++)
                                         @php
@@ -343,8 +324,14 @@
                                     </div>
                                 </td>
 
-									<td> 60% </td>
-                                    <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $course->id]) }}"
+                                <td>
+                                    @if($attendanceLogin != 0)
+                                    {{($course->duration / $attendanceLogin) *100 }}%
+                                    @else
+                                    0%
+                                    @endif
+                                </td>
+                                <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $course->id]) }}"
                                         target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
                                    <td class="d-flex filter-col-cell">
                                        <!-- dropdown-menu -->
@@ -376,9 +363,9 @@
              <div class="card mg-b-20">
                  <div class="card-body d-flex p-3">
                      <ul class="pagination mb-0">
-                         <li class="page-item"><button class="btn btn-previous" id="table-paganite-next"><i class="ti-angle-double-right"></i></button></li>
-                         <li class="page-item m-2" id="table-pages">1/10</li>
-                         <li class="page-item"><button class="btn btn-previous"  id="table-paganite-prev"><i class="ti-angle-double-left"></i></button>
+                        <ul class="pagination mb-0">
+                         </ul>
+
                          </li>
                      </ul>
                      {{-- <div class="d-flex">
@@ -433,9 +420,9 @@
                             <!-- Tabs -->
                             <ul class="nav panel-tabs">
                                 <li><a href="#tab11" data-toggle="tab" class="d-flex active"> الكل  <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li>
-                                {{-- <li><a href="#tab12" data-toggle="tab" class="d-flex"> اكسل <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li>
-                                <li><a href="#tab13" data-toggle="tab" class="d-flex"> وورد <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li>
-                                <li><a href="#tab14" data-toggle="tab" class="d-flex"> BDF <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li> --}}
+                                {{-- <li><a href="#tab12" data-toggle="tab" class="d-flex"> اكسل <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li> --}}
+                                {{-- <li><a href="#tab13" data-toggle="tab" class="d-flex"> وورد <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li> --}}
+                                {{-- <li><a href="#tab14" data-toggle="tab" class="d-flex"> BDF <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li> --}}
                             </ul>
                         </div>
                     </div>
@@ -452,7 +439,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab12">
+                            {{-- <div class="tab-pane" id="tab12">
                                 <div class="table-responsive d-flex">
                                     <div class="ml-4">
                                         <i class="bi bi-filetype-exe tx-24"></i></i>
@@ -472,9 +459,9 @@
                                         <p>ملف5</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="tab-pane" id="tab13">
+                            {{-- <div class="tab-pane" id="tab13">
                                 <div class="table-responsive d-flex">
                                     <div class="ml-4">
                                         <i class="bi bi-file-earmark-word-fill tx-26"></i>
@@ -518,8 +505,8 @@
                                         <p>ملف5</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane" id="tab14">
+                            </div> --}}
+                            {{-- <div class="tab-pane" id="tab14">
                                 <div class="table-responsive d-flex">
                                     <div class="ml-4">
                                         <i class="bi bi-file-earmark-word-fill tx-26"></i>
@@ -539,7 +526,7 @@
                                         <p>ملف5</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
@@ -568,7 +555,7 @@
                                     @foreach ($courseLinks as $item)
                                     <div class="ml-4">
                                         <i class="bi bi-file-earmark-word-fill tx-26"></i>
-                                        <a href="{{route($item->link)}}" target="_blank">     <p class="tx-10"> نسخ الرابط</p></a>
+                                        <a href="{{$item->link}}" target="_blank">     <p class="tx-10"> نسخ الرابط</p></a>
                                     </div>
                                     @endforeach
                                 </div>
@@ -998,7 +985,7 @@
     }
     function performStoreLink(id) {
         let formData = new FormData();
-        formData.append('name', document.getElementById('name').value);
+        formData.append('name', document.getElementById('name_link').value);
         formData.append('link', document.getElementById('link').value);
         formData.append('course_id',id);
         storeRoute('/dashboard/admin/courses-links', formData)

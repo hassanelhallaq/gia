@@ -129,7 +129,7 @@
                                                                 data-toggle="modal"> حذف </a>
                                                         </div>
                                                     </td>
- 
+
                                                 </tr>
                                             </tbody>
                                         @endforeach
@@ -335,7 +335,7 @@
                                 <label for="example"> اسم الأختبار </label>
                                 <input class="form-control" required="" id="name" type="text">
                             </div>
- 
+
                             <div class="col-12 mt-4">
                                 <label for="example"> طريقه التقديم</label>
                                 <select class="form-control select2" id="how_attend">
@@ -391,8 +391,8 @@
             formData.append('befor', document.getElementById('befor').checked);
             formData.append('after', document.getElementById('after').checked);
             formData.append('interactive', document.getElementById('interactive').checked);
-            formData.append('link', document.getElementById('link').checked);
-            formData.append('how_attend', document.getElementById('how_attend').checked);
+            formData.append('link', document.getElementById('link').value);
+            formData.append('how_attend', document.getElementById('how_attend').value);
             storeRoute('/dashboard/admin/quizes', formData)
         }
         $(document).ready(function() {

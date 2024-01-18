@@ -5,18 +5,18 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb breadcrumb-style1">
                 <li class="breadcrumb-item">
-                    <a href="../index.html" >الرئيسية</a>
+                    <a href="{{route('admin.dashboard')}}" >الرئيسية</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="view_programmes.html" class="text-muted">البرامج</a>
+                    <a href="{{route('programs.index')}}" class="text-muted">البرامج</a>
                 </li>
             </ol>
         </nav>
     </div>
     <div class="main-dashboard-header-right">
         <div class=" d-flex">
-            <button class="btn btn-outline-light btn-print"> طباعة <i class="icon ion-ios-print"></i></button>
-            <button class="btn btn-outline-light mr-1 btn-export"> تصدير <i class="ti-stats-up project"></i></button>
+            <button  class="btn btn-outline-light btn-print"> طباعة <i class="icon ion-ios-print"></i></button>
+            <a href="{{route('programs.xlsx')}}" class="btn btn-outline-light mr-1 btn-export"> تصدير <i class="ti-stats-up project"></i></a>
             <a class="btn btn-warning-gradient btn-with-icon mr-1" href="{{route('programs.create')}}">  انشاء برنامج <i class="bi bi-plus"></i></a>
         </div>
     </div>
@@ -31,45 +31,22 @@
             <div class="col-lg-12">
                 <div class="card mg-b-20">
                     <div class="card-body d-flex p-3">
+                        <form  method="get">
                         <div class="form">
                             <i class="fa fa-search"></i>
-                            <input type="text" class="form-control form-input" id="search-table" placeholder="بحث">
-                            <span class="right-pan"><i class="bi bi-sliders"></i></span>
+                            {{-- <span class="right-pan"><i class="bi bi-sliders"></i></span> --}}
+                            <div class="row row-sm mb-3">
+                                <div class="col-lg-6">
+                                    <div class="form-group has-success mg-b-0">
+                                        <input type="text" class="form-control form-input" name="name" value="{{request()->name}}" id="name" placeholder="بحث">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mg-t-20 mg-lg-t-0">
+                                    <button class="btn btn-outline-light btn-print" type="submit"> بحث </button>
+                                </div>
+                            </div>
                         </div>
-
-                        {{-- <div class="d-flex">
-                            <p class="mt-2 mr-2 d-flex"> عرض: </p>
-                            <select class="form-control select2-no-search mr-0 table-rows-number">
-                                <option value="all">
-                                    الكل
-                                </option>
-                                <option value="1">
-                                    1
-                                </option>
-                                <option value="2">
-                                    2
-                                </option>
-                                <option value="3">
-                                    3
-                                </option>
-                                <option value="10" selected>
-                                    10
-                                </option>
-                                <option value="50">
-                                    50
-                                </option>
-                                <option value="100">
-                                    100
-                                </option>
-                            </select>
-                        </div> --}}
-
-                        <div class="mr-auto d-block tx-20">
-                            {{-- <a href="{{route('programs.create')}}" class="btn btn-warning-gradient btn-with-icon" type="button" > اضف <i class="bi bi-floppy"></i></a> --}}
-                            <a href=""{{route('programs.grid')}}><i class="typcn typcn-calendar-outline"></i></a>
-                            <a href="{{route('programs.grid')}}"><i class="bi bi-grid"></i></a>
-                            <a href=""><i class="bi bi-list bg-black-9 text-white"></i></a>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -134,7 +111,7 @@
                                                        <td>{{$start }}</td>
                                                        <td>{{$end }}</td>
                                                      <td>
-                                                        @if (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($start)))
+                                                        @if (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($start)) && $item->status != 'active')
                                                             <span class="tag tag-rounded bg-primary-transparent text-primary">متآخره</span>
                                                         @elseif($item->status == 'active')
                                                         <span class="tag tag-rounded bg-primary-transparent text-primary">فعال</span>
@@ -186,7 +163,8 @@
 
 @endsection
 @section('js')
-
+<script src="{{asset('assets/js/xlsx.full.min.js')}}"></script>
+<script src="{{asset('assets/js/table.js')}}"></script>
 
 <script>
     function performDestroy(id, reference) {
