@@ -113,6 +113,8 @@
                                                     <td>40</td>
                                                     <td>90%</td>
                                                     <td class="d-flex filter-col-cell">
+                                                         <a href="{{route('quiz_detales')}}"><i class="far fa-eye tx-14"></i></a>                                                        <!-- dropdown-menu -->
+
                                                         <!-- dropdown-menu -->
                                                         <button data-toggle="dropdown"
                                                             class="btn btn-previous btn-sm btn-block"><i
