@@ -113,7 +113,7 @@
                                                     <td>40</td>
                                                     <td>90%</td>
                                                     <td class="d-flex filter-col-cell">
-                                                        <a href="{{route('quiz_detales')}}"><i class="far fa-eye tx-14"></i></a>                                                        <!-- dropdown-menu -->
+                                                         <a href="{{route('quiz_detales')}}"><i class="far fa-eye tx-14"></i></a>                                                        <!-- dropdown-menu -->
 
                                                         <!-- dropdown-menu -->
                                                         <button data-toggle="dropdown"
@@ -129,7 +129,7 @@
                                                                 data-toggle="modal"> حذف </a>
                                                         </div>
                                                     </td>
-
+ 
                                                 </tr>
                                             </tbody>
                                         @endforeach
@@ -335,7 +335,7 @@
                                 <label for="example"> اسم الأختبار </label>
                                 <input class="form-control" required="" id="name" type="text">
                             </div>
-
+ 
                             <div class="col-12 mt-4">
                                 <label for="example"> طريقه التقديم</label>
                                 <select class="form-control select2" id="how_attend">

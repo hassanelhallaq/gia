@@ -56,6 +56,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/attendance-summery/{id}/{attendanceId}', [UserAnswerController::class, 'userAswers'])->name('attendance.summery');
         Route::post('/attendance-sms', [CourseController::class, 'sendSms'])->name('attendance.sms');
 
+ 
         // روت مؤقت
         Route::get('/quiz/detales', function () {
             return view('dashboard.quiz.detales');
@@ -68,6 +69,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
             return view('invitation.Certificate_Issuance_form');
         })->name('Certificate_Issuance_form');
 
+ 
 
     }
 );

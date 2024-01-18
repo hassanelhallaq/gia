@@ -56,6 +56,7 @@
                     </div>
                 </div>
                 <div class="card_icon">&#10140;</div>
+ 
             </div>
             <div class="card">
                 <div>
@@ -96,21 +97,61 @@
                         </div>
                     @endif
                 @endif
+ 
             </div>
+            <div class="card">
+                <div>
+                    <div class="card_title">
+                        <p>الاختبار التفاعلي</p>
+                    </div>
 
+ 
 
             <div class="card">
                 <div>
                     <div class="card_title">
                         <p> الحصول علي شهادة </p>
+ 
+                    <div class="card_text not">
+                        <span data-translate="not_submit"> غير متوفر الان </span>
+                    </div>
+                </div>
+                <div class="card_icon">&#10140;</div>
+            </div>
+            <div class="card">
+                <div>
+                    <div class="card_title">
+                        <p>الاختبار البعدي</p>
+ 
                     </div>
                     <div class="card_text not">
                         <span data-translate="not_submit"> غير متوفر الان </span>
                     </div>
                 </div>
+ 
                 <div class="card_icon">
                     <a href="{{ route('Certificate_Issuance_form') }}" data-translate="submit">&#10140; </a>
                 </div>
+ 
+                @if ($quizAtten == null)
+                    @if ($course->status_after == 'active')
+                        @if ($quizAfter->how_attend = 'questions')
+                            <div class="card_icon"><a
+                                    href="{{ route('quiz.view', ['quizId' => $quizAfter->quiz_id, 'clientId' => $attendance->id]) }}"
+                                    data-translate="submit">&#10140; </a>
+                            @elseif($quizAfter->how_attend = 'link')
+                                <div class="card_icon"><a href="{{ $quizAfter->link }}" data-translate="submit">&#10140; </a>
+                                @else
+                                    <div class="card_icon"><a href="https://shorturl.at/osyB0 "
+                                            data-translate="submit">&#10140; </a>
+                        @endif
+                    @else
+                        <div class="card_text not">
+                            <span data-translate="not_submit"> غير متوفر الان </span>
+                        </div>
+                    @endif
+                @endif
+ 
             </div>
 
             <div class="btn_links">
