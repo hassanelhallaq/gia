@@ -331,6 +331,43 @@ button .disabled{background-color:red !important;}
 .tx-25{font-size: 25px;font-weight: bolder;}
 .justify-content-between{justify-content: space-between}
 .d-flex{display: flex; align-items: center;}
+.dropdown {
+    text-align: center;
+    width: 70%;
+    position: relative;
+    align-items: center;
+    display: inline-block;
+    justify-content: start;
+    background-color: #076f6d;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 10px;
+  }
+  .dropdown span{    color: white;}
+  .dropdown-content {
+    text-align: right;
+    margin-top: 6px;
+    display: none;
+    border-radius: 9px;
+    width: 100%;
+    /* border: 5px; */
+    position: absolute;
+    background-color: #f9f9f9;
+    /* min-width: 160px; */
+    box-shadow: 1px 8px 16px 8px rgb(0 0 0 / 20%);
+    z-index: 1;
+}
+  .dropdown-content p{padding:5px 12px;border-radius: 5px;}
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content p:hover{
+    background-color: rgb(216, 216, 214);
+  }
+
+
+
 
 
   .container {
@@ -339,14 +376,14 @@ button .disabled{background-color:red !important;}
     padding: 23px 8px 0px 6px;
 }
   .container .text{
-    font-family: 'Cairo', sans-serif;
     text-align: center;
-    font-size: 22px;
+    font-size: 20px;
+    font-family: 'Cairo', sans-serif;
     font-weight: 600;
-background-color: #262525;
-    /* background: -webkit-linear-gradient(right, #56d8e4, #9f01ea, #56d8e4, #9f01ea); */
+    /* background: -webkit-linear-gradient(right, #076f6d, #9f01ea, #56d8e4, #9f01ea); */
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #282828;
+    /* -webkit-text-fill-color: transparent; */
   }
   .container form{
     padding: 30px 0 0 0;
@@ -379,9 +416,12 @@ background-color: #262525;
   .input-data input:valid ~ label, .textarea textarea:valid ~ label{
     transform: translateY(-20px);
     font-size: 14px;
-    color: #3498db;
+    /* color: #3498db; */
   }
-
+  .textarea textarea{
+    resize: none;
+    padding-top: 10px;
+  }
   .input-data label{
     position: absolute;
     pointer-events: none;
@@ -389,7 +429,11 @@ background-color: #262525;
     font-size: 16px;
     transition: all 0.3s ease;
   }
-
+  .textarea label{
+    width: 100%;
+    bottom: 40px;
+    background: #fff;
+  }
   .input-data .underline{
     position: absolute;
     bottom: 0;
@@ -401,7 +445,7 @@ background-color: #262525;
     content: "";
     height: 2px;
     width: 100%;
-    background: #3498db;
+    background: #1b1a1a;
     transform: scaleX(0);
     transform-origin: center;
     transition: transform 0.3s ease;

@@ -27,6 +27,7 @@
     </div>
     <div class="main-dashboard-header-right flex-wrap">
         <div class=" d-flex">
+            <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تفعيل الدورة </button>
             <a href="{{route('course.attendance',[$course->id])}}" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> ادارة المشاركين  <i class="la la-cog"></i></a>
             <a href="View_test_results.html" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج الاختبار  <i class="bi bi-box-arrow-in-down"></i></a>
             <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركة  <i class="bi bi-box-arrow-in-down"></i></button>
@@ -432,9 +433,9 @@
                             <!-- Tabs -->
                             <ul class="nav panel-tabs">
                                 <li><a href="#tab11" data-toggle="tab" class="d-flex active"> الكل  <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li>
-                                <li><a href="#tab12" data-toggle="tab" class="d-flex"> اكسل <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li>
+                                {{-- <li><a href="#tab12" data-toggle="tab" class="d-flex"> اكسل <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li>
                                 <li><a href="#tab13" data-toggle="tab" class="d-flex"> وورد <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li>
-                                <li><a href="#tab14" data-toggle="tab" class="d-flex"> BDF <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li>
+                                <li><a href="#tab14" data-toggle="tab" class="d-flex"> BDF <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li> --}}
                             </ul>
                         </div>
                     </div>

@@ -31,8 +31,8 @@
                 {{-- <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1"> ارسال دعوة جماعية <i
                         class="icon ion-md-paper-plane"></i></button> --}}
 
-                        <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة جماعية <i
-                            class="icon ion-md-paper-plane"></i></button>
+                        <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة جماعية <i class="icon ion-md-paper-plane"></i></button>
+                        <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة محددة <i class="icon ion-md-paper-plane"></i></button>
 
                 <a href="../index.html" class="btn btn-previous btn-sm text-warning mt-2"><i
                         class="ti-angle-double-right"></i> العودة </a>
