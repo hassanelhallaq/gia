@@ -329,3 +329,43 @@ button .disabled{background-color:red !important;}
 
 .p-40{padding: 40px;}
 .tx-25{font-size: 25px;font-weight: bolder;}
+.justify-content-between{justify-content: space-between}
+.d-flex{display: flex; align-items: center;}
+.dropdown {
+    text-align: center;
+    width: 70%;
+    position: relative;
+    align-items: center;
+    display: inline-block;
+    justify-content: start;
+    background-color: #076f6d;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 10px;
+  }
+  .dropdown span{    color: white;}
+  .dropdown-content {
+    text-align: right;
+    margin-top: 6px;
+    display: none;
+    border-radius: 9px;
+    width: 100%;
+    /* border: 5px; */
+    position: absolute;
+    background-color: #f9f9f9;
+    /* min-width: 160px; */
+    box-shadow: 1px 8px 16px 8px rgb(0 0 0 / 20%);
+    z-index: 1;
+}
+  .dropdown-content p{padding:5px 12px;border-radius: 5px;}
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content p:hover{
+    background-color: rgb(216, 216, 214);
+  }
+
+
+
+

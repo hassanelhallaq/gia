@@ -10,7 +10,19 @@
           <div class="title">
             <h3>{{ $course->name }}</h3>
           </div>
-          <span class="accepted" data-translate="accepted"> تم القبول </span>
+          <div class=" d-flex justify-content-between">
+            <span class="accepted" data-translate="accepted"> تم القبول </span>
+            <div class="dropdown">
+                <span> متطلبات الحصول على الشهادة  </span>
+                <div class="dropdown-content">
+                  <p>Hello World!</p>
+                  <p>Hello World!</p>
+                  <p>Hello World!</p>
+                  <p>Hello World!</p>
+                  <p>Hello World!</p>
+                </div>
+            </div>
+          </div>
           <div class="disc">
             <p class="tx-14">
                 {{ $course->desc }}
@@ -38,7 +50,7 @@
       <div class="qr_container df f-c  ai-c g1 p-40">
         <span class="close" onclick="togglePopup()">&times;</span>
           {{-- <img src="{{asset('site/assets/logo.png')}}" alt=""> --}}
-          <img src="{{asset('images1.svg')}}" alt="">
+          <img src="{{asset($attendance->qr)}}" alt="">
           <p  data-translate="qr_text"> الرجاء عرض رمز الدخول السريع حتى يتم تسجيل الدخول بالدورة </p>
       </div>
     </div>
