@@ -12,10 +12,8 @@
       href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;700&family=Montserrat:wght@500;700&family=Poppins:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    @php
-      $course =  App\Models\Course::find(request()->course_id);
-    @endphp
-    <title>{{ $course->name}}</title>
+
+    <title>third connect</title>
   </head>
   <body>
     <!-- header -->
@@ -28,7 +26,7 @@
             </div>
             <div class="profile_txt">
               <span id=""  data-translate="profile_txt">مرحبا بك</span>
-              <h3 id=""  data-translate="profile_title"> {{$attendance->name}}</h3>
+              <h3 id=""  data-translate="profile_title"> name</h3>
             </div>
           </div>
           <div class="menu_icon">
@@ -37,8 +35,42 @@
         </div>
       </div>
     </header>
-    @yield('content')
+
+    <div class="content">
+        <section>
+            <div class="wrap">
+              <div class="container_cards">
+
+                <div class="card">
+                    <div>
+                      <div class="card_title">
+                        <p>محمد</p>
+                      </div>
+                      <div class="">
+                        <p> مدير </p>
+                        {{-- <span  data-translate="not_submit">{{$item->type}} </span> --}}
+                      </div>
+                    </div>
+                    <div class=""><a href=""> تواصل </a></div>
+                  </div>
+
+
+              </div>
+              <div class="btn_links">
+                <a  data-translate="show_results" href=""><i class="bi bi-arrow-right tx-white"></i> الرجوع الى الرئيسية </a>
+              </div>
+            </div>
+        </section>
+    </div>
+
 
       <script src="{{asset('site/main.js')}}"></script>
     </body>
   </html>
+
+
+
+
+
+
+
