@@ -58,7 +58,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/course/xlsx', [CourseController::class, 'courseXlsx'])->name('course.xlsx');
         Route::get('/program/xlsx', [ProgramController::class, 'programXlsx'])->name('programs.xlsx');
 
- 
+
         // روت مؤقت
         Route::get('/quiz/detales', function () {
             return view('dashboard.quiz.detales');
@@ -71,7 +71,11 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
             return view('invitation.Certificate_Issuance_form');
         })->name('Certificate_Issuance_form');
 
- 
+        Route::get('/Certificate_management', function () {
+            return view('dashboard.attendance.Certificate_management');
+        })->name('Certificate_management');
+
+
 
     }
 );

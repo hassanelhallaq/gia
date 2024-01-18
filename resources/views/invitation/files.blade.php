@@ -42,6 +42,19 @@
           <div class="card_icon"><a href="{{($item->link)}}" target="_blank"  data-translate="submit">&#10140;  </a></div>
         </div>
         @endforeach
+
+
+         <div class="card">
+            <div>
+              <div class="card_title">
+                <p>تحميل شهادة الدورة</p>
+              </div>
+              <div class="card_text not">
+                غير متوفرة
+              </div>
+            </div>
+            <div class="card_icon"><a href="#" target="_blank"  data-translate="submit">&#10140;  </a></div>
+          </div>
       </div>
       <div class="btn_links">
         <a  data-translate="show_results" href="{{ route('invitation.second',[$attendance->id,request()->course_id]) }}"><i class="bi bi-arrow-right tx-white"></i> الرجوع الى الرئيسية </a>
