@@ -98,6 +98,21 @@
                 @endif
             </div>
 
+
+            <div class="card">
+                <div>
+                    <div class="card_title">
+                        <p> الحصول علي شهادة </p>
+                    </div>
+                    <div class="card_text not">
+                        <span data-translate="not_submit"> غير متوفر الان </span>
+                    </div>
+                </div>
+                <div class="card_icon">
+                    <a href="{{ route('Certificate_Issuance_form') }}" data-translate="submit">&#10140; </a>
+                </div>
+            </div>
+
             <div class="btn_links">
                 <a data-translate="show_results"
                     href="{{ route('invitation.second', [$attendance->id, request()->course_id]) }}"><i
