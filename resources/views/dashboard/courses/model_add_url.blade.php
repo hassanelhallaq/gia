@@ -10,7 +10,7 @@
 
                         <div class="col-12 form-group">
                             <label for="example"> الاسم </label>
-                            <input class="form-control" required="" id="name" type="text">
+                            <input class="form-control" required="" id="name_link" type="text">
                         </div>
 
                         <div class="col-12 form-group">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="modal-footer border-0">
-                    <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="performStoreLink()"> حفظ <i class="bi bi-floppy"></i></button>
+                    <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="performStoreLink({{$course->id}})"> حفظ <i class="bi bi-floppy"></i></button>
                     <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
                 </div>
             </form>

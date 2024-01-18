@@ -6,16 +6,16 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1">
                     <li class="breadcrumb-item">
-                        <a href="../index.html">الرئيسية</a>
+                        <a href="{{route('admin.dashboard')}}">الرئيسية</a>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{route('programs.index')}}" class="text-muted">البرامج</a>
                     </li>
-                    {{-- @if($course)
+                    @if($course)
                     <li class="breadcrumb-item">
                         <a href="{{route('program.course',[$course->program->id])}}" class="text-muted"> برنامج {{$course->program->name}} </a>
                     </li>
-                    @endif --}}
+                    @endif
                     <li class="breadcrumb-item">
                         <a href="#" class="text-muted"> المشتركين </a>
                     </li>
@@ -59,20 +59,32 @@
         <div class="col-lg-12">
             <div class="card mg-b-20">
                 <div class="card-body d-flex p-3">
-                    <div class="form">
-                        <i class="fa fa-search"></i>
-                        <input type="text" class="form-control form-input" id="search-table" placeholder="بحث">
-                        <span class="right-pan"><i class="bi bi-sliders"></i></span>
-                    </div>
+                    <form method="get">
+                        <div class="form">
+                            <i class="fa fa-search"></i>
+                            {{-- <span class="right-pan"><i class="bi bi-sliders"></i></span> --}}
+                            <div class="row row-sm mb-3">
+                                <div class="col-lg-6">
+                                    <div class="form-group has-success mg-b-0">
+                                        <input type="text" class="form-control form-input" name="name"
+                                            value="{{ request()->name }}" id="name" placeholder="بحث">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mg-t-20 mg-lg-t-0">
+                                    <button class="btn btn-outline-light btn-print" type="submit"> بحث </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
 
-                    <button class="btn btn-danger mr-1 text-white btnSelectDelete" data-target="#modalDelete"
+                    {{-- <button class="btn btn-danger mr-1 text-white btnSelectDelete" data-target="#modalDelete"
                         data-toggle="modal" style="display: none;">حذف الصفوف المختارة <i
                             class="bi bi-trash tx-12"></i></button>
                     <div class="mr-auto d-block tx-20">
                         <a href=""><i class="typcn typcn-calendar-outline"></i></a>
                         <a href=""><i class="bi bi-grid"></i></a>
                         <a href=""><i class="bi bi-list bg-black-9 text-white"></i></a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -97,34 +109,16 @@
                                             <th> قبول الدعوه </th>
                                             <th> المهنة </th>
                                             <th> الاختبارات </th>
+                                            @if($course)
                                             <th> الحضور </th>
+                                            @endif
                                             <th> الاكتمال </th>
                                             @if ($id)
                                                 <th> الدعوه </th>
                                             @endif
 
                                             <!-- Filter -->
-                                            <th>
-                                                <div class="dropdown">
-                                                    <i aria-expanded="false" aria-haspopup="true"
-                                                        class="bi bi-filter-square tx-20"data-toggle="dropdown"
-                                                        id="dropdownMenuButton" type="button"></i></i>
-                                                    <div class="dropdown-menu tx-13">
-                                                        <p class="dropdown-item" href="#"><label class="ckbox"><input
-                                                                    type="checkbox"><span>Checkbox
-                                                                    Unchecked</span></label></p>
-                                                        <p class="dropdown-item" href="#"><label class="ckbox"><input
-                                                                    type="checkbox"><span>Checkbox
-                                                                    Unchecked</span></label></p>
-                                                        <p class="dropdown-item" href="#"><label class="ckbox"><input
-                                                                    type="checkbox"><span>Checkbox
-                                                                    Unchecked</span></label></p>
-                                                        <p class="dropdown-item" href="#"><label class="ckbox"><input
-                                                                    type="checkbox"><span>Checkbox
-                                                                    Unchecked</span></label></p>
-                                                    </div>
-                                                </div>
-                                            </th>
+
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -150,16 +144,18 @@
                                                         data-bs-target="#drawerafter_{{ $item->id }}"
                                                         aria-controls="offcanvasWithBothOptions"> بعدي </span>
                                                 </td>
+                                                @if($course)
                                                 <td>
                                                     <span class="ml-2 dropdown">
                                                         {{ $course->duration }} ايام
                                                     </span>
 
                                                     <button class="btn btn-previous p-0" data-toggle="dropdown"><i class="bi bi-exclamation-circle"></i></button>
-
+`
                                                     <div class="Attendance dropdown-menu scrollable-menu">
                                                         @php
                                                         $courseStartDate = \Carbon\Carbon::parse($course->start);
+                                                        $attendanceLogin = App\Models\AttendanceLogin::where([['attendance_id',$item->id],['course_id',$course->id]])->count();
                                                         @endphp
                                                         @for ($day = 1; $day <= $course->duration; $day++)
                                                         @php
@@ -175,8 +171,14 @@
                                                         @endfor
                                                     </div>
                                                 </td>
-                                                <td> 60% </td>
-                                                @if ($id)
+                                                @endif
+                                                <td>
+                                                    @if($attendanceLogin != 0)
+                                                    {{($course->duration / $attendanceLogin) *100 }}%
+                                                    @else
+                                                    0%
+                                                    @endif
+                                                </td>                                                @if ($id)
                                                     <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $id]) }}"
                                                             target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
                                                 @endif
@@ -304,9 +306,10 @@
                                     <input class="form-control" value="{{ $item->work_place }}"required=""
                                         id="work_place_{{ $item->id }}" type="text">
                                 </div>
+                                @if($course)
                                 <input class="form-control" value="{{ $course->id}}"required="" hidden
                                         id="course_id" type="text">
-
+                                @endif
                                 <div class="col-lg-3 mb-3">
                                     <label for="exampleInputEmail1"> شهاده </label>
                                     <div class="custom-file">
@@ -371,7 +374,9 @@
                 <div class="list p-3">
                     <div class="row row-sm">
                         <div class="col-6">
+                            @if($course)
                             <a class="card text-center" href="{{route('attendance.summery',[$id,$item->id])}}">
+                                @endif
                                 <div class="card-body p-2">
                                     <div class="feature widget-2 text-center mb-3">
                                         <i

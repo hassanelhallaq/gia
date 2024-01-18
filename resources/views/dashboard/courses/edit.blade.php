@@ -215,7 +215,7 @@
                                             <option value="InActive">
                                                 غير مفعل
                                             </option>
-                                            @endforeach
+                                            {{-- @endforeach --}}
                                         </select>
 
                                         <div class="d-flex ml-2">
@@ -237,7 +237,7 @@
                                             <option value="InActive">
                                                 غير مفعل
                                             </option>
-                                            @endforeach
+                                            {{-- @endforeach --}}
                                         </select>
 
                                         <div class="d-flex ml-2">
@@ -320,7 +320,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-6 mb-3">
+                                    <p class="mg-b-10"> الحاله</p>
+                                    <select class="form-control select2" id="register">
+                                        <option  @if ($course->status == 'active') selected @endif  value="active">
+                                        فعال
+                                        </option>
+                                        <option  @if ($course->status == 'Inactive') selected @endif  value="Inactive">
+                                            غير فعال
+                                        </option>
 
+                                    </select>
+                                </div>
                                 <div class="col-lg-6 mb-3">
                                     <label for="example"> المادة </label>
                                     <div class="webflow-style-input">

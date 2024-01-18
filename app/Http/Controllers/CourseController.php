@@ -21,17 +21,20 @@ class CourseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $program = null;
         $id = null;
-        $courses = Course::paginate(10);
+
+        $courses = Course::orderBy("created_at", "desc")->when($request->name,function($q)use($request){
+            $q->where('name','like', '%' . $request->name . '%');
+        });
         if (Auth::guard('admin')->check()) {
-            $courses = Course::orderBy("created_at", "desc")->paginate(10);
+            $courses = $courses->paginate(10);
         } elseif (Auth::guard('client')->check()) {
-            $courses = Course::with('program')->whereHas('program', function ($q) {
+            $courses = $courses->with('program')->whereHas('program', function ($q) {
                 $q->where('client_id', Auth::user()->id);
-            })->orderBy("created_at", "desc")->paginate(10);
+            })->paginate(10);
         }
         return view("dashboard.courses.index", compact("courses", 'program', 'id'));
     }
@@ -298,4 +301,26 @@ public function sendSms(Request $request)
             // if ($server_output == "OK") { echo "1"; } else { echo "0"; }
         }
     }
+    public function courseXlsx(Request $request)
+    {
+
+        $courses = Course::all();
+
+        foreach ($courses as $course) {
+
+
+            $data[] = [
+                'الاسم' => $course->name,
+                'الفئه' => $course->category->name,
+                'المدرب' => $course->trainer->name ?? '' ,
+                'تاريخ البداية	' => $course->start,
+                'المدة' => $course->duration,
+            ];
+        }
+        if (empty($data))
+            return back();
+        $list = collect($data);
+        return (new \Rap2hpoutre\FastExcel\FastExcel($list))->download('file.xlsx');
+    }
+
 }
