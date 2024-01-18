@@ -27,7 +27,7 @@
     </div>
     <div class="main-dashboard-header-right flex-wrap">
         <div class=" d-flex">
-            <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تفعيل الدورة </button>
+            <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"  onclick="activeCourse({{$course->id}})"> @if($course->status == 'active') مفعله @else تفعيل الدورة @endif</button>
             <a href="{{route('course.attendance',[$course->id])}}" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> ادارة المشاركين  <i class="la la-cog"></i></a>
             <a href="View_test_results.html" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج الاختبار  <i class="bi bi-box-arrow-in-down"></i></a>
             <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركة  <i class="bi bi-box-arrow-in-down"></i></button>
@@ -989,6 +989,12 @@
         formData.append('link', document.getElementById('link').value);
         formData.append('course_id',id);
         storeRoute('/dashboard/admin/courses-links', formData)
+    }
+    function activeCourse(id) {
+        let formData = new FormData();
+                formData.append("_method", "PUT")
+        formData.append('status', 'active');
+        storeRoute('/dashboard/admin/status-update/' + id, formData)
     }
 
     function performUpdate(id) {

@@ -322,5 +322,15 @@ public function sendSms(Request $request)
         $list = collect($data);
         return (new \Rap2hpoutre\FastExcel\FastExcel($list))->download('file.xlsx');
     }
+    public function updateStatus(Request $request, Course $course)
+    {
+        if($course->status == 'active'){
+            $course->status = 'Inactive';
+        }else{
+            $course->status = 'active';
+        }
+        $course->update();
+        return response()->json(['redirect' => route('courses.index')]);
 
+    }
 }

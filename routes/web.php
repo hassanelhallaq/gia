@@ -57,8 +57,9 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::post('/attendance-sms', [CourseController::class, 'sendSms'])->name('attendance.sms');
         Route::get('/course/xlsx', [CourseController::class, 'courseXlsx'])->name('course.xlsx');
         Route::get('/program/xlsx', [ProgramController::class, 'programXlsx'])->name('programs.xlsx');
+        Route::put('/status-update/{id}', [CourseController::class, 'updateStatus'])->name('update.status');
 
- 
+
         // روت مؤقت
         Route::get('/quiz/detales', function () {
             return view('dashboard.quiz.detales');
@@ -71,7 +72,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
             return view('invitation.Certificate_Issuance_form');
         })->name('Certificate_Issuance_form');
 
- 
+
 
     }
 );
