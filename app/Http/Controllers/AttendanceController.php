@@ -16,7 +16,7 @@ class AttendanceController extends Controller
     {
         $id = null;
         $course = null;
-        $attendance = Attendance::orderBy('created_at','desc')->when($request->name,function($q)use($request){
+        $attendance = Attendance::orderBy('created_at','desc')->when($request->name_search,function($q)use($request){
             $q->where('name','like', '%' . $request->name . '%');
         })->paginate(10);
         return view("dashboard.attendance.index", compact("attendance",'id','course'));

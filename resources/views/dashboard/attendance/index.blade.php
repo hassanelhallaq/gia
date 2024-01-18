@@ -30,11 +30,10 @@
                         class="bi bi-box-arrow-in-down"></i></i></button>
                 {{-- <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1"> ارسال دعوة جماعية <i
                         class="icon ion-md-paper-plane"></i></button> --}}
-
-                          <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة محددة <i class="icon ion-md-paper-plane"></i></button>
-                         <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة جماعية <i
+                          <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSmsSelected" data-toggle="modal">  ارسال دعوة محددة <i class="icon ion-md-paper-plane"></i></button>
+                         <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms"  data-toggle="modal">  ارسال دعوة جماعية <i
                             class="icon ion-md-paper-plane"></i></button>
- 
+
                 <a href="../index.html" class="btn btn-previous btn-sm text-warning mt-2"><i
                         class="ti-angle-double-right"></i> العودة </a>
             </div>
@@ -68,7 +67,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group has-success mg-b-0">
                                         <input type="text" class="form-control form-input" name="name"
-                                            value="{{ request()->name }}" id="name" placeholder="بحث">
+                                            value="{{ request()->name }}" id="name_search" placeholder="بحث">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mg-t-20 mg-lg-t-0">
@@ -102,6 +101,9 @@
                                     <thead>
                                         <tr>
                                             <th>
+
+                                            </th>
+                                            <th>
                                                 الأسم
                                             </th>
                                             <th>جهة العمل</th>
@@ -130,6 +132,8 @@
                                         </tr>
                                         @foreach ($attendance as $item)
                                             <tr class="table-rows">
+                                                <td scope="row"><input type="checkbox" class="form-data sub_chk" data-id="{{$item->id}}">  </td>
+
                                                 <td scope="row"> {{ $item->name }} </td>
                                                 <td>{{ $item->work_place }} </td>
                                                 <td class="client-name"> {{ $item->phone_number }} </td>
@@ -519,12 +523,33 @@
 
                             <div class="col-12 form-group">
                                 <label for="example"> رساله </label>
-                                <textarea class="form-control" required="" id="massege" type="text"></textarea>
+                                <textarea class="form-control" required="" id="massege_select" type="text"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer border-0">
-                        <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="performStoreSms({{$id}})"> حفظ <i class="bi bi-floppy"></i></button>
+                        <button class="btn btn-warning-gradient btn-with-icon " type="button"  onclick="performStoreSms({{$id}})"> حفظ <i class="bi bi-floppy"></i></button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="sendSmsSelected">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-content-demo">
+                <form action="">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 form-group">
+                                <label for="example"> رساله </label>
+                                <!-- Corrected the ID attribute to match the jQuery selector -->
+                                <textarea class="form-control" required="" id="massege" name="massege" type="text"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button class="btn btn-warning-gradient btn-with-icon send_all" type="button" data-url="{{url('/dashboard/admin/attendance-sms/selected')}}"> حفظ <i class="bi bi-floppy"></i></button>
                         <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
                     </div>
                 </form>
@@ -570,6 +595,66 @@
 
              storepart('/dashboard/admin/attendance-sms', formData)
         }
+        function performStoreSms(id) {
+            let formData = new FormData();
+            formData.append('massege', document.getElementById('massege').value);
+            formData.append('course_id', id);
+
+             storepart('/dashboard/admin/attendance-sms/selected', formData)
+        }
+
+        $(document).ready(function () {
+        $('#master').on('click', function (e) {
+            if ($(this).is(':checked')) {
+                $(".sub_chk").prop('checked', true);
+            } else {
+                $(".sub_chk").prop('checked', false);
+            }
+        });
+
+        $('.send_all').on('click', function (e) {
+            var allVals = [];
+            $(".sub_chk:checked").each(function () {
+                allVals.push($(this).attr('data-id'));
+            });
+            if (allVals.length <= 0) {
+                alert("Please select row.");
+            } else {
+                var join_selected_values = allVals.join(",");
+                // Corrected the typo in the next line
+                var join_selected_message = document.getElementById('massege').value;
+
+                $.ajax({
+                    url: $(this).data('url'),
+                    type: 'post',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    // Corrected the data parameter to send the message
+                    data: {ids: join_selected_values, massege_select: join_selected_message},
+                    success: function (data) {
+                        if (data['success']) {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'Quiz Archived successfully',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            location.reload();
+                        } else if (data['error']) {
+                            alert(data['error']);
+                        } else {
+                            alert('Whoops Something went wrong!!');
+                        }
+                    },
+                    error: function (data) {
+                        alert(data.responseText);
+                    }
+                });
+            }
+        });
+    });
         function performUpdate(id) {
             let formData = new FormData();
             formData.append("_method", "PUT")
