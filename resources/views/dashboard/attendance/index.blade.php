@@ -2,50 +2,46 @@
 @section('header')
     <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
         <div class="left-content mt-2">
-            <nav aria-label="breadcrumb">
+        <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1">
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.dashboard') }}">الرئيسية</a>
+                        <a href="../index.html">الرئيسية</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('programs.index') }}" class="text-muted">البرامج</a>
+                        <a href="{{route('programs.index')}}" class="text-muted">البرامج</a>
                     </li>
-                    @if ($course)
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('program.course', [$course->program->id]) }}" class="text-muted"> برنامج
-                                {{ $course->program->name }} </a>
-                        </li>
-                    @endif
+                    {{-- @if($course)
+                    <li class="breadcrumb-item">
+                        
+                        <a href="{{route('program.course',[$course->program->id])}}" class="text-muted"> برنامج {{$course->program->name}} </a>
+                    </li>
+                    @endif --}}
                     <li class="breadcrumb-item">
                         <a href="#" class="text-muted"> المشتركين </a>
+
                     </li>
                 </ol>
             </nav>
+
         </div>
         <div class="main-dashboard-header-right">
             <div class="d-flex flex-wrap">
+                <a href="{{ route('Certificate_management') }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1"> الشهادات <i class="bi bi-clipboard-data tx-11"></i></a>
                 <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"data-target="#modaladd" data-toggle="modal">
                     اضافة مشاركين جدد <i class="bi bi-plus"></i></button>
-                {{-- <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1"> ارسال دعوة جماعية <i
-                        class="icon ion-md-paper-plane"></i></button> --}}
 
-                <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSmsSelected"
-                    data-toggle="modal"> ارسال دعوة محددة <i class="icon ion-md-paper-plane"></i></button>
-                <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms"
-                    data-toggle="modal"> ارسال دعوة جماعية <i>
-                        </button>
-                         {{-- <a href="{{ route('Certificate_management') }}"
-                        class="btn btn-outline-light btn-with-icon btn-sm mr-1"> الشهادات <i
-                            class="bi bi-clipboard-data tx-11"></i></a> --}}
+                        <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة جماعية <i class="icon ion-md-paper-plane"></i></button>
+                        <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة محددة <i class="icon ion-md-paper-plane"></i></button>
 
-
-
-                        <a href="../index.html" class="btn btn-previous btn-sm text-warning mt-2"><i
-                                class="ti-angle-double-right"></i> العودة </a>
+                <a href="../index.html" class="btn btn-previous btn-sm text-warning mt-2"><i
+                        class="ti-angle-double-right"></i> العودة </a>
             </div>
+
         </div>
+        
     </div>
 @endsection
+
 @section('css')
     <link href="{{ asset('assets/css-rtl/drawar-user.css') }}" rel="stylesheet">
 @endsection
