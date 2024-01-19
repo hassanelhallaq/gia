@@ -98,13 +98,25 @@
                     @endif
                 @endif
 
+
             </div>
+            <div class="card">
+                <div>
+                    <div class="card_title">
+                        <p>الاختبار التفاعلي</p>
+                    </div>
+
+
+            </div>
+
 
             <div class="card">
                 <div>
                     <div class="card_title">
                         <p> الحصول علي شهادة </p>
+
                     </div>
+
 
                     <div class="card_text not">
                         <span data-translate="not_submit"> غير متوفر الان </span>
@@ -124,7 +136,7 @@
                 </div>
 
                 <div class="card_icon">
-                    <a href="{{ route('Certificate_Issuance_form') }}" data-translate="submit">&#10140; </a>
+                    <a href="{{ route('Certificate_Issuance_form', [$attendance->id, request()->course_id]) }}" data-translate="submit">&#10140; </a>
                 </div>
 
                 @if ($quizAtten == null)

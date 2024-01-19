@@ -25,8 +25,8 @@
                         class="ti-stats-up project"></i></a>
                 <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات صفحة الويب <i
                         class="icon ion-ios-settings"></i></button>
-                <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات <i
-                        class="icon ion-ios-settings"></i></button>
+                <a href="{{ route('programs.edit', [$program->id]) }}" class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات <i
+                        class="icon ion-ios-settings"></i></a>
                 @if ($id)
                     <a href="{{ route('program.course.create', [$id]) }}"
                         class="btn btn-warning-gradient btn-with-icon mr-1 mb-1"> اضافة دورة جديدة <i

@@ -38,11 +38,11 @@ class SiteController extends Controller
         $attendance =   Attendance::find($request->attendance_id);
         $attendance->is_accepted = $request->is_accepted == "true" ? 1 : 0;
         $attendance->save();
-        if($request->is_accepted == "true"){
-        return response()->json(['redirect' => route('invitation.second', [$attendance->id, $request->course_id])]);
-       }else{
-        return response()->json(['redirect' => route('invitation.index', [$attendance->id, $request->course_id])]);
-       }
+        if ($request->is_accepted == "true") {
+            return response()->json(['redirect' => route('invitation.second', [$attendance->id, $request->course_id])]);
+        } else {
+            return response()->json(['redirect' => route('invitation.index', [$attendance->id, $request->course_id])]);
+        }
     }
 
     public function second($id, $course_id)
@@ -55,23 +55,30 @@ class SiteController extends Controller
     }
 
 
-
+    public function certificateIssuance($id, $course_id)
+    {
+        $course = Course::findOrFail($course_id);
+        $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
+            $q->where('course_id', $course_id);
+        })->first();
+        return view("invitation.Certificate_Issuance_form", compact("attendance", "course"));
+    }
 
     public function third($id, $course_id)
     {
 
-         $course = Course::findOrFail($course_id);
-          $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
+        $course = Course::findOrFail($course_id);
+        $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
-           $quiz = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz',function($q){
-            $q->where('type','befor');
-         })->first();
-         $quizAfter= QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz',function($q){
-            $q->where('type','after');
-         })->first();
-            $quizAtten = QuizAttendance::where('quiz_id', $quiz->quiz_id)->where('attendance_id',$id)->first();
-        return view("invitation.third", compact("attendance", "course", 'quiz', 'quizAtten','quizAfter'));
+        $quiz = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz', function ($q) {
+            $q->where('type', 'befor');
+        })->first();
+        $quizAfter = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz', function ($q) {
+            $q->where('type', 'after');
+        })->first();
+        $quizAtten = QuizAttendance::where('quiz_id', $quiz->quiz_id)->where('attendance_id', $id)->first();
+        return view("invitation.third", compact("attendance", "course", 'quiz', 'quizAtten', 'quizAfter'));
     }
     public function backInvetaion($id, $auizId)
     {
@@ -82,20 +89,20 @@ class SiteController extends Controller
             $q->where('course_id', $course_id);
         })->first();
         $quiz = QuizCourse::where('quiz_id', $auizId)->first();
-          $quizAtten = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $id)->first();
+        $quizAtten = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $id)->first();
         return redirect()->route('invitation.third', ['id' => $id, 'course_id' => $course_id]);
         // return view("invitation.third", compact("attendance", "course", 'quiz','quizAtten'));
     }
     public function quiz($id, $clientId)
     {
-         $questions = Question::with('options')->where('quiz_id', $id)->with('quiz')->get();
+        $questions = Question::with('options')->where('quiz_id', $id)->with('quiz')->get();
         return response()->json(['questions' => $questions]);
     }
     public function quizView($id, $clientId)
     {
-         $quizAtend = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $clientId)->first();
+        $quizAtend = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $clientId)->first();
         if ($quizAtend == null) {
-        return view('invitation.quiz',compact('id','clientId'));
+            return view('invitation.quiz', compact('id', 'clientId'));
         } else {
             return redirect()->back();
         }
@@ -134,13 +141,38 @@ class SiteController extends Controller
         return response()->json(['message' => 'Answer saved successfully']);
     }
 
-    public function files($id, $course_id){
-        $files = CourseFile::where('course_id',$course_id)->get();
+    public function files($id, $course_id)
+    {
+        $files = CourseFile::where('course_id', $course_id)->get();
         $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
-        $links = CourseLink::where('course_id',$course_id)->get();
+        $links = CourseLink::where('course_id', $course_id)->get();
 
-        return view('invitation.files',compact('files','attendance','links'));
+        return view('invitation.files', compact('files', 'attendance', 'links'));
+    }
+
+    public function ateendanceUpdate(Request $request , $id, $course_id)
+    {
+        $data = $request->all();
+        $validator = Validator($data, [
+            'name' => 'required|string',
+            'phone_number' => 'required',
+            'work_place' => 'required',
+            'email' => 'required',
+            'job' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
+        }
+        $attendance = Attendance::find($id);
+        $attendance->name = $request->name;
+        $attendance->phone_number = $request->phone_number;
+        $attendance->work_place = $request->work_place;
+        $attendance->email = $request->email;
+        $attendance->job = $request->job;
+        $isSave =  $attendance->update();
+      
+        return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $attendance ? 201 : 400);
     }
 }

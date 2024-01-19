@@ -57,6 +57,9 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::post('/attendance-sms', [CourseController::class, 'sendSms'])->name('attendance.sms');
         Route::get('/course/xlsx', [CourseController::class, 'courseXlsx'])->name('course.xlsx');
         Route::get('/program/xlsx', [ProgramController::class, 'programXlsx'])->name('programs.xlsx');
+        Route::put('/status-update/{id}', [CourseController::class, 'updateStatus'])->name('update.status');
+        Route::post('/attendance-sms/selected', [CourseController::class, 'sendSmsSelected'])->name('attendance.sms.selected');
+
 
 
         // روت مؤقت
@@ -67,13 +70,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/third_connect', function () {
             return view('invitation.third_connect');
         })->name('third_connect');
-        Route::get('/Certificate_Issuance_form', function () {
-            return view('invitation.Certificate_Issuance_form');
-        })->name('Certificate_Issuance_form');
 
-        Route::get('/Certificate_management', function () {
-            return view('dashboard.attendance.Certificate_management');
-        })->name('Certificate_management');
 
 
 
@@ -106,6 +103,8 @@ Route::get('/accept/{id}/{course_id}', [SiteController::class, 'second'])->name(
 Route::get('/third/{id}/{course_id}', [SiteController::class, 'third'])->name('invitation.third');
 Route::get('/back/{id}/{quiz_id}', [SiteController::class, 'backInvetaion'])->name('invitation.back');
 Route::get('/files/{id}/{course_id}', [SiteController::class, 'files'])->name('invitation.files');
+Route::get('/Certificate_Issuance_form/{id}/{course_id}',[SiteController::class, 'certificateIssuance'])->name('Certificate_Issuance_form');
+Route::post('/ateendance/update/{id}/{course_id}', [SiteController::class, 'ateendanceUpdate'])->name('ateendance.update');
 
 
 Route::post('/invitation/reply', [SiteController::class, 'storeReply']);

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
+use App\Models\AttendanceLogin;
 use App\Models\Category;
 use App\Models\Client;
 use App\Models\Course;
@@ -9,6 +11,7 @@ use App\Models\CourseFile;
 use App\Models\CourseLink;
 use App\Models\Program;
 use App\Models\Quiz;
+use App\Models\QuizAttendance;
 use App\Models\QuizCourse;
 use App\Models\Trainer;
 use Carbon\Carbon;
@@ -26,8 +29,8 @@ class CourseController extends Controller
         $program = null;
         $id = null;
 
-        $courses = Course::orderBy("created_at", "desc")->when($request->name,function($q)use($request){
-            $q->where('name','like', '%' . $request->name . '%');
+        $courses = Course::orderBy("created_at", "desc")->when($request->name, function ($q) use ($request) {
+            $q->where('name', 'like', '%' . $request->name . '%');
         });
         if (Auth::guard('admin')->check()) {
             $courses = $courses->paginate(10);
@@ -128,11 +131,59 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        $course = Course::withCount("attendances")->with('attendances')->find($id);
-        $courseFile = CourseFile::where('course_id',$id)->get();
-        $courseLinks = CourseLink::where('course_id',$id)->get();
+        $course = Course::withCount(["attendances" => function ($q) {
+            $q->where('is_accepted', 1);
+        }])->with('attendances')->find($id);
+        $courseAttendancesEmail = Course::withCount("attendancesEmail")->with('attendances')->find($id);
 
-        return view("dashboard.courses.show", compact("course",'courseFile','courseLinks'));
+        $quizBefor = QuizCourse::where('course_id', $id)->with('quiz')->whereHas('quiz', function ($q) {
+            $q->where('type', 'befor');
+        })->first();
+
+        $quizAfter = QuizCourse::where('course_id', $id)->with('quiz')->whereHas('quiz', function ($q) {
+            $q->where('type', 'after');
+        })->first();
+
+        $quizInteractive = QuizCourse::where('course_id', $id)->with('quiz')->whereHas('quiz', function ($q) {
+            $q->where('type', 'interactive');
+        })->first();
+
+        if ($quizBefor) {
+            $quizAtendBefor = QuizAttendance::where('quiz_id', $quizBefor->quiz_id)->count();
+        } else {
+            $quizAtendBefor = 0;
+        }
+
+        $quizAtendBefor = QuizAttendance::where('quiz_id', $quizBefor->quiz_id)->count();
+        if ($quizAfter) {
+            $quizAtendAfter = QuizAttendance::where('quiz_id', $quizAfter->quiz_id)->count();
+        } else {
+            $quizAtendAfter = 0;
+        }
+
+        if ($quizInteractive) {
+            $quizAtendInteractive = QuizAttendance::where('quiz_id', $quizInteractive->quiz_id)->count();
+        } else {
+            $quizAtendInteractive = 0;
+        }
+        $courseFile = CourseFile::where('course_id', $id)->get();
+        $courseLinks = CourseLink::where('course_id', $id)->get();
+             $attendancesLog = AttendanceLogin::whereIn('attendance_id', $course->attendances->pluck('id'))->where([ ['course_id', $course->id]])->count();
+            $dueration = $course->duration;
+            $percent  = 0;
+            if ($attendancesLog) {
+                $percent += $dueration / $attendancesLog;
+            } else {
+                $percent = 0;
+            }
+
+        if ($course->attendances->count() != 0) {
+            $avrageAttend =  $percent / $course->attendances->count() * 100;
+        } else {
+            $avrageAttend = 0;
+        }
+
+        return view("dashboard.courses.show", compact("course", 'courseFile', 'courseLinks', 'quizAtendBefor', 'quizAtendAfter', 'courseAttendancesEmail', 'quizAtendInteractive','avrageAttend'));
     }
 
     /**
@@ -260,10 +311,11 @@ class CourseController extends Controller
         return response()->json(['icon' => 'success', 'title' => 'تم الحفط  بنجاح'], $save ? 200 : 400);
     }
 
-public function sendSms(Request $request)
+    public function sendSms(Request $request)
     {
         $course = Course::with('attendances')->find($request->course_id);
-        foreach ($course->attendances as $attendance) {
+        $attendances = $course->attendances;
+        foreach ($attendances as $attendance) {
             $phone = $attendance->phone_number;
             $massege = $request->massege;
 
@@ -295,11 +347,55 @@ public function sendSms(Request $request)
                 'response' => $response,
             ]);
             // Get the server response
-             $server_output = $response->body();
+            $server_output = $response->body();
 
             // Further processing...
             // if ($server_output == "OK") { echo "1"; } else { echo "0"; }
         }
+    }
+
+    public function sendSmsSelected(Request $request)
+    {
+        $ids = $request->ids;
+        $attendances = Attendance::whereIn('id', explode(",", $ids))->get();
+        foreach ($attendances as $attendance) {
+            $phone = $attendance->phone_number;
+            $massege = $request->massege_select;
+
+            // Retrieve POST parameters from the request
+            $sender = urlencode(request()->input('sender'));
+            $apikey = request()->input('api_key');
+            $username = request()->input('username');
+            $numbers = request()->input('numbers');
+            $response = request()->input('response');
+
+            // Process message for Unicode characters
+            if (request()->input('unicode') == 1) {
+                $mssg = request()->input('message');
+                $msg = str_replace("061B", "Ø", $mssg);
+                // ... (continue with your Unicode character replacements)
+            } else {
+                $msg = request()->input('message');
+            }
+
+            $lmsg = urlencode($msg);
+
+            // Make the HTTP request using Laravel HTTP client
+            $response = Http::post('https://www.mora-sa.com/api/v1/sendsms', [
+                'api_key' => "6052582b4d3853cae29fb67c8c9109f34c735af5",
+                'username' => "gialearning",
+                'message' => $massege . "\n" . route('invitation.index', [$attendance->id, 'course_id' => $request->course_id]),
+                'sender' => "GiaLearning",
+                'numbers' => $phone,
+                'response' => $response,
+            ]);
+            // Get the server response
+            $server_output = $response->body();
+
+            // Further processing...
+            // if ($server_output == "OK") { echo "1"; } else { echo "0"; }
+        }
+        return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $attendance ? 201 : 400);
     }
     public function courseXlsx(Request $request)
     {
@@ -312,7 +408,7 @@ public function sendSms(Request $request)
             $data[] = [
                 'الاسم' => $course->name,
                 'الفئه' => $course->category->name,
-                'المدرب' => $course->trainer->name ?? '' ,
+                'المدرب' => $course->trainer->name ?? '',
                 'تاريخ البداية	' => $course->start,
                 'المدة' => $course->duration,
             ];
@@ -322,5 +418,14 @@ public function sendSms(Request $request)
         $list = collect($data);
         return (new \Rap2hpoutre\FastExcel\FastExcel($list))->download('file.xlsx');
     }
-
+    public function updateStatus(Request $request, Course $course)
+    {
+        if ($course->status == 'active') {
+            $course->status = 'Inactive';
+        } else {
+            $course->status = 'active';
+        }
+        $course->update();
+        return response()->json(['redirect' => route('courses.index')]);
+    }
 }

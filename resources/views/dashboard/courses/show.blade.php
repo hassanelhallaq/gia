@@ -27,7 +27,7 @@
     </div>
     <div class="main-dashboard-header-right flex-wrap">
         <div class=" d-flex">
-            <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تفعيل الدورة </button>
+            <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"  onclick="activeCourse({{$course->id}})"> @if($course->status == 'active') مفعله @else تفعيل الدورة @endif</button>
             <a href="{{route('course.attendance',[$course->id])}}" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> ادارة المشاركين  <i class="la la-cog"></i></a>
             <a href="View_test_results.html" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج الاختبار  <i class="bi bi-box-arrow-in-down"></i></a>
             <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركة  <i class="bi bi-box-arrow-in-down"></i></button>
@@ -77,7 +77,7 @@
                             <div class="">
                                 <p class="mb-2 tx-12 text-muted">نسبة الأختبار القبلي  </p>
                                 <div class="d-flex">
-                                    <h4 class="mb-1 font-weight-bold">13</h4><span> من 50 </span>
+                                    <h4 class="mb-1 font-weight-bold">{{$quizAtendBefor}}</h4><span> من {{$course->attendances_count}} </span>
                                 </div>
                             </div>
                         </div>
@@ -102,9 +102,9 @@
                                 <i class="bi bi-cash-stack text-warning tx-24"></i>
                             </div>
                             <div class="">
-                                <p class="mb-2 tx-12 text-muted"> التكاليف المقدمة </p>
+                                <p class="mb-2 tx-12 text-muted">  نسبة اجتياز طلبات الشهادة</p>
                                 <div class="d-flex">
-                                    <h4 class="mb-1 font-weight-bold">13</h4><span> من 50 </span>
+                                    <h4 class="mb-1 font-weight-bold">{{$courseAttendancesEmail->attendances_email_count}}</h4><span> من {{$course->attendances_count}} </span>
                                 </div>
                             </div>
                         </div>
@@ -129,9 +129,9 @@
                                 <i class="si si-layers text-warning tx-24"></i>
                             </div>
                             <div class="">
-                                <p class="mb-2 tx-11 text-muted"> متوسط نسبة الحضور </p>
+                                <p class="mb-2 tx-11 text-muted"> نسبة اجتياز الاختبار التفاعلي</p>
                                 <div class="">
-                                    <h4 class="mb-1 font-weight-bold">500</h4>
+                                    <h4 class="mb-1 font-weight-bold">{{$quizAtendInteractive}}</h4><span> من {{$course->attendances_count}} </span>
                                 </div>
                             </div>
                         </div>
@@ -159,7 +159,7 @@
                             <div class="">
                                 <p class="mb-2 tx-12 text-muted"> نسبة الاختبار البعدي </p>
                                 <div class="">
-                                    <h4 class="mb-1 font-weight-bold">500</h4>
+                                    <h4 class="mb-1 font-weight-bold">{{$quizAtendAfter}}</h4><span> من {{$course->attendances_count}} </span>
                                 </div>
                             </div>
                         </div>
@@ -989,6 +989,12 @@
         formData.append('link', document.getElementById('link').value);
         formData.append('course_id',id);
         storeRoute('/dashboard/admin/courses-links', formData)
+    }
+    function activeCourse(id) {
+        let formData = new FormData();
+                formData.append("_method", "PUT")
+        formData.append('status', 'active');
+        storeRoute('/dashboard/admin/status-update/' + id, formData)
     }
 
     function performUpdate(id) {

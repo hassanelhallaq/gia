@@ -16,11 +16,19 @@ class AttendanceCourseController extends Controller
     {
         //
     }
-    public function coursesAttendance($id)
+    public function coursesAttendance(Request $request ,$id)
     {
+        if($request->name_search){
+            $attendance = Attendance::with('courses')->whereHas('courses',function($q)use($id){
+                $q->where('course_id',$id);
+            })->when($request->name_search,function($q)use($request){
+                $q->where('name','like', '%' . $request->name_search . '%');
+            })->get();
+        }else{
            $attendance = Attendance::with('courses')->whereHas('courses',function($q)use($id){
             $q->where('course_id',$id);
         })->paginate(10);
+    }
         $course = Course::find($id);
         return view("dashboard.attendance.index", compact("attendance","id",'course'));
     }
