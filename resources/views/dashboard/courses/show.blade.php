@@ -3,6 +3,7 @@
 <!---Internal Fileupload css-->
 <link href="{{ URL::asset('assets/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{ URL::asset('assets/plugins/fancyuploder/fancy_fileupload.css')}}" rel="stylesheet" />
+<link href="{{ URL::asset('assets/css-rtl/chartCircle.css')}}" rel="stylesheet" />
 @endsection
 @section('header')
 <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
@@ -193,10 +194,12 @@
             </div>
             <!-- col-6 -->
             <div class="col-lg-6 col-sm-12">
-                <div class="card pb-5">
+                <div class="card ">
                     <div class="card-body">
-                        <div id="chart" class=""></div>
-                        <div class="row pb-5" >
+                        <span class="chart" data-percent="87">
+                            <span class="percent"></span>
+                        </span>
+                        <div class="row pb-4  mg-t-60" >
                             <div class="col-md-12 col text-center">
                                 <h3 class=""> متوسط الأكتمال </h3>
                                 <span class="fs-14 text-muted">
@@ -1016,7 +1019,7 @@
 <script src="{{asset('assets/plugins/jquery.flot/jquery.flot.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery.flot/jquery.flot.pie.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery.flot/jquery.flot.resize.js')}}"></script>
-<script src="{{ asset('assets/js/apexcharts.js') }}"></script>
+<script src="{{ asset('assets/js/chartCircle.js') }}"></script>
 <script src="{{ URL::asset('assets/plugins/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
 
 <!--Internal Fileuploads js-->
