@@ -13,11 +13,13 @@
                     </li>
                     {{-- @if($course)
                     <li class="breadcrumb-item">
+                        
                         <a href="{{route('program.course',[$course->program->id])}}" class="text-muted"> برنامج {{$course->program->name}} </a>
                     </li>
                     @endif --}}
                     <li class="breadcrumb-item">
                         <a href="#" class="text-muted"> المشتركين </a>
+
                     </li>
                 </ol>
             </nav>
@@ -27,7 +29,7 @@
                 <a href="{{ route('Certificate_management') }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1"> الشهادات <i class="bi bi-clipboard-data tx-11"></i></a>
                 <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"data-target="#modaladd" data-toggle="modal">
                     اضافة مشاركين جدد <i class="bi bi-plus"></i></button>
-               
+
                         <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة جماعية <i class="icon ion-md-paper-plane"></i></button>
                         <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة محددة <i class="icon ion-md-paper-plane"></i></button>
 
