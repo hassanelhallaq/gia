@@ -1,9 +1,8 @@
 @extends('dashboard.layouts.master')
 @section('header')
-    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0"
-      >
+    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
         <div class="left-content mt-2">
-            <nav aria-label="breadcrumb">
+        <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1">
                     <li class="breadcrumb-item">
                         <a href="../index.html">الرئيسية</a>
@@ -23,6 +22,7 @@
                     </li>
                 </ol>
             </nav>
+
         </div>
         <div class="main-dashboard-header-right">
             <div class="d-flex flex-wrap">
@@ -38,6 +38,7 @@
             </div>
 
         </div>
+        
     </div>
 @endsection
 

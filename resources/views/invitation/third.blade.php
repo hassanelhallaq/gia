@@ -122,9 +122,9 @@
                     <div class="card_title">
                         <p>الاختبار البعدي</p>
                     </div>
-                    <div class="card_text not">
+                    {{-- <div class="card_text not">
                         <span data-translate="not_submit"> غير متوفر الان </span>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="card_icon">
