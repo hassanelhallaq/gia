@@ -154,7 +154,6 @@ class CourseController extends Controller
             $quizAtendBefor = 0;
         }
 
-        $quizAtendBefor = QuizAttendance::where('quiz_id', $quizBefor->quiz_id)->count();
         if ($quizAfter) {
             $quizAtendAfter = QuizAttendance::where('quiz_id', $quizAfter->quiz_id)->count();
         } else {

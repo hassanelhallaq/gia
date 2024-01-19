@@ -32,9 +32,11 @@
                 <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSmsSelected"
                     data-toggle="modal"> ارسال دعوة محددة <i class="icon ion-md-paper-plane"></i></button>
                 <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms"
-                    data-toggle="modal"> ارسال دعوة جماعية <i></button> <a href="{{ route('Certificate_management') }}"
+                    data-toggle="modal"> ارسال دعوة جماعية <i>
+                        </button>
+                         {{-- <a href="{{ route('Certificate_management') }}"
                         class="btn btn-outline-light btn-with-icon btn-sm mr-1"> الشهادات <i
-                            class="bi bi-clipboard-data tx-11"></i></a>
+                            class="bi bi-clipboard-data tx-11"></i></a> --}}
 
 
 
