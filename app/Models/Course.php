@@ -30,7 +30,10 @@ class Course extends Model
     {
         return $this->belongsToMany(Attendance::class, AttendanceCourse::class)->withPivot('certficate');
     }
-
+    public function attendancesEmail()
+    {
+        return $this->belongsToMany(Attendance::class, AttendanceCourse::class)->where('email','!=',null);
+    }
     public function program()
     {
         return $this->belongsTo(Program::class);

@@ -66,8 +66,8 @@
                             <div class="row row-sm mb-3">
                                 <div class="col-lg-6">
                                     <div class="form-group has-success mg-b-0">
-                                        <input type="text" class="form-control form-input" name="name"
-                                            value="{{ request()->name }}" id="name_search" placeholder="بحث">
+                                        <input type="text" class="form-control form-input" name="name_search"
+                                            value="{{ request()->name_search }}" id="name_search" placeholder="بحث">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mg-t-20 mg-lg-t-0">
@@ -623,6 +623,8 @@
                 var join_selected_values = allVals.join(",");
                 // Corrected the typo in the next line
                 var join_selected_message = document.getElementById('massege').value;
+                var courseId = document.getElementById('course_id').value;
+
 
                 $.ajax({
                     url: $(this).data('url'),
@@ -631,7 +633,7 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     // Corrected the data parameter to send the message
-                    data: {ids: join_selected_values, massege_select: join_selected_message},
+                    data: {ids: join_selected_values, massege_select: join_selected_message,course_id:courseId},
                     success: function (data) {
                         if (data['success']) {
                             Swal.fire({

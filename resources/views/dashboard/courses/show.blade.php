@@ -77,7 +77,7 @@
                             <div class="">
                                 <p class="mb-2 tx-12 text-muted">نسبة الأختبار القبلي  </p>
                                 <div class="d-flex">
-                                    <h4 class="mb-1 font-weight-bold">13</h4><span> من 50 </span>
+                                    <h4 class="mb-1 font-weight-bold">{{$quizAtendBefor}}</h4><span> من {{$course->attendances_count}} </span>
                                 </div>
                             </div>
                         </div>
@@ -102,9 +102,9 @@
                                 <i class="bi bi-cash-stack text-warning tx-24"></i>
                             </div>
                             <div class="">
-                                <p class="mb-2 tx-12 text-muted"> التكاليف المقدمة </p>
+                                <p class="mb-2 tx-12 text-muted">  نسبة اجتياز طلبات الشهادة</p>
                                 <div class="d-flex">
-                                    <h4 class="mb-1 font-weight-bold">13</h4><span> من 50 </span>
+                                    <h4 class="mb-1 font-weight-bold">{{$courseAttendancesEmail->attendances_email_count}}</h4><span> من {{$course->attendances_count}} </span>
                                 </div>
                             </div>
                         </div>
@@ -129,9 +129,9 @@
                                 <i class="si si-layers text-warning tx-24"></i>
                             </div>
                             <div class="">
-                                <p class="mb-2 tx-11 text-muted"> متوسط نسبة الحضور </p>
+                                <p class="mb-2 tx-11 text-muted"> نسبة اجتياز الاختبار التفاعلي</p>
                                 <div class="">
-                                    <h4 class="mb-1 font-weight-bold">500</h4>
+                                    <h4 class="mb-1 font-weight-bold">{{$quizAtendInteractive}}</h4><span> من {{$course->attendances_count}} </span>
                                 </div>
                             </div>
                         </div>
@@ -159,7 +159,7 @@
                             <div class="">
                                 <p class="mb-2 tx-12 text-muted"> نسبة الاختبار البعدي </p>
                                 <div class="">
-                                    <h4 class="mb-1 font-weight-bold">500</h4>
+                                    <h4 class="mb-1 font-weight-bold">{{$quizAtendAfter}}</h4><span> من {{$course->attendances_count}} </span>
                                 </div>
                             </div>
                         </div>

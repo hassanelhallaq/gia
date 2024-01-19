@@ -13,7 +13,7 @@ class Attendance extends Model
         'phone_number',
         'work_place',
         'id_number',
-        'job',
+        'job','email'
     ];
 
 
