@@ -12,7 +12,7 @@
           </div>
           <div class=" d-flex justify-content-between">
             <span class="accepted" data-translate="accepted"> تم القبول </span>
-            {{-- <div class="dropdown">
+            <div class="dropdown">
                 <span> متطلبات الحصول على الشهادة  </span>
                 <div class="dropdown-content">
                   <p>Hello World!</p>
@@ -21,7 +21,7 @@
                   <p>Hello World!</p>
                   <p>Hello World!</p>
                 </div>
-            </div> --}}
+            </div>
           </div>
           <div class="disc">
             <p class="tx-14">

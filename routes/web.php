@@ -62,14 +62,21 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
 
 
 
-        // روت مؤقت
-        Route::get('/quiz/detales', function () {
-            return view('dashboard.quiz.detales');
-        })->name('quiz_detales');
+    // روت مؤقت
+    Route::get('/quiz/detales', function () {
+        return view('dashboard.quiz.detales');
+    })->name('quiz_detales');
 
-        Route::get('/third_connect', function () {
-            return view('invitation.third_connect');
-        })->name('third_connect');
+    Route::get('/third_connect', function () {
+        return view('invitation.third_connect');
+    })->name('third_connect');
+    Route::get('/Certificate_Issuance_form', function () {
+        return view('invitation.Certificate_Issuance_form');
+    })->name('Certificate_Issuance_form');
+
+    Route::get('/Certificate_management', function () {
+        return view('dashboard.attendance.Certificate_management');
+    })->name('Certificate_management');
 
 
 

@@ -100,14 +100,7 @@
 
 
             </div>
-            <div class="card">
-                <div>
-                    <div class="card_title">
-                        <p>الاختبار التفاعلي</p>
-                    </div>
 
-
-            </div>
 
 
             <div class="card">
@@ -122,13 +115,12 @@
                         <span data-translate="not_submit"> غير متوفر الان </span>
                     </div>
                 </div>
-                <div class="card_icon">&#10140;</div>
+                <div class="card_icon">  <a href="{{ route('Certificate_Issuance_form', [$attendance->id, request()->course_id]) }}" data-translate="submit">&#10140; </a></div>
             </div>
             <div class="card">
                 <div>
                     <div class="card_title">
                         <p>الاختبار البعدي</p>
-
                     </div>
                     <div class="card_text not">
                         <span data-translate="not_submit"> غير متوفر الان </span>
@@ -136,7 +128,7 @@
                 </div>
 
                 <div class="card_icon">
-                    <a href="{{ route('Certificate_Issuance_form', [$attendance->id, request()->course_id]) }}" data-translate="submit">&#10140; </a>
+                    &#10140;
                 </div>
 
                 @if ($quizAtten == null)
