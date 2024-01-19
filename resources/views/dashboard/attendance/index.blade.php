@@ -6,16 +6,40 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1">
                     <li class="breadcrumb-item">
-                        <a href="{{route('admin.dashboard')}}">الرئيسية</a>
+                        <a href="../index.html">الرئيسية</a>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{route('programs.index')}}" class="text-muted">البرامج</a>
                     </li>
-                    @if($course)
+                    {{-- @if($course)
                     <li class="breadcrumb-item">
                         <a href="{{route('program.course',[$course->program->id])}}" class="text-muted"> برنامج {{$course->program->name}} </a>
                     </li>
-                    @endif
+                    @endif --}}
+                    <li class="breadcrumb-item">
+                        <a href="#" class="text-muted"> المشتركين </a>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <div class="main-dashboard-header-right">
+            @section('header')
+    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0"
+      >
+        <div class="left-content mt-2">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-style1">
+                    <li class="breadcrumb-item">
+                        <a href="../index.html">الرئيسية</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{route('programs.index')}}" class="text-muted">البرامج</a>
+                    </li>
+                    {{-- @if($course)
+                    <li class="breadcrumb-item">
+                        <a href="{{route('program.course',[$course->program->id])}}" class="text-muted"> برنامج {{$course->program->name}} </a>
+                    </li>
+                    @endif --}}
                     <li class="breadcrumb-item">
                         <a href="#" class="text-muted"> المشتركين </a>
                     </li>
@@ -26,14 +50,13 @@
             <div class="d-flex flex-wrap">
                 <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"data-target="#modaladd" data-toggle="modal">
                     اضافة مشاركين جدد <i class="bi bi-plus"></i></button>
+                <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركين <i
+                        class="bi bi-box-arrow-in-down"></i></i></button>
                 {{-- <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1"> ارسال دعوة جماعية <i
                         class="icon ion-md-paper-plane"></i></button> --}}
-                        <a href="{{ route('Certificate_management') }}" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> الشهادات <i class="bi bi-clipboard-data tx-11"></i></a>
 
-                          <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة محددة <i class="icon ion-md-paper-plane"></i></button>
-
-                         <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة جماعية <i
-                            class="icon ion-md-paper-plane"></i></button>
+                        <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة جماعية <i class="icon ion-md-paper-plane"></i></button>
+                        <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة محددة <i class="icon ion-md-paper-plane"></i></button>
 
                 <a href="../index.html" class="btn btn-previous btn-sm text-warning mt-2"><i
                         class="ti-angle-double-right"></i> العودة </a>
@@ -41,9 +64,13 @@
         </div>
     </div>
 @endsection
-@section('css')
 
-<link href="{{ asset('assets/css-rtl/drawar-user.css') }}" rel="stylesheet">
+        </div>
+    </div>
+@endsection
+
+@section('css')
+    <link href="{{ asset('assets/css-rtl/drawar-user.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -67,8 +94,8 @@
                             <div class="row row-sm mb-3">
                                 <div class="col-lg-6">
                                     <div class="form-group has-success mg-b-0">
-                                        <input type="text" class="form-control form-input" name="name"
-                                            value="{{ request()->name }}" id="name" placeholder="بحث">
+                                        <input type="text" class="form-control form-input" name="name_search"
+                                            value="{{ request()->name_search }}" id="name_search" placeholder="بحث">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mg-t-20 mg-lg-t-0">
@@ -102,6 +129,9 @@
                                     <thead>
                                         <tr>
                                             <th>
+
+                                            </th>
+                                            <th>
                                                 الأسم
                                             </th>
                                             <th>جهة العمل</th>
@@ -110,8 +140,8 @@
                                             <th> قبول الدعوه </th>
                                             <th> المهنة </th>
                                             <th> الاختبارات </th>
-                                            @if($course)
-                                            <th> الحضور </th>
+                                            @if ($course)
+                                                <th> الحضور </th>
                                             @endif
                                             <th> الاكتمال </th>
                                             @if ($id)
@@ -130,11 +160,14 @@
                                         </tr>
                                         @foreach ($attendance as $item)
                                             <tr class="table-rows">
+                                                <td scope="row"><input type="checkbox" class="form-data sub_chk"
+                                                        data-id="{{ $item->id }}"> </td>
+
                                                 <td scope="row"> {{ $item->name }} </td>
                                                 <td>{{ $item->work_place }} </td>
                                                 <td class="client-name"> {{ $item->phone_number }} </td>
                                                 <td>{{ $item->id_number }} </td>
-                                                <td>{{ $item->is_accepted == 1 ? "تم القبول" : "تم الرفض" }} </td>
+                                                <td>{{ $item->is_accepted == 1 ? 'تم القبول' : 'تم الرفض' }} </td>
                                                 <td>{{ $item->job }} </td>
                                                 <td class="d-flex">
                                                     <span class="ml-3 examBefor" data-bs-toggle="offcanvas"
@@ -145,41 +178,55 @@
                                                         data-bs-target="#drawerafter_{{ $item->id }}"
                                                         aria-controls="offcanvasWithBothOptions"> بعدي </span>
                                                 </td>
-                                                @if($course)
-                                                <td>
-                                                    <span class="ml-2 dropdown">
-                                                        {{ $course->duration }} ايام
-                                                    </span>
+                                                @if ($course)
+                                                    <td>
+                                                        <span class="ml-2 dropdown">
+                                                            {{ $course->duration }} ايام
+                                                        </span>
 
-                                                    <button class="btn btn-previous p-0" data-toggle="dropdown"><i class="bi bi-exclamation-circle"></i></button>
-`
-                                                    <div class="Attendance dropdown-menu scrollable-menu">
-                                                        @php
-                                                        $courseStartDate = \Carbon\Carbon::parse($course->start);
-                                                        $attendanceLogin = App\Models\AttendanceLogin::where([['attendance_id',$item->id],['course_id',$course->id]])->count();
-                                                        @endphp
-                                                        @for ($day = 1; $day <= $course->duration; $day++)
-                                                        @php
-                                                        $log = $item->attendance_logins
-                                                            ->whereBetween('created_at',[ $courseStartDate->copy()->addDays($day - 1)->startOfDay(),$courseStartDate->copy()->addDays($day)->startOfDay()])->where('course_id',$course->id)
-                                                            ->first();
-                                                        @endphp
-                                                            @if ($log)
-                                                                <span class="dropdown-item text-success"> اليوم {{ $day }} (حاضر)</span>
-                                                            @else
-                                                                <span class="dropdown-item text-danger"> اليوم {{  $day}} (غير حاضر)</span>
-                                                            @endif
-                                                        @endfor
-                                                    </div>
-                                                </td>
+                                                        <button class="btn btn-previous p-0" data-toggle="dropdown"><i
+                                                                class="bi bi-exclamation-circle"></i></button>
+                                                        `
+                                                        <div class="Attendance dropdown-menu scrollable-menu">
+                                                            @php
+                                                                $courseStartDate = \Carbon\Carbon::parse($course->start);
+                                                                $attendanceLogin = App\Models\AttendanceLogin::where([['attendance_id', $item->id], ['course_id', $course->id]])->count();
+                                                            @endphp
+                                                            @for ($day = 1; $day <= $course->duration; $day++)
+                                                                @php
+                                                                    $log = $item->attendance_logins
+                                                                        ->whereBetween('created_at', [
+                                                                            $courseStartDate
+                                                                                ->copy()
+                                                                                ->addDays($day - 1)
+                                                                                ->startOfDay(),
+                                                                            $courseStartDate
+                                                                                ->copy()
+                                                                                ->addDays($day)
+                                                                                ->startOfDay(),
+                                                                        ])
+                                                                        ->where('course_id', $course->id)
+                                                                        ->first();
+                                                                @endphp
+                                                                @if ($log)
+                                                                    <span class="dropdown-item text-success"> اليوم
+                                                                        {{ $day }} (حاضر)</span>
+                                                                @else
+                                                                    <span class="dropdown-item text-danger"> اليوم
+                                                                        {{ $day }} (غير حاضر)</span>
+                                                                @endif
+                                                            @endfor
+                                                        </div>
+                                                    </td>
                                                 @endif
                                                 <td>
-                                                    @if($attendanceLogin != 0)
-                                                    {{($course->duration / $attendanceLogin) *100 }}%
+                                                    @if ($attendanceLogin != 0)
+                                                        {{ ($course->duration / $attendanceLogin) * 100 }}%
                                                     @else
-                                                    0%
+                                                        0%
                                                     @endif
-                                                </td>                                                @if ($id)
+                                                </td>
+                                                @if ($id)
                                                     <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $id]) }}"
                                                             target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
                                                 @endif
@@ -192,7 +239,9 @@
                                                         <a href="#" class="dropdown-item"
                                                             data-target="#modaledit_{{ $item->id }}"
                                                             data-toggle="modal"> تحرير </a>
-                                                            <button  class="dropdown-item"  onclick="performDestroy({{ $item->id }} , this)" > حذف </button>
+                                                        <button class="dropdown-item"
+                                                            onclick="performDestroy({{ $item->id }} , this)"> حذف
+                                                        </button>
 
                                                     </div>
                                                 </td>
@@ -307,14 +356,15 @@
                                     <input class="form-control" value="{{ $item->work_place }}"required=""
                                         id="work_place_{{ $item->id }}" type="text">
                                 </div>
-                                @if($course)
-                                <input class="form-control" value="{{ $course->id}}"required="" hidden
+                                @if ($course)
+                                    <input class="form-control" value="{{ $course->id }}"required="" hidden
                                         id="course_id" type="text">
                                 @endif
                                 <div class="col-lg-3 mb-3">
                                     <label for="exampleInputEmail1"> شهاده </label>
                                     <div class="custom-file">
-                                        <input class="custom-file-input" id="certficate_{{ $item->id }}" type="file">
+                                        <input class="custom-file-input" id="certficate_{{ $item->id }}"
+                                            type="file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
                                     </div>
                                 </div>
@@ -375,16 +425,16 @@
                 <div class="list p-3">
                     <div class="row row-sm">
                         <div class="col-6">
-                            @if($course)
-                            <a class="card text-center" href="{{route('attendance.summery',[$id,$item->id])}}">
-                                @endif
-                                <div class="card-body p-2">
-                                    <div class="feature widget-2 text-center mb-3">
-                                        <i
-                                            class="bi bi-clipboard2-data-fill project bg-warning-transparent mx-auto text-warning "></i>
-                                    </div>
-                                    <p class="mb-1 text-muted tx-13"> عرض نموذج الاجابات </p>
+                            @if ($course)
+                                <a class="card text-center" href="{{ route('attendance.summery', [$id, $item->id]) }}">
+                            @endif
+                            <div class="card-body p-2">
+                                <div class="feature widget-2 text-center mb-3">
+                                    <i
+                                        class="bi bi-clipboard2-data-fill project bg-warning-transparent mx-auto text-warning "></i>
                                 </div>
+                                <p class="mb-1 text-muted tx-13"> عرض نموذج الاجابات </p>
+                            </div>
                             </a>
                         </div>
                         <div class="col-6">
@@ -519,12 +569,36 @@
 
                             <div class="col-12 form-group">
                                 <label for="example"> رساله </label>
-                                <textarea class="form-control" required="" id="massege" type="text"></textarea>
+                                <textarea class="form-control" required="" id="massege_select" type="text"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer border-0">
-                        <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="performStoreSms({{$id}})"> حفظ <i class="bi bi-floppy"></i></button>
+                        <button class="btn btn-warning-gradient btn-with-icon " type="button"
+                            onclick="performStoreSms({{ $id }})"> حفظ <i class="bi bi-floppy"></i></button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="sendSmsSelected">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-content-demo">
+                <form action="">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 form-group">
+                                <label for="example"> رساله </label>
+                                <!-- Corrected the ID attribute to match the jQuery selector -->
+                                <textarea class="form-control" required="" id="massege" name="massege" type="text"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button class="btn btn-warning-gradient btn-with-icon send_all" type="button"
+                            data-url="{{ url('/dashboard/admin/attendance-sms/selected') }}"> حفظ <i
+                                class="bi bi-floppy"></i></button>
                         <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
                     </div>
                 </form>
@@ -563,13 +637,82 @@
             formData.append('course_id', id);
             storepart('/dashboard/admin/attendance', formData)
         }
+
         function performStoreSms(id) {
             let formData = new FormData();
             formData.append('massege', document.getElementById('massege').value);
             formData.append('course_id', id);
 
-             storepart('/dashboard/admin/attendance-sms', formData)
+            storepart('/dashboard/admin/attendance-sms', formData)
         }
+
+        function performStoreSms(id) {
+            let formData = new FormData();
+            formData.append('massege', document.getElementById('massege').value);
+            formData.append('course_id', id);
+
+            storepart('/dashboard/admin/attendance-sms/selected', formData)
+        }
+
+        $(document).ready(function() {
+            $('#master').on('click', function(e) {
+                if ($(this).is(':checked')) {
+                    $(".sub_chk").prop('checked', true);
+                } else {
+                    $(".sub_chk").prop('checked', false);
+                }
+            });
+
+            $('.send_all').on('click', function(e) {
+                var allVals = [];
+                $(".sub_chk:checked").each(function() {
+                    allVals.push($(this).attr('data-id'));
+                });
+                if (allVals.length <= 0) {
+                    alert("Please select row.");
+                } else {
+                    var join_selected_values = allVals.join(",");
+                    // Corrected the typo in the next line
+                    var join_selected_message = document.getElementById('massege').value;
+                    var courseId = document.getElementById('course_id').value;
+
+
+                    $.ajax({
+                        url: $(this).data('url'),
+                        type: 'post',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        // Corrected the data parameter to send the message
+                        data: {
+                            ids: join_selected_values,
+                            massege_select: join_selected_message,
+                            course_id: courseId
+                        },
+                        success: function(data) {
+                            if (data['success']) {
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: 'Quiz Archived successfully',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                location.reload();
+                            } else if (data['error']) {
+                                alert(data['error']);
+                            } else {
+                                alert('Whoops Something went wrong!!');
+                            }
+                        },
+                        error: function(data) {
+                            alert(data.responseText);
+                        }
+                    });
+                }
+            });
+        });
+
         function performUpdate(id) {
             let formData = new FormData();
             formData.append("_method", "PUT")
@@ -585,12 +728,12 @@
         }
     </script>
 
-<script>
-    function performDestroy(id, reference) {
+    <script>
+        function performDestroy(id, reference) {
 
-        let url = '/dashboard/admin/attendance/' + id;
+            let url = '/dashboard/admin/attendance/' + id;
 
-        confirmDestroy(url, reference);
-    }
-</script>
+            confirmDestroy(url, reference);
+        }
+    </script>
 @endsection
