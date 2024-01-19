@@ -26,13 +26,15 @@
             <div class="d-flex flex-wrap">
                 <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"data-target="#modaladd" data-toggle="modal">
                     اضافة مشاركين جدد <i class="bi bi-plus"></i></button>
-                <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركين <i
-                        class="bi bi-box-arrow-in-down"></i></i></button>
                 {{-- <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1"> ارسال دعوة جماعية <i
                         class="icon ion-md-paper-plane"></i></button> --}}
+
                           <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSmsSelected" data-toggle="modal">  ارسال دعوة محددة <i class="icon ion-md-paper-plane"></i></button>
                          <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms"  data-toggle="modal">  ارسال دعوة جماعية <i
-                            class="icon ion-md-paper-plane"></i></button>
+
+                        <a href="{{ route('Certificate_management') }}" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> الشهادات <i class="bi bi-clipboard-data tx-11"></i></a>
+
+                         
 
                 <a href="../index.html" class="btn btn-previous btn-sm text-warning mt-2"><i
                         class="ti-angle-double-right"></i> العودة </a>

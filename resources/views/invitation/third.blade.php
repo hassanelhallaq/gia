@@ -98,6 +98,7 @@
                     @endif
                 @endif
 
+
             </div>
             <div class="card">
                 <div>
@@ -106,11 +107,16 @@
                     </div>
 
 
+            </div>
+
 
             <div class="card">
                 <div>
                     <div class="card_title">
                         <p> الحصول علي شهادة </p>
+
+                    </div>
+
 
                     <div class="card_text not">
                         <span data-translate="not_submit"> غير متوفر الان </span>

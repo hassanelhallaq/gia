@@ -61,6 +61,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::post('/attendance-sms/selected', [CourseController::class, 'sendSmsSelected'])->name('attendance.sms.selected');
 
 
+
         // روت مؤقت
         Route::get('/quiz/detales', function () {
             return view('dashboard.quiz.detales');
@@ -69,6 +70,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/third_connect', function () {
             return view('invitation.third_connect');
         })->name('third_connect');
+
 
 
 
