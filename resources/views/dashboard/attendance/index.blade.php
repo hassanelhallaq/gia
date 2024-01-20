@@ -12,7 +12,7 @@
                     </li>
                     {{-- @if($course)
                     <li class="breadcrumb-item">
-                        
+
                         <a href="{{route('program.course',[$course->program->id])}}" class="text-muted"> برنامج {{$course->program->name}} </a>
                     </li>
                     @endif --}}
@@ -26,7 +26,7 @@
         </div>
         <div class="main-dashboard-header-right">
             <div class="d-flex flex-wrap">
-                <a href="{{ route('Certificate_management') }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1"> الشهادات <i class="bi bi-clipboard-data tx-11"></i></a>
+                <a href=""class="btn btn-outline-light btn-with-icon btn-sm mr-1"> الشهادات <i class="bi bi-clipboard-data tx-11"></i></a>
                 <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"data-target="#modaladd" data-toggle="modal">
                     اضافة مشاركين جدد <i class="bi bi-plus"></i></button>
 
@@ -38,7 +38,7 @@
             </div>
 
         </div>
-        
+
     </div>
 @endsection
 

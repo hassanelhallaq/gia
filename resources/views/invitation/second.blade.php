@@ -12,16 +12,16 @@
           </div>
           <div class=" d-flex justify-content-between">
             <span class="accepted" data-translate="accepted"> تم القبول </span>
-            {{-- <div class="dropdown">
+            <div class="dropdown">
                 <span> متطلبات الحصول على الشهادة  </span>
                 <div class="dropdown-content">
-                  <p>Hello World!</p>
-                  <p>Hello World!</p>
-                  <p>Hello World!</p>
-                  <p>Hello World!</p>
-                  <p>Hello World!</p>
+                  <p>نسبة الإلتزام 80% من الحضور</p>
+                  <p>تقديم الأختبار القبلي</p>
+                  <p>تقديم الأختبار البعدي</p>
+                  <p> تقديم نموذج الحصول على الشهادة </p>
+                  <p>تقديم تقييم الحدث</p>
                 </div>
-            </div> --}}
+
           </div>
           <div class="disc">
             <p class="tx-14">
