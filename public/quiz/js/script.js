@@ -166,10 +166,40 @@ function optionSelected(answer) {
         answer.insertAdjacentHTML("beforeend", tickIconTag); // إضافة أيقونة الصحيح للاختيار المحدد
         console.log("الإجابة صحيحة");
         console.log("الإجابات الصحيحة الخاصة بك = " + userScore);
+        fetch('/quiz/save-answer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,
+            },
+            body: JSON.stringify({
+                question_id: questions[que_count].id,
+                user_id: clientId,
+                chosen_option: chosenOptionId,
+            }),
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('خطأ في حفظ الإجابة:', error));
     } else {
         answer.classList.add("incorrect"); // إضافة لون أحمر للاختيار الغير صحيح المحدد
         answer.insertAdjacentHTML("beforeend", crossIconTag); // إضافة أيقونة الخاطئ للاختيار المحدد
         console.log("الإجابة خاطئة");
+        fetch('/quiz/save-answer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,
+            },
+            body: JSON.stringify({
+                question_id: questions[que_count].id,
+                user_id: clientId,
+                chosen_option: chosenOptionId,
+            }),
+        })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('خطأ في حفظ الإجابة:', error));
     }
 
     for (let i = 0; i < allOptions; i++) {
@@ -181,21 +211,7 @@ function optionSelected(answer) {
     next_btn.classList.add("show"); // إظهار زر "التالي"
 
     // حفظ إجابة المستخدم
-    fetch('/quiz/save-answer', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrfToken,
-        },
-        body: JSON.stringify({
-            question_id: questions[que_count].id,
-            user_id: clientId,
-            chosen_option: chosenOptionId,
-        }),
-    })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('خطأ في حفظ الإجابة:', error));
+
 }
 
 
