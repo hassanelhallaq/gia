@@ -1,3 +1,4 @@
+// تحديد العناصر من واجهة المستخدم باستخدام Selectors
 const start_btn = document.querySelector(".start_btn button");
 const info_box = document.querySelector(".info_box");
 const exit_btn = info_box.querySelector(".buttons .quit");
@@ -9,28 +10,27 @@ const time_line = document.querySelector("header .time_line");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
 
-// if startQuiz button clicked
+// عند النقر على زر بدء الاختبار
 start_btn.onclick = () => {
-    info_box.classList.add("activeInfo"); //show info box
+    info_box.classList.add("activeInfo"); // إظهار صندوق المعلومات
 }
 
-// if exitQuiz button clicked
+// عند النقر على زر الخروج من الاختبار
 exit_btn.onclick = () => {
-    info_box.classList.remove("activeInfo"); //hide info box
+    info_box.classList.remove("activeInfo"); // إخفاء صندوق المعلومات
 }
 
-// if continueQuiz button clicked
-// if continueQuiz button clicked
+// عند النقر على زر الاستمرار في الاختبار
 continue_btn.onclick = () => {
-    info_box.classList.remove("activeInfo"); // hide info box
-    quiz_box.classList.add("activeQuiz"); // show quiz box
-    showQuestions(0); // calling showQuestions function instead of showQuetions
-    queCounter(1); // passing 1 parameter to queCounter
-    startTimer(timeValue); // calling startTimer function
-    startTimerLine(0); // calling startTimerLine function
+    info_box.classList.remove("activeInfo"); // إخفاء صندوق المعلومات
+    quiz_box.classList.add("activeQuiz"); // إظهار صندوق الاختبار
+    showQuestions(0); // استدعاء دالة عرض الأسئلة
+    queCounter(1); // تمرير قيمة واحدة كمعلمة إلى دالة تحديد عدد الأسئلة
+    startTimer(timeValue); // استدعاء دالة بدء العد التنازلي
+    startTimerLine(0); // استدعاء دالة بدء عداد الخط الزمني
 }
 
-
+// تعيين القيم الابتدائية
 let timeValue = 120;
 let que_count = 0;
 let que_numb = 1;
@@ -39,72 +39,71 @@ let counter;
 let counterLine;
 let widthValue = 0;
 
+// عند النقر على زر الخروج من الاختبار
 const quit_quiz = result_box.querySelector(".buttons .quit");
-
-// if quitQuiz button clicked
 quit_quiz.onclick = () => {
     const currentPath = window.location.pathname;
     const pathSegments = currentPath.split('/');
     const quizId = pathSegments[pathSegments.length - 2];
     const clientId = pathSegments[pathSegments.length - 1];
 
-    // Construct the redirect URL using raw JavaScript
+    // بناء عنوان URL للتوجيه باستخدام JavaScript الخام
     let redirectUrl = '/back/' + clientId + '/' + quizId;
 
-    // Perform the redirection
+    // تنفيذ التوجيه
     window.location.href = redirectUrl;
 
-    // window.location.reload(); //reload the current window
+    // window.location.reload(); // إعادة تحميل النافذة الحالية
 }
 
+// تحديد زر التالي وعداد عدد الأسئلة
 const next_btn = document.querySelector("footer .next_btn");
 const bottom_ques_counter = document.querySelector("footer .total_que");
 
-// if Next Que button clicked
+// عند النقر على زر التالي
 next_btn.onclick = () => {
-    if (que_count < questions.length - 1) { //if question count is less than total question length
-        que_count++; //increment the que_count value
-        que_numb++; //increment the que_numb value
-        showQuestions(que_count); //calling showQestions function
-        queCounter(que_numb); //passing que_numb value to queCounter
-        clearInterval(counter); //clear counter
-        clearInterval(counterLine); //clear counterLine
-        startTimer(timeValue); //calling startTimer function
-        startTimerLine(widthValue); //calling startTimerLine function
-        timeText.textContent = "وقت الاختبار"; //change the timeText to وقت الاختبار
-        next_btn.classList.remove("show"); //hide the next button
+    if (que_count < questions.length - 1) { // إذا كان عدد الأسئلة أقل من إجمالي عدد الأسئلة
+        que_count++; // زيادة قيمة عدد الأسئلة
+        que_numb++; // زيادة قيمة رقم السؤال
+        showQuestions(que_count); // استدعاء دالة عرض الأسئلة
+        queCounter(que_numb); // تمرير قيمة رقم السؤال إلى دالة تحديد عدد الأسئلة
+        clearInterval(counter); // إيقاف العداد
+        clearInterval(counterLine); // إيقاف عداد الخط الزمني
+        startTimer(timeValue); // استدعاء دالة بدء العد التنازلي
+        startTimerLine(widthValue); // استدعاء دالة بدء عداد الخط الزمني
+        timeText.textContent = "وقت الاختبار"; // تغيير نص الوقت إلى "وقت الاختبار"
+        next_btn.classList.remove("show"); // إخفاء زر "التالي"
     } else {
-        clearInterval(counter); //clear counter
-        clearInterval(counterLine); //clear counterLine
-        showResult(); //calling showResult function
+        clearInterval(counter); // إيقاف العداد
+        clearInterval(counterLine); // إيقاف عداد الخط الزمني
+        showResult(); // استدعاء دالة عرض النتائج
         moveToNextQuestion();
-
     }
 }
-document.addEventListener("DOMContentLoaded", function () {
-    // Extract quiz ID from the URL (you can use any method to get the ID)
 
-    // Extract quiz ID from the URL path
+// استجابة الصفحة بعد التحميل
+document.addEventListener("DOMContentLoaded", function () {
+    // استخراج معرف الاختبار من عنوان URL (يمكنك استخدام أي طريقة للحصول على المعرف)
     const currentPath = window.location.pathname;
     const pathSegments = currentPath.split('/');
-    const quizId = pathSegments[pathSegments.length - 2]; // Assuming quizId is the second-to-last segment
+    const quizId = pathSegments[pathSegments.length - 2]; // نفترض أن معرف الاختبار هو القيمة قبل الأخيرة
     const clientId = pathSegments[pathSegments.length - 1];
 
-    // Fetch quiz data from Laravel backend with the quiz ID
+    // جلب بيانات الاختبار من الخلفية في Laravel باستخدام معرف الاختبار
     fetch(`/quiz/index/${quizId}/${clientId}`)
         .then(response => response.json())
         .then(data => {
-            // Process the retrieved data
+            // معالجة البيانات المستلمة
             questions = data.questions;
-            // Call the showQuestions function to display the first question
+            // استدعاء دالة عرض الأسئلة لعرض السؤال الأول
             showQuestions(0);
         })
-        .catch(error => console.error('Error fetching quiz data:', error));
+        .catch(error => console.error('خطأ في جلب بيانات الاختبار:', error));
 });
 
-// Other quiz-related JavaScript code...
+// (الكود الخاص بالاختبار الآخر)...
 
-// getting questions and options from array
+// الحصول على الأسئلة والخيارات من المصفوفة
 function showQuestions(index) {
     const que_text = document.querySelector(".que_text");
 
@@ -125,7 +124,7 @@ function showQuestions(index) {
         });
     });
 
-    next_btn.classList.remove("show"); // هذا يفترض بإخفاء زر "التالي"
+    next_btn.classList.remove("show"); // إخفاء زر "التالي"
 }
 next_btn.addEventListener("click", function () {
     que_count + 1;
@@ -145,95 +144,68 @@ next_btn.addEventListener("click", function () {
 let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
 let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
 
-
 let userAnswers = [];
 
-// Function to handle option selection
+// دالة للتعامل مع اختيار الخيار
 function optionSelected(answer) {
-    clearInterval(counter); // Clear counter
-    clearInterval(counterLine); // Clear counterLine
-    let userAns = answer.textContent; // Get user selected option
-    let isCorrect = answer.getAttribute("data-is-correct") === "1"; // Check if the selected option is correct
-    const allOptions = option_list.children.length; // Get all option items
+    clearInterval(counter); // إيقاف العداد
+    clearInterval(counterLine); // إيقاف عداد الخط الزمني
+
+    let userAns = answer.textContent; // الحصول على الخيار الذي اختاره المستخدم
+    let isCorrect = answer.getAttribute("data-is-correct") === "1"; // التحقق مما إذا كان الخيار المختار صحيحًا
+    const allOptions = option_list.children.length; // الحصول على كل عناصر الخيارات
     let chosenOptionId = answer.getAttribute("data-option-id");
 
     console.log(isCorrect);
+
     const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+
     if (isCorrect) {
-        userScore += 1; // Upgrade score value by 1
-        answer.classList.add("correct"); // Add green color to correct selected option
-        answer.insertAdjacentHTML("beforeend", tickIconTag); // Add tick icon to correct selected option
-        console.log("Correct Answer");
-        console.log("Your correct answers = " + userScore);
-        const currentPath = window.location.pathname;
-        const pathSegments = currentPath.split('/');
-        const quizId = pathSegments[pathSegments.length - 2]; // Assuming quizId is the second-to-last segment
-        const clientId = pathSegments[pathSegments.length - 1];
-        fetch('/quiz/save-answer', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken, // Include the CSRF token in the headers
-
-            },
-            body: JSON.stringify({
-                question_id: questions[que_count].id, // Assuming you have an 'id' property in your question object
-                user_id: clientId, // Replace with the actual user ID (you can get it from your authentication system)
-                chosen_option: chosenOptionId,
-            }),
-        })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error saving answer:', error));
-
+        userScore += 1; // زيادة قيمة النقاط بمقدار 1
+        answer.classList.add("correct"); // إضافة لون أخضر للاختيار الصحيح المحدد
+        answer.insertAdjacentHTML("beforeend", tickIconTag); // إضافة أيقونة الصحيح للاختيار المحدد
+        console.log("الإجابة صحيحة");
+        console.log("الإجابات الصحيحة الخاصة بك = " + userScore);
     } else {
-        answer.classList.add("incorrect"); // Add red color to incorrect selected option
-        answer.insertAdjacentHTML("beforeend", crossIconTag); // Add cross icon to incorrect selected option
-        console.log("Wrong Answer");
-        const currentPath = window.location.pathname;
-        const pathSegments = currentPath.split('/');
-        const quizId = pathSegments[pathSegments.length - 2]; // Assuming quizId is the second-to-last segment
-        const clientId = pathSegments[pathSegments.length - 1];
-        fetch('/quiz/save-answer', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken, // Include the CSRF token in the headers
-
-            },
-            body: JSON.stringify({
-                question_id: questions[que_count].id, // Assuming you have an 'id' property in your question object
-                user_id: clientId, // Replace with the actual user ID (you can get it from your authentication system)
-                chosen_option: chosenOptionId,
-            }),
-        })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error saving answer:', error));
-        for (let i = 0; i < allOptions; i++) {
-            if (option_list.children[i].getAttribute("data-is-correct") === "1") {
-                option_list.children[i].setAttribute("class", "option correct"); // Add green color to correct option
-                option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); // Add tick icon to correct option
-                console.log("Auto selected correct answer.");
-            }
-        }
+        answer.classList.add("incorrect"); // إضافة لون أحمر للاختيار الغير صحيح المحدد
+        answer.insertAdjacentHTML("beforeend", crossIconTag); // إضافة أيقونة الخاطئ للاختيار المحدد
+        console.log("الإجابة خاطئة");
     }
 
     for (let i = 0; i < allOptions; i++) {
-        option_list.children[i].classList.add("disabled"); // Once user selects an option, disable all options
+
+            option_list.children[i].classList.add("disabled"); // تعطيل جميع الخيارات ما عدا الخيار المحدد
+
     }
 
-    next_btn.classList.add("show"); // هذا يفترض بإظهار زر "التالي"
+    next_btn.classList.add("show"); // إظهار زر "التالي"
+
+    // حفظ إجابة المستخدم
+    fetch('/quiz/save-answer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken,
+        },
+        body: JSON.stringify({
+            question_id: questions[que_count].id,
+            user_id: clientId,
+            chosen_option: chosenOptionId,
+        }),
+    })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('خطأ في حفظ الإجابة:', error));
 }
 
 
-// Function to move to the next question
+// (الكود الخاص بالانتقال إلى السؤال التالي)...
 function moveToNextQuestion() {
     que_count++;
     saveUserAnswers();
 }
 
-// Function to save all user answers
+// (الكود الخاص بحفظ جميع إجابات المستخدم)...
 function saveUserAnswers() {
     const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
     fetch('/quiz/save-answer', {
@@ -252,13 +224,15 @@ function saveUserAnswers() {
 }
 
 
+// (الكود الخاص بعرض النتائج)
 
 function showResult() {
     info_box.classList.remove("activeInfo"); //hide info box
     quiz_box.classList.remove("activeQuiz"); //hide quiz box
     result_box.classList.add("activeResult"); //show result box
     const scoreText = result_box.querySelector(".score_text");
-    if (userScore > 3) { // if user scored more than 3
+    if (userScore > 3) {
+        // if user scored more than 3
         //creating a new span tag and passing the user score number and total question number
         let scoreTag = '<span>and congrats! 🎉, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
         scoreText.innerHTML = scoreTag;  //adding new span tag inside score_Text
@@ -272,7 +246,7 @@ function showResult() {
         scoreText.innerHTML = scoreTag;
     }
 }
-
+// (الكود الخاص ببدء العد التنازلي للوقت)...
 function startTimer(time) {
     counter = setInterval(timer, 1000);
     function timer() {
@@ -301,7 +275,7 @@ function startTimer(time) {
         }
     }
 }
-
+// (الكود الخاص ببدء عداد الخط الزمني)
 function startTimerLine(time) {
     counterLine = setInterval(timer, 29);
     function timer() {
@@ -313,9 +287,9 @@ function startTimerLine(time) {
     }
 }
 
+// (الكود الخاص بتحديد عدد الأسئلة)...
 function queCounter(index) {
     //creating a new span tag and passing the question number and total question
     let totalQueCounTag = '<span><p>' + index + '</p> of <p>' + questions.length + '</p> Questions</span>';
     bottom_ques_counter.innerHTML = totalQueCounTag;  //adding new span tag inside bottom_ques_counter
 }
-
