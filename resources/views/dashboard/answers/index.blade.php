@@ -128,12 +128,21 @@
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12">
-                <div class="card p-0">
-                    <div class="card-body p-0 mb-1">
-                        <!-- col-6 -->
-                        <div id="chart" class=""></div>
-                        <h5 class="text-center"> درجة الأختبار </h5>
+                <div class="card ">
+                    <div class="card-body">
+                        <span class="chart" data-percent="{{$total}}">
+                            <span class="percent"></span>
+                        </span>
+                        <div class="row pb-4  mg-t-60" >
+                            <div class="col-md-12 col text-center">
+                                <h3 class=""> متوسط الأكتمال </h3>
+                                <span class="fs-14 text-muted">
+                                 متوسط الأكتمال كل المشاركين
+                                </span>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>

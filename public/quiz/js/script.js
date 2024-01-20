@@ -166,40 +166,10 @@ function optionSelected(answer) {
         answer.insertAdjacentHTML("beforeend", tickIconTag); // إضافة أيقونة الصحيح للاختيار المحدد
         console.log("الإجابة صحيحة");
         console.log("الإجابات الصحيحة الخاصة بك = " + userScore);
-        fetch('/quiz/save-answer', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken,
-            },
-            body: JSON.stringify({
-                question_id: questions[que_count].id,
-                user_id: clientId,
-                chosen_option: chosenOptionId,
-            }),
-        })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('خطأ في حفظ الإجابة:', error));
     } else {
         answer.classList.add("incorrect"); // إضافة لون أحمر للاختيار الغير صحيح المحدد
         answer.insertAdjacentHTML("beforeend", crossIconTag); // إضافة أيقونة الخاطئ للاختيار المحدد
         console.log("الإجابة خاطئة");
-        fetch('/quiz/save-answer', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken,
-            },
-            body: JSON.stringify({
-                question_id: questions[que_count].id,
-                user_id: clientId,
-                chosen_option: chosenOptionId,
-            }),
-        })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('خطأ في حفظ الإجابة:', error));
     }
 
     for (let i = 0; i < allOptions; i++) {
@@ -207,7 +177,25 @@ function optionSelected(answer) {
             option_list.children[i].classList.add("disabled"); // تعطيل جميع الخيارات ما عدا الخيار المحدد
 
     }
-
+    const currentPath = window.location.pathname;
+    const pathSegments = currentPath.split('/');
+    const quizId = pathSegments[pathSegments.length - 2];
+    const clientId = pathSegments[pathSegments.length - 1];
+    fetch('/quiz/save-answer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken,
+        },
+        body: JSON.stringify({
+            question_id: questions[que_count].id,
+            user_id: clientId,
+            chosen_option: chosenOptionId,
+        }),
+    })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('خطأ في حفظ الإجابة:', error));
     next_btn.classList.add("show"); // إظهار زر "التالي"
 
     // حفظ إجابة المستخدم
