@@ -128,7 +128,8 @@ function showQuestions(index) {
     next_btn.classList.remove("show"); // هذا يفترض بإخفاء زر "التالي"
 }
 next_btn.addEventListener("click", function () {
-    que_count++;
+    que_count + 1;
+    console.log(que_count);
     if (que_count < questions.length) {
         showQuestions(que_count);
         next_btn.classList.remove("show");

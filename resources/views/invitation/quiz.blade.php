@@ -80,7 +80,7 @@
         </div>
         <div class="buttons">
 
-             <a  href="{{route('invitation.back',[$id,$clientId])}}" class="quit">العودة الى الرئيسية</a>
+             <a  href="{{route('invitation.back',[$clientId,$id])}}" class="quit">العودة الى الرئيسية</a>
 
         </div>
     </div>

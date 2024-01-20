@@ -209,10 +209,10 @@
                                     <div class="webflow-style-input">
                                         <select id="status_befor" class="form-control select2 input_no_border custom-select" >
                                             <option></option>
-                                            <option value="active">
+                                            <option @if($course->status_befor == 'active') selected @endif value="active">
                                                 فعال
                                             </option>
-                                            <option value="InActive">
+                                            <option @if($course->status_befor == 'InActive') selected @endif value="InActive">
                                                 غير مفعل
                                             </option>
                                             {{-- @endforeach --}}
@@ -231,10 +231,10 @@
                                     <div class="webflow-style-input">
                                         <select id="status_after" class="form-control select2 input_no_border custom-select" >
                                             <option></option>
-                                            <option value="active">
+                                            <option @if($course->status_after == 'active') selected @endif  value="active">
                                                 فعال
                                             </option>
-                                            <option value="InActive">
+                                            <option @if($course->status_after == 'InActive') selected @endif value="InActive">
                                                 غير مفعل
                                             </option>
                                             {{-- @endforeach --}}

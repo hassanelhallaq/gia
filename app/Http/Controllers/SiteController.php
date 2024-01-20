@@ -82,14 +82,9 @@ class SiteController extends Controller
     }
     public function backInvetaion($id, $auizId)
     {
-        $courses = AttendanceCourse::where('attendance_id', $id)->first();
+        $courses = QuizCourse::where('quiz_id', $auizId)->first();
         $course_id = $courses->course_id;
-        $course = Course::find($course_id);
-        $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
-            $q->where('course_id', $course_id);
-        })->first();
-        $quiz = QuizCourse::where('quiz_id', $auizId)->first();
-        $quizAtten = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $id)->first();
+
         return redirect()->route('invitation.third', ['id' => $id, 'course_id' => $course_id]);
         // return view("invitation.third", compact("attendance", "course", 'quiz','quizAtten'));
     }
@@ -172,7 +167,7 @@ class SiteController extends Controller
         $attendance->email = $request->email;
         $attendance->job = $request->job;
         $isSave =  $attendance->update();
-      
+
         return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $attendance ? 201 : 400);
     }
 }
