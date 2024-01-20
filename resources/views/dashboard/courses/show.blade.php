@@ -196,7 +196,7 @@
             <div class="col-lg-6 col-sm-12">
                 <div class="card ">
                     <div class="card-body">
-                        <span class="chart" data-percent="87">
+                        <span class="chart" data-percent="{{$avrageAttend}}">
                             <span class="percent"></span>
                         </span>
                         <div class="row pb-4  mg-t-60" >
