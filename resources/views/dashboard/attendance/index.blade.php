@@ -409,7 +409,8 @@
      }
                     @endphp
                     <p class="wrapper">
-                        <b class="text-center"> {{ $total }}</b>
+                        <b>نتيجة الأختبار</b>
+                       <h3> <b class="text-center"> {{ $total }} %</b><h3>
                     </p>
 
                 </div>
@@ -464,7 +465,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="list p-3 w-100">
+                {{-- <div class="list p-3 w-100">
                     <div class="d-flex justify-content-between w-100 align-items-center">
                         <h6 class=""> الحالة </h6>
                         <p> تم التقدم </p>
@@ -477,7 +478,7 @@
                         <h6 class=""> الوقت </h6>
                         <p> 12:23 </p>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     @endforeach
@@ -533,7 +534,7 @@
 
                     </div>
                 </div>
-                <div class="list p-3 w-100">
+                {{-- <div class="list p-3 w-100">
                     <div class="d-flex justify-content-between w-100 align-items-center">
                         <h6 class=""> الحالة </h6>
                         <p> تم التقدم </p>
@@ -546,7 +547,7 @@
                         <h6 class=""> الوقت </h6>
                         <p> 12:23 </p>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     @endforeach

@@ -26,7 +26,7 @@ class AttendanceCourseController extends Controller
                 $q->where('course_id',$id);
             })->when($request->name_search,function($q)use($request){
                 $q->where('name','like', '%' . $request->name_search . '%');
-            })->get();
+            })->paginate(50);
         }else{
            $attendance = Attendance::with('courses')->whereHas('courses',function($q)use($id){
             $q->where('course_id',$id);
@@ -34,7 +34,7 @@ class AttendanceCourseController extends Controller
     }
         $course = Course::find($id);
 
-      
+
 
 
         return view("dashboard.attendance.index", compact("attendance","id",'course'));
