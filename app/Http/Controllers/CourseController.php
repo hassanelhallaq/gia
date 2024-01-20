@@ -181,7 +181,7 @@ class CourseController extends Controller
         } else {
             $avrageAttend = 0;
         }
-
+        
         return view("dashboard.courses.show", compact("course", 'courseFile', 'courseLinks', 'quizAtendBefor', 'quizAtendAfter', 'courseAttendancesEmail', 'quizAtendInteractive','avrageAttend'));
     }
 

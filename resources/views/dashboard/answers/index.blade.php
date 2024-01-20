@@ -128,21 +128,13 @@
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12">
-                <div class="card ">
-                    <div class="card-body">
+                <div class="card p-0">
+                    <div class="card-body p-0 mb-1">
                         <span class="chart" data-percent="{{$total}}">
                             <span class="percent"></span>
                         </span>
-                        <div class="row pb-4  mg-t-60" >
-                            <div class="col-md-12 col text-center">
-                                <h3 class=""> متوسط الأكتمال </h3>
-                                <span class="fs-14 text-muted">
-                                 متوسط الأكتمال كل المشاركين
-                                </span>
-                            </div>
-                        </div>
+                         <h5 class="text-center"> درجة الأختبار </h5>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -323,4 +315,14 @@
 <script src="{{asset('assets/plugins/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
 <script src="{{asset('assets/js/apexcharts.js')}}"></script>
 <script src="{{asset('assets/js/table.js')}}"> </script>
+<script src="{{asset('assets/js/chart.flot.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery.flot/jquery.flot.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery.flot/jquery.flot.pie.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery.flot/jquery.flot.resize.js')}}"></script>
+<script src="{{ asset('assets/js/chartCircle.js') }}"></script>
+<script src="{{ URL::asset('assets/plugins/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+
+<!--Internal Fileuploads js-->
+<script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js')}}"></script>
+<script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js')}}"></script>
 @endsection

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Models\AttendanceCourse;
 use App\Models\Course;
+use App\Models\Question;
+use App\Models\QuizCourse;
+use App\Models\UserAnswer;
 use Illuminate\Http\Request;
 
 class AttendanceCourseController extends Controller
@@ -30,7 +33,21 @@ class AttendanceCourseController extends Controller
         })->paginate(10);
     }
         $course = Course::find($id);
-        return view("dashboard.attendance.index", compact("attendance","id",'course'));
+
+        $quiz = QuizCourse::where('course_id', $course->id)->with('quiz')->whereHas('quiz',function($q){
+         $q->where('type', 'befor');
+     })->first();
+
+     $responseAnswers = UserAnswer::where('quiz_id', $quiz->quiz_id)->where('attendance_id',$attendance->id)->get();
+     $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
+     $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
+     $questions = Question::where('quiz_id', $quiz->quiz_id)->with('userAswes', 'optionTrue')->get();
+     if ($responseAnswersTrue != 0) {
+         $total = ($responseAnswersTrue / $responseAnswers->count()) * 100;
+     } else {
+         $total = 0;
+     }
+        return view("dashboard.attendance.index", compact("attendance","id",'course','total'));
     }
     /**
      * Show the form for creating a new resource.

@@ -394,6 +394,11 @@
                     <p class="wrapper">
                         <b class="text-center"> {{ $item->name }}</b>
                     </p>
+
+                    <p class="wrapper">
+                        <b class="text-center"> {{ $total }}</b>
+                    </p>
+
                 </div>
                 <div class="list p-3">
                     <div class="row row-sm">
