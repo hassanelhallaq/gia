@@ -26,7 +26,7 @@
             </div>
             <div class="profile_txt">
               <span id=""  data-translate="profile_txt">مرحبا بك</span>
-              <h3 id=""  data-translate="profile_title"> name</h3>
+              <h3 id=""  data-translate="profile_title"> </h3>
             </div>
           </div>
           <div class="menu_icon">
@@ -44,14 +44,14 @@
                 <div class="card">
                     <div>
                       <div class="card_title">
-                        <p>محمد</p>
+                        <p>د. وسام عبد الحافظ</p>
                       </div>
                       <div class="">
-                        <p> مدير </p>
+                        <p> مدير المشروع </p>
                         {{-- <span  data-translate="not_submit">{{$item->type}} </span> --}}
                       </div>
                     </div>
-                    <div class=""><a href=""> تواصل </a></div>
+                    <div class=""><a href="https://wa.me/966560960181"> تواصل </a></div>
                   </div>
 
 

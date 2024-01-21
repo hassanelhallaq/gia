@@ -2,15 +2,15 @@
 @section('header')
     <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
         <div class="left-content mt-2">
-        <nav aria-label="breadcrumb">
+            <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1">
                     <li class="breadcrumb-item">
                         <a href="../index.html">الرئيسية</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{route('programs.index')}}" class="text-muted">البرامج</a>
+                        <a href="{{ route('programs.index') }}" class="text-muted">البرامج</a>
                     </li>
-                    {{-- @if($course)
+                    {{-- @if ($course)
                     <li class="breadcrumb-item">
 
                         <a href="{{route('program.course',[$course->program->id])}}" class="text-muted"> برنامج {{$course->program->name}} </a>
@@ -26,12 +26,15 @@
         </div>
         <div class="main-dashboard-header-right">
             <div class="d-flex flex-wrap">
-                <a href=""class="btn btn-outline-light btn-with-icon btn-sm mr-1"> الشهادات <i class="bi bi-clipboard-data tx-11"></i></a>
+                <a href=""class="btn btn-outline-light btn-with-icon btn-sm mr-1"> الشهادات <i
+                        class="bi bi-clipboard-data tx-11"></i></a>
                 <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"data-target="#modaladd" data-toggle="modal">
                     اضافة مشاركين جدد <i class="bi bi-plus"></i></button>
 
-                        <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة جماعية <i class="icon ion-md-paper-plane"></i></button>
-                        <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms" data-toggle="modal">  ارسال دعوة محددة <i class="icon ion-md-paper-plane"></i></button>
+                <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms"
+                    data-toggle="modal"> ارسال دعوة جماعية <i class="icon ion-md-paper-plane"></i></button>
+                <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSmsSelected"
+                    data-toggle="modal"> ارسال دعوة محددة <i class="icon ion-md-paper-plane"></i></button>
 
                 <a href="../index.html" class="btn btn-previous btn-sm text-warning mt-2"><i
                         class="ti-angle-double-right"></i> العودة </a>
@@ -194,7 +197,7 @@
                                                 @endif
                                                 <td>
                                                     @if ($attendanceLogin != 0)
-                                                        {{ ($course->duration / $attendanceLogin) * 100 }}%
+                                                        {{ ($attendanceLogin / $course->duration ) * 100 }}%
                                                     @else
                                                         0%
                                                     @endif
@@ -395,23 +398,36 @@
                         <b class="text-center"> {{ $item->name }}</b>
                     </p>
                     @php
-                      $quiz = App\Models\QuizCourse::where('course_id', $course->id)->with('quiz')->whereHas('quiz',function($q){
-         $q->where('type', 'befor');
-     })->first();
-      $responseAnswers = App\Models\UserAnswer::where('quiz_id', $quiz->quiz_id)->where('attendance_id',$item->id)->get();
-     $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
-     $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
-     $questions = App\Models\Question::where('quiz_id', $quiz->quiz_id)->with('userAswes', 'optionTrue')->get();
-     if ($responseAnswersTrue != 0) {
-         $total = ($responseAnswersTrue / $responseAnswers->count()) * 100;
-     } else {
-         $total = 0;
-     }
+                        $quiz = App\Models\QuizCourse::where('course_id', $course->id)
+                            ->with('quiz')
+                            ->whereHas('quiz', function ($q) {
+                                $q->where('type', 'befor');
+                            })
+                            ->first();
+                         if($quiz){
+                        $responseAnswers = App\Models\UserAnswer::where('quiz_id', $quiz->quiz_id)
+                            ->where('attendance_id', $item->id)
+                            ->get();
+                        $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
+                        $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
+                        $questions = App\Models\Question::where('quiz_id', $quiz->quiz_id)
+                            ->with('userAswes', 'optionTrue')
+                            ->get();
+                        }else{
+                            $responseAnswersTrue = 0 ;
+                        }
+
+                        if ($responseAnswersTrue != 0) {
+                            $total = ($responseAnswersTrue / $questions->count()) * 100;
+                        } else {
+                            $total = 0;
+                        }
                     @endphp
                     <p class="wrapper">
                         <b>نتيجة الأختبار</b>
-                       <h3> <b class="text-center"> {{ $total }} %</b><h3>
-                    </p>
+                    <h3> <b class="text-center"> {{ $total }} %</b>
+                        <h3>
+                            </p>
 
                 </div>
                 <div class="list p-3">
@@ -638,13 +654,7 @@
             storepart('/dashboard/admin/attendance-sms', formData)
         }
 
-        function performStoreSms(id) {
-            let formData = new FormData();
-            formData.append('massege', document.getElementById('massege').value);
-            formData.append('course_id', id);
 
-            storepart('/dashboard/admin/attendance-sms/selected', formData)
-        }
 
         $(document).ready(function() {
             $('#master').on('click', function(e) {
@@ -660,12 +670,17 @@
                 $(".sub_chk:checked").each(function() {
                     allVals.push($(this).attr('data-id'));
                 });
+                debugger
+
                 if (allVals.length <= 0) {
+                    debugger
                     alert("Please select row.");
                 } else {
                     var join_selected_values = allVals.join(",");
                     // Corrected the typo in the next line
                     var join_selected_message = document.getElementById('massege').value;
+                    console.log(join_selected_message);
+
                     var courseId = document.getElementById('course_id').value;
 
 
@@ -690,7 +705,7 @@
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
-                                location.reload();
+                                debugger
                             } else if (data['error']) {
                                 alert(data['error']);
                             } else {

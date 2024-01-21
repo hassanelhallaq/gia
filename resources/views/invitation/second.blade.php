@@ -10,33 +10,43 @@
           <div class="title">
             <h3>{{ $course->name }}</h3>
           </div>
-          <div class=" d-flex justify-content-between">
-            <span class="accepted" data-translate="accepted"> تم القبول </span>
-            {{-- <div class="dropdown">
-                <span> متطلبات الحصول على الشهادة  </span>
-                <div class="dropdown-content">
-                  <p>نسبة الإلتزام 80% من الحضور</p>
-                  <p>تقديم الأختبار القبلي</p>
-                  <p>تقديم الأختبار البعدي</p>
-                  <p> تقديم نموذج الحصول على الشهادة </p>
-                  <p>تقديم تقييم الحدث</p>
-                </div>
 
-          </div> --}}
-          <div class="disc">
-            <p class="tx-14">
-                {{ $course->desc }}
 
-            </p>
-          </div>
+<div class="d-flex justify-content-between">
+    {{-- Dropdown section aligned to the left --}}
+
+    <span class="accepted" data-translate="accepted"> تم القبول </span>
+
+    {{-- Dropdown section aligned to the right --}}
+    <div class="dropdown" style="text-align: center;">
+        <span> متطلبات الحصول على الشهادة </span>
+        <div class="dropdown-content">
+            <p>نسبة الإلتزام 80% من الحضور</p>
+            <p>تقديم الأختبار القبلي</p>
+            <p>تقديم الأختبار البعدي</p>
+            <p> تقديم نموذج الحصول على الشهادة </p>
+            <p>تقديم تقييم الحدث</p>
+        </div>
+    </div>
+</div>
+
+    <div class="d-flex justify-content-between">
+    {{-- Move the "تم القبول" span above the paragraph --}}
+    <div class="disc">
+        <p class="tx-14">
+            {{ $course->desc }}
+        </p>
+    </div>
+</div>
+
+        <div class="btn_links">
+          <a data-translate="btn_1" href="{{ route('invitation.files',[$attendance->id,request()->course_id]) }} "> تحميل المرفقات </a>
+
+          <a data-translate="btn_2" href="{{route('invitation.third',[$attendance->id,request()->course_id])}}" >الأنشطة</a>
         </div>
         <div class="btn_links">
-          <a data-translate="btn_1" href="{{ route('invitation.files',[$attendance->id,request()->course_id]) }} "> المادة العلمية للدورة </a>
-          <a data-translate="btn_2" href="{{route('invitation.third',[$attendance->id,request()->course_id])}}" >الانشطة</a>
-        </div>
-        <div class="btn_links">
 
-            <button class="btn_primery" onclick="togglePopup()" type="button" class="df ai-c jc-c g1 w-25" data-translate="signup"> تسجيل الدخول</button>
+            <button class="btn_primery" onclick="togglePopup()" type="button" class="df ai-c jc-c g1 w-25" data-translate="signup"> رمز تسجيل الدخول </button>
             <a class="btn-border-block" data-translate="btn_2" target="_blank" href="{{ $course->location }}"> موقع التدريب <i class="bi bi-geo-alt ml-3"></i></a>
 
         </div>

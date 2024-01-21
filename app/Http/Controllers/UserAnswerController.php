@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Question;
+use App\Models\QuestionOption;
 use App\Models\Quiz;
 use App\Models\QuizCourse;
 use App\Models\UserAnswer;
@@ -73,16 +74,18 @@ class UserAnswerController extends Controller
            $quiz = QuizCourse::where('course_id', $course->id)->with('quiz')->whereHas('quiz',function($q){
             $q->where('type', 'befor');
         })->first();
-
+        // $questions
+        $quizId = $quiz->quiz_id;
         $responseAnswers = UserAnswer::where('quiz_id', $quiz->quiz_id)->where('attendance_id',$attendanceId)->get();
         $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
         $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
         $questions = Question::where('quiz_id', $quiz->quiz_id)->with('userAswes', 'optionTrue')->get();
+
         if ($responseAnswersTrue != 0) {
-            $total = ($responseAnswersTrue / $responseAnswers->count()) * 100;
+            $total = ($responseAnswersTrue / $questions->count()) * 100;
         } else {
             $total = 0;
         }
-        return view('dashboard.answers.index', compact('responseAnswers', 'responseAnswersTrue', 'responseAnswersFalse', 'questions', 'total'));
+        return view('dashboard.answers.index', compact('responseAnswers', 'responseAnswersTrue', 'responseAnswersFalse', 'questions', 'total','attendanceId','quizId'));
     }
 }

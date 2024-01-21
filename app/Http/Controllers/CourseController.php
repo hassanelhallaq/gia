@@ -181,7 +181,7 @@ class CourseController extends Controller
         } else {
             $avrageAttend = 0;
         }
-        
+
         return view("dashboard.courses.show", compact("course", 'courseFile', 'courseLinks', 'quizAtendBefor', 'quizAtendAfter', 'courseAttendancesEmail', 'quizAtendInteractive','avrageAttend'));
     }
 
@@ -394,7 +394,7 @@ class CourseController extends Controller
             // Further processing...
             // if ($server_output == "OK") { echo "1"; } else { echo "0"; }
         }
-        return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $attendance ? 201 : 400);
+        return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], null ? 201 : 400);
     }
     public function courseXlsx(Request $request)
     {

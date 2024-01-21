@@ -129,11 +129,19 @@
             </div>
             <div class="col-lg-6 col-sm-12">
                 <div class="card p-0">
-                    <div class="card-body p-0 mb-1">
+
+                    <div class="card-body">
                         <span class="chart" data-percent="{{$total}}">
                             <span class="percent"></span>
                         </span>
-                         <h5 class="text-center"> درجة الأختبار </h5>
+                        <div class="row pb-4  mg-t-60" >
+                            <div class="col-md-12 col text-center">
+                                <h3 class=""> درجة الأختبار </h3>
+                                <span class="fs-14 text-muted">
+
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -246,10 +254,16 @@
                                 <tr class="table-rows">
                                     <td scope="row">{{ $item->name}} </td>
                                     <td> {{$item->optionTrue->answer}} </td>
-                                    @if( $item->userAswes && $item->userAswes->is_true == 1 )
-                                    <td class="bg-success-transparent"> {{$item->userAswes->option->answer ?? ''}}  </td>
+                                    @php
+                                           $userAnswer= App\Models\UserAnswer::where('attendance_id',$attendanceId)->where('question_id',$item->id)->where('quiz_id',$quizId)->first();
+                                           if($userAnswer){
+                                           $option = App\Models\QuestionOption::find($userAnswer->question_option_id);
+                                        }
+                                        @endphp
+                                    @if( $userAnswer && $userAnswer->is_true == 1  )
+                                    <td class="bg-success-transparent"> {{$option->answer ?? ''}}  </td>
                                     @else
-                                    <td class="bg-danger-transparent"> {{$item->userAswes->option->answer ?? ''}}  </td>
+                                    <td class="bg-danger-transparent"> {{$option->answer ?? ''}}  </td>
                                     @endif
                                 </tr>
                                 @endforeach
