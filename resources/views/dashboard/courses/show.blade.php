@@ -229,8 +229,8 @@
                             <div class="row row-sm mb-3">
                                 <div class="col-lg-6">
                                     <div class="form-group has-success mg-b-0">
-                                        <input type="text" class="form-control form-input" name="name"
-                                            value="{{ request()->name }}" id="name" placeholder="بحث">
+                                        <input type="text" class="form-control form-input" name="seacrh_name"
+                                            value="{{ request()->name }}" id="seacrh_name" placeholder="بحث">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mg-t-20 mg-lg-t-0">
