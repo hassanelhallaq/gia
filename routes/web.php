@@ -38,55 +38,51 @@ Route::prefix('dashboard')->middleware('guest:admin,client')->group(function () 
     Route::get('{guard}/login', [App\Http\Controllers\UserAuthController::class, 'showLogin'])->name('dashboard.login');
     Route::post('{guard}/login', [App\Http\Controllers\UserAuthController::class, 'login']);
 });
-Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
+Route::prefix('dashboard/admin')->middleware('auth:admin,client,trainer')->group(
     function () {
         Route::resource('courses', CourseController::class);
+        Route::get('/courses.attendances/{id}', [AttendanceCourseController::class, 'coursesAttendance'])->name('course.attendance');
+        Route::get('/attendance-summery/{id}/{attendanceId}', [UserAnswerController::class, 'userAswers'])->name('attendance.summery');
+        Route::resource('programs', ProgramController::class);
         Route::get('/program.courses/{id}', [CourseController::class, 'programCourses'])->name('program.course');
+
+    }
+);
+Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
+    function () {
         Route::get('/program.courses/{id}/create', [CourseController::class, 'createCourse'])->name('program.course.create');
         Route::get('/get-courses/{id}', [CourseController::class, 'getCoureses']);
         Route::resource('questions', QuestionController::class);
         Route::resource('attendance', AttendanceController::class);
-        Route::resource('programs', ProgramController::class);
         Route::get('/programs-grid', [ProgramController::class, 'gridView'])->name('programs.grid');
-        Route::get('/courses.attendances/{id}', [AttendanceCourseController::class, 'coursesAttendance'])->name('course.attendance');
         Route::get('/quiz.questions/{id}', [QuizController::class, 'question'])->name('quiz.questions');
         Route::resource('quizes', QuizController::class);
         Route::get('/duplicate/{id}', [CourseController::class, 'question'])->name('duplicate.courses');
         Route::get('/{id}/{course_id}/login', [AttendanceLoginController::class, 'login'])->name('attendance.login');
-        Route::get('/attendance-summery/{id}/{attendanceId}', [UserAnswerController::class, 'userAswers'])->name('attendance.summery');
         Route::post('/attendance-sms', [CourseController::class, 'sendSms'])->name('attendance.sms');
         Route::get('/course/xlsx', [CourseController::class, 'courseXlsx'])->name('course.xlsx');
         Route::get('/program/xlsx', [ProgramController::class, 'programXlsx'])->name('programs.xlsx');
         Route::put('/status-update/{id}', [CourseController::class, 'updateStatus'])->name('update.status');
         Route::post('/attendance-sms/selected', [CourseController::class, 'sendSmsSelected'])->name('attendance.sms.selected');
 
-
-
-    // روت مؤقت
-    Route::get('/quiz/detales', function () {
-        return view('dashboard.quiz.detales');
-    })->name('quiz_detales');
-
-    Route::get('/third_connect', function () {
-        return view('invitation.third_connect');
-    })->name('third_connect');
-    Route::get('/Certificate_Issuance_form', function () {
-        return view('invitation.Certificate_Issuance_form');
-    })->name('Certificate_Issuance_form');
-
-    Route::get('/Certificate_management', function () {
-        return view('dashboard.attendance.Certificate_management');
-    })->name('Certificate_management');
-
-
-
-
+        // روت مؤقت
+        Route::get('/quiz/detales', function () {
+            return view('dashboard.quiz.detales');
+        })->name('quiz_detales');
+        Route::get('/Certificate_management', function () {
+            return view('dashboard.attendance.Certificate_management');
+        })->name('Certificate_management');
+    }
+);
+Route::prefix('dashboard/trainer')->middleware('auth:trainer')->group(
+    function () {
+        Route::get('/', [CourseController::class, 'index'])->name('trainer.dashboard');
     }
 );
 Route::prefix('dashboard/client')->middleware('auth:client')->group(
     function () {
-Route::get('/', [PagesController::class, 'index'])->name('client.dashboard');
-}
+        Route::get('/', [PagesController::class, 'index'])->name('client.dashboard');
+    }
 );
 Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
     function () {
@@ -100,9 +96,6 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::resource('trainers', TrainerController::class);
         Route::post('/courses-files', [CourseFileController::class, 'store']);
         Route::post('/courses-links', [CourseLinkController::class, 'store']);
-
-
-
     }
 );
 Route::get('/invitation/{id}/{course_id}', [SiteController::class, 'index'])->name('invitation.index');
@@ -110,9 +103,9 @@ Route::get('/accept/{id}/{course_id}', [SiteController::class, 'second'])->name(
 Route::get('/third/{id}/{course_id}', [SiteController::class, 'third'])->name('invitation.third');
 Route::get('/back/{id}/{quiz_id}', [SiteController::class, 'backInvetaion'])->name('invitation.back');
 Route::get('/files/{id}/{course_id}', [SiteController::class, 'files'])->name('invitation.files');
-Route::get('/Certificate_Issuance_form/{id}/{course_id}',[SiteController::class, 'certificateIssuance'])->name('Certificate_Issuance_form');
+Route::get('/Certificate_Issuance_form/{id}/{course_id}', [SiteController::class, 'certificateIssuance'])->name('Certificate_Issuance_form');
 Route::post('/ateendance/update/{id}/{course_id}', [SiteController::class, 'ateendanceUpdate'])->name('ateendance.update');
-
+Route::get('/third_connect/{id}/{course_id}', [SiteController::class, 'thirdContact'])->name('third_connect');
 
 Route::post('/invitation/reply', [SiteController::class, 'storeReply']);
 Route::prefix('/{username}')->group(

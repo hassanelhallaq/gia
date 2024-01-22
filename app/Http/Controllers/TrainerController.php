@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Trainer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class TrainerController extends Controller
 {
@@ -35,6 +36,7 @@ class TrainerController extends Controller
                 'name' => 'required|string',
                 'email' => 'required|email|unique:trainers',
                 'phone' => 'required|string|unique:trainers',
+                'password' => 'required',
 
             ], [
                 'name.required' => 'الاسم مطلوب',
@@ -49,6 +51,8 @@ class TrainerController extends Controller
                 $trainer->name = $request->get('name');
                 $trainer->email = $request->get('email');
                 $trainer->phone = $request->get('phone');
+                $trainer->password = Hash::make($request->get('password'));
+
                 $isSaved = $trainer->save();
                 return response()->json(['icon' => 'success', 'title' => 'تم الانشاء بنجاح '], 200);
 

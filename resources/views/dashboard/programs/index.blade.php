@@ -4,21 +4,28 @@
     <div class="left-content mt-2">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb breadcrumb-style1">
+                @if(!Auth::guard('trainer')->check())
+
                 <li class="breadcrumb-item">
                     <a href="{{route('admin.dashboard')}}" >الرئيسية</a>
                 </li>
+                @endif
                 <li class="breadcrumb-item">
                     <a href="{{route('programs.index')}}" class="text-muted">البرامج</a>
                 </li>
+
             </ol>
         </nav>
     </div>
     <div class="main-dashboard-header-right">
+        @if(!Auth::guard('trainer')->check())
+
         <div class=" d-flex">
             <button  class="btn btn-outline-light btn-print"> طباعة <i class="icon ion-ios-print"></i></button>
             <a href="{{route('programs.xlsx')}}" class="btn btn-outline-light mr-1 btn-export"> تصدير <i class="ti-stats-up project"></i></a>
             <a class="btn btn-warning-gradient btn-with-icon mr-1" href="{{route('programs.create')}}">  انشاء برنامج <i class="bi bi-plus"></i></a>
         </div>
+        @endif
     </div>
 </div>
 @endsection

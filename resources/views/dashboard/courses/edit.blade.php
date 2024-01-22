@@ -333,6 +333,39 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-6 mb-3">
+                                    <label for="example"> رقم تواصل مسؤول البرنامج </label>
+                                    <div class="webflow-style-input">
+                                        <input class="input_no_border readonly" id="contact_number" type="text"
+                                            value="{{ $course->contact_number }}" value="another value" readonly>
+                                        <div class="d-flex ml-2">
+                                            <p class="ml-3"> تحرير </p>
+                                            <i class="bi bi-pen edit-button"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <label for="example"> رابط التواصل </label>
+                                    <div class="webflow-style-input">
+                                        <input class="input_no_border readonly" id="contact_link" type="text"
+                                            value="{{ $course->contact_link }}" value="another value" readonly>
+                                        <div class="d-flex ml-2">
+                                            <p class="ml-3"> تحرير </p>
+                                            <i class="bi bi-pen edit-button"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <label for="example"> الاسم الجهة </label>
+                                    <div class="webflow-style-input">
+                                        <input class="input_no_border readonly" id="direction_name" type="text"
+                                            value="{{ $course->direction_name }}" value="another value" readonly>
+                                        <div class="d-flex ml-2">
+                                            <p class="ml-3"> تحرير </p>
+                                            <i class="bi bi-pen edit-button"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
                                     <label for="example"> المادة </label>
                                     <div class="webflow-style-input">
                                         <input class="input_no_border readonly" id="subject" type="text"
@@ -423,6 +456,11 @@
                 formData.append('link', document.getElementById('link').value);
                 formData.append('status_befor', document.getElementById('status_befor').value);
                 formData.append('status_after', document.getElementById('status_after').value);
+                formData.append('contact_number', document.getElementById('contact_number').value);
+                formData.append('contact_link', document.getElementById('contact_link').value);
+                formData.append('direction_name', document.getElementById('direction_name').value);
+
+
 
 
                 let assignmentInput = document.getElementById('assignment');

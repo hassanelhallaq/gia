@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AttendanceLogin;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AttendanceLoginController extends Controller
@@ -66,10 +67,16 @@ class AttendanceLoginController extends Controller
     }
     public function login(Request $request, $attendanceId , $courseId)
     {
+        $attendanceLogin = AttendanceLogin::where('attendance_id',$attendanceId)->where('course_id',$courseId)->whereDate('created_at',Carbon::today())->first();
+        if($attendanceLogin == null){
+
         $new = new AttendanceLogin();
         $new->attendance_id = $attendanceId;
         $new->course_id = $courseId;
         $new->save();
         return redirect('/dashboard/admin/courses');
+        }else{
+            return redirect()->back();
+        }
     }
 }

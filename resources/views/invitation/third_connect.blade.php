@@ -30,8 +30,8 @@
             </div>
           </div>
           <div class="menu_icon">
-           <a href="{{route('third_connect')}}" class="tx-25"> ؟ </a>
-          </div>
+            <a href="{{route('third_connect',[$attendance->id,request()->course_id])}}" class="tx-25"> ؟ </a>
+        </div>
         </div>
       </div>
     </header>
@@ -44,20 +44,20 @@
                 <div class="card">
                     <div>
                       <div class="card_title">
-                        <p>د. وسام عبد الحافظ</p>
+                        <p>{{$course->direction_name}}</p>
                       </div>
                       <div class="">
                         <p> مدير المشروع </p>
                         {{-- <span  data-translate="not_submit">{{$item->type}} </span> --}}
                       </div>
                     </div>
-                    <div class=""><a href="https://wa.me/966560960181"> تواصل </a></div>
+                    <div class=""><a href="https://wa.me/{{$course->contact_number}}"> تواصل </a></div>
                   </div>
 
 
               </div>
               <div class="btn_links">
-                <a  data-translate="show_results" href=""><i class="bi bi-arrow-right tx-white"></i> الرجوع الى الرئيسية </a>
+                <a  data-translate="show_results" href="{{route('invitation.second',[$attendance->id,request()->course_id])}}"><i class="bi bi-arrow-right tx-white"></i> الرجوع الى الرئيسية </a>
               </div>
             </div>
         </section>

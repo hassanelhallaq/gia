@@ -32,7 +32,7 @@ class UserAuthController extends Controller
             'email' => 'required|email|string',
             'password' => 'required|string|min:6',
             'remember_me' => 'required|boolean',
-            'guard' => 'required|string|in:admin,client'
+            'guard' => 'required|string|in:admin,client,trainer'
         ], [
             'email.required' => 'Email is required',
             'email.email' => 'Please enter the correct e-mail',

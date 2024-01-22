@@ -28,7 +28,6 @@ class CourseController extends Controller
     {
         $program = null;
         $id = null;
-
         $courses = Course::orderBy("created_at", "desc")->when($request->name, function ($q) use ($request) {
             $q->where('name', 'like', '%' . $request->name . '%');
         });
@@ -38,6 +37,8 @@ class CourseController extends Controller
             $courses = $courses->with('program')->whereHas('program', function ($q) {
                 $q->where('client_id', Auth::user()->id);
             })->paginate(10);
+        }elseif (Auth::guard('trainer')->check()) {
+            $courses = $courses->where('trainer_id',Auth::user()->id)->with('program')->paginate(10);
         }
         return view("dashboard.courses.index", compact("courses", 'program', 'id'));
     }
@@ -45,6 +46,11 @@ class CourseController extends Controller
     {
         $program = Program::find($id);
         $courses = Course::where('program_id', $id)->paginate(10);
+
+        if (Auth::guard('trainer')->check()) {
+            $courses = Course::where('trainer_id',Auth::user()->id)->with('program')->paginate(10);
+        }
+
         return view("dashboard.courses.index", compact("courses", 'program', 'id'));
     }
     /**
@@ -167,14 +173,14 @@ class CourseController extends Controller
         }
         $courseFile = CourseFile::where('course_id', $id)->get();
         $courseLinks = CourseLink::where('course_id', $id)->get();
-             $attendancesLog = AttendanceLogin::whereIn('attendance_id', $course->attendances->pluck('id'))->where([ ['course_id', $course->id]])->count();
-            $dueration = $course->duration;
-            $percent  = 0;
-            if ($attendancesLog) {
-                $percent += $dueration / $attendancesLog;
-            } else {
-                $percent = 0;
-            }
+        $attendancesLog = AttendanceLogin::whereIn('attendance_id', $course->attendances->pluck('id'))->where([['course_id', $course->id]])->count();
+        $dueration = $course->duration;
+        $percent  = 0;
+        if ($attendancesLog) {
+            $percent += $dueration / $attendancesLog;
+        } else {
+            $percent = 0;
+        }
 
         if ($course->attendances->count() != 0) {
             $avrageAttend =  $percent / $course->attendances->count() * 100;
@@ -182,7 +188,7 @@ class CourseController extends Controller
             $avrageAttend = 0;
         }
 
-        return view("dashboard.courses.show", compact("course", 'courseFile', 'courseLinks', 'quizAtendBefor', 'quizAtendAfter', 'courseAttendancesEmail', 'quizAtendInteractive','avrageAttend'));
+        return view("dashboard.courses.show", compact("course", 'courseFile', 'courseLinks', 'quizAtendBefor', 'quizAtendAfter', 'courseAttendancesEmail', 'quizAtendInteractive', 'avrageAttend'));
     }
 
     /**
@@ -236,6 +242,9 @@ class CourseController extends Controller
         $course->percentage_certificate = $request->percentage_certificate;
         $course->coordinator = $request->coordinator;
         $course->category_id = $request->category_id;
+        $course->contact_number = $request->contact_number;
+        $course->contact_link = $request->contact_link;
+        $course->direction_name = $request->direction_name;
         if ($request->hasFile('assignment')) {
             $adminImage = $request->file('assignment');
             $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();

@@ -18,8 +18,8 @@
                     <a href="{{route('programs.create')}}"
                         class="btn btn-warning-gradient btn-with-icon mr-1"> انشاء برنامج <i
                             class="bi bi-plus"></i></a>
-                    <button class="btn btn-warning-gradient btn-with-icon mr-1"data-target="#modaladd"
-                        data-toggle="modal"> اضافة مشاركين <i class="bi bi-plus"></i></button>
+                    {{-- <button class="btn btn-warning-gradient btn-with-icon mr-1"data-target="#modaladd"
+                        data-toggle="modal"> اضافة مشاركين <i class="bi bi-plus"></i></button> --}}
                     <button class="btn btn-warning-gradient btn-icon mr-1"><i
                             class="si si-options-vertical"></i></button>
                 </div>

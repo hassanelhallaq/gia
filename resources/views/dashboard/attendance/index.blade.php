@@ -186,10 +186,16 @@
                                                                 @endphp
                                                                 @if ($log)
                                                                     <span class="dropdown-item text-success"> اليوم
-                                                                        {{ $day }} (حاضر)</span>
+                                                                        {{ $day }} (حاضر) {{$courseStartDate
+                                                                            ->copy()
+                                                                            ->addDays($day)
+                                                                            ->startOfDay()->format('y-m-d')}} </span>
                                                                 @else
                                                                     <span class="dropdown-item text-danger"> اليوم
-                                                                        {{ $day }} (غير حاضر)</span>
+                                                                        {{ $day }} (غير حاضر) {{$courseStartDate
+                                                                            ->copy()
+                                                                            ->addDays($day)
+                                                                            ->startOfDay()->format('y-m-d')}}</span>
                                                                 @endif
                                                             @endfor
                                                         </div>

@@ -18,6 +18,7 @@
                 </ol>
             </nav>
         </div>
+        @if (!Auth::guard('trainer')->check())
         <div class="main-dashboard-header-right ">
             <div class=" d-flex flex-wrap">
                 <a href="{{ route('course.xlsx') }}"
@@ -44,6 +45,7 @@
                 @endif
             </div>
         </div>
+        @endif
     </div>
 @endsection
 @section('css')

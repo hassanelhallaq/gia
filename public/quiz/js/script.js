@@ -238,8 +238,8 @@ function showResult() {
     if (userScore > 3) {
         // if user scored more than 3
         //creating a new span tag and passing the user score number and total question number
-        let scoreTag = '<span>and congrats! 🎉, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
-        scoreText.innerHTML = scoreTag;  //adding new span tag inside score_Text
+ //        let scoreTag = '<span>and congrats! 🎉, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
+ //        scoreText.innerHTML = scoreTag;  //adding new span tag inside score_Text
     }
     else if (userScore > 1) { // if user scored more than 1
         let scoreTag = '<span>and nice 😎, You got <p>' + userScore + '</p> out of <p>' + questions.length + '</p></span>';
@@ -294,6 +294,6 @@ function startTimerLine(time) {
 // (الكود الخاص بتحديد عدد الأسئلة)...
 function queCounter(index) {
     //creating a new span tag and passing the question number and total question
-    let totalQueCounTag = '<span><p>' + index + '</p> of <p>' + questions.length + '</p> Questions</span>';
+    let totalQueCounTag = '<span><p>' + index + '</p>  من  <p>' + questions.length + '</p> الاسئلة </span>';
     bottom_ques_counter.innerHTML = totalQueCounTag;  //adding new span tag inside bottom_ques_counter
 }

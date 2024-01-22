@@ -68,24 +68,32 @@ class UserAnswerController extends Controller
         //
     }
 
-    public function userAswers($id,$attendanceId)
+    public function userAswers($id, $attendanceId)
     {
         $course = Course::find($id);
-           $quiz = QuizCourse::where('course_id', $course->id)->with('quiz')->whereHas('quiz',function($q){
+        $quiz = QuizCourse::where('course_id', $course->id)->with('quiz')->whereHas('quiz', function ($q) {
             $q->where('type', 'befor');
         })->first();
         // $questions
-        $quizId = $quiz->quiz_id;
-        $responseAnswers = UserAnswer::where('quiz_id', $quiz->quiz_id)->where('attendance_id',$attendanceId)->get();
-        $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
-        $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
-        $questions = Question::where('quiz_id', $quiz->quiz_id)->with('userAswes', 'optionTrue')->get();
+        if ($quiz) {
+            $quizId = $quiz->quiz_id;
+            $responseAnswers = UserAnswer::where('quiz_id', $quiz->quiz_id)->where('attendance_id', $attendanceId)->get();
+            $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
+            $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
+            $questions = Question::where('quiz_id', $quiz->quiz_id)->with('userAswes', 'optionTrue')->get();
+        } else {
+            $quizId = null;
+            $responseAnswers = null;
+            $responseAnswersTrue = 0;
+            $responseAnswersFalse = 0;
+            $questions = [];
+        }
 
         if ($responseAnswersTrue != 0) {
             $total = ($responseAnswersTrue / $questions->count()) * 100;
         } else {
             $total = 0;
         }
-        return view('dashboard.answers.index', compact('responseAnswers', 'responseAnswersTrue', 'responseAnswersFalse', 'questions', 'total','attendanceId','quizId'));
+        return view('dashboard.answers.index', compact('responseAnswers', 'responseAnswersTrue', 'responseAnswersFalse', 'questions', 'total', 'attendanceId', 'quizId'));
     }
 }

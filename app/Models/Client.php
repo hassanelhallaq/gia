@@ -18,9 +18,7 @@ class Client extends Authenticatable
         'email',
         'phone_number','password'
     ];
-    protected $casts = [
-         'password' => 'hashed',
-    ];
+
     public function country(){
         return $this->belongsTo(Country::class);
     }

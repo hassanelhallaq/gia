@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="menu_icon">
-           <a href="{{route('third_connect')}}" class="tx-25"> ؟ </a>
+           <a href="{{route('third_connect',[$attendance->id,request()->course_id])}}" class="tx-25"> ؟ </a>
           </div>
         </div>
       </div>

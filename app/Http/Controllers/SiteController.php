@@ -84,6 +84,19 @@ class SiteController extends Controller
         $quizAtten = QuizAttendance::where('quiz_id', $quiz->quiz_id)->where('attendance_id', $id)->first();
         return view("invitation.third", compact("attendance", "course", 'quiz', 'quizAtten', 'quizAfter'));
     }
+
+    public function thirdContact($id, $course_id)
+    {
+
+        $course = Course::findOrFail($course_id);
+        $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
+            $q->where('course_id', $course_id);
+        })->first();
+
+
+        return view("invitation.third_connect", compact("attendance", "course"));
+    }
+
     public function backInvetaion($id, $auizId)
     {
         $courses = QuizCourse::where('quiz_id', $auizId)->first();

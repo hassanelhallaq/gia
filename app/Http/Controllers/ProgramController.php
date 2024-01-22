@@ -25,6 +25,10 @@ class ProgramController extends Controller
             $programs = $programs->withCount('courses')->paginate(10);
         }elseif(Auth::guard('client')->check()){
             $programs = $programs->where('client_id',Auth::user()->id)->withCount('courses')->paginate(10);
+        }elseif(Auth::guard('trainer')->check()){
+            $programs = $programs->with('courses')->whereHas('courses',function($q){
+                $q->where('trainer_id',Auth::user()->id);
+            })->withCount('courses')->paginate(10);
         }
         return view("dashboard.programs.index", compact("programs"));
     }
