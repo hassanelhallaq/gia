@@ -425,7 +425,23 @@
         });
     </script>
 
+<script>
+    $(document).ready(function () {
+        // Initially hide the link input
+        $('#link').hide();
 
+        // On change event for the how_attend select element
+        $('#how_attend').change(function () {
+            // If the selected option is 'questions', hide the link input
+            if ($(this).val() === 'questions') {
+                $('#link').hide();
+            } else {
+                // If the selected option is 'link', show the link input
+                $('#link').show();
+            }
+        });
+    });
+</script>
 
     <script>
         function performDestroy(id, reference) {
