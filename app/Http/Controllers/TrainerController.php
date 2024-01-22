@@ -105,6 +105,7 @@ class TrainerController extends Controller
                 $trainer->name = $request->get('name');
                 $trainer->email = $request->get('email');
                 $trainer->phone = $request->get('phone');
+                $trainer->password = Hash::make($request->get('password'));
                 $isSaved = $trainer->update();
                 return response()->json(['icon' => 'success', 'title' => 'تم التعديل بنجاح '], 200);
 

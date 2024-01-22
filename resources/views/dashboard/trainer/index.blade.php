@@ -176,6 +176,10 @@
                             <label for="example"> البريد الألكتروني </label>
                             <input class="form-control"  required="" id="email" type="email">
                         </div>
+                        <div class="col-12 mt-4">
+                            <label for="example">  كلمه المرور </label>
+                            <input class="form-control"  required="" id="password" type="password">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer border-0">
@@ -208,6 +212,10 @@
                         <div class="col-12 mt-4">
                             <label for="example"> البريد الألكتروني </label>
                             <input class="form-control" value="{{$item->email}}" id="email_{{$item->id}}" required="" type="email">
+                        </div>
+                        <div class="col-12 mt-4">
+                            <label for="example">  كلمه المرور </label>
+                            <input class="form-control"  required="" id="password_{{$item->id}}" type="password">
                         </div>
                     </div>
                 </div>
@@ -291,6 +299,9 @@
                 name: document.getElementById("name").value,
                 email: document.getElementById("email").value,
                 phone: document.getElementById("phone").value,
+                password: document.getElementById("password").value,
+
+
             };
             storepart('/dashboard/admin/trainers', data);
         }
@@ -301,6 +312,8 @@
         formData.append('name', document.getElementById('name_'+id).value);
         formData.append('email', document.getElementById('email_'+id).value);
         formData.append('phone', document.getElementById('phone_'+id).value);
+        formData.append('password', document.getElementById('password'+id).value);
+
 
         storepart('/dashboard/admin/trainers/'+id, formData)
 }
