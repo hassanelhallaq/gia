@@ -230,7 +230,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group has-success mg-b-0">
                                         <input type="text" class="form-control form-input" name="seacrh_name"
-                                            value="{{ request()->name }}" id="seacrh_name" placeholder="بحث">
+                                            value="{{ request()->seacrh_name }}" id="seacrh_name" placeholder="بحث">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mg-t-20 mg-lg-t-0">
@@ -980,7 +980,7 @@
 <script>
     function performStore(id) {
         let formData = new FormData();
-        formData.append('name', document.getElementById('name').value);
+        formData.append('name', document.getElementById('file_name').value);
         formData.append('type', document.getElementById('type').value);
         formData.append('course_id',id);
         formData.append('file', document.getElementById('file').files[0]);

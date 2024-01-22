@@ -10,7 +10,7 @@
 
                         <div class="col-12 form-group">
                             <label for="example"> الاسم </label>
-                            <input class="form-control" required="" id="name" type="text">
+                            <input class="form-control" required="" id="file_name" type="text">
                         </div>
                         <div class="col-12 form-group">
                             <label class=""> نوع الملف </label>
