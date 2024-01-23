@@ -75,14 +75,18 @@ class SiteController extends Controller
         $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
-        $quiz = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz', function ($q) {
+         $quiz = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz', function ($q) {
             $q->where('type', 'befor');
         })->first();
         $quizAfter = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz', function ($q) {
             $q->where('type', 'after');
         })->first();
         $quizAtten = QuizAttendance::where('quiz_id', $quiz->quiz_id)->where('attendance_id', $id)->first();
-        return view("invitation.third", compact("attendance", "course", 'quiz', 'quizAtten', 'quizAfter'));
+        $quizAttenAfter = QuizAttendance::where('quiz_id', $quizAfter->quiz_id)->where('attendance_id', $id)->first();
+         $quizInteractive = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz', function ($q) {
+            $q->where('type', 'interactive');
+        })->first();
+        return view("invitation.third", compact("attendance", "course", 'quiz', 'quizAtten', 'quizAfter','quizAttenAfter','quizInteractive'));
     }
 
     public function thirdContact($id, $course_id)

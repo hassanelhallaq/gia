@@ -272,7 +272,52 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-6 mb-3">
+                                    <label for="example"> الاختبار التفاعلي </label>
+                                    <div class="webflow-style-input">
+                                        <select id="quiz_interactive_id" class="form-control select2 input_no_border custom-select" >
+                                            <option></option>
 
+                                            @foreach ($quizesInteractive as $item)
+                                                <option @foreach ($course->quizes->where('type','interactive') as $quiz)
+
+                                                @if ($item->id == $quiz->id) selected @endif @endforeach
+                                                value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+
+                                        <div class="d-flex ml-2">
+                                            <p class="ml-1"> تحرير </p>
+                                            <i class="bi bi-pen edit-button ml-2"></i>
+                                            <p class="ml-3 "> البحث عن اختبار </p>
+                                            <i class="bi bi-box-arrow-in-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <label for="example"> حاله الاختبار التفاعلي</label>
+                                    <div class="webflow-style-input">
+                                        <select id="status_interactive" class="form-control select2 input_no_border custom-select" >
+                                            <option></option>
+                                            <option @if($course->status_interactive == 'active') selected @endif  value="active">
+                                                فعال
+                                            </option>
+                                            <option @if($course->status_interactive == 'InActive') selected @endif value="InActive">
+                                                غير مفعل
+                                            </option>
+                                            {{-- @endforeach --}}
+                                        </select>
+
+                                        <div class="d-flex ml-2">
+                                            <p class="ml-1"> تحرير </p>
+                                            <i class="bi bi-pen edit-button ml-2"></i>
+                                            <p class="ml-3 "> البحث عن اختبار </p>
+                                            <i class="bi bi-box-arrow-in-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-lg-6 mb-3">
                                     <label for="example"> المستوى </label>
                                     <div class="webflow-style-input">
@@ -290,7 +335,7 @@
                                     <div class="webflow-style-input">
                                         <select id="quiz_after_id" class="form-control select2 input_no_border custom-select" >
                                             <option></option>
-                                            @foreach ($quizesBefor as $item)
+                                            @foreach ($quizesAfter as $item)
                                             <option @foreach ($course->quizes->where('type','after') as $quiz)
 
                                             @if ($item->id == $quiz->id) selected @endif @endforeach
@@ -459,13 +504,9 @@
                 formData.append('contact_number', document.getElementById('contact_number').value);
                 formData.append('contact_link', document.getElementById('contact_link').value);
                 formData.append('direction_name', document.getElementById('direction_name').value);
-
-
-
-
+                formData.append('quiz_interactive_id', document.getElementById('quiz_interactive_id').value);
+                formData.append('status_interactive', document.getElementById('status_interactive').value);
                 let assignmentInput = document.getElementById('assignment');
-
-
                 if (assignmentInput !== null && assignmentInput.files !== null && assignmentInput.files.length > 0) {
                     formData.append('assignment', assignmentInput.files[0]);
                     // The rest of your code for handling the form data
@@ -473,8 +514,6 @@
                     // Handle the case where the 'assignment' element does not exist, or no file is selected
                     console.log("No file selected or element not found");
                 }
-
-
                 let subjectInput = document.getElementById('subject');
                 if (subjectInput !== null && subjectInput.files !== null && subjectInput.files.length > 0) {
                     formData.append('subject', subjectInput.files[0]);
@@ -483,11 +522,7 @@
                     // Handle the case where the 'assignment' element does not exist, or no file is selected
                     console.log("No file selected or element not found");
                 }
-
-
                 storeRoute('/dashboard/admin/courses/' + id, formData)
-
-
             }
             function duplicate(id) {
                 let formData = new FormData();

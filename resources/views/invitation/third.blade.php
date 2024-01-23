@@ -9,89 +9,85 @@
                         <div class="card_title">
                             <p>الاختبار القبلى</p>
                         </div>
-                        <div class="card_text">
-                            <a data-translate="submit">
-                                @if ($quiz == null)
-                                لا يوجد اختبار
-                                 @endif
-                                 @if ($quizAtten == null && $quiz != null)
-                                 الرجاء تقديم الاختبار
-                                 @else
-                                 تم تقديم الاختبار
-                                 @endif
-                            </a>
-                        </div>
+
+
+                        @if ($course->status_befor == 'InActive')
+                            <div class="card_text not">
+                                <span data-translate="not_submit"> لا يوجد اختبار</span>
+                            </div>
+                        @endif
+
+                        @if ($quizAtten == null && $course->status_befor != 'InActive')
+                            <div class="card_text">
+                                <a data-translate="submit">
+                                    الرجاء تقديم الاختبار
+                                </a>
+                            </div>
+                        @elseif($course->status_befor != 'InActive')
+                            <div class="card_text">
+
+                                <a data-translate="submit">
+                                    تم تقديم الاختبار
+                                </a>
+                            </div>
+                        @endif
+
+
                     </div>
-                    {{-- @if ($quizAtten == null) --}}
-                    {{-- <div class="card_icon"><a href="{{route('quiz.view',['quizId'=>$quiz->quiz_id,'clientId'=>$attendance->id])}}"  data-translate="submit">&#10140;  </a> --}}
-                    {{-- <div class="card_icon"><a href="https://shorturl.at/osyB0 "  data-translate="submit">&#10140;  </a> --}}
-                    {{-- @endif --}}
+
                     @if ($quizAtten == null)
                         @if ($course->status_befor == 'active')
-                            @if ($quiz->how_attend = 'questions')
+                            @if ($quiz->quiz->how_attend = 'questions')
                                 <div class="card_icon"><a
                                         href="{{ route('quiz.view', ['quizId' => $quiz->quiz_id, 'clientId' => $attendance->id]) }}"
                                         data-translate="submit">&#10140; </a>
-                                @elseif($quiz->how_attend = 'link')
-                                    <div class="card_icon"><a href="{{ $quiz->link }}" data-translate="submit">&#10140;
+                                @elseif($quiz->quiz->how_attend = 'link')
+                                    <div class="card_icon"><a href="{{ $quiz->quiz->link }}" data-translate="submit">&#10140;
                                         </a>
                                     @else
                                         <div class="card_icon"><a href="https://shorturl.at/osyB0 "
                                                 data-translate="submit">&#10140; </a>
                             @endif
-                        @else
-                            <div class="card_text not">
-                                <span data-translate="not_submit"> غير متوفر الان </span>
-                            </div>
                         @endif
                     @endif
                 </div>
             </div>
 
-            {{-- <div class="card">
-                <div>
-                    <div class="card_title">
-                        <p>التكليف </p>
-                    </div>
-                    <div class="card_text not">
-                        <span data-translate="not_submit"> غير متوفر الان </span>
-                    </div>
-                </div>
-                <div class="card_icon">&#10140;</div>
-
-            </div> --}}
-            {{-- <div class="card">
-                <div>
-                    <div class="card_title">
-                        <p>الاختبار التفاعلي</p>
-                    </div>
-
-                    <div class="card_text not">
-                        <span data-translate="not_submit"> غير متوفر الان </span>
-                    </div>
-                </div>
-                <div class="card_icon">&#10140;</div>
-            </div> --}}
             <div class="card">
                 <div>
                     <div class="card_title">
                         <p>الاختبار البعدي</p>
                     </div>
-                    <div class="card_text not">
-                        <span data-translate="not_submit"> غير متوفر الان </span>
-                    </div>
+                    @if ($course->status_after == 'InActive')
+                        <div class="card_text not">
+                            <span data-translate="not_submit"> لا يوجد اختبار</span>
+                        </div>
+                    @endif
+
+                    @if ($quizAttenAfter == null && $course->status_after != 'InActive')
+                        <div class="card_text">
+                            <a data-translate="submit">
+                                الرجاء تقديم الاختبار
+                            </a>
+                        </div>
+                    @elseif($course->status_after != 'InActive')
+                        <div class="card_text">
+
+                            <a data-translate="submit">
+                                تم تقديم الاختبار
+                            </a>
+                        </div>
+                    @endif
                 </div>
-                @if ($quizAtten == null)
+                @if ($quizAttenAfter == null)
                     @if ($course->status_after == 'active')
-                        @if ($quizAfter->how_attend = 'questions')
+                        @if ($quizAfter->quiz->how_attend = 'questions')
                             <div class="card_icon"><a
                                     href="{{ route('quiz.view', ['quizId' => $quizAfter->quiz_id, 'clientId' => $attendance->id]) }}"
                                     data-translate="submit">&#10140; </a>
-                            @elseif($quizAfter->how_attend = 'link')
-                                <div class="card_icon"><a href="{{ $quizAfter->link }}" data-translate="submit">&#10140; </a>
-                                @else
-                                    <div class="card_icon"><a href="https://shorturl.at/osyB0 "
-                                            data-translate="submit">&#10140; </a>
+                            @elseif($quizAfter->quiz->how_attend = 'link')
+                                <div class="card_icon"><a href="{{ $quizAfter->quiz->link }}" data-translate="submit">&#10140;
+                                    </a>
                         @endif
                     @else
                         <div class="card_text not">
@@ -100,23 +96,32 @@
                     @endif
                 @endif
             </div>
+        </div>
             <div class="card">
                 <div>
                     <div class="card_title">
-                        <p> الحصول علي شهادة </p>
+                        <p> الحصول على شهادة </p>
                     </div>
                     <div class="card_text not">
                         <span data-translate="not_submit"> غير متوفر الان </span>
                     </div>
                 </div>
-                <div class="card_icon">  <a href="{{ route('Certificate_Issuance_form', [$attendance->id, request()->course_id]) }}" data-translate="submit">&#10140; </a></div>
+                <div class="card_icon"> <a
+                        href="{{ route('Certificate_Issuance_form', [$attendance->id, request()->course_id]) }}"
+                        data-translate="submit">&#10140; </a></div>
             </div>
             <div class="btn_links">
                 <a data-translate="show_results"
                     href="{{ route('invitation.second', [$attendance->id, request()->course_id]) }}"><i
                         class="bi bi-arrow-right tx-white"></i> الرجوع الى الرئيسية </a>
-                <a class="btn_primery @if($course->rate == null) disabled @endif" href="{{ $course->rate }}" data-translate="contact_coach"><i
-                        class="bi bi-star tx-white"></i> تقييم الحدث </a>
+                <a class="btn_primery
+                    @if ($course->status_interactive == 'InActive') disabled @endif
+                   @if ($quizAtten == null && $course->status_interactive != 'InActive')
+                    @elseif($course->status_befor != 'InActive')  disabled
+                     @endif
+                    " @if($quizInteractive->quiz->how_attend == 'link') href="{{ $quizInteractive->quiz->link }}"
+                     @else  href="{{ route('quiz.view', ['quizId' => $quizInteractive->quiz_id, 'clientId' => $attendance->id]) }}" @endif
+                    data-translate="contact_coach"><i class="bi bi-star tx-white"></i> تقييم الحدث </a>
             </div>
 
 

@@ -11,4 +11,6 @@ class AttendanceCourse extends Model
     use HasFactory;
     protected $table = 'attendance_courses';
 
+
+
 }

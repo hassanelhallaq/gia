@@ -37,8 +37,8 @@ class CourseController extends Controller
             $courses = $courses->with('program')->whereHas('program', function ($q) {
                 $q->where('client_id', Auth::user()->id);
             })->paginate(10);
-        }elseif (Auth::guard('trainer')->check()) {
-            $courses = $courses->where('trainer_id',Auth::user()->id)->with('program')->paginate(10);
+        } elseif (Auth::guard('trainer')->check()) {
+            $courses = $courses->where('trainer_id', Auth::user()->id)->with('program')->paginate(10);
         }
         return view("dashboard.courses.index", compact("courses", 'program', 'id'));
     }
@@ -48,7 +48,7 @@ class CourseController extends Controller
         $courses = Course::where('program_id', $id)->paginate(10);
 
         if (Auth::guard('trainer')->check()) {
-            $courses = Course::where('trainer_id',Auth::user()->id)->with('program')->paginate(10);
+            $courses = Course::where('trainer_id', Auth::user()->id)->with('program')->paginate(10);
         }
 
         return view("dashboard.courses.index", compact("courses", 'program', 'id'));
@@ -200,9 +200,11 @@ class CourseController extends Controller
         $clients = Client::all();
         $program = Program::all();
         $trainers = Trainer::all();
-        $quizesBefor = Quiz::orderBy("created_at", "desc")->where('type', 'befor')->paginate(10);
-        $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type', 'after')->paginate(10);
-        return view("dashboard.courses.edit", compact("course", 'program', 'categories', 'clients', 'trainers', 'quizesBefor', 'quizesAfter'));
+        $quizesBefor = Quiz::orderBy("created_at", "desc")->where('type', 'befor')->get();
+        $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type', 'after')->get();
+        $quizesInteractive = Quiz::orderBy("created_at", "desc")->where('type', 'interactive')->get();
+
+        return view("dashboard.courses.edit", compact("course", 'program', 'categories', 'clients', 'trainers', 'quizesBefor', 'quizesAfter','quizesInteractive'));
     }
 
     /**
@@ -245,6 +247,7 @@ class CourseController extends Controller
         $course->contact_number = $request->contact_number;
         $course->contact_link = $request->contact_link;
         $course->direction_name = $request->direction_name;
+        $course->status_interactive = $request->status_interactive;
         if ($request->hasFile('assignment')) {
             $adminImage = $request->file('assignment');
             $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
@@ -281,9 +284,9 @@ class CourseController extends Controller
             $quizBef->course_id = $course->id;
             $quizBef->save();
         }
-        $quizAftCheck = QuizCourse::where('quiz_id', $request->quiz_after_id)->where('course_id', $course->id)->first();
+         $quizAftCheck = QuizCourse::where('quiz_id', $request->quiz_after_id)->where('course_id', $course->id)->first();
         if ($request->quiz_after_id) {
-            if ($quizbefCheck) {
+            if ($quizAftCheck != null) {
                 $quizAft = $quizAftCheck;
             } else {
                 $quizAft = new QuizCourse();
@@ -291,6 +294,17 @@ class CourseController extends Controller
             $quizAft->course_id = $course->id;
             $quizAft->quiz_id = $request->quiz_after_id;
             $quizAft->save();
+        }
+        $quizInterCheck = QuizCourse::where('quiz_id', $request->quiz_interactive_id)->where('course_id', $course->id)->first();
+        if ($request->quiz_after_id) {
+            if ($quizInterCheck != null) {
+                $quizInter = $quizInterCheck;
+            } else {
+                $quizInter = new QuizCourse();
+            }
+            $quizInter->course_id = $course->id;
+            $quizInter->quiz_id = $request->quiz_interactive_id;
+            $quizInter->save();
         }
         return response()->json(['redirect' => route('program.course', [$course->program_id])]);
     }
@@ -321,6 +335,7 @@ class CourseController extends Controller
 
     public function sendSms(Request $request)
     {
+
         $course = Course::with('attendances')->find($request->course_id);
         $attendances = $course->attendances;
         foreach ($attendances as $attendance) {
@@ -340,7 +355,7 @@ class CourseController extends Controller
                 $msg = str_replace("061B", "Ø", $mssg);
                 // ... (continue with your Unicode character replacements)
             } else {
-                $msg = request()->input('message');
+                $msg = request()->input('massege');
             }
 
             $lmsg = urlencode($msg);

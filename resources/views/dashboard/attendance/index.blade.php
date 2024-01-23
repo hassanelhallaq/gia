@@ -26,7 +26,7 @@
         </div>
         <div class="main-dashboard-header-right">
             <div class="d-flex flex-wrap">
-                <a href=""class="btn btn-outline-light btn-with-icon btn-sm mr-1"> الشهادات <i
+                <a href="{{route('certificate.management',[$id])}}"class="btn btn-outline-light btn-with-icon btn-sm mr-1"> الشهادات <i
                         class="bi bi-clipboard-data tx-11"></i></a>
                 <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"data-target="#modaladd" data-toggle="modal">
                     اضافة مشاركين جدد <i class="bi bi-plus"></i></button>
@@ -186,16 +186,13 @@
                                                                 @endphp
                                                                 @if ($log)
                                                                     <span class="dropdown-item text-success"> اليوم
-                                                                        {{ $day }} (حاضر) {{$courseStartDate
-                                                                            ->copy()
-                                                                            ->addDays($day)
-                                                                            ->startOfDay()->format('y-m-d')}} </span>
+                                                                        {{ $day }} (حاضر)
+                                                                        {{ $courseStartDate->copy()->addDays($day)->startOfDay()->format('y-m-d') }}
+                                                                    </span>
                                                                 @else
                                                                     <span class="dropdown-item text-danger"> اليوم
-                                                                        {{ $day }} (غير حاضر) {{$courseStartDate
-                                                                            ->copy()
-                                                                            ->addDays($day)
-                                                                            ->startOfDay()->format('y-m-d')}}</span>
+                                                                        {{ $day }} (غير حاضر)
+                                                                        {{ $courseStartDate->copy()->addDays($day)->startOfDay()->format('y-m-d') }}</span>
                                                                 @endif
                                                             @endfor
                                                         </div>
@@ -203,7 +200,7 @@
                                                 @endif
                                                 <td>
                                                     @if ($attendanceLogin != 0)
-                                                        {{ ($attendanceLogin / $course->duration ) * 100 }}%
+                                                        {{ ($attendanceLogin / $course->duration) * 100 }}%
                                                     @else
                                                         0%
                                                     @endif
@@ -410,17 +407,17 @@
                                 $q->where('type', 'befor');
                             })
                             ->first();
-                         if($quiz){
-                        $responseAnswers = App\Models\UserAnswer::where('quiz_id', $quiz->quiz_id)
-                            ->where('attendance_id', $item->id)
-                            ->get();
-                        $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
-                        $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
-                        $questions = App\Models\Question::where('quiz_id', $quiz->quiz_id)
-                            ->with('userAswes', 'optionTrue')
-                            ->get();
-                        }else{
-                            $responseAnswersTrue = 0 ;
+                        if ($quiz) {
+                            $responseAnswers = App\Models\UserAnswer::where('quiz_id', $quiz->quiz_id)
+                                ->where('attendance_id', $item->id)
+                                ->get();
+                            $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
+                            $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
+                            $questions = App\Models\Question::where('quiz_id', $quiz->quiz_id)
+                                ->with('userAswes', 'optionTrue')
+                                ->get();
+                        } else {
+                            $responseAnswersTrue = 0;
                         }
 
                         if ($responseAnswersTrue != 0) {
@@ -518,9 +515,53 @@
                     <p class="wrapper">
                         <b class="text-center"> {{ $item->name }}</b>
                     </p>
+                    @php
+                    $quiz = App\Models\QuizCourse::where('course_id', $course->id)
+                        ->with('quiz')
+                        ->whereHas('quiz', function ($q) {
+                            $q->where('type', 'after');
+                        })
+                        ->first();
+                    if ($quiz) {
+                        $responseAnswers = App\Models\UserAnswer::where('quiz_id', $quiz->quiz_id)
+                            ->where('attendance_id', $item->id)
+                            ->get();
+                        $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
+                        $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
+                        $questions = App\Models\Question::where('quiz_id', $quiz->quiz_id)
+                            ->with('userAswes', 'optionTrue')
+                            ->get();
+                    } else {
+                        $responseAnswersTrue = 0;
+                    }
+
+                    if ($responseAnswersTrue != 0) {
+                        $total = ($responseAnswersTrue / $questions->count()) * 100;
+                    } else {
+                        $total = 0;
+                    }
+                @endphp
+                    <p class="wrapper">
+                        <h3>   <b class="text-center"> {{ $total }} %</b> </h3>
+                    </p>
                 </div>
+
+
                 <div class="list p-3">
                     <div class="row row-sm">
+                        <div class="col-6">
+                            @if ($course)
+                                <a class="card text-center" href="{{ route('attendance.summery.after', [$id, $item->id]) }}">
+                            @endif
+                            <div class="card-body p-2">
+                                <div class="feature widget-2 text-center mb-3">
+                                    <i
+                                        class="bi bi-clipboard2-data-fill project bg-warning-transparent mx-auto text-warning "></i>
+                                </div>
+                                <p class="mb-1 text-muted tx-13"> عرض نموذج الاجابات </p>
+                            </div>
+                            </a>
+                        </div>
                         <div class="col-6">
                             <a class="card text-center" href="">
                                 <div class="card-body p-2">
@@ -654,7 +695,7 @@
 
         function performStoreSms(id) {
             let formData = new FormData();
-            formData.append('massege', document.getElementById('massege').value);
+            formData.append('massege', document.getElementById('massege_select').value);
             formData.append('course_id', id);
 
             storepart('/dashboard/admin/attendance-sms', formData)

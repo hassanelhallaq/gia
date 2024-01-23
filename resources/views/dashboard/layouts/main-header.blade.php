@@ -82,12 +82,12 @@
                             <div class="d-flex wd-100p">
                                 <div class="main-img-user"><img alt="" src="assets/img/faces/1.jpg" class=""></div>
                                 <div class="mr-3 my-auto">
-                                    <h6> اسم المستخدم </h6><span> نشط </span>
+                                    <h6> {{Auth::user()->name}} </h6><span> نشط </span>
                                 </div>
                             </div>
                         </div>
                         <a class="dropdown-item" href=""><i class="bx bx-cog"></i> تعديل الملف الشخصي </a>
-                        <a class="dropdown-item" href="page-signin.html"><i class="bx bx-log-out"></i> تسجيل الخروج </a>
+                        <a class="dropdown-item" href="{{route('dashboard.auth.logout')}}"><i class="bx bx-log-out"></i> تسجيل الخروج </a>
                     </div>
                 </div>
 

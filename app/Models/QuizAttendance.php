@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class QuizAttendance extends Model
 {
     use HasFactory;
+    public function quiz()
+    {
+        return $this->BelongsTo(Quiz::class);
+    }
 }

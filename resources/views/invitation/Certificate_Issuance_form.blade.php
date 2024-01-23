@@ -44,7 +44,7 @@
                                </div>
 
                                 <div class="btn_links">
-                                    <a  data-translate="show_results" href=""><i class="bi bi-arrow-right tx-white"></i> الرجوع الى الرئيسية </a>
+                                    <a  data-translate="show_results" href="{{route('invitation.second',[$attendance->id,request()->course_id])}}"><i class="bi bi-arrow-right tx-white"></i> الرجوع الى الرئيسية </a>
                                     <button class="btn_primery" type="button" onclick="performUpdate({{request()->id}},{{request()->course_id}})" class="df ai-c jc-c g1 w-25" data-translate="signup"> حفظ </button>
                                 </div>
                             </form>

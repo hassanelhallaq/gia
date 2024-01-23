@@ -5,7 +5,6 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb breadcrumb-style1">
                 @if(!Auth::guard('trainer')->check())
-
                 <li class="breadcrumb-item">
                     <a href="{{route('admin.dashboard')}}" >الرئيسية</a>
                 </li>

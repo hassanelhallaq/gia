@@ -5,6 +5,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceCourseController;
 use App\Http\Controllers\AttendanceLoginController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CourseController;
@@ -43,6 +44,9 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client,trainer')->group
         Route::resource('courses', CourseController::class);
         Route::get('/courses.attendances/{id}', [AttendanceCourseController::class, 'coursesAttendance'])->name('course.attendance');
         Route::get('/attendance-summery/{id}/{attendanceId}', [UserAnswerController::class, 'userAswers'])->name('attendance.summery');
+        Route::get('/attendance-summery/after/{id}/{attendanceId}', [UserAnswerController::class, 'userAswersAfter'])->name('attendance.summery.after');
+
+
         Route::resource('programs', ProgramController::class);
         Route::get('/program.courses/{id}', [CourseController::class, 'programCourses'])->name('program.course');
 
@@ -64,14 +68,15 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/program/xlsx', [ProgramController::class, 'programXlsx'])->name('programs.xlsx');
         Route::put('/status-update/{id}', [CourseController::class, 'updateStatus'])->name('update.status');
         Route::post('/attendance-sms/selected', [CourseController::class, 'sendSmsSelected'])->name('attendance.sms.selected');
+        Route::get('/Certificate_management/{id}', [CertificateController::class, 'index'])->name('certificate.management');
+
+        Route::post('/update/certifcate', [CertificateController::class, 'updateCertifcate'])->name('updateCertifcate');
 
         // روت مؤقت
         Route::get('/quiz/detales', function () {
             return view('dashboard.quiz.detales');
         })->name('quiz_detales');
-        Route::get('/Certificate_management', function () {
-            return view('dashboard.attendance.Certificate_management');
-        })->name('Certificate_management');
+
     }
 );
 Route::prefix('dashboard/trainer')->middleware('auth:trainer')->group(
