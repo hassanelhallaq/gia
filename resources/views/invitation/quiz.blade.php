@@ -19,7 +19,7 @@
     <!-- Info Box -->
 <div class="mainqu">
     <div class="mainto">
-    <div class="start_btn"><button> اضغط هنا لتفعيل الأختبار </button></div>
+    <div class="start_btn"><button> اضغط هنا للبدء </button></div>
 
     <div class="info_box">
 

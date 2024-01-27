@@ -76,7 +76,7 @@
             formData.append('work_place', document.getElementById('work_place').value);
             formData.append('email', document.getElementById('email').value);
             formData.append('job', document.getElementById('job').value);
-            storepart('/ateendance/update/'+id+'/'+course_id, formData)
+            storeRoute('/ateendance/update/'+id+'/'+course_id, formData)
       }
   </script>
 

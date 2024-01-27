@@ -222,7 +222,7 @@ class CourseController extends Controller
             'is_certificate' => 'required',
             'trainer' => 'required',
             'percentage_certificate' => 'required',
-            'coordinator' => 'required',
+            // 'coordinator' => 'required',
             'category_id' => 'required',
         ]);
         if ($validator->fails()) {
@@ -296,7 +296,7 @@ class CourseController extends Controller
             $quizAft->save();
         }
         $quizInterCheck = QuizCourse::where('quiz_id', $request->quiz_interactive_id)->where('course_id', $course->id)->first();
-        if ($request->quiz_after_id) {
+        if ($request->quiz_interactive_id) {
             if ($quizInterCheck != null) {
                 $quizInter = $quizInterCheck;
             } else {
@@ -337,7 +337,7 @@ class CourseController extends Controller
     {
 
         $course = Course::with('attendances')->find($request->course_id);
-        $attendances = $course->attendances;
+        $attendances = $course->attendances->where('status','active');
         foreach ($attendances as $attendance) {
             $phone = $attendance->phone_number;
             $massege = $request->massege;
@@ -380,7 +380,7 @@ class CourseController extends Controller
     public function sendSmsSelected(Request $request)
     {
         $ids = $request->ids;
-        $attendances = Attendance::whereIn('id', explode(",", $ids))->get();
+        $attendances = Attendance::whereIn('id', explode(",", $ids))->where('status','active')->get();
         foreach ($attendances as $attendance) {
             $phone = $attendance->phone_number;
             $massege = $request->massege_select;

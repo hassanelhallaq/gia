@@ -1,4 +1,4 @@
-<div class="modal" id="select2modal">
+<div class="modal" id="select2modal_{{$attendances->id}}">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo">
             <div class="modal-header">
@@ -10,13 +10,21 @@
 
                         <div class="col-12 form-group">
                             <label for="example"> رمز الشهادة  </label>
-                            <input class="form-control" required="" id="code" type="text">
+                            <input class="form-control" required="" id="code_{{$attendances->id}}" type="text">
                         </div>
-
-
+                        <div class="col-12 form-group">
+                        <select id="certifacate_type_{{$attendances->id}}" class="form-control select2">
+                            <option value="شهادة حضور">
+                                شهادة حضور
+                            </option>
+                            <option value="شهادة احترافية">
+                                شهادة احترافية
+                            </option>
+                    </select>
+                </div>
                         <div class="col-12 form-group">
                             <label for="exampleInputEmail1"> ادراج ملف </label>
-                            <input type="file" id="file" class="dropify" id="file" data-default-file="../assets/img/photos/1.pdf" data-height="70"  />
+                            <input type="file" id="file_{{$attendances->id}}" class="dropify" id="file" data-default-file="../assets/img/photos/1.pdf" data-height="70"  />
                             <p class="tx-11">الحد الاقصى لحجم الملف 8 MB</p>
                         </div>
 

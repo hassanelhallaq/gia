@@ -20,6 +20,7 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\UserAnswerController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,10 +66,16 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/{id}/{course_id}/login', [AttendanceLoginController::class, 'login'])->name('attendance.login');
         Route::post('/attendance-sms', [CourseController::class, 'sendSms'])->name('attendance.sms');
         Route::get('/course/xlsx', [CourseController::class, 'courseXlsx'])->name('course.xlsx');
+        Route::get('/attendance/xlsx/{id}', [AttendanceController::class, 'attendanceXlsx'])->name('attendance.xlsx');
+
         Route::get('/program/xlsx', [ProgramController::class, 'programXlsx'])->name('programs.xlsx');
         Route::put('/status-update/{id}', [CourseController::class, 'updateStatus'])->name('update.status');
         Route::post('/attendance-sms/selected', [CourseController::class, 'sendSmsSelected'])->name('attendance.sms.selected');
         Route::get('/Certificate_management/{id}', [CertificateController::class, 'index'])->name('certificate.management');
+        Route::post('/update-attendance-status', [AttendanceController::class, 'changeStatus'])->name('attendance.status');
+        Route::get('/quiz/xlsx/{id}/{attendanceId}', [AttendanceController::class, 'QuizXlsx'])->name('quiz.xlsx');
+        Route::get('/quiz-after/xlsx/{id}/{attendanceId}', [AttendanceController::class, 'QuizAfterXlsx'])->name('quiz.after.xlsx');
+
 
         Route::post('/update/certifcate', [CertificateController::class, 'updateCertifcate'])->name('updateCertifcate');
 
@@ -101,6 +108,8 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::resource('trainers', TrainerController::class);
         Route::post('/courses-files', [CourseFileController::class, 'store']);
         Route::post('/courses-links', [CourseLinkController::class, 'store']);
+        Route::get('/get-rates/{id}', [RateController::class, 'createRate'])->name('get.rate');
+        Route::resource('rates', RateController::class);
     }
 );
 Route::get('/invitation/{id}/{course_id}', [SiteController::class, 'index'])->name('invitation.index');
@@ -111,6 +120,9 @@ Route::get('/files/{id}/{course_id}', [SiteController::class, 'files'])->name('i
 Route::get('/Certificate_Issuance_form/{id}/{course_id}', [SiteController::class, 'certificateIssuance'])->name('Certificate_Issuance_form');
 Route::post('/ateendance/update/{id}/{course_id}', [SiteController::class, 'ateendanceUpdate'])->name('ateendance.update');
 Route::get('/third_connect/{id}/{course_id}', [SiteController::class, 'thirdContact'])->name('third_connect');
+Route::get('/rate/{id}/{course_id}', [SiteController::class, 'rate'])->name('rate.attend');
+Route::post('/submitRating/{id}/{course_id}', [SiteController::class, 'submitRating'])->name('submitRating');
+
 
 Route::post('/invitation/reply', [SiteController::class, 'storeReply']);
 Route::prefix('/{username}')->group(

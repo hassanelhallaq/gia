@@ -173,6 +173,43 @@
 <script src="{{asset('assets/js/table.js')}}"></script>
 
 <script>
+    $(document).ready(function () {
+    // عند النقر على زر الطباعة
+    $('.btn-print').on('click', function () {
+        // قم بفتح نافذة جديدة لعرض الجدول
+        var printWindow = window.open('', '_blank');
+
+        // إضافة الجدول إلى نافذة الطباعة
+        printWindow.document.write('<html><head><title>Print</title></head><body style="direction: rtl;">');
+        printWindow.document.write('<style>table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid #dddddd; text-align: right; padding: 8px; }</style>');
+        printWindow.document.write('<table>');
+
+        // إضافة العنوان (الصف الأول) إلى نافذة الطباعة
+        $('.table-responsive table thead tr').each(function () {
+            printWindow.document.write('<tr>');
+            $(this).find('th').not(':first-child, :last-child').each(function () {
+                printWindow.document.write('<th>' + $(this).text() + '</th>');
+            });
+            printWindow.document.write('</tr>');
+        });
+
+        // إضافة البيانات (الصفوف باستثناء العنوان) إلى نافذة الطباعة
+        $('.table-responsive table tbody tr').each(function () {
+            printWindow.document.write('<tr>');
+            $(this).find('td').not(':first-child, :last-child').each(function () {
+                printWindow.document.write('<td>' + $(this).text() + '</td>');
+            });
+            printWindow.document.write('</tr>');
+        });
+
+        printWindow.document.write('</table></body></html>');
+
+        // أغلق نافذة الطباعة بعد الانتهاء من الطباعة
+        printWindow.document.close();
+        printWindow.print();
+    });
+});
+
     function performDestroy(id, reference) {
 
         let url = '/dashboard/admin/programs/' + id;

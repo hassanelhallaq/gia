@@ -410,7 +410,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 mb-3">
+                                {{-- <div class="col-lg-6 mb-3">
                                     <label for="example"> المادة </label>
                                     <div class="webflow-style-input">
                                         <input class="input_no_border readonly" id="subject" type="text"
@@ -420,7 +420,7 @@
                                             <i class="bi bi-box-arrow-in-down"></i>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="col-lg-6 mb-3">
                                     <label for="example"> تسجيل الحضور </label>
@@ -434,7 +434,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6 mb-3">
+                                {{-- <div class="col-lg-6 mb-3">
                                     <label for="example"> Assignment </label>
                                     <div class="webflow-style-input">
                                         <input class="input_no_border readonly" type="text" id="assignment"
@@ -447,7 +447,7 @@
                                     </div>
 
 
-                                </div>
+                                </div> --}}
                                 <div class="col-lg-3 mb-3">
                                     <label for="exampleInputEmail1">  صوره </label>
                                     <div class="custom-file">
@@ -506,22 +506,22 @@
                 formData.append('direction_name', document.getElementById('direction_name').value);
                 formData.append('quiz_interactive_id', document.getElementById('quiz_interactive_id').value);
                 formData.append('status_interactive', document.getElementById('status_interactive').value);
-                let assignmentInput = document.getElementById('assignment');
-                if (assignmentInput !== null && assignmentInput.files !== null && assignmentInput.files.length > 0) {
-                    formData.append('assignment', assignmentInput.files[0]);
-                    // The rest of your code for handling the form data
-                } else {
-                    // Handle the case where the 'assignment' element does not exist, or no file is selected
-                    console.log("No file selected or element not found");
-                }
-                let subjectInput = document.getElementById('subject');
-                if (subjectInput !== null && subjectInput.files !== null && subjectInput.files.length > 0) {
-                    formData.append('subject', subjectInput.files[0]);
-                    // The rest of your code for handling the form data
-                } else {
-                    // Handle the case where the 'assignment' element does not exist, or no file is selected
-                    console.log("No file selected or element not found");
-                }
+                // let assignmentInput = document.getElementById('assignment');
+                // if (assignmentInput !== null && assignmentInput.files !== null && assignmentInput.files.length > 0) {
+                //     formData.append('assignment', assignmentInput.files[0]);
+                //     // The rest of your code for handling the form data
+                // } else {
+                //     // Handle the case where the 'assignment' element does not exist, or no file is selected
+                //     console.log("No file selected or element not found");
+                // }
+                // let subjectInput = document.getElementById('subject');
+                // if (subjectInput !== null && subjectInput.files !== null && subjectInput.files.length > 0) {
+                //     formData.append('subject', subjectInput.files[0]);
+                //     // The rest of your code for handling the form data
+                // } else {
+                //     // Handle the case where the 'assignment' element does not exist, or no file is selected
+                //     console.log("No file selected or element not found");
+                // }
                 storeRoute('/dashboard/admin/courses/' + id, formData)
             }
             function duplicate(id) {

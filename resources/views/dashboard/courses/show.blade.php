@@ -29,13 +29,8 @@
         </div>
         <div class="main-dashboard-header-right flex-wrap">
             <div class=" d-flex">
-                <button class="btn btn-outline-light btn-with-icon btn-sm mr-1" onclick="activeCourse({{ $course->id }})">
-                    @if ($course->status == 'active')
-                        مفعله
-                    @else
-                        تفعيل الدورة
-                    @endif
-                </button>
+                <a href="{{ route('get.rate', [$course->id]) }}"
+                    class="btn btn-outline-light btn-with-icon btn-sm mr-1">التقيم <i class="la la-cog"></i></a>
                 <a href="{{ route('course.attendance', [$course->id]) }}"
                     class="btn btn-outline-light btn-with-icon btn-sm mr-1"> ادارة المشاركين <i class="la la-cog"></i></a>
                 <a href="View_test_results.html" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج

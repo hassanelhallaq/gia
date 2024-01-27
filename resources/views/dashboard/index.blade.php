@@ -467,7 +467,7 @@
             <!-- row close -->
 
             <!-- row opened -->
-            <div class="row row-sm">
+            {{-- <div class="row row-sm">
                 @foreach ($programsActice->take(3) as $item)
                 <div class="col-md-12 col-xl-4 col-xs-12 col-sm-12">
                     <div class="card">
@@ -512,7 +512,7 @@
                     </div>
                 </div>
                 @endforeach
-            </div>
+            </div> --}}
             <!-- /row -->
          <!-- container closed -->
 

@@ -42,18 +42,28 @@
           <div class="card_icon"><a href="{{($item->link)}}" target="_blank"  data-translate="submit">&#10140;  </a></div>
         </div>
         @endforeach
-
+        @php
+        $attendanceCourseCheck = App\Models\AttendanceCourse::where('attendance_id', $attendance->id)
+                                ->where('course_id', request()->course_id)
+                                ->first();
+    @endphp
 
          <div class="card">
             <div>
+                @if($attendanceCourseCheck->certficate)
               <div class="card_title">
                 <p>تحميل شهادة الدورة</p>
               </div>
+              @else
               <div class="card_text not">
                 غير متوفرة
               </div>
+              @endif
             </div>
-            <div class="card_icon"><a href="#" target="_blank"  data-translate="submit">&#10140;  </a></div>
+
+            @if($attendanceCourseCheck->certficate)
+            <div class="card_icon"><a href="{{url($attendanceCourseCheck->certficate)}}" target="_blank"  data-translate="submit">&#10140;  </a></div>
+            @endif
           </div>
       </div>
       <div class="btn_links">

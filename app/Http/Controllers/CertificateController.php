@@ -26,7 +26,10 @@ class CertificateController extends Controller
             $attendanceCourse->certficate = '/images/' . 'certificate' . '/' . $imageName;
         }
         $attendanceCourse->code = $request->code;
+        $attendanceCourse->certifacate_type = $request->certifacate_type;
+
         $attendanceCourse->update();
+        return response()->json(['redirect' => route('certificate.management',[$request->course_id])]);
 
     }
 }

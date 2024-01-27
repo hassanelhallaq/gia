@@ -114,14 +114,14 @@
                                     <th>لغة الدورة</th>
                                     <th>الحاله</th>
 
-                                    {{-- <th> عدد المسجلين </th>
+                                    <th> عدد المسجلين </th>
                                         <th> اسم المنسق </th>
                                         <th>  شهادة  </th>
                                         <th> نسبة الشهادة </th>
-                                        <th> المقاعد المتاحة </th>
+                                        {{-- <th> المقاعد المتاحة </th> --}}
                                         <th> الاختبار القبلي </th>
                                         <th> الاختبار البعدي </th>
-                                        <th> تحميل المادة </th>
+                                        {{-- <th> تحميل المادة </th>
                                         <th> AS </th> --}}
 
 
@@ -164,6 +164,8 @@
                                                 ->addDays($item->duration)
                                                 ->startOfDay();
                                             $today = Carbon\Carbon::today()->format('Y-m-d');
+                                                $status = (Carbon\Carbon::parse($today)->gt($end)) ? "منتهيه" : "غير منتهيه";
+
                                         @endphp
                                         <td>
                                             @if (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($start)) && $item->status != 'active')
@@ -172,24 +174,23 @@
                                             @elseif (Carbon\Carbon::parse($start)->gt(Carbon\Carbon::parse($today)))
                                                 <span
                                                     class="tag tag-rounded bg-primary-transparent text-primary">مجدوله</span>
-                                            @elseif($item->status == 'active')
+                                            @elseif($item->status == 'active' && !Carbon\Carbon::parse($today)->gt($end))
                                                 <span
                                                     class="tag tag-rounded bg-primary-transparent text-primary">فعال</span>
-                                            @elseif (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($end)))
+                                            @elseif (Carbon\Carbon::parse($today)->gt($end))
                                                 <span class="tag tag-rounded bg-primary-transparent text-primary">منتهيه</span>
                                                 @elseif($item->status == 'Inactive')
                                                 <span
                                                     class="tag tag-rounded bg-primary-transparent text-primary">غير فعال</span>
                                             @endif
                                         </td>
-                                        {{-- <th> # </th>
+                                        <th> # </th>
                                         <th>{{$item->coordinator}} </th>
                                         <th>{{$item->is_certificate == 1 ? "نعم" : "لا"}}</th>
-                                        <th> # </th>
-                                        <th> # </th>
-                                        <th> # </th>
-                                        <th> # </th>
-                                        <th> # </th>
+                                        <th>{{$item->percentage_certificate}} </th>
+                                         <th>{{$item->quizes->where('type','befor')->first()->name ?? ''}} </th>
+                                         <th>{{$item->quizes->where('type','after')->first()->name ?? ''}} </th>
+                                        {{-- <th> # </th>
                                         <th> # </th> --}}
                                         <td class="d-flex filter-col-cell">
                                             <a href="{{ route('courses.show', [$item->id]) }}"><i
@@ -237,11 +238,19 @@
     <script src="{{ asset('assets/js/table.js') }}"></script>
 
     <script>
+
         function performDestroy(id, reference) {
 
             let url = '/dashboard/admin/courses/' + id;
 
             confirmDestroy(url, reference);
         }
+
+
+
     </script>
+    		<script src="{{asset('assets/js/table.js')}}"></script>
+            <script src="{{asset('assets/js/custom.js')}}"></script>
+            <script src="{{asset('assets/js/index.js')}}"></script>
+
 @endsection

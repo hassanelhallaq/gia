@@ -6,10 +6,10 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1">
                     <li class="breadcrumb-item">
-                        <a href="../index.html">الرئيسية</a>
+                        <a href="{{ route('admin.dashboard') }}">الرئيسية</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="#"class="text-muted"> الأسئلة والأختبارات </a>
+                        <a href="{{ route('quizes.index') }}"class="text-muted"> الأسئلة والأختبارات </a>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="#" class="text-muted"> اضافة اختبار </a>
@@ -32,8 +32,8 @@
             <div class="col-lg-10 col-sm-12 m-auto mb-5 pos-relative">
                 <form action="" method="post" id="create_form">
                     <div class="card pos-relative">
-                        <div class="card-body" >
-                            <div class="row " >
+                        <div class="card-body">
+                            <div class="row ">
                                 <div class="col-8 mb-4">
                                     <label for="example"> السؤال </label>
                                     <input class="form-control" id="name" name="question_name" required=""
@@ -116,8 +116,11 @@
                     </div>
 
                     <div class="modal-footer btnSaveTest border-0">
-                        <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="createQuestions({{$id}})"> حفظ
-                            الأسئلة<i class="bi bi-floppy"></i></button>
+                        <button class="btn btn-warning-gradient btn-with-icon" type="button"
+                            onclick="createQuestions({{ $id }})"> حفظ
+                            السؤال واضافه سؤال جديد<i class="bi bi-floppy"></i></button>
+                        <a class="btn btn-warning-gradient btn-with-icon" href="{{ route('quizes.index') }}"> الانتهاء</a>
+
                     </div>
                 </form>
 

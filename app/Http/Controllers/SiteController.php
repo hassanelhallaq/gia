@@ -14,6 +14,8 @@ use App\Models\QuizAttendance;
 use App\Models\QuizCourse;
 use App\Models\UserAnswer;
 use Illuminate\Http\Request;
+use App\Models\Rate;
+use App\Models\RateAttendance;
 
 class SiteController extends Controller
 {
@@ -23,17 +25,21 @@ class SiteController extends Controller
             $q->where('course_id', $course_id);
         })->first();
         $course = Course::findOrFail($course_id);
-        if($attendance){
-        if ($attendance->is_accepted == null) {
-            return view("invitation.index", compact("attendance", "course"));
-        } elseif ($attendance->is_accepted == 1) {
-            return view("invitation.second", compact("attendance", "course"));
+        if ($attendance->status = 'active') {
+            if ($attendance) {
+                if ($attendance->is_accepted == null) {
+                    return view("invitation.index", compact("attendance", "course"));
+                } elseif ($attendance->is_accepted == 1) {
+                    return view("invitation.second", compact("attendance", "course"));
+                } else {
+                    return view("invitation.index", compact("attendance", "course"));
+                }
+            } else {
+                return view("invitation.index", compact("attendance", "course"));
+            }
         } else {
-            return view("invitation.index", compact("attendance", "course"));
+            return 'لم يتم العثور على نتاىج';
         }
-    }else{
-        return view("invitation.index", compact("attendance", "course"));
-    }
     }
 
     public function storeReply(Request $request)
@@ -51,11 +57,17 @@ class SiteController extends Controller
 
     public function second($id, $course_id)
     {
+
+
         $course = Course::findOrFail($course_id);
         $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
-        return view("invitation.second", compact("attendance", "course"));
+        if ($attendance->status = 'active') {
+            return view("invitation.second", compact("attendance", "course"));
+        } else {
+            return 'لم يتم العثور على نتاىج';
+        }
     }
 
 
@@ -72,21 +84,35 @@ class SiteController extends Controller
     {
 
         $course = Course::findOrFail($course_id);
+
         $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
-         $quiz = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz', function ($q) {
+
+        $quiz = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz', function ($q) {
             $q->where('type', 'befor');
         })->first();
         $quizAfter = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz', function ($q) {
             $q->where('type', 'after');
         })->first();
         $quizAtten = QuizAttendance::where('quiz_id', $quiz->quiz_id)->where('attendance_id', $id)->first();
-        $quizAttenAfter = QuizAttendance::where('quiz_id', $quizAfter->quiz_id)->where('attendance_id', $id)->first();
-         $quizInteractive = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz', function ($q) {
+        if ($quizAfter) {
+            $quizAttenAfter = QuizAttendance::where('quiz_id', $quizAfter->quiz_id)->where('attendance_id', $id)->first();
+        } else {
+            $quizAttenAfter = null;
+        }
+
+        $quizInteractive = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz', function ($q) {
             $q->where('type', 'interactive');
         })->first();
-        return view("invitation.third", compact("attendance", "course", 'quiz', 'quizAtten', 'quizAfter','quizAttenAfter','quizInteractive'));
+        $rates = Rate::where('course_id', $course_id)->get();
+
+        if ($quizInteractive) {
+            $quizAttenInteractive = QuizAttendance::where('quiz_id', $quizInteractive->quiz_id)->where('attendance_id', $id)->first();
+        } else {
+            $quizAttenInteractive = null;
+        }
+        return view("invitation.third", compact("attendance", "course", 'quiz', 'quizAtten', 'quizAfter', 'quizAttenAfter', 'quizInteractive', 'quizAttenInteractive', 'rates'));
     }
 
     public function thirdContact($id, $course_id)
@@ -100,7 +126,18 @@ class SiteController extends Controller
 
         return view("invitation.third_connect", compact("attendance", "course"));
     }
+    public function rate($id, $course_id)
+    {
 
+        $course = Course::findOrFail($course_id);
+        $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
+            $q->where('course_id', $course_id);
+        })->first();
+
+        $rates = Rate::where('course_id', $course_id)->get();
+
+        return view("invitation.rate", compact("attendance", "course", 'rates'));
+    }
     public function backInvetaion($id, $auizId)
     {
         $courses = QuizCourse::where('quiz_id', $auizId)->first();
@@ -118,7 +155,7 @@ class SiteController extends Controller
     {
         $quizAtend = QuizAttendance::where('quiz_id', $id)->where('attendance_id', $clientId)->first();
         // if ($quizAtend == null) {
-            return view('invitation.quiz', compact('id', 'clientId'));
+        return view('invitation.quiz', compact('id', 'clientId'));
         // } else {
         //     return redirect()->back();
         // }
@@ -168,7 +205,7 @@ class SiteController extends Controller
         return view('invitation.files', compact('files', 'attendance', 'links'));
     }
 
-    public function ateendanceUpdate(Request $request , $id, $course_id)
+    public function ateendanceUpdate(Request $request, $id, $course_id)
     {
         $data = $request->all();
         $validator = Validator($data, [
@@ -189,6 +226,31 @@ class SiteController extends Controller
         $attendance->job = $request->job;
         $isSave =  $attendance->update();
 
-        return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $attendance ? 201 : 400);
+        return response()->json(['redirect' => route('invitation.second', [$attendance->id, $course_id])]);
+    }
+
+    public function submitRating(Request $request, $id, $course_id)
+    {
+        // Validate the request
+        $request->validate([
+            'ratings' => 'required|array',
+        ]);
+
+        // Get the ratings from the request
+        $ratings = $request->input('ratings');
+
+        // Process and store the ratings in the database
+        foreach ($ratings as $questionId => $ratingValue) {
+            $rating = new RateAttendance([
+                'rate_id' => $questionId,
+                'rate' => $ratingValue,
+                'attendance_id' => $id,
+
+            ]);
+            $rating->save();
+        }
+
+        // You can send a response back to the JavaScript if needed
+        return response()->json(['message' => 'All ratings submitted successfully']);
     }
 }

@@ -26,8 +26,12 @@
         </div>
         <div class="main-dashboard-header-right">
             <div class="d-flex flex-wrap">
-                <a href="{{route('certificate.management',[$id])}}"class="btn btn-outline-light btn-with-icon btn-sm mr-1"> الشهادات <i
-                        class="bi bi-clipboard-data tx-11"></i></a>
+                <a href="{{ route('attendance.xlsx', [$id]) }}"
+                class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i
+                    class="ti-stats-up project"></i></a>
+                <a
+                    href="{{ route('certificate.management', [$id]) }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1">
+                    الشهادات <i class="bi bi-clipboard-data tx-11"></i></a>
                 <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"data-target="#modaladd" data-toggle="modal">
                     اضافة مشاركين جدد <i class="bi bi-plus"></i></button>
 
@@ -36,8 +40,8 @@
                 <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSmsSelected"
                     data-toggle="modal"> ارسال دعوة محددة <i class="icon ion-md-paper-plane"></i></button>
 
-                <a href="../index.html" class="btn btn-previous btn-sm text-warning mt-2"><i
-                        class="ti-angle-double-right"></i> العودة </a>
+                {{-- <a href="../index.html" class="btn btn-previous btn-sm text-warning mt-2"><i
+                        class="ti-angle-double-right"></i> العودة </a> --}}
             </div>
 
         </div>
@@ -123,6 +127,7 @@
                                             @if ($id)
                                                 <th> الدعوه </th>
                                             @endif
+                                            <th> الحاله </th>
 
                                             <!-- Filter -->
 
@@ -198,6 +203,7 @@
                                                         </div>
                                                     </td>
                                                 @endif
+
                                                 <td>
                                                     @if ($attendanceLogin != 0)
                                                         {{ ($attendanceLogin / $course->duration) * 100 }}%
@@ -209,6 +215,17 @@
                                                     <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $id]) }}"
                                                             target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
                                                 @endif
+                                                <td>
+                                                    <div class="form-group row">
+                                                        <div class="col-3">
+                                                            <input type="checkbox" class="toggle-switch"
+                                                                onclick="toogle({{ $item->id }},this)"
+                                                                data-toggle="toggle" data-on="yes" data-off="no"
+                                                                id="{{ $item->id }}"
+                                                                @if ($item->status == 'active') checked="checked" value="active" @else value="deactive" @endif>
+                                                        </div>
+                                                    </div>
+                                                </td>
                                                 <td class="d-flex filter-col-cell">
                                                     <!-- dropdown-menu -->
                                                     <button data-toggle="dropdown"
@@ -416,8 +433,10 @@
                             $questions = App\Models\Question::where('quiz_id', $quiz->quiz_id)
                                 ->with('userAswes', 'optionTrue')
                                 ->get();
+                            $q = App\Models\Quiz::find($quiz->quiz_id);
                         } else {
                             $responseAnswersTrue = 0;
+                            $q = null;
                         }
 
                         if ($responseAnswersTrue != 0) {
@@ -427,10 +446,15 @@
                         }
                     @endphp
                     <p class="wrapper">
+                        <b> الأختبار</b>
+                    <h3> <b class="text-center"> {{ $q->name ?? '' }} </b>
+                    </h3>
+                    </p>
+                    <p class="wrapper">
                         <b>نتيجة الأختبار</b>
                     <h3> <b class="text-center"> {{ $total }} %</b>
-                        <h3>
-                            </p>
+                    </h3>
+                    </p>
 
                 </div>
                 <div class="list p-3">
@@ -449,6 +473,9 @@
                             </a>
                         </div>
                         <div class="col-6">
+                            <a href="{{ route('quiz.xlsx', [$id,$item->id]) }}">
+
+
                             <div class="card text-center">
                                 <div class="card-body p-2">
                                     <div class="feature widget-2 text-center mt-0 mb-3">
@@ -458,8 +485,9 @@
                                     <p class="mb-1 text-muted tx-13"> تحميل نموذج الاجابات </p>
                                 </div>
                             </div>
+                        </a>
                         </div>
-                        <div class="col-6">
+                        {{-- <div class="col-6">
                             <div class="card text-center">
                                 <div class="card-body p-2">
                                     <div class="feature widget-2 text-center mt-0 mb-3">
@@ -469,8 +497,8 @@
                                     <p class="mb-1 text-muted"> الأختبار القبلي </p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-6">
+                        </div> --}}
+                        {{-- <div class="col-6">
                             <a class="card text-center">
                                 <div class="card-body p-2">
                                     <div class="feature widget-2 text-center mt-0 mb-3">
@@ -481,7 +509,7 @@
                                     <p class="mb-1 text-muted"> استلام الاختبار </p>
                                 </div>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 {{-- <div class="list p-3 w-100">
@@ -516,33 +544,41 @@
                         <b class="text-center"> {{ $item->name }}</b>
                     </p>
                     @php
-                    $quiz = App\Models\QuizCourse::where('course_id', $course->id)
-                        ->with('quiz')
-                        ->whereHas('quiz', function ($q) {
-                            $q->where('type', 'after');
-                        })
-                        ->first();
-                    if ($quiz) {
-                        $responseAnswers = App\Models\UserAnswer::where('quiz_id', $quiz->quiz_id)
-                            ->where('attendance_id', $item->id)
-                            ->get();
-                        $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
-                        $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
-                        $questions = App\Models\Question::where('quiz_id', $quiz->quiz_id)
-                            ->with('userAswes', 'optionTrue')
-                            ->get();
-                    } else {
-                        $responseAnswersTrue = 0;
-                    }
+                        $quiz = App\Models\QuizCourse::where('course_id', $course->id)
+                            ->with('quiz')
+                            ->whereHas('quiz', function ($q) {
+                                $q->where('type', 'after');
+                            })
+                            ->first();
+                        if ($quiz) {
+                            $responseAnswers = App\Models\UserAnswer::where('quiz_id', $quiz->quiz_id)
+                                ->where('attendance_id', $item->id)
+                                ->get();
+                            $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
+                            $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
+                            $questions = App\Models\Question::where('quiz_id', $quiz->quiz_id)
+                                ->with('userAswes', 'optionTrue')
+                                ->get();
+                            $q = App\Models\Quiz::find($quiz->quiz_id);
+                        } else {
+                            $q = null;
 
-                    if ($responseAnswersTrue != 0) {
-                        $total = ($responseAnswersTrue / $questions->count()) * 100;
-                    } else {
-                        $total = 0;
-                    }
-                @endphp
+                            $responseAnswersTrue = 0;
+                        }
+
+                        if ($responseAnswersTrue != 0) {
+                            $total = ($responseAnswersTrue / $questions->count()) * 100;
+                        } else {
+                            $total = 0;
+                        }
+                    @endphp
                     <p class="wrapper">
-                        <h3>   <b class="text-center"> {{ $total }} %</b> </h3>
+                        <b> الأختبار</b>
+                    <h3> <b class="text-center"> {{ $q->name ?? '' }} </b>
+                    </h3>
+                    </p>
+                    <p class="wrapper">
+                    <h3> <b class="text-center"> {{ $total }} %</b> </h3>
                     </p>
                 </div>
 
@@ -551,7 +587,8 @@
                     <div class="row row-sm">
                         <div class="col-6">
                             @if ($course)
-                                <a class="card text-center" href="{{ route('attendance.summery.after', [$id, $item->id]) }}">
+                                <a class="card text-center"
+                                    href="{{ route('attendance.summery.after', [$id, $item->id]) }}">
                             @endif
                             <div class="card-body p-2">
                                 <div class="feature widget-2 text-center mb-3">
@@ -562,18 +599,20 @@
                             </div>
                             </a>
                         </div>
-                        <div class="col-6">
-                            <a class="card text-center" href="">
-                                <div class="card-body p-2">
-                                    <div class="feature widget-2 text-center mb-3">
-                                        <i
-                                            class="bi bi-box-arrow-in-down project bg-warning-transparent mx-auto text-warning "></i>
+                            <div class="col-6">
+                                <a href="{{ route('quiz.after.xlsx', [$id,$item->id]) }}">
+                                <div class="card text-center">
+                                    <div class="card-body p-2">
+                                        <div class="feature widget-2 text-center mt-0 mb-3">
+                                            <i
+                                                class="icon ion-md-paper project bg-warning-transparent mx-auto text-warning "></i>
+                                        </div>
+                                        <p class="mb-1 text-muted tx-13"> تحميل نموذج الاجابات </p>
                                     </div>
-                                    <p class="mb-1 text-muted tx-13 "> تحميل ملف المشارك </p>
                                 </div>
                             </a>
-                        </div>
-                        <div class="col-6">
+                            </div>
+                        {{-- <div class="col-6">
                             <div class="card text-center">
                                 <div class="card-body p-2">
                                     <div class="feature widget-2 text-center mt-0 mb-3">
@@ -583,8 +622,8 @@
                                     <p class="mb-1 text-muted tx-13"> تحميل ملف التكليف </p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12">
+                        </div> --}}
+                        {{-- <div class="col-12">
                             <div class="card text-center">
                                 <div class="card-body p-2">
                                     <div class="feature widget-2 text-center mt-0 mb-3">
@@ -593,7 +632,7 @@
                                     <p class="mb-1 text-muted"> استلام التكليف </p>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>
@@ -788,6 +827,37 @@
             let url = '/dashboard/admin/attendance/' + id;
 
             confirmDestroy(url, reference);
+        }
+    </script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function toogle(id, tog) {
+
+            var id = id;
+            var unit_toggle_value = tog.value;
+            if (unit_toggle_value == "active") {
+                unit_toggle_value = "deactive";
+            } else {
+                unit_toggle_value = 'active';
+            }
+            $.ajax({
+                url: "{{ route('attendance.status') }}",
+                type: "POST",
+                cache: false,
+                data: {
+                    id: id,
+                    unit_toggle_value: unit_toggle_value,
+                },
+                dataType: "json",
+                success: function(response) {
+
+                }
+            });
         }
     </script>
 @endsection

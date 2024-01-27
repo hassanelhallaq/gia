@@ -50,7 +50,7 @@
                     <input type="text" class="form-control form-input" id="search-table" placeholder="بحث">
                     <span class="right-pan"><i class="bi bi-sliders"></i></span>
                 </div>
-{{--
+                {{--
                 <div class="d-flex">
                     <p class="mt-2 mr-2 d-flex"> عرض: </p>
                     <select class="form-control select2-no-search mr-0 table-rows-number">
@@ -133,54 +133,95 @@
                                     } else {
                                         $rate = 0;
                                     }
-                                    $quizAttendBefor = App\Models\QuizAttendance::where('attendance_id',$attendances->id)->with('quiz')->whereHas('quiz',function($q){
-                                        $q->where('type','befor');
-                                    })->first();
-                                    $quizAttendAfter = App\Models\QuizAttendance::where('attendance_id',$attendances->id)->with('quiz')->whereHas('quiz',function($q){
-                                        $q->where('type','after');
-                                    })->first();
+                                    $quizAttendBefor = App\Models\QuizAttendance::where('attendance_id', $attendances->id)
+                                        ->with('quiz')
+                                        ->whereHas('quiz', function ($q) {
+                                            $q->where('type', 'befor');
+                                        })
+                                        ->first();
+                                    $quizAttendAfter = App\Models\QuizAttendance::where('attendance_id', $attendances->id)
+                                        ->with('quiz')
+                                        ->whereHas('quiz', function ($q) {
+                                            $q->where('type', 'after');
+                                        })
+                                        ->first();
+                                    $quizAttendInteractive = App\Models\QuizAttendance::where('attendance_id', $attendances->id)
+                                        ->with('quiz')
+                                        ->whereHas('quiz', function ($q) {
+                                            $q->where('type', 'interactive');
+                                        })
+                                        ->first();
+                                    $attendanceCourseCheck = App\Models\AttendanceCourse::where('attendance_id', $attendances->id)
+                                        ->where('course_id', $attendanceCourse->id)
+                                        ->first();
                                 @endphp
-                                @if($rate == 80 && $quizAttendBefor != null  && $quizAttendAfter != null && $attendances->email != null)
-                                <tr class="table-rows">
-                                    <td><input type="checkbox" class="checkChild"></td>
-                                    <td>{{$i + 1}}</td>
-                                    <td scope="row"> {{$attendances->name}}</td>
-                                    <td>{{$attendances->phone}}</td>
-                                    <td>{{$rate}}</td>
-                                    <td> --- </td>
-                                    <td> --- </td>
-                                    <td> --- </td>
-                                    <td> --- </td>
-                                    <td> --- </td>
-                                    <td> --- </td>
-                                    <td> --- </td>
-                                    <td> --- </td>
-                                    {{-- <button class="btn btn-secondary btn-sm btn-light-icon mr-2 p-1" data-target="#select2modal" data-toggle="modal"> اضافة ملف <i class="bi bi-plus-circle"></i></button> --}}
 
-                                    <td>
+                                @if ($rate >= $attendanceCourse->percentage_certificate)
+                                    <tr class="table-rows">
+                                        <td><input type="checkbox" class="checkChild"></td>
+                                        <td>{{ $i + 1 }}</td>
+                                        <td scope="row"> {{ $attendances->name }}</td>
+                                        <td>{{ $attendances->phone_number }}</td>
+                                        <td>{{ $rate }}</td>
+                                        <td> {{ $attendances->email == null ? 'لا' : 'نعم' }} </td>
+                                        <td> {{ $quizAttendInteractive == null ? 'لا' : 'نعم' }} </td>
+                                        <td>{{ $attendanceCourseCheck->certifacate_type }}</td>
+                                        <td> {{ $quizAttendBefor == null ? 'لا' : 'نعم' }} </td>
+                                        <td>{{ $quizAttendAfter == null ? 'لا' : 'نعم' }}</td>
+                                        <td>
+                                            @if ($attendanceCourseCheck->certficate)
+                                                <input type="text" value="{{ url($attendanceCourseCheck->certficate) }}"
+                                                    id="myInput" style="display: none;">
 
-                                        <a href="../index.html" class="btn btn-previous text-warning btn-with-icon"
-                                            data-target="#select2modal" data-toggle="modal"> تحميل <i
-                                                class="bi bi-arrow-down tx-18"></i></a>
-                                        @include('dashboard.attendance.model_add_file')
-                                    </td>
+                                                <button id="copyBtn" class="btn btn-previous btn-sm"
+                                                    data-text="{{ url($attendanceCourseCheck->certficate) }}">Copy</button>
+                                            @endif
+
+                                            {{-- <button value="copy" onclick="copyToClipboard()">Copy!</button> --}}
+                                            {{--
+                                        <button id="copyButton" data-clipboard-text="{{$attendanceCourseCheck->certficate}}">
+                                        Copy  Link
+                                    </button> --}}
+                                        </td>
+                                        <td> {{ $attendanceCourseCheck->code }}</td>
+                                        <td>
+                                            @if (
+                                                $quizAttendBefor != null &&
+                                                    $quizAttendAfter != null &&
+                                                    $quizAttendInteractive != null &&
+                                                    $attendances->email != null)
+                                                مؤهل
+                                            @else
+                                                غير مؤهل
+                                            @endif
+                                        </td>
+                                        {{-- <button class="btn btn-secondary btn-sm btn-light-icon mr-2 p-1" data-target="#select2modal" data-toggle="modal"> اضافة ملف <i class="bi bi-plus-circle"></i></button> --}}
 
 
-                                    <td class="d-flex filter-col-cell">
-                                        <!-- dropdown-menu -->
-                                        <button data-toggle="dropdown"class="btn btn-previous btn-sm">
-                                            <i class="si si-options-vertical text-gray tx-12"></i></button>
-                                        <div class="dropdown-menu">
-                                            <a href="edit_course.html" class="dropdown-item"> تحرير </a>
-                                            <a href="" class="dropdown-item"data-target="#modalDelete"
-                                                data-toggle="modal"> حذف </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        <td>
+
+                                            <button href="../index.html" class="btn btn-previous text-warning btn-with-icon"
+                                                data-target="#select2modal_{{$attendances->id}}" data-toggle="modal"> تحميل <i
+                                                    class="bi bi-arrow-down tx-18"></i></button>
+                                            @include('dashboard.attendance.model_add_file')
+                                        </td>
+
+
+                                        <td class="d-flex filter-col-cell">
+                                            <!-- dropdown-menu -->
+                                            <button data-toggle="dropdown"class="btn btn-previous btn-sm">
+                                                <i class="si si-options-vertical text-gray tx-12"></i></button>
+                                            <div class="dropdown-menu">
+                                                <a href="edit_course.html" class="dropdown-item"> تحرير </a>
+                                                <a href="" class="dropdown-item"data-target="#modalDelete"
+                                                    data-toggle="modal"> حذف </a>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 @endif
                             @endforeach
                         </tbody>
-                        <input hidden id="course_id" value="{{$attendanceCourse->id}}">
+                        <input hidden id="course_id" value="{{ $attendanceCourse->id }}">
                     </table>
                 </div>
             </div>
@@ -243,11 +284,26 @@
     <script>
         function performStore(id) {
             let formData = new FormData();
-            formData.append('code', document.getElementById('code').value);
+            formData.append('code', document.getElementById('code_'+id).value);
             formData.append('course_id', document.getElementById('course_id').value);
             formData.append('attendance_id', id);
-            formData.append('file', document.getElementById('file').files[0]);
+            formData.append('certifacate_type', document.getElementById('certifacate_type_'+id).value);
+            formData.append('file', document.getElementById('file_'+id).files[0]);
             storeRoute('/dashboard/admin/update/certifcate', formData)
         }
-        </script>
+    </script>
+
+    <script>
+        const copyBtn = document.querySelector('#copyBtn');
+        copyBtn.addEventListener('click', e => {
+            const input = document.createElement('input');
+            input.value = copyBtn.dataset.text;
+            document.body.appendChild(input);
+            input.select();
+            if (document.execCommand('copy')) {
+                alert('Text Copied');
+                document.body.removeChild(input);
+            }
+        });
+    </script>
 @endsection
