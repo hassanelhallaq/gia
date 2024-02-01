@@ -179,13 +179,13 @@ class CourseController extends Controller
         $dueration = $course->duration;
         $percent  = 0;
         if ($attendancesLog) {
-            $percent += $dueration / $attendancesLog;
+            $percent +=  $attendancesLog /  $dueration ;
         } else {
             $percent = 0;
         }
         if ($course->attendances->count() != 0 && $percent != 0) {
             $avrageAttend =  ($percent / $course->attendances->count() ) ;
-            // dd($avrageAttend);
+
             $avrageAttend = $avrageAttend * 100;
         } else {
             $avrageAttend = 0;
