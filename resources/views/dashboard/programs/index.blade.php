@@ -113,17 +113,19 @@
                                                      $start = Carbon\Carbon::parse($item->start)->format('y-m-d');
                                                      $end = Carbon\Carbon::parse($item->end)->format('y-m-d');
                                                     $today = Carbon\Carbon::today()->format('Y-m-d');
-                                                    @endphp
+
+                                                     @endphp
                                                        <td>{{$start }}</td>
                                                        <td>{{$end }}</td>
                                                      <td>
-
                                                         @if (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($start)) && $item->status != 'active')
                                                         <span class="tag tag-rounded bg-primary-transparent text-primary">متآخره</span>
-                                                        @elseif($item->status == 'active')
+                                                        @elseif(!Carbon\Carbon::parse($today)->gt($end) == 'active')
                                                         <span class="tag tag-rounded bg-primary-transparent text-primary">فعال</span>
                                                         @elseif($item->status == 'pending')
                                                         <span class="tag tag-rounded bg-primary-transparent text-primary">في المعالجة</span>
+                                                        @elseif (Carbon\Carbon::parse($today)->gt($end))
+                                                        <span class="tag tag-rounded bg-primary-transparent text-primary">منتهيه</span>
                                                         @endif
                                                      </td>
                                                      <td class="d-flex filter-col-cell">

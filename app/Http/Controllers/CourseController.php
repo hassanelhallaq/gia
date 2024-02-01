@@ -42,10 +42,12 @@ class CourseController extends Controller
         }
         return view("dashboard.courses.index", compact("courses", 'program', 'id'));
     }
-    public function programCourses($id)
+    public function programCourses(Request $request, $id)
     {
         $program = Program::find($id);
-        $courses = Course::where('program_id', $id)->paginate(10);
+        $courses = Course::where('program_id', $id)->when($request->name,function($q)use($request){
+            $q->where('name','like', '%' . $request->name . '%');
+        })->paginate(10);
 
         if (Auth::guard('trainer')->check()) {
             $courses = Course::where('trainer_id', Auth::user()->id)->with('program')->paginate(10);
