@@ -183,9 +183,9 @@ class CourseController extends Controller
         } else {
             $percent = 0;
         }
-    // dd($course->attendances->count());
         if ($course->attendances->count() != 0 && $percent != 0) {
-            $avrageAttend =  ( $course->attendances->count() / $percent) ;
+            $avrageAttend =  ($percent / $course->attendances->count() ) ;
+            // dd($avrageAttend);
             $avrageAttend = $avrageAttend * 100;
         } else {
             $avrageAttend = 0;
