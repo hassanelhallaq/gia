@@ -35,8 +35,8 @@
                     class="btn btn-outline-light btn-with-icon btn-sm mr-1"> ادارة المشاركين <i class="la la-cog"></i></a>
                 <a href="View_test_results.html" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج
                     الاختبار <i class="bi bi-box-arrow-in-down"></i></a>
-                <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركة <i
-                        class="bi bi-box-arrow-in-down"></i></button>
+                <a href="{{ route('attendance.xlsx', [$course->id]) }}" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركين <i
+                        class="bi bi-box-arrow-in-down"></i></a>
             </div>
         </div>
     </div>
