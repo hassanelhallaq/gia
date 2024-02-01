@@ -64,7 +64,20 @@ class PagesController extends Controller
             $event->end_date = Carbon::parse($event->start_date)->addDays($event->duration)->format('Y-m-d');
             return $event;
         });
+        if (Auth::guard('admin')->check()) {
         $attendance = Attendance::count();
+        }elseif (Auth::guard('trainer')->check()){
+            $attendance = 0 ;
+        }
+        if (Auth::guard('client')->check()) {
+           
+            $attendance = Program::where('client_id', Auth::user()->id)->with(['courses'=>function($q){
+                $q->withCount('attendances');
+            }])->get();
+        }elseif (Auth::guard('trainer')->check()){
+            $attendance = 0 ;
+        }
+        
         return view('dashboard.index', compact('programs', 'programsActice', 'courses', 'events', 'attendance'));
     }
 }

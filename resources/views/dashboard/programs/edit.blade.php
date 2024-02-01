@@ -171,7 +171,7 @@
                             </div>
                             <div class="col-lg-6 mb-3">
                                 <p class="mg-b-10"> الحاله</p>
-                                <select class="form-control select2" id="register">
+                                <select class="form-control select2" id="status">
                                     <option  @if ($program->status == 'active') selected @endif  value="active">
                                     فعال
                                     </option>
@@ -291,6 +291,7 @@
         formData.append('color', document.getElementById('color').value);
         formData.append('register', document.getElementById('register').value);
         formData.append('client_id', document.getElementById('client_id').value);
+        formData.append('status', document.getElementById('status').value);
 
 
         formData.append('attendance_method', document.getElementById('attendance_method').value);

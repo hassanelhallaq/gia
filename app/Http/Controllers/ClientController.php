@@ -57,6 +57,7 @@ class ClientController extends Controller
         if ($validator->fails()) {
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
+        $data['password'] =  Hash::make($request->get('password'));
         $isSaved = Client::create($data);
         return response()->json(['redirect' => route('clients.index')]);
 

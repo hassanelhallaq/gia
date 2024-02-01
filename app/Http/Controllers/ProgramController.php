@@ -214,6 +214,7 @@ class ProgramController extends Controller
         $program->color = $request->color;
         $program->client_id = $request->client_id;
         $program->attendance_method = $request->attendance_method;
+        $program->status = $request->status;
         if ($request->hasFile('image')) {
             $adminImage = $request->file('image');
             $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();

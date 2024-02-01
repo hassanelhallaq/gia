@@ -42,6 +42,8 @@ Route::prefix('dashboard')->middleware('guest:admin,client')->group(function () 
 });
 Route::prefix('dashboard/admin')->middleware('auth:admin,client,trainer')->group(
     function () {
+                Route::get('logout', [App\Http\Controllers\UserAuthController::class, 'logout'])->name('dashboard.auth.logout');
+
         Route::resource('courses', CourseController::class);
         Route::get('/courses.attendances/{id}', [AttendanceCourseController::class, 'coursesAttendance'])->name('course.attendance');
         Route::get('/attendance-summery/{id}/{attendanceId}', [UserAnswerController::class, 'userAswers'])->name('attendance.summery');
@@ -75,7 +77,9 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::post('/update-attendance-status', [AttendanceController::class, 'changeStatus'])->name('attendance.status');
         Route::get('/quiz/xlsx/{id}/{attendanceId}', [AttendanceController::class, 'QuizXlsx'])->name('quiz.xlsx');
         Route::get('/quiz-after/xlsx/{id}/{attendanceId}', [AttendanceController::class, 'QuizAfterXlsx'])->name('quiz.after.xlsx');
-
+        Route::post('/courses-files', [CourseFileController::class, 'store']);
+        Route::post('/courses-links', [CourseLinkController::class, 'store']);
+        Route::resource('attendance', AttendanceController::class);
 
         Route::post('/update/certifcate', [CertificateController::class, 'updateCertifcate'])->name('updateCertifcate');
 
@@ -98,16 +102,13 @@ Route::prefix('dashboard/client')->middleware('auth:client')->group(
 );
 Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
     function () {
-        Route::get('logout', [App\Http\Controllers\UserAuthController::class, 'logout'])->name('dashboard.auth.logout');
         Route::get('/', [PagesController::class, 'index'])->name('admin.dashboard');
         Route::resource('categories', CategoryController::class);
         Route::get('/get-cities/{id}', [CityController::class, 'getCities']);
         Route::resource('clients', ClientController::class);
-        Route::resource('attendance', AttendanceController::class);
         Route::resource('admins', AdminController::class);
         Route::resource('trainers', TrainerController::class);
-        Route::post('/courses-files', [CourseFileController::class, 'store']);
-        Route::post('/courses-links', [CourseLinkController::class, 'store']);
+
         Route::get('/get-rates/{id}', [RateController::class, 'createRate'])->name('get.rate');
         Route::resource('rates', RateController::class);
     }

@@ -157,8 +157,29 @@
                                 </div>
                                 <div class="">
                                     <p class="mb-2 tx-12 text-muted">عددالمسجلين</p>
+                                   @php
+                                   
+                                    $count = 0 ;
+                                    if (Auth::guard('client')->check()) {
+                                    
+                                        foreach ($attendance as $key => $value) {
+                                            foreach ($value->courses as $key => $course) {
+                                            
+                                                $count += $course->attendances_count;
+                                            }
+                                        }
+                                            
+                                            
+                                        }elseif (Auth::guard('admin')->check()){
+                                        
+                                            $attendance = $attendance;
+                                        }
+                                        
+                                    @endphp
                                     <div class="">
-                                        <h4 class="mb-1 font-weight-bold">{{$attendance}}</h4>
+                                        <h4 class="mb-1 font-weight-bold">@if(Auth::guard('admin')->check()){{$attendance}}
+                                        @elseif (Auth::guard('client')->check()) {{$count}} @else 0  @endif
+                                        </h4>
                                     </div>
                                 </div>
                             </div>

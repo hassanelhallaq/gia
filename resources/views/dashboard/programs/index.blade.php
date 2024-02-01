@@ -48,7 +48,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mg-t-20 mg-lg-t-0">
-                                    <button class="btn btn-outline-light btn-print" type="submit"> بحث </button>
+                                    <button class="btn btn-outline-light " type="submit"> بحث </button>
                                 </div>
                             </div>
                         </div>
@@ -117,8 +117,9 @@
                                                        <td>{{$start }}</td>
                                                        <td>{{$end }}</td>
                                                      <td>
+
                                                         @if (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($start)) && $item->status != 'active')
-                                                            <span class="tag tag-rounded bg-primary-transparent text-primary">متآخره</span>
+                                                        <span class="tag tag-rounded bg-primary-transparent text-primary">متآخره</span>
                                                         @elseif($item->status == 'active')
                                                         <span class="tag tag-rounded bg-primary-transparent text-primary">فعال</span>
                                                         @elseif($item->status == 'pending')
