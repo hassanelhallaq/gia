@@ -45,8 +45,8 @@ class CourseController extends Controller
     public function programCourses(Request $request, $id)
     {
         $program = Program::find($id);
-        $courses = Course::where('program_id', $id)->when($request->name,function($q)use($request){
-            $q->where('name','like', '%' . $request->name . '%');
+        $courses = Course::where('program_id', $id)->when($request->name, function ($q) use ($request) {
+            $q->where('name', 'like', '%' . $request->name . '%');
         })->paginate(10);
 
         if (Auth::guard('trainer')->check()) {
@@ -179,12 +179,12 @@ class CourseController extends Controller
         $dueration = $course->duration;
         $percent  = 0;
         if ($attendancesLog) {
-            $percent +=  $attendancesLog /  $dueration ;
+            $percent +=  $attendancesLog /  $dueration;
         } else {
             $percent = 0;
         }
         if ($course->attendances->count() != 0 && $percent != 0) {
-            $avrageAttend =  ($percent / $course->attendances->count() ) ;
+            $avrageAttend =  ($percent / $course->attendances->count());
 
             $avrageAttend = $avrageAttend * 100;
         } else {
@@ -207,7 +207,7 @@ class CourseController extends Controller
         $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type', 'after')->get();
         $quizesInteractive = Quiz::orderBy("created_at", "desc")->where('type', 'interactive')->get();
 
-        return view("dashboard.courses.edit", compact("course", 'program', 'categories', 'clients', 'trainers', 'quizesBefor', 'quizesAfter','quizesInteractive'));
+        return view("dashboard.courses.edit", compact("course", 'program', 'categories', 'clients', 'trainers', 'quizesBefor', 'quizesAfter', 'quizesInteractive'));
     }
 
     /**
@@ -276,38 +276,44 @@ class CourseController extends Controller
         //     $q->where('course_id',$id);
         // })->paginate(10);
 
-        $quizbefCheck = QuizCourse::where('quiz_id', $request->quiz_befor_id)->where('course_id', $course->id)->first();
+        $quizbefCheck = QuizCourse::with('quiz')->whereHas('quiz', function ($q) {
+            $q->where('type', 'befor');
+        })->where('course_id', $course->id)->first();
         if ($request->quiz_befor_id) {
             if ($quizbefCheck) {
-                $quizBef = $quizbefCheck;
-            } else {
+                $quizBef = $quizbefCheck->delete();
                 $quizBef = new QuizCourse();
+                $quizBef->quiz_id = $request->quiz_befor_id;
+                $quizBef->course_id = $course->id;
+                $quizBef->save();
             }
-            $quizBef->quiz_id = $request->quiz_befor_id;
-            $quizBef->course_id = $course->id;
-            $quizBef->save();
         }
-         $quizAftCheck = QuizCourse::where('quiz_id', $request->quiz_after_id)->where('course_id', $course->id)->first();
+        $quizAftCheck = QuizCourse::with('quiz')->whereHas('quiz', function ($q) {
+            $q->where('type', 'after');
+        })->where('course_id', $course->id)->first();
         if ($request->quiz_after_id) {
             if ($quizAftCheck != null) {
-                $quizAft = $quizAftCheck;
-            } else {
+                $quizAft = $quizAftCheck->delete();
                 $quizAft = new QuizCourse();
+
+                $quizAft->course_id = $course->id;
+                $quizAft->quiz_id = $request->quiz_after_id;
+                $quizAft->save();
             }
-            $quizAft->course_id = $course->id;
-            $quizAft->quiz_id = $request->quiz_after_id;
-            $quizAft->save();
         }
-        $quizInterCheck = QuizCourse::where('quiz_id', $request->quiz_interactive_id)->where('course_id', $course->id)->first();
+        $quizInterCheck = QuizCourse::with('quiz')->whereHas('quiz', function ($q) {
+            $q->where('type', 'after');
+        })->where('course_id', $course->id)->first();
         if ($request->quiz_interactive_id) {
             if ($quizInterCheck != null) {
+                $quizInter = $quizInterCheck->delete();
                 $quizInter = $quizInterCheck;
-            } else {
                 $quizInter = new QuizCourse();
+                $quizInter->course_id = $course->id;
+                $quizInter->quiz_id = $request->quiz_interactive_id;
+                $quizInter->save();
             }
-            $quizInter->course_id = $course->id;
-            $quizInter->quiz_id = $request->quiz_interactive_id;
-            $quizInter->save();
+
         }
         return response()->json(['redirect' => route('program.course', [$course->program_id])]);
     }
@@ -340,7 +346,7 @@ class CourseController extends Controller
     {
 
         $course = Course::with('attendances')->find($request->course_id);
-        $attendances = $course->attendances->where('status','active');
+        $attendances = $course->attendances->where('status', 'active');
         foreach ($attendances as $attendance) {
             $phone = $attendance->phone_number;
             $massege = $request->massege;
@@ -383,7 +389,7 @@ class CourseController extends Controller
     public function sendSmsSelected(Request $request)
     {
         $ids = $request->ids;
-        $attendances = Attendance::whereIn('id', explode(",", $ids))->where('status','active')->get();
+        $attendances = Attendance::whereIn('id', explode(",", $ids))->where('status', 'active')->get();
         foreach ($attendances as $attendance) {
             $phone = $attendance->phone_number;
             $massege = $request->massege_select;
