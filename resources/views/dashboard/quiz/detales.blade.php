@@ -21,9 +21,9 @@
         </div>
         <div class="main-dashboard-header-right">
             <div class=" d-flex">
-                <a href="add_tests.html" class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> عرض الاختبار </a>
-                <button class="btn btn-warning-gradient btn-with-icon btn-md mr-1" data-target="#select2modal"data-toggle="modal"> تحميل QR </button>
-                <button class="btn btn-warning-gradient btn-with-icon btn-md mr-1" data-target="#select2modal"data-toggle="modal"> اضافة اسئلة <i class="bi bi-plus"></i></button>
+                <a href="{{route('quiz.view',[$id,'testQuiz'])}}" class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> عرض الاختبار </a>
+                {{-- <button class="btn btn-warning-gradient btn-with-icon btn-md mr-1" data-target="#select2modal"data-toggle="modal"> تحميل QR </button> --}}
+                <a class="btn btn-warning-gradient btn-with-icon btn-md mr-1"  href="{{route('quiz.questions',[$id])}}"> اضافة اسئلة <i class="bi bi-plus"></i></a>
             </div>
         </div>
     </div>

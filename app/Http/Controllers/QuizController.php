@@ -71,7 +71,7 @@ class QuizController extends Controller
     {
 
         $questions = Question::where('quiz_id',$id)->get();
-        return view('dashboard.quiz.detales',compact('questions'));
+        return view('dashboard.quiz.detales',compact('questions','id'));
     }
 
     /**
