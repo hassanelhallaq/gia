@@ -68,32 +68,12 @@
                                                     اسم الأختبار
                                                 </th>
                                                 <th class="tx-5">عدد الدورات المرتبطة </th>
-                                                <th> نوع السؤال </th>
-                                                <th>عدد التسجيلات</th>
+                                                {{-- <th> نوع السؤال </th> --}}
+                                                {{-- <th>عدد التسجيلات</th>
                                                 <th>حالات مقدمة</th>
                                                 <th>حالات لم تقدم</th>
-                                                <th>الاكتمال</th>
-                                                <th>
-                                                    <div class="dropdown">
-                                                        <i aria-expanded="false" aria-haspopup="true"
-                                                            class="bi bi-filter-square tx-20"data-toggle="dropdown"
-                                                            id="dropdownMenuButton" type="button"></i></i>
-                                                        <div class="dropdown-menu tx-13">
-                                                            <p class="dropdown-item" href="#"><label
-                                                                    class="ckbox"><input type="checkbox"><span>Checkbox
-                                                                        Unchecked</span></label></p>
-                                                            <p class="dropdown-item" href="#"><label
-                                                                    class="ckbox"><input type="checkbox"><span>Checkbox
-                                                                        Unchecked</span></label></p>
-                                                            <p class="dropdown-item" href="#"><label
-                                                                    class="ckbox"><input type="checkbox"><span>Checkbox
-                                                                        Unchecked</span></label></p>
-                                                            <p class="dropdown-item" href="#"><label
-                                                                    class="ckbox"><input type="checkbox"><span>Checkbox
-                                                                        Unchecked</span></label></p>
-                                                        </div>
-                                                    </div>
-                                                </th>
+                                                <th>الاكتمال</th> --}}
+
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -106,14 +86,14 @@
                                                     <td><input type="checkbox" class="checkChild"></td>
                                                     <td>{{ $index + 1 }}</td>
                                                     <td scope="row"> {{ $item->name }} </td>
-                                                    <td>6 دورات</td>
-                                                    <td> اختبار قبلي </td>
-                                                    <td>12</td>
+                                                    <td>{{$item->courses_count}} دورات</td>
+                                                    {{-- <td> اختبار قبلي </td> --}}
+                                                    {{-- <td>12</td>
                                                     <td>50</td>
                                                     <td>40</td>
-                                                    <td>90%</td>
+                                                    <td>90%</td> --}}
                                                     <td class="d-flex filter-col-cell">
-                                                         <a href="{{route('quiz_detales')}}"><i class="far fa-eye tx-14"></i></a>                                                        <!-- dropdown-menu -->
+                                                         <a href="{{route('quizes.show',[$item->id])}}"><i class="far fa-eye tx-14"></i></a>                                                        <!-- dropdown-menu -->
 
                                                         <!-- dropdown-menu -->
                                                         <button data-toggle="dropdown"

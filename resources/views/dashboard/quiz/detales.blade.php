@@ -40,40 +40,10 @@
                     <span class="right-pan"><i class="bi bi-sliders"></i></span>
                 </div>
 
-                <div class="d-flex">
-                    <p class="mt-2 mr-2 d-flex"> عرض: </p>
-                    <select class="form-control select2-no-search mr-0 table-rows-number">
-                        <option value="all">
-                            الكل
-                        </option>
-                        <option value="1">
-                            1
-                        </option>
-                        <option value="2">
-                            2
-                        </option>
-                        <option value="3">
-                            3
-                        </option>
-                        <option value="10" selected>
-                            10
-                        </option>
-                        <option value="50">
-                            50
-                        </option>
-                        <option value="100">
-                            100
-                        </option>
-                    </select>
-                </div>
+
 
                 <button class="btn btn-danger btn-sm btn-with-icon mr-1 text-white btnSelectDelete"data-target="#modalDelete" data-toggle="modal" style="display: none;">حذف الصفوف المختارة <i class="bi bi-trash tx-12"></i></button>
 
-                <div class="mr-auto d-block tx-20">
-                    <a href=""><i class="typcn typcn-calendar-outline"></i></a>
-                    <a href=""><i class="bi bi-grid"></i></a>
-                    <a href=""><i class="bi bi-list bg-black-9 text-white"></i></a>
-                </div>
             </div>
         </div>
     </div>
@@ -92,7 +62,7 @@
                                <th>
                                    السؤال
                                </th>
-                               <th> نوع السؤال </th>
+                               {{-- <th> نوع السؤال </th> --}}
                                <th> تاريخ الاضافة  </th>
                                <th> تاريخ التعديل </th>
                                <!-- Filter -->
@@ -108,13 +78,16 @@
                            <tr>
                                <p class="p-5 text-center d-none" id="empty-message">لا توجد   بيانات لعرضها</p>
                            </tr>
+                           @foreach ($questions as $i => $item)
+
+
                            <tr class="table-rows">
                                <td><input type="checkbox" class="checkChild"></td>
-                               <td>1</td>
-                               <td scope="row"> ----- </td>
-                               <td>3</td>
-                               <td> -------- </td>
-                               <td> --- </td>
+                               <td>{{$i +1}}</td>
+                               <td scope="row"> {{$item->name}} </td>
+                               {{-- <td>3</td> --}}
+                               <td> {{$item->created_at}}</td>
+                               <td> {{$item->updated_at}}</td>
 
 
                                <td class="d-flex filter-col-cell">
@@ -122,11 +95,13 @@
                                    <button data-toggle="dropdown"class="btn btn-previous btn-sm">
                                     <i class="si si-options-vertical text-gray tx-12"></i></button>
                                    <div class="dropdown-menu">
-                                       <a href="edit_course.html" class="dropdown-item"> تحرير </a>
-                                       <a href="" class="dropdown-item"data-target="#modalDelete" data-toggle="modal"> حذف </a>
-                                   </div>
+                                       <a href="{{route('questions.edit',[$item->id])}}" class="dropdown-item"> تحرير </a>
+                                       <button class="dropdown-item"
+                                       onclick="performDestroy({{ $item->id }} , this)"> حذف
+                                   </button>                                   </div>
                                </td>
                            </tr>
+                           @endforeach
                        </tbody>
                    </table>
                </div>
@@ -141,40 +116,11 @@
         <div class="card mg-b-20">
             <div class="card-body d-flex p-3">
                 <ul class="pagination mb-0">
-                    <li class="page-item"><button class="btn btn-previous" id="table-paganite-next"><i class="ti-angle-double-right"></i></button></li>
-                    <li class="page-item m-2" id="table-pages">1/10</li>
-                    <li class="page-item"><button class="btn btn-previous"  id="table-paganite-prev"><i class="ti-angle-double-left"></i></button>
+
                     </li>
                 </ul>
-                <div class="d-flex">
-                    <div class="d-block mt-2"> عرض</div>
-                    <select class="form-control select2-no-search mr-0 table-rows-number">
-                        <option value="all">
-                            الكل
-                        </option>
-                        <option value="1">
-                            1
-                        </option>
-                        <option value="2">
-                            2
-                        </option>
-                        <option value="3">
-                            3
-                        </option>
-                        <option value="10" selected>
-                            10
-                        </option>
-                        <option value="50">
-                            50
-                        </option>
-                        <option value="100">
-                            100
-                        </option>
-                    </select>
-                </div>
-                <div class="mr-auto tx-15 mt-2">
-                    <span id="table-status">1-6 of 100</span>
-                </div>
+
+
             </div>
         </div>
     </div>
@@ -183,7 +129,14 @@
 @endsection
 @section('js')
 
+<script>
+    function performDestroy(id, reference) {
 
+        let url = '/dashboard/admin/questions/' + id;
+
+        confirmDestroy(url, reference);
+    }
+</script>
 
 
 @endsection

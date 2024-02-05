@@ -15,8 +15,7 @@ class QuestionController extends Controller
     public function index()
     {
         $quzies = Quiz::paginate(10);
-        return view("dashboard.question.index",compact('quzies'));
-
+        return view("dashboard.question.index", compact('quzies'));
     }
 
     /**
@@ -24,7 +23,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-      return view("dashboard.question.create");
+        return view("dashboard.question.create");
     }
 
     /**
@@ -34,23 +33,26 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->all())) {
-            $validator = Validator($request->all(),
-            [
-                'name' => 'required|string',
-                'type' => 'required|string',
-                'option_one' => 'required|string',
-                'option_two' => 'required|string',
-                'option_three' => 'required|string',
-                'quiz_id'=> 'required',
-            ], [
-                'name.required' => 'الاسم مطلوب',
-                'type.required' => 'نوع السؤال مطلوب',
-                'option_one.required' => 'الخيار الاول مطلوب',
-                'option_two.required' => 'الخيار الثاني مطلوب',
-                'option_three.required' => 'الخيار الثالث مطلوب',
-                'quiz_id.required' => 'quiz is required',
+            $validator = Validator(
+                $request->all(),
+                [
+                    'name' => 'required|string',
+                    'type' => 'required|string',
+                    'option_one' => 'required|string',
+                    'option_two' => 'required|string',
+                    'option_three' => 'required|string',
+                    'quiz_id' => 'required',
+                ],
+                [
+                    'name.required' => 'الاسم مطلوب',
+                    'type.required' => 'نوع السؤال مطلوب',
+                    'option_one.required' => 'الخيار الاول مطلوب',
+                    'option_two.required' => 'الخيار الثاني مطلوب',
+                    'option_three.required' => 'الخيار الثالث مطلوب',
+                    'quiz_id.required' => 'quiz is required',
 
-            ]);
+                ]
+            );
             if (!$validator->fails()) {
                 $question = new question();
                 $question->name = $request->get('name');
@@ -58,38 +60,34 @@ class QuestionController extends Controller
                 $question->quiz_id = $request->get('quiz_id');
                 $isSaved = $question->save();
                 $isQuestionOption = $this->questionOption($request, $question);
-                 return response()->json(['icon' => 'success', 'title' => 'تم الانشاء بنجاح '], 200);
-
+                return response()->json(['icon' => 'success', 'title' => 'تم الانشاء بنجاح '], 200);
             } else {
 
                 return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
-
             }
-
         }
-
     }
 
     private function questionOption(Request $request, question $question)
     {
-             // save options
-           return  QuestionOption::insert([
-                [
-                    'question_id' => $question->id,
-                    'answer' => $request->get('option_one'),
-                    'is_corect' => $request->get('correct_one') == 'on' ? 1 : 0,
-                ],
-                [
-                    'question_id' => $question->id,
-                    'answer' => $request->get('option_two'),
-                    'is_corect' => $request->get('correct_two') == 'on' ? 1 : 0,
-                ],
-                [
-                    'question_id' => $question->id,
-                    'answer' => $request->get('option_three'),
-                    'is_corect' => $request->get('correct_three') == 'on' ? 1 : 0,
-                ],
-            ]);
+        // save options
+        return  QuestionOption::insert([
+            [
+                'question_id' => $question->id,
+                'answer' => $request->get('option_one'),
+                'is_corect' => $request->get('correct_one') == 'on' ? 1 : 0,
+            ],
+            [
+                'question_id' => $question->id,
+                'answer' => $request->get('option_two'),
+                'is_corect' => $request->get('correct_two') == 'on' ? 1 : 0,
+            ],
+            [
+                'question_id' => $question->id,
+                'answer' => $request->get('option_three'),
+                'is_corect' => $request->get('correct_three') == 'on' ? 1 : 0,
+            ],
+        ]);
     }
 
     /**
@@ -105,7 +103,7 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-        //
+        return view("dashboard.question.edit", compact('question'));
     }
 
     /**
@@ -113,16 +111,25 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        //
+        $question->name = $request->get('name');
+        $question->type = $request->get('type');
+        $question->update();
+        $questionData = json_decode($request->questions);
+        foreach ($questionData as $options) {
+            $option = QuestionOption::find($options->option_id);
+            $option->answer = $options->option;
+            $option->is_corect =  $options->correct;
+            $option->update();
+        }
+        return response()->json(['redirect' => route('quizes.show', [$question->quiz_id])]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
         $q = Question::destroy($id);
-        return response()->json(['icon' => 'success' , 'title' => 'تم الحذف  بنجاح'] , $q ? 200 : 400);
-
+        return response()->json(['icon' => 'success', 'title' => 'تم الحذف  بنجاح'], $q ? 200 : 400);
     }
 }
