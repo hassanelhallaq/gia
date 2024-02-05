@@ -35,7 +35,8 @@
                     class="btn btn-outline-light btn-with-icon btn-sm mr-1"> ادارة المشاركين <i class="la la-cog"></i></a>
                 <a href="View_test_results.html" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج
                     الاختبار <i class="bi bi-box-arrow-in-down"></i></a>
-                <a href="{{ route('attendance.xlsx', [$course->id]) }}" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركين <i
+                <a href="{{ route('attendance.xlsx', [$course->id]) }}"
+                    class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركين <i
                         class="bi bi-box-arrow-in-down"></i></a>
             </div>
         </div>
@@ -206,7 +207,10 @@
         <div class="col-lg-6 col-sm-12">
             <div class="card ">
                 <div class="card-body">
-                    <span class="chart" data-percent="{{ $avrageAttend }}">
+                    @php
+                        $integerNumber = intval($avrageAttend);
+                    @endphp
+                    <span class="chart" data-percent="{{ $integerNumber }}">
                         <span class="percent"></span>
                     </span>
                     <div class="row pb-4  mg-t-60">
@@ -347,7 +351,8 @@
                                                             {{ $day }} (حاضر)</span>
                                                     @else
                                                         <span class="dropdown-item text-danger"> اليوم {{ $day }}
-                                                            (غير حاضر)</span>
+                                                            (غير حاضر)
+                                                        </span>
                                                     @endif
                                                 @endfor
                                             </div>
