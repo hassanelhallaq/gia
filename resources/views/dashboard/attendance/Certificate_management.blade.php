@@ -162,7 +162,10 @@
                                         <td>{{ $i + 1 }}</td>
                                         <td scope="row"> {{ $attendances->name }}</td>
                                         <td>{{ $attendances->phone_number }}</td>
-                                        <td>{{ $rate }}</td>
+                                        @php
+                                            $integerNumber = intval($rate);
+                                        @endphp
+                                        <td>{{ $integerNumber }}</td>
                                         <td> {{ $attendances->email == null ? 'لا' : 'نعم' }} </td>
                                         <td> {{ $quizAttendInteractive == null ? 'لا' : 'نعم' }} </td>
                                         <td>{{ $attendanceCourseCheck->certifacate_type }}</td>
@@ -201,8 +204,8 @@
                                         <td>
 
                                             <button href="../index.html" class="btn btn-previous text-warning btn-with-icon"
-                                                data-target="#select2modal_{{$attendances->id}}" data-toggle="modal"> تحميل <i
-                                                    class="bi bi-arrow-down tx-18"></i></button>
+                                                data-target="#select2modal_{{ $attendances->id }}" data-toggle="modal">
+                                                تحميل <i class="bi bi-arrow-down tx-18"></i></button>
                                             @include('dashboard.attendance.model_add_file')
                                         </td>
 
@@ -284,11 +287,11 @@
     <script>
         function performStore(id) {
             let formData = new FormData();
-            formData.append('code', document.getElementById('code_'+id).value);
+            formData.append('code', document.getElementById('code_' + id).value);
             formData.append('course_id', document.getElementById('course_id').value);
             formData.append('attendance_id', id);
-            formData.append('certifacate_type', document.getElementById('certifacate_type_'+id).value);
-            formData.append('file', document.getElementById('file_'+id).files[0]);
+            formData.append('certifacate_type', document.getElementById('certifacate_type_' + id).value);
+            formData.append('file', document.getElementById('file_' + id).files[0]);
             storeRoute('/dashboard/admin/update/certifcate', formData)
         }
     </script>
