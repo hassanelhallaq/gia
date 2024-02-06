@@ -13,4 +13,8 @@ class RateAttendance extends Model
         'rate','attendance_id'
          // ... add other fields accordingly
     ];
+
+    public function rate(){
+        return $this->belongsTo(Rate::class);
+    }
 }

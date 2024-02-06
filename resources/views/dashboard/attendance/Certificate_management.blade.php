@@ -145,10 +145,12 @@
                                             $q->where('type', 'after');
                                         })
                                         ->first();
-                                    $quizAttendInteractive = App\Models\QuizAttendance::where('attendance_id', $attendances->id)
-                                        ->with('quiz')
-                                        ->whereHas('quiz', function ($q) {
-                                            $q->where('type', 'interactive');
+                                    $quizAttendInteractive = App\Models\RateAttendance::where('attendance_id', $attendances->id)
+                                        ->with('rate')
+                                        ->whereHas('rate', function ($q)use($attendanceCourse) {
+                                            $q->with('courses')->whereHas('courses', function ($i)use($attendanceCourse) {
+                                            $i->where('course_id',$attendanceCourse->id);
+                                        });
                                         })
                                         ->first();
                                     $attendanceCourseCheck = App\Models\AttendanceCourse::where('attendance_id', $attendances->id)
