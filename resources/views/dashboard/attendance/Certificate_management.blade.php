@@ -153,6 +153,7 @@
                                         });
                                         })
                                         ->first();
+
                                     $attendanceCourseCheck = App\Models\AttendanceCourse::where('attendance_id', $attendances->id)
                                         ->where('course_id', $attendanceCourse->id)
                                         ->first();
@@ -169,7 +170,7 @@
                                         @endphp
                                         <td>{{ $integerNumber }}</td>
                                         <td> {{ $attendances->email == null ? 'لا' : 'نعم' }} </td>
-                                        <td> {{ $quizAttendInteractive == null ? 'لا' : 'نعم' }} </td>
+                                        <td> {{ $quizAttendInteractive == null ? 'لا' : $quizAttendInteractive->avg('rate') }} </td>
                                         <td>{{ $attendanceCourseCheck->certifacate_type }}</td>
                                         <td> {{ $quizAttendBefor == null ? 'لا' : 'نعم' }} </td>
                                         <td>{{ $quizAttendAfter == null ? 'لا' : 'نعم' }}</td>
