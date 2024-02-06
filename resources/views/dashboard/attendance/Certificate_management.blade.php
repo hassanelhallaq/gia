@@ -147,13 +147,12 @@
                                         ->first();
                                     $quizAttendInteractive = App\Models\RateAttendance::where('attendance_id', $attendances->id)
                                         ->with('rate')
-                                        ->whereHas('rate', function ($q)use($attendanceCourse) {
-                                            $q->with('courses')->whereHas('courses', function ($i)use($attendanceCourse) {
-                                            $i->where('course_id',$attendanceCourse->id);
-                                        });
-                                        })
-                                        ->first();
 
+                                        ->first();
+                                    $quizAttendInteractiveAv = App\Models\RateAttendance::where('attendance_id', $attendances->id)
+                                        ->with('rate')
+
+                                        ->avg('rate');
                                     $attendanceCourseCheck = App\Models\AttendanceCourse::where('attendance_id', $attendances->id)
                                         ->where('course_id', $attendanceCourse->id)
                                         ->first();
@@ -167,10 +166,11 @@
                                         <td>{{ $attendances->phone_number }}</td>
                                         @php
                                             $integerNumber = intval($rate);
+                                            $quizAttendInteractiveAvF = number_format($quizAttendInteractiveAv, 1);
                                         @endphp
                                         <td>{{ $integerNumber }}</td>
                                         <td> {{ $attendances->email == null ? 'لا' : 'نعم' }} </td>
-                                        <td> {{ $quizAttendInteractive == null ? 'لا' : $quizAttendInteractive->avg('rate') }} </td>
+                                        <td> {{ $quizAttendInteractive == null ? 'لا' : $quizAttendInteractiveAvF }} </td>
                                         <td>{{ $attendanceCourseCheck->certifacate_type }}</td>
                                         <td> {{ $quizAttendBefor == null ? 'لا' : 'نعم' }} </td>
                                         <td>{{ $quizAttendAfter == null ? 'لا' : 'نعم' }}</td>
