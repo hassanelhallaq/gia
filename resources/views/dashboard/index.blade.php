@@ -158,23 +158,23 @@
                                 <div class="">
                                     <p class="mb-2 tx-12 text-muted">عددالمسجلين</p>
                                    @php
-                                   
+
                                     $count = 0 ;
                                     if (Auth::guard('client')->check()) {
-                                    
+
                                         foreach ($attendance as $key => $value) {
                                             foreach ($value->courses as $key => $course) {
-                                            
+
                                                 $count += $course->attendances_count;
                                             }
                                         }
-                                            
-                                            
+
+
                                         }elseif (Auth::guard('admin')->check()){
-                                        
+
                                             $attendance = $attendance;
                                         }
-                                        
+
                                     @endphp
                                     <div class="">
                                         <h4 class="mb-1 font-weight-bold">@if(Auth::guard('admin')->check()){{$attendance}}
@@ -272,9 +272,9 @@
                                     <li><a href="#tab12" data-toggle="tab" class="d-flex"><i
                                                 class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i>الدورات
                                             القائمة</a></li>
-                                    <li><a href="#tab13" data-toggle="tab" class="d-flex"><i
+                                    {{-- <li><a href="#tab13" data-toggle="tab" class="d-flex"><i
                                                 class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i>اخر
-                                            الدعوات</a></li>
+                                            الدعوات</a></li> --}}
                                 </ul>
                             </div>
                         </div>
@@ -351,17 +351,9 @@
                                                     </th>
                                                     <th><i class="far fa-calendar"></i> تاريخ البداية </th>
                                                     <th><i class="far fa-calendar"></i> عدد الايام </th>
-                                                    {{-- <th>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                            height="16" fill="currentColor" class="bi bi-check-circle"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                            <path
-                                                                d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05" />
-                                                        </svg>
-                                                        الحالة
-                                                    </th> --}}
+                                                    <th>
+                                                       
+                                                    </th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -375,12 +367,10 @@
                                                     <td>{{$item->program->name}}</td>
                                                     <td>{{$item->start}}</td>
                                                     <td>{{$item->duration}}ايام</td>
-                                                    {{-- <td>
-                                                        <span
-                                                            class="tag tag-rounded bg-primary-transparent text-success">Third
-                                                            tag</span>
-                                                        <i class="mdi mdi-dots-horizontal text-gray"></i>
-                                                    </td> --}}
+                                                    <td class="d-flex filter-col-cell">
+                                                        <a href="{{ route('courses.show', [$item->id]) }}"><i
+                                                                class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
+                                                    </td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>

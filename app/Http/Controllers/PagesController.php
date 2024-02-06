@@ -24,10 +24,9 @@ class PagesController extends Controller
         }
         if (Auth::guard('admin')->check()) {
 
-            $programsActice = Program::where('start', '<=', $now)
-                ->where('end', '>=', $now)->orderBy('created_at', 'desc')->withCount('courses')->get();
+            $programsActice = Program::where('end', '>=', $now)->orderBy('created_at', 'desc')->withCount('courses')->get();
         } elseif (Auth::guard('client')->check()) {
-            $programsActice = Program::where('client_id', Auth::user()->id)->where('start', '<=', $now)->withCount('courses')
+            $programsActice = Program::where('client_id', Auth::user()->id)->withCount('courses')
                 ->where('end', '>=', $now)
                 ->orderBy('created_at', 'desc')->get();
         }
@@ -70,14 +69,14 @@ class PagesController extends Controller
             $attendance = 0 ;
         }
         if (Auth::guard('client')->check()) {
-           
+
             $attendance = Program::where('client_id', Auth::user()->id)->with(['courses'=>function($q){
                 $q->withCount('attendances');
             }])->get();
         }elseif (Auth::guard('trainer')->check()){
             $attendance = 0 ;
         }
-        
+
         return view('dashboard.index', compact('programs', 'programsActice', 'courses', 'events', 'attendance'));
     }
 }
