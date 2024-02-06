@@ -24,9 +24,10 @@ class PagesController extends Controller
         }
         if (Auth::guard('admin')->check()) {
 
-            $programsActice = Program::where('end', '>=', $now)->orderBy('created_at', 'desc')->withCount('courses')->get();
+            $programsActice = Program::where('start', '<=', $now)
+                ->where('end', '>=', $now)->orderBy('created_at', 'desc')->withCount('courses')->get();
         } elseif (Auth::guard('client')->check()) {
-            $programsActice = Program::where('client_id', Auth::user()->id)->withCount('courses')
+            $programsActice = Program::where('client_id', Auth::user()->id)->where('start', '<=', $now)->withCount('courses')
                 ->where('end', '>=', $now)
                 ->orderBy('created_at', 'desc')->get();
         }
