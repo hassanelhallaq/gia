@@ -204,9 +204,10 @@ class QuizController extends Controller
             $quizAttendInteractiveAvF = number_format($quizAttendInteractiveAv, 1);
             $attendanceRow['نسبه الاجتياز'] = $rate;
             $attendanceRow["الحصول على الشهاده"] = $certif;
-            $attendanceRow["نسبه الاختبار القبلي"] = $totalBefor;
-            $attendanceRow["نسبه الاختبار البعدي"] = $totalAfter;
+            $attendanceRow["نسبه الاختبار القبلي"] = $totalBefor  ."٪";
+            $attendanceRow["نسبه الاختبار البعدي"] = $totalAfter  ."٪";
             $attendanceRow["نسبه تقيم المدرب"] = $quizAttendInteractiveAvF;
+            $attendanceRow["نسبه التحسن "] = $totalAfter -  $totalBefor ."٪"  ;
 
 
             // Add the attendance record to the pivoted data array
