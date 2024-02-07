@@ -26,12 +26,14 @@
         </div>
         <div class="main-dashboard-header-right">
             <div class="d-flex flex-wrap">
-                <a href="{{ route('attendance.xlsx', [$id]) }}"
-                class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i
+                @if($id)
+                 <a href="{{ route('attendance.xlsx', [$id]) }}"
+                 class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i
                     class="ti-stats-up project"></i></a>
-                <a
+                     <a
                     href="{{ route('certificate.management', [$id]) }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1">
                     الشهادات <i class="bi bi-clipboard-data tx-11"></i></a>
+                    @endif
                 <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"data-target="#modaladd" data-toggle="modal">
                     اضافة مشاركين جدد <i class="bi bi-plus"></i></button>
 
