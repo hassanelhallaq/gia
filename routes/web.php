@@ -69,6 +69,8 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::post('/attendance-sms', [CourseController::class, 'sendSms'])->name('attendance.sms');
         Route::get('/course/xlsx', [CourseController::class, 'courseXlsx'])->name('course.xlsx');
         Route::get('/attendance/xlsx/{id}', [AttendanceController::class, 'attendanceXlsx'])->name('attendance.xlsx');
+        Route::get('/quiz/xlsx/{id}', [QuizController::class, 'report'])->name('quiz.report');
+
 
         Route::get('/program/xlsx', [ProgramController::class, 'programXlsx'])->name('programs.xlsx');
         Route::put('/status-update/{id}', [CourseController::class, 'updateStatus'])->name('update.status');

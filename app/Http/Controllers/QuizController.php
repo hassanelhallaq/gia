@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
+use App\Models\AttendanceLogin;
 use App\Models\Course;
 use App\Models\Program;
 use App\Models\Question;
 use App\Models\Quiz;
+use App\Models\QuizCourse;
+use App\Models\RateAttendance;
+use App\Models\UserAnswer;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -70,8 +75,8 @@ class QuizController extends Controller
     public function show($id)
     {
 
-        $questions = Question::where('quiz_id',$id)->get();
-        return view('dashboard.quiz.detales',compact('questions','id'));
+        $questions = Question::where('quiz_id', $id)->get();
+        return view('dashboard.quiz.detales', compact('questions', 'id'));
     }
 
     /**
@@ -97,5 +102,126 @@ class QuizController extends Controller
     {
         $qu = Quiz::destroy($id);
         return response()->json(['icon' => 'success', 'title' => 'تم الحذف  بنجاح'], $qu ? 200 : 400);
+    }
+
+    public function report(Request $request, $id)
+    {
+        $attendances = Attendance::with('courses')->whereHas('courses', function ($q) use ($id) {
+            $q->where('course_id', $id);
+        })->get();
+        $course = Course::find($id);
+        $data = [];
+
+        // Initialize an empty array to hold the pivoted data
+        $pivotedData = [];
+
+        // Loop through each attendance record
+        foreach ($attendances as $attendance) {
+            $attendanceRow = [
+                'الاسم' => $attendance->name
+            ];
+
+            // Loop through each day of the course
+            for ($day = 1; $day <= $course->duration; $day++) {
+                $courseStartDate = \Carbon\Carbon::parse($course->start);
+
+                // Determine the date range for the current day
+                $startDate = $courseStartDate->copy()->addDays($day - 1)->startOfDay();
+                $endDate = $courseStartDate->copy()->addDays($day)->startOfDay();
+                $attendanceLogin = AttendanceLogin::where([['attendance_id', $attendance->id], ['course_id', $course->id]])->count();
+
+                // Check if there's a login record within the date range for the current day
+                $log = $attendance->attendance_logins
+                    ->whereBetween('created_at', [$startDate, $endDate])
+                    ->where('course_id', $course->id)
+                    ->first();
+
+                // Set the attendance status for the current day
+                $attendanceRow['اليوم ' . $day] = $log ? 'حاضر' : 'لم يحضر';
+            }
+            if ($attendanceLogin != 0) {
+                $rate = ($attendanceLogin / $course->duration) * 100;
+            } else {
+                $rate = 0;
+            }
+            if ($rate >= $course->percentage_certificate) {
+                $certif  = 'نعم';
+            } else {
+                $certif  = 'لا';
+            }
+
+            // quiz befor perc
+            $quiz = QuizCourse::where('course_id', $course->id)
+                ->with('quiz')
+                ->whereHas('quiz', function ($q) {
+                    $q->where('type', 'befor');
+                })
+                ->first();
+            if ($quiz) {
+                $responseAnswers = UserAnswer::where('quiz_id', $quiz->quiz_id)
+                    ->where('attendance_id', $attendance->id)
+                    ->get();
+                $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
+                $questions = Question::where('quiz_id', $quiz->quiz_id)
+                    ->with('userAswes', 'optionTrue')
+                    ->get();
+            } else {
+                $responseAnswersTrue = 0;
+            }
+
+            if ($responseAnswersTrue != 0) {
+                $totalBefor = ($responseAnswersTrue / $questions->count()) * 100;
+            } else {
+                $totalBefor = 0;
+            }
+
+            // quiz after perc
+            $quiz = QuizCourse::where('course_id', $course->id)
+                ->with('quiz')
+                ->whereHas('quiz', function ($q) {
+                    $q->where('type', 'after');
+                })
+                ->first();
+            if ($quiz) {
+                $responseAnswers = UserAnswer::where('quiz_id', $quiz->quiz_id)
+                    ->where('attendance_id', $attendance->id)
+                    ->get();
+                $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
+                $questions = Question::where('quiz_id', $quiz->quiz_id)
+                    ->with('userAswes', 'optionTrue')
+                    ->get();
+            } else {
+                $responseAnswersTrue = 0;
+            }
+            if ($responseAnswersTrue != 0) {
+                $totalAfter = ($responseAnswersTrue / $questions->count()) * 100;
+            } else {
+                $totalAfter = 0;
+            }
+
+            $quizAttendInteractiveAv = RateAttendance::where('attendance_id', $attendance->id)
+                ->with('rate')->avg('rate');
+            $quizAttendInteractiveAvF = number_format($quizAttendInteractiveAv, 1);
+            $attendanceRow['نسبه الاجتياز'] = $rate;
+            $attendanceRow["الحصول على الشهاده"] = $certif;
+            $attendanceRow["نسبه الاختبار القبلي"] = $totalBefor;
+            $attendanceRow["نسبه الاختبار البعدي"] = $totalAfter;
+            $attendanceRow["نسبه تقيم المدرب"] = $quizAttendInteractiveAvF;
+
+
+            // Add the attendance record to the pivoted data array
+            $pivotedData[] = $attendanceRow;
+        }
+
+        // Create a collection from the pivoted data
+        $pivotedCollection = collect($pivotedData);
+
+        // Generate and download the Excel file
+        return (new \Rap2hpoutre\FastExcel\FastExcel($pivotedCollection))->download('file.xlsx');
+
+
+        // Now $data contains attendance data for each day in separate rows
+
+
     }
 }
