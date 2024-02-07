@@ -410,6 +410,7 @@
 
     <!-- قبلي-->
     <!-- Begin Side Drawer before-->
+    @if($course)
     @foreach ($attendance as $item)
         <div class="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabindex="-1"
             id="drawerbefore_{{ $item->id }}" aria-labelledby="offcanvasWithBothOptionsLabel">
@@ -531,10 +532,12 @@
             </div>
         </div>
     @endforeach
+    @endif
     <!--/Sidebar-right-->
 
     <!--  بعدي-->
     <!-- Begin Side Drawer after -->
+    @if($course)
     @foreach ($attendance as $item)
         <div class="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabindex="-1"
             id="drawerafter_{{ $item->id }}" aria-labelledby="offcanvasWithBothOptionsLabel">
@@ -655,6 +658,7 @@
             </div>
         </div>
     @endforeach
+    @endif
     <div class="modal" id="sendSms">
         <div class="modal-dialog" role="document">
             <div class="modal-content modal-content-demo">

@@ -21,10 +21,11 @@ class AttendanceController extends Controller
     {
         $id = null;
         $course = null;
+        $attendanceLogin = null ;
         $attendance = Attendance::orderBy('created_at', 'desc')->when($request->name_search, function ($q) use ($request) {
             $q->where('seacrh_name', 'like', '%' . $request->name . '%');
         })->paginate(10);
-        return view("dashboard.attendance.index", compact("attendance", 'id', 'course'));
+        return view("dashboard.attendance.index", compact("attendance", 'id', 'course','attendanceLogin'));
     }
 
     /**
