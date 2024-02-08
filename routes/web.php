@@ -70,6 +70,8 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/course/xlsx', [CourseController::class, 'courseXlsx'])->name('course.xlsx');
         Route::get('/attendance/xlsx/{id}', [AttendanceController::class, 'attendanceXlsx'])->name('attendance.xlsx');
         Route::get('/quiz/xlsx/{id}', [QuizController::class, 'report'])->name('quiz.report');
+        Route::get('/quizBefor/xlsx/{id}', [QuizController::class, 'quizBefor'])->name('quiz.befor.report');
+        Route::get('/quizAfter/xlsx/{id}', [QuizController::class, 'quizAfter'])->name('quiz.after.report');
 
 
         Route::get('/program/xlsx', [ProgramController::class, 'programXlsx'])->name('programs.xlsx');

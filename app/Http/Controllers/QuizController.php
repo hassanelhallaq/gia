@@ -140,10 +140,11 @@ class QuizController extends Controller
                 $attendanceRow['اليوم ' . $day] = $log ? 'حاضر' : 'لم يحضر';
             }
             if ($attendanceLogin != 0) {
-                $rate = ($attendanceLogin / $course->duration) * 100;
+                $rate = intval(($attendanceLogin / $course->duration) * 100);
             } else {
                 $rate = 0;
             }
+
             if ($rate >= $course->percentage_certificate) {
                 $certif  = 'نعم';
             } else {
@@ -195,6 +196,11 @@ class QuizController extends Controller
             }
             if ($responseAnswersTrue != 0) {
                 $totalAfter = ($responseAnswersTrue / $questions->count()) * 100;
+                if ($totalAfter > 100) {
+                    $totalAfter = $totalAfter - 100;
+                } else {
+                    $totalAfter;
+                }
             } else {
                 $totalAfter = 0;
             }
@@ -204,10 +210,10 @@ class QuizController extends Controller
             $quizAttendInteractiveAvF = number_format($quizAttendInteractiveAv, 1);
             $attendanceRow['نسبه الاجتياز'] = $rate;
             $attendanceRow["الحصول على الشهاده"] = $certif;
-            $attendanceRow["نسبه الاختبار القبلي"] = $totalBefor  ."٪";
-            $attendanceRow["نسبه الاختبار البعدي"] = $totalAfter  ."٪";
+            $attendanceRow["نسبه الاختبار القبلي"] = $totalBefor  . "٪";
+            $attendanceRow["نسبه الاختبار البعدي"] = $totalAfter  . "٪";
             $attendanceRow["نسبه تقيم المدرب"] = $quizAttendInteractiveAvF;
-            $attendanceRow["نسبه التحسن "] = $totalAfter -  $totalBefor ."٪"  ;
+            $attendanceRow["نسبه التحسن "] = $totalAfter == 0 ? 0 . '%' : $totalAfter -  $totalBefor . "٪";
 
 
             // Add the attendance record to the pivoted data array
@@ -224,5 +230,119 @@ class QuizController extends Controller
         // Now $data contains attendance data for each day in separate rows
 
 
+    }
+
+    public function quizBefor(Request $request, $id)
+    {
+        $attendances = Attendance::with('courses')->whereHas('courses', function ($q) use ($id) {
+            $q->where('course_id', $id);
+        })->get();
+        $course = Course::find($id);
+        $quizBefor = Quiz::where('type', 'befor')->with('courses')->whereHas('courses', function ($q) use ($id) {
+            $q->where('course_id', $id);
+        })->first();
+        $data = [];
+        $pivotedData = [];
+        foreach ($attendances as $attendance) {
+            $quiz = QuizCourse::where('course_id', $course->id)
+                ->with('quiz')
+                ->whereHas('quiz', function ($q) {
+                    $q->where('type', 'befor');
+                })
+                ->first();
+            if ($quiz) {
+                $responseAnswers = UserAnswer::where('quiz_id', $quiz->quiz_id)
+                    ->where('attendance_id', $attendance->id)
+                    ->get();
+                $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
+                $questions = Question::where('quiz_id', $quiz->quiz_id)
+                    ->with('userAswes', 'optionTrue')
+                    ->get();
+            } else {
+                $responseAnswersTrue = 0;
+            }
+
+            if ($responseAnswersTrue != 0) {
+                $totalBefor = ($responseAnswersTrue / $questions->count()) * 100;
+            } else {
+                $totalBefor = 0;
+            }
+            $attendanceRow = [
+                'رقم الهاتف' => $attendance->phone_number,
+                'الاسم' => $attendance->name,
+                'النتيجه' => $totalBefor
+
+            ];
+            foreach ($quizBefor->questions as $question) {
+                $attendanceAnswer = UserAnswer::where([['quiz_id', $quizBefor->id], ['question_id', $question->id], ['attendance_id', $attendance->id]])->first();
+                if ($attendanceAnswer) {
+                    $attendanceRow[' ' . $question->name] = $attendanceAnswer->is_true;
+
+                } else {
+                    $attendanceRow[' ' . $question->name] = 0;
+                }
+            }
+            $pivotedData[] = $attendanceRow;
+        }
+        $pivotedCollection = collect($pivotedData);
+        // Generate and download the Excel file
+        return (new \Rap2hpoutre\FastExcel\FastExcel($pivotedCollection))->download('file.xlsx');
+    }
+
+    public function quizAfter(Request $request, $id)
+    {
+        $attendances = Attendance::with('courses')->whereHas('courses', function ($q) use ($id) {
+            $q->where('course_id', $id);
+        })->get();
+        $course = Course::find($id);
+        $quizBefor = Quiz::where('type', 'after')->with('courses')->whereHas('courses', function ($q) use ($id) {
+            $q->where('course_id', $id);
+        })->first();
+        $data = [];
+        $pivotedData = [];
+        foreach ($attendances as $attendance) {
+            $quiz = QuizCourse::where('course_id', $course->id)
+                ->with('quiz')
+                ->whereHas('quiz', function ($q) {
+                    $q->where('type', 'after');
+                })
+                ->first();
+            if ($quiz) {
+                $responseAnswers = UserAnswer::where('quiz_id', $quiz->quiz_id)
+                    ->where('attendance_id', $attendance->id)
+                    ->get();
+                $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
+                $questions = Question::where('quiz_id', $quiz->quiz_id)
+                    ->with('userAswes', 'optionTrue')
+                    ->get();
+            } else {
+                $responseAnswersTrue = 0;
+            }
+
+            if ($responseAnswersTrue != 0) {
+                $totalBefor = ($responseAnswersTrue / $questions->count()) * 100;
+            } else {
+                $totalBefor = 0;
+            }
+            $attendanceRow = [
+                'رقم الهاتف' => $attendance->phone_number,
+                'الاسم' => $attendance->name,
+                'النتيجه' => $totalBefor
+
+            ];
+            foreach ($quizBefor->questions as $question) {
+                $attendanceAnswer = UserAnswer::where([['quiz_id', $quizBefor->id], ['question_id', $question->id], ['attendance_id', $attendance->id]])->first();
+                if ($attendanceAnswer) {
+                    $attendanceRow[' ' . $question->name] = $attendanceAnswer->is_true;
+
+                } else {
+                    $attendanceRow[' ' . $question->name] = 0;
+                }
+            }
+            $pivotedData[] = $attendanceRow;
+        }
+        $pivotedCollection = collect($pivotedData);
+        // Generate and download the Excel file
+        return (new \Rap2hpoutre\FastExcel\FastExcel($pivotedCollection))->download('file.xlsx');
     }
 }

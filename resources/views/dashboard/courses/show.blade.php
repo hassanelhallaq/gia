@@ -35,6 +35,10 @@
                     class="btn btn-outline-light btn-with-icon btn-sm mr-1"> ادارة المشاركين <i class="la la-cog"></i></a>
                 <a href="{{route('quiz.report',[$course->id])}}" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج
                     الاختبار <i class="bi bi-box-arrow-in-down"></i></a>
+                    <a href="{{route('quiz.befor.report',[$course->id])}}" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج
+                        الاختبار القبلي <i class="bi bi-box-arrow-in-down"></i></a>
+                        <a href="{{route('quiz.after.report',[$course->id])}}" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج
+                            الاختبار البعدي <i class="bi bi-box-arrow-in-down"></i></a>
                 <a href="{{ route('attendance.xlsx', [$course->id]) }}"
                     class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركين <i
                         class="bi bi-box-arrow-in-down"></i></a>
@@ -360,7 +364,8 @@
 
                                         <td>
                                             @if ($attendanceLogin != 0)
-                                                {{ ($attendanceLogin / $course->duration) * 100 }}%
+                                                {{intval(($attendanceLogin / $course->duration) * 100)
+                                                }}%
                                             @else
                                                 0%
                                             @endif
