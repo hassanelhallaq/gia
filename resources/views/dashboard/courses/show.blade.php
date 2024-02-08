@@ -39,6 +39,8 @@
                         الاختبار القبلي <i class="bi bi-box-arrow-in-down"></i></a>
                         <a href="{{route('quiz.after.report',[$course->id])}}" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج
                             الاختبار البعدي <i class="bi bi-box-arrow-in-down"></i></a>
+                            <a href="{{route('quiz.rate.report',[$course->id])}}" class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج
+                                الاختبار التفاعلي <i class="bi bi-box-arrow-in-down"></i></a>
                 <a href="{{ route('attendance.xlsx', [$course->id]) }}"
                     class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركين <i
                         class="bi bi-box-arrow-in-down"></i></a>

@@ -9,6 +9,7 @@ use App\Models\Program;
 use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\QuizCourse;
+use App\Models\Rate;
 use App\Models\RateAttendance;
 use App\Models\UserAnswer;
 use Illuminate\Http\Request;
@@ -277,7 +278,6 @@ class QuizController extends Controller
                 $attendanceAnswer = UserAnswer::where([['quiz_id', $quizBefor->id], ['question_id', $question->id], ['attendance_id', $attendance->id]])->first();
                 if ($attendanceAnswer) {
                     $attendanceRow[' ' . $question->name] = $attendanceAnswer->is_true;
-
                 } else {
                     $attendanceRow[' ' . $question->name] = 0;
                 }
@@ -334,9 +334,37 @@ class QuizController extends Controller
                 $attendanceAnswer = UserAnswer::where([['quiz_id', $quizBefor->id], ['question_id', $question->id], ['attendance_id', $attendance->id]])->first();
                 if ($attendanceAnswer) {
                     $attendanceRow[' ' . $question->name] = $attendanceAnswer->is_true;
-
                 } else {
                     $attendanceRow[' ' . $question->name] = 0;
+                }
+            }
+            $pivotedData[] = $attendanceRow;
+        }
+        $pivotedCollection = collect($pivotedData);
+        // Generate and download the Excel file
+        return (new \Rap2hpoutre\FastExcel\FastExcel($pivotedCollection))->download('file.xlsx');
+    }
+
+    public function quizRate(Request $request, $id)
+    {
+        $attendances = Attendance::with('courses')->whereHas('courses', function ($q) use ($id) {
+            $q->where('course_id', $id);
+        })->get();
+        $data = [];
+        $pivotedData = [];
+        foreach ($attendances as $attendance) {
+            $attendanceRow = [
+                'رقم الهاتف' => $attendance->phone_number,
+                'الاسم' => $attendance->name,
+            ];
+
+            $rates = Rate::where('course_id', $id)->get();
+            foreach ($rates as $question) {
+                $userRate = RateAttendance::where([['attendance_id',$attendance->id],['rate_id',$question->id]])->first();
+                if ($userRate) {
+                    $attendanceRow[$question->question] = $userRate->rate;
+                } else {
+                    $attendanceRow[$question->name] = 0;
                 }
             }
             $pivotedData[] = $attendanceRow;
