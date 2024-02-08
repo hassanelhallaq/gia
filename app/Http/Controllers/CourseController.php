@@ -414,7 +414,7 @@ class CourseController extends Controller
 
             // Make the HTTP request using Laravel HTTP client
             $response = Http::post('https://www.mora-sa.com/api/v1/sendsms', [
-                'api_key' => "6052582b4d3853cae29fb67c8c9109f34c735af5",
+                'api_key' => "b4b7dd1dc34bac417c190a5e148b61c55503df08",
                 'username' => "gialearning",
                 'message' => $massege . "\n" . route('invitation.index', [$attendance->id, 'course_id' => $request->course_id]),
                 'sender' => "GiaLearning",
