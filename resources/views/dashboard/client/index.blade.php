@@ -16,9 +16,7 @@
 
                         <div class="mr-auto d-block tx-20">
                             <a href="{{route('clients.create')}}" class="btn btn-warning-gradient btn-with-icon" type="button" > اضف <i class="bi bi-floppy"></i></a>
-                            <a href=""><i class="typcn typcn-calendar-outline"></i></a>
-                            <a href=""><i class="bi bi-grid"></i></a>
-                            <a href=""><i class="bi bi-list bg-black-9 text-white"></i></a>
+                           
                         </div>
                     </div>
                 </div>

@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use App\Models\AttendanceCourse;
+use App\Models\AttendanceLogin;
 use App\Models\Course;
 use App\Models\Question;
 use App\Models\QuestionOption;
 use App\Models\QuizCourse;
 use App\Models\UserAnswer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Rap2hpoutre\FastExcel\Facades\FastExcel;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AttendanceController extends Controller
@@ -21,11 +24,11 @@ class AttendanceController extends Controller
     {
         $id = null;
         $course = null;
-        $attendanceLogin = null ;
+        $attendanceLogin = null;
         $attendance = Attendance::orderBy('created_at', 'desc')->when($request->name_search, function ($q) use ($request) {
             $q->where('seacrh_name', 'like', '%' . $request->name . '%');
         })->paginate(10);
-        return view("dashboard.attendance.index", compact("attendance", 'id', 'course','attendanceLogin'));
+        return view("dashboard.attendance.index", compact("attendance", 'id', 'course', 'attendanceLogin'));
     }
 
     /**
@@ -151,7 +154,7 @@ class AttendanceController extends Controller
         $list = collect($data);
         return (new \Rap2hpoutre\FastExcel\FastExcel($list))->download('file.xlsx');
     }
-    public function QuizXlsx(Request $request,$courseId, $id)
+    public function QuizXlsx(Request $request, $courseId, $id)
     {
 
         $attendance = Attendance::find($id);
@@ -198,7 +201,7 @@ class AttendanceController extends Controller
         $list = collect($data);
         return (new \Rap2hpoutre\FastExcel\FastExcel($list))->download('file.xlsx');
     }
-    public function QuizAfterXlsx(Request $request,$courseId, $id)
+    public function QuizAfterXlsx(Request $request, $courseId, $id)
     {
 
         $attendance = Attendance::find($id);
@@ -244,5 +247,34 @@ class AttendanceController extends Controller
             return back();
         $list = collect($data);
         return (new \Rap2hpoutre\FastExcel\FastExcel($list))->download('file.xlsx');
+    }
+
+    public function upload(Request $request, $id)
+    {
+        $file = $request->file('excel_file');
+        $rows = (new FastExcel)->sheet()->import($file);
+        foreach ($rows as $row) {
+            $name = $row['name'];
+            $phone = $row['phone_number'];
+            $attendance =  Attendance::create(['name' => $name, 'phone_number' => $phone]);
+            $attendance->courses()->attach($id);
+        }
+        return redirect()->back();
+    }
+
+    public function attendCourse(Request $request)
+    {
+        $course = Course::find($request->course_id);
+        $start = $course->start;
+        $courseStartDate = Carbon::parse($course->start);
+        $courseStartDay =  $courseStartDate
+            ->copy()
+            ->addDays($request->day)
+            ->startOfDay();
+        $attendanceLogin = new AttendanceLogin();
+        $attendanceLogin->attendance_id = $request->attendance_id;
+        $attendanceLogin->course_id = $request->course_id;
+        $attendanceLogin->created_at = $courseStartDay;
+        $attendanceLogin->save();
     }
 }

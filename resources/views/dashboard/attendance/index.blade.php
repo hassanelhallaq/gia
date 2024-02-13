@@ -34,7 +34,7 @@
                     href="{{ route('certificate.management', [$id]) }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1">
                     الشهادات <i class="bi bi-clipboard-data tx-11"></i></a>
                     @endif
-                <button class="btn btn-outline-light btn-with-icon btn-sm mr-1"data-target="#modaladd" data-toggle="modal">
+                <button class="btn btn-outline-light btn-with-icon btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal">
                     اضافة مشاركين جدد <i class="bi bi-plus"></i></button>
 
                 <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms"
@@ -272,7 +272,49 @@
         </div>
         <!--closed filter bottom  -->
     </div>
+    <div class="modal" id="choseAttendType">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h5 class="modal-title"> اضافة مشارك </h5><button aria-label="Close" class="close"
+                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="">
 
+                    <div class="modal-footer border-0">
+                        <button class="btn btn-outline-light btn-with-icon btn-sm mr-1" data-dismiss="modal" data-target="#excel_file" data-toggle="modal" type="button"
+                             > رفع ملف <i class="bi bi-floppy"></i></button>
+                       <button class="btn btn-outline-light btn-with-icon btn-sm mr-1" data-dismiss="modal" data-target="#modaladd" data-toggle="modal" type="button"
+                             > اضافه مشترك<i class="bi bi-floppy"></i></button>                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="excel_file">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h5 class="modal-title"> اضافة مشارك </h5><button aria-label="Close" class="close"
+                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mt-4">
+                                <label for="example"> الملف  </label>
+                                <input type="file" class="form-control" required="" id="excel_file" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button class="btn btn-warning-gradient btn-with-icon" type="button"
+                            onclick="performStoreExcel({{ $id }})"> حفظ <i class="bi bi-floppy"></i></button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal" id="modaladd">
         <div class="modal-dialog " role="document">
             <div class="modal-content modal-content-demo">
@@ -737,6 +779,11 @@
             formData.append('course_id', id);
             storepart('/dashboard/admin/attendance', formData)
         }
+        function performStoreExcel(id) {
+            let formData = new FormData();
+            formData.append('excel_file', document.getElementById('excel_file').files[0]);
+            storepart('/dashboard/admin/attendance/upload-excel/'+id, formData)
+        }
 
         function performStoreSms(id) {
             let formData = new FormData();
@@ -762,10 +809,10 @@
                 $(".sub_chk:checked").each(function() {
                     allVals.push($(this).attr('data-id'));
                 });
-                debugger
+
 
                 if (allVals.length <= 0) {
-                    debugger
+
                     alert("Please select row.");
                 } else {
                     var join_selected_values = allVals.join(",");
@@ -789,20 +836,13 @@
                             course_id: courseId
                         },
                         success: function(data) {
-                            if (data['success']) {
-                                Swal.fire({
+                                 Swal.fire({
                                     position: 'center',
                                     icon: 'success',
-                                    title: 'Quiz Archived successfully',
+                                    title: '  successfully',
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
-                                debugger
-                            } else if (data['error']) {
-                                alert(data['error']);
-                            } else {
-                                alert('Whoops Something went wrong!!');
-                            }
                         },
                         error: function(data) {
                             alert(data.responseText);
@@ -825,6 +865,7 @@
             formData.append('course_id', document.getElementById('course_id').value);
             storepart('/dashboard/admin/attendance/' + id, formData)
         }
+
     </script>
 
     <script>

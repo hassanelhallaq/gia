@@ -304,12 +304,14 @@
                     <div class="modal-body">
                         <div class="row mg-t-10">
                             <div class="col  d-flex justify-content-between flex-wrap">
-                                <label class="rdiobox"><input name="rdio" id="befor" type="radio"> <span>
+                                <label class="rdiobox"><input selected name="rdio" id="befor" type="radio"> <span>
                                         اختبار قبلي </span></label>
                                 <label class="rdiobox"><input checked="" id="after" name="rdio"
                                         type="radio"> <span> اختبار بعدي </span></label>
                                 <label class="rdiobox"><input id="interactive" name="rdio" type="radio"> <span>
                                         اختبار تفاعلي </span></label>
+                                 <label class="rdiobox"><input id="rate" name="rdio" type="radio"> <span>
+                                             تقيم المشاركين </span></label>
                             </div>
                             <div class="col-12 mt-4">
                                 <label for="example"> اسم الأختبار </label>
@@ -371,6 +373,9 @@
             formData.append('befor', document.getElementById('befor').checked);
             formData.append('after', document.getElementById('after').checked);
             formData.append('interactive', document.getElementById('interactive').checked);
+            formData.append('rate', document.getElementById('rate').checked);
+
+
             formData.append('link', document.getElementById('link').value);
             formData.append('how_attend', document.getElementById('how_attend').value);
             storeRoute('/dashboard/admin/quizes', formData)
@@ -406,6 +411,22 @@
     </script>
 
 <script>
+    $(document).ready(function () {
+        // Initially hide the link input
+        $('#link').hide();
+
+        // On change event for the how_attend select element
+        $('#how_attend').change(function () {
+            // If the selected option is 'questions', hide the link input
+            if ($(this).val() === 'questions') {
+                $('#link').hide();
+            } else {
+                // If the selected option is 'link', show the link input
+                $('#link').show();
+            }
+        });
+    });
+
     $(document).ready(function () {
         // Initially hide the link input
         $('#link').hide();

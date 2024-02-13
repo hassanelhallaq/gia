@@ -27,8 +27,7 @@ return new class extends Migration
             $table->tinyInteger('attendance_questionnaire')->default('0');
             $table->tinyInteger('image')->default('0');
             $table->tinyInteger('study')->default('0');
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->string('category_id');
             $table->unsignedBigInteger('program_id');
             $table->foreign('program_id')->references('id')->on('programs')->onDelete('cascade');
             $table->timestamps();

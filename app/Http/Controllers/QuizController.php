@@ -44,6 +44,9 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->rate == 'true'){
+            return response()->json(['redirect' => route('get.rate', [$quiz->id])]);
+        }
         $data = $request->all();
         $validator = Validator($data, [
             'name' => 'required|string',
@@ -55,6 +58,7 @@ class QuizController extends Controller
         if ($validator->fails()) {
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
+
         if ($request->befor == 'true') {
             $data['type'] = 'befor';
         } elseif ($request->after == 'true') {
@@ -62,6 +66,7 @@ class QuizController extends Controller
         } elseif ($request->interactive == 'true') {
             $data['type'] = 'interactive';
         }
+
         $quiz = Quiz::create($data);
         if ($request->how_attend == 'questions') {
             return response()->json(['redirect' => route('quiz.questions', [$quiz->id])]);

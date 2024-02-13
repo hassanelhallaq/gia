@@ -83,8 +83,10 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::post('/courses-files', [CourseFileController::class, 'store']);
         Route::post('/courses-links', [CourseLinkController::class, 'store']);
         Route::resource('attendance', AttendanceController::class);
-
+        Route::post('/attendance/upload-excel/{courseId}', [AttendanceController::class, 'upload'])->name('attendance.upload');
         Route::post('/update/certifcate', [CertificateController::class, 'updateCertifcate'])->name('updateCertifcate');
+        Route::post('/attend', [AttendanceController::class, 'attendCourse'])->name('attend.course');
+
 
         // روت مؤقت
         Route::get('/quiz/detales', function () {

@@ -51,13 +51,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group has-success mg-b-0">
                                     <label for="example"> الفئة </label>
-                                    <select id="category_id" class="form-control select2">
-                                        @foreach ($categories as $item)
-                                            <option value="{{ $item->id }}">
-                                                {{ $item->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    <input class="form-control" required="" type="text" id="category_id">
                                 </div>
                             </div>
                             <div class="col-lg-6 mg-t-20 mg-lg-t-0">

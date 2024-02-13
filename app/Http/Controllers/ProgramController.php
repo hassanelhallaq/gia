@@ -38,11 +38,10 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        $clients = Client::all();
+         $clients = Client::all();
         $trainers = Trainer::all();
 
-        return view("dashboard.programs.create", compact('categories', 'clients','trainers'));
+        return view("dashboard.programs.create", compact( 'clients','trainers'));
     }
 
     /**

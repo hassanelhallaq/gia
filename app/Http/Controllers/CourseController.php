@@ -60,8 +60,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        if (Auth::guard('admin')->check()) {
+         if (Auth::guard('admin')->check()) {
             $clients = Client::all();
             $program = Program::all();
         } elseif (Auth::guard('client')->check()) {
@@ -69,7 +68,7 @@ class CourseController extends Controller
             $program = Program::where('client_id', Auth::user()->id)->get();
         }
         $trainers = Trainer::all();
-        return view("dashboard.courses.create", compact('program', 'categories', 'clients', 'trainers'));
+        return view("dashboard.courses.create", compact('program',  'clients', 'trainers'));
     }
     public function createCourse($id)
     {
@@ -371,7 +370,7 @@ class CourseController extends Controller
 
             // Make the HTTP request using Laravel HTTP client
             $response = Http::post('https://www.mora-sa.com/api/v1/sendsms', [
-                'api_key' => "6052582b4d3853cae29fb67c8c9109f34c735af5",
+                'api_key' => env('api_key_sms'),
                 'username' => "gialearning",
                 'message' => $massege . "\n" . route('invitation.index', [$attendance->id, 'course_id' => $request->course_id]),
                 'sender' => "GiaLearning",
@@ -379,9 +378,8 @@ class CourseController extends Controller
                 'response' => $response,
             ]);
             // Get the server response
-            $server_output = $response->body();
-
-            // Further processing...
+              $server_output = $response->body();
+             // Further processing...
             // if ($server_output == "OK") { echo "1"; } else { echo "0"; }
         }
     }
@@ -414,7 +412,7 @@ class CourseController extends Controller
 
             // Make the HTTP request using Laravel HTTP client
             $response = Http::post('https://www.mora-sa.com/api/v1/sendsms', [
-                'api_key' => "b4b7dd1dc34bac417c190a5e148b61c55503df08",
+                'api_key' => env('api_key_sms'),
                 'username' => "gialearning",
                 'message' => $massege . "\n" . route('invitation.index', [$attendance->id, 'course_id' => $request->course_id]),
                 'sender' => "GiaLearning",
@@ -422,12 +420,12 @@ class CourseController extends Controller
                 'response' => $response,
             ]);
             // Get the server response
-            $server_output = $response->body();
+            return  $server_output = $response->body();
 
             // Further processing...
             // if ($server_output == "OK") { echo "1"; } else { echo "0"; }
         }
-        return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], null ? 201 : 400);
+        return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'],200 );
     }
     public function courseXlsx(Request $request)
     {

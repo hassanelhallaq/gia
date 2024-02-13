@@ -359,6 +359,7 @@
                                                         <span class="dropdown-item text-danger"> اليوم {{ $day }}
                                                             (غير حاضر)
                                                         </span>
+                                                        <button class=" btn btn-warning-gradient btn-with-icon mr-1" type="button" onclick="attend({{$item->id}},{{$course->id}},{{$day}})">تسجيل حضور</button>
                                                     @endif
                                                 @endfor
                                             </div>
@@ -954,6 +955,13 @@
             formData.append("_method", "PUT")
             formData.append('status', 'active');
             storeRoute('/dashboard/admin/status-update/' + id, formData)
+        }
+        function attend(id,courseId,day) {
+            let formData = new FormData();
+            formData.append('course_id', courseId);
+            formData.append('attendance_id', id);
+            formData.append('day', day);
+            storepart('/dashboard/admin/attend' , formData)
         }
 
         function performUpdate(id) {

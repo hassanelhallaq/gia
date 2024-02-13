@@ -37,6 +37,7 @@
 
                     @if ($quizAtten == null)
                         @if ($course->status_befor == 'active')
+                            @if($quiz)
                             @if ($quiz->quiz->how_attend = 'questions')
                                 <div class="card_icon"><a
                                         href="{{ route('quiz.view', ['quizId' => $quiz->quiz_id, 'clientId' => $attendance->id]) }}"
@@ -48,6 +49,7 @@
                                     @else
                                         <div class="card_icon"><a href="https://shorturl.at/osyB0 "
                                                 data-translate="submit">&#10140; </a>
+                            @endif
                             @endif
                         @endif
                     @endif

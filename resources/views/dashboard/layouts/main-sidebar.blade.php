@@ -23,7 +23,7 @@
                         <li class=""><a class="slide-item" href="{{route('programs.index')}}"> البرامج </a></li>
                         @if(Auth::guard('admin')->check())
 
-                        <li class=""><a class="slide-item" href="{{route('categories.index')}}"> الفئات </a></li>
+                        {{-- <li class=""><a class="slide-item" href="{{route('categories.index')}}"> الفئات </a></li> --}}
                         @endif
                         <li class=""><a class="slide-item" href="{{route('courses.index')}}"> الدورات التدريبية </a></li>
                     </ul>

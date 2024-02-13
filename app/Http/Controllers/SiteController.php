@@ -95,7 +95,13 @@ class SiteController extends Controller
         $quizAfter = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz', function ($q) {
             $q->where('type', 'after');
         })->first();
-        $quizAtten = QuizAttendance::where('quiz_id', $quiz->quiz_id)->where('attendance_id', $id)->first();
+        
+        if ($quiz) {
+            $quizAtten = QuizAttendance::where('quiz_id', $quiz->quiz_id)->where('attendance_id', $id)->first();
+        } else {
+            $quizAtten = null;
+        }
+
         if ($quizAfter) {
             $quizAttenAfter = QuizAttendance::where('quiz_id', $quizAfter->quiz_id)->where('attendance_id', $id)->first();
         } else {
