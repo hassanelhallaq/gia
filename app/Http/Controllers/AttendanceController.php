@@ -277,4 +277,17 @@ class AttendanceController extends Controller
         $attendanceLogin->created_at = $courseStartDay;
         $attendanceLogin->save();
     }
+    public function deleteAttendCourse(Request $request)
+    {
+        $course = Course::find($request->course_id);
+        $start = $course->start;
+        $courseStartDate = Carbon::parse($course->start);
+        $courseStartDay =  $courseStartDate
+            ->copy()
+            ->addDays($request->day)
+            ->startOfDay();
+        $attendanceLogin =   AttendanceLogin::where([['course_id',$request->course_id],['attendance_id',$request->attendance_id],['created_at',$courseStartDay]])->delete();
+
+    }
+
 }

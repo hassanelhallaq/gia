@@ -42,6 +42,8 @@
                         <li><a class="slide-item" href="{{route('admins.index')}}">الادارة </a></li>
                         <li><a class="slide-item" href="{{route('clients.index')}}">العملاء</a></li>
                         <li><a class="slide-item" href="{{route('trainers.index')}}">المدربين</a></li>
+                        <li><a class="slide-item" href="{{route('attendance.index')}}">المشاركين</a></li>
+
                     </ul>
                 </li>
                 <li class="slide">

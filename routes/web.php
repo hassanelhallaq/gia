@@ -86,6 +86,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::post('/attendance/upload-excel/{courseId}', [AttendanceController::class, 'upload'])->name('attendance.upload');
         Route::post('/update/certifcate', [CertificateController::class, 'updateCertifcate'])->name('updateCertifcate');
         Route::post('/attend', [AttendanceController::class, 'attendCourse'])->name('attend.course');
+        Route::post('/delete-attend', [AttendanceController::class, 'deleteAttendCourse'])->name('delete.attend.course');
 
 
         // روت مؤقت

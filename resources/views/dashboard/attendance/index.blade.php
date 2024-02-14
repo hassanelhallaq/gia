@@ -177,30 +177,27 @@
                                                             @endphp
                                                             @for ($day = 1; $day <= $course->duration; $day++)
                                                                 @php
-                                                                    $log = $item->attendance_logins
-                                                                        ->whereBetween('created_at', [
-                                                                            $courseStartDate
-                                                                                ->copy()
-                                                                                ->addDays($day - 1)
-                                                                                ->startOfDay(),
-                                                                            $courseStartDate
-                                                                                ->copy()
-                                                                                ->addDays($day)
-                                                                                ->startOfDay(),
-                                                                        ])
-                                                                        ->where('course_id', $course->id)
-                                                                        ->first();
+                                                                     $log = $item->attendance_logins
+                                                            ->where('created_at',
+
+                                                                $courseStartDate
+                                                                    ->copy()
+                                                                    ->addDays($day)
+                                                                    ->startOfDay(),
+                                                            )
+                                                            ->where('course_id', $course->id)
+                                                            ->first();
                                                                 @endphp
                                                                 @if ($log)
-                                                                    <span class="dropdown-item text-success"> اليوم
-                                                                        {{ $day }} (حاضر)
-                                                                        {{ $courseStartDate->copy()->addDays($day)->startOfDay()->format('y-m-d') }}
-                                                                    </span>
-                                                                @else
-                                                                    <span class="dropdown-item text-danger"> اليوم
-                                                                        {{ $day }} (غير حاضر)
-                                                                        {{ $courseStartDate->copy()->addDays($day)->startOfDay()->format('y-m-d') }}</span>
-                                                                @endif
+                                                                <span class="dropdown-item text-success"> اليوم
+                                                                    {{ $day }} (حاضر)</span>
+                                                                    <button class=" btn btn-warning-gradient btn-with-icon mr-1" type="button" onclick="Delattend({{$item->id}},{{$course->id}},{{$day}})">حذف حضور</button>
+                                                            @else
+                                                                <span class="dropdown-item text-danger"> اليوم {{ $day }}
+                                                                    (غير حاضر)
+                                                                </span>
+                                                                <button class=" btn btn-warning-gradient btn-with-icon mr-1" type="button" onclick="attend({{$item->id}},{{$course->id}},{{$day}})">تسجيل حضور</button>
+                                                            @endif
                                                             @endfor
                                                         </div>
                                                     </td>
@@ -865,7 +862,20 @@
             formData.append('course_id', document.getElementById('course_id').value);
             storepart('/dashboard/admin/attendance/' + id, formData)
         }
-
+        function attend(id,courseId,day) {
+            let formData = new FormData();
+            formData.append('course_id', courseId);
+            formData.append('attendance_id', id);
+            formData.append('day', day);
+            storepart('/dashboard/admin/attend' , formData)
+        }
+        function Delattend(id,courseId,day) {
+            let formData = new FormData();
+            formData.append('course_id', courseId);
+            formData.append('attendance_id', id);
+            formData.append('day', day);
+            storepart('/dashboard/admin/delete-attend' , formData)
+        }
     </script>
 
     <script>

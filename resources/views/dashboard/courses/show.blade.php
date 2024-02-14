@@ -339,22 +339,20 @@
                                                 @for ($day = 1; $day <= $course->duration; $day++)
                                                     @php
                                                         $log = $item->attendance_logins
-                                                            ->whereBetween('created_at', [
-                                                                $courseStartDate
-                                                                    ->copy()
-                                                                    ->addDays($day - 1)
-                                                                    ->startOfDay(),
+                                                            ->where('created_at',
+
                                                                 $courseStartDate
                                                                     ->copy()
                                                                     ->addDays($day)
                                                                     ->startOfDay(),
-                                                            ])
+                                                            )
                                                             ->where('course_id', $course->id)
                                                             ->first();
                                                     @endphp
                                                     @if ($log)
                                                         <span class="dropdown-item text-success"> اليوم
                                                             {{ $day }} (حاضر)</span>
+                                                            <button class=" btn btn-warning-gradient btn-with-icon mr-1" type="button" onclick="Delattend({{$item->id}},{{$course->id}},{{$day}})">حذف حضور</button>
                                                     @else
                                                         <span class="dropdown-item text-danger"> اليوم {{ $day }}
                                                             (غير حاضر)
@@ -962,6 +960,13 @@
             formData.append('attendance_id', id);
             formData.append('day', day);
             storepart('/dashboard/admin/attend' , formData)
+        }
+        function Delattend(id,courseId,day) {
+            let formData = new FormData();
+            formData.append('course_id', courseId);
+            formData.append('attendance_id', id);
+            formData.append('day', day);
+            storepart('/dashboard/admin/delete-attend' , formData)
         }
 
         function performUpdate(id) {
