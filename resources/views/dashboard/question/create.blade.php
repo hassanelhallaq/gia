@@ -119,6 +119,7 @@
                         <button class="btn btn-warning-gradient btn-with-icon" type="button"
                             onclick="createQuestions({{ $id }})"> حفظ
                             السؤال واضافه سؤال جديد<i class="bi bi-floppy"></i></button>
+                            {{-- <a class="btn btn-warning-gradient btn-with-icon" href="{{ route('duplicate.quiz',[$id]) }}"> الانتهاء ونسخ للاختبار القبلي </a> --}}
                         <a class="btn btn-warning-gradient btn-with-icon" href="{{ route('quizes.index') }}"> الانتهاء</a>
 
                     </div>

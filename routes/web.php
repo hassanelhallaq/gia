@@ -64,7 +64,10 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/programs-grid', [ProgramController::class, 'gridView'])->name('programs.grid');
         Route::get('/quiz.questions/{id}', [QuizController::class, 'question'])->name('quiz.questions');
         Route::resource('quizes', QuizController::class);
-        Route::get('/duplicate/{id}', [CourseController::class, 'question'])->name('duplicate.courses');
+        Route::get('/duplicate/{id}', [CourseController::class, 'duplicate'])->name('duplicate.courses');
+        Route::get('/duplicate-quiz/{id}', [QuizController::class, 'duplicate'])->name('duplicate.quiz');
+
+
         Route::get('/{id}/{course_id}/login', [AttendanceLoginController::class, 'login'])->name('attendance.login');
         Route::post('/attendance-sms', [CourseController::class, 'sendSms'])->name('attendance.sms');
         Route::get('/course/xlsx', [CourseController::class, 'courseXlsx'])->name('course.xlsx');

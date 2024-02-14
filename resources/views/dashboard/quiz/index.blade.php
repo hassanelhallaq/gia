@@ -100,13 +100,15 @@
                                                             class="btn btn-previous btn-sm btn-block"><i
                                                                 class="si si-options-vertical text-gray tx-13"></i></button>
                                                         <div class="dropdown-menu">
-                                                            <a href="#" class="dropdown-item" data-target="#modaledit"
+                                                            <a href="#" class="dropdown-item" data-target="#modaledit_{{$item->id}}"
                                                                 data-toggle="modal"> تحرير </a>
-                                                            <a href="questions_and_tests_management.html"
-                                                                class="dropdown-item"> عرض </a>
-                                                            <a href="#"
-                                                                class="dropdown-item text-danger"data-target="#modalDelete"
-                                                                data-toggle="modal"> حذف </a>
+                                                                <a href="{{route('duplicate.quiz',[$item->id])}}" class="dropdown-item" data-target="#modaledit"
+                                                                data-toggle="modal"> نسخ </a>
+                                                            {{-- <a href="questions_and_tests_management.html"
+                                                                class="dropdown-item"> عرض </a> --}}
+                                                                <button class="dropdown-item"data-target="#modalDelete"
+                                                                onclick="performDestroy({{ $item->id }} , this)"> حذف
+                                                            </button>
                                                         </div>
                                                     </td>
 
@@ -133,25 +135,7 @@
                                                 <th>حالات لم تقدم</th>
                                                 <th>الاكتمال</th>
                                                 <th>
-                                                    <div class="dropdown">
-                                                        <i aria-expanded="false" aria-haspopup="true"
-                                                            class="bi bi-filter-square tx-20"data-toggle="dropdown"
-                                                            id="dropdownMenuButton" type="button"></i></i>
-                                                        <div class="dropdown-menu tx-13">
-                                                            <p class="dropdown-item" href="#"><label
-                                                                    class="ckbox"><input type="checkbox"><span>Checkbox
-                                                                        Unchecked</span></label></p>
-                                                            <p class="dropdown-item" href="#"><label
-                                                                    class="ckbox"><input type="checkbox"><span>Checkbox
-                                                                        Unchecked</span></label></p>
-                                                            <p class="dropdown-item" href="#"><label
-                                                                    class="ckbox"><input type="checkbox"><span>Checkbox
-                                                                        Unchecked</span></label></p>
-                                                            <p class="dropdown-item" href="#"><label
-                                                                    class="ckbox"><input type="checkbox"><span>Checkbox
-                                                                        Unchecked</span></label></p>
-                                                        </div>
-                                                    </div>
+
                                                 </th>
                                                 <th></th>
                                             </tr>
@@ -177,13 +161,13 @@
                                                             class="btn btn-previous btn-sm btn-block"><i
                                                                 class="si si-options-vertical text-gray tx-13"></i></button>
                                                         <div class="dropdown-menu">
-                                                            <a href="#" class="dropdown-item"
-                                                                data-target="#modaledit" data-toggle="modal"> تحرير </a>
-                                                            <a href="questions_and_tests_management.html"
-                                                                class="dropdown-item"> عرض </a>
-                                                            <a href="#"
-                                                                class="dropdown-item text-danger"data-target="#modalDelete"
-                                                                data-toggle="modal"> حذف </a>
+                                                            <a href="#" class="dropdown-item" data-target="#modaledit_{{$item->id}}"
+                                                                data-toggle="modal"> تحرير </a>
+                                                            {{-- <a href="questions_and_tests_management.html"
+                                                                class="dropdown-item"> عرض </a> --}}
+                                                                <button class="dropdown-item"data-target="#modalDelete"
+                                                                onclick="performDestroy({{ $item->id }} , this)"> حذف
+                                                            </button>
                                                         </div>
                                                     </td>
 
@@ -210,25 +194,7 @@
                                                 <th>حالات لم تقدم</th>
                                                 <th>الاكتمال</th>
                                                 <th>
-                                                    <div class="dropdown">
-                                                        <i aria-expanded="false" aria-haspopup="true"
-                                                            class="bi bi-filter-square tx-20"data-toggle="dropdown"
-                                                            id="dropdownMenuButton" type="button"></i></i>
-                                                        <div class="dropdown-menu tx-13">
-                                                            <p class="dropdown-item" href="#"><label
-                                                                    class="ckbox"><input type="checkbox"><span>Checkbox
-                                                                        Unchecked</span></label></p>
-                                                            <p class="dropdown-item" href="#"><label
-                                                                    class="ckbox"><input type="checkbox"><span>Checkbox
-                                                                        Unchecked</span></label></p>
-                                                            <p class="dropdown-item" href="#"><label
-                                                                    class="ckbox"><input type="checkbox"><span>Checkbox
-                                                                        Unchecked</span></label></p>
-                                                            <p class="dropdown-item" href="#"><label
-                                                                    class="ckbox"><input type="checkbox"><span>Checkbox
-                                                                        Unchecked</span></label></p>
-                                                        </div>
-                                                    </div>
+
                                                 </th>
                                                 <th></th>
                                             </tr>
@@ -254,10 +220,10 @@
                                                             class="btn btn-previous btn-sm btn-block"><i
                                                                 class="si si-options-vertical text-gray tx-13"></i></button>
                                                         <div class="dropdown-menu">
-                                                            <a href="#" class="dropdown-item"
-                                                                data-target="#modaledit" data-toggle="modal"> تحرير </a>
-                                                            <a href="questions_and_tests_management.html"
-                                                                class="dropdown-item"> عرض </a>
+                                                            <a href="#" class="dropdown-item" data-target="#modaledit_{{$item->id}}"
+                                                                data-toggle="modal"> تحرير </a>
+                                                            {{-- <a href="questions_and_tests_management.html"
+                                                                class="dropdown-item"> عرض </a> --}}
                                                             <button class="dropdown-item"data-target="#modalDelete"
                                                                 onclick="performDestroy({{ $item->id }} , this)"> حذف
                                                             </button>
@@ -363,6 +329,63 @@
             </div>
         </div>
     </div>
+    @foreach ($quizes as $quiz)
+    <div class="modal" id="modaledit_{{$quiz->id}}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h5 class="modal-title">اضافة اختبار جديد</h5><button aria-label="Close" class="close"
+                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="">
+                    <div class="modal-body">
+                        <div class="row mg-t-10">
+                            <div class="col  d-flex justify-content-between flex-wrap">
+                                <label class="rdiobox"><input @if($quiz->type == 'befor') checked @endif name="rdio" id="befor_{{$quiz->id}}" type="radio"> <span>
+                                        اختبار قبلي </span></label>
+                                <label class="rdiobox"><input @if($quiz->type == 'after') checked @endif  id="after_{{$quiz->id}}" name="rdio"
+                                        type="radio"> <span> اختبار بعدي </span></label>
+                                <label class="rdiobox"><input id="interactive_{{$quiz->id}}" @if($quiz->type == 'interactive') checked @endif  name="rdio" type="radio"> <span>
+                                        اختبار تفاعلي </span></label>
+                                 <label class="rdiobox"><input id="rate_{{$quiz->id}}" @if($quiz->type == 'rate') checked @endif name="rdio" type="radio"> <span>
+                                             تقيم المشاركين </span></label>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <label for="example"> اسم الأختبار </label>
+                                <input class="form-control" required="" value="{{$quiz->name}}" id="name_{{$quiz->id}}" type="text">
+                            </div>
+
+                            <div class="col-12 mt-4">
+                                <label for="example"> طريقه التقديم</label>
+                                <select class="form-control select2" id="how_attend_{{$quiz->id}}">
+
+                                    <option @if ($quiz->how_attend == 'questions') selected @endif
+
+                                     value="questions">
+                                        questions
+                                    </option>
+                                    <option @if ($quiz->how_attend == 'link') selected @endif value="link">
+                                        link
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <label for="example"> الرابط</label>
+                                <input class="form-control"  id="link_{{$quiz->id}}" value="{{$quiz->link}}" type="text">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="performUpdate({{$quiz->id}})">
+                            حفظ <i class="bi bi-floppy"></i></button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endforeach
 @endsection
 @section('js')
     <script>
@@ -374,12 +397,23 @@
             formData.append('after', document.getElementById('after').checked);
             formData.append('interactive', document.getElementById('interactive').checked);
             formData.append('rate', document.getElementById('rate').checked);
-
-
             formData.append('link', document.getElementById('link').value);
             formData.append('how_attend', document.getElementById('how_attend').value);
             storeRoute('/dashboard/admin/quizes', formData)
         }
+        function performUpdate(id) {
+            let formData = new FormData();
+            formData.append("_method", "PUT")
+            formData.append('name', document.getElementById('name_'+id).value);
+             formData.append('befor', document.getElementById('befor_'+id).checked);
+            formData.append('after', document.getElementById('after_'+id).checked);
+            formData.append('interactive', document.getElementById('interactive_'+id).checked);
+            formData.append('rate', document.getElementById('rate_'+id).checked);
+            formData.append('link', document.getElementById('link_'+id).value);
+            formData.append('how_attend', document.getElementById('how_attend_'+id).value);
+            storeRoute('/dashboard/admin/quizes/' + id, formData)
+        }
+
         $(document).ready(function() {
             // Triggered when the country selection changes
             $('#program_id').change(function() {

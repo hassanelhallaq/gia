@@ -12,6 +12,7 @@ use App\Models\QuizCourse;
 use App\Models\Rate;
 use App\Models\RateAttendance;
 use App\Models\UserAnswer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class QuizController extends Controller
@@ -25,8 +26,8 @@ class QuizController extends Controller
         $quizesBefor = Quiz::orderBy("created_at", "desc")->where('type', 'befor')->withCount('courses')->paginate(10);
         $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type', 'after')->withCount('courses')->paginate(10);
         $quizesInteractive = Quiz::orderBy("created_at", "desc")->where('type', 'interactive')->withCount('courses')->paginate(10);
-
-        return view("dashboard.quiz.index", compact("quizesBefor", 'quizesAfter', 'quizesInteractive', 'programs'));
+        $quizes = Quiz::all();
+        return view("dashboard.quiz.index", compact("quizesBefor", 'quizesAfter', 'quizesInteractive', 'programs','quizes'));
     }
     /**
      * Show the form for creating a new resource.
@@ -96,9 +97,34 @@ class QuizController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Quiz $quiz)
+    public function update(Request $request,  $id)
     {
-        //
+        if($request->rate == 'true'){
+            return response()->json(['redirect' => route('get.rate', [$id])]);
+        }
+        $data = $request->all();
+        $validator = Validator($data, [
+            'name' => 'required|string',
+         ], [
+            'name.required' => ' اسم  مطلوب',
+         ]);
+        if ($validator->fails()) {
+            return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
+        }
+        if ($request->befor == 'true') {
+            $data['type'] = 'befor';
+        } elseif ($request->after == 'true') {
+            $data['type'] = 'after';
+        } elseif ($request->interactive == 'true') {
+            $data['type'] = 'interactive';
+        }
+          $quiz=   Quiz::find($id);
+          $quiz->update($data);
+        if ($request->how_attend == 'questions') {
+            return response()->json(['redirect' => route('quizes.index')]);
+        } elseif ($request->how_attend == 'link') {
+            return response()->json(['redirect' => route('quizes.index')]);
+        }
     }
 
     /**
@@ -377,5 +403,25 @@ class QuizController extends Controller
         $pivotedCollection = collect($pivotedData);
         // Generate and download the Excel file
         return (new \Rap2hpoutre\FastExcel\FastExcel($pivotedCollection))->download('file.xlsx');
+    }
+    public function duplicate($id)
+    {
+        $quiz = Quiz::find($id);
+        $newQuiz = $quiz->replicate();
+        $newQuiz->type = 'after';
+        $newQuiz->created_at = Carbon::now();
+        $save = $newQuiz->save();
+        $questions = Question::where('quiz_id',$id)->get();;
+        foreach($questions as $question ){
+            $newQuestion = $question->replicate();
+            $newQuestion->quiz_id = $newQuiz->id;
+            $save = $newQuestion->save();
+            foreach($question->options as $options ){
+                $newOptions = $options->replicate();
+                $newOptions->question_id = $newQuestion->id;
+                $save = $newQuestion->save();
+            }
+        }
+        return redirect()->route('quiz.questions', [$id]);
     }
 }
