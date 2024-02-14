@@ -102,8 +102,8 @@
                                                         <div class="dropdown-menu">
                                                             <a href="#" class="dropdown-item" data-target="#modaledit_{{$item->id}}"
                                                                 data-toggle="modal"> تحرير </a>
-                                                                <a href="{{route('duplicate.quiz',[$item->id])}}" class="dropdown-item" data-target="#modaledit"
-                                                                data-toggle="modal"> نسخ </a>
+                                                                <a href="{{route('duplicate.quiz',[$item->id])}}" class="dropdown-item"
+                                                                > نسخ </a>
                                                             {{-- <a href="questions_and_tests_management.html"
                                                                 class="dropdown-item"> عرض </a> --}}
                                                                 <button class="dropdown-item"data-target="#modalDelete"
@@ -129,11 +129,11 @@
                                                     اسم الأختبار
                                                 </th>
                                                 <th class="tx-5">عدد الدورات المرتبطة </th>
-                                                <th> نوع السؤال </th>
+                                                {{-- <th> نوع السؤال </th>
                                                 <th>عدد التسجيلات</th>
                                                 <th>حالات مقدمة</th>
                                                 <th>حالات لم تقدم</th>
-                                                <th>الاكتمال</th>
+                                                <th>الاكتمال</th> --}}
                                                 <th>
 
                                                 </th>
@@ -149,14 +149,16 @@
                                                     <td><input type="checkbox" class="checkChild"></td>
                                                     <td>{{ $index + 1 }}</td>
                                                     <td scope="row"> {{ $item->name }} </td>
-                                                    <td>6 دورات</td>
-                                                    <td> اختبار بعدي </td>
-                                                    <td>12</td>
+                                                    <td>{{$item->courses_count}} دورات</td>
+                                                    {{-- <td> اختبار بعدي </td> --}}
+                                                    {{-- <td>12</td>
                                                     <td>50</td>
                                                     <td>40</td>
-                                                    <td>90%</td>
+                                                    <td>90%</td> --}}
                                                     <td class="d-flex filter-col-cell">
                                                         <!-- dropdown-menu -->
+                                                        <a href="{{route('quizes.show',[$item->id])}}"><i class="far fa-eye tx-14"></i></a>                                                        <!-- dropdown-menu -->
+
                                                         <button data-toggle="dropdown"
                                                             class="btn btn-previous btn-sm btn-block"><i
                                                                 class="si si-options-vertical text-gray tx-13"></i></button>
@@ -188,11 +190,11 @@
                                                     اسم الأختبار
                                                 </th>
                                                 <th class="tx-5">عدد الدورات المرتبطة </th>
-                                                <th> نوع السؤال </th>
+                                                {{-- <th> نوع السؤال </th>
                                                 <th>عدد التسجيلات</th>
                                                 <th>حالات مقدمة</th>
                                                 <th>حالات لم تقدم</th>
-                                                <th>الاكتمال</th>
+                                                <th>الاكتمال</th> --}}
                                                 <th>
 
                                                 </th>
@@ -208,13 +210,13 @@
                                                     <td><input type="checkbox" class="checkChild"></td>
                                                     <td>{{ $index + 1 }}</td>
                                                     <td scope="row"> {{ $item->name }} </td>
-                                                    <td>6 دورات</td>
-                                                    <td> اختبار تفاعلي </td>
-                                                    <td>12</td>
+                                                    <td>{{$item->courses_count}} دورات</td>                                                    <td> اختبار تفاعلي </td>
+                                                    {{-- <td>12</td>
                                                     <td>50</td>
                                                     <td>40</td>
-                                                    <td>90%</td>
+                                                    <td>90%</td> --}}
                                                     <td class="d-flex filter-col-cell">
+                                                        <a href="{{route('quizes.show',[$item->id])}}"><i class="far fa-eye tx-14"></i></a>                                                        <!-- dropdown-menu -->
                                                         <!-- dropdown-menu -->
                                                         <button data-toggle="dropdown"
                                                             class="btn btn-previous btn-sm btn-block"><i

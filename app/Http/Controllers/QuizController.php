@@ -422,6 +422,6 @@ class QuizController extends Controller
                 $save = $newQuestion->save();
             }
         }
-        return redirect()->route('quiz.questions', [$id]);
+        return redirect()->route('quizes.index');
     }
 }
