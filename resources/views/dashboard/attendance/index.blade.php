@@ -176,18 +176,20 @@
                                                                 $attendanceLogin = App\Models\AttendanceLogin::where([['attendance_id', $item->id], ['course_id', $course->id]])->count();
                                                             @endphp
                                                             @for ($day = 1; $day <= $course->duration; $day++)
-                                                                @php
-                                                                     $log = $item->attendance_logins
-                                                            ->where('created_at',
-
-                                                                $courseStartDate
-                                                                    ->copy()
-                                                                    ->addDays($day)
-                                                                    ->startOfDay(),
-                                                            )
-                                                            ->where('course_id', $course->id)
-                                                            ->first();
-                                                                @endphp
+                                                            @php
+                                                            $startDate = $courseStartDate
+                                                                ->copy()
+                                                                ->addDays($day - 1)
+                                                                ->startOfDay();
+                                                            $endDate = $courseStartDate
+                                                                ->copy()
+                                                                ->addDays($day)
+                                                                ->startOfDay();
+                                                            $log = $item->attendance_logins
+                                                                ->whereBetween('created_at', [$startDate, $endDate])
+                                                                ->where('course_id', $course->id)
+                                                                ->first();
+                                                        @endphp
                                                                 @if ($log)
                                                                 <span class="dropdown-item text-success"> اليوم
                                                                     {{ $day }} (حاضر)</span>
