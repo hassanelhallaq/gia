@@ -200,7 +200,7 @@
             <!-- row closed -->
 
             <!-- row opened -->
-            <div class="row row-sm">
+            {{-- <div class="row row-sm">
                 <div class="col-xl-7 col-sm-12 ">
                     <div class="card overflow-hidden">
                         <div class="card-body">
@@ -255,7 +255,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div> --}}
             <!-- row closed -->
 
             <!-- row opened -->
@@ -352,7 +352,7 @@
                                                     <th><i class="far fa-calendar"></i> تاريخ البداية </th>
                                                     <th><i class="far fa-calendar"></i> عدد الايام </th>
                                                     <th>
-                                                       
+
                                                     </th>
                                                     <th></th>
                                                 </tr>

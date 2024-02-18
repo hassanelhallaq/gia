@@ -420,7 +420,7 @@ class CourseController extends Controller
                 'response' => $response,
             ]);
             // Get the server response
-            return  $server_output = $response->body();
+               $server_output = $response->body();
 
             // Further processing...
             // if ($server_output == "OK") { echo "1"; } else { echo "0"; }
