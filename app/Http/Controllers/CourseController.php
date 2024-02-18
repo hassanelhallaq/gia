@@ -374,7 +374,7 @@ class CourseController extends Controller
                 'username' => "gialearning",
                 'message' => $massege . "\n" . route('invitation.index', [$attendance->id, 'course_id' => $request->course_id]),
                 'sender' => "GiaLearning",
-                'numbers' => $phone,
+                'numbers' => '966'.$phone,
                 'response' => $response,
             ]);
             // Get the server response
@@ -416,7 +416,7 @@ class CourseController extends Controller
                 'username' => "gialearning",
                 'message' => $massege . "\n" . route('invitation.index', [$attendance->id, 'course_id' => $request->course_id]),
                 'sender' => "GiaLearning",
-                'numbers' => $phone,
+                'numbers' => '966'.$phone,
                 'response' => $response,
             ]);
             // Get the server response
