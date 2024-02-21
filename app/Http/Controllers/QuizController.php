@@ -29,6 +29,13 @@ class QuizController extends Controller
         $quizes = Quiz::all();
         return view("dashboard.quiz.index", compact("quizesBefor", 'quizesAfter', 'quizesInteractive', 'programs','quizes'));
     }
+    public function drepIn()
+    {
+        $quizesBefor = Quiz::orderBy("created_at", "desc")->where('type', 'befor')->withCount('courses')->paginate(10);
+        $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type', 'after')->withCount('courses')->paginate(10);
+        $quizesInteractive = Quiz::orderBy("created_at", "desc")->where('type', 'interactive')->withCount('courses')->paginate(10);
+        return view("dashboard.quiz.drepIn", compact("quizesBefor", 'quizesAfter', 'quizesInteractive'));
+    }
     /**
      * Show the form for creating a new resource.
      */

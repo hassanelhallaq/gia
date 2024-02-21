@@ -162,7 +162,9 @@
                                     <div class="webflow-style-input">
                                         <select id="trainer" class="form-control select2 input_no_border custom-select" disabled>
                                             @foreach ($trainers as $item)
-                                                <option value="{{ $item->id }}">
+                                                <option @if ($item->id == $course->trainer_id)
+                                                    selected
+                                                @endif value="{{ $item->id }}">ش
                                                     {{ $item->name }}
                                                 </option>
                                             @endforeach

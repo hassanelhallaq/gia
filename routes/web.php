@@ -66,8 +66,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::resource('quizes', QuizController::class);
         Route::get('/duplicate/{id}', [CourseController::class, 'duplicate'])->name('duplicate.courses');
         Route::get('/duplicate-quiz/{id}', [QuizController::class, 'duplicate'])->name('duplicate.quiz');
-
-
+        Route::get('/drepIn-quiz/{id}', [QuizController::class, 'drepIn'])->name('drepIn.quiz');
         Route::get('/{id}/{course_id}/login', [AttendanceLoginController::class, 'login'])->name('attendance.login');
         Route::post('/attendance-sms', [CourseController::class, 'sendSms'])->name('attendance.sms');
         Route::get('/course/xlsx', [CourseController::class, 'courseXlsx'])->name('course.xlsx');

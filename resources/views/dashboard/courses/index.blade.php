@@ -201,6 +201,8 @@
                                             <div class="dropdown-menu">
                                                 <a href="{{ route('courses.edit', [$item->id]) }}" class="dropdown-item">
                                                     تحرير </a>
+                                                    <a href="{{ route('drepIn.quiz', [$item->id]) }}" class="dropdown-item">
+                                                        الاختبارات </a>
                                                 <button class="dropdown-item"
                                                     onclick="performDestroy({{ $item->id }} , this)"> حذف </button>
                                             </div>
