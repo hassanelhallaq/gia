@@ -89,6 +89,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::post('/update/certifcate', [CertificateController::class, 'updateCertifcate'])->name('updateCertifcate');
         Route::post('/attend', [AttendanceController::class, 'attendCourse'])->name('attend.course');
         Route::post('/delete-attend', [AttendanceController::class, 'deleteAttendCourse'])->name('delete.attend.course');
+        Route::post('/deipIn-store/{id}', [QuizController::class, 'drepInStore'])->name('deipIn.store');
 
 
         // روت مؤقت

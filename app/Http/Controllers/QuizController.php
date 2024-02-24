@@ -29,12 +29,12 @@ class QuizController extends Controller
         $quizes = Quiz::all();
         return view("dashboard.quiz.index", compact("quizesBefor", 'quizesAfter', 'quizesInteractive', 'programs','quizes'));
     }
-    public function drepIn()
+    public function drepIn($id)
     {
         $quizesBefor = Quiz::orderBy("created_at", "desc")->where('type', 'befor')->withCount('courses')->paginate(10);
         $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type', 'after')->withCount('courses')->paginate(10);
         $quizesInteractive = Quiz::orderBy("created_at", "desc")->where('type', 'interactive')->withCount('courses')->paginate(10);
-        return view("dashboard.quiz.drepIn", compact("quizesBefor", 'quizesAfter', 'quizesInteractive'));
+        return view("dashboard.quiz.drepIn", compact("quizesBefor", 'quizesAfter', 'quizesInteractive','id'));
     }
     /**
      * Show the form for creating a new resource.
@@ -430,5 +430,68 @@ class QuizController extends Controller
             }
         }
         return redirect()->route('quizes.index');
+    }
+    public function drepInStore(Request $request , $id)
+    {
+        $course = Course::find($id);
+        $course->status_interactive = $request->status_interactive;
+        $course->status_befor = $request->status_befor;
+        $course->status_after = $request->status_after;
+        $course->update();
+        $quizbefCheck = QuizCourse::with('quiz')->whereHas('quiz', function ($q) {
+            $q->where('type', 'befor');
+        })->where('course_id', $id)->first();
+        if ($request->quiz_befor_id) {
+            if ($quizbefCheck) {
+                $quizBef = $quizbefCheck->delete();
+                $quizBef = new QuizCourse();
+                $quizBef->quiz_id = $request->quiz_befor_id;
+                $quizBef->course_id = $course->id;
+                $quizBef->save();
+            }
+        }
+        $quizAftCheck = QuizCourse::with('quiz')->whereHas('quiz', function ($q) {
+            $q->where('type', 'after');
+        })->where('course_id', $id)->first();
+        if ($request->quiz_after_id) {
+            if ($quizAftCheck != null) {
+                $quizAft = $quizAftCheck->delete();
+                $quizAft = new QuizCourse();
+                $quizAft->course_id = $course->id;
+                $quizAft->quiz_id = $request->quiz_after_id;
+                $quizAft->save();
+            }
+        }
+        $quizInterCheck = QuizCourse::with('quiz')->whereHas('quiz', function ($q) {
+            $q->where('type', 'after');
+        })->where('course_id', $id)->first();
+        if ($request->quiz_interactive_id) {
+            if ($quizInterCheck != null) {
+                $quizInter = $quizInterCheck->delete();
+                $quizInter = $quizInterCheck;
+                $quizInter = new QuizCourse();
+                $quizInter->course_id = $course->id;
+                $quizInter->quiz_id = $request->quiz_interactive_id;
+                $quizInter->save();
+            }
+        }
+        $dropdownsAndDates = json_decode($request->input('dropdownsAndDates'), true);
+        // Process the dropdowns and dates
+        foreach ($dropdownsAndDates as $dropdownAndDate) {
+            $dropdown = $dropdownAndDate['dropdown'];
+            $datetime = $dropdownAndDate['datetime'];
+            // Update the course based on dropdown selection
+            $course = Course::find($id); // Assuming you have a Course model
+            if ($dropdown === 'befor') {
+                $course->date_befor = $datetime;
+            } elseif ($dropdown === 'after') {
+                $course->date_after = $datetime;
+            } elseif ($dropdown === 'interactive') {
+                $course->date_interactive = $datetime;
+            }
+            $course->save();
+        }
+        // Return response
+        return response()->json(['message' => 'Form submitted successfully']);
     }
 }
