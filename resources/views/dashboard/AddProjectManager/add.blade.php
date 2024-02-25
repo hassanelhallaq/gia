@@ -5,14 +5,15 @@
 
 @section('content')
 <!-- row -->
-<div class="row">
+{{-- <div class="row w-100"> --}}
     <section class="wizard-section">
 		<div class="row no-gutters">
 			<div class="col-12">
 				<div class="form-wizard">
 					<form action="" method="post" role="form">
 						<div class="form-wizard-header">
-							<p>Fill all form field to go next step</p>
+                            <h5> مرحبا محمد الزرو </h5>
+							<p> يمكنك البدء فى انشاء جهة لانشاء وادارة الدورات الخاصه بك </p>
 							<ul class="list-unstyled form-wizard-steps clearfix">
 								<li class="active"><span>1</span></li>
 								<li><span>2</span></li>
@@ -24,12 +25,94 @@
 							</ul>
 						</div>
 						<fieldset class="wizard-fieldset show">
-							<h5>Personal Information</h5>
-							<div class="form-group">
-								<input type="text" class="form-control wizard-required" id="fname">
-								<label for="fname" class="wizard-form-text-label">First Name*</label>
-								<div class="wizard-form-error"></div>
-							</div>
+                            <h5 class=" text-center mt-5 mb-5"> نموذج اضافة منسق المشروع </h5>
+                            <div class="row mt-5">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control wizard-required" id="fname">
+                                        <label for="fname" class="wizard-form-text-label"> الاسم بالكامل بالعربي *</label>
+                                        <div class="wizard-form-error"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control wizard-required" id="fname">
+                                        <label for="fname" class="wizard-form-text-label"> Full Name in English *</label>
+                                        <div class="wizard-form-error"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control wizard-required" id="fname">
+                                        <label for="fname" class="wizard-form-text-label"> الجنسية  *</label>
+                                        <div class="wizard-form-error"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="date" class="form-control wizard-required" id="fname">
+                                        <label for="fname" class="wizard-form-text-label"> تاريخ الولادة  *</label>
+                                        <div class="wizard-form-error"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control wizard-required" id="fname">
+                                        <label for="fname" class="wizard-form-text-label"> الشهادة الأكاديمية *</label>
+                                        <div class="wizard-form-error"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control wizard-required" id="fname">
+                                        <label for="fname" class="wizard-form-text-label"> مجال الوظيفة الرئيسي  *</label>
+                                        <div class="wizard-form-error"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="number" class="form-control wizard-required" id="fname">
+                                        <label for="fname" class="wizard-form-text-label"> سنوات الخبرة *</label>
+                                        <div class="wizard-form-error"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control wizard-required" id="fname">
+                                        <label for="fname" class="wizard-form-text-label"> الاعتماد *</label>
+                                        <div class="wizard-form-error"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="number" class="form-control wizard-required" id="fname">
+                                        <label for="fname" class="wizard-form-text-label"> رقم الجوال *</label>
+                                        <div class="wizard-form-error"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control wizard-required" id="fname">
+                                        <label for="fname" class="wizard-form-text-label">  البريد الإلكتروني *</label>
+                                        <div class="wizard-form-error"></div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+
 
 							<div class="form-group clearfix">
 								<a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
@@ -120,7 +203,7 @@
 			</div>
 		</div>
 </section>
-</div>
+{{-- </div> --}}
 <!-- /row -->
 <!-- row closed -->
 @endsection
