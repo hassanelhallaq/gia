@@ -448,6 +448,11 @@ class QuizController extends Controller
                 $quizBef->quiz_id = $request->quiz_befor_id;
                 $quizBef->course_id = $course->id;
                 $quizBef->save();
+            }else{
+                $quizBef = new QuizCourse();
+                $quizBef->quiz_id = $request->quiz_befor_id;
+                $quizBef->course_id = $course->id;
+                $quizBef->save();
             }
         }
         $quizAftCheck = QuizCourse::with('quiz')->whereHas('quiz', function ($q) {
@@ -460,6 +465,11 @@ class QuizController extends Controller
                 $quizAft->course_id = $course->id;
                 $quizAft->quiz_id = $request->quiz_after_id;
                 $quizAft->save();
+            }else{
+                $quizAft = new QuizCourse();
+                $quizAft->course_id = $course->id;
+                $quizAft->quiz_id = $request->quiz_after_id;
+                $quizAft->save();
             }
         }
         $quizInterCheck = QuizCourse::with('quiz')->whereHas('quiz', function ($q) {
@@ -468,7 +478,11 @@ class QuizController extends Controller
         if ($request->quiz_interactive_id) {
             if ($quizInterCheck != null) {
                 $quizInter = $quizInterCheck->delete();
-                $quizInter = $quizInterCheck;
+                $quizInter = new QuizCourse();
+                $quizInter->course_id = $course->id;
+                $quizInter->quiz_id = $request->quiz_interactive_id;
+                $quizInter->save();
+            }else{
                 $quizInter = new QuizCourse();
                 $quizInter->course_id = $course->id;
                 $quizInter->quiz_id = $request->quiz_interactive_id;

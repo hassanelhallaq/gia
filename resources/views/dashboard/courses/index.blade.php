@@ -144,7 +144,7 @@
                                         <td><input type="checkbox" class="checkChild"></td>
                                         <td>{{ $i + 1 }}</td>
                                         <td scope="row">{{ $item->name }}</td>
-                                        <td>{{ $item->category->name }}</td>
+                                        <td>{{ $item->category_id }}</td>
                                         <td class="client-name"> {{ $item->trainer->name ?? '' }}</td>
                                         <td> {{ $item->level ?? '' }}</td>
                                         <td>{{ $item->start }}</td>
