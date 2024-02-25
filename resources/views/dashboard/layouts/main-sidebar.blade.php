@@ -46,10 +46,23 @@
 
                     </ul>
                 </li>
+
+
                 <li class="slide">
                     <a class="side-menu__item" href="{{route('attendance.index')}}"><i class="typcn typcn-group-outline tx-22"></i><span class="side-menu__label mr-3">ادارة المشتركين</span><i class=""></i></a>
 
                 </li>
+
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide"  href="#"><i class="si si-people tx-22"></i><span class="side-menu__label mr-3"> اضافة مدير مشروع </span><i class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        <li><a class="slide-item" href="{{ route('AddProjectManager') }}"> اضافة </a></li>
+                        <li><a class="slide-item" href="{{route('clients.index')}}">العملاء</a></li>
+                    </ul>
+                </li>
+
+
+
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="#"><i class="mdi mdi-account-card-details tx-22"></i><span class="side-menu__label mr-3">الدعوات الإلكترونية</span><i class=""></i></a>
 

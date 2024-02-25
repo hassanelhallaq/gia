@@ -97,6 +97,12 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
             return view('dashboard.quiz.detales');
         })->name('quiz_detales');
 
+        Route::get('/AddProjectManager', function () {
+            return view('dashboard.AddProjectManager.add');
+        })->name('AddProjectManager');
+
+
+
     }
 );
 Route::prefix('dashboard/trainer')->middleware('auth:trainer')->group(
