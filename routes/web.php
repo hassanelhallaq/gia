@@ -101,6 +101,17 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
             return view('dashboard.AddProjectManager.add');
         })->name('AddProjectManager');
 
+        Route::get('/AddProject', function () {
+            return view('dashboard.AddProject.add');
+        })->name('AddProject');
+        Route::get('/AddProject2', function () {
+            return view('dashboard.AddProject.add2');
+        })->name('AddProject2');
+
+        Route::get('/AddProject3', function () {
+            return view('dashboard.AddProject.add3');
+        })->name('AddProject3');
+
 
 
     }
