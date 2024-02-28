@@ -22,7 +22,7 @@
 <!-- Eva-icons js -->
 <script src="{{ URL::asset('assets/js/eva-icons.min.js') }}"></script>
 <!-- Sticky js -->
-<script src="{{ URL::asset('assets/js/sticky.js') }}"></script>
+{{-- <script src="{{ URL::asset('assets/js/sticky.js') }}"></script> --}}
 <script src="{{ URL::asset('assets/js/modal-popup.js') }}"></script>
 <!-- Left-menu js-->
 <script src="{{ URL::asset('assets/plugins/side-menu/sidemenu.js') }}"></script>
@@ -33,6 +33,7 @@
 <!-- custom js -->
 <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
 <script src="{{ URL::asset('crudjs/crud.js') }}"></script>
+
 <script src="{{URL::asset('assets/js/table.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
