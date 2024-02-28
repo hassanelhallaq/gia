@@ -357,14 +357,14 @@
                                                     @endphp
                                                     @if ($log)
                                                         <span class="dropdown-item text-success"> اليوم
-                                                            {{ $day }} (حاضر)</span>
+                                                            {{ $day }} (حاضر) {{$endDate}}</span>
                                                         <button class=" btn btn-warning-gradient btn-with-icon mr-1"
                                                             type="button"
                                                             onclick="Delattend({{ $item->id }},{{ $course->id }},{{ $day }})">حذف
                                                             حضور</button>
                                                     @else
                                                         <span class="dropdown-item text-danger"> اليوم {{ $day }}
-                                                            (غير حاضر)
+                                                            (غير حاضر) {{$endDate}}
                                                         </span>
                                                         <button class=" btn btn-warning-gradient btn-with-icon mr-1"
                                                             type="button"

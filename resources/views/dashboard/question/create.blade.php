@@ -91,21 +91,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="col-lg-12 mb-4">
+                                <div class="col-lg-12 mb-4">
                                     <div
-                                        class=" ht-lg-45 ht-sm-70 bd bd-gray-40 pl-2 rounded-5  d-flex justify-content-between">
-                                        <input class="form-control border-0" placeholder=" اكتب اجابة هنا " type="text">
-                                        <div class=" ">
-                                            <button type="button" class="btn btn-previous btn-icon   addinputresult"> أضف
-                                                <i class="bi bi-plus tx-24"></i></button>
+                                        class=" ht-lg-45 ht-sm-70 bd bd-gray-40 pl-2 rounded-5 d-lg-flex d-sm-block justify-content-between">
+                                        <input class="form-control border-0" placeholder=" الأجابة رقم الرابعه "
+                                            id="option_four" name="option" type="text">
+                                        <div class="d-flex w-lg-40">
+                                            <label class="rdiobox m-auto"><input correct-input name="correct"
+                                                    id="correct_four" type="radio">
+                                                <span>الأجابة الصحيحة</span></label>
+                                            <i class="typcn typcn-edit mr-3 tx-20"></i>
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
 
-                                {{-- <div
-                                    class="btnAddtest card-chart wd-25 ht-25 bg-warning-gradient brround ml-2 mt-1 pos-absolute b-0 l-100">
-                                    <i class="bi bi-plus text-white tx-36"></i>
-                                </div> --}}
 
                             </div>
 
@@ -119,8 +118,7 @@
                         <button class="btn btn-warning-gradient btn-with-icon" type="button"
                             onclick="createQuestions({{ $id }})"> حفظ
                             السؤال واضافه سؤال جديد<i class="bi bi-floppy"></i></button>
-                            {{-- <a class="btn btn-warning-gradient btn-with-icon" href="{{ route('duplicate.quiz',[$id]) }}"> الانتهاء ونسخ للاختبار القبلي </a> --}}
-                        <a class="btn btn-warning-gradient btn-with-icon" href="{{ route('quizes.index') }}"> الانتهاء</a>
+                         <a class="btn btn-warning-gradient btn-with-icon" href="{{ route('quizes.index') }}"> الانتهاء</a>
 
                     </div>
                 </form>
@@ -146,6 +144,8 @@
                 correct_one: document.getElementById("correct_one").checked,
                 correct_two: document.getElementById("correct_two").checked,
                 correct_three: document.getElementById("correct_three").checked,
+                option_four: document.getElementById("option_four").value,
+                correct_four: document.getElementById("correct_four").checked,
                 quiz_id: id,
 
             };

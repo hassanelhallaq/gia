@@ -59,8 +59,9 @@ class QuestionController extends Controller
                 $question->type = $request->get('type');
                 $question->quiz_id = $request->get('quiz_id');
                 $isSaved = $question->save();
+                $quizQuestions = Question::where('quiz_id',$request->get('quiz_id'))->count();
                 $isQuestionOption = $this->questionOption($request, $question);
-                return response()->json(['icon' => 'success', 'title' => 'تم الانشاء بنجاح '], 200);
+                return response()->json(['icon' => 'success', 'title' => 'اضف بيانات السؤال التالي رقم ' . $quizQuestions + 1  ], 200);
             } else {
 
                 return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
@@ -71,6 +72,7 @@ class QuestionController extends Controller
     private function questionOption(Request $request, question $question)
     {
         // save options
+        if($request->get('option_four')){
         return  QuestionOption::insert([
             [
                 'question_id' => $question->id,
@@ -87,7 +89,32 @@ class QuestionController extends Controller
                 'answer' => $request->get('option_three'),
                 'is_corect' => $request->get('correct_three') == 'on' ? 1 : 0,
             ],
+            [
+                'question_id' => $question->id,
+                'answer' => $request->get('option_four'),
+                'is_corect' => $request->get('correct_four') == 'on' ? 1 : 0,
+            ]
         ]);
+    }else{
+        return  QuestionOption::insert([
+            [
+                'question_id' => $question->id,
+                'answer' => $request->get('option_one'),
+                'is_corect' => $request->get('correct_one') == 'on' ? 1 : 0,
+            ],
+            [
+                'question_id' => $question->id,
+                'answer' => $request->get('option_two'),
+                'is_corect' => $request->get('correct_two') == 'on' ? 1 : 0,
+            ],
+            [
+                'question_id' => $question->id,
+                'answer' => $request->get('option_three'),
+                'is_corect' => $request->get('correct_three') == 'on' ? 1 : 0,
+            ]
+
+        ]);
+    }
     }
 
     /**

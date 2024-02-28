@@ -15,7 +15,7 @@
                             $dateBAfter = Carbon\Carbon::parse($course->date_after);
 
                         @endphp
-                        @if ($currentDateTime > $dateBefore)
+                        @if ($currentDateTime < $dateBefore)
                             <div class="card_text not">
                                 <span data-translate="not_submit"> لا يوجد اختبار</span>
                             </div>
@@ -43,7 +43,7 @@
                         @endif
 
                     </div>
-                    @if ($currentDateTime > $dateBefore)
+                    @if ($currentDateTime < $dateBefore)
                     @else
                         @if ($quizAtten == null)
                             @if ($course->status_befor == 'active')
@@ -72,7 +72,7 @@
                     <div class="card_title">
                         <p>الاختبار البعدي</p>
                     </div>
-                    @if ($currentDateTime > $dateBAfter)
+                    @if ($currentDateTime < $dateBAfter)
                         <div class="card_text not">
                             <span data-translate="not_submit"> لا يوجد اختبار</span>
                         </div>
@@ -99,10 +99,10 @@
                         @endif
                     @endif
                 </div>
-                @if ($currentDateTime > $dateBAfter)
+                @if ($currentDateTime < $dateBAfter)
                 @else
                     @if ($quizAttenAfter == null)
-                        @if ($course->status_after == 'active')
+                        @if ($course->status_after == 'active' && $quizAfter)
                             @if ($quizAfter->quiz->how_attend = 'questions')
                                 <div class="card_icon"><a
                                         href="{{ route('quiz.view', ['quizId' => $quizAfter->quiz_id, 'clientId' => $attendance->id]) }}"

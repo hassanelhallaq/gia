@@ -344,6 +344,11 @@
                                 <label for="example"> جهة العمل </label>
                                 <input class="form-control" required="" id="work_place" type="text">
                             </div>
+                            <div class="col-12 mt-4">
+                                <label for="example">  السجل المدني</label>
+                                <input class="form-control" required="" id="civil_registry" type="text">
+                            </div>
+
                         </div>
                     </div>
                     <div class="modal-footer border-0">
@@ -394,6 +399,10 @@
                                     <label for="example"> جهة العمل </label>
                                     <input class="form-control" value="{{ $item->work_place }}"required=""
                                         id="work_place_{{ $item->id }}" type="text">
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <label for="example">  السجل المدني</label>
+                                    <input class="form-control" value="{{ $item->civil_registry }}" required="" id="civil_registry_{{ $item->id }}" type="text">
                                 </div>
                                 @if ($course)
                                     <input class="form-control" value="{{ $course->id }}"required="" hidden
@@ -775,7 +784,10 @@
             formData.append('work_place', document.getElementById('work_place').value);
             formData.append('id_number', document.getElementById('id_number').value);
             formData.append('job', document.getElementById('job').value);
+            formData.append('civil_registry', document.getElementById('civil_registry').value);
+
             formData.append('course_id', id);
+
             storepart('/dashboard/admin/attendance', formData)
         }
         function performStoreExcel(id) {
@@ -860,6 +872,8 @@
             formData.append('id_number', document.getElementById('id_number_' + id).value);
             formData.append('job', document.getElementById('job_' + id).value);
             formData.append('certficate', document.getElementById('certficate_' + id).files[0]);
+
+            formData.append('civil_registry', document.getElementById('civil_registry_' + id).value);
 
             formData.append('course_id', document.getElementById('course_id').value);
             storepart('/dashboard/admin/attendance/' + id, formData)
