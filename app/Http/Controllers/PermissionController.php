@@ -4,8 +4,7 @@
 
 namespace App\Http\Controllers;
 
-
-
+use App\Models\PermissionGroup;
 use Illuminate\Http\Request;
 
 use Spatie\Permission\Models\Permission;
@@ -42,7 +41,7 @@ class PermissionController extends Controller
 
         return view('dashboard.spatie.permissions.index', compact('permissions', 'page_title', 'page_description'));
 
-        
+
 
     }
 
@@ -63,8 +62,8 @@ class PermissionController extends Controller
     {
 
         //
-
-        return response()->view('dashboard.spatie.permissions.create');
+        $groups = PermissionGroup::all();
+        return response()->view('dashboard.spatie.permissions.create',compact('groups'));
 
     }
 
@@ -85,39 +84,20 @@ class PermissionController extends Controller
     public function store(Request $request)
 
     {
-
-        //
-
-        //
-
         $validator = Validator($request->all(), [
-
             'name' => 'required|string|max:100',
-
             'guard_name' => 'required|string|in:admin',
-
         ]);
-
-
-
         if (!$validator->fails()) {
-
             $permission = new Permission();
-
             $permission->name = $request->get('name');
-
+            $permission->permission_group_id = $request->get('group_id');
             $permission->guard_name = $request->get('guard_name');
-
             $isSaved = $permission->save();
-
             return response()->json(['icon' => 'success', 'title' => 'Permission created successfully'], $isSaved ? 201 : 400);
-
         } else {
-
             return response()->json(['icon' => 'error', 'title'=> $validator->getMessageBag()->first()], 400);
-
         }
-
     }
 
 

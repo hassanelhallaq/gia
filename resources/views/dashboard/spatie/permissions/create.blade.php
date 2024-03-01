@@ -59,7 +59,18 @@
                     </select>
 
                 </div>
+                <div class="form-group col-md-6">
 
+                    <label>groups:</label>
+
+                   <select class="form-control form-control-solid" name="group_id" id="group_id">
+                            @foreach ($groups as $item)
+                            <option value="{{$item->id}}">{{$item->name}}</option>
+                            @endforeach
+
+                        </select>
+
+                    </div>
             <div class="form-group col-md-6">
 
                 <label>Permission:</label>
@@ -123,6 +134,7 @@
             name: document.getElementById('name').value,
 
             guard_name: document.getElementById('guards').value
+            group_id: document.getElementById('group_id').value
 
             };
 
