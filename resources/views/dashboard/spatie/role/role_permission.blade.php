@@ -2,7 +2,7 @@
 
 @extends('dashboard.layouts.master')
 
-@section('title','Role.Permissions')
+@section('title', 'Role.Permissions')
 
 
 
@@ -10,11 +10,11 @@
 
 @section('styles')
 
-    <link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 
-    <link rel="stylesheet" href="{{asset('plugins/toastr/toastr.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
 
-    <link rel="stylesheet" href="{{asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 
 @endsection
 
@@ -47,79 +47,74 @@
 
 
         <div class="card-body">
-
+            @php
+            $permissionGroup = App\Models\PermissionGroup::all();
+        @endphp
+            @foreach ($permissionGroup as $item)
+            <span class="badge bg-info">{{ $item->name }}</span>
             <table class="table table-bordered table-hover" id="kt_datatable">
 
                 <thead>
 
-                <tr>
+                    <tr>
 
-                  <th>#</th>
+                        <th>#</th>
 
-                  <th>ID</th>
+                        <th>ID</th>
 
-                  <th>Name</th>
+                        <th>Name</th>
 
-                  <th>Guard</th>
+                        <th>Guard</th>
 
-                  <th>Status</th>
+                        <th>Status</th>
 
-                </tr>
+                    </tr>
 
                 </thead>
 
 
+                    <tbody>
 
-              <tbody>
+                        <span hidden>{{ $counter = 0 }}</span>
 
-                <span hidden>{{$counter = 0}}</span>
-                @php
-                  $permissionGroup =  App\Models\PermissionGroup::all();
-                @endphp
-                @foreach ($permissionGroup as $item)
-                <span class="badge bg-info">#{{$item->name}}</span>
-                @php
-                 $permissions=    Spatie\Permission\Models\Permission::where('permission_group_id',$item->id)->get()
-                @endphp
-                 @foreach ($permissions as $permission)
+                        @php
+                            $permissions = Spatie\Permission\Models\Permission::where('permission_group_id', $item->id)->get();
+                        @endphp
+                        @foreach ($permissions as $permission)
+                            <tr>
 
-                <tr>
+                                <td><span class="badge bg-info">#{{ ++$counter }}</span></td>
 
-                  <td><span class="badge bg-info">#{{++$counter}}</span></td>
+                                <td>{{ $permission->id }}</td>
 
-                  <td>{{$permission->id}}</td>
+                                <td>{{ $permission->name }}</td>
 
-                  <td>{{$permission->name}}</td>
+                                <td>{{ $permission->guard_name }}</td>
 
-                  <td>{{$permission->guard_name}}</td>
+                                <td>
 
-                   <td>
+                                    <div class="icheck-primary d-inline">
 
-                    <div class="icheck-primary d-inline">
+                                        <input type="checkbox" id="permission_{{ $permission->id }}"
+                                            onchange="storeRolePermission({{ $roleId }},{{ $permission->id }})"
+                                            @if ($permission->active) checked @endif>
 
-                      <input type="checkbox" id="permission_{{$permission->id}}"
+                                        <label for="permission_{{ $permission->id }}">
 
-                        onchange="storeRolePermission({{$roleId}},{{$permission->id}})" @if($permission->active) checked
+                                        </label>
 
-                      @endif>
+                                    </div>
 
-                      <label for="permission_{{$permission->id}}">
+                                </td>
 
-                      </label>
-
-                    </div>
-
-                  </td>
-
-                </tr>
-
-                @endforeach
-                @endforeach
-              </tbody>
+                            </tr>
+                        @endforeach
+                    </tbody>
 
 
 
             </table>
+            @endforeach
 
         </div>
 
@@ -151,29 +146,24 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <script src="{{asset('crudjs/crud.js')}}"></script>
+    <script src="{{ asset('crudjs/crud.js') }}"></script>
 
 
 
-<script>
+    <script>
+        function storeRolePermission(roleId, permissionId) {
 
-  function storeRolePermission(roleId, permissionId){
+            let data = {
 
-    let data = {
+                permission_id: permissionId,
 
-      permission_id: permissionId,
-
-    };
-
-
-
-    store('/dashboard/admin/role/'+roleId+'/permissions',data);
-
-  }
+            };
 
 
 
-</script>
+            store('/dashboard/admin/role/' + roleId + '/permissions', data);
+
+        }
+    </script>
 
 @endsection
-
