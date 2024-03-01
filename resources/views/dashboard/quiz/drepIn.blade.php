@@ -179,7 +179,9 @@
         })
         .then(response => {
             // Handle response
-            console.log(response);
+            location.reload();
+
+
             // You can redirect or show a success message here
         })
         .catch(error => console.error('Error:', error));
