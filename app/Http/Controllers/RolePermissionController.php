@@ -64,7 +64,7 @@ class RolePermissionController extends Controller
 
         }
 
-        return response()->view('dashboard.spatie.role.role_permission', ['roleId' => $roleId, 'permissions' => $permissions]);
+        return response()->view('dashboard.spatie.role.role_permission', ['roleId' => $roleId]);
         // } else {
         //     return response()->view('error-6');
         // }

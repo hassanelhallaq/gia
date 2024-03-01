@@ -93,8 +93,11 @@
                   <td>{{$permission->id}}</td>
 
                   <td>{{$permission->name}}</td>
+                  @php
+                  $permissionGroup =  App\Models\PermissionGroup::where('id',$permission->permission_group_id)->first();
+                @endphp
 
-                  <td><span class="badge bg-success">{{$permission->guard_name}}</span></td>
+                  <td><span class="badge bg-success">{{$permissionGroup->name}}</span></td>
 
                   <td>
 

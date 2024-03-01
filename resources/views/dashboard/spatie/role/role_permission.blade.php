@@ -73,7 +73,14 @@
               <tbody>
 
                 <span hidden>{{$counter = 0}}</span>
-
+                @php
+                  $permissionGroup =  App\Models\PermissionGroup::all();
+                @endphp
+                @foreach ($permissionGroup as $item)
+                <span class="badge bg-info">#{{$item->name}}</span>
+                @php
+                 $permissions=    Spatie\Permission\Models\Permission::where('permission_group_id',$item->id)->get()
+                @endphp
                  @foreach ($permissions as $permission)
 
                 <tr>
@@ -107,7 +114,7 @@
                 </tr>
 
                 @endforeach
-
+                @endforeach
               </tbody>
 
 

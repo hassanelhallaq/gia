@@ -71,16 +71,11 @@
                         </select>
 
                     </div>
-            <div class="form-group col-md-6">
-
+                <div class="form-group col-md-6">
                 <label>Permission:</label>
-
                 <input type="text" name="name" id="name" class="form-control form-control-solid" placeholder="Enter Permission"/>
-
             </div>
-
         </div>
-
      </div>
 
       <div class="card-footer">
@@ -127,13 +122,12 @@
 
     })
 
-        function performStore(){
-
+            function performStore(){
             let data = {
 
             name: document.getElementById('name').value,
 
-            guard_name: document.getElementById('guards').value
+            guard_name: document.getElementById('guards').value,
             group_id: document.getElementById('group_id').value
 
             };
