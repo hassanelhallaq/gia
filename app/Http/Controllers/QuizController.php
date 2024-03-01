@@ -52,9 +52,7 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->rate == 'true'){
-            return response()->json(['redirect' => route('get.rate', [$quiz->id])]);
-        }
+
         $data = $request->all();
         $validator = Validator($data, [
             'name' => 'required|string',
@@ -76,6 +74,9 @@ class QuizController extends Controller
         }
 
         $quiz = Quiz::create($data);
+        if($request->rate == 'true'){
+            return response()->json(['redirect' => route('get.rate', [$quiz->id])]);
+        }
         if ($request->how_attend == 'questions') {
             return response()->json(['redirect' => route('quiz.questions', [$quiz->id])]);
         } elseif ($request->how_attend == 'link') {

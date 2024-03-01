@@ -19,8 +19,10 @@
     </div>
     <div class="main-dashboard-header-right">
         <div class=" d-flex">
-            <button class="btn btn-warning-gradient btn-with-icon ml-1"data-target="#modalAddRoles" data-toggle="modal"> اضافة صلاحية جديدة  <i class="bi bi-plus"></i></button>
-            <button class="btn btn-warning-gradient btn-with-icon"data-target="#modaladd" data-toggle="modal"> اضافة مدرب جديد <i class="bi bi-plus"></i></button>
+            @can('اضافه مدرب')
+             <button class="btn btn-warning-gradient btn-with-icon"data-target="#modaladd" data-toggle="modal"> اضافة مدرب جديد <i class="bi bi-plus"></i></button>
+             @endcan
+
         </div>
     </div>
 </div>

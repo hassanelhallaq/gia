@@ -31,12 +31,20 @@
                         class="icon ion-ios-settings"></i></a>
                         @endif
                 @if ($id)
+                @can('اضافه دوره')
+
+
                     <a href="{{ route('program.course.create', [$id]) }}"
                         class="btn btn-warning-gradient btn-with-icon mr-1 mb-1"> اضافة دورة جديدة <i
                             class="bi bi-plus"></i></a>
+                            @endcan
                 @else
+                @can('اضافه دوره')
+
                     <a href="{{ route('courses.create') }}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1"> اضافة
                         دورة جديدة <i class="bi bi-plus"></i></a>
+                        @endcan
+
                 @endif
                 @if ($program)
                     <a href="{{ route('home', [$program->username]) }}"

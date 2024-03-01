@@ -34,8 +34,11 @@
                     href="{{ route('certificate.management', [$id]) }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1">
                     الشهادات <i class="bi bi-clipboard-data tx-11"></i></a>
                     @endif
+                    @can('اضافه مشترك')
+
                 <button class="btn btn-outline-light btn-with-icon btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal">
                     اضافة مشاركين جدد <i class="bi bi-plus"></i></button>
+                    @endcan
 
                 <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms"
                     data-toggle="modal"> ارسال دعوة جماعية <i class="icon ion-md-paper-plane"></i></button>

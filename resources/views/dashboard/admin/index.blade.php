@@ -2,7 +2,7 @@
 @section('header')
 
 
-<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0" style="border-top: 1px solid #00000030;">
+<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
     <div class="left-content mt-2">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb breadcrumb-style1">
@@ -22,10 +22,9 @@
     <div class="main-dashboard-header-right">
         <div class=" d-flex">
             <!-- <button class="btn btn-outline-light btn-with-icon btn-sm ml-1"> اعضاء الإدارة <i class="bi bi-award-fill"></i></button> -->
-            <button class="btn btn-outline-light btn-with-icon btn-sm ml-1">  المدربين <i class="bi bi-award-fill"></i></button>
-            <button class="btn btn-outline-light btn-with-icon btn-sm ml-1">  العملاء <i class="bi bi-award-fill"></i></button>
-            <a href="../Program_management/members.html" class="btn btn-outline-light btn-with-icon btn-sm ml-1">  المشاركين <i class="bi bi-award-fill"></i></a>
             <a href="{{route('admins.create')}}" class="btn btn-warning-gradient btn-with-icon btn-sm"> اضافة حساب جديد <i class="bi bi-plus"></i></a>
+            <button class="btn btn-warning-gradient btn-with-icon ml-1"data-target="#modalAddRoles" data-toggle="modal">
+                اضافة صلاحية جديدة <i class="bi bi-plus"></i></button>
         </div>
     </div>
 </div>
@@ -136,5 +135,85 @@
      <!--closed filter bottom  -->
 </div>
 <!-- row closed -->
+<div class="modal" id="modalAddRoles">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h5 class="modal-title">اضافة صلاحية جديدة</h5><button aria-label="Close" class="close"
+                    data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <form action="">
+                <div class="modal-body">
+                    <div class="row mg-t-10">
+                        <div class="col-12 mb-3">
+                            <label for="example"> اسم الصلاحية </label>
+                            <input class="form-control" required="" type="text">
+                        </div>
+                        <div class="col-12 mb-3 border-bottom-1 pb-2">
+                            <h6>اعضاء الأدارة</h6>
+                            <div class="row">
+                                <div class="col-4"><label><input type="checkbox"> <span> تحرير الاعدادات
+                                        </span></label></div>
+                                <div class="col-4"><label><input checked="" type="checkbox"> <span> اضافة اعضاء
+                                        </span></label></div>
+                                <div class="col-4"><label><input type="checkbox"> <span> اضافة برنامج </span></label>
+                                </div>
+                                <div class="col-4"><label><input checked type="checkbox"> <span> تحرير برنامج
+                                        </span></label></div>
+                                <div class="col-4"><label><input checked type="checkbox"> <span> حذف اعضاء
+                                        </span></label></div>
+                                <div class="col-4"><label><input type="checkbox"> <span> خيارات اخري </span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mb-3 border-bottom-1 pb-2">
+                            <h6> المدربين </h6>
+                            <div class="row">
+                                <div class="col-4"><label><input checked type="checkbox"> <span class="m-0">
+                                            الأطلاع على الدورة </span></label></div>
+                                <div class="col-4"><label><input checked type="checkbox"> تحرير الإعدادات <span>
+                                        </span></label></div>
+                                <div class="col-4"><label><input type="checkbox"> <span> الأطلاع على النتائج
+                                        </span></label></div>
+                                <div class="col-4"><label><input type="checkbox"> <span> تحرير برنامج </span></label>
+                                </div>
+                                <div class="col-4"><label><input type="checkbox"> <span> تحرير برنامج </span></label>
+                                </div>
+                                <div class="col-4"><label><input type="checkbox"> <span> تحرير برنامج </span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mb-3 border-bottom-1 pb-2">
+                            <h6> العملاء </h6>
+                            <div class="row">
+                                <div class="col-4"><label><input type="checkbox"> <span> تحرير الاعدادات
+                                        </span></label></div>
+                                <div class="col-4"><label><input checked="" type="checkbox"> <span> اضافة اعضاء
+                                        </span></label></div>
+                                <div class="col-4"><label><input type="checkbox"> <span> اضافة برنامج </span></label>
+                                </div>
+                                <div class="col-4"><label><input type="checkbox"> <span> تحرير برنامج </span></label>
+                                </div>
+                                <div class="col-4"><label><input checked="" type="checkbox"> <span> حذف اعضاء
+                                        </span></label></div>
+                                <div class="col-4"><label><input type="checkbox"> <span> خيارات اخري </span></label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button class="btn btn-warning-gradient btn-with-icon" type="submit"> حفظ <i
+                            class="bi bi-floppy"></i></button>
+                    <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </div>
 @endsection

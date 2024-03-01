@@ -31,8 +31,12 @@
             <div class=" d-flex">
                 <a href="{{ route('get.rate', [$course->id]) }}"
                     class="btn btn-outline-light btn-with-icon btn-sm mr-1">التقيم <i class="la la-cog"></i></a>
+                    @can('الأطلاع على المشاركين')
+
                 <a href="{{ route('course.attendance', [$course->id]) }}"
                     class="btn btn-outline-light btn-with-icon btn-sm mr-1"> ادارة المشاركين <i class="la la-cog"></i></a>
+                    @endcan
+
                 <a href="{{ route('quiz.report', [$course->id]) }}" class="btn btn-outline-light btn-with-icon btn-sm mr-1">
                     تحميل نتائج
                     الاختبار <i class="bi bi-box-arrow-in-down"></i></a>

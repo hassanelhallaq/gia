@@ -13,6 +13,7 @@ use App\Http\Controllers\CourseFileController;
 use App\Http\Controllers\CourseLinkController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
@@ -21,6 +22,8 @@ use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\UserAnswerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RateController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RolePermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -134,7 +137,9 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::resource('clients', ClientController::class);
         Route::resource('admins', AdminController::class);
         Route::resource('trainers', TrainerController::class);
-
+        Route::resource('/roles', RoleController::class);
+        Route::resource('/permissions', PermissionController::class);
+        Route::resource('/role.permissions', RolePermissionController::class);
         Route::get('/get-rates/{id}', [RateController::class, 'createRate'])->name('get.rate');
         Route::resource('rates', RateController::class);
     }

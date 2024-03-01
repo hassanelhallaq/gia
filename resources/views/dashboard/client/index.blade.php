@@ -13,11 +13,14 @@
                             <input type="text" class="form-control form-input" id="search-table" placeholder="بحث">
                             <span class="right-pan"><i class="bi bi-sliders"></i></span>
                         </div>
+                        @can('اضافه عميل')
 
                         <div class="mr-auto d-block tx-20">
                             <a href="{{route('clients.create')}}" class="btn btn-warning-gradient btn-with-icon" type="button" > اضف <i class="bi bi-floppy"></i></a>
-                           
+
                         </div>
+                        @endcan
+
                     </div>
                 </div>
             </div>
