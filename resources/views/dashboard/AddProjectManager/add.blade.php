@@ -56,7 +56,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname1" class="wizard-form-text-label"> الاسم بالكامل بالعربي *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname1">
+                                        <input type="text" class="form-control wizard-required" id="manager_name">
                                     </div>
                                 </div>
 
@@ -64,28 +64,28 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname2" class="wizard-form-text-label"> Full Name in English *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname2">
+                                        <input type="text" class="form-control wizard-required" id="english_name_manger">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname3" class="wizard-form-text-label"> الجنسية  *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname3">
+                                        <input type="text" class="form-control wizard-required" id="manager_nationality">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname4" class="wizard-form-text-label"> تاريخ الولادة  *</label>
-                                        <input type="date" class="form-control wizard-required" id="fname4">
+                                        <input type="date" class="form-control wizard-required" id="birthday_manger">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname55" class="wizard-form-text-label"> الشهادة الأكاديمية *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname55">
+                                        <input type="text" class="form-control wizard-required" id="academicـcertificate_manger">
                                     </div>
                                 </div>
 
@@ -93,35 +93,54 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname5" class="wizard-form-text-label"> مجال  التدريب الرئيسي  *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname5">
+                                        <input type="text" class="form-control wizard-required" id="main_training_area_manger">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname5" class="wizard-form-text-label"> الاعتماد *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname5">
+                                        <input type="text" class="form-control wizard-required" id="accreditation_manger">
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname6" class="wizard-form-text-label"> سنوات الخبرة *</label>
-                                        <input type="number" class="form-control wizard-required" id="fname6">
+                                        <input type="number" class="form-control wizard-required" id="years_of_experience_manger">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname7" class="wizard-form-text-label"> رقم الجوال *</label>
-                                        <input type="number" class="form-control wizard-required" id="fname7">
+                                        <input type="number" class="form-control wizard-required" id="phone_manger">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname8" class="wizard-form-text-label">  البريد الإلكتروني *</label>
-                                        <input type="email" class="form-control wizard-required" id="fname8">
+                                        <input type="email" class="form-control wizard-required" id="email_manger">
                                     </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fname8" class="wizard-form-text-label"> كلمه المرور*</label>
+                                        <input type="password" class="form-control wizard-required" id="password_manger">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-4">
+                                    <p class="mg-b-10"> الصلاحيات </p>
+                                    <select class="form-control select2" id="manger_role_id">
+                                        <option value="">
+
+                                        </option>
+                                        @foreach ($roles as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
@@ -130,14 +149,14 @@
                                     <label for="exampleInputEmail1">  تحميل السيرة الذاتية </label>
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="image" type="file">
+                                        <input class="custom-file-input" id="cv_manger" type="file">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="file" type="file">
+                                        <input class="custom-file-input" id="accreditationـcertificate_manger" type="file">
                                     </div>
                                 </div>
 
@@ -145,7 +164,7 @@
                                     <label for="exampleInputEmail1"> إدراج صورةشخصية  </label>
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="file" type="file">
+                                        <input class="custom-file-input" id="pic_manger" type="file">
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +183,7 @@
                                 </div>
                                 <div class="d-flex">
                                     <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
-                                    <button type="button" class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
+                                    <button type="button" onclick="performStoreManger()" class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
                                 </div>
                             </div>
                     </fieldset>
@@ -176,7 +195,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname1" class="wizard-form-text-label"> الاسم بالكامل بالعربي *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname1">
+                                        <input type="text" class="form-control wizard-required" id="cord_name">
                                     </div>
                                 </div>
 
@@ -184,28 +203,28 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname2" class="wizard-form-text-label"> Full Name in English *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname2">
+                                        <input type="text" class="form-control wizard-required" id="cord_name_english">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname3" class="wizard-form-text-label"> الجنسية  *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname3">
+                                        <input type="text" class="form-control wizard-required" id="nationality_cord">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname4" class="wizard-form-text-label"> تاريخ الولادة  *</label>
-                                        <input type="date" class="form-control wizard-required" id="fname4">
+                                        <input type="date" class="form-control wizard-required" id="birthday_cord">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname55" class="wizard-form-text-label"> الشهادة الأكاديمية *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname55">
+                                        <input type="text" class="form-control wizard-required" id="academicـcertificate_cord">
                                     </div>
                                 </div>
 
@@ -213,35 +232,55 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname5" class="wizard-form-text-label"> مجال الوظيفة الرئيسي  *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname5">
+                                        <input type="text" class="form-control wizard-required" id="main_job_field_cord">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname5" class="wizard-form-text-label"> الاعتماد *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname5">
+                                        <input type="text" class="form-control wizard-required" id="accreditation_cord">
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname6" class="wizard-form-text-label"> سنوات الخبرة *</label>
-                                        <input type="number" class="form-control wizard-required" id="fname6">
+                                        <input type="number" class="form-control wizard-required" id="years_of_experience_cord">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname7" class="wizard-form-text-label"> رقم الجوال *</label>
-                                        <input type="number" class="form-control wizard-required" id="fname7">
+                                        <input type="number" class="form-control wizard-required" id="phone_cord">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname8" class="wizard-form-text-label">  البريد الإلكتروني *</label>
-                                        <input type="email" class="form-control wizard-required" id="fname8">
+                                        <input type="email" class="form-control wizard-required" id="email_cord">
                                     </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fname8" class="wizard-form-text-label"> كلمه المرور*</label>
+                                        <input type="password" class="form-control wizard-required" id="password_cord">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-4">
+                                    <p class="mg-b-10"> الصلاحيات </p>
+                                    <select class="form-control select2" id="cord_role_id">
+                                        <option value="">
+
+                                        </option>
+                                        @foreach ($roles as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
@@ -250,14 +289,14 @@
                                     <label for="exampleInputEmail1">  تحميل السيرة الذاتية </label>
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="image" type="file">
+                                        <input class="custom-file-input" id="cv_cord" type="file">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="file" type="file">
+                                        <input class="custom-file-input" id="accreditationـcertificate_cord" type="file">
                                     </div>
                                 </div>
 
@@ -265,7 +304,7 @@
                                     <label for="exampleInputEmail1"> إدراج صورةشخصية  </label>
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="file" type="file">
+                                        <input class="custom-file-input" id="pic_cord" type="file">
                                     </div>
                                 </div>
                             </div>
@@ -284,7 +323,7 @@
                                 </div>
                                 <div class="d-flex">
                                     <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
-                                    <button type="button" class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
+                                    <button type="button" onclick="performStoreCord()" class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
                                 </div>
                             </div>
                     </fieldset>
@@ -296,7 +335,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname1" class="wizard-form-text-label"> الاسم بالكامل بالعربي *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname1">
+                                        <input type="text" class="form-control wizard-required" id="trainer_name">
                                     </div>
                                 </div>
 
@@ -304,35 +343,35 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname2" class="wizard-form-text-label"> Full Name in English *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname2">
+                                        <input type="text" class="form-control wizard-required" id="trainer_name_english">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname3" class="wizard-form-text-label"> الجنسية  *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname3">
+                                        <input type="text" class="form-control wizard-required" id="nationality_trainer">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname4" class="wizard-form-text-label"> تاريخ الولادة  *</label>
-                                        <input type="date" class="form-control wizard-required" id="fname4">
+                                        <input type="date" class="form-control wizard-required" id="birthday_trainer">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname55" class="wizard-form-text-label"> الشهادة الأكاديمية *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname55">
+                                        <input type="text" class="form-control wizard-required" id="academicـcertificate_trainer">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname55" class="wizard-form-text-label"> الشهادة التدريبية(TOT) *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname55">
+                                        <input type="text" class="form-control wizard-required" id="tot_trainer">
                                     </div>
                                 </div>
 
@@ -340,51 +379,69 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname5" class="wizard-form-text-label"> مجال التدريب الرئيسي  *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname5">
+                                        <input type="text" class="form-control wizard-required" id="main_training_area_trainer">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname5" class="wizard-form-text-label"> الاعتماد *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname5">
+                                        <input type="text" class="form-control wizard-required" id="accreditation_trainer">
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname6" class="wizard-form-text-label"> سنوات الخبرة *</label>
-                                        <input type="number" class="form-control wizard-required" id="fname6">
+                                        <input type="number" class="form-control wizard-required" id="years_of_experience_trainer">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname7" class="wizard-form-text-label"> رقم الجوال *</label>
-                                        <input type="number" class="form-control wizard-required" id="fname7">
+                                        <input type="number" class="form-control wizard-required" id="phone_trainer">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname8" class="wizard-form-text-label">  البريد الإلكتروني *</label>
-                                        <input type="email" class="form-control wizard-required" id="fname8">
+                                        <input type="email" class="form-control wizard-required" id="email_trainer">
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="fname8" class="wizard-form-text-label"> كلمه المرور*</label>
+                                    <input type="password" class="form-control wizard-required" id="password_trainer">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mb-4">
+                                <p class="mg-b-10"> الصلاحيات </p>
+                                <select class="form-control select2" id="trainer_role_id">
+                                    <option value="">
 
+                                    </option>
+                                    @foreach ($roles as $item)
+                                        <option value="{{ $item->id }}">
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="row mb-3">
                                 <div class="col-lg-4 mb-3">
                                     <label for="exampleInputEmail1">  تحميل السيرة الذاتية </label>
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="image" type="file">
+                                        <input class="custom-file-input" id="cv_trainer" type="file">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="file" type="file">
+                                        <input class="custom-file-input" id="accreditationـcertificate_trainer" type="file">
                                     </div>
                                 </div>
 
@@ -392,7 +449,7 @@
                                     <label for="exampleInputEmail1"> إدراج صورةشخصية  </label>
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="file" type="file">
+                                        <input class="custom-file-input" id="pic_trainer" type="file">
                                     </div>
                                 </div>
                             </div>
@@ -411,7 +468,7 @@
                                 </div>
                                 <div class="d-flex">
                                     <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
-                                    <button type="button" class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
+                                    <button type="button" onclick="performStoreTrainer()" class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
                                 </div>
                             </div>
                     </fieldset>
@@ -423,34 +480,34 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname1" class="wizard-form-text-label"> الاسم بالكامل بالعربي *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname1">
+                                        <input type="text" class="form-control wizard-required" id="cord_trainer_name">
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname2" class="wizard-form-text-label"> Full Name in English *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname2">
+                                        <input type="text" class="form-control wizard-required" id="cord_trainer_name_english">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname3" class="wizard-form-text-label"> الجنسية  *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname3">
+                                        <input type="text" class="form-control wizard-required" id="cord_trainer_nationality">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname4" class="wizard-form-text-label"> تاريخ الولادة  *</label>
-                                        <input type="date" class="form-control wizard-required" id="fname4">
+                                        <input type="date" class="form-control wizard-required" id="cord_trainer_birthday">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname55" class="wizard-form-text-label"> الشهادة الأكاديمية *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname55">
+                                        <input type="text" class="form-control wizard-required" id="cord_trainer_academicـcertificate">
                                     </div>
                                 </div>
 
@@ -460,7 +517,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname5" class="wizard-form-text-label"> مجال التدريب الرئيسي  *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname5">
+                                        <input type="text" class="form-control wizard-required" id="cord_trainer_main_training_area">
                                     </div>
                                 </div>
 
@@ -468,22 +525,41 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname6" class="wizard-form-text-label"> سنوات الخبرة *</label>
-                                        <input type="number" class="form-control wizard-required" id="fname6">
+                                        <input type="number" class="form-control wizard-required" id="cord_trainer_years_of_experience">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname7" class="wizard-form-text-label"> رقم الجوال *</label>
-                                        <input type="number" class="form-control wizard-required" id="fname7">
+                                        <input type="number" class="form-control wizard-required" id="cord_trainer_phone">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname8" class="wizard-form-text-label">  البريد الإلكتروني *</label>
-                                        <input type="email" class="form-control wizard-required" id="fname8">
+                                        <input type="email" class="form-control wizard-required" id="cord_trainer_email">
                                     </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fname8" class="wizard-form-text-label"> كلمه المرور*</label>
+                                        <input type="password" class="form-control wizard-required" id="cord_trainer_password">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-4">
+                                    <p class="mg-b-10"> الصلاحيات </p>
+                                    <select class="form-control select2" id="cord_trainer_role_id">
+                                        <option value="">
+
+                                        </option>
+                                        @foreach ($roles as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
@@ -492,14 +568,14 @@
                                     <label for="exampleInputEmail1">  تحميل السيرة الذاتية </label>
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="image" type="file">
+                                        <input class="custom-file-input" id="cord_trainer_cv" type="file">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="file" type="file">
+                                        <input class="custom-file-input" id="cord_trainer_accreditation" type="file">
                                     </div>
                                 </div>
 
@@ -507,7 +583,7 @@
                                     <label for="exampleInputEmail1"> إدراج صورةشخصية  </label>
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="file" type="file">
+                                        <input class="custom-file-input" id="cord_trainer_pic" type="file">
                                     </div>
                                 </div>
                             </div>
@@ -526,7 +602,7 @@
                                 </div>
                                 <div class="d-flex">
                                     <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
-                                    <button type="button" class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
+                                    <button type="button" onclick="performStoreCordTrainer()" class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
                                 </div>
                             </div>
                     </fieldset>
@@ -540,7 +616,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname1" class="wizard-form-text-label"> الاسم بالكامل بالعربي *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname1">
+                                        <input type="text" class="form-control wizard-required" id="name">
                                     </div>
                                 </div>
 
@@ -548,48 +624,48 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname2" class="wizard-form-text-label"> Full Name in English *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname2">
+                                        <input type="text" class="form-control wizard-required" id="name_english">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname3" class="wizard-form-text-label"> الجنسية  *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname3">
+                                        <input type="text" class="form-control wizard-required" id="nationality">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname4" class="wizard-form-text-label"> تاريخ الولادة  *</label>
-                                        <input type="date" class="form-control wizard-required" id="fname4">
+                                        <input type="date" class="form-control wizard-required" id="birthday">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname55" class="wizard-form-text-label"> الشهادة الأكاديمية *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname55">
+                                        <input type="text" class="form-control wizard-required" id="academicـcertificate">
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname5" class="wizard-form-text-label"> مجال  الاستشارات الرئيسي  *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname5">
+                                        <input type="text" class="form-control wizard-required" id="main_field_of_consulting">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname5" class="wizard-form-text-label"> مجال  التدريب الرئيسي  *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname5">
+                                        <input type="text" class="form-control wizard-required" id="main_training_area">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname6" class="wizard-form-text-label"> سنوات الخبرة *</label>
-                                        <input type="number" class="form-control wizard-required" id="fname6">
+                                        <input type="number" class="form-control wizard-required" id="years_of_experience">
                                     </div>
                                 </div>
 
@@ -597,15 +673,34 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname7" class="wizard-form-text-label"> رقم الجوال *</label>
-                                        <input type="number" class="form-control wizard-required" id="fname7">
+                                        <input type="number" class="form-control wizard-required" id="phone">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname8" class="wizard-form-text-label">  البريد الإلكتروني *</label>
-                                        <input type="email" class="form-control wizard-required" id="fname8">
+                                        <input type="email" class="form-control wizard-required" id="email">
                                     </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fname8" class="wizard-form-text-label"> كلمه المرور*</label>
+                                        <input type="password" class="form-control wizard-required" id="password">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-4">
+                                    <p class="mg-b-10"> الصلاحيات </p>
+                                    <select class="form-control select2" id="role_id">
+                                        <option value="">
+
+                                        </option>
+                                        @foreach ($roles as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
@@ -614,14 +709,14 @@
                                     <label for="exampleInputEmail1">  تحميل السيرة الذاتية </label>
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="image" type="file">
+                                        <input class="custom-file-input" id="cv" type="file">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="file" type="file">
+                                        <input class="custom-file-input" id="accreditationـcertificate" type="file">
                                     </div>
                                 </div>
 
@@ -629,7 +724,7 @@
                                     <label for="exampleInputEmail1"> إدراج صورةشخصية  </label>
                                     <div class="custom-file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="file" type="file">
+                                        <input class="custom-file-input" id="pic" type="file">
                                     </div>
                                 </div>
                             </div>
@@ -648,7 +743,7 @@
                                 </div>
                                 <div class="d-flex">
                                     <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
-                                    <button type="button" class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
+                                    <button type="button" onclick="performStore()" class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
                                 </div>
                             </div>
                     </fieldset>
@@ -679,9 +774,12 @@
                                 <div class="col-lg-6">
                                     <p class="mg-b-10"> طريقة الحضور</p>
                                     <select class="form-control select2" id="attendance_method">
-                                        <option value="remote">.....
+                                        <option value="remote">
+                                            عن بعد
                                         </option>
-
+                                        <option value="immanence">
+                                            حضوري
+                                        </option>
                                     </select>
                                 </div>
 
@@ -715,14 +813,14 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname4" class="wizard-form-text-label"> تاريخ البدأ  *</label>
-                                        <input type="date" class="form-control wizard-required" id="fname4">
+                                        <input type="date" class="form-control wizard-required" id="start">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname55" class="wizard-form-text-label">  تاريخ الانتهاء *</label>
-                                        <input type="date" class="form-control wizard-required" id="fname55">
+                                        <input type="date" class="form-control wizard-required" id="end">
                                     </div>
                                 </div>
 
@@ -732,7 +830,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname5" class="wizard-form-text-label"> عدد الدورات في المشروع  *</label>
-                                        <input type="nuumber" class="form-control wizard-required" id="fname5">
+                                        <input type="nuumber" class="form-control wizard-required" id="courses_count">
                                     </div>
                                 </div>
 
@@ -740,19 +838,22 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname6" class="wizard-form-text-label">  عدد المتدربين الاجمالي *</label>
-                                        <input type="number" class="form-control wizard-required" id="fname6">
+                                        <input type="number" class="form-control wizard-required" id="trainers_count">
                                     </div>
                                 </div>
-
                                 <div class="col-lg-6">
                                     <p class="mg-b-10"> مكان تنفيذ خدمات المشروع الدولة / المدينة </p>
-                                    <select class="form-control select2" id="attendance_method">
-                                        <option value="remote">.....
-                                        </option>
+                                    <select class="form-control select2" id="country_id">
+                                        <option value="">
 
+                                        </option>
+                                        @foreach ($countries as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->name_ar }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
-
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname7" class="wizard-form-text-label">  مقر تنفيذ المشروع مقر العمل / مقر مركز التدريب *</label>
@@ -877,4 +978,152 @@
 <script src="{{ asset('assets/plugins/wizard/js/jquery.backstretch.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/wizard/js/retina-1.1.0.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/wizard/js/scripts.js') }}"></script>
+
+<script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function performStoreManger() {
+        let formData = new FormData();
+        formData.append('name', document.getElementById('manager_name').value);
+        formData.append('name_english', document.getElementById('english_name_manger').value);
+         formData.append('nationality', document.getElementById('manager_nationality').value);
+        formData.append('birthday', document.getElementById('birthday_manger').value);
+        formData.append('academicـcertificate', document.getElementById('academicـcertificate_manger').value);
+        formData.append('main_training_area', document.getElementById('main_training_area_manger').value);
+        formData.append('accreditation', document.getElementById('accreditation_manger').value);
+        formData.append('years_of_experience', document.getElementById('years_of_experience_manger').value);
+        formData.append('phone', document.getElementById('phone_manger').value);
+        formData.append('email', document.getElementById('email_manger').value);
+        formData.append('password', document.getElementById('password_manger').value);
+        formData.append('role_id', document.getElementById('manger_role_id').value);
+        formData.append('cv', document.getElementById('cv_manger').files[0]);
+        formData.append('accreditationـcertificate', document.getElementById('accreditationـcertificate_manger').files[0]);
+        formData.append('pic', document.getElementById('pic_manger').files[0]);
+        store('/dashboard/admin/admins', formData)
+    }
+
+    function performStoreCord() {
+        let formData = new FormData();
+        formData.append('name', document.getElementById('cord_name').value);
+        formData.append('name_english', document.getElementById('cord_name_english').value);
+         formData.append('nationality', document.getElementById('nationality_cord').value);
+        formData.append('birthday', document.getElementById('birthday_cord').value);
+        formData.append('academicـcertificate', document.getElementById('academicـcertificate_cord').value);
+        formData.append('main_job_field', document.getElementById('main_job_field_cord').value);
+        formData.append('accreditation', document.getElementById('accreditation_cord').value);
+        formData.append('years_of_experience', document.getElementById('years_of_experience_cord').value);
+        formData.append('phone', document.getElementById('phone_cord').value);
+        formData.append('email', document.getElementById('email_cord').value);
+        formData.append('password', document.getElementById('password_cord').value);
+        formData.append('role_id', document.getElementById('cord_role_id').value);
+        formData.append('cv', document.getElementById('cv_cord').files[0]);
+        formData.append('accreditationـcertificate', document.getElementById('accreditationـcertificate_cord').files[0]);
+        formData.append('pic', document.getElementById('pic_cord').files[0]);
+        store('/dashboard/admin/admins', formData)
+    }
+    function performStoreTrainer() {
+        let formData = new FormData();
+        formData.append('name', document.getElementById('trainer_name').value);
+        formData.append('name_english', document.getElementById('trainer_name_english').value);
+        formData.append('nationality', document.getElementById('nationality_trainer').value);
+        formData.append('birthday', document.getElementById('birthday_trainer').value);
+        formData.append('academicـcertificate', document.getElementById('academicـcertificate_trainer').value);
+        formData.append('tot', document.getElementById('tot_trainer').value);
+        formData.append('main_training_area', document.getElementById('main_training_area_trainer').value);
+        formData.append('accreditation', document.getElementById('accreditation_trainer').value);
+        formData.append('years_of_experience', document.getElementById('years_of_experience_trainer').value);
+        formData.append('phone', document.getElementById('phone_trainer').value);
+        formData.append('email', document.getElementById('email_trainer').value);
+        formData.append('password', document.getElementById('password_trainer').value);
+        formData.append('role_id', document.getElementById('trainer_role_id').value);
+        formData.append('cv', document.getElementById('cv_trainer').files[0]);
+        formData.append('accreditationـcertificate', document.getElementById('accreditationـcertificate_trainer').files[0]);
+        formData.append('pic', document.getElementById('pic_trainer').files[0]);
+         store('/dashboard/admin/trainers', formData)
+    }
+
+
+
+    function performStoreCordTrainer() {
+        let formData = new FormData();
+        formData.append('name', document.getElementById('cord_trainer_name').value);
+        formData.append('name_english', document.getElementById('cord_trainer_name_english').value);
+        formData.append('nationality', document.getElementById('cord_trainer_nationality').value);
+        formData.append('birthday', document.getElementById('cord_trainer_birthday').value);
+        formData.append('academicـcertificate', document.getElementById('cord_trainer_academicـcertificate').value);
+        formData.append('main_training_area', document.getElementById('cord_trainer_main_training_area').value);
+        formData.append('accreditation', document.getElementById('accreditation_trainer').value);
+        formData.append('years_of_experience', document.getElementById('cord_trainer_years_of_experience').value);
+        formData.append('phone', document.getElementById('cord_trainer_phone').value);
+        formData.append('email', document.getElementById('cord_trainer_email').value);
+        formData.append('password', document.getElementById('cord_trainer_password').value);
+        formData.append('role_id', document.getElementById('cord_trainer_role_id').value);
+        formData.append('cv', document.getElementById('cord_trainer_cv').files[0]);
+        formData.append('accreditationـcertificate', document.getElementById('cord_trainer_accreditation').files[0]);
+        formData.append('pic', document.getElementById('cord_trainer_pic').files[0]);
+         store('/dashboard/admin/admins', formData)
+    }
+
+    function performStore() {
+        let formData = new FormData();
+        formData.append('name', document.getElementById('name').value);
+        formData.append('name_english', document.getElementById('name_english').value);
+        formData.append('main_training_area', document.getElementById('main_training_area').value);
+        formData.append('nationality', document.getElementById('nationality').value);
+        formData.append('birthday', document.getElementById('birthday').value);
+        formData.append('academicـcertificate', document.getElementById('academicـcertificate').value);
+        formData.append('main_field_of_consulting', document.getElementById('main_field_of_consulting').value);
+        formData.append('accreditation', document.getElementById('accreditation_trainer').value);
+        formData.append('years_of_experience', document.getElementById('years_of_experience').value);
+        formData.append('phone', document.getElementById('phone').value);
+        formData.append('email', document.getElementById('email').value);
+        formData.append('password', document.getElementById('password').value);
+        formData.append('role_id', document.getElementById('role_id').value);
+        formData.append('cv', document.getElementById('cv').files[0]);
+        formData.append('accreditationـcertificate', document.getElementById('accreditationـcertificate').files[0]);
+        formData.append('pic', document.getElementById('pic').files[0]);
+         store('/dashboard/admin/admins', formData)
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
 @endsection

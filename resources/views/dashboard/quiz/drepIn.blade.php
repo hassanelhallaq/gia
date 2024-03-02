@@ -38,8 +38,12 @@
                                 <div class="form-group has-success mg-b-0">
                                     <label for="example"> قبلي </label>
                                     <select id="quiz_befor" name="quiz_befor_id" class="form-control select2">
+
                                         @foreach ($quizesBefor as $item)
-                                            <option value="{{ $item->id }}">
+                                        <option @foreach ($course->quizes->where('type','befor') as $quiz)
+
+                                            @if ($item->id == $quiz->id) selected @endif @endforeach
+                                            value="{{ $item->id }}">
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
@@ -67,7 +71,10 @@
                                     <label for="example"> بعدي</label>
                                     <select id="quiz_after" name="quiz_after_id" class="form-control select2">
                                         @foreach ($quizesAfter as $item)
-                                            <option value="{{ $item->id }}">
+                                        <option @foreach ($course->quizes->where('type','after') as $quiz)
+
+                                            @if ($item->id == $quiz->id) selected @endif @endforeach
+                                            value="{{ $item->id }}">
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
@@ -94,9 +101,12 @@
                                     <label for="example"> تفاعلي</label>
                                     <select id="quiz_interactive" name="quiz_interactive_id" class="form-control select2">
                                         @foreach ($quizesInteractive as $item)
-                                            <option value="{{ $item->id }}">
-                                                {{ $item->name }}
-                                            </option>
+                                            <option @foreach ($course->quizes->where('type','interactive') as $quiz)
+
+                                                @if ($item->id == $quiz->id) selected @endif @endforeach
+                                                value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
                                         @endforeach
                                     </select>
 
@@ -180,8 +190,7 @@
         .then(response => {
             // Handle response
             location.reload();
-
-
+        }
             // You can redirect or show a success message here
         })
         .catch(error => console.error('Error:', error));

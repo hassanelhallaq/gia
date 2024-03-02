@@ -52,7 +52,32 @@ class TrainerController extends Controller
                 $trainer->email = $request->get('email');
                 $trainer->phone = $request->get('phone');
                 $trainer->password = Hash::make($request->get('password'));
-
+                $trainer->english_name = $request->get('name_english');
+                $trainer->main_training_area = $request->get('main_training_area');
+                $trainer->nationality = $request->get('nationality');
+                $trainer->birthday = $request->get('birthday');
+                $trainer->academicـcertificate = $request->get('academicـcertificate');
+                $trainer->accreditation = $request->get('accreditation');
+                $trainer->years_of_experience = $request->get('years_of_experience');
+                $trainer->tot = $request->get('tot');
+                if ($request->hasFile('cv')) {
+                    $trainerImage = $request->file('cv');
+                    $imageName = time() . '_' . $request->get('cv') . '.' . $trainerImage->getClientOriginalExtension();
+                    $trainerImage->move('images/program', $imageName);
+                    $trainer->cv = '/images/' . 'program' . '/' . $imageName;
+                }
+                if ($request->hasFile('pic')) {
+                    $trainerImage = $request->file('pic');
+                    $imageName = time() . '_' . $request->get('pic') . '.' . $trainerImage->getClientOriginalExtension();
+                    $trainerImage->move('images/program', $imageName);
+                    $trainer->cv = '/images/' . 'program' . '/' . $imageName;
+                }
+                if ($request->hasFile('accreditationـcertificate')) {
+                    $trainerImage = $request->file('accreditationـcertificate');
+                    $imageName = time() . '_' . $request->get('pic') . '.' . $trainerImage->getClientOriginalExtension();
+                    $trainerImage->move('images/program', $imageName);
+                    $trainer->accreditationـcertificate = '/images/' . 'program' . '/' . $imageName;
+                }
                 $isSaved = $trainer->save();
                 return response()->json(['icon' => 'success', 'title' => 'تم الانشاء بنجاح '], 200);
 

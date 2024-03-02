@@ -34,7 +34,8 @@ class QuizController extends Controller
         $quizesBefor = Quiz::orderBy("created_at", "desc")->where('type', 'befor')->withCount('courses')->paginate(10);
         $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type', 'after')->withCount('courses')->paginate(10);
         $quizesInteractive = Quiz::orderBy("created_at", "desc")->where('type', 'interactive')->withCount('courses')->paginate(10);
-        return view("dashboard.quiz.drepIn", compact("quizesBefor", 'quizesAfter', 'quizesInteractive','id'));
+        $course = Course::find($id);
+        return view("dashboard.quiz.drepIn", compact("quizesBefor", 'quizesAfter', 'quizesInteractive','id','course'));
     }
     /**
      * Show the form for creating a new resource.
@@ -491,6 +492,7 @@ class QuizController extends Controller
             }
         }
         $dropdownsAndDates = json_decode($request->input('dropdownsAndDates'), true);
+         if($dropdownsAndDates){
         // Process the dropdowns and dates
         foreach ($dropdownsAndDates as $dropdownAndDate) {
             $dropdown = $dropdownAndDate['dropdown'];
@@ -506,7 +508,7 @@ class QuizController extends Controller
             }
             $course->save();
         }
-        // Return response
-        return response()->json(['message' => 'Form submitted successfully']);
     }
+        // Return response
+     }
 }

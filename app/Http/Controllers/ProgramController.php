@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Client;
+use App\Models\Country;
 use App\Models\Course;
 use App\Models\Program;
 use App\Models\Trainer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class ProgramController extends Controller
 {
@@ -265,5 +267,12 @@ class ProgramController extends Controller
             return back();
         $list = collect($data);
         return (new \Rap2hpoutre\FastExcel\FastExcel($list))->download('file.xlsx');
+    }
+
+    public function programWizard()
+    {
+        $countries = Country::all();
+        $roles = Role::where('guard_name', 'admin')->get();
+        return view("dashboard.AddProjectManager.add", compact( 'roles','countries'));
     }
 }

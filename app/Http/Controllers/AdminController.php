@@ -141,7 +141,7 @@ class AdminController extends Controller
 
             'role_id' => 'required|numeric|exists:roles,id',
             'name' => 'required|string|min:3|max:35',
-            'job' => 'required|string|min:3|max:35',
+            // 'job' => 'required|string|min:3|max:35',
             'phone' => 'required|numeric',
             'email' => 'required|email|unique:admins,email',
             'password' => 'required|string',
@@ -151,9 +151,38 @@ class AdminController extends Controller
 
         if (!$validator->fails()) {
 
+
+
             $admin = new Admin();
             $admin->email = $request->get('email');
-            $admin->job = $request->get('job');
+            $admin->english_name = $request->get('name_english');
+            $admin->main_training_area = $request->get('main_training_area');
+            $admin->nationality = $request->get('nationality');
+            $admin->birthday = $request->get('birthday');
+            $admin->academicـcertificate = $request->get('academicـcertificate');
+            $admin->main_field_of_consulting = $request->get('main_field_of_consulting');
+            $admin->accreditation = $request->get('accreditation');
+            $admin->years_of_experience = $request->get('years_of_experience');
+
+            if ($request->hasFile('cv')) {
+                $adminImage = $request->file('cv');
+                $imageName = time() . '_' . $request->get('cv') . '.' . $adminImage->getClientOriginalExtension();
+                $adminImage->move('images/program', $imageName);
+                $admin->cv = '/images/' . 'program' . '/' . $imageName;
+            }
+            if ($request->hasFile('pic')) {
+                $adminImage = $request->file('pic');
+                $imageName = time() . '_' . $request->get('pic') . '.' . $adminImage->getClientOriginalExtension();
+                $adminImage->move('images/program', $imageName);
+                $admin->cv = '/images/' . 'program' . '/' . $imageName;
+            }
+            if ($request->hasFile('accreditationـcertificate')) {
+                $adminImage = $request->file('accreditationـcertificate');
+                $imageName = time() . '_' . $request->get('pic') . '.' . $adminImage->getClientOriginalExtension();
+                $adminImage->move('images/program', $imageName);
+                $admin->accreditationـcertificate = '/images/' . 'program' . '/' . $imageName;
+            }
+            $admin->job = $request->get('job') == null ? 'job' : $request->get('job');
             $admin->password = Hash::make($request->get('password'));
             $admin->name = $request->get('name');
             $admin->phone = $request->get('phone');
