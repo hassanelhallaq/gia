@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
 <div class="row m-auto">
     <div class="col-sm-10  m-auto">
         <form role="form" action="" method="post" class="f1">
@@ -13,7 +12,7 @@
 			<p class=" text-center "> يمكنك البدء فى انشاء جهة لانشاء وادارة الدورات الخاصه بك </p>
             <div class="card p-4">
                 <div class="body-cord">
-                    <div class="row mt-2">
+                    <div class="row mt-2 pb-2 brd-btn">
                         <div class="col-lg-4  col-sm-12 mb-3">
                             <label  class="wizard-form-text-label  rdiobox"><input name="rdio" type="radio"> <span> القطاع  العام </span></label>
                         </div>
@@ -37,7 +36,10 @@
                                 <input  type="text" class="form-control wizard-required" id="mangment">
                             </div>
                         </div>
+                    </div>
 
+
+                    <div class="row mt-3 brd-btn">
                         <div class="col-md-6 col-g-6 col-sm-12">
                             <div class="form-group">
                                 <label for="fname1" class="wizard-form-text-label"> المدير العام / التنفيذي *</label>
@@ -67,7 +69,43 @@
                             </div>
                         </div>
 
+                    </div>
+
+                    <div class="row mt-2 brd-btn">
                         <div class="col-md-6 col-g-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="fname1" class="wizard-form-text-label">  ممثل العمل في المشروع *</label>
+                                <input  type="text" class="form-control wizard-required" id="manager">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-g-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="fname1" class="wizard-form-text-label"> رقم الجوال *</label>
+                                <input  type="text" class="form-control wizard-required" id="phone">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 col-g-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="fname1" class="wizard-form-text-label"> البريد الإلكتروني *</label>
+                                <input  type="text" class="form-control wizard-required" id="email">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-g-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="fname1" class="wizard-form-text-label"> رقم الهاتف *</label>
+                                <input  type="number" class="form-control wizard-required" id="phone_number">
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row mt-2">
+                        <div class="col-md-6 col-g-6 col-sm-12 " >
                             <div class="form-group">
                                 <label for="fname1" class="wizard-form-text-label"> الدولة *</label>
                                 <select class="form-control select2" id="country_id">
@@ -80,7 +118,7 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                                        </div>
+                            </div>
                         </div>
 
                         <div class="col-md-6 col-g-6 col-sm-12">
@@ -167,7 +205,6 @@
         </form>
     </div>
 </div>
-
 
 @endsection
 
