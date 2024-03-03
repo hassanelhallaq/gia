@@ -76,7 +76,7 @@
 
                 </li>
                 @endcan
-                @can('اضافه مدير مشروع')
+                {{-- @can('اضافه مدير مشروع')
 
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide"  href="#"><i class="si si-people tx-22"></i><span class="side-menu__label mr-3"> اضافة مدير مشروع </span><i class="angle fe fe-chevron-down"></i></a>
@@ -85,7 +85,7 @@
                     </ul>
                 </li>
 
-                @endcan
+                @endcan --}}
 
                 @can('اضافه مشروع')
 
