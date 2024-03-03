@@ -124,12 +124,6 @@
 
 
     function performStore() {
-
-
-
-
-
-
             let formData = new FormData();
             formData.append('name', document.getElementById('name').value);
             formData.append('country_id', document.getElementById('country_id').value);
@@ -138,7 +132,6 @@
             formData.append('email', document.getElementById('email').value);
             formData.append('password', document.getElementById('password').value);
             formData.append('phone_number', document.getElementById('phone_number').value);
-
             storeRoute('/dashboard/admin/clients', formData)
         }
 </script>

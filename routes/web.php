@@ -93,20 +93,20 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::post('/attend', [AttendanceController::class, 'attendCourse'])->name('attend.course');
         Route::post('/delete-attend', [AttendanceController::class, 'deleteAttendCourse'])->name('delete.attend.course');
         Route::post('/deipIn-store/{id}', [QuizController::class, 'drepInStore'])->name('deipIn.store');
+        Route::get('/search', [ClientController::class , 'search'])->name('search');
+
         // روت مؤقت
         Route::get('/quiz/detales', function () {
             return view('dashboard.quiz.detales');
         })->name('quiz_detales');
-        Route::get('/AddProjectManager',[ProgramController::class ,'programWizard'])->name('AddProjectManager');
+        Route::get('/AddProjectManager/{id}',[ProgramController::class ,'programWizard'])->name('AddProjectManager');
         Route::get('/AddProject', function () {
             return view('dashboard.AddProject.add');
         })->name('AddProject');
         Route::get('/AddProject2', function () {
             return view('dashboard.AddProject.add2');
         })->name('AddProject2');
-        Route::get('/AddProject3', function () {
-            return view('dashboard.AddProject.add3');
-        })->name('AddProject3');
+        Route::get('/AddProject3',[ClientController::class , 'createClient'])->name('AddProject3');
     }
 );
 Route::prefix('dashboard/trainer')->middleware('auth:trainer')->group(

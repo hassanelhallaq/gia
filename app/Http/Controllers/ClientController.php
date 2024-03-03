@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
 {
@@ -58,6 +59,12 @@ class ClientController extends Controller
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
         $data['password'] =  Hash::make($request->get('password'));
+        if ($request->hasFile('address')) {
+            $adminImage = $request->file('address');
+            $imageName = time() . '_' . $request->get('address') . '.' . $adminImage->getClientOriginalExtension();
+            $adminImage->move('images/program', $imageName);
+            $data['address'] = '/images/' . 'program' . '/' . $imageName;
+        }
         $isSaved = Client::create($data);
         return response()->json(['redirect' => route('clients.index')]);
 
@@ -96,6 +103,18 @@ class ClientController extends Controller
     {
         $client = Client::destroy($id);
         return response()->json(['icon' => 'success' , 'title' => 'تم الحذف  بنجاح'] , $client ? 200 : 400);
+
+    }
+    public function search(Request $request)
+    {
+        $searchQuery = $request->input('search_query');
+        $organizations = Client::where('name', 'like', "%$searchQuery%")->get();
+        return $organizations;
+    }
+    public function createClient()
+    {
+        $countries = Country::all();
+        return view("dashboard.AddProject.add3",compact("countries"));
 
     }
 }

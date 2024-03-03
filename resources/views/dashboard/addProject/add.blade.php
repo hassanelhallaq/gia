@@ -11,7 +11,7 @@
 <div class="row m-auto">
     <div class="col-sm-10  m-auto">
         <form role="form" action="" method="post" class="f1">
-            <h5 class=" text-center"> مرحبا محمد الزرو </h5>
+            <h5 class=" text-center"> مرحبا  {{Auth::user()->name}}  </h5>
 			<p class=" text-center "> يمكنك البدء فى انشاء جهة لانشاء وادارة الدورات الخاصه بك </p>
 
 
@@ -22,9 +22,13 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label class="" for="fname4" class="wizard-form-text-label">  يرجى البحث عن اسم الجهة من خلال القائمة ادناه  *</label>
-                                <input type="text" placeholder="اكتب هنا للبحث عن جهة" class="form-control wizard-required" id="fname4">
+                                <input type="text" name="search_query" placeholder="اكتب هنا للبحث عن جهة" class="form-control wizard-required" id="search_query">
                                 <div class="wizard-form-error"></div>
                             </div>
+                            <select class="form-control select2" id="organizationList" style="display: none;">
+
+                            </select>
+
                         </div>
                         <div class="col-12">
                             <h5 class="text-center mt-3 mb-5">او قم بإضافة وتعريف جهة جديدة</h5>
@@ -61,7 +65,7 @@
                                 <button class="btn btn-outline-warning ml-1 btn-with-icon  "> العودة للرئيسية  </button>
                             </div>
                             <div class="d-flex">
-                                <button class="btn ml-1 btn-warning-gradient btn-with-icon">  التوجة للخطوه التالية  </button>
+                                <button type="button" onclick="redirect()" class="btn ml-1 btn-warning-gradient btn-with-icon">  التوجة للخطوه التالية  </button>
                                 {{-- <button type="button" class="btn btn-outline-warning btn-next ">   المتابعة لاصدار تكليف </button> --}}
                             </div>
                         </div>
@@ -80,4 +84,41 @@
 <!--Internal Fileuploads js-->
 <script src="{{URL::asset('assets/plugins/fileuploads/js/fileupload.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/fileuploads/js/file-upload.js')}}"></script>
+
+<script>
+    $(document).ready(function(){
+        // Function to hide the select element initially
+        $('#organizationList').hide();
+
+        $('#search_query').on('input', function() {
+            var searchQuery = $(this).val();
+            if (searchQuery.trim() !== '') {
+                // Show the select element when the user starts typing
+                $('#organizationList').show();
+                $.ajax({
+                    url: "{{ route('search') }}",
+                    method: "GET",
+                    data: { search_query: searchQuery },
+                    success: function(data) {
+                        $('#organizationList').empty();
+                        $.each(data, function(index, organization) {
+                            $('#organizationList').append('<option value="'+ organization.id + '">' + organization.name + '</option>');
+                        });
+                    }
+                });
+            } else {
+                // Hide the select element when the search input is empty
+                $('#organizationList').hide();
+            }
+        });
+    });
+
+    function redirect(){
+       var clientId =  document.getElementById('organizationList').value ;
+       if (clientId) {
+            window.location.href = "{{ route('AddProjectManager', ':id') }}".replace(':id', clientId);
+        }
+    }
+    </script>
+
 @endsection

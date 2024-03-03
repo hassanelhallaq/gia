@@ -16,7 +16,13 @@ class Client extends Authenticatable
         'city_id',
         'street',
         'email',
-        'phone_number','password'
+        'phone_number','password','phone',
+        'mangment',
+        'post',
+        'code',
+        'nighberhooad',
+        'manager',
+        'address,'
     ];
 
     public function country(){

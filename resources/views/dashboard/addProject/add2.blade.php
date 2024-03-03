@@ -9,7 +9,7 @@
 <div class="row m-auto">
     <div class="col-sm-10  m-auto">
         <form role="form" action="" method="post" class="f1">
-            <h5 class=" text-center"> مرحبا محمد الزرو </h5>
+            <h5 class=" text-center"> مرحبا  {{Auth::user()->name}}  </h5>
 			<p class=" text-center "> يمكنك البدء فى انشاء جهة لانشاء وادارة الدورات الخاصه بك </p>
             <div class="card p-4">
                 <div class="body-cord">
