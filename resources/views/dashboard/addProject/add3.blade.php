@@ -20,7 +20,7 @@
                             <label class="rdiobox "><input checked="" name="rdio" type="radio"> <span> القطاع الخاص </span></label>
                         </div>
                         <div class="col-lg-4 col-sm-12 mr-auto float-left">
-                            <button type="button" class="btn  btn-warning-gradient  btn-sm  mt-0"> إدراج شعار العميل </button>
+                            <input type="file" class="btn  btn-warning-gradient  btn-sm  mt-0"> إدراج شعار العميل </button>
                         </div>
 
                         <div class="col-md-6 col-g-6 col-sm-12">
@@ -70,7 +70,7 @@
                         </div>
 
                     </div>
-                    
+
                     <div class="row mt-2 brd-btn">
                         <div class="col-md-6 col-g-6 col-sm-12">
                             <div class="form-group">
@@ -155,15 +155,16 @@
                             <div class="form-group">
                                 <label for="fname1" class="wizard-form-text-label">  الشارع *</label>
                                 <input  type="text" class="form-control wizard-required" id="street">
+
                             </div>
                         </div>
 
                         <div class="col-12 col-sm-12">
                             <label for="exampleInputEmail1"> إدراج العنوان الوطني (صورة / ملف pdf)  </label>
-                            <div class="custom-file">
-                                <label class="custom-file-label" for="customFile">Drop files here ⇬</label>
-                                <input class="custom-file-input" id="address" type="file">
-                            </div>
+                            <div class="input-group mb-3">
+                                <input type="file" class="form-control" id="inputGroupFile02">
+                                <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                              </div>
                         </div>
                     </div>
                     {{-- <div class="row">

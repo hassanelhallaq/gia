@@ -3,7 +3,11 @@
 <link rel="stylesheet" href="{{ asset('assets/plugins/wizard/style copy 3.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/plugins/wizard/form-elements.css') }}">
 @endsection
-
+@section('css')
+<style>
+    #cart-create-mp{display:none !important;background-color: red }
+</style>
+@endsection
 @section('content')
 
 <div class="row m-auto">
@@ -11,7 +15,6 @@
         <form role="form" action="" method="post" class="f1">
             <h5 class=" text-center"> مرحبا محمد الزرو </h5>
 			<p class=" text-center "> يمكنك البدء فى انشاء جهة لانشاء وادارة الدورات الخاصه بك </p>
-
             <div class="f1-steps mb-5 mt-2">
                 <div class="f1-progress">
                     <div class="f1-progress-line" data-now-value="0" data-number-of-steps="7" style="width: 1%;"></div>
@@ -20,7 +23,7 @@
                     <div class="f1-step-icon">6</div>
                     <p> انشاء مشروع </p>
                 </div>
-                <div class="f1-step ">
+                <div class="f1-step">
                     <div class="f1-step-icon">1</div>
                     <p> مدير المشروع </p>
                 </div>
@@ -41,16 +44,14 @@
                     <p> المستشارون </p>
                 </div>
 
-
                 <div class="f1-step">
                     <div class="f1-step-icon">7</div>
                     <p>  التكليف </p>
                 </div>
-
             </div>
             <div class="card p-4">
                 <div class="body-cord">
-                    {{--############# fieldset 6    نموذج انشلء مشروع المشروع ###########--}}
+                    {{--############# fieldset 1    نموذج انشلء مشروع المشروع ###########--}}
                     <fieldset>
                         <h5 class=" text-center mt-3 mb-5">  نموذج انشاء مشروع  </h5>
                         <div class="row mt-5">
@@ -171,15 +172,14 @@
                                     <input type="text" class="form-control wizard-required" id="fname8">
                                 </div>
                             </div>
+
                             <div class="col-lg-6">
-                                <p class="mg-b-10"> مدة المشروع  </p>
+                                <p class="mg-b-10">  طريقة التسجيل  </p>
                                 <select class="form-control select2" id="attendance_method">
-                                    <option value="remote"> شهر </option>
-                                    <option value="remote"> شهرين </option>
-                                    <option value="remote"> شهر 3  </option>
-                                    <option value="remote"> شهر 4</option>
-                                    <option value="remote"> شهر 5</option>
-                                    <option value="remote"> شهر 6</option>
+                                    <option value="remote"> من خلال صفحة الهبوط </option>
+                                    <option value="remote"> من خلال المنصة فقط </option>
+                                    <option value="remote"> جميع الخيارات  </option>
+                                    
                                 </select>
                             </div>
                             <div class="col-3">
@@ -202,9 +202,10 @@
                             </div>
                         </div>
                     </fieldset>
-                    {{--#############✔ fieldset 1 نموذج اضافة مدير المشروع  ###########--}}
+                    {{--#############✔ fieldset 2 نموذج اضافة مدير المشروع  ###########--}}
                     <fieldset>
-                        <h5 class=" text-center mt-3 mb-5"> نموذج اضافة مدير المشروع </h5>
+                        <div id="cart-create-mp" class="cart-create-mp" style="display: none">
+                            <h5 class=" text-center mt-3 mb-5"> نموذج اضافة مدير المشروع </h5>
                             <div class="row mt-5">
                                 <div class="col-6">
                                     <div class="form-group">
@@ -282,7 +283,7 @@
                                         <input type="password" class="form-control wizard-required" id="password_manger">
                                     </div>
                                 </div>
-                                <div class="col-lg-4 mb-4">
+                                <div class="col-lg-6  col-sm-12  mb-4">
                                     <p class="mg-b-10"> الصلاحيات </p>
                                     <select class="form-control select2" id="manger_role_id">
                                         <option value="">
@@ -297,28 +298,31 @@
                                 </div>
                             </div>
 
+
                             <div class="row mb-3">
-                                <div class="col-lg-4 mb-3">
-                                    <label for="exampleInputEmail1">  تحميل السيرة الذاتية </label>
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="cv_manger" type="file">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="accreditationـcertificate_manger" type="file">
-                                    </div>
+
+                                <div class="col-lg-4 col-sm-12">
+                                    <label for="exampleInputEmail1"> تحميل السيرة الذاتية   </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                      </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <label for="exampleInputEmail1"> إدراج صورةشخصية  </label>
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="pic_manger" type="file">
-                                    </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <label for="exampleInputEmail1"> تحميل شهادة الاعتماد   </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                      </div>
+                                </div>
+
+                                <div class="col-lg-4 col-sm-12">
+                                    <label for="exampleInputEmail1"> إدراج صورةشخصية   </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                      </div>
                                 </div>
                             </div>
                             <div class="row mb-5 justify-content-between d-flex">
@@ -339,9 +343,34 @@
                                     <button type="button" onclick="performStoreManger()" class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
                                 </div>
                             </div>
-                    </fieldset>
+                        </div>
 
-                    {{--#############✔ fieldset 2 نموذج اضافة منسق المشروع###########--}}
+                        <div id="cart-search-mp" class="cart-search-mp">
+                                <h6 class=" text-center mt-3 mb-5"> هل الجهة مسجلة مسبقاً </h6>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="" for="fname4" class="wizard-form-text-label">   البحث عن  مدير مشروع موجود مسبقا من خلال القائمة ادناه  *</label>
+                                            <input type="text" name="search_query" placeholder="اكتب هنا للبحث عن جهة" class="form-control wizard-required" id="search_query">
+                                            <div class=""></div>
+                                        </div>
+                                        <select class="form-control select2" id="organizationList" style="display: none;">
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3 mt-4 justify-content-between d-flex">
+                                    <div class="">
+                                        <button id="btnCreateMProject" class="btn btn-dark" type="button"> او انشاء مدير مشروع جديد  </button>
+                                    </div>
+                                    <div class="d-flex">
+                                        <a href="javascript:;" class="btn btn-warning-gradient form-wizard-previous-btn btn-previous "> السابق </a>
+                                        <button type="button" onclick="performStoreCord()" class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
+                                    </div>
+                                </div>
+                        </div>
+                    </fieldset>
+                    {{--#############✔ fieldset 3 نموذج اضافة منسق المشروع###########--}}
                     <fieldset>
                         <h5 class=" text-center mt-3 mb-5"> نموذج اضافة منسق المشروع </h5>
                             <div class="row mt-5">
@@ -422,7 +451,7 @@
                                         <input type="password" class="form-control wizard-required" id="password_cord">
                                     </div>
                                 </div>
-                                <div class="col-lg-4 mb-4">
+                                <div class="col-lg-6 mb-4">
                                     <p class="mg-b-10"> الصلاحيات </p>
                                     <select class="form-control select2" id="cord_role_id">
                                         <option value="">
@@ -438,27 +467,29 @@
                             </div>
 
                             <div class="row mb-3">
-                                <div class="col-lg-4 mb-3">
-                                    <label for="exampleInputEmail1">  تحميل السيرة الذاتية </label>
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="cv_cord" type="file">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="accreditationـcertificate_cord" type="file">
-                                    </div>
+
+                                <div class="col-lg-4 col-sm-12">
+                                    <label for="exampleInputEmail1"> تحميل السيرة الذاتية   </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                      </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <label for="exampleInputEmail1"> إدراج صورةشخصية  </label>
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="pic_cord" type="file">
-                                    </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <label for="exampleInputEmail1"> تحميل شهادة الاعتماد   </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                      </div>
+                                </div>
+
+                                <div class="col-lg-4 col-sm-12">
+                                    <label for="exampleInputEmail1"> إدراج صورةشخصية   </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                      </div>
                                 </div>
                             </div>
                             <div class="row mb-5 justify-content-between d-flex">
@@ -481,7 +512,7 @@
                             </div>
                     </fieldset>
 
-                    {{--#############✔ fieldset 3 نموذج اضافة المدربين ###########--}}
+                    {{--#############✔ fieldset 4 نموذج اضافة المدربين ###########--}}
                     <fieldset>
                         <h5 class=" text-center mt-3 mb-5"> نموذج اضافة المدربين  </h5>
                             <div class="row mt-5">
@@ -562,49 +593,54 @@
                                         <input type="email" class="form-control wizard-required" id="email_trainer">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="fname8" class="wizard-form-text-label"> كلمه المرور*</label>
-                                    <input type="password" class="form-control wizard-required" id="password_trainer">
-                                </div>
-                            </div>
-                            <div class="col-lg-4 mb-4">
-                                <p class="mg-b-10"> الصلاحيات </p>
-                                <select class="form-control select2" id="trainer_role_id">
-                                    <option value="">
 
-                                    </option>
-                                    @foreach ($roles as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->name }}
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fname8" class="wizard-form-text-label"> كلمه المرور*</label>
+                                        <input type="password" class="form-control wizard-required" id="password_trainer">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <p class="mg-b-10"> الصلاحيات </p>
+                                    <select class="form-control select2" id="trainer_role_id">
+                                        <option value="">
+
                                         </option>
-                                    @endforeach
-                                </select>
+                                        @foreach ($roles as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <div class="row mb-3">
-                                <div class="col-lg-4 mb-3">
-                                    <label for="exampleInputEmail1">  تحميل السيرة الذاتية </label>
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="cv_trainer" type="file">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="accreditationـcertificate_trainer" type="file">
-                                    </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <label for="exampleInputEmail1"> تحميل السيرة الذاتية   </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                      </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <label for="exampleInputEmail1"> إدراج صورةشخصية  </label>
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="pic_trainer" type="file">
-                                    </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <label for="exampleInputEmail1"> تحميل شهادة الاعتماد   </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                      </div>
                                 </div>
+
+                                <div class="col-lg-4 col-sm-12">
+                                    <label for="exampleInputEmail1"> إدراج صورةشخصية   </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                      </div>
+                                </div>
+
+
+
                             </div>
                             <div class="row mb-5 justify-content-between d-flex">
                                 <div class="">
@@ -626,7 +662,7 @@
                             </div>
                     </fieldset>
 
-                    {{--#############✔ fieldset 4  نموذج اضافة منسقو التدريب  ###########--}}
+                    {{--#############✔ fieldset 5  نموذج اضافة منسقو التدريب  ###########--}}
                     <fieldset>
                         <h5 class=" text-center mt-3 mb-5"> نموذج اضافة منسقو التدريب </h5>
                             <div class="row mt-5">
@@ -717,28 +753,33 @@
                             </div>
 
                             <div class="row mb-3">
-                                <div class="col-lg-4 mb-3">
-                                    <label for="exampleInputEmail1">  تحميل السيرة الذاتية </label>
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="cord_trainer_cv" type="file">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="cord_trainer_accreditation" type="file">
-                                    </div>
+
+                                <div class="col-lg-4 col-sm-12">
+                                    <label for="exampleInputEmail1"> تحميل السيرة الذاتية   </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                      </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <label for="exampleInputEmail1"> إدراج صورةشخصية  </label>
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="cord_trainer_pic" type="file">
-                                    </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <label for="exampleInputEmail1"> تحميل شهادة الاعتماد   </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                      </div>
                                 </div>
+
+                                <div class="col-lg-4 col-sm-12">
+                                    <label for="exampleInputEmail1"> إدراج صورةشخصية   </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                      </div>
+                                </div>
+
+
+
                             </div>
                             <div class="row mb-5 justify-content-between d-flex">
                                 <div class="">
@@ -760,7 +801,7 @@
                             </div>
                     </fieldset>
 
-                    {{--#############✔ fieldset 5  نموذج اضافة المستشارون ###########--}}
+                    {{--#############✔ fieldset 6  نموذج اضافة المستشارون ###########--}}
                     <fieldset>
                         <h5 class=" text-center mt-3 mb-5"> نموذج اضافة المستشارون </h5>
                             <div class="row mt-5">
@@ -840,7 +881,7 @@
                                         <input type="password" class="form-control wizard-required" id="password">
                                     </div>
                                 </div>
-                                <div class="col-lg-4 mb-4">
+                                <div class="col-lg-6 mb-4">
                                     <p class="mg-b-10"> الصلاحيات </p>
                                     <select class="form-control select2" id="role_id">
                                         <option value="">
@@ -856,29 +897,34 @@
                             </div>
 
                             <div class="row mb-3">
-                                <div class="col-lg-4 mb-3">
-                                    <label for="exampleInputEmail1">  تحميل السيرة الذاتية </label>
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="cv" type="file">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="accreditationـcertificate" type="file">
-                                    </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <label for="exampleInputEmail1"> تحميل السيرة الذاتية   </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                      </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <label for="exampleInputEmail1"> إدراج صورةشخصية  </label>
-                                    <div class="custom-file">
-                                        <label class="custom-file-label" for="customFile">Drop files here⇬</label>
-                                        <input class="custom-file-input" id="pic" type="file">
-                                    </div>
+                                <div class="col-lg-4 col-sm-12">
+                                    <label for="exampleInputEmail1"> تحميل شهادة الاعتماد   </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                      </div>
                                 </div>
+
+                                <div class="col-lg-4 col-sm-12">
+                                    <label for="exampleInputEmail1"> إدراج صورةشخصية   </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                      </div>
+                                </div>
+
+
+
                             </div>
+
                             <div class="row mb-5 justify-content-between d-flex">
                                 <div class="">
                                     <button class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> تسجيل بيانات مستشار المشروع </button>
@@ -942,7 +988,6 @@
                                 </select>
                             </div>
 
-
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="fname1" class="wizard-form-text-label">    تعليمات حول المشروع المشروع *</label>
@@ -950,21 +995,14 @@
                                 </div>
                             </div>
 
-                            <div class="col-12">
-                                <label for="exampleInputEmail1">  يرجي ارفاق ملفات المشروع </label>
-                                <div class="custom-file">
-                                    <label class="custom-file-label" for="customFile">Drop files here ⇬</label>
-                                    <input class="custom-file-input" id="file" type="file">
-                                </div>
+                            <div class="col-lg-12 col-sm-12">
+                                <label for="exampleInputEmail1">  يرجي ارفاق ملفات المشروع  </label>
+                                <div class="input-group mb-3">
+                                    <input type="file" class="form-control" id="inputGroupFile02">
+                                    <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                  </div>
                             </div>
-
-
-
-
                         </div>
-
-
-
 
                         <div class="row mb-3 mt-4 justify-content-between d-flex">
                             <div class="">
@@ -976,8 +1014,6 @@
                             </div>
                         </div>
                     </fieldset>
-
-
                 </div>
             </div>
         </form>
@@ -994,7 +1030,16 @@
 
 <script>
 
+document.getElementById("btnCreateMProject").addEventListener("click", function() {
+  var div1 = document.getElementById("cart-create-mp");
+  var div2 = document.getElementById("cart-search-mp");
 
+  if (div1.style.display === "none") {
+    div1.style.display = "block";
+    div2.style.display = "none";
+}
+
+});
 
 
 
