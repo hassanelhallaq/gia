@@ -17,6 +17,10 @@
                     <div class="f1-progress-line" data-now-value="0" data-number-of-steps="7" style="width: 1%;"></div>
                 </div>
                 <div class="f1-step active">
+                    <div class="f1-step-icon">6</div>
+                    <p> انشاء مشروع </p>
+                </div>
+                <div class="f1-step ">
                     <div class="f1-step-icon">1</div>
                     <p> مدير المشروع </p>
                 </div>
@@ -36,10 +40,7 @@
                     <div class="f1-step-icon">5</div>
                     <p> المستشارون </p>
                 </div>
-                <div class="f1-step">
-                    <div class="f1-step-icon">6</div>
-                    <p> انشاء مشروع </p>
-                </div>
+
 
                 <div class="f1-step">
                     <div class="f1-step-icon">7</div>
@@ -49,6 +50,158 @@
             </div>
             <div class="card p-4">
                 <div class="body-cord">
+                    {{--############# fieldset 6    نموذج انشلء مشروع المشروع ###########--}}
+                    <fieldset>
+                        <h5 class=" text-center mt-3 mb-5">  نموذج انشاء مشروع  </h5>
+                        <div class="row mt-5">
+                            <div class="col-6">
+                                <label  class="wizard-form-text-label mb-5 rdiobox"><input name="rdio" type="radio"> <span> القطاع  العام </span></label>
+                            </div>
+                            <div class="col-6 ">
+                                <label class="rdiobox mb-5"><input checked="" name="rdio" type="radio"> <span> القطاع الخاص </span></label>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-6 mb-4">
+                                <button type="button" class="btn btn-dark"> مجال المشروع </button>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 mb-4">
+                                <button type="button" class="btn  btn-warning-gradient "> التدريب </button>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 mb-4">
+                                <button class="btn btn-outline-warning ml-1 btn-with-icon  ">  الاستشارات </button>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 mb-4">
+                                <button class="btn btn-outline-warning ml-1 btn-with-icon  ">  خدمات اخري </button>
+                            </div>
+                            <div class="col-lg-6">
+                                <p class="mg-b-10"> طريقة الحضور</p>
+                                <select class="form-control select2" id="attendance_method">
+                                    <option value="remote">
+                                        عن بعد
+                                    </option>
+                                    <option value="immanence">
+                                        حضوري
+                                    </option>
+                                </select>
+                            </div>
+
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="fname1" class="wizard-form-text-label">   عنوان اسم المشروع *</label>
+                                    <input type="text" class="form-control wizard-required" id="fname1">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="fname2" class="wizard-form-text-label"> رقم العقد *</label>
+                                    <input type="text" class="form-control wizard-required" id="fname2">
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-6">
+                                <p class="mg-b-10">  اسم المستخدم  </p>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <a href="#" class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></a>
+                                    </div><input aria-describedby="basic-addon1" aria-label="Username" class="form-control" placeholder=" اسم المستخدم " type="text">
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="fname4" class="wizard-form-text-label"> تاريخ البدأ  *</label>
+                                    <input type="date" class="form-control wizard-required" id="start">
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="fname55" class="wizard-form-text-label">  تاريخ الانتهاء *</label>
+                                    <input type="date" class="form-control wizard-required" id="end">
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="fname5" class="wizard-form-text-label"> عدد الدورات في المشروع  *</label>
+                                    <input type="nuumber" class="form-control wizard-required" id="courses_count">
+                                </div>
+                            </div>
+
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="fname6" class="wizard-form-text-label">  عدد المتدربين الاجمالي *</label>
+                                    <input type="number" class="form-control wizard-required" id="trainers_count">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <p class="mg-b-10"> مكان تنفيذ خدمات المشروع الدولة / المدينة </p>
+                                <select class="form-control select2" id="country_id">
+                                    <option value="">
+
+                                    </option>
+                                    @foreach ($countries as $item)
+                                        <option value="{{ $item->id }}">
+                                            {{ $item->name_ar }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="fname7" class="wizard-form-text-label">  مقر تنفيذ المشروع مقر العمل / مقر مركز التدريب *</label>
+                                    <input type="text" class="form-control wizard-required" id="fname7">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="fname8" class="wizard-form-text-label">  الخدمات اللوجستية *</label>
+                                    <input type="text" class="form-control wizard-required" id="fname8">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <p class="mg-b-10"> مدة المشروع  </p>
+                                <select class="form-control select2" id="attendance_method">
+                                    <option value="remote"> شهر </option>
+                                    <option value="remote"> شهرين </option>
+                                    <option value="remote"> شهر 3  </option>
+                                    <option value="remote"> شهر 4</option>
+                                    <option value="remote"> شهر 5</option>
+                                    <option value="remote"> شهر 6</option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <label  class="wizard-form-text-label mb-5 rdiobox"><input name="rdio" type="radio"> <span> كوفي بريك </span></label>
+                            </div>
+                            <div class="col-3">
+                                <label class="rdiobox mb-5"><input checked="" name="rdio" type="radio"> <span> غداء </span></label>
+                            </div>
+                            <div class="col-3">
+                                <label class="rdiobox mb-5"><input checked="" name="rdio" type="radio"> <span> اخري حدد </span></label>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-4 justify-content-between d-flex">
+                            <div class="">
+                                <a href="javascript:;" class="btn btn-warning-gradient form-wizard-previous-btn float-left btn-previous "> السابق </a>
+                            </div>
+                            <div class="d-flex">
+                                <button class="btn ml-1 btn-warning-gradient btn-with-icon"> حفظ بيانات المشروع </button>
+                                <button type="button" class="btn btn-outline-warning btn-next ">   المتابعة لاصدار تكليف </button>
+                            </div>
+                        </div>
+                    </fieldset>
                     {{--#############✔ fieldset 1 نموذج اضافة مدير المشروع  ###########--}}
                     <fieldset>
                         <h5 class=" text-center mt-3 mb-5"> نموذج اضافة مدير المشروع </h5>
@@ -607,8 +760,6 @@
                             </div>
                     </fieldset>
 
-
-
                     {{--#############✔ fieldset 5  نموذج اضافة المستشارون ###########--}}
                     <fieldset>
                         <h5 class=" text-center mt-3 mb-5"> نموذج اضافة المستشارون </h5>
@@ -748,145 +899,7 @@
                             </div>
                     </fieldset>
 
-                    {{--############# fieldset 6    نموذج اكتمال المشروع ###########--}}
-                    <fieldset>
-                            <h5 class=" text-center mt-3 mb-5">  نموذج اكتمال المشروع </h5>
-                            <div class="row mt-5">
-                                <div class="col-6">
-                                    <label  class="wizard-form-text-label mb-5 rdiobox"><input name="rdio" type="radio"> <span> القطاع  العام </span></label>
-                                </div>
-                                <div class="col-6 ">
-                                    <label class="rdiobox mb-5"><input checked="" name="rdio" type="radio"> <span> القطاع الخاص </span></label>
-                                </div>
 
-                                <div class="col-lg-3 col-sm-6 mb-4">
-                                    <button type="button" class="btn btn-dark"> مجال المشروع </button>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 mb-4">
-                                    <button type="button" class="btn  btn-warning-gradient "> التدريب </button>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 mb-4">
-                                    <button class="btn btn-outline-warning ml-1 btn-with-icon  ">  الاستشارات </button>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 mb-4">
-                                    <button class="btn btn-outline-warning ml-1 btn-with-icon  ">  خدمات اخري </button>
-                                </div>
-                                <div class="col-lg-6">
-                                    <p class="mg-b-10"> طريقة الحضور</p>
-                                    <select class="form-control select2" id="attendance_method">
-                                        <option value="remote">
-                                            عن بعد
-                                        </option>
-                                        <option value="immanence">
-                                            حضوري
-                                        </option>
-                                    </select>
-                                </div>
-
-
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="fname1" class="wizard-form-text-label">   عنوان اسم المشروع *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname1">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="fname2" class="wizard-form-text-label"> رقم العقد *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname2">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <p class="mg-b-10"> مدة المشروع  </p>
-                                    <select class="form-control select2" id="attendance_method">
-                                        <option value="remote"> شهر </option>
-                                        <option value="remote"> شهرين </option>
-                                        <option value="remote"> شهر 3  </option>
-                                        <option value="remote"> شهر 4</option>
-                                        <option value="remote"> شهر 5</option>
-                                        <option value="remote"> شهر 6</option>
-                                    </select>
-                                </div>
-
-
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="fname4" class="wizard-form-text-label"> تاريخ البدأ  *</label>
-                                        <input type="date" class="form-control wizard-required" id="start">
-                                    </div>
-                                </div>
-
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="fname55" class="wizard-form-text-label">  تاريخ الانتهاء *</label>
-                                        <input type="date" class="form-control wizard-required" id="end">
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="fname5" class="wizard-form-text-label"> عدد الدورات في المشروع  *</label>
-                                        <input type="nuumber" class="form-control wizard-required" id="courses_count">
-                                    </div>
-                                </div>
-
-
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="fname6" class="wizard-form-text-label">  عدد المتدربين الاجمالي *</label>
-                                        <input type="number" class="form-control wizard-required" id="trainers_count">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <p class="mg-b-10"> مكان تنفيذ خدمات المشروع الدولة / المدينة </p>
-                                    <select class="form-control select2" id="country_id">
-                                        <option value="">
-
-                                        </option>
-                                        @foreach ($countries as $item)
-                                            <option value="{{ $item->id }}">
-                                                {{ $item->name_ar }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="fname7" class="wizard-form-text-label">  مقر تنفيذ المشروع مقر العمل / مقر مركز التدريب *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname7">
-                                    </div>
-                                </div>
-
-                                <div class="col-12 mb-3">
-                                    <div class="form-group">
-                                        <label for="fname8" class="wizard-form-text-label">  الخدمات اللوجستية *</label>
-                                        <input type="text" class="form-control wizard-required" id="fname8">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <label  class="wizard-form-text-label mb-5 rdiobox"><input name="rdio" type="radio"> <span> كوفي بريك </span></label>
-                                </div>
-                                <div class="col-3">
-                                    <label class="rdiobox mb-5"><input checked="" name="rdio" type="radio"> <span> غداء </span></label>
-                                </div>
-                                <div class="col-3">
-                                    <label class="rdiobox mb-5"><input checked="" name="rdio" type="radio"> <span> اخري حدد </span></label>
-                                </div>
-                            </div>
-                            <div class="row mb-3 mt-4 justify-content-between d-flex">
-                                <div class="">
-                                    <a href="javascript:;" class="btn btn-warning-gradient form-wizard-previous-btn float-left btn-previous "> السابق </a>
-                                </div>
-                                <div class="d-flex">
-                                    <button class="btn ml-1 btn-warning-gradient btn-with-icon"> حفظ بيانات المشروع </button>
-                                    <button type="button" class="btn btn-outline-warning btn-next ">   المتابعة لاصدار تكليف </button>
-                                </div>
-                            </div>
-                    </fieldset>
 
                     {{--############# fieldset 7 ###########--}}
                     <fieldset>

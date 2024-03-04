@@ -99,7 +99,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/quiz/detales', function () {
             return view('dashboard.quiz.detales');
         })->name('quiz_detales');
-        Route::get('/AddProjectManager/{id}',[ProgramController::class ,'programWizard'])->name('AddProjectManager');
+        Route::get('/AddProjectManager',[ProgramController::class ,'programWizard'])->name('AddProjectManager');
         Route::get('/AddProject', function () {
             return view('dashboard.AddProject.add');
         })->name('AddProject');
