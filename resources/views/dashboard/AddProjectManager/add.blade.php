@@ -1285,6 +1285,7 @@
         function performStoreMangerId() {
             let formData = new FormData();
             formData.append('manger_id', document.getElementById('MangerList').value);
+            formData.append('type', 'manger');
             store('/dashboard/admin/admins-manger', formData)
         }
 

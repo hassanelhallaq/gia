@@ -65,7 +65,7 @@
                             اهلا بك
                         </span>
                         <span id="profile_name">
-                            محمد الزرو
+                            {{Auth::user()->name}}
                         </span>
                     </div>
 

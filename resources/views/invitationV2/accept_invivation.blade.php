@@ -63,10 +63,9 @@
                             اهلا بك
                         </span>
                         <span id="profile_name">
-                            محمد الزرو
+                            {{Auth::user()->name}}
                         </span>
                     </div>
-
                 </div>
                 <div class="df ai-c" id="open_menu">
                     <span> متطلبات الشهادة </span>

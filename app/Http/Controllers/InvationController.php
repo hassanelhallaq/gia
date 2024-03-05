@@ -16,6 +16,8 @@ use App\Models\UserAnswer;
 use Illuminate\Http\Request;
 use App\Models\Rate;
 use App\Models\RateAttendance;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 
 class InvationController extends Controller
 {
@@ -278,5 +280,74 @@ class InvationController extends Controller
 
         // You can send a response back to the JavaScript if needed
         return response()->json(['message' => 'All ratings submitted successfully']);
+    }
+
+    public function sendSms(Request $request)
+    {
+
+        $attendance = Attendance::where('phone_number',$request->phone)->first();
+        $newCode = Str::random(4);
+        $attendance->code = $newCode;
+        $attendance->update();
+            $massege = $request->massege;
+            // Retrieve POST parameters from the request
+            $sender = urlencode(request()->input('sender'));
+            $apikey = request()->input('api_key');
+            $username = request()->input('username');
+            $numbers = request()->input('numbers');
+            $response = request()->input('response');
+
+            // Process message for Unicode characters
+            if (request()->input('unicode') == 1) {
+                $mssg = request()->input('message');
+                $msg = str_replace("061B", "Ø", $mssg);
+                // ... (continue with your Unicode character replacements)
+            } else {
+                $msg = request()->input('massege');
+            }
+
+            $lmsg = urlencode($msg);
+
+            // Make the HTTP request using Laravel HTTP client
+            $response = Http::post('https://www.mora-sa.com/api/v1/sendsms', [
+                'api_key' => "7d937a772bb38892581c72408e3e0146ba57454d",
+                'username' => "gialearning",
+                'message' => $newCode . "رمز تفعيلك هو " ,
+                'sender' => "GiaLearning",
+                'numbers' => '966'.$request->phone,
+                'response' => $response,
+            ]);
+            // Get the server response
+              $server_output = $response->body();
+             // Further processing...
+            // if ($server_output == "OK") { echo "1"; } else { echo "0"; }
+
+    }
+    public function courses($id, $course_id)
+    {
+
+            return view("invitationV2.courses");
+
+    }
+    public function login($id, $course_id)
+    {
+
+            return view("invitationV2.login",compact('id','course_id'));
+
+    }
+    public function submitOtp(Request $request)
+    {
+        // dd($request->is_accepted);
+       $code =  $request->ist .''.
+        $request->sec .''.
+        $request->third .''.
+        $request->fourth ;
+        $attendance = Attendance::where('phone_number',$request->phone)->first();
+        if($attendance->code == $code){
+            return response()->json(['redirect' => route('invitationV2.courses', [$request->id, $request->course_id])]);
+        }else{
+            return response()->json(['icon' => 'error', 'title' => 'فشلت العمليه '], 200);
+
+        }
     }
 }

@@ -41,8 +41,8 @@
                             اهلا بك
                          </span>
                          <span id="profile_name">
-                             محمد الزرو
-                         </span>
+                            {{Auth::user()->name}}
+                        </span>
                      </div>
 
                  </div>

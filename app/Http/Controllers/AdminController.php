@@ -465,7 +465,7 @@ class AdminController extends Controller
         $adminManger = new AdminProgram();
         $adminManger->admin_id = $searchQuery ;
         $adminManger->program_id = $id ;
-        $adminManger->type = 'manger' ;
+        $adminManger->type = $request->type;
         $adminManger->save();
         return response()->json(['icon' => 'success', 'title' => 'admin sucess '], 200);
 

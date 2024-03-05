@@ -54,6 +54,11 @@ return [
             'driver' => 'session',
             'provider' => 'trainers',
         ],
+        'attendance' => [
+            'driver' => 'session',
+            'provider' => 'attendances',
+        ],
+
     ],
 
     /*
@@ -89,6 +94,10 @@ return [
         'trainers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Trainer::class,
+        ],
+        'attendances' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Attendance::class,
         ],
 
         // 'users' => [
