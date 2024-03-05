@@ -58,6 +58,12 @@ class ClientController extends Controller
         if ($validator->fails()) {
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
+        if($request->public_sector == 1){
+            $data['sector_type'] = 'public_sector';
+        }
+        if($request->private_sector == 1){
+            $data['sector_type'] = 'private_sector';
+        }
         $data['password'] =  Hash::make($request->get('password'));
         if ($request->hasFile('address')) {
             $adminImage = $request->file('address');
@@ -65,8 +71,14 @@ class ClientController extends Controller
             $adminImage->move('images/program', $imageName);
             $data['address'] = '/images/' . 'program' . '/' . $imageName;
         }
-        $isSaved = Client::create($data);
-        return response()->json(['redirect' => route('clients.index')]);
+        if ($request->hasFile('logo')) {
+            $adminImage = $request->file('logo');
+            $imageName = time() . '_' . $request->get('logo') . '.' . $adminImage->getClientOriginalExtension();
+            $adminImage->move('images/program', $imageName);
+            $data['logo'] = '/images/' . 'program' . '/' . $imageName;
+        }
+        $client = Client::create($data);
+        return response()->json(['redirect' => route('AddProjectManager',[$client->id])]);
 
         // return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $isSaved ? 201 : 400);
 

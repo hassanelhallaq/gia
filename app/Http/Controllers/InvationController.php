@@ -137,7 +137,7 @@ class InvationController extends Controller
         } else {
             $quizAttenInteractive = null;
         }
-        return view("invitation.third", compact("attendance", "course", 'quiz', 'quizAtten', 'quizAfter', 'quizAttenAfter', 'quizInteractive', 'quizAttenInteractive', 'rates'));
+        return view("invitationV2.exams", compact("attendance", "course", 'quiz', 'quizAtten', 'quizAfter', 'quizAttenAfter', 'quizInteractive', 'quizAttenInteractive', 'rates'));
     }
 
     public function thirdContact($id, $course_id)

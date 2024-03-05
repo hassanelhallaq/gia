@@ -14,13 +14,13 @@
                 <div class="body-cord">
                     <div class="row mt-2 pb-2 brd-btn">
                         <div class="col-lg-4  col-sm-12 mb-3">
-                            <label  class="wizard-form-text-label  rdiobox"><input name="rdio" type="radio"> <span> القطاع  العام </span></label>
+                            <label  class="wizard-form-text-label  rdiobox"><input name="rdio" id="public_sector" value="public_sector" type="radio"> <span> القطاع  العام </span></label>
                         </div>
                         <div class="col-lg-4 col-sm-12 mb-3">
-                            <label class="rdiobox "><input checked="" name="rdio" type="radio"> <span> القطاع الخاص </span></label>
+                            <label class="rdiobox "><input checked="" name="rdio" id="private_sector" value="private_sector" type="radio"> <span> القطاع الخاص </span></label>
                         </div>
                         <div class="col-lg-4 col-sm-12 mr-auto float-left">
-                            <button type="button" class="btn  btn-warning-gradient  btn-sm  mt-0"> إدراج شعار العميل </button>
+                            <input type="file" id="logo" class="btn  btn-warning-gradient  btn-sm  mt-0"> إدراج شعار العميل </button>
                         </div>
 
                         <div class="col-md-6 col-g-6 col-sm-12">
@@ -155,15 +155,21 @@
                             <div class="form-group">
                                 <label for="fname1" class="wizard-form-text-label">  الشارع *</label>
                                 <input  type="text" class="form-control wizard-required" id="street">
+
                             </div>
                         </div>
-
+                        <div class="col-md-3 col-g-3 col-sm-6">
+                            <div class="form-group">
+                                <label for="fname1" class="wizard-form-text-label">  كلمه المرور *</label>
+                                <input  type="password" class="form-control wizard-required" id="password">
+                            </div>
+                        </div>
                         <div class="col-12 col-sm-12">
                             <label for="exampleInputEmail1"> إدراج العنوان الوطني (صورة / ملف pdf)  </label>
-                            <div class="custom-file">
-                                <label class="custom-file-label" for="customFile">Drop files here ⇬</label>
-                                <input class="custom-file-input" id="address" type="file">
-                            </div>
+                            <div class="input-group mb-3">
+                                <input type="file" class="form-control" id="address">
+                                <label class="input-group-text" for="address">Upload</label>
+                              </div>
                         </div>
                     </div>
                     {{-- <div class="row">
@@ -196,9 +202,9 @@
                         <div class="">
                             <button type="button" onclick="performStore()" class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> حفظ <i class="bi bi-plus"></i></button>
                         </div>
-                        <div class="">
+                        {{-- <div class="">
                             <button class="btn btn-warning-gradient btn-with-icon  mr-1">  إضافة جهة  <i class="bi bi-plus"></i></button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -228,6 +234,9 @@
             formData.append('code', document.getElementById('code').value);
             formData.append('nighberhooad', document.getElementById('nighberhooad').value);
             formData.append('manager', document.getElementById('manager').value);
+            formData.append('public_sector', document.getElementById('public_sector').checked);
+            formData.append('private_sector', document.getElementById('private_sector').checked);
+            formData.append('logo', document.getElementById('logo').files[0]);
             formData.append('address', document.getElementById('address').files[0]);
             storeRoute('/dashboard/admin/clients', formData)
         }

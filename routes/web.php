@@ -95,6 +95,9 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::post('/delete-attend', [AttendanceController::class, 'deleteAttendCourse'])->name('delete.attend.course');
         Route::post('/deipIn-store/{id}', [QuizController::class, 'drepInStore'])->name('deipIn.store');
         Route::get('/search', [ClientController::class , 'search'])->name('search');
+        Route::get('/search/admins', [AdminController::class , 'search'])->name('search.admins');
+        Route::post('/admins-manger', [AdminController::class, 'adminManger'])->name('admin.manger');
+
 
         // روت مؤقت
         Route::get('/quiz/detales', function () {
@@ -107,6 +110,8 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/AddProject2', function () {
             return view('dashboard.AddProject.add2');
         })->name('AddProject2');
+        Route::post('/programWizardStore/{id}', [ProgramController::class, 'programWizardStore'])->name('programWizardStore.store');
+
         Route::get('/AddProject3',[ClientController::class , 'createClient'])->name('AddProject3');
     }
 );
@@ -150,6 +155,7 @@ Route::get('/invitation-v2/{id}/{course_id}', [InvationController::class, 'index
 Route::post('/invitation-v2/reply', [InvationController::class, 'storeReply']);
 Route::get('/files-v2/{id}/{course_id}', [InvationController::class, 'files'])->name('invitationV2.files');
 Route::get('/inviation-v2/{id}/{course_id}', [InvationController::class, 'inviation'])->name('invitationV2.inviation');
+Route::get('/exams-v2/{id}/{course_id}', [InvationController::class, 'third'])->name('invitationV2.third');
 
 
 Route::post('/invitation/reply', [SiteController::class, 'storeReply']);

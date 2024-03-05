@@ -8,6 +8,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 
+use App\Models\AdminProgram;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -187,6 +188,12 @@ class AdminController extends Controller
             $admin->name = $request->get('name');
             $admin->phone = $request->get('phone');
             $isSaved = $admin->save();
+            $id = $request->session()->get('program_id');
+            $adminManger = new AdminProgram();
+            $adminManger->admin_id = $admin->id ;
+            $adminManger->program_id = $id ;
+            $adminManger->type = 'manger' ;
+            $adminManger->save();
             if ($isSaved) {
                 $role = Role::findById($request->get('role_id'));
                 $admin->assignRole($role->id);
@@ -449,5 +456,25 @@ class AdminController extends Controller
         } else {
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
+    }
+
+    public function adminManger(Request $request)
+    {
+        $searchQuery = $request->input('manger_id');
+        $id = $request->session()->get('program_id');
+        $adminManger = new AdminProgram();
+        $adminManger->admin_id = $searchQuery ;
+        $adminManger->program_id = $id ;
+        $adminManger->type = 'manger' ;
+        $adminManger->save();
+        return response()->json(['icon' => 'success', 'title' => 'admin sucess '], 200);
+
+    }
+    public function search(Request $request)
+    {
+        $searchQuery = $request->input('search_query');
+        $organizations = Admin::where('name', 'like', "%$searchQuery%")->get();
+
+        return $organizations;
     }
 }

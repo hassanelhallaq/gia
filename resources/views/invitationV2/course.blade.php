@@ -146,7 +146,7 @@
             </div>
 
             <div id="activity">
-               <a href="{{route('invitation.third',[$attendance->id,request()->course_id])}}"  class=" df f-c ai-c"> <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <a href="{{route('invitationV2.third',[$attendance->id,request()->course_id])}}"  class=" df f-c ai-c"> <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M3.66663 8.66683V7.3335C3.66663 5.12436 5.45749 3.3335 7.66663 3.3335H8.99996C11.2091 3.3335 13 5.12436 13 7.3335V8.66683C13 10.876 11.2091 12.6668 8.99996 12.6668H7.66663C5.45749 12.6668 3.66663 10.876 3.66663 8.66683Z" stroke="#265AE8" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M6.99994 6.42621C6.99994 5.69955 7.59994 5.29955 8.49794 5.33355C9.146 5.35602 9.66128 5.88512 9.66661 6.53355C9.69795 7.1399 9.4106 7.71866 8.90861 8.06021C8.48191 8.33355 8.25639 8.83268 8.33327 9.33355" stroke="#265AE8" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M8.33327 11.0002C8.14947 11.0002 7.99994 10.8506 7.99994 10.6668C7.99994 10.483 8.14947 10.3335 8.33327 10.3335C8.51707 10.3335 8.66661 10.483 8.66661 10.6668C8.66661 10.8506 8.51707 11.0002 8.33327 11.0002Z" fill="#265AE8"/>

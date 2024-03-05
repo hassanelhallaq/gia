@@ -20,16 +20,16 @@ class ProgramController extends Controller
      */
     public function index(Request $request)
     {
-        $programs = Program::orderBy("id", "desc")->when($request->name,function($q)use($request){
-            $q->where('name','like', '%' . $request->name . '%');
+        $programs = Program::orderBy("id", "desc")->when($request->name, function ($q) use ($request) {
+            $q->where('name', 'like', '%' . $request->name . '%');
         });
-        if(Auth::guard('admin')->check()){
+        if (Auth::guard('admin')->check()) {
             $programs = $programs->withCount('courses')->paginate(10);
-        }elseif(Auth::guard('client')->check()){
-            $programs = $programs->where('client_id',Auth::user()->id)->withCount('courses')->paginate(10);
-        }elseif(Auth::guard('trainer')->check()){
-            $programs = $programs->with('courses')->whereHas('courses',function($q){
-                $q->where('trainer_id',Auth::user()->id);
+        } elseif (Auth::guard('client')->check()) {
+            $programs = $programs->where('client_id', Auth::user()->id)->withCount('courses')->paginate(10);
+        } elseif (Auth::guard('trainer')->check()) {
+            $programs = $programs->with('courses')->whereHas('courses', function ($q) {
+                $q->where('trainer_id', Auth::user()->id);
             })->withCount('courses')->paginate(10);
         }
         return view("dashboard.programs.index", compact("programs"));
@@ -40,10 +40,10 @@ class ProgramController extends Controller
      */
     public function create()
     {
-         $clients = Client::all();
+        $clients = Client::all();
         $trainers = Trainer::all();
 
-        return view("dashboard.programs.create", compact( 'clients','trainers'));
+        return view("dashboard.programs.create", compact('clients', 'trainers'));
     }
 
     /**
@@ -102,10 +102,10 @@ class ProgramController extends Controller
         $program->register = $request->register;
         $program->show_invited = $request->show_invited;
         $program->color = $request->color;
-        if(Auth::guard('admin')->check()){
-        $program->client_id = $request->client_id;
-        }else if(Auth::guard('client')->check()){
-        $program->client_id = Auth::user()->id;
+        if (Auth::guard('admin')->check()) {
+            $program->client_id = $request->client_id;
+        } else if (Auth::guard('client')->check()) {
+            $program->client_id = Auth::user()->id;
         }
         $program->attendance_method = $request->attendance_method;
         if ($request->hasFile('image')) {
@@ -170,7 +170,7 @@ class ProgramController extends Controller
     {
         $categories = Category::all();
         $clients = Client::all();
-        return view("dashboard.programs.edit", compact('program', 'clients','categories'));
+        return view("dashboard.programs.edit", compact('program', 'clients', 'categories'));
     }
 
     /**
@@ -184,7 +184,7 @@ class ProgramController extends Controller
             'name' => 'required|string',
             // 'image' => 'required',
             'content_one' => 'required',
-            'username' => 'required||unique:programs,username,' .$program->id,
+            'username' => 'required||unique:programs,username,' . $program->id,
             'content_two' => 'required',
             'start' => 'required',
             'end' => 'required',
@@ -235,11 +235,10 @@ class ProgramController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
         $prog = Program::destroy($id);
-        return response()->json(['icon' => 'success' , 'title' => 'تم الحذف  بنجاح'] , $prog ? 200 : 400);
-
+        return response()->json(['icon' => 'success', 'title' => 'تم الحذف  بنجاح'], $prog ? 200 : 400);
     }
 
     public function gridView(Request $request)
@@ -258,7 +257,7 @@ class ProgramController extends Controller
             $data[] = [
                 'الاسم' => $course->name,
                 'عدد الدورات' => $course->courses_count,
-                'العميل' => $course->client->name ?? '' ,
+                'العميل' => $course->client->name ?? '',
                 'تاريخ البداية	' => $course->start,
                 'النهايه' => $course->end,
             ];
@@ -269,10 +268,55 @@ class ProgramController extends Controller
         return (new \Rap2hpoutre\FastExcel\FastExcel($list))->download('file.xlsx');
     }
 
-    public function programWizard()
+    public function programWizard($id)
     {
         $countries = Country::all();
         $roles = Role::where('guard_name', 'admin')->get();
-        return view("dashboard.AddProjectManager.add", compact( 'roles','countries'));
+        return view("dashboard.AddProjectManager.add", compact('roles', 'countries','id'));
+    }
+
+    public function programWizardStore(Request $request, $id)
+    {
+
+        $data = $request->all();
+        $validator = Validator($data, [
+            'name' => 'required|string',
+            // 'username' => 'required|unique:programs',
+            'start' => 'required',
+            'end' => 'required',
+            'contract_number' => 'required',
+            'courses_count' => 'required',
+            'trainers_count' => 'required',
+            'country_id' => 'required',
+            'logistics_services' => 'required',
+            'training_center' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
+        }
+        $program = new Program();
+        $program->name = $request->name;
+        $program->username = $request->username;
+        $start = Carbon::parse($request->start)->format('y-m-d');
+        $end = Carbon::parse($request->end)->format('y-m-d');
+        $program->start = $start;
+        $program->end = $end;
+        $program->contract_number = $request->contract_number;
+        $program->courses_count = $request->courses_count;
+        $program->trainers_count = $request->trainers_count;
+        $program->country_id = $request->country_id;
+        $program->logistics_services = $request->logistics_services;
+        $program->client_id = $id;
+        $program->training_center = $request->training_center;
+        if($request->public_sector == 1){
+            $program->sector_type = 'public_sector';
+        }
+        if($request->private_sector == 1){
+            $program->sector_type = 'private_sector';
+        }
+         $program->save();
+        session(['program_id' => $program->id]);
+
+        return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $program ? 201 : 400);
     }
 }
