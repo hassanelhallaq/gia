@@ -12,10 +12,6 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if ($this->auth->guard('admin')) {
-            // $loginroute = 'dashboard.login';
-            // return route($loginroute,'admin');
-            return route('dashboard.login', 'admin');
-        }
+
     }
 }

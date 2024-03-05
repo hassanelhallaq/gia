@@ -23,24 +23,52 @@ use Illuminate\Support\Facades\Hash;
 
 class InvationController extends Controller
 {
-    public function index($id, $course_id)
+    public function redirectToLogin($id, $course_id)
     {
-        $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
-            $q->where('course_id', $course_id);
-        })->first();
-        $course = Course::findOrFail($course_id);
-        if ($attendance->status = 'active') {
-            if ($attendance) {
-                if ($attendance->is_accepted == null) {
-                    return view("invitationV2.invition", compact("attendance", "course"));
-                } elseif ($attendance->is_accepted == 1) {
-                    return view("invitationV2.course", compact("attendance", "course"));
+        if (Auth::user()) {
+            $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
+                $q->where('course_id', $course_id);
+            })->first();
+            $course = Course::findOrFail($course_id);
+            if ($attendance->status = 'active') {
+                if ($attendance) {
+                    if ($attendance->is_accepted == null) {
+                        return view("invitationV2.invition", compact("attendance", "course"));
+                    } elseif ($attendance->is_accepted == 1) {
+                        return view("invitationV2.course", compact("attendance", "course"));
+                    } else {
+                        return view("invitationV2.0404", compact("attendance", "course"));
+                    }
                 } else {
                     return view("invitationV2.0404", compact("attendance", "course"));
                 }
-            } else {
-                return view("invitationV2.0404", compact("attendance", "course"));
             }
+        } else {
+            return redirect()->route('invitationV2.login', ['id' => $id, 'course_id' => $course_id]);
+        }
+    }
+    public function index($id, $course_id)
+    {
+        if (Auth::user()) {
+            $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
+                $q->where('course_id', $course_id);
+            })->first();
+            $course = Course::findOrFail($course_id);
+            if ($attendance->status = 'active') {
+                if ($attendance) {
+                    if ($attendance->is_accepted == null) {
+                        return view("invitationV2.invition", compact("attendance", "course"));
+                    } elseif ($attendance->is_accepted == 1) {
+                        return view("invitationV2.course", compact("attendance", "course"));
+                    } else {
+                        return view("invitationV2.0404", compact("attendance", "course"));
+                    }
+                } else {
+                    return view("invitationV2.0404", compact("attendance", "course"));
+                }
+            }
+        } else {
+            return redirect()->route('invitationV2.login', ['id' => $id, 'course_id' => $course_id]);
         }
     }
 
@@ -48,7 +76,7 @@ class InvationController extends Controller
     {
         // dd($request->is_accepted);
         $attendance =   Attendance::find($request->attendance_id);
-        $attendance->is_accepted = $request->is_accepted ;
+        $attendance->is_accepted = $request->is_accepted;
         $attendance->save();
         if ($request->is_accepted == 1) {
             return response()->json(['redirect' => route('invitationV2.second', [$attendance->id, $request->course_id])]);
@@ -77,8 +105,7 @@ class InvationController extends Controller
         $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
-            return view("invitationV2.accept_invivation", compact("attendance", "course",'svgPaths','titles'));
-
+        return view("invitationV2.accept_invivation", compact("attendance", "course", 'svgPaths', 'titles'));
     }
     public function second($id, $course_id)
     {
@@ -232,7 +259,7 @@ class InvationController extends Controller
         $links = CourseLink::where('course_id', $course_id)->get();
         $course = Course::findOrFail($course_id);
 
-        return view('invitationV2.download', compact('files', 'attendance', 'links','course'));
+        return view('invitationV2.download', compact('files', 'attendance', 'links', 'course'));
     }
 
     public function ateendanceUpdate(Request $request, $id, $course_id)
@@ -287,65 +314,63 @@ class InvationController extends Controller
     public function sendSms(Request $request)
     {
 
-        $attendance = Attendance::where('phone_number',$request->phone)->first();
+        $attendance = Attendance::where('phone_number', $request->phone)->first();
         $newCode =  mt_rand(1000, 9999);
         $attendance->password = Hash::make($newCode);
         $attendance->update();
-            $massege = $request->massege;
-            // Retrieve POST parameters from the request
-            $sender = urlencode(request()->input('sender'));
-            $apikey = request()->input('api_key');
-            $username = request()->input('username');
-            $numbers = request()->input('numbers');
-            $response = request()->input('response');
+        $massege = $request->massege;
+        // Retrieve POST parameters from the request
+        $sender = urlencode(request()->input('sender'));
+        $apikey = request()->input('api_key');
+        $username = request()->input('username');
+        $numbers = request()->input('numbers');
+        $response = request()->input('response');
 
-            // Process message for Unicode characters
-            if (request()->input('unicode') == 1) {
-                $mssg = request()->input('message');
-                $msg = str_replace("061B", "Ø", $mssg);
-                // ... (continue with your Unicode character replacements)
-            } else {
-                $msg = request()->input('massege');
-            }
+        // Process message for Unicode characters
+        if (request()->input('unicode') == 1) {
+            $mssg = request()->input('message');
+            $msg = str_replace("061B", "Ø", $mssg);
+            // ... (continue with your Unicode character replacements)
+        } else {
+            $msg = request()->input('massege');
+        }
 
-            $lmsg = urlencode($msg);
+        $lmsg = urlencode($msg);
 
-            // Make the HTTP request using Laravel HTTP client
-            $response = Http::post('https://www.mora-sa.com/api/v1/sendsms', [
-                'api_key' => "7d937a772bb38892581c72408e3e0146ba57454d",
-                'username' => "gialearning",
-                'message' => $newCode . "رمز تفعيلك هو " ,
-                'sender' => "GiaLearning",
-                'numbers' => '966'.$request->phone,
-                'response' => $response,
-            ]);
-            // Get the server response
-              $server_output = $response->body();
-             // Further processing...
-            // if ($server_output == "OK") { echo "1"; } else { echo "0"; }
+        // Make the HTTP request using Laravel HTTP client
+        $response = Http::post('https://www.mora-sa.com/api/v1/sendsms', [
+            'api_key' => "7d937a772bb38892581c72408e3e0146ba57454d",
+            'username' => "gialearning",
+            'message' => $newCode . "رمز تفعيلك هو ",
+            'sender' => "GiaLearning",
+            'numbers' => '966' . $request->phone,
+            'response' => $response,
+        ]);
+        // Get the server response
+        $server_output = $response->body();
+        // Further processing...
+        // if ($server_output == "OK") { echo "1"; } else { echo "0"; }
 
     }
     public function courses($id, $course_id)
     {
 
-            return view("invitationV2.courses");
-
+        return view("invitationV2.courses");
     }
     public function login($id, $course_id)
     {
 
-            return view("invitationV2.login",compact('id','course_id'));
-
+        return view("invitationV2.login", compact('id', 'course_id'));
     }
     public function submitOtp(Request $request)
     {
         // dd($request->is_accepted);
-         $code =  $request->ist .''.
-        $request->sec .''.
-        $request->third .''.
-        $request->fourth ;
-        $attendance = Attendance::where('phone_number',$request->phone)->first();
-          $credentials = [
+        $code =  $request->ist . '' .
+            $request->sec . '' .
+            $request->third . '' .
+            $request->fourth;
+        $attendance = Attendance::where('phone_number', $request->phone)->first();
+        $credentials = [
             'phone_number' => $request->get('phone'),
             'password' => $code,
         ];
@@ -356,6 +381,5 @@ class InvationController extends Controller
             // Authentication failed
             return response()->json(['icon' => 'error', 'title' => 'Login Failed'], 400);
         }
-
     }
 }

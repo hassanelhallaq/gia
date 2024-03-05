@@ -151,6 +151,9 @@ Route::get('/third_connect/{id}/{course_id}', [SiteController::class, 'thirdCont
 Route::get('/rate/{id}/{course_id}', [SiteController::class, 'rate'])->name('rate.attend');
 Route::post('/submitRating/{id}/{course_id}', [SiteController::class, 'submitRating'])->name('submitRating');
 
+Route::prefix('')->middleware('guest:attendance')->group(function () {
+    Route::get('/login/{id}/{course_id}', [InvationController::class, 'login'])->name('invitationV2.login');
+});
 Route::prefix('')->middleware('auth:attendance')->group(
     function () {
 Route::get('/accept-v2/{id}/{course_id}', [InvationController::class, 'second'])->name('invitationV2.second');
@@ -162,7 +165,8 @@ Route::get('/exams-v2/{id}/{course_id}', [InvationController::class, 'third'])->
 Route::get('/courses/{id}/{course_id}', [InvationController::class, 'courses'])->name('invitationV2.courses');
 }
 );
-Route::get('/login/{id}/{course_id}', [InvationController::class, 'login'])->name('invitationV2.login');
+
+Route::get('/home/{id}/{course_id}', [InvationController::class, 'redirectToLogin'])->name('redirectToLogin');
 Route::post('/send-sms', [InvationController::class, 'sendSms'])->name('sendSms');
 Route::post('/send-otp', [InvationController::class, 'submitOtp'])->name('submitOtp');
 
