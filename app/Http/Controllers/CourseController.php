@@ -370,7 +370,7 @@ class CourseController extends Controller
 
             // Make the HTTP request using Laravel HTTP client
             $response = Http::post('https://www.mora-sa.com/api/v1/sendsms', [
-                'api_key' => "79084e211979f506aca575df6fa9e9135f400f7b",
+                'api_key' => "7d937a772bb38892581c72408e3e0146ba57454d",
                 'username' => "gialearning",
                 'message' => $massege . "\n" . route('invitation.index', [$attendance->id, 'course_id' => $request->course_id]),
                 'sender' => "GiaLearning",
@@ -412,7 +412,7 @@ class CourseController extends Controller
 
             // Make the HTTP request using Laravel HTTP client
             $response = Http::post('https://www.mora-sa.com/api/v1/sendsms', [
-                'api_key' => "79084e211979f506aca575df6fa9e9135f400f7b",
+                'api_key' => "7d937a772bb38892581c72408e3e0146ba57454d",
                 'username' => "gialearning",
                 'message' => $massege . "\n" . route('invitation.index', [$attendance->id, 'course_id' => $request->course_id]),
                 'sender' => "GiaLearning",

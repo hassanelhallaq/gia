@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 use App\Models\Rate;
 use App\Models\RateAttendance;
 
-class SiteController extends Controller
+class InvationController extends Controller
 {
     public function index($id, $course_id)
     {
@@ -28,17 +28,15 @@ class SiteController extends Controller
         if ($attendance->status = 'active') {
             if ($attendance) {
                 if ($attendance->is_accepted == null) {
-                    return view("invitation.index", compact("attendance", "course"));
+                    return view("invitationV2.invition", compact("attendance", "course"));
                 } elseif ($attendance->is_accepted == 1) {
-                    return view("invitation.second", compact("attendance", "course"));
+                    return view("invitationV2.course", compact("attendance", "course"));
                 } else {
-                    return view("invitation.index", compact("attendance", "course"));
+                    return view("invitationV2.0404", compact("attendance", "course"));
                 }
             } else {
-                return view("invitation.index", compact("attendance", "course"));
+                return view("invitationV2.0404", compact("attendance", "course"));
             }
-        } else {
-            return 'لم يتم العثور على نتاىج';
         }
     }
 
@@ -46,27 +44,48 @@ class SiteController extends Controller
     {
         // dd($request->is_accepted);
         $attendance =   Attendance::find($request->attendance_id);
-        $attendance->is_accepted = $request->is_accepted == "true" ? 1 : 0;
+        $attendance->is_accepted = $request->is_accepted ;
         $attendance->save();
-        if ($request->is_accepted == "true") {
-            return response()->json(['redirect' => route('invitation.second', [$attendance->id, $request->course_id])]);
+        if ($request->is_accepted == 1) {
+            return response()->json(['redirect' => route('invitationV2.second', [$attendance->id, $request->course_id])]);
         } else {
-            return response()->json(['redirect' => route('invitation.index', [$attendance->id, $request->course_id])]);
+            return response()->json(['redirect' => route('invitationV2.index', [$attendance->id, $request->course_id])]);
         }
     }
-
-    public function second($id, $course_id)
+    public function inviation($id, $course_id)
     {
 
+        $svgPaths = [
+            "inv/assets/one.svg",
+            "inv/assets/two.svg",
+            "inv/assets/three.svg",
+            "inv/assets/four.svg",
+            "inv/assets/five.svg"
+        ];
+        $titles = [
+            "الألتزام بنسبة الحضور",
+            "تقديم الأختبار القبلي",
+            "تقديم الأختبار البعدي",
+            "الحصول على الشهادة",
+            "تقييم الحدث"
+        ];
+        $course = Course::findOrFail($course_id);
+        $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
+            $q->where('course_id', $course_id);
+        })->first();
+            return view("invitationV2.accept_invivation", compact("attendance", "course",'svgPaths','titles'));
 
+    }
+    public function second($id, $course_id)
+    {
         $course = Course::findOrFail($course_id);
         $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
         if ($attendance->status = 'active') {
-            return view("invitation.second", compact("attendance", "course"));
+            return view("invitationV2.course", compact("attendance", "course"));
         } else {
-            return 'لم يتم العثور على نتاىج';
+            return view("invitationV2.0404", compact("attendance", "course"));
         }
     }
 
@@ -207,8 +226,9 @@ class SiteController extends Controller
             $q->where('course_id', $course_id);
         })->first();
         $links = CourseLink::where('course_id', $course_id)->get();
+        $course = Course::findOrFail($course_id);
 
-        return view('invitation.files', compact('files', 'attendance', 'links'));
+        return view('invitationV2.download', compact('files', 'attendance', 'links','course'));
     }
 
     public function ateendanceUpdate(Request $request, $id, $course_id)

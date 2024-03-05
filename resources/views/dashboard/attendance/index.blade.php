@@ -810,61 +810,61 @@
 
 
         $(document).ready(function() {
-            $('#master').on('click', function(e) {
-                if ($(this).is(':checked')) {
-                    $(".sub_chk").prop('checked', true);
-                } else {
-                    $(".sub_chk").prop('checked', false);
-                }
-            });
+    // Unbind the click event before binding it again to prevent multiple bindings
+    $('#master').off('click').on('click', function(e) {
+        if ($(this).is(':checked')) {
+            $(".sub_chk").prop('checked', true);
+        } else {
+            $(".sub_chk").prop('checked', false);
+        }
+    });
 
-            $('.send_all').on('click', function(e) {
-                var allVals = [];
-                $(".sub_chk:checked").each(function() {
-                    allVals.push($(this).attr('data-id'));
-                });
-
-
-                if (allVals.length <= 0) {
-
-                    alert("Please select row.");
-                } else {
-                    var join_selected_values = allVals.join(",");
-                    // Corrected the typo in the next line
-                    var join_selected_message = document.getElementById('massege').value;
-                    console.log(join_selected_message);
-
-                    var courseId = document.getElementById('course_id').value;
-
-
-                    $.ajax({
-                        url: $(this).data('url'),
-                        type: 'post',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        // Corrected the data parameter to send the message
-                        data: {
-                            ids: join_selected_values,
-                            massege_select: join_selected_message,
-                            course_id: courseId
-                        },
-                        success: function(data) {
-                                 Swal.fire({
-                                    position: 'center',
-                                    icon: 'success',
-                                    title: '  successfully',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
-                        },
-                        error: function(data) {
-                            alert(data.responseText);
-                        }
-                    });
-                }
-            });
+    // Unbind the click event before binding it again to prevent multiple bindings
+    $('.send_all').off('click').on('click', function(e) {
+        var allVals = [];
+        $(".sub_chk:checked").each(function() {
+            allVals.push($(this).attr('data-id'));
         });
+        if (allVals.length <= 0) {
+            alert("Please select row.");
+        } else {
+            var join_selected_values = allVals.join(",");
+            // Corrected the typo in the next line
+            var join_selected_message = document.getElementById('massege').value;
+            console.log(join_selected_message);
+
+            var courseId = document.getElementById('course_id').value;
+
+
+            $.ajax({
+                url: $(this).data('url'),
+                type: 'post',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                // Corrected the data parameter to send the message
+                data: {
+                    ids: join_selected_values,
+                    massege_select: join_selected_message,
+                    course_id: courseId
+                },
+                success: function(data) {
+                         Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: '  successfully',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                },
+                error: function(data) {
+                    alert(data.responseText);
+                }
+            });
+        }
+    });
+});
+
 
         function performUpdate(id) {
             let formData = new FormData();

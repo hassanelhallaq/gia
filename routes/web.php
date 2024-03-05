@@ -11,6 +11,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CourseFileController;
 use App\Http\Controllers\CourseLinkController;
+use App\Http\Controllers\InvationController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PermissionController;
@@ -144,6 +145,11 @@ Route::post('/ateendance/update/{id}/{course_id}', [SiteController::class, 'atee
 Route::get('/third_connect/{id}/{course_id}', [SiteController::class, 'thirdContact'])->name('third_connect');
 Route::get('/rate/{id}/{course_id}', [SiteController::class, 'rate'])->name('rate.attend');
 Route::post('/submitRating/{id}/{course_id}', [SiteController::class, 'submitRating'])->name('submitRating');
+Route::get('/accept-v2/{id}/{course_id}', [InvationController::class, 'second'])->name('invitationV2.second');
+Route::get('/invitation-v2/{id}/{course_id}', [InvationController::class, 'index'])->name('invitationV2.index');
+Route::post('/invitation-v2/reply', [InvationController::class, 'storeReply']);
+Route::get('/files-v2/{id}/{course_id}', [InvationController::class, 'files'])->name('invitationV2.files');
+Route::get('/inviation-v2/{id}/{course_id}', [InvationController::class, 'inviation'])->name('invitationV2.inviation');
 
 
 Route::post('/invitation/reply', [SiteController::class, 'storeReply']);
