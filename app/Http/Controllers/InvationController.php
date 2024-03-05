@@ -16,8 +16,10 @@ use App\Models\UserAnswer;
 use Illuminate\Http\Request;
 use App\Models\Rate;
 use App\Models\RateAttendance;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Hash;
 
 class InvationController extends Controller
 {
@@ -286,8 +288,8 @@ class InvationController extends Controller
     {
 
         $attendance = Attendance::where('phone_number',$request->phone)->first();
-        $newCode = Str::random(4);
-        $attendance->code = $newCode;
+        $newCode =  mt_rand(1000, 9999);
+        $attendance->password = Hash::make($newCode);
         $attendance->update();
             $massege = $request->massege;
             // Retrieve POST parameters from the request
@@ -338,16 +340,22 @@ class InvationController extends Controller
     public function submitOtp(Request $request)
     {
         // dd($request->is_accepted);
-       $code =  $request->ist .''.
+         $code =  $request->ist .''.
         $request->sec .''.
         $request->third .''.
         $request->fourth ;
         $attendance = Attendance::where('phone_number',$request->phone)->first();
-        if($attendance->code == $code){
+          $credentials = [
+            'phone_number' => $request->get('phone'),
+            'password' => $code,
+        ];
+        if (Auth::guard('attendance')->attempt($credentials)) {
+            // Authentication successful
             return response()->json(['redirect' => route('invitationV2.courses', [$request->id, $request->course_id])]);
-        }else{
-            return response()->json(['icon' => 'error', 'title' => 'فشلت العمليه '], 200);
-
+        } else {
+            // Authentication failed
+            return response()->json(['icon' => 'error', 'title' => 'Login Failed'], 400);
         }
+
     }
 }

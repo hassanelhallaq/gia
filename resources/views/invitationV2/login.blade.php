@@ -267,7 +267,7 @@
             }
             let formData = new FormData();
             formData.append('phone', document.getElementById('phone').value);
-            storeRoute('/send-sms', formData)
+            store('/send-sms', formData)
 
         }
         let countdownActive = false;
@@ -304,8 +304,8 @@
         function login() {
             let formData = new FormData();
             formData.append('phone', document.getElementById('phone').value);
-            formData.append('{{asset('inv/id')}}', document.getElementById('id').value);
-            formData.append('{{asset('inv/course_id')}}', document.getElementById('course_id').value);
+            formData.append('id', document.getElementById('id').value);
+            formData.append('course_id', document.getElementById('course_id').value);
             formData.append('ist', document.getElementById('ist').value);
             formData.append('sec', document.getElementById('sec').value);
             formData.append('third', document.getElementById('third').value);

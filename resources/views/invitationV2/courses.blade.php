@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ asset('inv/style.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
@@ -80,7 +80,7 @@
         <div class="wrap">
             <div class="df ai-c jc-sb">
                 <div class="df ai-c g0">
-                   <a href="/One_Course_Index.html"> <img src="assets/logo.webp" alt="" width="40px " height="40px"></a>
+                   <a href="/One_Course_Index.html"> <img src="{{asset('inv/assets/logo.webp')}}"alt="" width="40px " height="40px"></a>
                      <div class="df  f-c ">
                         <span>
                             اهلا بك
@@ -107,7 +107,7 @@
         </div>
     </header>
     <section>
-        <img class="mc" src="assets/training.svg" alt="">
+        <img class="mc" src="{{asset('iv/assets/training.svg')}}" alt="">
         <div class="container_trainer">
             <div class="nav_training">
                <!--  add class active to get the opacity off -->

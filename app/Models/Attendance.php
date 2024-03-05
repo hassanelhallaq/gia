@@ -1,21 +1,23 @@
 <?php
 
 namespace App\Models;
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Attendance extends Model
+class Attendance extends Authenticatable
 {
-    use HasFactory;
+
     protected $fillable = [
-        'name',
-        'phone_number',
-        'work_place',
-        'id_number',
-        'job','email'
+        'phone_number', 'code',
     ];
 
+    // Specify the field used as the "username" for authentication
+
+
+    // Specify how the authentication system retrieves the user's password (or code in this case)
+
+
+    // Your other model code...
 
     public function attendance_logins(){
         return $this->hasMany(AttendanceLogin::class);
