@@ -66,6 +66,23 @@
                         <li><a class="slide-item" href="{{route('attendance.index')}}">المشاركين</a></li>
                         @endcan
 
+                        @can('الأطلاع على مدير المشروع')
+
+                        <li><a class="slide-item" href="{{route('mangersProjects')}}">مدير المشروع</a></li>
+                        @endcan
+
+                        @can('الأطلاع على منسق المشروع')
+
+                        <li><a class="slide-item" href="{{route('cordreatorProjects')}}">منسق المشروع</a></li>
+                        @endcan
+                        @can('الأطلاع على منسقو التدريب')
+                        <li><a class="slide-item" href="{{route('cordTrainnerProjects')}}">منسقو التدريب
+                        </a></li>
+                        @endcan
+                        @can('الأطلاع على  المستشارون')
+                        <li><a class="slide-item" href="{{route('consultantsProjects')}}"> المستشارون
+                        </a></li>
+                        @endcan
                     </ul>
                 </li>
 

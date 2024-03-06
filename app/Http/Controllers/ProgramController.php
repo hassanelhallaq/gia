@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminProgram;
 use App\Models\Category;
 use App\Models\Client;
 use App\Models\Country;
@@ -23,8 +24,14 @@ class ProgramController extends Controller
         $programs = Program::orderBy("id", "desc")->when($request->name, function ($q) use ($request) {
             $q->where('name', 'like', '%' . $request->name . '%');
         });
-        if (Auth::guard('admin')->check()) {
+        $programAdmin =  AdminProgram::where('admin_id',Auth::user()->id)->first();
+
+        if (Auth::guard('admin')->check() && $programAdmin == null) {
             $programs = $programs->withCount('courses')->paginate(10);
+        }elseif (Auth::guard('admin')->check()) {
+
+            $programAdmin =  AdminProgram::where('admin_id',Auth::user()->id)->get();
+            $programs = $programs->where('id',$programAdmin->pluck('program_id'))->withCount('courses')->paginate(10);
         } elseif (Auth::guard('client')->check()) {
             $programs = $programs->where('client_id', Auth::user()->id)->withCount('courses')->paginate(10);
         } elseif (Auth::guard('trainer')->check()) {

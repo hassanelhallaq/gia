@@ -143,7 +143,12 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::get('/search/admincord_select', [AdminController::class , 'admincordSelect'])->name('search.admincordSelect');
 
         Route::post('/programWizardUpdate', [Program::class, 'programWizardUpdate'])->name('programWizardUpdate');
-
+        Route::get('/mangersProjects', [AdminController::class , 'mangersProjects'])->name('mangersProjects');
+        Route::get('/cordreatorProjects', [AdminController::class , 'cordreatorProjects'])->name('cordreatorProjects');
+        Route::get('/cordTrainnerProjects', [AdminController::class , 'cordTrainnerProjects'])->name('cordTrainnerProjects');
+        Route::get('/consultantsProjects', [AdminController::class , 'consultantsProjects'])->name('consultantsProjects');
+        Route::post('/updateMangment', [AdminController::class, 'updateMangment'])->name('updateMangment');
+        Route::get('/edit-mangment/{id}', [AdminController::class , 'editMangment'])->name('mangment.edit');
     }
 );
 Route::get('/invitation/{id}/{course_id}', [SiteController::class, 'index'])->name('invitation.index');
