@@ -356,14 +356,14 @@
                                     </div>
                                 </div>
                                 <div class="row mb-5 justify-content-between d-flex">
-                                    <div class="">
+                                    {{-- <div class="">
                                         <button class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> تسجيل بيانات
                                             منسق المشروع</button>
                                     </div>
                                     <div class="">
                                         <button class="btn btn-outline-warning btn-with-icon  mr-1"> إضافة منسق مشروع آخر
                                             <i class="bi bi-plus"></i></button>
-                                    </div>
+                                    </div> --}}
 
 
                                 </div>
@@ -546,7 +546,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mb-5 justify-content-between d-flex">
+                            {{-- <div class="row mb-5 justify-content-between d-flex">
                                 <div class="">
                                     <button class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> تسجيل بيانات منسق
                                         المشروع</button>
@@ -555,7 +555,7 @@
                                     <button class="btn btn-outline-warning btn-with-icon  mr-1"> إضافة منسق مشروع آخر <i
                                             class="bi bi-plus"></i></button>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="row mb-3 mt-4 justify-content-between d-flex">
                                 <div class="">
@@ -715,7 +715,7 @@
 
 
                             </div>
-                            <div class="row mb-5 justify-content-between d-flex">
+                            {{-- <div class="row mb-5 justify-content-between d-flex">
                                 <div class="">
                                     <button class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> تسجيل بيانات مدربين
                                         المشروع</button>
@@ -724,7 +724,7 @@
                                     <button class="btn btn-outline-warning btn-with-icon  mr-1"> إضافة مدرب مشروع آخر <i
                                             class="bi bi-plus"></i></button>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="row mb-3 mt-4 justify-content-between d-flex">
                                 <div class="">
@@ -869,7 +869,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mb-5 justify-content-between d-flex">
+                            {{-- <div class="row mb-5 justify-content-between d-flex">
                                 <div class="">
                                     <button class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> تسجيل بيانات منسقو
                                         المشروع</button>
@@ -878,7 +878,7 @@
                                     <button class="btn btn-outline-warning btn-with-icon  mr-1"> إضافة منسقو مشروع آخر <i
                                             class="bi bi-plus"></i></button>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="row mb-3 mt-4 justify-content-between d-flex">
                                 <div class="">
@@ -1028,7 +1028,7 @@
 
                             </div>
 
-                            <div class="row mb-5 justify-content-between d-flex">
+                            {{-- <div class="row mb-5 justify-content-between d-flex">
                                 <div class="">
                                     <button class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> تسجيل بيانات مستشار
                                         المشروع </button>
@@ -1037,7 +1037,7 @@
                                     <button class="btn btn-outline-warning btn-with-icon  mr-1"> إضافة مستشار مشروع آخر <i
                                             class="bi bi-plus"></i></button>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="row mb-3 mt-4 justify-content-between d-flex">
                                 <div class="">
