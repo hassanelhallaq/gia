@@ -5,7 +5,7 @@
             <div class="card p-4">
                 <div class="body-cord">
                     <fieldset>
-                        <h5 class=" text-center mt-3 mb-5"> نموذج اضافة منسق المشروع </h5>
+                        {{-- <h5 class=" text-center mt-3 mb-5"> نموذج اضافة منسق المشروع </h5> --}}
                         <div class="row mt-5">
                             <div class="col-6">
                                 <div class="form-group">
