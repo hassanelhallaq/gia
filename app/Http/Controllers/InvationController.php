@@ -339,7 +339,7 @@ class InvationController extends Controller
 
         // Make the HTTP request using Laravel HTTP client
         $response = Http::post('https://www.mora-sa.com/api/v1/sendsms', [
-            'api_key' => "7d937a772bb388925821c72408e3e0146ba57454d",
+            'api_key' => "7d937a772bb3889ssss25821c72408e3e0146ba574v54d",
             'username' => "gialearning",
             'message' => $newCode . "رمز تفعيلك هو ",
             'sender' => "GiaLearning",
