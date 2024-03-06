@@ -111,8 +111,7 @@
 
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <a href="#" class="input-group-text" ><i
-                                                    class="bi bi-person"></i></a>
+                                            <a href="#" class="input-group-text"><i class="bi bi-person"></i></a>
                                         </div><input aria-describedby="basic-addon1" aria-label="Username" id="username"
                                             class="form-control" placeholder=" اسم المستخدم " type="text">
                                     </div>
@@ -342,7 +341,8 @@
                                     <div class="col-lg-4 col-sm-12">
                                         <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
                                         <div class="input-group mb-3">
-                                            <input type="file" class="form-control" id="accreditationـcertificate_manger">
+                                            <input type="file" class="form-control"
+                                                id="accreditationـcertificate_manger">
                                             <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                         </div>
                                     </div>
@@ -393,8 +393,7 @@
                                                 class="form-control wizard-required" id="search_query">
                                             <div class=""></div>
                                         </div>
-                                        <select class="form-control select2" id="MangerList"
-                                            style="display: none;">
+                                        <select class="form-control select2" id="MangerList" style="display: none;">
 
                                         </select>
                                     </div>
@@ -696,7 +695,8 @@
                                 <div class="col-lg-4 col-sm-12">
                                     <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="accreditationـcertificate_trainer">
+                                        <input type="file" class="form-control"
+                                            id="accreditationـcertificate_trainer">
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
                                 </div>
@@ -1082,18 +1082,16 @@
                                 </div>
                                 <div class="col-12 mb-4">
                                     <p class="mg-b-10"> يرجي اختيار مدير المشروع </p>
-                                    <select class="form-control select2" id="attendance_method">
-                                        <option value="remote">.....
-                                        </option>
+                                    <select class="form-control select2" id="mang_select">
+
 
                                     </select>
                                 </div>
 
                                 <div class="col-12 mb-4">
                                     <p class="mg-b-10"> يرجي اختيار منسق المشروع </p>
-                                    <select class="form-control select2" id="attendance_method">
-                                        <option value="remote">.....
-                                        </option>
+                                    <select class="form-control select2" id="cord_select">
+
 
                                     </select>
                                 </div>
@@ -1102,14 +1100,14 @@
                                     <div class="form-group">
                                         <label for="fname1" class="wizard-form-text-label"> تعليمات حول المشروع المشروع
                                             *</label>
-                                        <textarea rows="4" type="text" class="form-control wizard-required" id="fname1"></textarea>
+                                        <textarea rows="4" type="text" class="form-control wizard-required" id="info"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12 col-sm-12">
                                     <label for="exampleInputEmail1"> يرجي ارفاق ملفات المشروع </label>
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <input type="file" class="form-control" id="program_files">
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
                                 </div>
@@ -1122,7 +1120,7 @@
                                         السابق </a>
                                 </div>
                                 <div class="d-flex">
-                                    <button class="btn ml-1 btn-warning-gradient btn-with-icon"> حفظ بيانات المشروع
+                                    <button class="btn ml-1 btn-warning-gradient btn-with-icon" type="button" onclick="performStoreFinal()"> حفظ بيانات المشروع
                                     </button>
                                     {{-- <button type="button" class="btn btn-outline-warning btn-next ">   المتابعة لاصدار تكليف </button> --}}
                                 </div>
@@ -1182,6 +1180,8 @@
             formData.append('accreditationـcertificate', document.getElementById('accreditationـcertificate_manger').files[
                 0]);
             formData.append('pic', document.getElementById('pic_manger').files[0]);
+            formData.append('type', 'manger');
+
             store('/dashboard/admin/admins', formData)
         }
 
@@ -1201,8 +1201,10 @@
             formData.append('role_id', document.getElementById('cord_role_id').value);
             formData.append('cv', document.getElementById('cv_cord').files[0]);
             formData.append('accreditationـcertificate', document.getElementById('accreditationـcertificate_cord').files[
-            0]);
+                0]);
             formData.append('pic', document.getElementById('pic_cord').files[0]);
+            formData.append('type', 'cordreator');
+
             store('/dashboard/admin/admins', formData)
         }
 
@@ -1247,10 +1249,52 @@
             formData.append('cv', document.getElementById('cord_trainer_cv').files[0]);
             formData.append('accreditationـcertificate', document.getElementById('cord_trainer_accreditation').files[0]);
             formData.append('pic', document.getElementById('cord_trainer_pic').files[0]);
+            formData.append('type', 'cord-trainner');
+
             store('/dashboard/admin/admins', formData)
         }
-
+        function performStoreFinal() {
+            let formData = new FormData();
+            formData.append('info', document.getElementById('info').value);
+            formData.append('program_files', document.getElementById('program_files').files[0]);
+            storeRoute('/dashboard/admin/programWizardUpdate', formData)
+        }
         function performStore() {
+
+            // Make an Ajax request to fetch project managers
+            $.ajax({
+                url: "{{ url('dashboard/admin/search/adminMangersel') }}",
+                type: "GET",
+                dataType: "json",
+                success: function(response) {
+                    var options = '';
+                    $.each(response, function(index, manager) {
+                        options += '<option value="' + manager.id + '">' + manager.name + '</option>';
+                    });
+                    $('#mang_select').append(options);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+            $.ajax({
+                url: "{{ url('dashboard/admin/search/admincord_select') }}",
+                type: "GET",
+                dataType: "json",
+                success: function(response) {
+                    var options = '';
+                    $.each(response, function(index, manager) {
+                        options += '<option value="' + manager.id + '">' + manager.name + '</option>';
+                    });
+                    $('#cord_select').append(options);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+
+
+
             let formData = new FormData();
             formData.append('name', document.getElementById('name').value);
             formData.append('name_english', document.getElementById('name_english').value);
@@ -1268,6 +1312,8 @@
             formData.append('cv', document.getElementById('cv').files[0]);
             formData.append('accreditationـcertificate', document.getElementById('accreditationـcertificate').files[0]);
             formData.append('pic', document.getElementById('pic').files[0]);
+            formData.append('type', 'consultants');
+
             store('/dashboard/admin/admins', formData)
         }
 
@@ -1286,18 +1332,19 @@
             formData.append('training_center', document.getElementById('training_center').value);
             formData.append('public_sector', document.getElementById('public_sector').checked);
             formData.append('private_sector', document.getElementById('private_sector').checked);
+
             store('/dashboard/admin/programWizardStore/' + id, formData)
         }
+
         function performStoreMangerId() {
             let formData = new FormData();
             formData.append('manger_id', document.getElementById('MangerList').value);
             formData.append('type', 'manger');
             store('/dashboard/admin/admins-manger', formData)
         }
-
     </script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             // Function to hide the select element initially
             $('#MangerList').hide();
 
@@ -1309,11 +1356,14 @@
                     $.ajax({
                         url: "{{ route('search.admins') }}",
                         method: "GET",
-                        data: { search_query: searchQuery },
+                        data: {
+                            search_query: searchQuery
+                        },
                         success: function(data) {
                             $('#MangerList').empty();
                             $.each(data, function(index, organization) {
-                                $('#MangerList').append('<option value="'+ organization.id + '">' + organization.name + '</option>');
+                                $('#MangerList').append('<option value="' + organization
+                                    .id + '">' + organization.name + '</option>');
                             });
                         }
                     });
@@ -1324,11 +1374,11 @@
             });
         });
 
-        function redirect(){
-           var clientId =  document.getElementById('organizationList').value ;
-           if (clientId) {
+        function redirect() {
+            var clientId = document.getElementById('organizationList').value;
+            if (clientId) {
                 window.location.href = "{{ route('AddProjectManager', ':id') }}".replace(':id', clientId);
             }
         }
-        </script>
+    </script>
 @endsection

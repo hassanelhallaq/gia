@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RateController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
+use App\Models\Program;
 
 /*
 |--------------------------------------------------------------------------
@@ -138,6 +139,11 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::resource('/role.permissions', RolePermissionController::class);
         Route::get('/get-rates/{id}', [RateController::class, 'createRate'])->name('get.rate');
         Route::resource('rates', RateController::class);
+        Route::get('/search/adminMangersel', [AdminController::class , 'adminMangersel'])->name('search.adminMangersel');
+        Route::get('/search/admincord_select', [AdminController::class , 'admincordSelect'])->name('search.admincordSelect');
+
+        Route::post('/programWizardUpdate', [Program::class, 'programWizardUpdate'])->name('programWizardUpdate');
+
     }
 );
 Route::get('/invitation/{id}/{course_id}', [SiteController::class, 'index'])->name('invitation.index');

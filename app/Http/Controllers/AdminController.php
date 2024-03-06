@@ -192,7 +192,7 @@ class AdminController extends Controller
             $adminManger = new AdminProgram();
             $adminManger->admin_id = $admin->id ;
             $adminManger->program_id = $id ;
-            $adminManger->type = 'manger' ;
+            $adminManger->type = $request->type ;
             $adminManger->save();
             if ($isSaved) {
                 $role = Role::findById($request->get('role_id'));
@@ -477,4 +477,26 @@ class AdminController extends Controller
 
         return $organizations;
     }
+
+    public function adminMangersel(Request $request)
+    {
+        $searchQuery = $request->input('search_query');
+        $id = $request->session()->get('program_id');
+        $adminManger =  AdminProgram::where('program_id',$id)->where('type','manger')->first();
+        $organizations = Admin::where('id',$adminManger->admin_id)->get();
+
+        return response()->json($organizations);
+
+    }
+    public function admincordSelect(Request $request)
+    {
+        $searchQuery = $request->input('search_query');
+        $id = $request->session()->get('program_id');
+        $adminManger =  AdminProgram::where('program_id',$id)->where('type','cordreator')->first();
+        $organizations = Admin::where('id',$adminManger->admin_id)->get();
+
+        return response()->json($organizations);
+
+    }
+
 }

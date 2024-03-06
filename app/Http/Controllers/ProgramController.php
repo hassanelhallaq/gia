@@ -319,4 +319,23 @@ class ProgramController extends Controller
 
         return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $program ? 201 : 400);
     }
+
+    public function programWizardUpdate(Request $request)
+    {
+        $id = $request->session()->get('program_id');
+        $program = Program::find($id);
+        $program->info = $request->info;
+        if ($request->hasFile('program_files')) {
+            $adminImage = $request->file('program_files');
+            $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
+            $adminImage->move('images/program', $imageName);
+            $program->program_files = '/images/' . 'program' . '/' . $imageName;
+        }
+        $program->update();
+        $request->session()->forget('program_id');
+
+        return response()->json(['redirect' => route('programs.grid')]);
+
+    }
+
 }

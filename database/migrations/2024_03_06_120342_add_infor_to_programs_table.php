@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('permissions', function (Blueprint $table) {
-            $table->foreignId('permission_group_id')->constrained()->cascadeOnDelete();
+        Schema::table('programs', function (Blueprint $table) {
+            $table->string('program_files')->nullable();
+            $table->string('info')->nullable();
         });
     }
 
@@ -21,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('permissions', function (Blueprint $table) {
+        Schema::table('programs', function (Blueprint $table) {
             //
         });
     }
