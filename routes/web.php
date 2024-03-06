@@ -147,7 +147,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::get('/cordreatorProjects', [AdminController::class , 'cordreatorProjects'])->name('cordreatorProjects');
         Route::get('/cordTrainnerProjects', [AdminController::class , 'cordTrainnerProjects'])->name('cordTrainnerProjects');
         Route::get('/consultantsProjects', [AdminController::class , 'consultantsProjects'])->name('consultantsProjects');
-        Route::post('/updateMangment', [AdminController::class, 'updateMangment'])->name('updateMangment');
+        Route::post('/updateMangment/{id}', [AdminController::class, 'updateMangment'])->name('updateMangment');
         Route::get('/edit-mangment/{id}', [AdminController::class , 'editMangment'])->name('mangment.edit');
     }
 );

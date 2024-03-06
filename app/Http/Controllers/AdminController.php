@@ -423,7 +423,9 @@ class AdminController extends Controller
     public function editMangment($id)
     {
         $admin = Admin::findOrFail($id);
-        return response()->view('dashboard.admin.edit-mangment', compact('admin'));
+        $adminManger =  AdminProgram::where('admin_id',$id)->first();
+
+        return response()->view('dashboard.admin.edit-mangment', compact('admin','adminManger'));
     }
     public function editPassword($id)
 
