@@ -334,7 +334,7 @@
                                     <div class="col-lg-4 col-sm-12">
                                         <label for="exampleInputEmail1"> تحميل السيرة الذاتية </label>
                                         <div class="input-group mb-3">
-                                            <input type="file" class="form-control" id="inputGroupFile02">
+                                            <input type="file" class="form-control" id="cv_manger">
                                             <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                         </div>
                                     </div>
@@ -342,7 +342,7 @@
                                     <div class="col-lg-4 col-sm-12">
                                         <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
                                         <div class="input-group mb-3">
-                                            <input type="file" class="form-control" id="inputGroupFile02">
+                                            <input type="file" class="form-control" id="accreditationـcertificate_manger">
                                             <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                         </div>
                                     </div>
@@ -350,7 +350,7 @@
                                     <div class="col-lg-4 col-sm-12">
                                         <label for="exampleInputEmail1"> إدراج صورةشخصية </label>
                                         <div class="input-group mb-3">
-                                            <input type="file" class="form-control" id="inputGroupFile02">
+                                            <input type="file" class="form-control" id="pic_manger">
                                             <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                         </div>
                                     </div>
@@ -364,6 +364,8 @@
                                         <button class="btn btn-outline-warning btn-with-icon  mr-1"> إضافة منسق مشروع آخر
                                             <i class="bi bi-plus"></i></button>
                                     </div>
+
+
                                 </div>
 
                                 <div class="row mb-3 mt-4 justify-content-between d-flex">
