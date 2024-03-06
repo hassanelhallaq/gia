@@ -523,7 +523,7 @@
                                 <div class="col-lg-4 col-sm-12">
                                     <label for="exampleInputEmail1"> تحميل السيرة الذاتية </label>
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <input type="file" class="form-control" id="pic_cord">
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
                                 </div>
@@ -531,15 +531,17 @@
                                 <div class="col-lg-4 col-sm-12">
                                     <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <input type="file" class="form-control" id="accreditationـcertificate_cord">
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
                                 </div>
 
+
+
                                 <div class="col-lg-4 col-sm-12">
                                     <label for="exampleInputEmail1"> إدراج صورةشخصية </label>
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <input type="file" class="form-control" id="cv_cord">
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
                                 </div>
@@ -686,7 +688,7 @@
                                 <div class="col-lg-4 col-sm-12">
                                     <label for="exampleInputEmail1"> تحميل السيرة الذاتية </label>
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <input type="file" class="form-control" id="cv_trainer">
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
                                 </div>
@@ -694,7 +696,7 @@
                                 <div class="col-lg-4 col-sm-12">
                                     <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <input type="file" class="form-control" id="accreditationـcertificate_trainer">
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
                                 </div>
@@ -702,10 +704,13 @@
                                 <div class="col-lg-4 col-sm-12">
                                     <label for="exampleInputEmail1"> إدراج صورةشخصية </label>
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <input type="file" class="form-control" id="pic_trainer">
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
                                 </div>
+
+                                <input type="file" class="form-control" id="inputGroupFile02">
+
 
 
 
@@ -843,7 +848,7 @@
                                 <div class="col-lg-4 col-sm-12">
                                     <label for="exampleInputEmail1"> تحميل السيرة الذاتية </label>
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <input type="file" class="form-control" id="cord_trainer_cv">
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
                                 </div>
@@ -851,7 +856,7 @@
                                 <div class="col-lg-4 col-sm-12">
                                     <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <input type="file" class="form-control" id="cord_trainer_accreditation">
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
                                 </div>
@@ -859,13 +864,10 @@
                                 <div class="col-lg-4 col-sm-12">
                                     <label for="exampleInputEmail1"> إدراج صورةشخصية </label>
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <input type="file" class="form-control" id="cord_trainer_pic">
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
                                 </div>
-
-
-
                             </div>
                             <div class="row mb-5 justify-content-between d-flex">
                                 <div class="">
@@ -995,11 +997,13 @@
                                 </div>
                             </div>
 
+
+
                             <div class="row mb-3">
                                 <div class="col-lg-4 col-sm-12">
                                     <label for="exampleInputEmail1"> تحميل السيرة الذاتية </label>
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <input type="file" class="form-control" id="cv">
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
                                 </div>
@@ -1007,7 +1011,7 @@
                                 <div class="col-lg-4 col-sm-12">
                                     <label for="exampleInputEmail1"> تحميل شهادة الاعتماد </label>
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <input type="file" class="form-control" id="accreditationـcertificate">
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
                                 </div>
@@ -1015,7 +1019,7 @@
                                 <div class="col-lg-4 col-sm-12">
                                     <label for="exampleInputEmail1"> إدراج صورةشخصية </label>
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <input type="file" class="form-control" id="pic">
                                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                     </div>
                                 </div>
