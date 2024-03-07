@@ -219,7 +219,7 @@
                             </div>
                         </fieldset>
                         {{-- #############✔ fieldset 2 نموذج اضافة مدير المشروع  ########### --}}
-                        <fieldset>
+                        <fieldset id="cart-create-mp-perant">
                             <div id="cart-create-mp" class="cart-create-mp" style="display: none">
                                 <h5 class=" text-center mt-3 mb-5"> نموذج اضافة مدير المشروع </h5>
                                 <div class="row mt-5">
@@ -389,8 +389,8 @@
                                         <div class="form-group">
                                             <label class="" for="fname4" class="wizard-form-text-label"> البحث عن
                                                 مدير مشروع موجود مسبقا من خلال القائمة ادناه *</label>
-                                            <input type="text" name="search_query" placeholder="اكتب هنا للبحث عن جهة"
-                                                class="form-control wizard-required" id="search_query">
+                                            <input type="text" name="inputManagerserch" placeholder="اكتب هنا للبحث عن جهة"
+                                                class="form-control wizard-required" id="inputManagerserch">
                                             <div class=""></div>
                                         </div>
                                         <select class="form-control select2" id="MangerList" style="display: none;">
@@ -1120,7 +1120,8 @@
                                         السابق </a>
                                 </div>
                                 <div class="d-flex">
-                                    <button class="btn ml-1 btn-warning-gradient btn-with-icon" type="button" onclick="performStoreFinal()"> حفظ بيانات المشروع
+                                    <button class="btn ml-1 btn-warning-gradient btn-with-icon" type="button"
+                                        onclick="performStoreFinal()"> حفظ بيانات المشروع
                                     </button>
                                     {{-- <button type="button" class="btn btn-outline-warning btn-next ">   المتابعة لاصدار تكليف </button> --}}
                                 </div>
@@ -1151,15 +1152,25 @@
         });
 
 
+        var div1 = document.getElementById("cart-create-mp");
+        var div2 = document.getElementById("cart-search-mp");
+        const inputElement = document.getElementById('inputManagerserch');
+        const ElementParent = document.getElementById('cart-create-mp-perant');
+        const divDeleted = div1;
 
-
-
-
-
-
-
-
-
+        inputElement.addEventListener('change', function() {
+            // divDeleted=div1;
+            div1.remove();
+            console.log(divDeleted);
+        });
+        document.getElementById("btnCreateMProject").addEventListener("click", function() {
+            if (div1.style.display === "none") {
+                div1.style.display = "block";
+                div2.style.display = "none";
+                ElementParent.append(divDeleted);
+                div2.remove();
+            }
+        });
 
 
         function performStoreManger() {
@@ -1253,12 +1264,14 @@
 
             store('/dashboard/admin/admins', formData)
         }
+
         function performStoreFinal() {
             let formData = new FormData();
             formData.append('info', document.getElementById('info').value);
             formData.append('program_files', document.getElementById('program_files').files[0]);
             storeRoute('/dashboard/admin/programWizardUpdate', formData)
         }
+
         function performStore() {
 
             // Make an Ajax request to fetch project managers
@@ -1348,7 +1361,7 @@
             // Function to hide the select element initially
             $('#MangerList').hide();
 
-            $('#search_query').on('input', function() {
+            $('#inputManagerserch').on('input', function() {
                 var searchQuery = $(this).val();
                 if (searchQuery.trim() !== '') {
                     // Show the select element when the user starts typing
@@ -1357,7 +1370,7 @@
                         url: "{{ route('search.admins') }}",
                         method: "GET",
                         data: {
-                            search_query: searchQuery
+                            inputManagerserch: searchQuery
                         },
                         success: function(data) {
                             $('#MangerList').empty();
