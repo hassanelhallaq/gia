@@ -142,7 +142,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::get('/search/adminMangersel', [AdminController::class , 'adminMangersel'])->name('search.adminMangersel');
         Route::get('/search/admincord_select', [AdminController::class , 'admincordSelect'])->name('search.admincordSelect');
 
-        Route::post('/programWizardUpdate', [Program::class, 'programWizardUpdate'])->name('programWizardUpdate');
+        Route::post('/programWizardUpdate', [ProgramController::class, 'programWizardUpdate'])->name('programWizardUpdate');
         Route::get('/mangersProjects', [AdminController::class , 'mangersProjects'])->name('mangersProjects');
         Route::get('/cordreatorProjects', [AdminController::class , 'cordreatorProjects'])->name('cordreatorProjects');
         Route::get('/cordTrainnerProjects', [AdminController::class , 'cordTrainnerProjects'])->name('cordTrainnerProjects');

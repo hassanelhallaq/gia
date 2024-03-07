@@ -341,7 +341,7 @@ class ProgramController extends Controller
         $program->update();
         $request->session()->forget('program_id');
 
-        return response()->json(['redirect' => route('programs.grid')]);
+        return response()->json(['redirect' => route('programs.index')]);
 
     }
 
