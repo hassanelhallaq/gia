@@ -67,7 +67,7 @@
                         <div class="">
                             <p class="mb-2 tx-12 text-muted"> عدد المشاركين </p>
                             <div class="">
-                                <h4 class="mb-1 font-weight-bold">{{ $course->attendances_count }}</h4>
+                                <h6 class="mb-1 ">{{ $course->attendances_count }}</h6>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                         <div class="">
                             <p class="mb-2 tx-12 text-muted">نسبة الأختبار القبلي </p>
                             <div class="d-flex">
-                                <h4 class="mb-1 font-weight-bold">{{ $quizAtendBefor }}</h4><span> من
+                                <h6 class="mb-1 font-weight-bold">{{ $quizAtendBefor }}</h6><span> من
                                     {{ $course->attendances_count }} </span>
                             </div>
                         </div>
@@ -122,8 +122,8 @@
                         <div class="">
                             <p class="mb-2 tx-12 text-muted"> نسبة اجتياز طلبات الشهادة</p>
                             <div class="d-flex">
-                                <h4 class="mb-1 font-weight-bold">{{ $courseAttendancesEmail->attendances_email_count }}
-                                </h4><span> من {{ $course->attendances_count }} </span>
+                                <h6 class="mb-1 font-weight-bold">{{ $courseAttendancesEmail->attendances_email_count }}
+                                </h6><span> من {{ $course->attendances_count }} </span>
                             </div>
                         </div>
                     </div>
@@ -149,8 +149,8 @@
                         </div>
                         <div class="">
                             <p class="mb-2 tx-11 text-muted"> نسبة اجتياز الاختبار التفاعلي</p>
-                            <div class="">
-                                <h4 class="mb-1 font-weight-bold">{{ $quizAtendInteractive }}</h4><span> من
+                            <div class=" d-flex">
+                                <h6 class="mb-1 font-weight-bold">{{ $quizAtendInteractive }}</h6><span> من
                                     {{ $course->attendances_count }} </span>
                             </div>
                         </div>
@@ -169,17 +169,17 @@
             </div>
         </div>
 
-        <div class="col-xl-part h-100" >
+        <div class="col-xl-part" >
             <div class="card">
-                <div class="card-body iconfont text-right d-flex justify-content-between p-2 " style="height: 100px">
+                <div class="card-body iconfont text-right d-flex justify-content-between p-2 ">
                     <div class="d-flex mb-0">
                         <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
                             <i class="bi bi-collection text-warning tx-24"></i>
                         </div>
                         <div class="">
                             <p class="mb-2 tx-12 text-muted"> نسبة الاختبار البعدي </p>
-                            <div class="">
-                                <h4 class="mb-1 font-weight-bold">{{ $quizAtendAfter }}</h4><span> من
+                            <div class=" d-flex">
+                                <h6 class="mb-1 font-weight-bold">{{ $quizAtendAfter }}</h6><span> من
                                     {{ $course->attendances_count }} </span>
                             </div>
                         </div>
