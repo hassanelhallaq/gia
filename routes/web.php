@@ -113,6 +113,10 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         })->name('AddProject2');
         Route::post('/programWizardStore/{id}', [ProgramController::class, 'programWizardStore'])->name('programWizardStore.store');
 
+        Route::get('/interactivse', function () {
+            return view('dashboard.interactive');
+        })->name('interactivse');
+
         Route::get('/AddProject3',[ClientController::class , 'createClient'])->name('AddProject3');
     }
 );
