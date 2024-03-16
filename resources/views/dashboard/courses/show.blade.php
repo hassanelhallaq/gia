@@ -6,7 +6,7 @@
     <link href="{{ URL::asset('assets/css-rtl/chartCircle.css') }}" rel="stylesheet" />
 @endsection
 @section('header')
-    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
+    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 mb-0 mr-0">
 
         <div class="left-content mt-2">
             <nav aria-label="breadcrumb">
@@ -29,29 +29,24 @@
         </div>
         <div class="main-dashboard-header-right flex-wrap">
             <div class=" d-flex">
-                <a href="{{ route('get.rate', [$course->id]) }}"
-                    class="btn btn-outline-light btn-with-icon btn-sm mr-1">التقيم <i class="la la-cog"></i></a>
+                 <a href="{{ route('get.rate', [$course->id]) }}"
+                    class="btn btn-outline-light btn-with-icon btn-md ml-2">التقيم <i class="la la-cog"></i></a>
                     @can('الأطلاع على المشاركين')
-
-                <a href="{{ route('course.attendance', [$course->id]) }}"
-                    class="btn btn-outline-light btn-with-icon btn-sm mr-1"> ادارة المشاركين <i class="la la-cog"></i></a>
+                        <a href="{{ route('course.attendance', [$course->id]) }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1"> ادارة المشاركين <i class="la la-cog"></i></a>
                     @endcan
-
-                <a href="{{ route('quiz.report', [$course->id]) }}" class="btn btn-outline-light btn-with-icon btn-sm mr-1">
-                    تحميل نتائج
-                    الاختبار <i class="bi bi-box-arrow-in-down"></i></a>
-                <a href="{{ route('quiz.befor.report', [$course->id]) }}"
-                    class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج
-                    الاختبار القبلي <i class="bi bi-box-arrow-in-down"></i></a>
-                <a href="{{ route('quiz.after.report', [$course->id]) }}"
-                    class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج
-                    الاختبار البعدي <i class="bi bi-box-arrow-in-down"></i></a>
-                <a href="{{ route('quiz.rate.report', [$course->id]) }}"
-                    class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج
-                    الاختبار التفاعلي <i class="bi bi-box-arrow-in-down"></i></a>
-                <a href="{{ route('attendance.xlsx', [$course->id]) }}"
-                    class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركين <i
-                        class="bi bi-box-arrow-in-down"></i></a>
+                        <div class="dropdown mr-1 btn-md">
+                            <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-warning-gradient btn-md"
+                            data-toggle="dropdown" id="dropdownMenuButton" type="button"> تحميل النتائج  <i class="fas fa-caret-down ml-1"></i></button>
+                            <div  class="dropdown-menu tx-13">
+                                <a href="{{ route('quiz.report', [$course->id]) }}" class="btn btn-outline-light btn-with-icon btn-sm mr-1 mb-1">
+                                    تحميل نتائج
+                                    الاختبار <i class="bi bi-box-arrow-in-down"></i></a>
+                                <a href="{{ route('attendance.xlsx', [$course->id]) }}"class="mb-2 btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركين <i class="bi bi-box-arrow-in-down"></i></a>
+                                <a href="{{ route('quiz.rate.report', [$course->id]) }}"class="mb-2 btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج الاختبار التفاعلي <i class="bi bi-box-arrow-in-down"></i></a>
+                                <a href="{{ route('quiz.after.report', [$course->id]) }}"class="mb-2 btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج  الاختبار البعدي <i class="bi bi-box-arrow-in-down"></i></a>
+                                <a href="{{ route('quiz.befor.report', [$course->id]) }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج الاختبار القبلي <i class="bi bi-box-arrow-in-down"></i></a>
+                            </div>
+                        </div>
             </div>
         </div>
     </div>
@@ -64,7 +59,7 @@
     <div class="row row-sm sales-cardSmall">
         <div class="col-xl-part">
             <div class="card">
-                <div class="card-body  iconfont text-right d-flex justify-content-between">
+                <div class="card-body  iconfont text-right d-flex justify-content-between p-2">
                     <div class="d-flex mb-0">
                         <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
                             <i class="typcn typcn-group-outline text-warning tx-24"></i>
@@ -72,7 +67,7 @@
                         <div class="">
                             <p class="mb-2 tx-12 text-muted"> عدد المشاركين </p>
                             <div class="">
-                                <h4 class="mb-1 font-weight-bold">{{ $course->attendances_count }}</h4>
+                                <h6 class="mb-1 ">{{ $course->attendances_count }}</h6>
                             </div>
                         </div>
                     </div>
@@ -91,7 +86,7 @@
         </div>
         <div class="col-xl-part">
             <div class="card">
-                <div class="card-body iconfont text-right d-flex justify-content-between">
+                <div class="card-body iconfont text-right d-flex justify-content-between p-2">
                     <div class="d-flex mb-0">
                         <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
                             <i class="typcn typcn-document-text text-warning tx-24"></i>
@@ -99,7 +94,7 @@
                         <div class="">
                             <p class="mb-2 tx-12 text-muted">نسبة الأختبار القبلي </p>
                             <div class="d-flex">
-                                <h4 class="mb-1 font-weight-bold">{{ $quizAtendBefor }}</h4><span> من
+                                <h6 class="mb-1 font-weight-bold">{{ $quizAtendBefor }}</h6><span> من
                                     {{ $course->attendances_count }} </span>
                             </div>
                         </div>
@@ -119,7 +114,7 @@
         </div>
         <div class="col-xl-part">
             <div class="card">
-                <div class="card-body iconfont text-right d-flex justify-content-between">
+                <div class="card-body iconfont text-right d-flex justify-content-between p-2">
                     <div class="d-flex mb-0">
                         <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
                             <i class="bi bi-cash-stack text-warning tx-24"></i>
@@ -127,8 +122,8 @@
                         <div class="">
                             <p class="mb-2 tx-12 text-muted"> نسبة اجتياز طلبات الشهادة</p>
                             <div class="d-flex">
-                                <h4 class="mb-1 font-weight-bold">{{ $courseAttendancesEmail->attendances_email_count }}
-                                </h4><span> من {{ $course->attendances_count }} </span>
+                                <h6 class="mb-1 font-weight-bold">{{ $courseAttendancesEmail->attendances_email_count }}
+                                </h6><span> من {{ $course->attendances_count }} </span>
                             </div>
                         </div>
                     </div>
@@ -147,15 +142,15 @@
         </div>
         <div class="col-xl-part">
             <div class="card">
-                <div class="card-body iconfont text-right d-flex justify-content-between">
+                <div class="card-body iconfont text-right d-flex justify-content-between p-2">
                     <div class="d-flex mb-0">
                         <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
                             <i class="si si-layers text-warning tx-24"></i>
                         </div>
                         <div class="">
                             <p class="mb-2 tx-11 text-muted"> نسبة اجتياز الاختبار التفاعلي</p>
-                            <div class="">
-                                <h4 class="mb-1 font-weight-bold">{{ $quizAtendInteractive }}</h4><span> من
+                            <div class=" d-flex">
+                                <h6 class="mb-1 font-weight-bold">{{ $quizAtendInteractive }}</h6><span> من
                                     {{ $course->attendances_count }} </span>
                             </div>
                         </div>
@@ -174,17 +169,17 @@
             </div>
         </div>
 
-        <div class="col-xl-part">
+        <div class="col-xl-part" >
             <div class="card">
-                <div class="card-body iconfont text-right d-flex justify-content-between">
+                <div class="card-body iconfont text-right d-flex justify-content-between p-2 ">
                     <div class="d-flex mb-0">
                         <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
                             <i class="bi bi-collection text-warning tx-24"></i>
                         </div>
                         <div class="">
                             <p class="mb-2 tx-12 text-muted"> نسبة الاختبار البعدي </p>
-                            <div class="">
-                                <h4 class="mb-1 font-weight-bold">{{ $quizAtendAfter }}</h4><span> من
+                            <div class=" d-flex">
+                                <h6 class="mb-1 font-weight-bold">{{ $quizAtendAfter }}</h6><span> من
                                     {{ $course->attendances_count }} </span>
                             </div>
                         </div>

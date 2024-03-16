@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 @section('header')
-    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
+    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 mb-0 mr-0">
         <div class="left-content mt-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1">
@@ -67,7 +67,260 @@
 @endsection
 @section('content')
     <!-- row -->
-    <div class="row row">
+    <div class="row">
+
+        <div class="row  sales-cardSmall totalNumberPrograms">
+            <div class="col-lg-3 col-sm-12">
+                <div class="snip1191 orange pos-relative">
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample69.jpg" alt="sample69" style="border-radius: 10px;"/>
+                    <a class="pos-absolute l-30 t-20 text-white ">  فريق ادارة المشاريع </a>
+                    <button class="btn btn-warning-light pos-absolute l-20 text-white b-10" href="#">تحرير القائمة </button>
+                </div>
+            </div>
+            <div class="col-lg-9 col-sm-12">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-12">
+                        <div class="col-xl-part w-100">
+                            <div class="card">
+                                <div class="card-body  iconfont text-right d-flex justify-content-between p-2">
+                                    <div class="d-flex mb-0">
+                                        <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
+                                            <i class="typcn typcn-book text-warning tx-24"></i>
+                                        </div>
+                                        <div class="">
+                                            <p class="mb-2 tx-12 text-muted">عدد الدورات </p>
+                                            <div class="">
+                                                <h6 class="mb-1 font-weight-bold">20</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" mt-3">
+                                        <div class="dropdown">
+                                            <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
+                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div  class="dropdown-menu tx-13">
+                                                <a class="dropdown-item" href="#">تفاصيل</a>
+                                                <a class="dropdown-item" href="#">تعديل</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="col-xl-part w-100">
+                            <div class="card">
+                                <div class="card-body iconfont text-right d-flex justify-content-between p-2">
+                                    <div class="d-flex mb-0">
+                                        <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
+                                            <i class="typcn typcn-book text-warning tx-24"></i>
+                                        </div>
+                                        <div class="">
+                                            <p class="mb-2 tx-12 text-muted"> الدورات الفعالة  </p>
+                                            <div class="">
+                                                <h6 class="mb-1 font-weight-bold">13</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" mt-3">
+                                        <div class="dropdown">
+                                            <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
+                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div  class="dropdown-menu tx-13">
+                                                <a class="dropdown-item" href="#">تفاصيل</a>
+                                                <a class="dropdown-item" href="#">تعديل</a>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="col-xl-part w-100">
+                            <div class="card">
+                                <div class="card-body iconfont text-right d-flex justify-content-between p-2">
+                                    <div class="d-flex mb-0">
+                                        <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
+                                            <i class="si si-layers text-warning tx-24"></i>
+                                        </div>
+                                        <div class="">
+                                            <p class="mb-2 tx-12 text-muted"> الدورات المجدولة</p>
+                                            <div class="">
+                                                <h6 class="mb-1 font-weight-bold">75</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" mt-3">
+                                        <div class="dropdown">
+                                            <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
+                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div  class="dropdown-menu tx-13">
+                                                <a class="dropdown-item" href="#">تفاصيل</a>
+                                                <a class="dropdown-item" href="#">تعديل</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="col-xl-part w-100">
+                            <div class="card">
+                                <div class="card-body iconfont text-right d-flex justify-content-between p-2">
+                                    <div class="d-flex mb-0">
+                                        <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
+                                            <i class="si si-layers text-warning tx-24"></i>
+                                        </div>
+                                        <div class="">
+                                            <p class="mb-2 tx-12 text-muted"> الدورات المنتهية </p>
+                                            <div class="">
+                                                <h6 class="mb-1 font-weight-bold">500</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" mt-3">
+                                        <div class="dropdown">
+                                            <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
+                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div  class="dropdown-menu tx-13">
+                                                <a class="dropdown-item" href="#">تفاصيل</a>
+                                                <a class="dropdown-item" href="#">تعديل</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="col-xl-part w-100">
+                            <div class="card">
+                                <div class="card-body iconfont text-right d-flex justify-content-between p-2">
+                                    <div class="d-flex mb-0">
+                                        <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
+                                            <i class="typcn typcn-group-outline text-warning tx-24"></i>
+                                        </div>
+                                        <div class="">
+                                            <p class="mb-2 tx-12 text-muted"> اجمالي المشاركين </p>
+                                            <div class="">
+                                                <h6 class="mb-1 ">500</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" mt-3">
+                                        <div class="dropdown">
+                                            <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
+                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div  class="dropdown-menu tx-13">
+                                                <a class="dropdown-item" href="#">تفاصيل</a>
+                                                <a class="dropdown-item" href="#">تعديل</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="col-xl-part w-100">
+                            <div class="card">
+                                <div class="card-body iconfont text-right d-flex justify-content-between p-2">
+                                    <div class="d-flex mb-0">
+                                        <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
+                                            <i class="typcn typcn-group-outline text-warning tx-24"></i>
+                                        </div>
+                                        <div class="">
+                                            <p class="mb-2 tx-12 text-muted"> نسبة التحسين العامة </p>
+                                            <div class="">
+                                                <h6 class="mb-1 ">500</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" mt-3">
+                                        <div class="dropdown">
+                                            <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
+                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div  class="dropdown-menu tx-13">
+                                                <a class="dropdown-item" href="#">تفاصيل</a>
+                                                <a class="dropdown-item" href="#">تعديل</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="col-xl-part w-100">
+                            <div class="card">
+                                <div class="card-body iconfont text-right d-flex justify-content-between p-2">
+                                    <div class="d-flex mb-0">
+                                        <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
+                                            <i class="typcn typcn-group-outline text-warning tx-24"></i>
+                                        </div>
+                                        <div class="">
+                                            <p class="mb-2 tx-12 text-muted"> عدد الدورات المقبولة </p>
+                                            <div class="">
+                                                <h6 class="mb-1 ">500</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" mt-3">
+                                        <div class="dropdown">
+                                            <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
+                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div  class="dropdown-menu tx-13">
+                                                <a class="dropdown-item" href="#">تفاصيل</a>
+                                                <a class="dropdown-item" href="#">تعديل</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="col-xl-part w-100">
+                            <div class="card">
+                                <div class="card-body iconfont text-right d-flex justify-content-between p-2">
+                                    <div class="d-flex mb-0">
+                                        <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
+                                            <i class="typcn typcn-group-outline text-warning tx-24"></i>
+                                        </div>
+                                        <div class="">
+                                            <p class="mb-2 tx-12 text-muted"> عدد حالات الاعتذار </p>
+                                            <div class="">
+                                                <h6 class="mb-1 ">500</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" mt-3">
+                                        <div class="dropdown">
+                                            <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
+                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div  class="dropdown-menu tx-13">
+                                                <a class="dropdown-item" href="#">تفاصيل</a>
+                                                <a class="dropdown-item" href="#">تعديل</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
 
         <!--open filter Top  -->
         <div class="col-lg-12">
@@ -100,7 +353,6 @@
             </div>
         </div>
         <!--closed filter Top  -->
-
         <!-- table -->
         <div class="col-lg-12">
             <div class="card">
