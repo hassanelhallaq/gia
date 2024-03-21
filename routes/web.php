@@ -145,6 +145,8 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::resource('rates', RateController::class);
         Route::get('/search/adminMangersel', [AdminController::class , 'adminMangersel'])->name('search.adminMangersel');
         Route::get('/search/admincord_select', [AdminController::class , 'admincordSelect'])->name('search.admincordSelect');
+        Route::get('/program/manger/{id}', [ProgramController::class , 'mangers'])->name('program.mangers');
+        Route::put('/program/manger/{id}', [ProgramController::class , 'mangersUpdate'])->name('program.mangers.update');
 
         Route::post('/programWizardUpdate', [ProgramController::class, 'programWizardUpdate'])->name('programWizardUpdate');
         Route::get('/mangersProjects', [AdminController::class , 'mangersProjects'])->name('mangersProjects');

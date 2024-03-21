@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\AdminProgram;
 use App\Models\Category;
 use App\Models\Client;
@@ -21,25 +22,25 @@ class ProgramController extends Controller
      */
     public function index(Request $request)
     {
-        // $programs = Program::orderBy("id", "desc")->when($request->name, function ($q) use ($request) {
-        //     $q->where('name', 'like', '%' . $request->name . '%');
-        // });
-        // $programAdmin =  AdminProgram::where('admin_id',Auth::user()->id)->first();
+        $programs = Program::orderBy("id", "desc")->when($request->name, function ($q) use ($request) {
+            $q->where('name', 'like', '%' . $request->name . '%');
+        });
+        $programAdmin =  AdminProgram::where('admin_id',Auth::user()->id)->first();
 
-        // if (Auth::guard('admin')->check() && $programAdmin == null) {
-        //     $programs = $programs->withCount('courses')->paginate(10);
-        // }elseif (Auth::guard('admin')->check()) {
+        if (Auth::guard('admin')->check() && $programAdmin == null) {
+            $programs = $programs->withCount('courses')->paginate(10);
+        }elseif (Auth::guard('admin')->check()) {
 
-        //     $programAdmin =  AdminProgram::where('admin_id',Auth::user()->id)->get();
-        //     $programs = $programs->where('id',$programAdmin->pluck('program_id'))->withCount('courses')->paginate(10);
-        // } elseif (Auth::guard('client')->check()) {
-        //     $programs = $programs->where('client_id', Auth::user()->id)->withCount('courses')->paginate(10);
-        // } elseif (Auth::guard('trainer')->check()) {
-        //     $programs = $programs->with('courses')->whereHas('courses', function ($q) {
-        //         $q->where('trainer_id', Auth::user()->id);
-        //     })->withCount('courses')->paginate(10);
-        // }
-        $programs=Program::withCount('courses')->paginate(10);
+            $programAdmin =  AdminProgram::where('admin_id',Auth::user()->id)->get();
+            $programs = $programs->where('id',$programAdmin->pluck('program_id'))->withCount('courses')->paginate(10);
+        } elseif (Auth::guard('client')->check()) {
+            $programs = $programs->where('client_id', Auth::user()->id)->withCount('courses')->paginate(10);
+        } elseif (Auth::guard('trainer')->check()) {
+            $programs = $programs->with('courses')->whereHas('courses', function ($q) {
+                $q->where('trainer_id', Auth::user()->id);
+            })->withCount('courses')->paginate(10);
+        }
+        // $programs=Program::withCount('courses')->paginate(10);
         return view("dashboard.programs.index", compact("programs"));
     }
 
@@ -346,4 +347,46 @@ class ProgramController extends Controller
 
     }
 
+    public function mangers($id)
+    {
+        $manger = Admin::where('program_id',$id)->with('admins')->whereHas('admins',function($q){
+            $q->where('type','manger');
+        })->get();
+        $cordreator = Admin::where('program_id',$id)->with('admins')->whereHas('admins',function($q){
+            $q->where('type','cordreator');
+        })->get();
+        $cordTrainner = Admin::where('program_id',$id)->with('admins')->whereHas('admins',function($q){
+            $q->where('type','cordrecord-trainnerator');
+        })->get();
+        $consultants = Admin::where('program_id',$id)->with('admins')->whereHas('admins',function($q){
+            $q->where('type','consultants');
+        })->get();
+
+        $trainers = Trainer::with('programs')->whereHas('programs',function($q)use($id){
+            $q->where('program_id',$id);
+        })->get();
+        return view("dashboard.programs.mangers", compact('cordreator', 'trainers','cordTrainner','consultants','manger'));
+    }
+    public function mangersUpdate(Request $request , $id)
+    {
+        $adminManger = AdminProgram::where('program_id',$id)->where('type','manger')->first();
+        $adminManger->admin_id = $request->mang_select;
+        $adminManger->update();
+        $adminCordreator = AdminProgram::where('program_id',$id)->where('type','cordreator')->first();
+        $adminCordreator->admin_id = $request->cord_select;
+        $adminCordreator->update();
+        $adminCordTrainer = AdminProgram::where('program_id',$id)->where('type','cord-trainner')->first();
+        $adminCordTrainer->admin_id = $request->cordTrainner;
+        $adminCordTrainer->update();
+        $adminConsultants = AdminProgram::where('program_id',$id)->where('type','consultants')->first();
+        $adminConsultants->admin_id = $request->consultants;
+        $adminConsultants->update();
+        $program = Course::where('program_id',$id)->first();
+        $program->trainer_id = $request->trainers;
+        $program->update();
+        return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $program ? 201 : 400);
+
+
+
+    }
 }

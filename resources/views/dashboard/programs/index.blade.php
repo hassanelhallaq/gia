@@ -137,6 +137,8 @@
                                                         <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i class="si si-options-vertical text-gray tx-13" ></i></button>
                                                         <div class="dropdown-menu">
                                                             <a href="{{route('programs.edit',[$item->id])}}" class="dropdown-item"> تحرير </a>
+                                                            <a href="{{route('program.mangers',[$item->id])}}" class="dropdown-item"> تحرير المشرفين </a>
+
                                                             <button  class="dropdown-item"data-target="#modalDelete" onclick="performDestroy({{ $item->id }} , this)" > حذف </button>
                                                         </div>
                                                     </td>
