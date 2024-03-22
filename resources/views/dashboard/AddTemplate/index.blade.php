@@ -72,7 +72,7 @@
                     <div class="tab-content">
 
                         <div class="tab-pane active table-container" id="tab11">
-                            <button class="btn btn-warning-gradient btn-with-icon btn-md mb-5" data-target="#select2modal" data-toggle="modal"> اضافة  قالب <i class="bi bi-plus"></i></button>
+                            <button class="btn btn-warning-gradient btn-with-icon btn-md mb-5" data-target="#model_add_sms" data-toggle="modal"> اضافة  قالب <i class="bi bi-plus"></i></button>
                             <div class="table-responsive">
                                 <table class="table table-striped mg-b-0 text-md-nowrap">
                                     <thead>
@@ -279,6 +279,7 @@
         @include('dashboard.AddTemplate.model_add_email')
         @include('dashboard.AddTemplate.model_add_InteractiveCommands')
         @include('dashboard.AddTemplate.model_add_template')
+        @include('dashboard.AddTemplate.model_add_sms')
     </div>
     <!-- row closed -->
     <!-- row closed -->
