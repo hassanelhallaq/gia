@@ -114,6 +114,12 @@
                 </li>
                 @endcan
 
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide"  href="#"><i class="si si-people tx-22"></i><span class="side-menu__label mr-3"> اضافة قالب </span><i class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        <li><a class="slide-item" href="{{ route('AddTemplate') }}"> اضافة </a></li>
+                    </ul>
+                </li>
 
 
                 <li class="slide">

@@ -48,13 +48,10 @@ Route::prefix('dashboard')->middleware('guest:admin,client')->group(function () 
 Route::prefix('dashboard/admin')->middleware('auth:admin,client,trainer')->group(
     function () {
                 Route::get('logout', [App\Http\Controllers\UserAuthController::class, 'logout'])->name('dashboard.auth.logout');
-
         Route::resource('courses', CourseController::class);
         Route::get('/courses.attendances/{id}', [AttendanceCourseController::class, 'coursesAttendance'])->name('course.attendance');
         Route::get('/attendance-summery/{id}/{attendanceId}', [UserAnswerController::class, 'userAswers'])->name('attendance.summery');
         Route::get('/attendance-summery/after/{id}/{attendanceId}', [UserAnswerController::class, 'userAswersAfter'])->name('attendance.summery.after');
-
-
         Route::resource('programs', ProgramController::class);
         Route::get('/program.courses/{id}', [CourseController::class, 'programCourses'])->name('program.course');
 
@@ -118,6 +115,10 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         })->name('interactivse');
 
         Route::get('/AddProject3',[ClientController::class , 'createClient'])->name('AddProject3');
+
+        Route::get('/AddTemplate', function () {
+            return view('dashboard.AddTemplate.index');
+        })->name('AddTemplate');
     }
 );
 Route::prefix('dashboard/trainer')->middleware('auth:trainer')->group(
