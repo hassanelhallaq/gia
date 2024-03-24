@@ -16,7 +16,6 @@
                 </ol>
             </nav>
         </div>
-
     </div>
 @endsection
 @section('content')
@@ -84,7 +83,7 @@
                             onclick="performStoreFinal({{$id}})"> حفظ
                             بيانات المشروع
                         </button>
-                        {{-- <button type="button" class="btn btn-outline-warning btn-next ">   المتابعة لاصدار تكليف </button> --}}
+                        <a href="{{route('programs.index')}}" class="btn btn-outline-warning btn-next ">  </a>
                     </div>
                 </div>
             </div>

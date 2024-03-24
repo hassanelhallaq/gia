@@ -147,17 +147,7 @@
                                 </select>
                             </div>
 
-                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                <p class="mg-b-10">طريقة التواصل</p>
 
-                                <select class="form-control select2" id="contact_person">
-                                    @foreach ($admins as $item)
-                                    <option   value="{{$item->id}}">
-                                       {{$item->name}}
-                                    </option>
-                                    @endforeach
-                                </select>
-                            </div>
                         </div>
                         <!-- closed row -->
 
@@ -288,7 +278,7 @@
         formData.append('name', document.getElementById('name').value);
         formData.append('content_one', document.getElementById('content_one').value);
         formData.append('username', document.getElementById('username').value);
-         formData.append('start', document.getElementById('start').value);
+        formData.append('start', document.getElementById('start').value);
         formData.append('end', document.getElementById('end').value);
         formData.append('theme_name', document.getElementById('theme_name').value);
         formData.append('contact_type', document.getElementById('contact_type').value);
@@ -298,7 +288,6 @@
         formData.append('register', document.getElementById('register').value);
         formData.append('client_id', document.getElementById('client_id').value);
         formData.append('status', document.getElementById('status').value);
-        formData.append('contact_person', document.getElementById('contact_person').value);
 
 
         formData.append('attendance_method', document.getElementById('attendance_method').value);

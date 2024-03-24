@@ -181,8 +181,7 @@ class ProgramController extends Controller
         $categories = Category::all();
         $clients = Client::all();
         $trainers = Trainer::all();
-        $adminProgram = AdminProgram::where('program_id',$program->id)->get();
-        $admins = Admin::whereIn('id',$adminProgram->pluck('admin_id'))->get();
+
         return view("dashboard.programs.edit", compact('program', 'clients', 'categories','trainers','admins'));
     }
 
@@ -227,7 +226,6 @@ class ProgramController extends Controller
         $program->show_invited = $request->show_invited;
         $program->color = $request->color;
         $program->client_id = $request->client_id;
-        $program->contact_person = $request->contact_person;
         $program->attendance_method = $request->attendance_method;
         $program->status = $request->status;
         if ($request->hasFile('image')) {

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
+use App\Models\AdminProgram;
 use App\Models\Attendance;
 use App\Models\AttendanceLogin;
 use App\Models\Category;
 use App\Models\Client;
 use App\Models\Course;
+use App\Models\CourseContact;
 use App\Models\CourseFile;
 use App\Models\CourseLink;
 use App\Models\Program;
@@ -130,6 +133,7 @@ class CourseController extends Controller
             $adminImage->move('images/program', $imageName);
             $course->profile = '/images/' . 'program' . '/' . $imageName;
         }
+
         $course->save();
         return response()->json(['redirect' => route('program.course', [$request->program_id])]);
     }
@@ -206,8 +210,9 @@ class CourseController extends Controller
         $quizesBefor = Quiz::orderBy("created_at", "desc")->where('type', 'befor')->get();
         $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type', 'after')->get();
         $quizesInteractive = Quiz::orderBy("created_at", "desc")->where('type', 'interactive')->get();
-
-        return view("dashboard.courses.edit", compact("course", 'program', 'categories', 'clients', 'trainers', 'quizesBefor', 'quizesAfter', 'quizesInteractive'));
+        $adminProgram = AdminProgram::where('program_id',$course->program_id)->get();
+        $admins = Admin::whereIn('id',$adminProgram->pluck('admin_id'))->get();
+        return view("dashboard.courses.edit", compact("course", 'program', 'categories', 'admins','clients', 'trainers', 'quizesBefor', 'quizesAfter', 'quizesInteractive'));
     }
 
     /**
@@ -270,6 +275,15 @@ class CourseController extends Controller
             $course->profile = '/images/' . 'program' . '/' . $imageName;
         }
         $course->update();
+        if ($request->contact_person) {
+            $admins = json_decode($request->contact_person);
+            foreach ($admins as $admin) {
+                $contact = new CourseContact();
+                $contact->admin_id = $admin;
+                $contact->course_id = $course->id;
+                $contact->save();
+            }
+        }
         $id = $course->id;
         // $quizesBefor = Quiz::orderBy("created_at", "desc")->where('type','befor')->with('courses')
         // ->whereHas('courses',function($q)use($id){
