@@ -195,7 +195,13 @@ class AdminController extends Controller
             $adminManger->program_id = $id ;
             $adminManger->type = $request->type ;
             $adminManger->save();
-        }
+            }else{
+            $adminManger = new AdminProgram();
+            $adminManger->admin_id = $admin->id ;
+            $adminManger->program_id = $id ;
+            $adminManger->type = 'admin' ;
+            $adminManger->save();
+            }
             if ($isSaved) {
                 $role = Role::findById($request->get('role_id'));
                 $admin->assignRole($role->id);

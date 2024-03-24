@@ -74,7 +74,7 @@
                 <div class="snip1191 orange pos-relative">
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample69.jpg" alt="sample69" style="border-radius: 10px;"/>
                     <a class="pos-absolute l-30 t-20 text-white ">  فريق ادارة المشاريع </a>
-                    <button class="btn btn-warning-light pos-absolute l-20 text-white b-10" href="#">تحرير القائمة </button>
+                    <a class="btn btn-warning-light pos-absolute l-20 text-white b-10" href="{{route('program.mangers',[$program->id])}}">تحرير القائمة </a>
                 </div>
             </div>
             <div class="col-lg-9 col-sm-12">

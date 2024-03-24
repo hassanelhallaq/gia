@@ -201,120 +201,8 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6 mb-3">
-                                    <label for="example"> حاله الاختبار القبلي</label>
-                                    <div class="webflow-style-input">
-                                        <select id="status_befor" class="form-control select2 input_no_border custom-select" >
-                                            <option></option>
-                                            <option @if($course->status_befor == 'active') selected @endif value="active">
-                                                فعال
-                                            </option>
-                                            <option @if($course->status_befor == 'InActive') selected @endif value="InActive">
-                                                غير مفعل
-                                            </option>
-                                            {{-- @endforeach --}}
-                                        </select>
 
-                                        <div class="d-flex ml-2">
-                                            <p class="ml-1"> تحرير </p>
-                                            <i class="bi bi-pen edit-button ml-2"></i>
-                                            <p class="ml-3 "> البحث عن اختبار </p>
-                                            <i class="bi bi-box-arrow-in-down"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-3">
-                                    <label for="example"> حاله الاختبار البعدي</label>
-                                    <div class="webflow-style-input">
-                                        <select id="status_after" class="form-control select2 input_no_border custom-select" >
-                                            <option></option>
-                                            <option @if($course->status_after == 'active') selected @endif  value="active">
-                                                فعال
-                                            </option>
-                                            <option @if($course->status_after == 'InActive') selected @endif value="InActive">
-                                                غير مفعل
-                                            </option>
-                                            {{-- @endforeach --}}
-                                        </select>
 
-                                        <div class="d-flex ml-2">
-                                            <p class="ml-1"> تحرير </p>
-                                            <i class="bi bi-pen edit-button ml-2"></i>
-                                            <p class="ml-3 "> البحث عن اختبار </p>
-                                            <i class="bi bi-box-arrow-in-down"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-3">
-                                    <label for="example"> الاختبار القبلي </label>
-                                    <div class="webflow-style-input">
-                                        <select id="quiz_befor_id" class="form-control select2 input_no_border custom-select" >
-                                            <option></option>
-
-                                            @foreach ($quizesBefor as $item)
-                                                <option @foreach ($course->quizes->where('type','befor') as $quiz)
-
-                                                @if ($item->id == $quiz->id) selected @endif @endforeach
-                                                value="{{ $item->id }}">
-                                                    {{ $item->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-
-                                        <div class="d-flex ml-2">
-                                            <p class="ml-1"> تحرير </p>
-                                            <i class="bi bi-pen edit-button ml-2"></i>
-                                            <p class="ml-3 "> البحث عن اختبار </p>
-                                            <i class="bi bi-box-arrow-in-down"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-3">
-                                    <label for="example"> الاختبار التفاعلي </label>
-                                    <div class="webflow-style-input">
-                                        <select id="quiz_interactive_id" class="form-control select2 input_no_border custom-select" >
-                                            <option></option>
-
-                                            @foreach ($quizesInteractive as $item)
-                                                <option @foreach ($course->quizes->where('type','interactive') as $quiz)
-
-                                                @if ($item->id == $quiz->id) selected @endif @endforeach
-                                                value="{{ $item->id }}">
-                                                    {{ $item->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-
-                                        <div class="d-flex ml-2">
-                                            <p class="ml-1"> تحرير </p>
-                                            <i class="bi bi-pen edit-button ml-2"></i>
-                                            <p class="ml-3 "> البحث عن اختبار </p>
-                                            <i class="bi bi-box-arrow-in-down"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-3">
-                                    <label for="example"> حاله الاختبار التفاعلي</label>
-                                    <div class="webflow-style-input">
-                                        <select id="status_interactive" class="form-control select2 input_no_border custom-select" >
-                                            <option></option>
-                                            <option @if($course->status_interactive == 'active') selected @endif  value="active">
-                                                فعال
-                                            </option>
-                                            <option @if($course->status_interactive == 'InActive') selected @endif value="InActive">
-                                                غير مفعل
-                                            </option>
-                                            {{-- @endforeach --}}
-                                        </select>
-
-                                        <div class="d-flex ml-2">
-                                            <p class="ml-1"> تحرير </p>
-                                            <i class="bi bi-pen edit-button ml-2"></i>
-                                            <p class="ml-3 "> البحث عن اختبار </p>
-                                            <i class="bi bi-box-arrow-in-down"></i>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-lg-6 mb-3">
                                     <label for="example"> المستوى </label>
                                     <div class="webflow-style-input">
@@ -490,20 +378,15 @@
                 formData.append('coordinator', document.getElementById('coordinator').value);
                 formData.append('category_id', document.getElementById('category_id').value);
                 formData.append('level', document.getElementById('level').value);
-                formData.append('quiz_befor_id', document.getElementById('quiz_befor_id').value);
-                formData.append('quiz_after_id', document.getElementById('quiz_after_id').value);
-                formData.append('image_course', document.getElementById('image_course').files[0]);
+                 formData.append('image_course', document.getElementById('image_course').files[0]);
                 formData.append('desc', document.getElementById('desc').value);
                 formData.append('location', document.getElementById('location').value);
                 formData.append('link', document.getElementById('link').value);
-                formData.append('status_befor', document.getElementById('status_befor').value);
-                formData.append('status_after', document.getElementById('status_after').value);
-                formData.append('contact_number', document.getElementById('contact_number').value);
+                 formData.append('contact_number', document.getElementById('contact_number').value);
                 formData.append('contact_link', document.getElementById('contact_link').value);
                 formData.append('direction_name', document.getElementById('direction_name').value);
                 formData.append('quiz_interactive_id', document.getElementById('quiz_interactive_id').value);
-                formData.append('status_interactive', document.getElementById('status_interactive').value);
-                // let assignmentInput = document.getElementById('assignment');
+                 // let assignmentInput = document.getElementById('assignment');
                 // if (assignmentInput !== null && assignmentInput.files !== null && assignmentInput.files.length > 0) {
                 //     formData.append('assignment', assignmentInput.files[0]);
                 //     // The rest of your code for handling the form data

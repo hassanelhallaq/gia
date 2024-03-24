@@ -27,7 +27,8 @@ class QuizController extends Controller
         $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type', 'after')->withCount('courses')->paginate(10);
         $quizesInteractive = Quiz::orderBy("created_at", "desc")->where('type', 'interactive')->withCount('courses')->paginate(10);
         $quizes = Quiz::all();
-        return view("dashboard.quiz.index", compact("quizesBefor", 'quizesAfter', 'quizesInteractive', 'programs','quizes'));
+        $rates = Rate::all();
+        return view("dashboard.quiz.index", compact("quizesBefor", 'quizesAfter', 'quizesInteractive', 'programs','quizes','rates'));
     }
     public function drepIn($id)
     {
@@ -78,11 +79,16 @@ class QuizController extends Controller
         if($request->rate == 'true'){
             return response()->json(['redirect' => route('get.rate', [$quiz->id])]);
         }
+        if ($request->rate == 'true') {
+            return response()->json(['redirect' => route('get.rate',[])]);
+
+         }
         if ($request->how_attend == 'questions') {
             return response()->json(['redirect' => route('quiz.questions', [$quiz->id])]);
         } elseif ($request->how_attend == 'link') {
             return response()->json(['redirect' => route('quizes.index')]);
         }
+
     }
 
     /**

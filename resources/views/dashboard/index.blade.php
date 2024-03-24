@@ -308,7 +308,7 @@
                                                             <path
                                                                 d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05" />
                                                         </svg>
-                                                        الحالة
+                                                        البرامج
                                                     </th>
                                                     <th></th>
                                                 </tr>
@@ -323,8 +323,8 @@
                                                     <td>{{$item->client->name}}</td>
                                                     <td>{{$item->start}}</td>
                                                     <td>{{$item->end}}</td>
-                                                    <td><span class="tag tag-rounded bg-success-transparent text-success">
-                                                            فعال </span></td>
+                                                     <td> <a href="{{route('program.course',[$item->id])}}"><i class="far fa-eye tx-15"></i></a>                                                        <!-- dropdown-menu -->
+</td>
                                                     <td><i class="mdi mdi-dots-horizontal text-gray"></i></td>
                                                 </tr>
                                                 @endforeach
@@ -367,9 +367,9 @@
                                                     <td>{{$item->program->name}}</td>
                                                     <td>{{$item->start}}</td>
                                                     <td>{{$item->duration}}ايام</td>
-                                                    <td class="d-flex filter-col-cell">
+                                                    <td>
                                                         <a href="{{ route('courses.show', [$item->id]) }}"><i
-                                                                class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
+                                                            class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

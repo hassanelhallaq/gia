@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.master')
 @section('header')
-    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
-        <div class="left-content mt-2">
+<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
+    <div class="left-content mt-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1">
                     <li class="breadcrumb-item">
@@ -26,7 +26,6 @@
     </div>
 @endsection
 @section('content')
-    <div class="container-fluid mt-3">
         <!-- row -->
         <div class="row table-tabs">
             <!--open filter and Tap <Top>  -->
@@ -41,6 +40,8 @@
                                         </a></li>
                                     <li class="ml-3"><a href="#tab12" data-toggle="tab"> الأختبار البعدي </a></li>
                                     <li class="ml-3"><a href="#tab13" data-toggle="tab"> الأختبار التفاعلي </a></li>
+                                    <li class="ml-3"><a href="#tab131" data-toggle="tab"> تقييم المشارك</a></li>
+
                                 </ul>
                             </div>
                         </div>
@@ -238,7 +239,61 @@
                                     </table>
                                 </div>
                             </div>
+                            <div class="tab-pane  table-container" id="tab131">
+                                <div class="table-responsive">
+                                    <table class="table table-striped mg-b-0 text-md-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th><input type="checkbox" class="checkParent"></th>
+                                                <th>#</th>
+                                                <th class="tx-15">
+                                                    اسم الأختبار
+                                                </th>
+                                                <th class="tx-5">عدد الدورات المرتبطة </th>
+                                                {{-- <th> نوع السؤال </th> --}}
+                                                {{-- <th>عدد التسجيلات</th>
+                                                <th>حالات مقدمة</th>
+                                                <th>حالات لم تقدم</th>
+                                                <th>الاكتمال</th> --}}
 
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        @foreach ($rates as $index => $item)
+                                            <tbody class="table-body">
+                                                <tr>
+                                                    <p class="p-5 text-center d-none empty-message"> لايوجد </p>
+                                                </tr>
+                                                <tr class="table-rows">
+                                                    <td><input type="checkbox" class="checkChild"></td>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td scope="row"> {{ $item->name }} </td>
+                                                    <td>{{$item->courses_count}} دورات</td>
+                                                    {{-- <td> اختبار قبلي </td> --}}
+                                                    {{-- <td>12</td>
+                                                    <td>50</td>
+                                                    <td>40</td>
+                                                    <td>90%</td> --}}
+                                                    <td class="d-flex filter-col-cell">
+                                                         <a href="{{route('quizes.show',[$item->id])}}"><i class="far fa-eye tx-14"></i></a>                                                        <!-- dropdown-menu -->
+                                                        <!-- dropdown-menu -->
+                                                        <button data-toggle="dropdown"
+                                                            class="btn btn-previous btn-sm btn-block"><i
+                                                                class="si si-options-vertical text-gray tx-13"></i></button>
+                                                        <div class="dropdown-menu">
+
+                                                                <button class="dropdown-item"data-target="#modalDelete"
+                                                                onclick="performDestroy({{ $item->id }} , this)"> حذف
+                                                            </button>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -260,7 +315,6 @@
             <!--closed filter bottom  -->
         </div>
         <!-- row closed -->
-    </div>
     <div class="modal" id="select2modal">
         <div class="modal-dialog" role="document">
             <div class="modal-content modal-content-demo">
@@ -278,7 +332,7 @@
                                         type="radio"> <span> اختبار بعدي </span></label>
                                 <label class="rdiobox"><input id="interactive" name="rdio" type="radio"> <span>
                                         اختبار تفاعلي </span></label>
-                                 <label class="rdiobox"><input id="rate" name="rdio" type="radio"> <span>
+                                 <label class="rdiobox"><input id="rate" name="rate" type="radio"> <span>
                                              تقيم المشاركين </span></label>
                             </div>
                             <div class="col-12 mt-4">
@@ -488,4 +542,31 @@
             confirmDestroy(url, reference);
         }
     </script>
+
+<script>
+    // Function to handle radio button change
+    function handleRadioChange() {
+        // Get the selected radio button
+        var selectedRadio = document.querySelector('input[name="rate"]:checked');
+
+        // Hide all fields initially
+        document.querySelectorAll('.modal-body .row .col').forEach(function(element) {
+            element.style.display = 'none';
+        });
+
+        // Show fields if "rate" radio button is selected
+        if (selectedRadio && selectedRadio.id === 'rate') {
+            document.getElementById('rate').parentNode.parentNode.style.display = 'block';
+        }
+    }
+
+    // Add event listeners for radio button change
+    document.querySelectorAll('input[name="rate"]').forEach(function(radio) {
+        radio.addEventListener('change', handleRadioChange);
+    });
+
+    // Initially call handleRadioChange to set the initial state
+    handleRadioChange();
+</script>
+
 @endsection

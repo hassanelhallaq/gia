@@ -52,12 +52,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6">
-                                <p class="mg-b-10">محتوي 2</p>
-                                <textarea class="form-control" required="" id="content_two"
-                                    value="{{ $program->content_two }}" type="text">{{ $program->content_two }}</textarea>
 
-                            </div>
                         </div>
                         <!-- closed row -->
 
@@ -122,14 +117,16 @@
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <p class="mg-b-10">حدد قالب الدعوة</p>
                                 <select class="form-control select2" id="theme_name">
-                                    <option @if ($program->theme_name == 'T001') selected @endif value="T001">
-                                        T001
+                                    <option @if ($program->theme_name == 'A1') selected @endif value="A1">
+                                        A1
+                                    </option>
+                                    <option @if ($program->theme_name == 'A2') selected @endif value="A2">
+                                        A2
                                     </option>
                                 </select>
                             </div>
 
                             <div class="col-lg-6 col-md-12 col-sm-12">
-
                                 <p class="mg-b-10">طريقة التواصل</p>
                                 <select class="form-control select2" id="contact_type">
                                     <option @if ($program->contact_type == 'whatsapp') selected @endif value="whatsapp">
@@ -148,7 +145,18 @@
                                         رسائل نصية و بريد الكتروني
                                     </option>
                                 </select>
+                            </div>
 
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <p class="mg-b-10">طريقة التواصل</p>
+
+                                <select class="form-control select2" id="contact_person">
+                                    @foreach ($admins as $item)
+                                    <option   value="{{$item->id}}">
+                                       {{$item->name}}
+                                    </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <!-- closed row -->
@@ -254,11 +262,10 @@
                             <div class="d-flex">
                                 <button class="btn btn-warning-gradient btn-with-icon btn-sm" onclick="update({{$program->id}})" type="button" > حفظ الاعدادات <i class="bi bi-floppy"></i></button>
 
-                                <a class="btn btn-outline-light btn-with-icon btn-sm mr-1 " id="copyButton"> استنساخ
-                                    البرنامج <i class="far fa-clone"></i></a>
+                                {{-- <a class="btn btn-outline-light btn-with-icon btn-sm mr-1 " id="copyButton"> استنساخ
+                                    البرنامج <i class="far fa-clone"></i></a> --}}
                             </div>
-                            <a class="btn btn-danger btn-with-icon btn-sm "> حذف <i class="bi bi-trash3"></i></a>
-                        </div>
+                         </div>
 
                         <!--closed pag  one   -->
 
@@ -281,8 +288,7 @@
         formData.append('name', document.getElementById('name').value);
         formData.append('content_one', document.getElementById('content_one').value);
         formData.append('username', document.getElementById('username').value);
-        formData.append('content_two', document.getElementById('content_two').value);
-        formData.append('start', document.getElementById('start').value);
+         formData.append('start', document.getElementById('start').value);
         formData.append('end', document.getElementById('end').value);
         formData.append('theme_name', document.getElementById('theme_name').value);
         formData.append('contact_type', document.getElementById('contact_type').value);
@@ -292,6 +298,7 @@
         formData.append('register', document.getElementById('register').value);
         formData.append('client_id', document.getElementById('client_id').value);
         formData.append('status', document.getElementById('status').value);
+        formData.append('contact_person', document.getElementById('contact_person').value);
 
 
         formData.append('attendance_method', document.getElementById('attendance_method').value);

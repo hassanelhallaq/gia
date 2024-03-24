@@ -8,7 +8,7 @@ class Attendance extends Authenticatable
 {
 
     protected $fillable = [
-        'phone_number', 'code',
+        'name','work_place','id_number','job','civil_registry','phone_number', 'code','password'
     ];
 
     // Specify the field used as the "username" for authentication

@@ -10,9 +10,7 @@ class Trainer extends Authenticatable
 {
     use HasFactory;
 
-    public function programs(){
-        $this->hasMany(Program::class);
-    }
+     
 
 
 }

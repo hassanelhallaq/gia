@@ -216,8 +216,18 @@
                                                     @endif
                                                 </td>
                                                 @if ($id)
-                                                    <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $id]) }}"
+
+                                                @if($course->program->theme_name == 'A1')
+                                                <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $course->id]) }}"
+                                                        target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
+                                                    @elseif($course->program->theme_name == 'A2')
+                                                        <td><a href="{{ route('redirectToLogin', [$item->id, 'course_id' => $course->id]) }}"
                                                             target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
+                                                            @else
+                                                            <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $course->id]) }}"
+                                                                target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
+                                                            @endif
+
                                                 @endif
                                                 <td>
                                                     <div class="form-group row">

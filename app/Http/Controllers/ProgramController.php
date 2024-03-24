@@ -26,8 +26,9 @@ class ProgramController extends Controller
             $q->where('name', 'like', '%' . $request->name . '%');
         });
         $programAdmin =  AdminProgram::where('admin_id',Auth::user()->id)->first();
+        $programAdminSuper =  AdminProgram::where('admin_id',Auth::user()->id)->where('type','admin')->first();
 
-        if (Auth::guard('admin')->check() && $programAdmin == null) {
+        if (Auth::guard('admin')->check() && $programAdminSuper->type == 'admin') {
             $programs = $programs->withCount('courses')->paginate(10);
         }elseif (Auth::guard('admin')->check()) {
 
@@ -179,7 +180,10 @@ class ProgramController extends Controller
     {
         $categories = Category::all();
         $clients = Client::all();
-        return view("dashboard.programs.edit", compact('program', 'clients', 'categories'));
+        $trainers = Trainer::all();
+        $adminProgram = AdminProgram::where('program_id',$program->id)->get();
+        $admins = Admin::whereIn('id',$adminProgram->pluck('admin_id'))->get();
+        return view("dashboard.programs.edit", compact('program', 'clients', 'categories','trainers','admins'));
     }
 
     /**
@@ -223,6 +227,7 @@ class ProgramController extends Controller
         $program->show_invited = $request->show_invited;
         $program->color = $request->color;
         $program->client_id = $request->client_id;
+        $program->contact_person = $request->contact_person;
         $program->attendance_method = $request->attendance_method;
         $program->status = $request->status;
         if ($request->hasFile('image')) {
@@ -349,23 +354,21 @@ class ProgramController extends Controller
 
     public function mangers($id)
     {
-        $manger = Admin::where('program_id',$id)->with('admins')->whereHas('admins',function($q){
+        $manger = Admin::with('admins')->whereHas('admins',function($q)use($id){
             $q->where('type','manger');
         })->get();
-        $cordreator = Admin::where('program_id',$id)->with('admins')->whereHas('admins',function($q){
+        $cordreator = Admin::with('admins')->whereHas('admins',function($q)use($id){
             $q->where('type','cordreator');
         })->get();
-        $cordTrainner = Admin::where('program_id',$id)->with('admins')->whereHas('admins',function($q){
-            $q->where('type','cordrecord-trainnerator');
+        $cordTrainner = Admin::with('admins')->whereHas('admins',function($q)use($id){
+            $q->where('type','cord-trainner');
         })->get();
-        $consultants = Admin::where('program_id',$id)->with('admins')->whereHas('admins',function($q){
+        $consultants = Admin::with('admins')->whereHas('admins',function($q)use($id){
             $q->where('type','consultants');
         })->get();
+        $trainers = Trainer::all();
 
-        $trainers = Trainer::with('programs')->whereHas('programs',function($q)use($id){
-            $q->where('program_id',$id);
-        })->get();
-        return view("dashboard.programs.mangers", compact('cordreator', 'trainers','cordTrainner','consultants','manger'));
+        return view("dashboard.programs.mangers", compact('cordreator', 'trainers','cordTrainner','consultants','manger','id'));
     }
     public function mangersUpdate(Request $request , $id)
     {
@@ -382,8 +385,10 @@ class ProgramController extends Controller
         $adminConsultants->admin_id = $request->consultants;
         $adminConsultants->update();
         $program = Course::where('program_id',$id)->first();
+        if($program){
         $program->trainer_id = $request->trainers;
         $program->update();
+    }
         return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $program ? 201 : 400);
 
 

@@ -99,6 +99,7 @@ class CourseController extends Controller
             'attendance_questionnaire' => 'required',
             'category_id' => 'required',
             'image_check' => 'required',
+            'desc' => 'required|max:420',
         ]);
         if ($validator->fails()) {
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
@@ -275,45 +276,7 @@ class CourseController extends Controller
         //     $q->where('course_id',$id);
         // })->paginate(10);
 
-        $quizbefCheck = QuizCourse::with('quiz')->whereHas('quiz', function ($q) {
-            $q->where('type', 'befor');
-        })->where('course_id', $course->id)->first();
-        if ($request->quiz_befor_id) {
-            if ($quizbefCheck) {
-                $quizBef = $quizbefCheck->delete();
-                $quizBef = new QuizCourse();
-                $quizBef->quiz_id = $request->quiz_befor_id;
-                $quizBef->course_id = $course->id;
-                $quizBef->save();
-            }
-        }
-        $quizAftCheck = QuizCourse::with('quiz')->whereHas('quiz', function ($q) {
-            $q->where('type', 'after');
-        })->where('course_id', $course->id)->first();
-        if ($request->quiz_after_id) {
-            if ($quizAftCheck != null) {
-                $quizAft = $quizAftCheck->delete();
-                $quizAft = new QuizCourse();
 
-                $quizAft->course_id = $course->id;
-                $quizAft->quiz_id = $request->quiz_after_id;
-                $quizAft->save();
-            }
-        }
-        $quizInterCheck = QuizCourse::with('quiz')->whereHas('quiz', function ($q) {
-            $q->where('type', 'after');
-        })->where('course_id', $course->id)->first();
-        if ($request->quiz_interactive_id) {
-            if ($quizInterCheck != null) {
-                $quizInter = $quizInterCheck->delete();
-                $quizInter = $quizInterCheck;
-                $quizInter = new QuizCourse();
-                $quizInter->course_id = $course->id;
-                $quizInter->quiz_id = $request->quiz_interactive_id;
-                $quizInter->save();
-            }
-
-        }
         return response()->json(['redirect' => route('program.course', [$course->program_id])]);
     }
 

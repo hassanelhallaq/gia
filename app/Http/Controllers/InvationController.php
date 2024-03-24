@@ -7,6 +7,7 @@ use App\Models\AttendanceCourse;
 use App\Models\Course;
 use App\Models\CourseFile;
 use App\Models\CourseLink;
+use App\Models\Program;
 use App\Models\Question;
 use App\Models\QuestionOption;
 use App\Models\Quiz;
@@ -113,6 +114,9 @@ class InvationController extends Controller
         $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
+        if (!$attendance) {
+            return view("invitationV2.0404", compact("attendance", "course"));
+        }
         if ($attendance->status = 'active') {
             return view("invitationV2.course", compact("attendance", "course"));
         } else {
@@ -316,7 +320,7 @@ class InvationController extends Controller
 
         $attendance = Attendance::where('phone_number', $request->phone)->first();
         $newCode =  mt_rand(1000, 9999);
-        $attendance->password = Hash::make('1234');
+        $attendance->password = Hash::make($newCode);
         $attendance->update();
         $massege = $request->massege;
         // Retrieve POST parameters from the request
@@ -339,7 +343,7 @@ class InvationController extends Controller
 
         // Make the HTTP request using Laravel HTTP client
         $response = Http::post('https://www.mora-sa.com/api/v1/sendsms', [
-            'api_key' => "7d937a772bb3889ssss25821c72408e3e0146ba574v54d",
+            'api_key' => "7d937a772bb38892581c72408e3e0146ba57454d",
             'username' => "gialearning",
             'message' => $newCode . "رمز تفعيلك هو ",
             'sender' => "GiaLearning",
@@ -354,9 +358,12 @@ class InvationController extends Controller
     }
     public function courses($id, $course_id)
     {
-        $attendance = Attendance::find($id);
-        $courses = AttendanceCourse::where('attendance_id',$id)->get();
-        return view("invitationV2.courses",compact('courses'));
+        // dd(Auth::user()->phone_number);
+        $attendance = Attendance::where('phone_number', Auth::user()->phone_number)->get();
+        $attendanceIds = $attendance->pluck('id')->toArray(); // Extracting IDs from collection
+        $courses = AttendanceCourse::whereIn('attendance_id', $attendanceIds)->get();
+        $programs = Program::whereIn('id',$courses->pluck('program_id'))->get();
+        return view("invitationV2.courses", compact('courses','programs'));
     }
     public function login($id, $course_id)
     {
@@ -366,10 +373,10 @@ class InvationController extends Controller
     public function submitOtp(Request $request)
     {
         // dd($request->is_accepted);
-        $code =  $request->ist . '' .
-            $request->sec . '' .
+        $code =   $request->fourth . '' .
             $request->third . '' .
-            $request->fourth;
+            $request->sec  . '' .
+            $request->ist;
         $attendance = Attendance::where('phone_number', $request->phone)->first();
         $credentials = [
             'phone_number' => $request->get('phone'),

@@ -12,7 +12,7 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-       if (! $request->expectsJson()) {
+       if ($request->get('guard') == 'admin') {
             return route('dashboard.login' , 'admin');
         }
     }

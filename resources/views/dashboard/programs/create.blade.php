@@ -61,11 +61,6 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
-                                    <p class="mg-b-10">محتوي 2</p>
-                                    <textarea class="form-control" required="" id="content_two" type="text"></textarea>
-
-                                </div>
                             </div>
                             <!-- closed row -->
 
@@ -122,8 +117,11 @@
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <p class="mg-b-10">حدد قالب الدعوة</p>
                                     <select class="form-control select2" id="theme_name">
-                                        <option value="T001">
-                                            T001
+                                        <option value="A1">
+                                            A1
+                                        </option>
+                                        <option value="A2">
+                                            A2
                                         </option>
                                     </select>
                                 </div>
@@ -451,8 +449,7 @@
             formData.append('name', document.getElementById('name').value);
             formData.append('content_one', document.getElementById('content_one').value);
              formData.append('username', document.getElementById('username').value);
-            formData.append('content_two', document.getElementById('content_two').value);
-            formData.append('start', document.getElementById('start').value);
+             formData.append('start', document.getElementById('start').value);
             formData.append('end', document.getElementById('end').value);
             formData.append('theme_name', document.getElementById('theme_name').value);
             formData.append('contact_type', document.getElementById('contact_type').value);

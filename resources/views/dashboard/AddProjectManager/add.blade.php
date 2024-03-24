@@ -375,7 +375,7 @@
                                             السابق </a>
                                     </div>
                                     <div class="d-flex">
-                                        <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
+                                        {{-- <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button> --}}
                                         <button type="button" onclick="performStoreManger()"
                                             class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
                                     </div>
@@ -563,7 +563,7 @@
                                         السابق </a>
                                 </div>
                                 <div class="d-flex">
-                                    <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
+                                    {{-- <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button> --}}
                                     <button type="button" onclick="performStoreCord()"
                                         class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
                                 </div>
@@ -733,7 +733,7 @@
                                         السابق </a>
                                 </div>
                                 <div class="d-flex">
-                                    <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
+                                    {{-- <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button> --}}
                                     <button type="button" onclick="performStoreTrainer()"
                                         class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
                                 </div>
@@ -887,7 +887,7 @@
                                         السابق </a>
                                 </div>
                                 <div class="d-flex">
-                                    <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
+                                    {{-- <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button> --}}
                                     <button type="button" onclick="performStoreCordTrainer()"
                                         class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
                                 </div>
@@ -1046,7 +1046,7 @@
                                         السابق </a>
                                 </div>
                                 <div class="d-flex">
-                                    <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
+                                    {{-- <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button> --}}
                                     <button type="button" onclick="performStore()"
                                         class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
                                 </div>

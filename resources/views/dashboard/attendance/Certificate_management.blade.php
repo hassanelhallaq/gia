@@ -203,7 +203,7 @@
                                         </td>
                                         {{-- <button class="btn btn-secondary btn-sm btn-light-icon mr-2 p-1" data-target="#select2modal" data-toggle="modal"> اضافة ملف <i class="bi bi-plus-circle"></i></button> --}}
 
-
+                                        @if($attendanceCourse->is_certificate == 'yes')
                                         <td>
 
                                             <button href="../index.html" class="btn btn-previous text-warning btn-with-icon"
@@ -211,7 +211,8 @@
                                                 تحميل <i class="bi bi-arrow-down tx-18"></i></button>
                                             @include('dashboard.attendance.model_add_file')
                                         </td>
-
+                                        @else
+                                        @endif
 
                                         <td class="d-flex filter-col-cell">
                                             <!-- dropdown-menu -->

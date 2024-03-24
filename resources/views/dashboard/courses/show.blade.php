@@ -201,7 +201,7 @@
     <!-- row closed -->
 
     <!-- row -->
-    <div class="row row-sm">
+    {{-- <div class="row row-sm">
         <div class="col-lg-6 col-sm-12">
             <div class="card">
                 <div class="card-body">
@@ -211,9 +211,9 @@
                     <div class="ht-200 ht-sm-300" id="flotArea1"></div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- col-6 -->
-        <div class="col-lg-6 col-sm-12">
+        {{-- <div class="col-lg-6 col-sm-12">
             <div class="card ">
                 <div class="card-body">
                     @php
@@ -233,7 +233,7 @@
                 </div>
 
             </div>
-        </div>
+        </div> --}}
 
     </div>
     <!-- /row -->
@@ -381,8 +381,16 @@
                                                 0%
                                             @endif
                                         </td>
+                                        @if($course->program->theme_name == 'A1')
                                         <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $course->id]) }}"
                                                 target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
+                                            @elseif($course->program->theme_name == 'A2')
+                                                <td><a href="{{ route('redirectToLogin', [$item->id, 'course_id' => $course->id]) }}"
+                                                    target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
+                                                    @else
+                                                    <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $course->id]) }}"
+                                                        target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
+                                                    @endif
                                         <td class="d-flex filter-col-cell">
                                             <!-- dropdown-menu -->
                                             <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i
