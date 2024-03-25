@@ -59,11 +59,11 @@
                             <div class="row mt-5">
                                 <div class="col-6">
 
-                                    <label class="wizard-form-text-label mb-5 rdiobox"><input name="rdio"
+                                    <label class="wizard-form-text-label mb-5 rdiobox"><input name="rdio" @if($client->public_sector == 'public_sector') checked="" @endif
                                             id="public_sector" type="radio"> <span> القطاع العام </span></label>
                                 </div>
                                 <div class="col-6 ">
-                                    <label class="rdiobox mb-5"><input checked="" name="rdio" id="private_sector"
+                                    <label class="rdiobox mb-5"><input @if($client->sector_type == 'private_sector')  checked @endif name="rdio" id="private_sector"
                                             type="radio"> <span> القطاع الخاص </span></label>
                                 </div>
 
@@ -79,17 +79,7 @@
                                 <div class="col-lg-3 col-sm-6 mb-4">
                                     <button class="btn btn-outline-warning ml-1 btn-with-icon  "> خدمات اخري </button>
                                 </div>
-                                <div class="col-lg-6">
-                                    <p class="mg-b-10"> طريقة الحضور</p>
-                                    <select class="form-control select2" id="attendance_method">
-                                        <option value="remote">
-                                            عن بعد
-                                        </option>
-                                        <option value="immanence">
-                                            حضوري
-                                        </option>
-                                    </select>
-                                </div>
+
 
 
                                 <div class="col-6">
@@ -153,19 +143,7 @@
                                         <input type="number" class="form-control wizard-required" id="trainers_count">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <p class="mg-b-10"> مكان تنفيذ خدمات المشروع الدولة / المدينة </p>
-                                    <select class="form-control select2" id="country_id">
-                                        <option value="">
 
-                                        </option>
-                                        @foreach ($countries as $item)
-                                            <option value="{{ $item->id }}">
-                                                {{ $item->name_ar }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname7" class="wizard-form-text-label"> مقر تنفيذ المشروع مقر العمل
@@ -1339,8 +1317,7 @@
             formData.append('end', document.getElementById('end').value);
             formData.append('courses_count', document.getElementById('courses_count').value);
             formData.append('trainers_count', document.getElementById('trainers_count').value);
-            formData.append('country_id', document.getElementById('country_id').value);
-            formData.append('logistics_services', document.getElementById('logistics_services').value);
+             formData.append('logistics_services', document.getElementById('logistics_services').value);
             formData.append('attendance_method', document.getElementById('attendance_method').value);
             formData.append('training_center', document.getElementById('training_center').value);
             formData.append('public_sector', document.getElementById('public_sector').checked);

@@ -22,7 +22,7 @@ class Client extends Authenticatable
         'code',
         'nighberhooad',
         'manager',
-        'address,'
+        'address,','sector_type'
     ];
 
     public function country(){

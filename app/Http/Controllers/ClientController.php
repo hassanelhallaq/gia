@@ -41,7 +41,7 @@ class ClientController extends Controller
              'email' => 'required|email|unique:clients',
             'country_id' => 'required|string',
             'city_id' => 'required|string',
-            'street' => 'required',
+            // 'street' => 'required',
             'password' => 'required',
 
 
@@ -58,13 +58,16 @@ class ClientController extends Controller
         if ($validator->fails()) {
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
-        if($request->public_sector == 1){
+
+        if($request->public_sector == true){
             $data['sector_type'] = 'public_sector';
         }
-        if($request->private_sector == 1){
+        if($request->private_sector == true){
             $data['sector_type'] = 'private_sector';
         }
+        $data['code'] = $request->get('url');
         $data['password'] =  Hash::make($request->get('password'));
+
         if ($request->hasFile('address')) {
             $adminImage = $request->file('address');
             $imageName = time() . '_' . $request->get('address') . '.' . $adminImage->getClientOriginalExtension();
@@ -77,6 +80,7 @@ class ClientController extends Controller
             $adminImage->move('images/program', $imageName);
             $data['logo'] = '/images/' . 'program' . '/' . $imageName;
         }
+
         $client = Client::create($data);
         return response()->json(['redirect' => route('AddProjectManager',[$client->id])]);
 

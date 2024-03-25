@@ -77,13 +77,12 @@
                 </div>
 
                 <div class="row mb-3 mt-4 justify-content-between d-flex">
-                 >
+                    <a href="{{route('programs.index')}}" class="btn btn-outline-warning btn-next "> الرجوع </a>
                     <div class="d-flex">
                         <button class="btn ml-1 btn-warning-gradient btn-with-icon" type="button"
                             onclick="performStoreFinal({{$id}})"> حفظ
                             بيانات المشروع
                         </button>
-                        <a href="{{route('programs.index')}}" class="btn btn-outline-warning btn-next ">  </a>
                     </div>
                 </div>
             </div>

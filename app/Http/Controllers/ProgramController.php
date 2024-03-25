@@ -284,7 +284,8 @@ class ProgramController extends Controller
     {
         $countries = Country::all();
         $roles = Role::where('guard_name', 'admin')->get();
-        return view("dashboard.AddProjectManager.add", compact('roles', 'countries','id'));
+        $client = Client::find($id);
+        return view("dashboard.AddProjectManager.add", compact('roles', 'countries','id','client'));
     }
 
     public function programWizardStore(Request $request, $id)
@@ -299,7 +300,7 @@ class ProgramController extends Controller
             'contract_number' => 'required',
             'courses_count' => 'required',
             'trainers_count' => 'required',
-            'country_id' => 'required',
+            // 'country_id' => 'required',
             'logistics_services' => 'required',
             'training_center' => 'required',
         ]);
@@ -316,7 +317,7 @@ class ProgramController extends Controller
         $program->contract_number = $request->contract_number;
         $program->courses_count = $request->courses_count;
         $program->trainers_count = $request->trainers_count;
-        $program->country_id = $request->country_id;
+        // $program->country_id = $request->country_id;
         $program->logistics_services = $request->logistics_services;
         $program->client_id = $id;
         $program->training_center = $request->training_center;
