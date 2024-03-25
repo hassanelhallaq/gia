@@ -6,7 +6,7 @@
                 <div class="body-cord">
                     @if ($adminManger->type == 'manger')
                         <fieldset>
-                            <div id="cart-create-mp" class="cart-create-mp" style="display: none">
+                            <div class="row mt-5">
                                 <h5 class=" text-center mt-3 mb-5"> نموذج اضافة مدير المشروع </h5>
                                 <div class="row mt-5">
                                     <div class="col-6">
