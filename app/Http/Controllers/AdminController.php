@@ -135,9 +135,9 @@ class AdminController extends Controller
     public function store(Request $request)
 
     {
-
+        $findAdmin = Admin::where('email',$request->email)->first();
         //
-
+        if(!$findAdmin) {
         $validator = Validator($request->all(), [
 
             'role_id' => 'required|numeric|exists:roles,id',
@@ -147,14 +147,17 @@ class AdminController extends Controller
             'email' => 'required|email|unique:admins,email',
             'password' => 'required|string',
         ]);
-
+    }
 
 
         if (!$validator->fails()) {
 
-
+            if(!$findAdmin) {
 
             $admin = new Admin();
+            }else{
+                $admin =  $findAdmin;
+            }
             $admin->email = $request->get('email');
             $admin->english_name = $request->get('name_english');
             $admin->main_training_area = $request->get('main_training_area');
@@ -187,7 +190,11 @@ class AdminController extends Controller
             $admin->password = Hash::make($request->get('password'));
             $admin->name = $request->get('name');
             $admin->phone = $request->get('phone');
+            if(!$findAdmin) {
             $isSaved = $admin->save();
+            }else{
+            $isSaved = $admin->update();
+            }
             $id = $request->session()->get('program_id');
             if($id != null){
             $adminManger = new AdminProgram();

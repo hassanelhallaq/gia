@@ -182,7 +182,7 @@ class ProgramController extends Controller
         $clients = Client::all();
         $trainers = Trainer::all();
 
-        return view("dashboard.programs.edit", compact('program', 'clients', 'categories','trainers','admins'));
+        return view("dashboard.programs.edit", compact('program', 'clients', 'categories','trainers'));
     }
 
     /**
@@ -326,6 +326,31 @@ class ProgramController extends Controller
         }
         if($request->private_sector == 1){
             $program->sector_type = 'private_sector';
+        }
+        if($request->coffe_break == 1){
+            $program->logistic = 'coffe_break';
+        }
+        if($request->lanch == 1){
+            $program->logistic = 'lanch';
+        }
+        if($request->other == 1){
+            $program->logistic = 'other';
+        }
+        if($request->tranning == 1){
+            $program->colsntunt = 'tranning';
+        }
+        if($request->tranning_and_colustant == 1){
+            $program->colsntunt = 'tranning_and_colustant';
+        }if($request->colustant == 1){
+            $program->colsntunt = 'colustant';
+        }if($request->other == 1){
+            $program->other_type = 'other_type';
+        }
+        if ($request->hasFile('prog_file')) {
+            $adminImage = $request->file('prog_file');
+            $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
+            $adminImage->move('files/program', $imageName);
+            $program->file = '/files/' . 'program' . '/' . $imageName;
         }
          $program->save();
         session(['program_id' => $program->id]);

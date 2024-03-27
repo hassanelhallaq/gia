@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Quiz;
 use App\Models\Rate;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,7 @@ class RateController extends Controller
 
     public function createRate($id)
     {
-        $course = Course::find($id);
+        $course = Quiz::find($id);
         return view('dashboard.rate.create',compact('course','id'));
     }
     /**
@@ -42,7 +43,7 @@ class RateController extends Controller
             if (!$validator->fails()) {
                 $question = new Rate();
                 $question->question = $request->get('question');
-                $question->course_id = $request->get('course_id');
+                $question->quiz_id = $request->get('quiz_id');
                 $isSaved = $question->save();
                  return response()->json(['icon' => 'success', 'title' => 'تم الانشاء بنجاح '], 200);
             } else {

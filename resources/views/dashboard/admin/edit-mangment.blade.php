@@ -454,7 +454,7 @@
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="fname5" class="wizard-form-text-label"> مجال التدريب الرئيسي
+                                        <label for="fname5" class="wizard-form-text-label"> الاعتماد
                                             *</label>
                                         <input type="text" class="form-control wizard-required" value="{{$admin->main_training_area}}"
                                             id="main_training_area">

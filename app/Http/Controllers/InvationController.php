@@ -190,12 +190,18 @@ class InvationController extends Controller
     {
 
         $course = Course::findOrFail($course_id);
+
+        $quizRateCheck = QuizCourse::with('quiz')->whereHas('quiz', function ($q) {
+            $q->where('type', 'rate');
+        })->where('course_id', $course_id)->first();
         $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
             $q->where('course_id', $course_id);
         })->first();
-
-        $rates = Rate::where('course_id', $course_id)->get();
-
+        if ($quizRateCheck) {
+            $rates = Rate::where('course_id', $quizRateCheck->quiz_id)->get();
+        } else {
+            $rates = [];
+        }
         return view("invitation.rate", compact("attendance", "course", 'rates'));
     }
     public function backInvetaion($id, $auizId)

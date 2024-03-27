@@ -69,7 +69,7 @@
             let data = {
                 question: document.getElementById("question").value,
 
-                course_id: id,
+                quiz_id: id,
 
             };
 

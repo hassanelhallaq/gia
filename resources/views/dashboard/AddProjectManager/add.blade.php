@@ -9,6 +9,16 @@
             display: none !important;
             background-color: red
         }
+
+        .input-group-prepend {
+            margin-right: -1px;
+        }
+
+        .input-group-append,
+        .input-group-prepend {
+            display: -ms-flexbox;
+            display: flex;
+        }
     </style>
 @endsection
 @section('content')
@@ -59,27 +69,35 @@
                             <div class="row mt-5">
                                 <div class="col-6">
 
-                                    <label class="wizard-form-text-label mb-5 rdiobox"><input name="rdio" @if($client->public_sector == 'public_sector') checked="" @endif
-                                            id="public_sector" type="radio"> <span> القطاع العام </span></label>
+                                    <label class="wizard-form-text-label mb-5 rdiobox"><input name="rdio"
+                                            @if ($client->public_sector == 'public_sector') checked="" @endif id="public_sector"
+                                            type="radio"> <span> القطاع العام </span></label>
                                 </div>
                                 <div class="col-6 ">
-                                    <label class="rdiobox mb-5"><input @if($client->sector_type == 'private_sector')  checked @endif name="rdio" id="private_sector"
-                                            type="radio"> <span> القطاع الخاص </span></label>
+                                    <label class="rdiobox mb-5"><input @if ($client->sector_type == 'private_sector') checked @endif
+                                            name="rdio" id="private_sector" type="radio"> <span> القطاع الخاص
+                                        </span></label>
                                 </div>
 
-                                <div class="col-lg-3 col-sm-6 mb-4">
-                                    <button type="button" class="btn btn-dark"> مجال المشروع </button>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 mb-4">
-                                    <button type="button" class="btn  btn-warning-gradient "> التدريب </button>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 mb-4">
-                                    <button class="btn btn-outline-warning ml-1 btn-with-icon  "> الاستشارات </button>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 mb-4">
-                                    <button class="btn btn-outline-warning ml-1 btn-with-icon  "> خدمات اخري </button>
-                                </div>
 
+
+
+                                <div class="col-3">
+                                    <label class="rdiobox mb-5"><input checked="" id="tranning" name="rdio" type="radio">
+                                        <span> التدريب </span></label>
+                                </div>
+                                <div class="col-3">
+                                    <label class="rdiobox mb-5"><input checked="" id="tranning_and_colustant" name="rdio" type="radio">
+                                        <span> التدريب والاستشارات </span></label>
+                                </div>
+                                <div class="col-3">
+                                    <label class="rdiobox mb-5"><input checked="" id="colustant" name="rdio" type="radio">
+                                        <span> الاستشارات </span></label>
+                                </div>
+                                <div class="col-3">
+                                    <label class="rdiobox mb-5"><input checked="" id="other_type"  name="rdio" type="radio">
+                                        <span> خدمات اخري </span></label>
+                                </div>
 
 
                                 <div class="col-6">
@@ -171,15 +189,23 @@
                                 </div>
                                 <div class="col-3">
                                     <label class="wizard-form-text-label mb-5 rdiobox"><input name="rdio"
-                                            type="radio"> <span> كوفي بريك </span></label>
+                                        id="coffe_break"    type="radio"> <span> كوفي بريك </span></label>
                                 </div>
                                 <div class="col-3">
-                                    <label class="rdiobox mb-5"><input checked="" name="rdio" type="radio">
+                                    <label class="rdiobox mb-5"><input checked="" id="lanch" name="rdio" type="radio">
                                         <span> غداء </span></label>
                                 </div>
                                 <div class="col-3">
-                                    <label class="rdiobox mb-5"><input checked="" name="rdio" type="radio">
+                                    <label class="rdiobox mb-5"><input checked="" id="other"  name="rdio" type="radio">
                                         <span> اخري حدد </span></label>
+                                </div>
+
+                                <div class="col-12 col-sm-12">
+                                    <label for="exampleInputEmail1"> إدراج ملف  (صورة / ملف pdf) </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="prog_file">
+                                        <label class="input-group-text" for="address">Upload</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-3 mt-4 justify-content-between d-flex">
@@ -272,7 +298,12 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="fname7" class="wizard-form-text-label"> رقم الجوال *</label>
-                                            <input type="number" class="form-control wizard-required" id="phone_manger">
+                                            <div class="input-group mb-12">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="country_code_label">+966</span>
+                                                </div>
+                                                <input type="number" class="form-control wizard-required" id="phone_manager" onchange="addCountryCode()" placeholder="Enter phone number">
+                                            </div>
                                         </div>
                                     </div>
 
@@ -304,8 +335,6 @@
                                         </select>
                                     </div>
                                 </div>
-
-
                                 <div class="row mb-3">
 
                                     <div class="col-lg-4 col-sm-12">
@@ -367,8 +396,9 @@
                                         <div class="form-group">
                                             <label class="" for="fname4" class="wizard-form-text-label"> البحث عن
                                                 مدير مشروع موجود مسبقا من خلال القائمة ادناه *</label>
-                                            <input type="text" name="inputManagerserch" placeholder="اكتب هنا للبحث عن جهة"
-                                                class="form-control wizard-required" id="inputManagerserch">
+                                            <input type="text" name="inputManagerserch"
+                                                placeholder="اكتب هنا للبحث عن جهة" class="form-control wizard-required"
+                                                id="inputManagerserch">
                                             <div class=""></div>
                                         </div>
                                         <select class="form-control select2" id="MangerList" style="display: none;">
@@ -463,8 +493,14 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname7" class="wizard-form-text-label"> رقم الجوال *</label>
+                                        <div class="input-group mb-12">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="country_code_label">+966</span>
+                                            </div>
                                         <input type="number" class="form-control wizard-required" id="phone_cord">
                                     </div>
+                                </div>
+
                                 </div>
 
                                 <div class="col-6">
@@ -629,8 +665,14 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname7" class="wizard-form-text-label"> رقم الجوال *</label>
+                                        <div class="input-group mb-12">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="country_code_label">+966</span>
+                                            </div>
+
                                         <input type="number" class="form-control wizard-required" id="phone_trainer">
                                     </div>
+                                </div>
                                 </div>
 
                                 <div class="col-6">
@@ -787,9 +829,15 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname7" class="wizard-form-text-label"> رقم الجوال *</label>
+                                        <div class="input-group mb-12">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="country_code_label">+966</span>
+                                            </div>
                                         <input type="number" class="form-control wizard-required"
                                             id="cord_trainer_phone">
                                     </div>
+                                </div>
+
                                 </div>
 
                                 <div class="col-6">
@@ -925,7 +973,7 @@
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="fname5" class="wizard-form-text-label"> مجال التدريب الرئيسي
+                                        <label for="fname5" class="wizard-form-text-label"> الاعتماد
                                             *</label>
                                         <input type="text" class="form-control wizard-required"
                                             id="main_training_area">
@@ -944,8 +992,14 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname7" class="wizard-form-text-label"> رقم الجوال *</label>
+                                        <div class="input-group mb-12">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="country_code_label">+966</span>
+                                            </div>
                                         <input type="number" class="form-control wizard-required" id="phone">
                                     </div>
+                                </div>
+
                                 </div>
 
                                 <div class="col-6">
@@ -1035,7 +1089,7 @@
 
                         {{-- ############# fieldset 7 ########### --}}
                         <fieldset>
-                            <h5 class=" text-center mt-3 mb-5"> نموذج اضافة منسقو التدريب </h5>
+                            <h5 class=" text-center mt-3 mb-5"> التكليف</h5>
                             <div class="row mt-5">
                                 <div class="col-6">
                                     <label class="wizard-form-text-label mb-5 rdiobox"><input name="rdio"
@@ -1317,11 +1371,21 @@
             formData.append('end', document.getElementById('end').value);
             formData.append('courses_count', document.getElementById('courses_count').value);
             formData.append('trainers_count', document.getElementById('trainers_count').value);
-             formData.append('logistics_services', document.getElementById('logistics_services').value);
+            formData.append('logistics_services', document.getElementById('logistics_services').value);
             formData.append('attendance_method', document.getElementById('attendance_method').value);
             formData.append('training_center', document.getElementById('training_center').value);
             formData.append('public_sector', document.getElementById('public_sector').checked);
             formData.append('private_sector', document.getElementById('private_sector').checked);
+            formData.append('coffe_break', document.getElementById('coffe_break').checked);
+            formData.append('lanch', document.getElementById('lanch').checked);
+            formData.append('other', document.getElementById('other').checked);
+            formData.append('tranning', document.getElementById('tranning').checked);
+            formData.append('tranning_and_colustant', document.getElementById('tranning_and_colustant').checked);
+            formData.append('colustant', document.getElementById('colustant').checked);
+            formData.append('other_type', document.getElementById('other_type').checked);
+            formData.append('prog_file', document.getElementById('prog_file').files[0]);
+
+
 
             store('/dashboard/admin/programWizardStore/' + id, formData)
         }

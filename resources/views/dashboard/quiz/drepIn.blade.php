@@ -127,6 +127,36 @@
                                 </div>
                             </div>
 
+                            <div class="col-lg-6">
+                                <div class="form-group has-success mg-b-0">
+                                    <label for="example"> تقيم</label>
+                                    <select id="quiz_rate_id" name="quiz_rate_id" class="form-control select2">
+                                        @foreach ($quizesRate as $item)
+                                            <option @foreach ($course->quizes->where('type','rate') as $quiz)
+
+                                                @if ($item->id == $quiz->id) selected @endif @endforeach
+                                                value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group has-success mg-b-0">
+                                    <label for="example"> الحاله</label>
+                                    <select id="status_rate" name="status_rate" class="form-control select2">
+                                        <option value="active">
+                                            فعال
+                                        </option>
+                                        <option value="active">
+                                            غير فعال
+                                        </option>
+                                    </select>
+
+                                </div>
+                            </div>
 
                             <div id="repeater">
                                 <div class="item">
@@ -134,6 +164,8 @@
                                         <option value="befor">قبلي</option>
                                         <option value="after">بعدي</option>
                                         <option value="interactive">تفاعلي</option>
+                                        <option value="تقيم">تقيم</option>
+
                                     </select>
                                     <input type="datetime-local" name="datetimes[]" class="datetime">
                                     <button class="remove-item">Remove</button>
