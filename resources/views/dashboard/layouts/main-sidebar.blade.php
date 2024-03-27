@@ -61,10 +61,10 @@
 
                         <li><a class="slide-item" href="{{route('trainers.index')}}">المدربين</a></li>
                         @endcan
-                        @can('الأطلاع على المشاركين')
+                        {{-- @can('الأطلاع على المشاركين')
 
                         <li><a class="slide-item" href="{{route('attendance.index')}}">المشاركين</a></li>
-                        @endcan
+                        @endcan --}}
 
                         @can('الأطلاع على مدير المشروع')
 

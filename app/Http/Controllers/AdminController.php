@@ -494,7 +494,8 @@ class AdminController extends Controller
     public function search(Request $request)
     {
         $searchQuery = $request->input('search_query');
-        $organizations = Admin::where('name', 'like', "%$searchQuery%")->get();
+        $adminProg = AdminProgram::where('type','manger')->get();
+        $organizations = Admin::whereIn('id',$adminProg->pluck('admin_id'))->where('name', 'like', "%$searchQuery%")->get();
 
         return $organizations;
     }

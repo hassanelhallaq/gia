@@ -450,6 +450,7 @@ class QuizController extends Controller
         $course->status_interactive = $request->status_interactive;
         $course->status_befor = $request->status_befor;
         $course->status_after = $request->status_after;
+        $course->status_rate = $request->status_rate;
         $course->update();
         $quizbefCheck = QuizCourse::with('quiz')->whereHas('quiz', function ($q) {
             $q->where('type', 'befor');
@@ -507,7 +508,7 @@ class QuizController extends Controller
         })->where('course_id', $id)->first();
         if ($request->quiz_rate_id) {
             if ($quizRateCheck != null) {
-                $quizRate= $quizInterCheck->delete();
+                $quizRate= $quizRateCheck->delete();
                 $quizRate = new QuizCourse();
                 $quizRate->course_id = $course->id;
                 $quizRate->quiz_id = $request->quiz_rate_id;
