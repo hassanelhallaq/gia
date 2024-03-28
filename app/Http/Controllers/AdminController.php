@@ -9,6 +9,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 
 use App\Models\AdminProgram;
+use App\Models\Program;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -523,8 +524,8 @@ class AdminController extends Controller
     public function addMangement(Request $request ,$type)
     {
 
-
-        return response()->view('dashboard.admin.add-mangment', compact('type'));
+        $programs = Program::all();
+        return response()->view('dashboard.admin.add-mangment', compact('type','programs'));
 
     }
     public function cordreatorProjects(Request $request)
@@ -617,14 +618,7 @@ class AdminController extends Controller
             $admin->name = $request->get('name');
             $admin->phone = $request->get('phone');
             $isSaved = $admin->save();
-            $id = $request->session()->get('program_id');
-            if($id != null){
-            $adminManger = new AdminProgram();
-            $adminManger->admin_id = $admin->id ;
-            $adminManger->program_id = $id ;
-            $adminManger->type = $request->type ;
-            $adminManger->save();
-        }
+
             if ($isSaved) {
 
                 return response()->json(['icon' => 'success', 'title' => 'updated successfully'], $isSaved ? 201 : 400);
@@ -686,8 +680,12 @@ class AdminController extends Controller
             $admin->name = $request->get('name');
             $admin->phone = $request->get('phone');
             $isSaved = $admin->save();
+            $adminManger = new AdminProgram();
+            $adminManger->admin_id = $admin->id ;
+            $adminManger->program_id =$request->program_id;
+            $adminManger->type = $request->type ;
+            $adminManger->save();
 
-            
 
             if ($isSaved) {
 

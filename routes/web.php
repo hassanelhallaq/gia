@@ -95,7 +95,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/search', [ClientController::class , 'search'])->name('search');
         Route::get('/search/admins', [AdminController::class , 'search'])->name('search.admins');
         Route::post('/admins-manger', [AdminController::class, 'adminManger'])->name('admin.manger');
-        Route::get('/add-mangemt/{type}', [AdminController::class , 'mangersProjects'])->name('mangersProjects');
+        Route::get('/add-mangemt/{type}', [AdminController::class , 'addMangement'])->name('addMangement');
 
 
         // روت مؤقت

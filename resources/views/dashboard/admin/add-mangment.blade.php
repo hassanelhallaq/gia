@@ -9,11 +9,22 @@
                             <div class="row mt-5">
                                 <h5 class=" text-center mt-3 mb-5"> نموذج اضافة مدير المشروع </h5>
                                 <div class="row mt-5">
+                                    <div class="col-lg-6">
+                                        <label for="fname1" class="wizard-form-text-label">البرنامج
+                                            *</label>
+                                        <select class="form-control select2" id="program_id">
+                                            @foreach ($programs as $item)
+                                                <option value="{{ $item->id }}"> {{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="fname1" class="wizard-form-text-label"> الاسم بالكامل بالعربي
                                                 *</label>
-                                            <input type="text" class="form-control wizard-required"  id="manager_name">
+                                            <input type="text" class="form-control wizard-required" id="manager_name">
                                         </div>
                                     </div>
 
@@ -22,7 +33,7 @@
                                         <div class="form-group">
                                             <label for="fname2" class="wizard-form-text-label"> Full Name in English
                                                 *</label>
-                                            <input type="text"  class="form-control wizard-required"
+                                            <input type="text" class="form-control wizard-required"
                                                 id="english_name_manger">
                                         </div>
                                     </div>
@@ -30,7 +41,7 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="fname3" class="wizard-form-text-label"> الجنسية *</label>
-                                            <input type="text"  class="form-control wizard-required"
+                                            <input type="text" class="form-control wizard-required"
                                                 id="manager_nationality">
                                         </div>
                                     </div>
@@ -38,7 +49,7 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="fname4" class="wizard-form-text-label"> تاريخ الولادة *</label>
-                                            <input type="date"  class="form-control wizard-required" id="birthday_manger">
+                                            <input type="date" class="form-control wizard-required" id="birthday_manger">
                                         </div>
                                     </div>
 
@@ -46,7 +57,7 @@
                                         <div class="form-group">
                                             <label for="fname55" class="wizard-form-text-label"> الشهادة الأكاديمية
                                                 *</label>
-                                            <input type="text"  class="form-control wizard-required"
+                                            <input type="text" class="form-control wizard-required"
                                                 id="academicـcertificate_manger">
                                         </div>
                                     </div>
@@ -56,7 +67,7 @@
                                         <div class="form-group">
                                             <label for="fname5" class="wizard-form-text-label"> مجال التدريب الرئيسي
                                                 *</label>
-                                            <input type="text"  class="form-control wizard-required"
+                                            <input type="text" class="form-control wizard-required"
                                                 id="main_training_area_manger">
                                         </div>
                                     </div>
@@ -64,14 +75,14 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="fname5" class="wizard-form-text-label"> الاعتماد *</label>
-                                            <input type="text"  class="form-control wizard-required"
+                                            <input type="text" class="form-control wizard-required"
                                                 id="accreditation_manger">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="fname6" class="wizard-form-text-label"> سنوات الخبرة *</label>
-                                            <input type="number"   class="form-control wizard-required"
+                                            <input type="number" class="form-control wizard-required"
                                                 id="years_of_experience_manger">
                                         </div>
                                     </div>
@@ -79,7 +90,7 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="fname7" class="wizard-form-text-label"> رقم الجوال *</label>
-                                            <input type="number" class="form-control wizard-required"   id="phone_manger">
+                                            <input type="number" class="form-control wizard-required" id="phone_manger">
                                         </div>
                                     </div>
 
@@ -141,13 +152,22 @@
                     @endif
                     @if ($type == 'cordreator')
                         <fieldset>
+
+                            <div class="col-lg-6">
+                                <label for="fname1" class="wizard-form-text-label">البرنامج
+                                    *</label>
+                                <select class="form-control select2" id="program_id">
+                                    @foreach ($programs as $item)
+                                        <option value="{{ $item->id }}"> {{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="row mt-5">
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname1" class="wizard-form-text-label"> الاسم بالكامل بالعربي
                                             *</label>
-                                        <input type="text" class="form-control wizard-required"
-                                            id="cord_name">
+                                        <input type="text" class="form-control wizard-required" id="cord_name">
                                     </div>
                                 </div>
 
@@ -157,23 +177,21 @@
                                         <label for="fname2" class="wizard-form-text-label"> Full Name in English
                                             *</label>
                                         <input type="text" class="form-control wizard-required"
-                                             id="cord_name_english">
+                                            id="cord_name_english">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname3" class="wizard-form-text-label"> الجنسية *</label>
-                                        <input type="text" class="form-control wizard-required"
-                                            id="nationality_cord">
+                                        <input type="text" class="form-control wizard-required" id="nationality_cord">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname4" class="wizard-form-text-label"> تاريخ الولادة *</label>
-                                        <input type="date" class="form-control wizard-required"
-                                              id="birthday_cord">
+                                        <input type="date" class="form-control wizard-required" id="birthday_cord">
                                     </div>
                                 </div>
 
@@ -181,7 +199,7 @@
                                     <div class="form-group">
                                         <label for="fname55" class="wizard-form-text-label"> الشهادة الأكاديمية *</label>
                                         <input type="text" class="form-control wizard-required"
-                                              id="academicـcertificate_cord">
+                                            id="academicـcertificate_cord">
                                     </div>
                                 </div>
 
@@ -199,30 +217,28 @@
                                     <div class="form-group">
                                         <label for="fname5" class="wizard-form-text-label"> الاعتماد *</label>
                                         <input type="text" class="form-control wizard-required"
-                                              id="accreditation_cord">
+                                            id="accreditation_cord">
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname6" class="wizard-form-text-label"> سنوات الخبرة *</label>
                                         <input type="number" class="form-control wizard-required"
-                                             id="years_of_experience_cord">
+                                            id="years_of_experience_cord">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname7" class="wizard-form-text-label"> رقم الجوال *</label>
-                                        <input type="number" class="form-control wizard-required"
-                                              id="phone_cord">
+                                        <input type="number" class="form-control wizard-required" id="phone_cord">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname8" class="wizard-form-text-label"> البريد الإلكتروني *</label>
-                                        <input type="email" class="form-control wizard-required"
-                                              id="email_cord">
+                                        <input type="email" class="form-control wizard-required" id="email_cord">
                                     </div>
                                 </div>
 
@@ -273,11 +289,20 @@
                         <fieldset>
                             <h5 class=" text-center mt-3 mb-5"> نموذج اضافة منسقو التدريب </h5>
                             <div class="row mt-5">
+                                <div class="col-lg-6">
+                                    <label for="fname1" class="wizard-form-text-label">البرنامج
+                                        *</label>
+                                    <select class="form-control select2" id="program_id">
+                                        @foreach ($programs as $item)
+                                            <option value="{{ $item->id }}"> {{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname1" class="wizard-form-text-label"> الاسم بالكامل بالعربي
                                             *</label>
-                                        <input type="text"   class="form-control wizard-required"
+                                        <input type="text" class="form-control wizard-required"
                                             id="cord_trainer_name">
                                     </div>
                                 </div>
@@ -285,7 +310,7 @@
                                     <div class="form-group">
                                         <label for="fname2" class="wizard-form-text-label"> Full Name in English
                                             *</label>
-                                        <input type="text"   class="form-control wizard-required"
+                                        <input type="text" class="form-control wizard-required"
                                             id="cord_trainer_name_english">
                                     </div>
                                 </div>
@@ -293,7 +318,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname3" class="wizard-form-text-label"> الجنسية *</label>
-                                        <input type="text"   class="form-control wizard-required"
+                                        <input type="text" class="form-control wizard-required"
                                             id="cord_trainer_nationality">
                                     </div>
                                 </div>
@@ -301,7 +326,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname4" class="wizard-form-text-label"> تاريخ الولادة *</label>
-                                        <input type="date"   class="form-control wizard-required"
+                                        <input type="date" class="form-control wizard-required"
                                             id="cord_trainer_birthday">
                                     </div>
                                 </div>
@@ -309,7 +334,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname55" class="wizard-form-text-label"> الشهادة الأكاديمية *</label>
-                                        <input type="text"   class="form-control wizard-required"
+                                        <input type="text" class="form-control wizard-required"
                                             id="cord_trainer_academicـcertificate">
                                     </div>
                                 </div>
@@ -321,7 +346,7 @@
                                     <div class="form-group">
                                         <label for="fname5" class="wizard-form-text-label"> مجال التدريب الرئيسي
                                             *</label>
-                                        <input type="text"   class="form-control wizard-required"
+                                        <input type="text" class="form-control wizard-required"
                                             id="cord_trainer_main_training_area">
                                     </div>
                                 </div>
@@ -405,11 +430,20 @@
                         <fieldset>
                             <h5 class=" text-center mt-3 mb-5"> نموذج اضافة المستشارون </h5>
                             <div class="row mt-5">
+                                <div class="col-lg-6">
+                                    <label for="fname1" class="wizard-form-text-label">البرنامج
+                                        *</label>
+                                    <select class="form-control select2" id="program_id">
+                                        @foreach ($programs as $item)
+                                            <option value="{{ $item->id }}"> {{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname1" class="wizard-form-text-label"> الاسم بالكامل بالعربي
                                             *</label>
-                                        <input type="text" class="form-control wizard-required"   id="name">
+                                        <input type="text" class="form-control wizard-required" id="name">
                                     </div>
                                 </div>
 
@@ -418,21 +452,21 @@
                                     <div class="form-group">
                                         <label for="fname2" class="wizard-form-text-label"> Full Name in English
                                             *</label>
-                                        <input type="text" class="form-control wizard-required" id="name_english"  >
+                                        <input type="text" class="form-control wizard-required" id="name_english">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname3" class="wizard-form-text-label"> الجنسية *</label>
-                                        <input type="text" class="form-control wizard-required" id="nationality"  >
+                                        <input type="text" class="form-control wizard-required" id="nationality">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname4" class="wizard-form-text-label"> تاريخ الولادة *</label>
-                                        <input type="date" class="form-control wizard-required" id="birthday"  >
+                                        <input type="date" class="form-control wizard-required" id="birthday">
                                     </div>
                                 </div>
 
@@ -473,14 +507,14 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname7" class="wizard-form-text-label"> رقم الجوال *</label>
-                                        <input type="number" class="form-control wizard-required"   id="phone">
+                                        <input type="number" class="form-control wizard-required" id="phone">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="fname8" class="wizard-form-text-label"> البريد الإلكتروني *</label>
-                                        <input type="email" class="form-control wizard-required"   id="email">
+                                        <input type="email" class="form-control wizard-required" id="email">
                                     </div>
                                 </div>
 
@@ -550,6 +584,8 @@
             formData.append('cv', document.getElementById('cv_cord').files[0]);
             formData.append('accreditationـcertificate', document.getElementById('accreditationـcertificate_cord').files[
                 0]);
+                formData.append('program_id', document.getElementById('program_id').value);
+            formData.append('type', document.getElementById('type').value);
             formData.append('pic', document.getElementById('pic_cord').files[0]);
             formData.append('type', 'cordreator');
 
@@ -570,6 +606,10 @@
             formData.append('email', document.getElementById('email_manger').value);
             formData.append('password', document.getElementById('password_manger').value);
             formData.append('role_id', document.getElementById('manger_role_id').value);
+            formData.append('program_id', document.getElementById('program_id').value);
+            formData.append('type', document.getElementById('type').value);
+
+
             formData.append('cv', document.getElementById('cv_manger').files[0]);
             formData.append('accreditationـcertificate', document.getElementById('accreditationـcertificate_manger').files[
                 0]);
@@ -591,6 +631,8 @@
             formData.append('years_of_experience', document.getElementById('cord_trainer_years_of_experience').value);
             formData.append('phone', document.getElementById('cord_trainer_phone').value);
             formData.append('email', document.getElementById('cord_trainer_email').value);
+            formData.append('program_id', document.getElementById('program_id').value);
+            formData.append('type', document.getElementById('type').value);
             formData.append('cv', document.getElementById('cord_trainer_cv').files[0]);
             formData.append('accreditationـcertificate', document.getElementById('cord_trainer_accreditation').files[0]);
             formData.append('pic', document.getElementById('cord_trainer_pic').files[0]);
@@ -613,7 +655,9 @@
             formData.append('years_of_experience', document.getElementById('years_of_experience').value);
             formData.append('phone', document.getElementById('phone').value);
             formData.append('email', document.getElementById('email').value);
-             formData.append('cv', document.getElementById('cv').files[0]);
+            formData.append('program_id', document.getElementById('program_id').value);
+            formData.append('type', document.getElementById('type').value);
+            formData.append('cv', document.getElementById('cv').files[0]);
             formData.append('accreditationـcertificate', document.getElementById('accreditationـcertificate').files[0]);
             formData.append('pic', document.getElementById('pic').files[0]);
             formData.append('type', 'consultants');

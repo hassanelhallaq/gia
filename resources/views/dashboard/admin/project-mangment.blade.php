@@ -3,7 +3,7 @@
 
 
 <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
-    <div class="left-content mt-2">
+        <div class="left-content mt-2">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb breadcrumb-style1">
                 <li class="breadcrumb-item">
@@ -22,20 +22,17 @@
     <div class="main-dashboard-header-right">
         <div class=" d-flex">
             <!-- <button class="btn btn-outline-light btn-with-icon btn-sm ml-1"> اعضاء الإدارة <i class="bi bi-award-fill"></i></button> -->
-            <a href="{{route('mangersProjects'.[$type])}}" class="btn btn-warning-gradient btn-with-icon btn-sm"> اضافة حساب جديد <i class="bi bi-plus"></i></a>
+            <a href="{{route('addMangement',[$type])}}" class="btn btn-warning-gradient btn-with-icon btn-sm"> اضافة حساب جديد <i class="bi bi-plus"></i></a>
         </div>
     </div>
 </div>
 @endsection
 @section('content')
 
-<div class="container-fluid mt-3">
     <!-- row -->
 <div class="row">
-
-    <!--open filter Top  -->
-     <div class="col-lg-12">
-         <div class="card mg-b-20">
+    <div class="col-lg-12">
+        <div class="card mg-b-20">
              <div class="card-body d-flex p-3">
                  <div class="form">
                      <i class="fa fa-search"></i>
@@ -208,6 +205,5 @@
             </form>
         </div>
     </div>
-</div>
 </div>
 @endsection
