@@ -101,8 +101,26 @@
                                             <input type="email" class="form-control wizard-required" id="email_manger">
                                         </div>
                                     </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="fname8" class="wizard-form-text-label"> كلمه المرور*</label>
+                                            <input type="password" class="form-control wizard-required"
+                                                id="password_manger">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6  col-sm-12  mb-4">
+                                        <p class="mg-b-10"> الصلاحيات </p>
+                                        <select class="form-control select2" id="manger_role_id">
+                                            <option value="">
 
-
+                                            </option>
+                                            @foreach ($roles as $item)
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
 
 
@@ -241,7 +259,25 @@
                                         <input type="email" class="form-control wizard-required" id="email_cord">
                                     </div>
                                 </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fname8" class="wizard-form-text-label"> كلمه المرور*</label>
+                                        <input type="password" class="form-control wizard-required" id="password_cord">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <p class="mg-b-10"> الصلاحيات </p>
+                                    <select class="form-control select2" id="cord_role_id">
+                                        <option value="">
 
+                                        </option>
+                                        @foreach ($roles as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="row mb-3">
@@ -376,7 +412,26 @@
                                     </div>
                                 </div>
 
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fname8" class="wizard-form-text-label"> كلمه المرور*</label>
+                                        <input type="password" class="form-control wizard-required"
+                                            id="cord_trainer_password">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-4">
+                                    <p class="mg-b-10"> الصلاحيات </p>
+                                    <select class="form-control select2" id="cord_trainer_role_id">
+                                        <option value="">
 
+                                        </option>
+                                        @foreach ($roles as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="row mb-3">
@@ -517,8 +572,25 @@
                                         <input type="email" class="form-control wizard-required" id="email">
                                     </div>
                                 </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="fname8" class="wizard-form-text-label"> كلمه المرور*</label>
+                                        <input type="password" class="form-control wizard-required" id="password">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-4">
+                                    <p class="mg-b-10"> الصلاحيات </p>
+                                    <select class="form-control select2" id="role_id">
+                                        <option value="">
 
-
+                                        </option>
+                                        @foreach ($roles as $item)
+                                            <option value="{{ $item->id }}">
+                                                {{ $item->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
 
 
@@ -581,11 +653,11 @@
             formData.append('years_of_experience', document.getElementById('years_of_experience_cord').value);
             formData.append('phone', document.getElementById('phone_cord').value);
             formData.append('email', document.getElementById('email_cord').value);
+            formData.append('password', document.getElementById('password_cord').value);
             formData.append('cv', document.getElementById('cv_cord').files[0]);
             formData.append('accreditationـcertificate', document.getElementById('accreditationـcertificate_cord').files[
                 0]);
                 formData.append('program_id', document.getElementById('program_id').value);
-            formData.append('type', document.getElementById('type').value);
             formData.append('pic', document.getElementById('pic_cord').files[0]);
             formData.append('type', 'cordreator');
 
@@ -607,7 +679,6 @@
             formData.append('password', document.getElementById('password_manger').value);
             formData.append('role_id', document.getElementById('manger_role_id').value);
             formData.append('program_id', document.getElementById('program_id').value);
-            formData.append('type', document.getElementById('type').value);
 
 
             formData.append('cv', document.getElementById('cv_manger').files[0]);
@@ -631,8 +702,8 @@
             formData.append('years_of_experience', document.getElementById('cord_trainer_years_of_experience').value);
             formData.append('phone', document.getElementById('cord_trainer_phone').value);
             formData.append('email', document.getElementById('cord_trainer_email').value);
+            formData.append('password', document.getElementById('cord_trainer_password').value);
             formData.append('program_id', document.getElementById('program_id').value);
-            formData.append('type', document.getElementById('type').value);
             formData.append('cv', document.getElementById('cord_trainer_cv').files[0]);
             formData.append('accreditationـcertificate', document.getElementById('cord_trainer_accreditation').files[0]);
             formData.append('pic', document.getElementById('cord_trainer_pic').files[0]);
@@ -655,8 +726,8 @@
             formData.append('years_of_experience', document.getElementById('years_of_experience').value);
             formData.append('phone', document.getElementById('phone').value);
             formData.append('email', document.getElementById('email').value);
+            formData.append('password', document.getElementById('password').value);
             formData.append('program_id', document.getElementById('program_id').value);
-            formData.append('type', document.getElementById('type').value);
             formData.append('cv', document.getElementById('cv').files[0]);
             formData.append('accreditationـcertificate', document.getElementById('accreditationـcertificate').files[0]);
             formData.append('pic', document.getElementById('pic').files[0]);

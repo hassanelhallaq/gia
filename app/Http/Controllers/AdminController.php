@@ -523,9 +523,10 @@ class AdminController extends Controller
     }
     public function addMangement(Request $request ,$type)
     {
+        $roles = Role::where('guard_name', 'admin')->get();
 
         $programs = Program::all();
-        return response()->view('dashboard.admin.add-mangment', compact('type','programs'));
+        return response()->view('dashboard.admin.add-mangment', compact('type','programs','roles'));
 
     }
     public function cordreatorProjects(Request $request)
