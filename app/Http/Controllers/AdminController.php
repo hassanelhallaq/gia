@@ -513,31 +513,44 @@ class AdminController extends Controller
 
     public function mangersProjects(Request $request)
     {
+        $type = 'manger';
 
         $adminManger =  AdminProgram::where('type','manger')->get();
         $admins = Admin::whereIn('id',$adminManger->pluck('admin_id'))->paginate(10);
-        return response()->view('dashboard.admin.project-mangment', compact('admins'));
+        return response()->view('dashboard.admin.project-mangment', compact('admins','type'));
+
+    }
+    public function addMangement(Request $request ,$type)
+    {
+
+
+        return response()->view('dashboard.admin.add-mangment', compact('type'));
 
     }
     public function cordreatorProjects(Request $request)
     {
+        $type = 'cordreator';
            $adminManger =  AdminProgram::where('type','cordreator')->get();
            $admins = Admin::whereIn('id',$adminManger->pluck('admin_id'))->paginate(10);
-           return response()->view('dashboard.admin.project-mangment', compact('admins'));
+           return response()->view('dashboard.admin.project-mangment', compact('admins','type'));
 
     }
     public function cordTrainnerProjects(Request $request)
     {
+        $type = 'cord-trainner';
+
         $adminManger =  AdminProgram::where('type','cord-trainner')->get();
         $admins = Admin::whereIn('id',$adminManger->pluck('admin_id'))->paginate(10);
-        return response()->view('dashboard.admin.project-mangment', compact('admins'));
+        return response()->view('dashboard.admin.project-mangment', compact('admins','type'));
 
     }
     public function consultantsProjects(Request $request)
     {
+        $type = 'consultants';
+
         $adminManger =  AdminProgram::where('type','consultants')->get();
         $admins = Admin::whereIn('id',$adminManger->pluck('admin_id'))->paginate(10);
-        return response()->view('dashboard.admin.project-mangment', compact('admins'));
+        return response()->view('dashboard.admin.project-mangment', compact('admins','type'));
 
     }
     public function admincordSelect(Request $request)
@@ -612,6 +625,70 @@ class AdminController extends Controller
             $adminManger->type = $request->type ;
             $adminManger->save();
         }
+            if ($isSaved) {
+
+                return response()->json(['icon' => 'success', 'title' => 'updated successfully'], $isSaved ? 201 : 400);
+            } else {
+
+                return response()->json(['message' => "Failed to save"], 400);
+            }
+        } else {
+
+            return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
+        }
+    }
+    public function addMangment(Request $request )
+
+    {
+        //
+        $validator = Validator($request->all(), [
+
+            'role_id' => 'required|numeric|exists:roles,id',
+            'name' => 'required|string|min:3|max:35',
+            // 'job' => 'required|string|min:3|max:35',
+            'phone' => 'required|numeric',
+            'email' => 'required|email|unique:admins,email',
+            'password' => 'required|string',
+        ]);
+
+        if (!$validator->fails()) {
+
+            $admin =  new Admin();
+            $admin->email = $request->get('email');
+            $admin->english_name = $request->get('name_english');
+            $admin->main_training_area = $request->get('main_training_area');
+            $admin->nationality = $request->get('nationality');
+            $admin->birthday = $request->get('birthday');
+            $admin->academicـcertificate = $request->get('academicـcertificate');
+            $admin->main_field_of_consulting = $request->get('main_field_of_consulting');
+            $admin->accreditation = $request->get('accreditation');
+            $admin->years_of_experience = $request->get('years_of_experience');
+            if ($request->hasFile('cv')) {
+                $adminImage = $request->file('cv');
+                $imageName = time() . '_' . $request->get('cv') . '.' . $adminImage->getClientOriginalExtension();
+                $adminImage->move('images/program', $imageName);
+                $admin->cv = '/images/' . 'program' . '/' . $imageName;
+            }
+            if ($request->hasFile('pic')) {
+                $adminImage = $request->file('pic');
+                $imageName = time() . '_' . $request->get('pic') . '.' . $adminImage->getClientOriginalExtension();
+                $adminImage->move('images/program', $imageName);
+                $admin->cv = '/images/' . 'program' . '/' . $imageName;
+            }
+            if ($request->hasFile('accreditationـcertificate')) {
+                $adminImage = $request->file('accreditationـcertificate');
+                $imageName = time() . '_' . $request->get('pic') . '.' . $adminImage->getClientOriginalExtension();
+                $adminImage->move('images/program', $imageName);
+                $admin->accreditationـcertificate = '/images/' . 'program' . '/' . $imageName;
+            }
+            $admin->job = $request->get('job') == null ? 'job' : $request->get('job');
+            $admin->password = Hash::make($request->get('password'));
+            $admin->name = $request->get('name');
+            $admin->phone = $request->get('phone');
+            $isSaved = $admin->save();
+
+            
+
             if ($isSaved) {
 
                 return response()->json(['icon' => 'success', 'title' => 'updated successfully'], $isSaved ? 201 : 400);

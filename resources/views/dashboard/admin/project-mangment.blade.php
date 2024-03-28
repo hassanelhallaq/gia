@@ -22,9 +22,7 @@
     <div class="main-dashboard-header-right">
         <div class=" d-flex">
             <!-- <button class="btn btn-outline-light btn-with-icon btn-sm ml-1"> اعضاء الإدارة <i class="bi bi-award-fill"></i></button> -->
-            <a href="{{route('admins.create')}}" class="btn btn-warning-gradient btn-with-icon btn-sm"> اضافة حساب جديد <i class="bi bi-plus"></i></a>
-            <button class="btn btn-warning-gradient btn-with-icon ml-1"data-target="#modalAddRoles" data-toggle="modal">
-                اضافة صلاحية جديدة <i class="bi bi-plus"></i></button>
+            <a href="{{route('mangersProjects'.[$type])}}" class="btn btn-warning-gradient btn-with-icon btn-sm"> اضافة حساب جديد <i class="bi bi-plus"></i></a>
         </div>
     </div>
 </div>
