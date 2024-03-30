@@ -110,6 +110,8 @@
                     <a class="side-menu__item" data-toggle="slide"  href="#"><i class="si si-people tx-22"></i><span class="side-menu__label mr-3"> اضافة مشروع </span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
                         <li><a class="slide-item" href="{{ route('AddProject') }}"> اضافة </a></li>
+                        <li><a class="slide-item" href="{{ route('programQuick') }}"> اضافه سريعه </a></li>
+
                     </ul>
                 </li>
                 @endcan

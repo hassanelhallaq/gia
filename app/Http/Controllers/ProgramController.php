@@ -25,15 +25,15 @@ class ProgramController extends Controller
         $programs = Program::orderBy("id", "desc")->when($request->name, function ($q) use ($request) {
             $q->where('name', 'like', '%' . $request->name . '%');
         });
-        $programAdmin =  AdminProgram::where('admin_id',Auth::user()->id)->first();
-        $programAdminSuper =  AdminProgram::where('admin_id',Auth::user()->id)->where('type','admin')->first();
+        $programAdmin =  AdminProgram::where('admin_id', Auth::user()->id)->first();
+        $programAdminSuper =  AdminProgram::where('admin_id', Auth::user()->id)->where('type', 'admin')->first();
 
         if (Auth::guard('admin')->check() && $programAdminSuper->type == 'admin') {
             $programs = $programs->withCount('courses')->paginate(10);
-        }elseif (Auth::guard('admin')->check()) {
+        } elseif (Auth::guard('admin')->check()) {
 
-            $programAdmin =  AdminProgram::where('admin_id',Auth::user()->id)->get();
-            $programs = $programs->where('id',$programAdmin->pluck('program_id'))->withCount('courses')->paginate(10);
+            $programAdmin =  AdminProgram::where('admin_id', Auth::user()->id)->get();
+            $programs = $programs->where('id', $programAdmin->pluck('program_id'))->withCount('courses')->paginate(10);
         } elseif (Auth::guard('client')->check()) {
             $programs = $programs->where('client_id', Auth::user()->id)->withCount('courses')->paginate(10);
         } elseif (Auth::guard('trainer')->check()) {
@@ -182,7 +182,7 @@ class ProgramController extends Controller
         $clients = Client::all();
         $trainers = Trainer::all();
 
-        return view("dashboard.programs.edit", compact('program', 'clients', 'categories','trainers'));
+        return view("dashboard.programs.edit", compact('program', 'clients', 'categories', 'trainers'));
     }
 
     /**
@@ -285,9 +285,21 @@ class ProgramController extends Controller
         $countries = Country::all();
         $roles = Role::where('guard_name', 'admin')->get();
         $client = Client::find($id);
-        return view("dashboard.AddProjectManager.add", compact('roles', 'countries','id','client'));
+        return view("dashboard.AddProjectManager.add", compact('roles', 'countries', 'id', 'client'));
     }
+    public function programQuick()
+    {
 
+        $adminManger =  AdminProgram::where('type', 'manger')->get();
+        $adminsMangs = Admin::whereIn('id', $adminManger->pluck('admin_id'))->paginate(10);
+
+        $adminCordreator =  AdminProgram::where('type','cordreator')->get();
+        $admins = Admin::whereIn('id',$adminCordreator->pluck('admin_id'))->paginate(10);
+
+        $countries = Country::all();
+        $clients = Client::all();
+        return view("dashboard.AddProjectManager.quick_add", compact('countries', 'clients','adminsMangs','admins'));
+    }
     public function programWizardStore(Request $request, $id)
     {
 
@@ -321,29 +333,31 @@ class ProgramController extends Controller
         $program->logistics_services = $request->logistics_services;
         $program->client_id = $id;
         $program->training_center = $request->training_center;
-        if($request->public_sector == 1){
+        if ($request->public_sector == 1) {
             $program->sector_type = 'public_sector';
         }
-        if($request->private_sector == 1){
+        if ($request->private_sector == 1) {
             $program->sector_type = 'private_sector';
         }
-        if($request->coffe_break == 1){
+        if ($request->coffe_break == 1) {
             $program->logistic = 'coffe_break';
         }
-        if($request->lanch == 1){
+        if ($request->lanch == 1) {
             $program->logistic = 'lanch';
         }
-        if($request->other == 1){
+        if ($request->other == 1) {
             $program->logistic = 'other';
         }
-        if($request->tranning == 1){
+        if ($request->tranning == 1) {
             $program->colsntunt = 'tranning';
         }
-        if($request->tranning_and_colustant == 1){
+        if ($request->tranning_and_colustant == 1) {
             $program->colsntunt = 'tranning_and_colustant';
-        }if($request->colustant == 1){
+        }
+        if ($request->colustant == 1) {
             $program->colsntunt = 'colustant';
-        }if($request->other == 1){
+        }
+        if ($request->other == 1) {
             $program->other_type = 'other_type';
         }
         if ($request->hasFile('prog_file')) {
@@ -352,12 +366,83 @@ class ProgramController extends Controller
             $adminImage->move('files/program', $imageName);
             $program->file = '/files/' . 'program' . '/' . $imageName;
         }
-         $program->save();
+        $program->save();
         session(['program_id' => $program->id]);
 
         return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $program ? 201 : 400);
     }
 
+    public function programQuickStore(Request $request)
+    {
+
+        $data = $request->all();
+        $validator = Validator($data, [
+            'name' => 'required|string',
+            // 'username' => 'required|unique:programs',
+            'start' => 'required',
+            'end' => 'required',
+            'contract_number' => 'required',
+            'courses_count' => 'required',
+            'trainers_count' => 'required',
+            // 'country_id' => 'required',
+            'logistics_services' => 'required',
+            'training_center' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
+        }
+        $program = new Program();
+        $program->name = $request->name;
+        $program->username = $request->username;
+        $start = Carbon::parse($request->start)->format('y-m-d');
+        $end = Carbon::parse($request->end)->format('y-m-d');
+        $program->start = $start;
+        $program->end = $end;
+        $program->contract_number = $request->contract_number;
+        $program->courses_count = $request->courses_count;
+        $program->trainers_count = $request->trainers_count;
+        // $program->country_id = $request->country_id;
+        $program->logistics_services = $request->logistics_services;
+        $program->client_id = $request->client_id;
+        $program->training_center = $request->training_center;
+        if ($request->public_sector == 1) {
+            $program->sector_type = 'public_sector';
+        }
+        if ($request->private_sector == 1) {
+            $program->sector_type = 'private_sector';
+        }
+        if ($request->coffe_break == 1) {
+            $program->logistic = 'coffe_break';
+        }
+        if ($request->lanch == 1) {
+            $program->logistic = 'lanch';
+        }
+        if ($request->other == 1) {
+            $program->logistic = 'other';
+        }
+        if ($request->tranning == 1) {
+            $program->colsntunt = 'tranning';
+        }
+        if ($request->tranning_and_colustant == 1) {
+            $program->colsntunt = 'tranning_and_colustant';
+        }
+        if ($request->colustant == 1) {
+            $program->colsntunt = 'colustant';
+        }
+        if ($request->other == 1) {
+            $program->other_type = 'other_type';
+        }
+        if ($request->hasFile('prog_file')) {
+            $adminImage = $request->file('prog_file');
+            $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
+            $adminImage->move('files/program', $imageName);
+            $program->file = '/files/' . 'program' . '/' . $imageName;
+        }
+        $program->save();
+        session(['program_id' => $program->id]);
+
+        return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $program ? 201 : 400);
+    }
     public function programWizardUpdate(Request $request)
     {
         $id = $request->session()->get('program_id');
@@ -373,49 +458,45 @@ class ProgramController extends Controller
         $request->session()->forget('program_id');
 
         return response()->json(['redirect' => route('programs.index')]);
-
     }
 
     public function mangers($id)
     {
-        $manger = Admin::with('admins')->whereHas('admins',function($q)use($id){
-            $q->where('type','manger');
+        $manger = Admin::with('admins')->whereHas('admins', function ($q) use ($id) {
+            $q->where('type', 'manger');
         })->get();
-        $cordreator = Admin::with('admins')->whereHas('admins',function($q)use($id){
-            $q->where('type','cordreator');
+        $cordreator = Admin::with('admins')->whereHas('admins', function ($q) use ($id) {
+            $q->where('type', 'cordreator');
         })->get();
-        $cordTrainner = Admin::with('admins')->whereHas('admins',function($q)use($id){
-            $q->where('type','cord-trainner');
+        $cordTrainner = Admin::with('admins')->whereHas('admins', function ($q) use ($id) {
+            $q->where('type', 'cord-trainner');
         })->get();
-        $consultants = Admin::with('admins')->whereHas('admins',function($q)use($id){
-            $q->where('type','consultants');
+        $consultants = Admin::with('admins')->whereHas('admins', function ($q) use ($id) {
+            $q->where('type', 'consultants');
         })->get();
         $trainers = Trainer::all();
 
-        return view("dashboard.programs.mangers", compact('cordreator', 'trainers','cordTrainner','consultants','manger','id'));
+        return view("dashboard.programs.mangers", compact('cordreator', 'trainers', 'cordTrainner', 'consultants', 'manger', 'id'));
     }
-    public function mangersUpdate(Request $request , $id)
+    public function mangersUpdate(Request $request, $id)
     {
-        $adminManger = AdminProgram::where('program_id',$id)->where('type','manger')->first();
+        $adminManger = AdminProgram::where('program_id', $id)->where('type', 'manger')->first();
         $adminManger->admin_id = $request->mang_select;
         $adminManger->update();
-        $adminCordreator = AdminProgram::where('program_id',$id)->where('type','cordreator')->first();
+        $adminCordreator = AdminProgram::where('program_id', $id)->where('type', 'cordreator')->first();
         $adminCordreator->admin_id = $request->cord_select;
         $adminCordreator->update();
-        $adminCordTrainer = AdminProgram::where('program_id',$id)->where('type','cord-trainner')->first();
+        $adminCordTrainer = AdminProgram::where('program_id', $id)->where('type', 'cord-trainner')->first();
         $adminCordTrainer->admin_id = $request->cordTrainner;
         $adminCordTrainer->update();
-        $adminConsultants = AdminProgram::where('program_id',$id)->where('type','consultants')->first();
+        $adminConsultants = AdminProgram::where('program_id', $id)->where('type', 'consultants')->first();
         $adminConsultants->admin_id = $request->consultants;
         $adminConsultants->update();
-        $program = Course::where('program_id',$id)->first();
-        if($program){
-        $program->trainer_id = $request->trainers;
-        $program->update();
-    }
+        $program = Course::where('program_id', $id)->first();
+        if ($program) {
+            $program->trainer_id = $request->trainers;
+            $program->update();
+        }
         return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $program ? 201 : 400);
-
-
-
     }
 }

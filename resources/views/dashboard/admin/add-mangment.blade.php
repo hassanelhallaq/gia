@@ -314,7 +314,7 @@
 
                                 <div class="d-flex">
                                     <button type="button" onclick="performStoreCord()"
-                                        class="btn  btn-warning-gradient btn-next"> تحديث
+                                        class="btn  btn-warning-gradient btn-next"> اضافه
                                     </button>
                                 </div>
                             </div>
@@ -698,7 +698,7 @@
             formData.append('birthday', document.getElementById('cord_trainer_birthday').value);
             formData.append('academicـcertificate', document.getElementById('cord_trainer_academicـcertificate').value);
             formData.append('main_training_area', document.getElementById('cord_trainer_main_training_area').value);
-            formData.append('accreditation', document.getElementById('accreditation_trainer').value);
+            // formData.append('accreditation', document.getElementById('accreditation_trainer').value);
             formData.append('years_of_experience', document.getElementById('cord_trainer_years_of_experience').value);
             formData.append('phone', document.getElementById('cord_trainer_phone').value);
             formData.append('email', document.getElementById('cord_trainer_email').value);

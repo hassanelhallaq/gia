@@ -96,7 +96,9 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/search/admins', [AdminController::class , 'search'])->name('search.admins');
         Route::post('/admins-manger', [AdminController::class, 'adminManger'])->name('admin.manger');
         Route::get('/add-mangemt/{type}', [AdminController::class , 'addMangement'])->name('addMangement');
+        Route::get('/quick-program',[ProgramController::class ,'programQuick'])->name('programQuick');
 
+        Route::post('/quick-program/store',[ProgramController::class ,'programQuickStore'])->name('programQuickStore');
 
         // روت مؤقت
         Route::get('/quiz/detales', function () {
@@ -149,14 +151,13 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::get('/search/admincord_select', [AdminController::class , 'admincordSelect'])->name('search.admincordSelect');
         Route::get('/program/manger/{id}', [ProgramController::class , 'mangers'])->name('program.mangers');
         Route::put('/program/manger/{id}', [ProgramController::class , 'mangersUpdate'])->name('program.mangers.update');
-        Route::post('/add-mangment/{id}', [AdminController::class, 'updateMangment'])->name('addmangment');
-
+        Route::post('/addmangment', [AdminController::class, 'addMangment'])->name('addmangment');
         Route::post('/programWizardUpdate', [ProgramController::class, 'programWizardUpdate'])->name('programWizardUpdate');
         Route::get('/mangersProjects', [AdminController::class , 'mangersProjects'])->name('mangersProjects');
         Route::get('/cordreatorProjects', [AdminController::class , 'cordreatorProjects'])->name('cordreatorProjects');
         Route::get('/cordTrainnerProjects', [AdminController::class , 'cordTrainnerProjects'])->name('cordTrainnerProjects');
         Route::get('/consultantsProjects', [AdminController::class , 'consultantsProjects'])->name('consultantsProjects');
-        Route::post('/updateMangment/{id}', [AdminController::class, 'addMangment'])->name('updateMangment');
+        Route::post('/updateMangment/{id}', [AdminController::class, 'updateMangment'])->name('updateMangment');
         Route::get('/edit-mangment/{id}', [AdminController::class , 'editMangment'])->name('mangment.edit');
     }
 );
