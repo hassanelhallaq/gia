@@ -1203,7 +1203,7 @@
                 div2.remove();
             }
         });
-        function performStoreManger() {
+        function checkUser() {
             let formData = new FormData();
             formData.append('username', document.getElementById('username').value);
             store('/dashboard/admin/check-user', formData)
