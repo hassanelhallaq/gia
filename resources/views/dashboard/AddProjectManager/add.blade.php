@@ -83,19 +83,19 @@
 
 
                                 <div class="col-3">
-                                    <label class="rdiobox mb-5"><input checked="" id="tranning" name="rdio" type="radio">
+                                    <label class="rdiobox mb-5"><input checked="" id="tranning" name="rdioType" type="radio">
                                         <span> التدريب </span></label>
                                 </div>
                                 <div class="col-3">
-                                    <label class="rdiobox mb-5"><input checked="" id="tranning_and_colustant" name="rdio" type="radio">
+                                    <label class="rdiobox mb-5"><input checked="" id="tranning_and_colustant" name="rdioType" type="radio">
                                         <span> التدريب والاستشارات </span></label>
                                 </div>
                                 <div class="col-3">
-                                    <label class="rdiobox mb-5"><input checked="" id="colustant" name="rdio" type="radio">
+                                    <label class="rdiobox mb-5"><input checked="" id="colustant" name="rdioType" type="radio">
                                         <span> الاستشارات </span></label>
                                 </div>
                                 <div class="col-3">
-                                    <label class="rdiobox mb-5"><input checked="" id="other_type"  name="rdio" type="radio">
+                                    <label class="rdiobox mb-5"><input checked="" id="other_type"  name="rdioType" type="radio">
                                         <span> خدمات اخري </span></label>
                                 </div>
 

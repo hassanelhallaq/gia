@@ -182,7 +182,7 @@ class ProgramController extends Controller
         $clients = Client::all();
         $trainers = Trainer::all();
 
-        return view("dashboard.programs.edit", compact('program', 'clients', 'categories', 'trainers'));
+        return view("dashboard.programs.new_edit", compact('program', 'clients', 'categories', 'trainers'));
     }
 
     /**
@@ -195,17 +195,17 @@ class ProgramController extends Controller
         $validator = Validator($data, [
             'name' => 'required|string',
             // 'image' => 'required',
-            'content_one' => 'required',
+            // 'content_one' => 'required',
             'username' => 'required||unique:programs,username,' . $program->id,
-            'content_two' => 'required',
+            // 'content_two' => 'required',
             'start' => 'required',
             'end' => 'required',
             'theme_name' => 'required',
-            'contact_type' => 'required',
-            'register' => 'required',
-            'show_invited' => 'required',
-            'color' => 'required',
-            'attendance_method' => 'required',
+            // 'contact_type' => 'required',
+            // 'register' => 'required',
+            // 'show_invited' => 'required',
+            // 'color' => 'required',
+            // 'attendance_method' => 'required',
             // 'file' => 'required',
 
         ]);
@@ -213,29 +213,46 @@ class ProgramController extends Controller
             return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
         }
         $program->name = $request->name;
-        $program->content_one = $request->content_one;
         $program->username = $request->username;
-        $program->content_two = $request->content_two;
         $start = Carbon::parse($request->start)->format('y-m-d');
         $end = Carbon::parse($request->end)->format('y-m-d');
         $program->start = $start;
         $program->end = $end;
+        $program->contract_number = $request->contract_number;
         $program->theme_name = $request->theme_name;
-        $program->contact_type = $request->contact_type;
-        $program->register = $request->register;
-        $program->show_invited = $request->show_invited;
-        $program->color = $request->color;
-        $program->client_id = $request->client_id;
-        $program->attendance_method = $request->attendance_method;
-        $program->status = $request->status;
-        if ($request->hasFile('image')) {
-            $adminImage = $request->file('image');
-            $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
-            $adminImage->move('images/program', $imageName);
-            $program->image = '/images/' . 'program' . '/' . $imageName;
+        $program->courses_count = $request->courses_count;
+        $program->trainers_count = $request->trainers_count;
+        $program->logistics_services = $request->logistics_services;
+        $program->training_center = $request->training_center;
+        if ($request->public_sector == 1) {
+            $program->sector_type = 'public_sector';
         }
-        if ($request->hasFile('file')) {
-            $adminImage = $request->file('file');
+        if ($request->private_sector == 1) {
+            $program->sector_type = 'private_sector';
+        }
+        if ($request->coffe_break == 1) {
+            $program->logistic = 'coffe_break';
+        }
+        if ($request->lanch == 1) {
+            $program->logistic = 'lanch';
+        }
+        if ($request->other == 1) {
+            $program->logistic = 'other';
+        }
+        if ($request->tranning == 1) {
+            $program->colsntunt = 'tranning';
+        }
+        if ($request->tranning_and_colustant == 1) {
+            $program->colsntunt = 'tranning_and_colustant';
+        }
+        if ($request->colustant == 1) {
+            $program->colsntunt = 'colustant';
+        }
+        if ($request->other == 1) {
+            $program->other_type = 'other_type';
+        }
+        if ($request->hasFile('prog_file')) {
+            $adminImage = $request->file('prog_file');
             $imageName = time() . '_' . $request->get('name') . '.' . $adminImage->getClientOriginalExtension();
             $adminImage->move('files/program', $imageName);
             $program->file = '/files/' . 'program' . '/' . $imageName;

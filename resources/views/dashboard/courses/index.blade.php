@@ -19,40 +19,38 @@
             </nav>
         </div>
         @if (!Auth::guard('trainer')->check())
-        <div class="main-dashboard-header-right ">
-            <div class=" d-flex flex-wrap">
-                <a href="{{ route('course.xlsx') }}"
-                    class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i
-                        class="ti-stats-up project"></i></a>
-                <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات صفحة الويب <i
-                        class="icon ion-ios-settings"></i></button>
-                        @if ($program)
-                <a href="{{ route('programs.edit', [$program->id]) }}" class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات <i
-                        class="icon ion-ios-settings"></i></a>
-                        @endif
-                @if ($id)
-                @can('اضافه دوره')
-
-
-                    <a href="{{ route('program.course.create', [$id]) }}"
-                        class="btn btn-warning-gradient btn-with-icon mr-1 mb-1"> اضافة دورة جديدة <i
-                            class="bi bi-plus"></i></a>
-                            @endcan
-                @else
-                @can('اضافه دوره')
-
-                    <a href="{{ route('courses.create') }}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1"> اضافة
-                        دورة جديدة <i class="bi bi-plus"></i></a>
+            <div class="main-dashboard-header-right ">
+                <div class=" d-flex flex-wrap">
+                    <a href="{{ route('course.xlsx') }}"
+                        class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i
+                            class="ti-stats-up project"></i></a>
+                    <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات صفحة الويب <i
+                            class="icon ion-ios-settings"></i></button>
+                    @if ($program)
+                        <a href="{{ route('programs.edit', [$program->id]) }}"
+                            class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات <i
+                                class="icon ion-ios-settings"></i></a>
+                    @endif
+                    @if ($id)
+                        @can('اضافه دوره')
+                            <a href="{{ route('program.course.create', [$id]) }}"
+                                class="btn btn-warning-gradient btn-with-icon mr-1 mb-1"> اضافة دورة جديدة <i
+                                    class="bi bi-plus"></i></a>
                         @endcan
-
-                @endif
-                @if ($program)
-                    <a href="{{ route('home', [$program->username]) }}"
-                        class="btn btn-warning-gradient btn-with-icon mr-1 mb-1" target=”_blank> عرض صفحة الويب <i
-                            class="icon ion-ios-share-alt"></i></a>
-                @endif
+                    @else
+                        @can('اضافه دوره')
+                            <a href="{{ route('courses.create') }}" class="btn btn-warning-gradient btn-with-icon mr-1 mb-1">
+                                اضافة
+                                دورة جديدة <i class="bi bi-plus"></i></a>
+                        @endcan
+                    @endif
+                    @if ($program)
+                        <a href="{{ route('home', [$program->username]) }}"
+                            class="btn btn-warning-gradient btn-with-icon mr-1 mb-1" target=”_blank> عرض صفحة الويب <i
+                                class="icon ion-ios-share-alt"></i></a>
+                    @endif
+                </div>
             </div>
-        </div>
         @endif
     </div>
 @endsection
@@ -72,9 +70,11 @@
         <div class="row  sales-cardSmall totalNumberPrograms">
             <div class="col-lg-3 col-sm-12">
                 <div class="snip1191 orange pos-relative">
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample69.jpg" alt="sample69" style="border-radius: 10px;"/>
-                    <a class="pos-absolute l-30 t-20 text-white ">  فريق ادارة المشاريع </a>
-                    <a class="btn btn-warning-light pos-absolute l-20 text-white b-10" href="{{route('program.mangers',[$program->id])}}">تحرير القائمة </a>
+                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample69.jpg" alt="sample69"
+                        style="border-radius: 10px;" />
+                    <a class="pos-absolute l-30 t-20 text-white "> فريق ادارة المشاريع </a>
+                    <a class="btn btn-warning-light pos-absolute l-20 text-white b-10"
+                        href="{{ route('program.mangers', [$program->id]) }}">تحرير القائمة </a>
                 </div>
             </div>
             <div class="col-lg-9 col-sm-12">
@@ -90,15 +90,15 @@
                                         <div class="">
                                             <p class="mb-2 tx-12 text-muted">عدد الدورات </p>
                                             <div class="">
-                                                <h6 class="mb-1 font-weight-bold">20</h6>
+                                                <h6 class="mb-1 font-weight-bold">{{ $program->courses->count() }}</h6>
                                             </div>
                                         </div>
                                     </div>
                                     <div class=" mt-3">
                                         <div class="dropdown">
                                             <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
-                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
-                                            <div  class="dropdown-menu tx-13">
+                                                data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div class="dropdown-menu tx-13">
                                                 <a class="dropdown-item" href="#">تفاصيل</a>
                                                 <a class="dropdown-item" href="#">تعديل</a>
                                             </div>
@@ -117,17 +117,18 @@
                                             <i class="typcn typcn-book text-warning tx-24"></i>
                                         </div>
                                         <div class="">
-                                            <p class="mb-2 tx-12 text-muted"> الدورات الفعالة  </p>
+                                            <p class="mb-2 tx-12 text-muted"> الدورات الفعالة </p>
                                             <div class="">
-                                                <h6 class="mb-1 font-weight-bold">13</h6>
+                                                <h6 class="mb-1 font-weight-bold">
+                                                    {{ $program->courses->where('status', 'active')->count() }}</h6>
                                             </div>
                                         </div>
                                     </div>
                                     <div class=" mt-3">
                                         <div class="dropdown">
                                             <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
-                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
-                                            <div  class="dropdown-menu tx-13">
+                                                data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div class="dropdown-menu tx-13">
                                                 <a class="dropdown-item" href="#">تفاصيل</a>
                                                 <a class="dropdown-item" href="#">تعديل</a>
                                             </div>
@@ -139,6 +140,27 @@
                             </div>
                         </div>
                     </div>
+                    @php
+                        $countActiveItems = 0; // Counter for active items
+                        $countPastItems = 0;
+                        foreach ($courses as $i => $item) {
+                            $start = Carbon\Carbon::parse($item->start)->format('y-m-d');
+                            $courseStartDate = \Carbon\Carbon::parse($item->start);
+
+                            $end = $courseStartDate->addDays($item->duration)->startOfDay();
+                            $today = Carbon\Carbon::today()->format('Y-m-d');
+                            $status = Carbon\Carbon::parse($today)->gt($end) ? 'منتهيه' : 'غير منتهيه';
+
+                            // Check if the item is active and end date is in the future
+                            if ($status == 'غير منتهيه') {
+                                $countActiveItems++;
+                            }
+                            if (Carbon\Carbon::parse($today)->gt($end)) {
+                                $countPastItems++;
+                            }
+                        }
+
+                    @endphp
                     <div class="col-lg-3 col-sm-6">
                         <div class="col-xl-part w-100">
                             <div class="card">
@@ -150,15 +172,16 @@
                                         <div class="">
                                             <p class="mb-2 tx-12 text-muted"> الدورات المجدولة</p>
                                             <div class="">
-                                                <h6 class="mb-1 font-weight-bold">75</h6>
+                                                <h6 class="mb-1 font-weight-bold">
+                                                    {{ $countActiveItems }}</h6>
                                             </div>
                                         </div>
                                     </div>
                                     <div class=" mt-3">
                                         <div class="dropdown">
                                             <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
-                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
-                                            <div  class="dropdown-menu tx-13">
+                                                data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div class="dropdown-menu tx-13">
                                                 <a class="dropdown-item" href="#">تفاصيل</a>
                                                 <a class="dropdown-item" href="#">تعديل</a>
                                             </div>
@@ -179,15 +202,15 @@
                                         <div class="">
                                             <p class="mb-2 tx-12 text-muted"> الدورات المنتهية </p>
                                             <div class="">
-                                                <h6 class="mb-1 font-weight-bold">500</h6>
+                                                <h6 class="mb-1 font-weight-bold">{{ $countPastItems }}</h6>
                                             </div>
                                         </div>
                                     </div>
                                     <div class=" mt-3">
                                         <div class="dropdown">
                                             <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
-                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
-                                            <div  class="dropdown-menu tx-13">
+                                                data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div class="dropdown-menu tx-13">
                                                 <a class="dropdown-item" href="#">تفاصيل</a>
                                                 <a class="dropdown-item" href="#">تعديل</a>
                                             </div>
@@ -208,15 +231,109 @@
                                         <div class="">
                                             <p class="mb-2 tx-12 text-muted"> اجمالي المشاركين </p>
                                             <div class="">
-                                                <h6 class="mb-1 ">500</h6>
+                                                @php
+                                                    $totalAttendanceCount = 0; // Initialize total attendance count
+                                                    $totalAttendanceCountAccepted = 0; // Initialize total attendance Accepted count
+                                                    $totalAttendanceCountRejected = 0; // Initialize total attendance Rejected count
+                                                    $totalBef = 0;
+                                                    $totalAfter = 0;
+                                                    
+                                                    foreach ($courses as $i => $item) {
+                                                        $count = $item->attendances->count();
+                                                        $countAccepted = $item->attendances
+                                                            ->where('is_accepted', 1)
+                                                            ->count();
+                                                        $countRejected = $item->attendances
+                                                            ->where('is_accepted', 0)
+                                                            ->count();
+                                                        $totalAttendanceCount += $count; // Accumulate the count for each item
+                                                        $totalAttendanceCountAccepted += $countAccepted; // Accumulate the count for each item
+                                                        $totalAttendanceCountRejected += $countRejected; // Accumulate the count for each item
+                                                    }
+                                                    $quiz = App\Models\QuizCourse::where('course_id', $item->id)
+                                                        ->with('quiz')
+                                                        ->whereHas('quiz', function ($q) {
+                                                            $q->where('type', 'befor');
+                                                        })
+                                                        ->first();
+                                                    if ($quiz) {
+                                                        $responseAnswers = App\Models\UserAnswer::where(
+                                                            'quiz_id',
+                                                            $quiz->quiz_id,
+                                                        )
+                                                            ->where('attendance_id', $item->id)
+                                                            ->get();
+                                                        $responseAnswersTrue = $responseAnswers
+                                                            ->where('is_true', 1)
+                                                            ->count();
+                                                        $responseAnswersFalse = $responseAnswers
+                                                            ->where('is_true', 0)
+                                                            ->count();
+                                                        $questions = App\Models\Question::where(
+                                                            'quiz_id',
+                                                            $quiz->quiz_id,
+                                                        )
+                                                            ->with('userAswes', 'optionTrue')
+                                                            ->get();
+                                                        $q = App\Models\Quiz::find($quiz->quiz_id);
+                                                    } else {
+                                                        $responseAnswersTrue = 0;
+                                                        $q = null;
+                                                    }
+
+                                                    if ($responseAnswersTrue != 0) {
+                                                        $totalBef += ($responseAnswersTrue / $questions->count()) * 100;
+                                                    } else {
+                                                        $totalBef = 0;
+                                                    }
+
+                                                    $quizAfter = App\Models\QuizCourse::where('course_id', $course->id)
+                                                        ->with('quiz')
+                                                        ->whereHas('quiz', function ($q) {
+                                                            $q->where('type', 'after');
+                                                        })
+                                                        ->first();
+                                                    if ($quiz) {
+                                                        $responseAnswers = App\Models\UserAnswer::where(
+                                                            'quiz_id',
+                                                            $quizAfter->quiz_id,
+                                                        )
+                                                            ->where('attendance_id', $item->id)
+                                                            ->get();
+                                                        $responseAnswersTrue = $responseAnswers
+                                                            ->where('is_true', 1)
+                                                            ->count();
+                                                        $responseAnswersFalse = $responseAnswers
+                                                            ->where('is_true', 0)
+                                                            ->count();
+                                                        $questions = App\Models\Question::where(
+                                                            'quiz_id',
+                                                            $quizAfter->quiz_id,
+                                                        )
+                                                            ->with('userAswes', 'optionTrue')
+                                                            ->get();
+                                                        $q = App\Models\Quiz::find($quizAfter->quiz_id);
+                                                    } else {
+                                                        $q = null;
+
+                                                        $responseAnswersTrue = 0;
+                                                    }
+
+                                                    if ($responseAnswersTrue != 0) {
+                                                        $totalAfter += ($responseAnswersTrue / $questions->count()) * 100;
+                                                    } else {
+                                                        $totalAfter = 0;
+                                                    }
+                                                @endphp
+                                                <h6 class="mb-1 ">{{ $totalAttendanceCount }}</h6>
                                             </div>
                                         </div>
                                     </div>
                                     <div class=" mt-3">
                                         <div class="dropdown">
                                             <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
-                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
-                                            <div  class="dropdown-menu tx-13">
+                                                data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div class="dropdown-menu tx-13">
                                                 <a class="dropdown-item" href="#">تفاصيل</a>
                                                 <a class="dropdown-item" href="#">تعديل</a>
                                             </div>
@@ -245,8 +362,8 @@
                                     <div class=" mt-3">
                                         <div class="dropdown">
                                             <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
-                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
-                                            <div  class="dropdown-menu tx-13">
+                                                data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div class="dropdown-menu tx-13">
                                                 <a class="dropdown-item" href="#">تفاصيل</a>
                                                 <a class="dropdown-item" href="#">تعديل</a>
                                             </div>
@@ -268,15 +385,16 @@
                                         <div class="">
                                             <p class="mb-2 tx-12 text-muted"> عدد الدورات المقبولة </p>
                                             <div class="">
-                                                <h6 class="mb-1 ">500</h6>
+                                                <h6 class="mb-1 ">{{ $totalAttendanceCountAccepted }}</h6>
                                             </div>
                                         </div>
+
                                     </div>
                                     <div class=" mt-3">
                                         <div class="dropdown">
                                             <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
-                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
-                                            <div  class="dropdown-menu tx-13">
+                                                data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div class="dropdown-menu tx-13">
                                                 <a class="dropdown-item" href="#">تفاصيل</a>
                                                 <a class="dropdown-item" href="#">تعديل</a>
                                             </div>
@@ -298,15 +416,15 @@
                                         <div class="">
                                             <p class="mb-2 tx-12 text-muted"> عدد حالات الاعتذار </p>
                                             <div class="">
-                                                <h6 class="mb-1 ">500</h6>
+                                                <h6 class="mb-1 ">{{ $totalAttendanceCountRejected }}</h6>
                                             </div>
                                         </div>
                                     </div>
                                     <div class=" mt-3">
                                         <div class="dropdown">
                                             <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
-                                            data-toggle="dropdown" id="dropdownMenuButton"></i>
-                                            <div  class="dropdown-menu tx-13">
+                                                data-toggle="dropdown" id="dropdownMenuButton"></i>
+                                            <div class="dropdown-menu tx-13">
                                                 <a class="dropdown-item" href="#">تفاصيل</a>
                                                 <a class="dropdown-item" href="#">تعديل</a>
                                             </div>
@@ -375,13 +493,13 @@
                                     <th>الحاله</th>
 
                                     <th> عدد المسجلين </th>
-                                        <th> اسم المنسق </th>
-                                        <th>  شهادة  </th>
-                                        <th> نسبة الشهادة </th>
-                                        {{-- <th> المقاعد المتاحة </th> --}}
-                                        <th> الاختبار القبلي </th>
-                                        <th> الاختبار البعدي </th>
-                                        {{-- <th> تحميل المادة </th>
+                                    <th> اسم المنسق </th>
+                                    <th> شهادة </th>
+                                    <th> نسبة الشهادة </th>
+                                    {{-- <th> المقاعد المتاحة </th> --}}
+                                    <th> الاختبار القبلي </th>
+                                    <th> الاختبار البعدي </th>
+                                    {{-- <th> تحميل المادة </th>
                                         <th> AS </th> --}}
 
 
@@ -420,11 +538,9 @@
                                             $start = Carbon\Carbon::parse($item->start)->format('y-m-d');
                                             $courseStartDate = \Carbon\Carbon::parse($item->start);
 
-                                            $end = $courseStartDate
-                                                ->addDays($item->duration)
-                                                ->startOfDay();
+                                            $end = $courseStartDate->addDays($item->duration)->startOfDay();
                                             $today = Carbon\Carbon::today()->format('Y-m-d');
-                                                $status = (Carbon\Carbon::parse($today)->gt($end)) ? "منتهيه" : "غير منتهيه";
+                                            $status = Carbon\Carbon::parse($today)->gt($end) ? 'منتهيه' : 'غير منتهيه';
 
                                         @endphp
                                         <td>
@@ -438,18 +554,19 @@
                                                 <span
                                                     class="tag tag-rounded bg-primary-transparent text-primary">فعال</span>
                                             @elseif (Carbon\Carbon::parse($today)->gt($end))
-                                                <span class="tag tag-rounded bg-primary-transparent text-primary">منتهيه</span>
-                                                @elseif($item->status == 'Inactive')
                                                 <span
-                                                    class="tag tag-rounded bg-primary-transparent text-primary">غير فعال</span>
+                                                    class="tag tag-rounded bg-primary-transparent text-primary">منتهيه</span>
+                                            @elseif($item->status == 'Inactive')
+                                                <span class="tag tag-rounded bg-primary-transparent text-primary">غير
+                                                    فعال</span>
                                             @endif
                                         </td>
                                         <th> # </th>
-                                        <th>{{$item->coordinator}} </th>
-                                        <th>{{$item->is_certificate == 1 ? "نعم" : "لا"}}</th>
-                                        <th>{{$item->percentage_certificate}} </th>
-                                         <th>{{$item->quizes->where('type','befor')->first()->name ?? ''}} </th>
-                                         <th>{{$item->quizes->where('type','after')->first()->name ?? ''}} </th>
+                                        <th>{{ $item->coordinator }} </th>
+                                        <th>{{ $item->is_certificate == 1 ? 'نعم' : 'لا' }}</th>
+                                        <th>{{ $item->percentage_certificate }} </th>
+                                        <th>{{ $item->quizes->where('type', 'befor')->first()->name ?? '' }} </th>
+                                        <th>{{ $item->quizes->where('type', 'after')->first()->name ?? '' }} </th>
                                         {{-- <th> # </th>
                                         <th> # </th> --}}
                                         <td class="d-flex filter-col-cell">
@@ -461,8 +578,8 @@
                                             <div class="dropdown-menu">
                                                 <a href="{{ route('courses.edit', [$item->id]) }}" class="dropdown-item">
                                                     تحرير </a>
-                                                    <a href="{{ route('drepIn.quiz', [$item->id]) }}" class="dropdown-item">
-                                                        الاختبارات </a>
+                                                <a href="{{ route('drepIn.quiz', [$item->id]) }}" class="dropdown-item">
+                                                    الاختبارات </a>
                                                 <button class="dropdown-item"
                                                     onclick="performDestroy({{ $item->id }} , this)"> حذف </button>
                                             </div>
@@ -500,19 +617,14 @@
     <script src="{{ asset('assets/js/table.js') }}"></script>
 
     <script>
-
         function performDestroy(id, reference) {
 
             let url = '/dashboard/admin/courses/' + id;
 
             confirmDestroy(url, reference);
         }
-
-
-
     </script>
-    		<script src="{{asset('assets/js/table.js')}}"></script>
-            <script src="{{asset('assets/js/custom.js')}}"></script>
-            <script src="{{asset('assets/js/index.js')}}"></script>
-
+    <script src="{{ asset('assets/js/table.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
+    <script src="{{ asset('assets/js/index.js') }}"></script>
 @endsection
