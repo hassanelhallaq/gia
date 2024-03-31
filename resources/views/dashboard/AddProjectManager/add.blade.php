@@ -119,7 +119,7 @@
 
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <a href="#" class="input-group-text"><i class="bi bi-person"></i></a>
+                                            <abutton type="button" onclick="checkUser()" class="input-group-text">check user</abutton>
                                         </div><input aria-describedby="basic-addon1" aria-label="Username" id="username"
                                             class="form-control" placeholder=" اسم المستخدم " type="text">
                                     </div>
@@ -1203,8 +1203,11 @@
                 div2.remove();
             }
         });
-
-
+        function performStoreManger() {
+            let formData = new FormData();
+            formData.append('username', document.getElementById('username').value);
+            store('/dashboard/admin/check-user', formData)
+        }
         function performStoreManger() {
             let formData = new FormData();
             formData.append('name', document.getElementById('manager_name').value);

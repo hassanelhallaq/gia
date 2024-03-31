@@ -166,6 +166,15 @@ class ProgramController extends Controller
 
     }
 
+    public function checkUser(Request $request)
+    {
+        $program = Program::where('username', $request->username)->get();
+        if ($program->count() == 0) {
+            return response()->json(['icon' => 'sucess', 'title' => 'هذا المستخدم غير مستخدم'], 400);
+        } else {
+            return response()->json(['icon' => 'error', 'title' => 'هذا المستخدم  مستخدم'], 400);
+        }
+    }
     /**
      * Display the specified resource.
      */
@@ -310,12 +319,12 @@ class ProgramController extends Controller
         $adminManger =  AdminProgram::where('type', 'manger')->get();
         $adminsMangs = Admin::whereIn('id', $adminManger->pluck('admin_id'))->paginate(10);
 
-        $adminCordreator =  AdminProgram::where('type','cordreator')->get();
-        $admins = Admin::whereIn('id',$adminCordreator->pluck('admin_id'))->paginate(10);
+        $adminCordreator =  AdminProgram::where('type', 'cordreator')->get();
+        $admins = Admin::whereIn('id', $adminCordreator->pluck('admin_id'))->paginate(10);
 
         $countries = Country::all();
         $clients = Client::all();
-        return view("dashboard.AddProjectManager.quick_add", compact('countries', 'clients','adminsMangs','admins'));
+        return view("dashboard.AddProjectManager.quick_add", compact('countries', 'clients', 'adminsMangs', 'admins'));
     }
     public function programWizardStore(Request $request, $id)
     {

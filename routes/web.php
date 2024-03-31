@@ -97,6 +97,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::post('/admins-manger', [AdminController::class, 'adminManger'])->name('admin.manger');
         Route::get('/add-mangemt/{type}', [AdminController::class , 'addMangement'])->name('addMangement');
         Route::get('/quick-program',[ProgramController::class ,'programQuick'])->name('programQuick');
+        Route::get('/check-user',[ProgramController::class ,'checkUser'])->name('check.user');
 
         Route::post('/quick-program/store',[ProgramController::class ,'programQuickStore'])->name('programQuickStore');
 

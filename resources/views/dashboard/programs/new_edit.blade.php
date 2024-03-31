@@ -93,7 +93,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6 col-md-12 col-sm-12">
+                            <div class="col-6">
                                 <p class="mg-b-10">حدد قالب الدعوة</p>
                                 <select class="form-control select2" id="theme_name">
                                     <option @if ($program->theme_name == 'A1') selected @endif value="A1">
@@ -157,6 +157,10 @@
 
                                 </select>
                             </div>
+                            <div class="col-lg-6 col-sm-12 mb-3">
+
+                            </div>
+
                             <div class="col-3">
                                 <label class="wizard-form-text-label mb-5 rdiobox"><input
                                         @if ($program->logistic == 'coffe_break') checked @endif name="rdio" id="coffe_break"
