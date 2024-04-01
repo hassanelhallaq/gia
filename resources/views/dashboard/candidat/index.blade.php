@@ -222,6 +222,53 @@
                 </div>
             </div>
         </div>
+        @foreach ($candidat as $i => $item)
+        <div class="modal" id="modaledit_{{$item->id}}">
+            <div class="modal-dialog " role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-header">
+                        <h5 class="modal-title"> اضافة مرشح </h5><button aria-label="Close" class="close"
+                            data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <form action="">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="example"> الأسم </label>
+                                    <input class="form-control" required="" value="{{$item->name}}" id="name" type="text">
+                                </div>
+                                <div class="col-6 mt-4">
+                                    <label for="example"> رقم الهاتف </label>
+                                    <input class="form-control" required="" value="{{$item->phone_number}}"  id="phone_number" type="number">
+                                </div>
+                                <div class="col-6 mt-4">
+                                    <label for="example"> البريد الالكتروني</label>
+                                    <input class="form-control" required="" value="{{$item->email}}"  id="email" type="number">
+                                </div>
+                                <div class="col-12">
+                                    <label for="example"> المسمى الوظيفي </label>
+                                    <input class="form-control" required="" value="{{$item->job}}"    id="job" type="text">
+                                </div>
+                                <div class="col-12">
+                                    <label for="example"> القسم  </label>
+                                    <input class="form-control" required="" value="{{$item->department}}"  id="department" type="text">
+                                </div>
+                                <div class="col-12">
+                                    <label for="example"> الفسم الفرعي  </label>
+                                    <input class="form-control" required="" value="{{$item->scound_department}}"  id="scound_department" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-0">
+                            <button class="btn btn-warning-gradient btn-with-icon" type="button"
+                                onclick="performUpdate({{ $item->id }})"> حفظ <i class="bi bi-floppy"></i></button>
+                            <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @endforeach
         <div class="modal" id="sendSms">
             <div class="modal-dialog" role="document">
                 <div class="modal-content modal-content-demo">
@@ -374,6 +421,18 @@
         });
 
 
+        function performUpdate(id) {
+            let formData = new FormData();
+            formData.append("_method", "PUT")
+            formData.append('name', document.getElementById('name').value);
+            formData.append('phone_number', document.getElementById('phone_number').value);
+            formData.append('program_id', id);
+            formData.append('email', document.getElementById('email').value);
+            formData.append('job', document.getElementById('job').value);
+            formData.append('department', document.getElementById('department').value);
+            formData.append('scound_department', document.getElementById('scound_department').value);
+            storepart('/dashboard/admin/candidat/' + id, formData)
+        }
         function performStoreSms(id) {
             let formData = new FormData();
             formData.append('massege', document.getElementById('massege_select').value);
