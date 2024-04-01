@@ -25,7 +25,7 @@
                 class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i
                     class="ti-stats-up project"></i></a>
                     <a
-                    href="{{ route('certificate.management', [$id]) }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1">
+                    href="{{ route('candidat.management', [$id]) }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1">
                     اداره القبول <i class="bi bi-clipboard-data tx-11"></i></a>
             <button class="btn btn-outline-light btn-with-icon btn-sm mr-1" data-target="#choseAttendType"
                 data-toggle="modal">

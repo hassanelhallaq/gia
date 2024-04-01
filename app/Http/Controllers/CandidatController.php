@@ -210,4 +210,11 @@ class CandidatController extends Controller
         }
         return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'],200 );
     }
+
+    public function acceptance(Request $request, $courseId)
+    {
+        $attendanceCourse = Program::with('candidats')->find($courseId);
+
+        return view('dashboard.candidat.acceptance',compact('attendanceCourse'));
+    }
 }

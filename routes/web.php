@@ -60,7 +60,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client,trainer')->group
         Route::get('/candidat/xlsx/{id}', [CandidatController::class, 'candidatXlsx'])->name('candidat.xlsx');
         Route::post('/candidat-sms', [CandidatController::class, 'sendSms'])->name('candidat.sms');
         Route::post('/candidat-sms/selected', [CandidatController::class, 'sendSmsSelected'])->name('candidat.sms.selected');
-
+        Route::get('/candidat_management/{id}', [CandidatController::class, 'acceptance'])->name('candidat.management');
 
     }
 );
