@@ -9,6 +9,6 @@ class Candidat extends Model
 {
     use HasFactory;
       protected $fillable = [
-        'name','phone_number','program_id'
+        'name','phone_number','program_id','email','job','department','scound_department'
     ];
 }

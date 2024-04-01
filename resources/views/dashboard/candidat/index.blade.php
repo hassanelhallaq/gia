@@ -195,6 +195,22 @@
                                     <label for="example"> رقم الهاتف </label>
                                     <input class="form-control" required="" id="phone_number" type="number">
                                 </div>
+                                <div class="col-6 mt-4">
+                                    <label for="example"> البريد الالكتروني</label>
+                                    <input class="form-control" required="" id="email" type="number">
+                                </div>
+                                <div class="col-12">
+                                    <label for="example"> المسمى الوظيفي </label>
+                                    <input class="form-control" required="" id="job" type="text">
+                                </div>
+                                <div class="col-12">
+                                    <label for="example"> القسم  </label>
+                                    <input class="form-control" required="" id="department" type="text">
+                                </div>
+                                <div class="col-12">
+                                    <label for="example"> الفسم الفرعي  </label>
+                                    <input class="form-control" required="" id="scound_department" type="text">
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer border-0">
@@ -276,6 +292,15 @@
             formData.append('name', document.getElementById('name').value);
             formData.append('phone_number', document.getElementById('phone_number').value);
             formData.append('program_id', id);
+            formData.append('email', document.getElementById('email').value);
+            formData.append('job', document.getElementById('job').value);
+            formData.append('department', document.getElementById('department').value);
+            formData.append('scound_department', document.getElementById('scound_department').value);
+
+
+
+
+
             storepart('/dashboard/admin/candidate', formData)
         }
 
