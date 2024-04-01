@@ -403,7 +403,6 @@ class ProgramController extends Controller
                 $name = $row['name'];
                 $phone = $row['phone_number'];
                 $attendance =  Candidat::create(['name' => $name, 'phone_number' => $phone, 'program_id' => $program->id]);
-                $attendance->courses()->attach($id);
             }
         }
         session(['program_id' => $program->id]);
@@ -478,6 +477,15 @@ class ProgramController extends Controller
             $program->file = '/files/' . 'program' . '/' . $imageName;
         }
         $program->save();
+        $file = $request->file('excel_file');
+        if ($file) {
+            $rows = (new FastExcel)->sheet()->import($file);
+            foreach ($rows as $row) {
+                $name = $row['name'];
+                $phone = $row['phone_number'];
+                $attendance =  Candidat::create(['name' => $name, 'phone_number' => $phone, 'program_id' => $program->id]);
+            }
+        }
         session(['program_id' => $program->id]);
 
         return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $program ? 201 : 400);
