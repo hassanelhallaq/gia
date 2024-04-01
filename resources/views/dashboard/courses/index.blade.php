@@ -237,7 +237,7 @@
                                                     $totalAttendanceCountRejected = 0; // Initialize total attendance Rejected count
                                                     $totalBef = 0;
                                                     $totalAfter = 0;
-                                                    
+
                                                     foreach ($courses as $i => $item) {
                                                         $count = $item->attendances->count();
                                                         $countAccepted = $item->attendances
@@ -249,80 +249,6 @@
                                                         $totalAttendanceCount += $count; // Accumulate the count for each item
                                                         $totalAttendanceCountAccepted += $countAccepted; // Accumulate the count for each item
                                                         $totalAttendanceCountRejected += $countRejected; // Accumulate the count for each item
-                                                    }
-                                                    $quiz = App\Models\QuizCourse::where('course_id', $item->id)
-                                                        ->with('quiz')
-                                                        ->whereHas('quiz', function ($q) {
-                                                            $q->where('type', 'befor');
-                                                        })
-                                                        ->first();
-                                                    if ($quiz) {
-                                                        $responseAnswers = App\Models\UserAnswer::where(
-                                                            'quiz_id',
-                                                            $quiz->quiz_id,
-                                                        )
-                                                            ->where('attendance_id', $item->id)
-                                                            ->get();
-                                                        $responseAnswersTrue = $responseAnswers
-                                                            ->where('is_true', 1)
-                                                            ->count();
-                                                        $responseAnswersFalse = $responseAnswers
-                                                            ->where('is_true', 0)
-                                                            ->count();
-                                                        $questions = App\Models\Question::where(
-                                                            'quiz_id',
-                                                            $quiz->quiz_id,
-                                                        )
-                                                            ->with('userAswes', 'optionTrue')
-                                                            ->get();
-                                                        $q = App\Models\Quiz::find($quiz->quiz_id);
-                                                    } else {
-                                                        $responseAnswersTrue = 0;
-                                                        $q = null;
-                                                    }
-
-                                                    if ($responseAnswersTrue != 0) {
-                                                        $totalBef += ($responseAnswersTrue / $questions->count()) * 100;
-                                                    } else {
-                                                        $totalBef = 0;
-                                                    }
-
-                                                    $quizAfter = App\Models\QuizCourse::where('course_id', $course->id)
-                                                        ->with('quiz')
-                                                        ->whereHas('quiz', function ($q) {
-                                                            $q->where('type', 'after');
-                                                        })
-                                                        ->first();
-                                                    if ($quiz) {
-                                                        $responseAnswers = App\Models\UserAnswer::where(
-                                                            'quiz_id',
-                                                            $quizAfter->quiz_id,
-                                                        )
-                                                            ->where('attendance_id', $item->id)
-                                                            ->get();
-                                                        $responseAnswersTrue = $responseAnswers
-                                                            ->where('is_true', 1)
-                                                            ->count();
-                                                        $responseAnswersFalse = $responseAnswers
-                                                            ->where('is_true', 0)
-                                                            ->count();
-                                                        $questions = App\Models\Question::where(
-                                                            'quiz_id',
-                                                            $quizAfter->quiz_id,
-                                                        )
-                                                            ->with('userAswes', 'optionTrue')
-                                                            ->get();
-                                                        $q = App\Models\Quiz::find($quizAfter->quiz_id);
-                                                    } else {
-                                                        $q = null;
-
-                                                        $responseAnswersTrue = 0;
-                                                    }
-
-                                                    if ($responseAnswersTrue != 0) {
-                                                        $totalAfter += ($responseAnswersTrue / $questions->count()) * 100;
-                                                    } else {
-                                                        $totalAfter = 0;
                                                     }
                                                 @endphp
                                                 <h6 class="mb-1 ">{{ $totalAttendanceCount }}</h6>

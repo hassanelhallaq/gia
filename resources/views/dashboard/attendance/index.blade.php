@@ -26,19 +26,19 @@
         </div>
         <div class="main-dashboard-header-right">
             <div class="d-flex flex-wrap">
-                @if($id)
-                 <a href="{{ route('attendance.xlsx', [$id]) }}"
-                 class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i
-                    class="ti-stats-up project"></i></a>
-                     <a
-                    href="{{ route('certificate.management', [$id]) }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1">
-                    الشهادات <i class="bi bi-clipboard-data tx-11"></i></a>
-                    @endif
-                    @can('اضافه مشترك')
-
-                <button class="btn btn-outline-light btn-with-icon btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal">
-                    اضافة مشاركين جدد <i class="bi bi-plus"></i></button>
-                    @endcan
+                @if ($id)
+                    <a href="{{ route('attendance.xlsx', [$id]) }}"
+                        class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i
+                            class="ti-stats-up project"></i></a>
+                    <a
+                        href="{{ route('certificate.management', [$id]) }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1">
+                        الشهادات <i class="bi bi-clipboard-data tx-11"></i></a>
+                @endif
+                @can('اضافه مشترك')
+                    <button class="btn btn-outline-light btn-with-icon btn-sm mr-1" data-target="#choseAttendType"
+                        data-toggle="modal">
+                        اضافة مشاركين جدد <i class="bi bi-plus"></i></button>
+                @endcan
 
                 <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#sendSms"
                     data-toggle="modal"> ارسال دعوة جماعية <i class="icon ion-md-paper-plane"></i></button>
@@ -175,34 +175,51 @@
                                                         `
                                                         <div class="Attendance dropdown-menu scrollable-menu">
                                                             @php
-                                                                $courseStartDate = \Carbon\Carbon::parse($course->start);
-                                                                $attendanceLogin = App\Models\AttendanceLogin::where([['attendance_id', $item->id], ['course_id', $course->id]])->count();
+                                                                $courseStartDate = \Carbon\Carbon::parse(
+                                                                    $course->start,
+                                                                );
+                                                                $attendanceLogin = App\Models\AttendanceLogin::where([
+                                                                    ['attendance_id', $item->id],
+                                                                    ['course_id', $course->id],
+                                                                ])->count();
                                                             @endphp
                                                             @for ($day = 1; $day <= $course->duration; $day++)
-                                                            @php
-                                                            $startDate = $courseStartDate
-                                                                ->copy()
-                                                                ->addDays($day - 1)
-                                                                ->startOfDay();
-                                                            $endDate = $courseStartDate
-                                                                ->copy()
-                                                                ->addDays($day)
-                                                                ->startOfDay();
-                                                            $log = $item->attendance_logins
-                                                                ->whereBetween('created_at', [$startDate, $endDate])
-                                                                ->where('course_id', $course->id)
-                                                                ->first();
-                                                        @endphp
+                                                                @php
+                                                                    $startDate = $courseStartDate
+                                                                        ->copy()
+                                                                        ->addDays($day - 1)
+                                                                        ->startOfDay();
+                                                                    $endDate = $courseStartDate
+                                                                        ->copy()
+                                                                        ->addDays($day)
+                                                                        ->startOfDay();
+                                                                    $log = $item->attendance_logins
+                                                                        ->whereBetween('created_at', [
+                                                                            $startDate,
+                                                                            $endDate,
+                                                                        ])
+                                                                        ->where('course_id', $course->id)
+                                                                        ->first();
+                                                                @endphp
                                                                 @if ($log)
-                                                                <span class="dropdown-item text-success"> اليوم
-                                                                    {{ $day }} (حاضر)</span>
-                                                                    <button class=" btn btn-warning-gradient btn-with-icon mr-1" type="button" onclick="Delattend({{$item->id}},{{$course->id}},{{$day}})">حذف حضور</button>
-                                                            @else
-                                                                <span class="dropdown-item text-danger"> اليوم {{ $day }}
-                                                                    (غير حاضر)
-                                                                </span>
-                                                                <button class=" btn btn-warning-gradient btn-with-icon mr-1" type="button" onclick="attend({{$item->id}},{{$course->id}},{{$day}})">تسجيل حضور</button>
-                                                            @endif
+                                                                    <span class="dropdown-item text-success"> اليوم
+                                                                        {{ $day }} (حاضر)</span>
+                                                                    <button
+                                                                        class=" btn btn-warning-gradient btn-with-icon mr-1"
+                                                                        type="button"
+                                                                        onclick="Delattend({{ $item->id }},{{ $course->id }},{{ $day }})">حذف
+                                                                        حضور</button>
+                                                                @else
+                                                                    <span class="dropdown-item text-danger"> اليوم
+                                                                        {{ $day }}
+                                                                        (غير حاضر)
+                                                                    </span>
+                                                                    <button
+                                                                        class=" btn btn-warning-gradient btn-with-icon mr-1"
+                                                                        type="button"
+                                                                        onclick="attend({{ $item->id }},{{ $course->id }},{{ $day }})">تسجيل
+                                                                        حضور</button>
+                                                                @endif
                                                             @endfor
                                                         </div>
                                                     </td>
@@ -216,18 +233,16 @@
                                                     @endif
                                                 </td>
                                                 @if ($id)
-
-                                                @if($course->program->theme_name == 'A1')
-                                                <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $course->id]) }}"
-                                                        target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
+                                                    @if ($course->program->theme_name == 'A1')
+                                                        <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $course->id]) }}"
+                                                                target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
                                                     @elseif($course->program->theme_name == 'A2')
                                                         <td><a href="{{ route('redirectToLogin', [$item->id, 'course_id' => $course->id]) }}"
-                                                            target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
-                                                            @else
-                                                            <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $course->id]) }}"
                                                                 target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
-                                                            @endif
-
+                                                    @else
+                                                        <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $course->id]) }}"
+                                                                target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
+                                                    @endif
                                                 @endif
                                                 <td>
                                                     <div class="form-group row">
@@ -294,10 +309,13 @@
                 <form action="">
 
                     <div class="modal-footer border-0">
-                        <button class="btn btn-outline-light btn-with-icon btn-sm mr-1" data-dismiss="modal" data-target="#excel_file" data-toggle="modal" type="button"
-                             > رفع ملف <i class="bi bi-floppy"></i></button>
-                       <button class="btn btn-outline-light btn-with-icon btn-sm mr-1" data-dismiss="modal" data-target="#modaladd" data-toggle="modal" type="button"
-                             > اضافه مشترك<i class="bi bi-floppy"></i></button>                    </div>
+                        <button class="btn btn-outline-light btn-with-icon btn-sm mr-1" data-dismiss="modal"
+                            data-target="#excel_file" data-toggle="modal" type="button"> رفع ملف <i
+                                class="bi bi-floppy"></i></button>
+                        <button class="btn btn-outline-light btn-with-icon btn-sm mr-1" data-dismiss="modal"
+                            data-target="#modaladd" data-toggle="modal" type="button"> اضافه مشترك<i
+                                class="bi bi-floppy"></i></button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -313,8 +331,8 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-12 mt-4">
-                                <label for="example"> الملف  </label>
-                                <input type="file" class="form-control" required="" id="excel_file" >
+                                <label for="example"> الملف </label>
+                                <input type="file" class="form-control" required="" id="excel_file">
                             </div>
                         </div>
                     </div>
@@ -358,7 +376,7 @@
                                 <input class="form-control" required="" id="work_place" type="text">
                             </div>
                             <div class="col-12 mt-4">
-                                <label for="example">  السجل المدني</label>
+                                <label for="example"> السجل المدني</label>
                                 <input class="form-control" required="" id="civil_registry" type="text">
                             </div>
 
@@ -414,8 +432,9 @@
                                         id="work_place_{{ $item->id }}" type="text">
                                 </div>
                                 <div class="col-12 mt-4">
-                                    <label for="example">  السجل المدني</label>
-                                    <input class="form-control" value="{{ $item->civil_registry }}" required="" id="civil_registry_{{ $item->id }}" type="text">
+                                    <label for="example"> السجل المدني</label>
+                                    <input class="form-control" value="{{ $item->civil_registry }}" required=""
+                                        id="civil_registry_{{ $item->id }}" type="text">
                                 </div>
                                 @if ($course)
                                     <input class="form-control" value="{{ $course->id }}"required="" hidden
@@ -473,87 +492,88 @@
 
     <!-- قبلي-->
     <!-- Begin Side Drawer before-->
-    @if($course)
-    @foreach ($attendance as $item)
-        <div class="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabindex="-1"
-            id="drawerbefore_{{ $item->id }}" aria-labelledby="offcanvasWithBothOptionsLabel">
-            <div class="offcanvas-body d-flex align-items-start flex-column mb-3 justify-content-between bg-light p-0">
-                <div class="list m-auto text-center">
-                    <i class="bi bi-person-circle tx-80"></i>
-                    <p class="wrapper">
-                        <b class="text-center"> {{ $item->name }}</b>
-                    </p>
-                    @php
-                        $quiz = App\Models\QuizCourse::where('course_id', $course->id)
-                            ->with('quiz')
-                            ->whereHas('quiz', function ($q) {
-                                $q->where('type', 'befor');
-                            })
-                            ->first();
-                        if ($quiz) {
-                            $responseAnswers = App\Models\UserAnswer::where('quiz_id', $quiz->quiz_id)
-                                ->where('attendance_id', $item->id)
-                                ->get();
-                            $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
-                            $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
-                            $questions = App\Models\Question::where('quiz_id', $quiz->quiz_id)
-                                ->with('userAswes', 'optionTrue')
-                                ->get();
-                            $q = App\Models\Quiz::find($quiz->quiz_id);
-                        } else {
-                            $responseAnswersTrue = 0;
-                            $q = null;
-                        }
+    @if ($course)
+        @foreach ($attendance as $item)
+            <div class="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabindex="-1"
+                id="drawerbefore_{{ $item->id }}" aria-labelledby="offcanvasWithBothOptionsLabel">
+                <div class="offcanvas-body d-flex align-items-start flex-column mb-3 justify-content-between bg-light p-0">
+                    <div class="list m-auto text-center">
+                        <i class="bi bi-person-circle tx-80"></i>
+                        <p class="wrapper">
+                            <b class="text-center"> {{ $item->name }}</b>
+                        </p>
+                        @php
+                            $quiz = App\Models\QuizCourse::where('course_id', $course->id)
+                                ->with('quiz')
+                                ->whereHas('quiz', function ($q) {
+                                    $q->where('type', 'befor');
+                                })
+                                ->first();
+                            if ($quiz) {
+                                $responseAnswers = App\Models\UserAnswer::where('quiz_id', $quiz->quiz_id)
+                                    ->where('attendance_id', $item->id)
+                                    ->get();
+                                $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
+                                $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
+                                $questions = App\Models\Question::where('quiz_id', $quiz->quiz_id)
+                                    ->with('userAswes', 'optionTrue')
+                                    ->get();
+                                $q = App\Models\Quiz::find($quiz->quiz_id);
+                            } else {
+                                $responseAnswersTrue = 0;
+                                $q = null;
+                            }
 
-                        if ($responseAnswersTrue != 0) {
-                            $total = ($responseAnswersTrue / $questions->count()) * 100;
-                        } else {
-                            $total = 0;
-                        }
-                    @endphp
-                    <p class="wrapper">
-                        <b> الأختبار</b>
-                    <h3> <b class="text-center"> {{ $q->name ?? '' }} </b>
-                    </h3>
-                    </p>
-                    <p class="wrapper">
-                        <b>نتيجة الأختبار</b>
-                    <h3> <b class="text-center"> {{ $total }} %</b>
-                    </h3>
-                    </p>
+                            if ($responseAnswersTrue != 0) {
+                                $total = ($responseAnswersTrue / $questions->count()) * 100;
+                            } else {
+                                $total = 0;
+                            }
+                        @endphp
+                        <p class="wrapper">
+                            <b> الأختبار</b>
+                        <h3> <b class="text-center"> {{ $q->name ?? '' }} </b>
+                        </h3>
+                        </p>
+                        <p class="wrapper">
+                            <b>نتيجة الأختبار</b>
+                        <h3> <b class="text-center"> {{ $total }} %</b>
+                        </h3>
+                        </p>
 
-                </div>
-                <div class="list p-3">
-                    <div class="row row-sm">
-                        <div class="col-6">
-                            @if ($course)
-                                <a class="card text-center" href="{{ route('attendance.summery', [$id, $item->id]) }}">
-                            @endif
-                            <div class="card-body p-2">
-                                <div class="feature widget-2 text-center mb-3">
-                                    <i
-                                        class="bi bi-clipboard2-data-fill project bg-warning-transparent mx-auto text-warning "></i>
-                                </div>
-                                <p class="mb-1 text-muted tx-13"> عرض نموذج الاجابات </p>
-                            </div>
-                            </a>
-                        </div>
-                        <div class="col-6">
-                            <a href="{{ route('quiz.xlsx', [$id,$item->id]) }}">
-
-
-                            <div class="card text-center">
+                    </div>
+                    <div class="list p-3">
+                        <div class="row row-sm">
+                            <div class="col-6">
+                                @if ($course)
+                                    <a class="card text-center"
+                                        href="{{ route('attendance.summery', [$id, $item->id]) }}">
+                                @endif
                                 <div class="card-body p-2">
-                                    <div class="feature widget-2 text-center mt-0 mb-3">
+                                    <div class="feature widget-2 text-center mb-3">
                                         <i
-                                            class="icon ion-md-paper project bg-warning-transparent mx-auto text-warning "></i>
+                                            class="bi bi-clipboard2-data-fill project bg-warning-transparent mx-auto text-warning "></i>
                                     </div>
-                                    <p class="mb-1 text-muted tx-13"> تحميل نموذج الاجابات </p>
+                                    <p class="mb-1 text-muted tx-13"> عرض نموذج الاجابات </p>
                                 </div>
+                                </a>
                             </div>
-                        </a>
-                        </div>
-                        {{-- <div class="col-6">
+                            <div class="col-6">
+                                <a href="{{ route('quiz.xlsx', [$id, $item->id]) }}">
+
+
+                                    <div class="card text-center">
+                                        <div class="card-body p-2">
+                                            <div class="feature widget-2 text-center mt-0 mb-3">
+                                                <i
+                                                    class="icon ion-md-paper project bg-warning-transparent mx-auto text-warning "></i>
+                                            </div>
+                                            <p class="mb-1 text-muted tx-13"> تحميل نموذج الاجابات </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {{-- <div class="col-6">
                             <div class="card text-center">
                                 <div class="card-body p-2">
                                     <div class="feature widget-2 text-center mt-0 mb-3">
@@ -564,7 +584,7 @@
                                 </div>
                             </div>
                         </div> --}}
-                        {{-- <div class="col-6">
+                            {{-- <div class="col-6">
                             <a class="card text-center">
                                 <div class="card-body p-2">
                                     <div class="feature widget-2 text-center mt-0 mb-3">
@@ -576,9 +596,9 @@
                                 </div>
                             </a>
                         </div> --}}
+                        </div>
                     </div>
-                </div>
-                {{-- <div class="list p-3 w-100">
+                    {{-- <div class="list p-3 w-100">
                     <div class="d-flex justify-content-between w-100 align-items-center">
                         <h6 class=""> الحالة </h6>
                         <p> تم التقدم </p>
@@ -592,95 +612,95 @@
                         <p> 12:23 </p>
                     </div>
                 </div> --}}
+                </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
     @endif
     <!--/Sidebar-right-->
 
     <!--  بعدي-->
     <!-- Begin Side Drawer after -->
-    @if($course)
-    @foreach ($attendance as $item)
-        <div class="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabindex="-1"
-            id="drawerafter_{{ $item->id }}" aria-labelledby="offcanvasWithBothOptionsLabel">
-            <div class="offcanvas-body d-flex align-items-start flex-column mb-3 justify-content-between bg-light p-0">
-                <div class="list m-auto text-center">
-                    <i class="bi bi-person-circle tx-80"></i>
-                    <!-- <a class="profile-user" href=""><img alt="" src="../assets/img/1.jpg" class="rounded-circle"></a> -->
-                    <p class="wrapper">
-                        <b class="text-center"> {{ $item->name }}</b>
-                    </p>
-                    @php
-                        $quiz = App\Models\QuizCourse::where('course_id', $course->id)
-                            ->with('quiz')
-                            ->whereHas('quiz', function ($q) {
-                                $q->where('type', 'after');
-                            })
-                            ->first();
-                        if ($quiz) {
-                            $responseAnswers = App\Models\UserAnswer::where('quiz_id', $quiz->quiz_id)
-                                ->where('attendance_id', $item->id)
-                                ->get();
-                            $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
-                            $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
-                            $questions = App\Models\Question::where('quiz_id', $quiz->quiz_id)
-                                ->with('userAswes', 'optionTrue')
-                                ->get();
-                            $q = App\Models\Quiz::find($quiz->quiz_id);
-                        } else {
-                            $q = null;
+    @if ($course)
+        @foreach ($attendance as $item)
+            <div class="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabindex="-1"
+                id="drawerafter_{{ $item->id }}" aria-labelledby="offcanvasWithBothOptionsLabel">
+                <div class="offcanvas-body d-flex align-items-start flex-column mb-3 justify-content-between bg-light p-0">
+                    <div class="list m-auto text-center">
+                        <i class="bi bi-person-circle tx-80"></i>
+                        <!-- <a class="profile-user" href=""><img alt="" src="../assets/img/1.jpg" class="rounded-circle"></a> -->
+                        <p class="wrapper">
+                            <b class="text-center"> {{ $item->name }}</b>
+                        </p>
+                        @php
+                            $quiz = App\Models\QuizCourse::where('course_id', $course->id)
+                                ->with('quiz')
+                                ->whereHas('quiz', function ($q) {
+                                    $q->where('type', 'after');
+                                })
+                                ->first();
+                            if ($quiz) {
+                                $responseAnswers = App\Models\UserAnswer::where('quiz_id', $quiz->quiz_id)
+                                    ->where('attendance_id', $item->id)
+                                    ->get();
+                                $responseAnswersTrue = $responseAnswers->where('is_true', 1)->count();
+                                $responseAnswersFalse = $responseAnswers->where('is_true', 0)->count();
+                                $questions = App\Models\Question::where('quiz_id', $quiz->quiz_id)
+                                    ->with('userAswes', 'optionTrue')
+                                    ->get();
+                                $q = App\Models\Quiz::find($quiz->quiz_id);
+                            } else {
+                                $q = null;
 
-                            $responseAnswersTrue = 0;
-                        }
+                                $responseAnswersTrue = 0;
+                            }
 
-                        if ($responseAnswersTrue != 0) {
-                            $total = ($responseAnswersTrue / $questions->count()) * 100;
-                        } else {
-                            $total = 0;
-                        }
-                    @endphp
-                    <p class="wrapper">
-                        <b> الأختبار</b>
-                    <h3> <b class="text-center"> {{ $q->name ?? '' }} </b>
-                    </h3>
-                    </p>
-                    <p class="wrapper">
-                    <h3> <b class="text-center"> {{ $total }} %</b> </h3>
-                    </p>
-                </div>
+                            if ($responseAnswersTrue != 0) {
+                                $total = ($responseAnswersTrue / $questions->count()) * 100;
+                            } else {
+                                $total = 0;
+                            }
+                        @endphp
+                        <p class="wrapper">
+                            <b> الأختبار</b>
+                        <h3> <b class="text-center"> {{ $q->name ?? '' }} </b>
+                        </h3>
+                        </p>
+                        <p class="wrapper">
+                        <h3> <b class="text-center"> {{ $total }} %</b> </h3>
+                        </p>
+                    </div>
 
 
-                <div class="list p-3">
-                    <div class="row row-sm">
-                        <div class="col-6">
-                            @if ($course)
-                                <a class="card text-center"
-                                    href="{{ route('attendance.summery.after', [$id, $item->id]) }}">
-                            @endif
-                            <div class="card-body p-2">
-                                <div class="feature widget-2 text-center mb-3">
-                                    <i
-                                        class="bi bi-clipboard2-data-fill project bg-warning-transparent mx-auto text-warning "></i>
-                                </div>
-                                <p class="mb-1 text-muted tx-13"> عرض نموذج الاجابات </p>
-                            </div>
-                            </a>
-                        </div>
+                    <div class="list p-3">
+                        <div class="row row-sm">
                             <div class="col-6">
-                                <a href="{{ route('quiz.after.xlsx', [$id,$item->id]) }}">
-                                <div class="card text-center">
-                                    <div class="card-body p-2">
-                                        <div class="feature widget-2 text-center mt-0 mb-3">
-                                            <i
-                                                class="icon ion-md-paper project bg-warning-transparent mx-auto text-warning "></i>
-                                        </div>
-                                        <p class="mb-1 text-muted tx-13"> تحميل نموذج الاجابات </p>
+                                @if ($course)
+                                    <a class="card text-center"
+                                        href="{{ route('attendance.summery.after', [$id, $item->id]) }}">
+                                @endif
+                                <div class="card-body p-2">
+                                    <div class="feature widget-2 text-center mb-3">
+                                        <i
+                                            class="bi bi-clipboard2-data-fill project bg-warning-transparent mx-auto text-warning "></i>
                                     </div>
+                                    <p class="mb-1 text-muted tx-13"> عرض نموذج الاجابات </p>
                                 </div>
-                            </a>
+                                </a>
                             </div>
-                        {{-- <div class="col-6">
+                            <div class="col-6">
+                                <a href="{{ route('quiz.after.xlsx', [$id, $item->id]) }}">
+                                    <div class="card text-center">
+                                        <div class="card-body p-2">
+                                            <div class="feature widget-2 text-center mt-0 mb-3">
+                                                <i
+                                                    class="icon ion-md-paper project bg-warning-transparent mx-auto text-warning "></i>
+                                            </div>
+                                            <p class="mb-1 text-muted tx-13"> تحميل نموذج الاجابات </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {{-- <div class="col-6">
                             <div class="card text-center">
                                 <div class="card-body p-2">
                                     <div class="feature widget-2 text-center mt-0 mb-3">
@@ -691,7 +711,7 @@
                                 </div>
                             </div>
                         </div> --}}
-                        {{-- <div class="col-12">
+                            {{-- <div class="col-12">
                             <div class="card text-center">
                                 <div class="card-body p-2">
                                     <div class="feature widget-2 text-center mt-0 mb-3">
@@ -702,9 +722,9 @@
                             </div>
                         </div> --}}
 
+                        </div>
                     </div>
-                </div>
-                {{-- <div class="list p-3 w-100">
+                    {{-- <div class="list p-3 w-100">
                     <div class="d-flex justify-content-between w-100 align-items-center">
                         <h6 class=""> الحالة </h6>
                         <p> تم التقدم </p>
@@ -718,9 +738,9 @@
                         <p> 12:23 </p>
                     </div>
                 </div> --}}
+                </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
     @endif
     <div class="modal" id="sendSms">
         <div class="modal-dialog" role="document">
@@ -803,10 +823,11 @@
 
             storepart('/dashboard/admin/attendance', formData)
         }
+
         function performStoreExcel(id) {
             let formData = new FormData();
             formData.append('excel_file', document.getElementById('excel_file').files[0]);
-            storepart('/dashboard/admin/attendance/upload-excel/'+id, formData)
+            storepart('/dashboard/admin/attendance/upload-excel/' + id, formData)
         }
 
         function performStoreSms(id) {
@@ -820,60 +841,60 @@
 
 
         $(document).ready(function() {
-    // Unbind the click event before binding it again to prevent multiple bindings
-    $('#master').off('click').on('click', function(e) {
-        if ($(this).is(':checked')) {
-            $(".sub_chk").prop('checked', true);
-        } else {
-            $(".sub_chk").prop('checked', false);
-        }
-    });
-
-    // Unbind the click event before binding it again to prevent multiple bindings
-    $('.send_all').off('click').on('click', function(e) {
-        var allVals = [];
-        $(".sub_chk:checked").each(function() {
-            allVals.push($(this).attr('data-id'));
-        });
-        if (allVals.length <= 0) {
-            alert("Please select row.");
-        } else {
-            var join_selected_values = allVals.join(",");
-            // Corrected the typo in the next line
-            var join_selected_message = document.getElementById('massege').value;
-            console.log(join_selected_message);
-
-            var courseId = document.getElementById('course_id').value;
-
-
-            $.ajax({
-                url: $(this).data('url'),
-                type: 'post',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                // Corrected the data parameter to send the message
-                data: {
-                    ids: join_selected_values,
-                    massege_select: join_selected_message,
-                    course_id: courseId
-                },
-                success: function(data) {
-                         Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: '  successfully',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                },
-                error: function(data) {
-                    alert(data.responseText);
+            // Unbind the click event before binding it again to prevent multiple bindings
+            $('#master').off('click').on('click', function(e) {
+                if ($(this).is(':checked')) {
+                    $(".sub_chk").prop('checked', true);
+                } else {
+                    $(".sub_chk").prop('checked', false);
                 }
             });
-        }
-    });
-});
+
+            // Unbind the click event before binding it again to prevent multiple bindings
+            $('.send_all').off('click').on('click', function(e) {
+                var allVals = [];
+                $(".sub_chk:checked").each(function() {
+                    allVals.push($(this).attr('data-id'));
+                });
+                if (allVals.length <= 0) {
+                    alert("Please select row.");
+                } else {
+                    var join_selected_values = allVals.join(",");
+                    // Corrected the typo in the next line
+                    var join_selected_message = document.getElementById('massege').value;
+                    console.log(join_selected_message);
+
+                    var courseId = document.getElementById('course_id').value;
+
+
+                    $.ajax({
+                        url: $(this).data('url'),
+                        type: 'post',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        // Corrected the data parameter to send the message
+                        data: {
+                            ids: join_selected_values,
+                            massege_select: join_selected_message,
+                            course_id: courseId
+                        },
+                        success: function(data) {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: '  successfully',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        },
+                        error: function(data) {
+                            alert(data.responseText);
+                        }
+                    });
+                }
+            });
+        });
 
 
         function performUpdate(id) {
@@ -891,19 +912,21 @@
             formData.append('course_id', document.getElementById('course_id').value);
             storepart('/dashboard/admin/attendance/' + id, formData)
         }
-        function attend(id,courseId,day) {
+
+        function attend(id, courseId, day) {
             let formData = new FormData();
             formData.append('course_id', courseId);
             formData.append('attendance_id', id);
             formData.append('day', day);
-            storepart('/dashboard/admin/attend' , formData)
+            storepart('/dashboard/admin/attend', formData)
         }
-        function Delattend(id,courseId,day) {
+
+        function Delattend(id, courseId, day) {
             let formData = new FormData();
             formData.append('course_id', courseId);
             formData.append('attendance_id', id);
             formData.append('day', day);
-            storepart('/dashboard/admin/delete-attend' , formData)
+            storepart('/dashboard/admin/delete-attend', formData)
         }
     </script>
 

@@ -12,6 +12,9 @@ class Program extends Model
     public function courses(){
         return $this->hasMany(Course::class);
     }
+    public function candidats(){
+        return $this->hasMany(Candidat::class);
+    }
 
     public function client(){
         return $this->belongsTo(Client::class);

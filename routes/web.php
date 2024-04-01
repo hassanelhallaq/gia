@@ -56,6 +56,11 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client,trainer')->group
         Route::resource('programs', ProgramController::class);
         Route::get('/program.courses/{id}', [CourseController::class, 'programCourses'])->name('program.course');
         Route::resource('candidate', CandidatController::class);
+        Route::post('/candidate/upload-excel/{courseId}', [CandidatController::class, 'upload'])->name('candidate.upload');
+        Route::get('/candidat/xlsx/{id}', [CandidatController::class, 'candidatXlsx'])->name('candidat.xlsx');
+        Route::post('/candidat-sms', [CandidatController::class, 'sendSms'])->name('candidat.sms');
+        Route::post('/candidat-sms/selected', [CandidatController::class, 'sendSmsSelected'])->name('candidat.sms.selected');
+
 
     }
 );
