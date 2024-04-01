@@ -90,6 +90,8 @@
                                                  <th><i class="far fa-calendar"></i> تاريخ النهاية </th>
 
                                                  <th> الحالة </th>
+                                                 <th><i class="far fa-calendar"></i> المرشحين</th>
+
                                                  <td class="col-filter">
                                                     <!-- dropdown-menu -->
                                                     <button data-toggle="dropdown"
@@ -132,6 +134,10 @@
                                                         <span class="tag tag-rounded bg-primary-transparent text-primary">منتهيه</span>
                                                         @endif
                                                      </td>
+                                                    <td>
+                                                     <a href="{{ route('candidate.show', [$item->id]) }}"><i
+                                                        class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
+                                                    </td>
                                                      <td class="d-flex filter-col-cell">
                                                         <a href="{{route('program.course',[$item->id])}}"><i class="far fa-eye tx-15"></i></a>                                                        <!-- dropdown-menu -->
                                                         <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i class="si si-options-vertical text-gray tx-13" ></i></button>

@@ -207,6 +207,14 @@
                                         <label class="input-group-text" for="address">Upload</label>
                                     </div>
                                 </div>
+                                <div class="col-12 col-sm-12">
+                                    <label for="exampleInputEmail1"> إدراج المرشحين  (صورة / ملف pdf) </label>
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" id="excel_file">
+                                        <label class="input-group-text" for="address">Upload</label>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="row mb-3 mt-4 justify-content-between d-flex">
                                 <div class="">
@@ -1387,9 +1395,7 @@
             formData.append('colustant', document.getElementById('colustant').checked);
             formData.append('other_type', document.getElementById('other_type').checked);
             formData.append('prog_file', document.getElementById('prog_file').files[0]);
-
-
-
+            formData.append('excel_file', document.getElementById('excel_file').files[0]);
             store('/dashboard/admin/programWizardStore/' + id, formData)
         }
 

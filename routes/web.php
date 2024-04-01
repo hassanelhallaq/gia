@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceCourseController;
 use App\Http\Controllers\AttendanceLoginController;
+use App\Http\Controllers\CandidatController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CityController;
@@ -54,6 +55,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client,trainer')->group
         Route::get('/attendance-summery/after/{id}/{attendanceId}', [UserAnswerController::class, 'userAswersAfter'])->name('attendance.summery.after');
         Route::resource('programs', ProgramController::class);
         Route::get('/program.courses/{id}', [CourseController::class, 'programCourses'])->name('program.course');
+        Route::resource('candidate', CandidatController::class);
 
     }
 );

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\AdminProgram;
+use App\Models\Candidat;
 use App\Models\Category;
 use App\Models\Client;
 use App\Models\Country;
@@ -14,6 +15,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+use Rap2hpoutre\FastExcel\Facades\FastExcel;
 
 class ProgramController extends Controller
 {
@@ -393,6 +395,17 @@ class ProgramController extends Controller
             $program->file = '/files/' . 'program' . '/' . $imageName;
         }
         $program->save();
+
+        $file = $request->file('excel_file');
+        if ($file) {
+            $rows = (new FastExcel)->sheet()->import($file);
+            foreach ($rows as $row) {
+                $name = $row['name'];
+                $phone = $row['phone_number'];
+                $attendance =  Candidat::create(['name' => $name, 'phone_number' => $phone, 'program_id' => $program->id]);
+                $attendance->courses()->attach($id);
+            }
+        }
         session(['program_id' => $program->id]);
 
         return response()->json(['icon' => 'success', 'title' => 'تم الاضافه بنجاح'], $program ? 201 : 400);
@@ -481,6 +494,8 @@ class ProgramController extends Controller
             $program->program_files = '/images/' . 'program' . '/' . $imageName;
         }
         $program->update();
+
+
         $request->session()->forget('program_id');
 
         return response()->json(['redirect' => route('programs.index')]);
