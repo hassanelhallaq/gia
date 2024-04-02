@@ -326,7 +326,7 @@ class InvationController extends Controller
 
         $attendance = Attendance::where('phone_number', $request->phone)->first();
         $newCode =  mt_rand(1000, 9999);
-        $attendance->password = Hash::make($newCode);
+        $attendance->password = Hash::make('1234');
         $attendance->update();
         $massege = $request->massege;
         // Retrieve POST parameters from the request
@@ -368,8 +368,8 @@ class InvationController extends Controller
         $attendance = Attendance::where('phone_number', Auth::user()->phone_number)->get();
         $attendanceIds = $attendance->pluck('id')->toArray(); // Extracting IDs from collection
         $courses = AttendanceCourse::whereIn('attendance_id', $attendanceIds)->get();
-        $programs = Program::whereIn('id',$courses->pluck('program_id'))->get();
-        return view("invitationV2.courses", compact('courses','programs'));
+        $programs = Program::whereIn('id', $courses->pluck('program_id'))->get();
+        return view("invitationV2.courses", compact('courses', 'programs'));
     }
     public function login($id, $course_id)
     {

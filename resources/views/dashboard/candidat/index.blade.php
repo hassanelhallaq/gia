@@ -105,7 +105,10 @@
                                         <td scope="row"> {{ $i + 1 }} </td>
                                         <td scope="row"> {{ $item->name }} </td>
                                         <td class="client-name"> {{ $item->phone_number }} </td>
-
+                                        <td class="client-name"> {{ $item->email }} </td>
+                                        <td class="client-name"> {{ $item->job }} </td>
+                                        <td class="client-name"> {{ $item->department }} </td>
+                                        <td class="client-name"> {{ $item->scound_department }} </td>
                                         <td class="d-flex filter-col-cell">
                                             <!-- dropdown-menu -->
                                             <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i

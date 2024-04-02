@@ -15,9 +15,7 @@
                     <li class="breadcrumb-item">
                         <a href="table_program_management.html"class="text-muted">اسم الدورة</a>
                     </li>
-                    <li class="breadcrumb-item">
-                        <a href="table_program_management.html"class="text-muted"> اسم الاختبار </a>
-                    </li>
+
                     {{-- <li class="breadcrumb-item">
                     <a href="#" class="text-muted"> برنامج تطوير المهارات الشخصية </a>
                 </li> --}}
@@ -110,8 +108,7 @@
                                 <th> أسم القسم</th>
                                 <th> القسم الفرعي</th>
                                 <th>  قبول </th>
-                                <th>  استبعاد </th>
-                                <th>  قبول الاستثناء </th>
+
 
 
                                 <!-- Filter -->
@@ -123,29 +120,38 @@
                             <tr>
                                 <p class="p-5 text-center d-none" id="empty-message">لا توجد بيانات لعرضها</p>
                             </tr>
-                            @foreach ($attendanceCourse->candidats as $i => $attendances)
+                            @foreach ($candidat as $i => $item)
                                 <tr class="table-rows">
-                                    <td><input type="checkbox" class="checkChild"></td>
-                                    <td>{{ $i + 1 }}</td>
-                                    <td scope="row"> {{ $attendances->name }}</td>
-                                    <td>{{ $attendances->phone_number }}</td>
+                                    <td scope="row"> {{ $i + 1 }} </td>
+                                    <td scope="row"> {{ $item->name }} </td>
+                                    <td class="client-name"> {{ $item->phone_number }} </td>
+                                    <td class="client-name"> {{ $item->email }} </td>
+                                    <td class="client-name"> {{ $item->job }} </td>
+                                    <td class="client-name"> {{ $item->department }} </td>
+                                    <td class="client-name"> {{ $item->scound_department }} </td>
+                                    <td>
+                                        @php
+                                       $candidateCourse = App\Models\CandidateCourse::where([['course_id',$id],['candidat_id',$item->candidat_id]])->first();
+                                        @endphp
+                                        <div class="icheck-primary d-inline">
+                                            <input type="checkbox" id="candidate_{{ $item->id }}"
+                                                onchange="storeCandidateCourse({{ $item->id }},{{ $id }})"
+                                                @if ($candidateCourse ) checked @endif>
+                                            </label>
 
-                                    <td>{{ $attendances->email }}</td>
-                                    <td>{{ $attendances->job }}</td>
-                                    <td>{{ $attendances->department }}</td>
-                                    <td>{{ $attendances->scound_department }}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                        </div>
 
-
+                                    </td>
                                     <td class="d-flex filter-col-cell">
                                         <!-- dropdown-menu -->
-                                        <button data-toggle="dropdown"class="btn btn-previous btn-sm">
-                                            <i class="si si-options-vertical text-gray tx-12"></i></button>
+                                        <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i
+                                                class="si si-options-vertical text-gray tx-13"></i></button>
                                         <div class="dropdown-menu">
-                                            <a href="edit_course.html" class="dropdown-item"> تحرير </a>
-                                            <a href="" class="dropdown-item"data-target="#modalDelete"
+                                            <a href="#" class="dropdown-item"
+                                                data-target="#modaledit_{{ $item->id }}" data-toggle="modal">
+                                                تحرير </a>
+                                            <a href="#"
+                                                class="dropdown-item text-danger"data-target="#modalDelete"
                                                 data-toggle="modal"> حذف </a>
                                         </div>
                                     </td>
@@ -212,16 +218,16 @@
     <script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js') }}"></script>
 
     <script>
-        function performStore(id) {
+       
+        function storeCandidateCourse(candidate,courseId) {
             let formData = new FormData();
-            formData.append('code', document.getElementById('code_' + id).value);
-            formData.append('course_id', document.getElementById('course_id').value);
-            formData.append('attendance_id', id);
-            formData.append('certifacate_type', document.getElementById('certifacate_type_' + id).value);
-            formData.append('file', document.getElementById('file_' + id).files[0]);
-            storeRoute('/dashboard/admin/update/certifcate', formData)
+            formData.append('candidat_id', candidate);
+            formData.append('course_id', courseId);
+            storeRoute('/dashboard/admin/candidate/course', formData)
         }
     </script>
+
+
 
     <script>
         const copyBtn = document.querySelector('#copyBtn');

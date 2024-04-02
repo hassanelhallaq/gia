@@ -506,6 +506,8 @@
                                                     تحرير </a>
                                                 <a href="{{ route('drepIn.quiz', [$item->id]) }}" class="dropdown-item">
                                                     الاختبارات </a>
+                                                    <a href="{{ route('show.candidate', [$item->id]) }}" class="dropdown-item">
+                                                        المرشحين </a>
                                                 <button class="dropdown-item"
                                                     onclick="performDestroy({{ $item->id }} , this)"> حذف </button>
                                             </div>

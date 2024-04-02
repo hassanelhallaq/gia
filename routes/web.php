@@ -5,6 +5,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AttendanceCourseController;
 use App\Http\Controllers\AttendanceLoginController;
 use App\Http\Controllers\CandidatController;
+use App\Http\Controllers\CandidateCourseController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CityController;
@@ -153,6 +154,8 @@ Route::prefix('dashboard/admin')->middleware('auth:admin')->group(
         Route::resource('/roles', RoleController::class);
         Route::resource('/permissions', PermissionController::class);
         Route::resource('/role.permissions', RolePermissionController::class);
+        Route::post('/candidate/course', [CandidateCourseController::class , 'store']);
+        Route::get('/candidate/course/{id}', [CandidateCourseController::class, 'showCand'])->name('show.candidate');
         Route::get('/get-rates/{id}', [RateController::class, 'createRate'])->name('get.rate');
         Route::resource('rates', RateController::class);
         Route::get('/search/adminMangersel', [AdminController::class , 'adminMangersel'])->name('search.adminMangersel');
