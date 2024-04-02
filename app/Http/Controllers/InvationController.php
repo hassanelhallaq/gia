@@ -362,7 +362,7 @@ class InvationController extends Controller
         // if ($server_output == "OK") { echo "1"; } else { echo "0"; }
 
     }
-    public function courses($id)
+    public function courses()
     {
         // dd(Auth::user()->phone_number);
         $attendance = Attendance::where('phone_number', Auth::user()->phone_number)->get();

@@ -194,7 +194,7 @@ Route::post('/invitation-v2/reply', [InvationController::class, 'storeReply']);
 Route::get('/files-v2/{id}/{course_id}', [InvationController::class, 'files'])->name('invitationV2.files');
 Route::get('/inviation-v2/{id}/{course_id}', [InvationController::class, 'inviation'])->name('invitationV2.inviation');
 Route::get('/exams-v2/{id}/{course_id}', [InvationController::class, 'third'])->name('invitationV2.third');
-Route::get('/courses/{id}', [InvationController::class, 'courses'])->name('invitationV2.courses');
+Route::get('/courses', [InvationController::class, 'courses'])->name('invitationV2.courses');
 }
 );
 
