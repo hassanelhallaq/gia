@@ -81,11 +81,13 @@
                                 <tr class="tableHead">
                                     {{-- <th><input type="checkbox" class="checkParent"></th> --}}
                                     <th>#</th>
-                                    <th>
-                                        الأسم
-                                    </th>
-                                    <th> رقم الهاتف </th>
-
+                                    <th> اسم المشارك </th>
+                                    <th> رقم الهاتف</th>
+                                    <th> البريد الإلكتروني</th>
+                                    <th> المسمى الوظيفي</th>
+                                    <th> أسم القسم</th>
+                                    <th> القسم الفرعي</th>
+                                    {{-- <th>  اضافه للدوره </th> --}}
                                     <td class="col-filter">
                                         <!-- dropdown-menu -->
                                         <button data-toggle="dropdown" class="btn btn-previous p-0"><i

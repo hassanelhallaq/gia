@@ -134,8 +134,7 @@
                     <input type="text" id="sec" maxlength="1" onkeyup="clickEvent(this,'third')">
                     <input type="text" id="third" maxlength="1" onkeyup="clickEvent(this,'fourth')">
                     <input type="text" id="fourth" maxlength="1">
-                    <input hidden id="id" value="{{$id}}">
-                    <input hidden id="course_id" value="{{$course_id}}">
+
 
                 </form>
                 <div class="df jc-c g1">
@@ -304,8 +303,6 @@
         function login() {
             let formData = new FormData();
             formData.append('phone', document.getElementById('phone').value);
-            formData.append('id', document.getElementById('id').value);
-            formData.append('course_id', document.getElementById('course_id').value);
             formData.append('ist', document.getElementById('ist').value);
             formData.append('sec', document.getElementById('sec').value);
             formData.append('third', document.getElementById('third').value);

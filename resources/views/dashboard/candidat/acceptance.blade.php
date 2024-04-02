@@ -99,7 +99,6 @@
                     <table class="table table-striped mg-b-0 text-md-nowrap">
                         <thead>
                             <tr class="">
-                                <th><input type="checkbox" class="checkParent"></th>
                                 <th>#</th>
                                 <th> اسم المشارك </th>
                                 <th> رقم الهاتف</th>
@@ -107,7 +106,7 @@
                                 <th> المسمى الوظيفي</th>
                                 <th> أسم القسم</th>
                                 <th> القسم الفرعي</th>
-                                <th>  قبول </th>
+                                <th>  اضافه للدوره </th>
 
 
 
@@ -131,8 +130,8 @@
                                     <td class="client-name"> {{ $item->scound_department }} </td>
                                     <td>
                                         @php
-                                       $candidateCourse = App\Models\CandidateCourse::where([['course_id',$id],['candidat_id',$item->candidat_id]])->first();
-                                        @endphp
+                                       $candidateCourse = App\Models\CandidateCourse::where([['course_id',$id],['candidat_id',$item->id]])->first();
+                                         @endphp
                                         <div class="icheck-primary d-inline">
                                             <input type="checkbox" id="candidate_{{ $item->id }}"
                                                 onchange="storeCandidateCourse({{ $item->id }},{{ $id }})"
@@ -218,12 +217,12 @@
     <script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js') }}"></script>
 
     <script>
-       
+
         function storeCandidateCourse(candidate,courseId) {
             let formData = new FormData();
             formData.append('candidat_id', candidate);
             formData.append('course_id', courseId);
-            storeRoute('/dashboard/admin/candidate/course', formData)
+            store('/dashboard/admin/candidate/course', formData)
         }
     </script>
 

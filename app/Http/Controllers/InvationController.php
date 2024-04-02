@@ -362,7 +362,7 @@ class InvationController extends Controller
         // if ($server_output == "OK") { echo "1"; } else { echo "0"; }
 
     }
-    public function courses($id, $course_id)
+    public function courses($id)
     {
         // dd(Auth::user()->phone_number);
         $attendance = Attendance::where('phone_number', Auth::user()->phone_number)->get();
@@ -371,10 +371,10 @@ class InvationController extends Controller
         $programs = Program::whereIn('id', $courses->pluck('program_id'))->get();
         return view("invitationV2.courses", compact('courses', 'programs'));
     }
-    public function login($id, $course_id)
+    public function login()
     {
 
-        return view("invitationV2.login", compact('id', 'course_id'));
+        return view("invitationV2.login");
     }
     public function submitOtp(Request $request)
     {
@@ -390,7 +390,7 @@ class InvationController extends Controller
         ];
         if (Auth::guard('attendance')->attempt($credentials)) {
             // Authentication successful
-            return response()->json(['redirect' => route('invitationV2.courses', [$request->id, $request->course_id])]);
+            return response()->json(['redirect' => route('invitationV2.courses', [$request->id])]);
         } else {
             // Authentication failed
             return response()->json(['icon' => 'error', 'title' => 'Login Failed'], 400);

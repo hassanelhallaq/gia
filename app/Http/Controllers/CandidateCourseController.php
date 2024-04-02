@@ -21,7 +21,7 @@ class CandidateCourseController extends Controller
 
     public function store(Request $request)
     {
-
+    // dd($request->candidat_id);
         $validator = Validator($request->all(), [
             'candidat_id' => 'required|exists:candidats,id',
             'course_id' => 'required|exists:courses,id',
@@ -32,6 +32,7 @@ class CandidateCourseController extends Controller
             if ($candidateCourse) {
                 $candidateCourse->delete();
             } else {
+                $candidateCourse = new CandidateCourse();
                 $candidateCourse->candidat_id = $request->candidat_id;
                 $candidateCourse->course_id = $request->course_id;
                 $candidateCourse->save();

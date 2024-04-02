@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('candidate_courses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('course_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('candidat_id')->nullable()->constrained()->cascadeOnDelete();
+
             $table->timestamps();
         });
     }

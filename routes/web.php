@@ -40,9 +40,9 @@ use App\Models\Program;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::prefix('dashboard')->middleware('guest:admin,client')->group(function () {
     Route::get('{guard}/login', [App\Http\Controllers\UserAuthController::class, 'showLogin'])->name('dashboard.login');
     Route::post('{guard}/login', [App\Http\Controllers\UserAuthController::class, 'login']);
@@ -183,8 +183,8 @@ Route::get('/third_connect/{id}/{course_id}', [SiteController::class, 'thirdCont
 Route::get('/rate/{id}/{course_id}', [SiteController::class, 'rate'])->name('rate.attend');
 Route::post('/submitRating/{id}/{course_id}', [SiteController::class, 'submitRating'])->name('submitRating');
 
-Route::prefix('')->middleware('guest:attendance')->group(function () {
-    Route::get('/login/{id}/{course_id}', [InvationController::class, 'login'])->name('invitationV2.login');
+Route::prefix('/')->middleware('guest:attendance')->group(function () {
+    Route::get('', [InvationController::class, 'login'])->name('invitationV2.login');
 });
 Route::prefix('')->middleware('auth:attendance')->group(
     function () {
@@ -194,7 +194,7 @@ Route::post('/invitation-v2/reply', [InvationController::class, 'storeReply']);
 Route::get('/files-v2/{id}/{course_id}', [InvationController::class, 'files'])->name('invitationV2.files');
 Route::get('/inviation-v2/{id}/{course_id}', [InvationController::class, 'inviation'])->name('invitationV2.inviation');
 Route::get('/exams-v2/{id}/{course_id}', [InvationController::class, 'third'])->name('invitationV2.third');
-Route::get('/courses/{id}/{course_id}', [InvationController::class, 'courses'])->name('invitationV2.courses');
+Route::get('/courses/{id}', [InvationController::class, 'courses'])->name('invitationV2.courses');
 }
 );
 
