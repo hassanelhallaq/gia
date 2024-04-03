@@ -138,31 +138,27 @@
             <div class="cards_training">
                 @foreach ($programs as $program)
                     <div class="tab-content">
-                        <div class="tab-pane active" id="{{$program->id}}">
+                        <div class="tab-pane active" id="{{ $program->id }}">
                             @php
-                               $cours=  $program->courses->with('attendances')->whereHas('attendances',function($q){
-                                    $q->where('attendance_id',Auth::user()->id);
-                                })->get();
+                                $attendanceCourse =  App\Models\AttendanceCourse::whereIn('attendance_id', $attendances->pluck('id'))->get();
+                                $cours = App\Models\Course::whereIn('id',$attendanceCourse->pluck('course_id'))
+                                    ->get();
                             @endphp
                             @foreach ($cours as $courses)
                                 @php
-                                    $courses = AttendanceCourse::whereIn('attendance_id', Auth::user->id)->get();
-
-                                    $cor = App\Models\Course::find($courses->course_id);
-
-                                    $attendance = App\Models\Attendance::find(request()->id);
+                                    $attendanceCourse =  App\Models\AttendanceCourse::where('course_id', $courses->id)->whereIn('attendance_id',$attendances->pluck('id'))->first();
+                                    $attendance = App\Models\Attendance::find($attendanceCourse->attendance_id);
                                 @endphp
-
                                 <div class="card_train">
                                     <div>
-                                        @if ($attendance->is_accepted == 0)
+                                    @if ($attendance->is_accepted == 0)
                                             <a
-                                                href="{{ route('invitationV2.inviation', [request()->id, $courses->course_id]) }}">
+                                                href="{{ route('invitationV2.inviation', [$attendance->id, $courses->id]) }}">
                                             @else
                                                 <a
-                                                    href="{{ route('invitationV2.second', [request()->id, $courses->course_id]) }}">
+                                                    href="{{ route('invitationV2.second', [$attendance->id, $courses->id]) }}">
                                         @endif
-                                        <h3>دورة {{ $cor->name }}</h3></a>
+                                        <h3>دورة {{ $courses->name }}</h3></a>
                                         <div id="timePlace" class="flex-g g0 ai-c ">
                                             <div class="df ai-c">
                                                 <span>
@@ -190,7 +186,7 @@
                                                     </svg>
 
                                                 </span>
-                                                <p id="day_content">{{ $cor->start }}</p>
+                                                <p id="day_content">{{ $courses->start }}</p>
                                             </div>
                                             <div class="df ai-c">
                                                 <span>

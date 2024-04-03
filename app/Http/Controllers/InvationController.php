@@ -365,11 +365,15 @@ class InvationController extends Controller
     public function courses()
     {
         // dd(Auth::user()->phone_number);
-        $attendance = Attendance::where('phone_number', Auth::user()->phone_number)->get();
+        $phone =  Auth::user()->phone_number;
+           $attendance = Attendance::where('phone_number', $phone)->get();
+            $attendances =  Attendance::where('phone_number', $phone)->get();
+
         $attendanceIds = $attendance->pluck('id')->toArray(); // Extracting IDs from collection
-        $courses = AttendanceCourse::whereIn('attendance_id', $attendanceIds)->get();
-        $programs = Program::whereIn('id', $courses->pluck('program_id'))->get();
-        return view("invitationV2.courses", compact('courses', 'programs'));
+        $atendanceCourse = AttendanceCourse::whereIn('attendance_id', $attendance->pluck('id'))->get();
+        $courses = Course::whereIn('id', $atendanceCourse->pluck('course_id'))->get();
+          $programs = Program::whereIn('id', $courses->pluck('program_id'))->get();
+        return view("invitationV2.courses", compact('courses', 'programs','phone','attendances'));
     }
     public function login()
     {
