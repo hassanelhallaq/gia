@@ -383,10 +383,10 @@ class InvationController extends Controller
     public function submitOtp(Request $request)
     {
         // dd($request->is_accepted);
-        $code =   $request->fourth . '' .
-            $request->third . '' .
-            $request->sec  . '' .
-            $request->ist;
+        $code =   $request->ist . '' .
+            $request->sec. '' .
+            $request->third  . '' .
+            $request->fourth;
         $attendance = Attendance::where('phone_number', $request->phone)->first();
         $credentials = [
             'phone_number' => $request->get('phone'),

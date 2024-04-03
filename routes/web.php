@@ -229,4 +229,4 @@ Route::get('/inv4Mohammed', function () {
 
 Route::get('/inv4Mohammed2', function () {
     return view('invitationV2.invition');
-})->name('inv4Mohammed');
+})->name('inv6Mohammed');
