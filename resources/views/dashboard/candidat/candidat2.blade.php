@@ -63,7 +63,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped mg-b-0 text-md-nowrap">
+                        <table class="table table-bordered mg-b-0 text-md-nowrap">
                             <thead>
                                 <tr class="tableHead">
                                     {{-- <th><input type="checkbox" class="checkParent"></th> --}}
@@ -96,7 +96,7 @@
                                     <td class="client-name"> k0 </td>
                                     <td class="client-name"> k0 </td>
                                     <td class="client-name"> k0</td>
-                                    <td class="d-flex w-200"  width="200" >
+                                    <td class="client-name d-flex ">
                                         <a aria-controls="collapseExample" aria-expanded="false" data-toggle="collapse" href="#collapseExample" role="button"> <i class="ti-arrow-circle-down fa-2x"></i>  </a>
                                         <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#model_add_candidat2" data-toggle="modal">  اضافة مشترك <i class="bi bi-plus"></i></button>
                                         @include('dashboard.candidat.model_add_candidat2')
@@ -110,8 +110,8 @@
                                             <div class="card-body">
                                                 {{-- row table children --}}
                                                 <div class="table-responsive">
-                                                    <table class="table text-nowrap">
-                                                        <thead class="p-4">
+                                                    <table class=" table table-bordered mg-b-0 text-md-nowrap">
+                                                        <thead class="p-4 bg-darck">
                                                             <tr class="tableHead bg-darck p-3">
                                                                 {{-- <th><input type="checkbox" class="checkParent"></th> --}}
                                                                 <th class="pt-2 pb-2">#</th>
@@ -121,6 +121,7 @@
                                                                 <th class="pt-2 pb-2"> المسمى الوظيفي</th>
                                                                 <th class="pt-2 pb-2"> أسم القسم</th>
                                                                 <th class="pt-2 pb-2"> القسم الفرعي</th>
+                                                                <th class="pt-2 pb-2">  الحالة </th>
                                                                 <th class="pt-2 pb-2">  القبول او الرفض </th>
                                                             </tr>
                                                         </thead>
@@ -132,18 +133,19 @@
                                                                 <td class="client-name"> moh@gmail.com</td>
                                                                 <td class="client-name"> k0 </td>
                                                                 <td class="client-name"> k0 </td>
-                                                                <td class="client-name"> k0</td>
+                                                                <td class="client-name"> k0 </td>
+                                                                <td class="client-name ">
+                                                                        <span class="tag tag-rounded bg-success-gradient text-white ml-2"> تم القبول </span>
+                                                                        <span class="tag tag-rounded bg-danger-gradient text-white">  اعتذر </span>
+                                                                </td>
 
-                                                                <td class="">
-                                                                    <div class="d-flex">
+                                                                <td class="d-flex">
+
                                                                         <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal"> قبول </button>
                                                                         <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal">   اعتذر </button>
                                                                         <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal">   قبول باستثناء </button>
-                                                                    </div>
-                                                                    <div class="d-flex mt-2 text-center">
-                                                                        <span class="tag tag-rounded bg-success-gradient text-white ml-2"> تم القبول </span>
-                                                                        <span class="tag tag-rounded bg-danger-gradient text-white">  اعتذر </span>
-                                                                    </div>
+
+
                                                                 </td>
                                                             </tr>
                                                             <tr class="table-rows bg-white">
@@ -154,6 +156,12 @@
                                                                 <td class="client-name"> k0 </td>
                                                                 <td class="client-name"> k0 </td>
                                                                 <td class="client-name"> k0</td>
+                                                                <td class="client-name d-flex">
+
+                                                                        <span class="tag tag-rounded bg-success-gradient text-white ml-2"> تم القبول </span>
+                                                                        <span class="tag tag-rounded bg-danger-gradient text-white">  اعتذر </span>
+
+                                                                </td>
 
                                                                 <td class="">
                                                                     <div class="d-flex">
@@ -161,10 +169,7 @@
                                                                         <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal">   اعتذر </button>
                                                                         <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal">   قبول باستثناء </button>
                                                                     </div>
-                                                                    <div class="d-flex mt-2 text-center">
-                                                                        <span class="tag tag-rounded bg-success-gradient text-white ml-2"> تم القبول </span>
-                                                                        <span class="tag tag-rounded bg-danger-gradient text-white">  اعتذر </span>
-                                                                    </div>
+
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -187,7 +192,7 @@
                                     <td class="client-name"> k0 </td>
                                     <td class="client-name"> k0 </td>
                                     <td class="client-name"> k0</td>
-                                    <td class="d-flex w-200"  width="200" >
+                                    <td class="client-name d-flex" >
                                         <a aria-controls="collapseExample" aria-expanded="false" data-toggle="collapse" href="#collapseExample2" role="button"> <i class="ti-arrow-circle-down fa-2x"></i>  </a>
                                         <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#model_add_candidat2" data-toggle="modal">  اضافة مشترك <i class="bi bi-plus"></i></button>
                                         @include('dashboard.candidat.model_add_candidat2')
@@ -212,6 +217,7 @@
                                                                 <th class="pt-2 pb-2"> المسمى الوظيفي</th>
                                                                 <th class="pt-2 pb-2"> أسم القسم</th>
                                                                 <th class="pt-2 pb-2"> القسم الفرعي</th>
+                                                                <th class="pt-2 pb-2">  الحالة</th>
                                                                 <th class="pt-2 pb-2">  القبول او الرفض </th>
                                                             </tr>
                                                         </thead>
@@ -225,6 +231,12 @@
                                                                 <td class="client-name"> k0 </td>
                                                                 <td class="client-name"> k0 </td>
                                                                 <td class="client-name"> k0</td>
+                                                                <td class="client-name">
+
+                                                                        <span class="tag tag-rounded bg-success-gradient text-white ml-2"> تم القبول </span>
+                                                                        <span class="tag tag-rounded bg-danger-gradient text-white">  اعتذر </span>
+
+                                                                </td>
 
                                                                 <td class="">
                                                                     <div class="d-flex">
@@ -232,10 +244,7 @@
                                                                         <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal">   اعتذر </button>
                                                                         <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal">   قبول باستثناء </button>
                                                                     </div>
-                                                                    <div class="d-flex mt-2 text-center">
-                                                                        <span class="tag tag-rounded bg-success-gradient text-white ml-2"> تم القبول </span>
-                                                                        <span class="tag tag-rounded bg-danger-gradient text-white">  اعتذر </span>
-                                                                    </div>
+
                                                                 </td>
                                                             </tr>
                                                         </tbody>
