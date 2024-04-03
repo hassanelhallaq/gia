@@ -27,6 +27,9 @@
                     <a
                     href="{{ route('candidat.management', [$id]) }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1">
                     اداره القبول <i class="bi bi-clipboard-data tx-11"></i></a>
+                    <a
+                    href="{{ route('candidat2') }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1">
+                    اداره القبول 2<i class="bi bi-clipboard-data tx-11"></i></a>
             <button class="btn btn-outline-light btn-with-icon btn-sm mr-1" data-target="#choseAttendType"
                 data-toggle="modal">
                 اضافة مشاركين جدد <i class="bi bi-plus"></i></button>

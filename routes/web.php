@@ -131,6 +131,10 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
         Route::get('/AddTemplate', function () {
             return view('dashboard.AddTemplate.index');
         })->name('AddTemplate');
+
+        Route::get('/candidat2', function () {
+            return view('dashboard.candidat.candidat2');
+        })->name('candidat2');
     }
 );
 Route::prefix('dashboard/trainer')->middleware('auth:trainer')->group(
@@ -214,3 +218,15 @@ Route::get('/quiz/index/{quizId}/{clientId}', [SiteController::class, 'quiz'])->
 Route::get('/quiz/questions/{quizId}/{clientId}', [SiteController::class, 'quizView'])->name('quiz.view');
 Route::get('/quiz/save-answer', [SiteController::class, 'quizView']);
 Route::post('/quiz/save-answer', [SiteController::class, 'saveAnswer']);
+
+
+Route::get('/inv4Mohammed', [SiteController::class, 'quizView']);
+
+
+Route::get('/inv4Mohammed', function () {
+    return view('invitationV2.accept_invivation');
+})->name('inv4Mohammed');
+
+Route::get('/inv4Mohammed2', function () {
+    return view('invitationV2.invition');
+})->name('inv4Mohammed');

@@ -359,7 +359,7 @@ class InvationController extends Controller
         // Get the server response
         $server_output = $response->body();
         // Further processing...
-        // if ($server_output == "OK") { echo "1"; } else { echo "0"; }
+        return response()->json(['icon' => 'success', 'title' => 'تم ارسال الرمز بنجاح'], 200);
 
     }
     public function courses()

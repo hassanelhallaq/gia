@@ -41,7 +41,7 @@
                             اهلا بك
                          </span>
                          <span id="profile_name">
-                            {{Auth::user()->name}}
+                            {{-- {{Auth::user()->name}} --}}
                         </span>
                      </div>
 
@@ -93,9 +93,9 @@
                 <p>
                     لقبول الدعوة يرجى البدء ادناه
                 </p>
-                <a href="{{route('invitationV2.inviation',[$attendance->id , request()->course_id])}}" class="btn">
+                {{-- <a href="{{route('invitationV2.inviation',[$attendance->id , request()->course_id])}}" class="btn">
                     أبدأ الآن
-                </a>
+                </a> --}}
             </div>
             <div class="sociel_media">
                <a href="#"> <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
