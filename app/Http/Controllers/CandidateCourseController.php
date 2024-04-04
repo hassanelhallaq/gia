@@ -51,4 +51,13 @@ class CandidateCourseController extends Controller
         // $candidat = Candidat::where('program_id',$course->program_id)->get();
         return view("dashboard.candidat.candidat2", compact('course'));
     }
+
+
+    public function candStatus(Request $request)
+    {
+            $candidat = CandidateCourse::where('candidat_id',$request->candidate_id)->first();
+            $candidat->is_accept = $request->is_accept;
+            $candidat->update();
+
+    }
 }

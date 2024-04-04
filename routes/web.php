@@ -63,6 +63,8 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client,trainer')->group
         Route::post('/candidat-sms/selected', [CandidatController::class, 'sendSmsSelected'])->name('candidat.sms.selected');
         Route::get('/candidat_management/{id}', [CandidatController::class, 'acceptance'])->name('candidat.management');
         Route::get('/candidat-course/accetptance/{id}', [CandidateCourseController::class, 'acceptance'])->name('candidat.course.accetptance');
+        Route::post('/candidat-course/status', [CandidateCourseController::class, 'candStatus'])->name('candidat.course.status');
+
     }
 );
 Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(

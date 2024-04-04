@@ -40,7 +40,7 @@ class Course extends Model
     }
     public function candidatAttend()
     {
-        return $this->belongsToMany(Candidat::class, CandidateCourse::class)->withPivot('is_attend')->where('is_attend',1);
+        return $this->belongsToMany(Candidat::class, CandidateCourse::class)->withPivot('is_attend','is_accept')->where('is_attend',1);
     }
 
     public function program()

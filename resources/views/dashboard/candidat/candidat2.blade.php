@@ -127,22 +127,23 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody id="table-body">
-                                                            @foreach ($cou->candidatAttend as $candidat)
+                                                            @foreach ($cou->candidatAttend as $e => $candidat)
 
                                                             <tr class="table-rows bg-white">
+                                                                <td scope="row"> {{$e + 1}} </td>
                                                                 <td scope="row"> {{$candidat->name}} </td>
                                                                 <td scope="row">{{$candidat->phone_number}} </td>
                                                                 <td class="client-name"> {{$candidat->email}}</td>
                                                                 <td class="client-name"> {{$candidat->job}}</td>
                                                                 <td class="client-name"> {{$candidat->department}} </td>
                                                                 <td class="client-name"> {{$candidat->scound_department}} </td>
-                                                                <td class="client-name"> k0</td>
+                                                                <td class="client-name"> {{$candidat->pivot->is_accept == 1 ? 'مقبول' : "مرفوض"}}</td>
                                                                 <td class="">
                                                                     <div class="d-flex">
-                                                                        <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal"> قبول </button>
-                                                                        <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal">   اعتذر </button>
+                                                                        <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" type="button" onclick="performStoreAccept({{$candidat->id}})"  data-toggle="modal"> قبول </button>
+                                                                        <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" type="button" onclick="performStoreRefused({{$candidat->id}})" data-toggle="modal">   اعتذر </button>
                                                                         <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal">   قبول باستثناء </button>
-                                                                    </div>
+                                                                    </div>  
 
                                                                 </td>
                                                             </tr>
@@ -169,5 +170,21 @@
     </div>
 @endsection
 @section('js')
+    <script>
+        function performStoreAccept(id) {
+            let formData = new FormData();
+            formData.append('candidate_id', id);
+            formData.append('is_accept', 1);
+            storepart('/dashboard/admin/candidat-course/status', formData)
+        }
+        function performStoreRefused(id) {
+            let formData = new FormData();
+            formData.append('candidate_id', id);
+            formData.append('is_accept', 0);
+            storepart('/dashboard/admin/candidat-course/status', formData)
+        }
+    </script>
 
 @endsection
+
+
