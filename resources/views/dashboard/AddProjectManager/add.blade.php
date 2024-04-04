@@ -279,14 +279,14 @@
                                     </div>
 
 
-                                    <div class="col-6">
+                                    {{-- <div class="col-6">
                                         <div class="form-group">
                                             <label for="fname5" class="wizard-form-text-label"> الاعتماد
                                                 *</label>
                                             <input type="text" class="form-control wizard-required"
                                                 id="main_training_area_manger">
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-6">
                                         <div class="form-group">
@@ -310,7 +310,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="country_code_label">+966</span>
                                                 </div>
-                                                <input type="number" class="form-control wizard-required" id="phone_manager" onchange="addCountryCode()" placeholder="Enter phone number">
+                                                <input type="number" class="form-control wizard-required" id="phone_manger" onchange="addCountryCode()" placeholder="Enter phone number">
                                             </div>
                                         </div>
                                     </div>
@@ -1223,7 +1223,7 @@
             formData.append('nationality', document.getElementById('manager_nationality').value);
             formData.append('birthday', document.getElementById('birthday_manger').value);
             formData.append('academicـcertificate', document.getElementById('academicـcertificate_manger').value);
-            formData.append('main_training_area', document.getElementById('main_training_area_manger').value);
+            // formData.append('main_training_area', document.getElementById('main_training_area_manger').value);
             formData.append('accreditation', document.getElementById('accreditation_manger').value);
             formData.append('years_of_experience', document.getElementById('years_of_experience_manger').value);
             formData.append('phone', document.getElementById('phone_manger').value);

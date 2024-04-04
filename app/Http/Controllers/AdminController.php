@@ -148,10 +148,13 @@ class AdminController extends Controller
             'email' => 'required|email|unique:admins,email',
             'password' => 'required|string',
         ]);
+        if ($validator->fails()) {
+                return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
+            }
     }
 
 
-        if (!$validator->fails()) {
+
 
             if(!$findAdmin) {
 
@@ -218,10 +221,7 @@ class AdminController extends Controller
 
                 return response()->json(['message' => "Failed to save"], 400);
             }
-        } else {
 
-            return response()->json(['icon' => 'error', 'title' => $validator->getMessageBag()->first()], 400);
-        }
     }
 
 
