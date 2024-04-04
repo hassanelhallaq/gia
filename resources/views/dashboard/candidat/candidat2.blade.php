@@ -63,7 +63,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped mg-b-0 text-md-nowrap">
+                        <table class="table table-bordered mg-b-0 text-md-nowrap">
                             <thead>
                                 <tr class="tableHead">
                                     {{-- <th><input type="checkbox" class="checkParent"></th> --}}
@@ -122,6 +122,7 @@
                                                                 <th class="pt-2 pb-2"> المسمى الوظيفي</th>
                                                                 <th class="pt-2 pb-2"> أسم القسم</th>
                                                                 <th class="pt-2 pb-2"> القسم الفرعي</th>
+                                                                <th class="pt-2 pb-2">  الحالة</th>
                                                                 <th class="pt-2 pb-2">  القبول او الرفض </th>
                                                             </tr>
                                                         </thead>
@@ -142,10 +143,7 @@
                                                                         <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal">   اعتذر </button>
                                                                         <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal">   قبول باستثناء </button>
                                                                     </div>
-                                                                    <div class="d-flex mt-2 text-center">
-                                                                        <span class="tag tag-rounded bg-success-gradient text-white ml-2"> تم القبول </span>
-                                                                        <span class="tag tag-rounded bg-danger-gradient text-white">  اعتذر </span>
-                                                                    </div>
+
                                                                 </td>
                                                             </tr>
                                                             @endforeach
