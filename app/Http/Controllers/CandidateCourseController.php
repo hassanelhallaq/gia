@@ -44,4 +44,11 @@ class CandidateCourseController extends Controller
         }
 
     }
+
+    public function acceptance($id)
+    {
+            $course = Course::with('candidatAttend')->where('program_id',$id)->get();
+        // $candidat = Candidat::where('program_id',$course->program_id)->get();
+        return view("dashboard.candidat.candidat2", compact('course'));
+    }
 }

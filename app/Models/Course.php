@@ -38,6 +38,11 @@ class Course extends Model
     {
         return $this->belongsToMany(Candidat::class, CandidateCourse::class);
     }
+    public function candidatAttend()
+    {
+        return $this->belongsToMany(Candidat::class, CandidateCourse::class)->withPivot('is_attend')->where('is_attend',1);
+    }
+
     public function program()
     {
         return $this->belongsTo(Program::class);

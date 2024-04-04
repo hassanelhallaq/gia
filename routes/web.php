@@ -62,7 +62,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client,trainer')->group
         Route::post('/candidat-sms', [CandidatController::class, 'sendSms'])->name('candidat.sms');
         Route::post('/candidat-sms/selected', [CandidatController::class, 'sendSmsSelected'])->name('candidat.sms.selected');
         Route::get('/candidat_management/{id}', [CandidatController::class, 'acceptance'])->name('candidat.management');
-
+        Route::get('/candidat-course/accetptance/{id}', [CandidateCourseController::class, 'acceptance'])->name('candidat.course.accetptance');
     }
 );
 Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
@@ -132,9 +132,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
             return view('dashboard.AddTemplate.index');
         })->name('AddTemplate');
 
-        Route::get('/candidat2', function () {
-            return view('dashboard.candidat.candidat2');
-        })->name('candidat2');
+
     }
 );
 Route::prefix('dashboard/trainer')->middleware('auth:trainer')->group(
