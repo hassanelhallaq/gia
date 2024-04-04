@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('candidate_courses', function (Blueprint $table) {
-            //
+            $table->integer('is_accept')->default(0);
+
         });
     }
 
