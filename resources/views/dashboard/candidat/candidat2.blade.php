@@ -94,14 +94,17 @@
                                     <td scope="row">{{$cou->start}} </td>
                                     <td scope="row">{{$cou->category->name ?? ''}} </td>
                                     <td scope="row">{{{$cou->seat_count}}} </td>
-                                    <td class="client-name"> k0</td>
-                                    <td class="client-name"> k0 </td>
-                                    <td class="client-name"> k0 </td>
-                                    <td class="d-flex w-200"  width="200" >
+                                    @php
+                                       $candidateCourse =  App\Models\CandidateCourse::where('course_id',$cou->course_id)->where('is_accept',1)->count();
+                                    @endphp
+                                    <td class="client-name">{{{$candidateCourse}}}</td>
+                                    <td class="client-name"> {{{$cou->seat_count - $candidateCourse}}} </td>
+                                    <td class="client-name"> 0 </td>
+                                    {{-- <td class="d-flex w-200"  width="200" >
                                         <a aria-controls="collapseExample" aria-expanded="false" data-toggle="collapse" href="#collapseExample2" role="button"> <i class="ti-arrow-circle-down fa-2x"></i>  </a>
                                         <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#model_add_candidat2" data-toggle="modal">  اضافة مشترك <i class="bi bi-plus"></i></button>
                                         @include('dashboard.candidat.model_add_candidat2')
-                                    </td>
+                                    </td> --}}
 
                                 </tr>
                                 {{-- row Tap  --}}
@@ -143,7 +146,7 @@
                                                                         <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" type="button" onclick="performStoreAccept({{$candidat->id}})"  data-toggle="modal"> قبول </button>
                                                                         <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" type="button" onclick="performStoreRefused({{$candidat->id}})" data-toggle="modal">   اعتذر </button>
                                                                         <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal">   قبول باستثناء </button>
-                                                                    </div>  
+                                                                    </div>
 
                                                                 </td>
                                                             </tr>

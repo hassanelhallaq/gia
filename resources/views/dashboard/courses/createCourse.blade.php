@@ -27,6 +27,11 @@
                                     <input class="form-control" required="" type="text" id="course_name">
                                 </div>
                             </div>
+                            <div class="col-lg-6">
+                                <p class="mg-b-10">الوصف</p>
+                                <textarea class="form-control" required="" id="desc" type="text"></textarea>
+
+                            </div>
                             <div class="col-lg-6 mg-t-20 mg-lg-t-0">
                                 <p class="mg-b-10"> لغة الدورة </p>
                                 <select class="form-control select2" id="language">
@@ -198,6 +203,7 @@
             formData.append('image_check', document.getElementById('image_check').checked);
              formData.append('attendance_questionnaire', document.getElementById('attendance_questionnaire').checked);
              formData.append('program_id', id);
+             formData.append('desc', document.getElementById('desc').value);
 
 
             storeRoute('/dashboard/admin/courses', formData)
