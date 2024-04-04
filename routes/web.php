@@ -190,6 +190,7 @@ Route::post('/submitRating/{id}/{course_id}', [SiteController::class, 'submitRat
 Route::prefix('/')->middleware('guest:attendance')->group(function () {
     Route::get('', [InvationController::class, 'login'])->name('invitationV2.login');
 });
+Route::get('/candidat', [InvationController::class, 'candidat'])->name('invitationV2.candidat')->middleware('auth:attendance');
 Route::prefix('')->middleware('auth:attendance')->group(
     function () {
 Route::get('/accept-v2/{id}/{course_id}', [InvationController::class, 'second'])->name('invitationV2.second');

@@ -63,6 +63,8 @@ class CourseController extends Controller
      */
     public function create()
     {
+        $categories = Category::all();
+
          if (Auth::guard('admin')->check()) {
             $clients = Client::all();
             $program = Program::all();
@@ -71,7 +73,7 @@ class CourseController extends Controller
             $program = Program::where('client_id', Auth::user()->id)->get();
         }
         $trainers = Trainer::all();
-        return view("dashboard.courses.create", compact('program',  'clients', 'trainers'));
+        return view("dashboard.courses.create", compact('program',  'clients', 'trainers','categories'));
     }
     public function createCourse($id)
     {

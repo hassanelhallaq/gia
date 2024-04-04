@@ -34,6 +34,10 @@ class Course extends Model
     {
         return $this->belongsToMany(Attendance::class, AttendanceCourse::class)->where('email','!=',null);
     }
+    public function candidat()
+    {
+        return $this->belongsToMany(Candidat::class, CandidateCourse::class);
+    }
     public function program()
     {
         return $this->belongsTo(Program::class);

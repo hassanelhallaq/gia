@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use App\Models\AttendanceCourse;
+use App\Models\Category;
 use App\Models\Course;
 use App\Models\CourseFile;
 use App\Models\CourseLink;
@@ -379,6 +380,13 @@ class InvationController extends Controller
     {
 
         return view("invitationV2.login");
+    }
+    public function candidat()
+    {
+        $phone = Auth::user()->phone_number;
+        $categories = Category::all();
+
+        return view("invitationV2.candidat",compact('categories','phone'));
     }
     public function submitOtp(Request $request)
     {

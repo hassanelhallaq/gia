@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{asset('inv/style.css')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
@@ -141,7 +141,7 @@
         <div class="wrap">
             <div class="df ai-c jc-sb">
                 <div class="df ai-c g0">
-                   <img src="assets/logo.webp" alt="" width="40px " height="40px">
+                  <img src="{{asset('inv/assets/logo.webp')}}" alt="" width="40px " height="40px">
 
 
                  </div>
@@ -162,8 +162,8 @@
         </div>
     </header>
     <section>
-        <img class="mc" src="assets/login.svg" alt="">
-        <div class="form">
+      <img class="mc" src="{{asset('inv/assets/login.svg')}}" alt="">
+      <div class="form">
             <form class=sigin>
                 <h2>تسجيل الدخول</h2>
                 <label for="phone">يرجي ادخال  رقم الهاتف بدون 0</label>
@@ -247,7 +247,10 @@
              </div>
              <p class="para">جميع الحقوق محفوظة لدي جيا لعام 2024</p>
     </section>
+    <script src = "{{ asset('crudjs/crud.js') }}" ></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
     function clickEvent(first,last){
         if(first.value.length){
