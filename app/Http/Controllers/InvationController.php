@@ -51,7 +51,8 @@ class InvationController extends Controller
     }
     public function index($id, $course_id)
     {
-        if (Auth::user()) {
+
+        // if (Auth::user()) {
             $attendance = Attendance::where('id', $id)->with('courses')->whereHas('courses', function ($q) use ($course_id) {
                 $q->where('course_id', $course_id);
             })->first();
@@ -69,9 +70,9 @@ class InvationController extends Controller
                     return view("invitationV2.0404", compact("attendance", "course"));
                 }
             }
-        } else {
-            return redirect()->route('invitationV2.login', ['id' => $id, 'course_id' => $course_id]);
-        }
+        // } else {
+        //     return redirect()->route('invitationV2.login', ['id' => $id, 'course_id' => $course_id]);
+        // }
     }
 
     public function storeReply(Request $request)

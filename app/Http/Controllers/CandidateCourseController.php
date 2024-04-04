@@ -44,7 +44,25 @@ class CandidateCourseController extends Controller
         }
 
     }
+    public function addCand(Request $request)
+    {
+    // dd($request->candidat_id);
+        $validator = Validator($request->all(), [
+            'candidat_id' => 'required|exists:candidats,id',
+            'course_id' => 'required|exists:courses,id',
 
+        ]);
+        if (!$validator->fails()) {
+            $candidateCourse = CandidateCourse::where([['course_id',$request->course_id],['candidat_id',$request->candidat_id]])->first();
+            $candidateCourse->is_attend = 1 ;
+            $candidateCourse->update();
+            return response()->json(['icon' => 'success', 'title' => 'status updated'], 200);
+        } else {
+            return response()->json(['message' => $validator->getMessageBag()->first()], 400);
+
+        }
+
+    }
     public function acceptance($id)
     {
             $course = Course::with('candidatAttend')->where('program_id',$id)->get();

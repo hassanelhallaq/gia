@@ -385,10 +385,10 @@
                                         <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $course->id]) }}"
                                                 target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
                                             @elseif($course->program->theme_name == 'A2')
-                                                <td><a href="{{ route('redirectToLogin', [$item->id, 'course_id' => $course->id]) }}"
+                                                <td><a href="{{ route('invitationV2.index', [$item->id, 'course_id' => $course->id]) }}"
                                                     target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
                                                     @else
-                                                    <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $course->id]) }}"
+                                                    <td><a href="{{ route('invitationV2.index', [$item->id, 'course_id' => $course->id]) }}"
                                                         target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
                                                     @endif
                                         <td class="d-flex filter-col-cell">

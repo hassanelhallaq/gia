@@ -95,7 +95,7 @@
                                     <td scope="row">{{$cou->category->name ?? ''}} </td>
                                     <td scope="row">{{{$cou->seat_count}}} </td>
                                     @php
-                                       $candidateCourse =  App\Models\CandidateCourse::where('course_id',$cou->course_id)->where('is_accept',1)->count();
+                                       $candidateCourse =  App\Models\CandidateCourse::where('course_id',$cou->id)->where('is_accept',1)->count();
                                     @endphp
                                     <td class="client-name">{{{$candidateCourse}}}</td>
                                     <td class="client-name"> {{{$cou->seat_count - $candidateCourse}}} </td>
@@ -140,12 +140,19 @@
                                                                 <td class="client-name"> {{$candidat->job}}</td>
                                                                 <td class="client-name"> {{$candidat->department}} </td>
                                                                 <td class="client-name"> {{$candidat->scound_department}} </td>
-                                                                <td class="client-name"> {{$candidat->pivot->is_accept == 1 ? 'مقبول' : "مرفوض"}}</td>
+                                                                <td class="client-name"> @if($candidat->pivot->is_accept == 1)
+                                                                    مقبول
+                                                                    @elseif($candidat->pivot->is_accept == 2)
+                                                                    مرفوض
+                                                                    @else
+                                                                    استثناء
+                                                                    @endif
+                                                                </td>
                                                                 <td class="">
                                                                     <div class="d-flex">
                                                                         <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" type="button" onclick="performStoreAccept({{$candidat->id}})"  data-toggle="modal"> قبول </button>
                                                                         <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" type="button" onclick="performStoreRefused({{$candidat->id}})" data-toggle="modal">   اعتذر </button>
-                                                                        <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" data-toggle="modal">   قبول باستثناء </button>
+                                                                        <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" type="button" onclick="performStoreExption({{$candidat->id}})" data-toggle="modal">   قبول باستثناء </button>
                                                                     </div>
 
                                                                 </td>
@@ -186,6 +193,13 @@
             formData.append('is_accept', 0);
             storepart('/dashboard/admin/candidat-course/status', formData)
         }
+        function performStoreExption(id) {
+            let formData = new FormData();
+            formData.append('candidate_id', id);
+            formData.append('is_accept', 2);
+            storepart('/dashboard/admin/candidat-course/status', formData)
+        }
+
     </script>
 
 @endsection

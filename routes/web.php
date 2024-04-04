@@ -191,18 +191,20 @@ Route::prefix('/')->middleware('guest:attendance')->group(function () {
     Route::get('', [InvationController::class, 'login'])->name('invitationV2.login');
 });
 Route::get('/candidat', [InvationController::class, 'candidat'])->name('invitationV2.candidat')->middleware('auth:attendance');
+Route::post('/invitation-v2/addCand', [CandidateCourseController::class, 'addCand'])->name('invitationV2.addCand')->middleware('auth:attendance');
+
 Route::prefix('')->middleware('auth:attendance')->group(
     function () {
+
+Route::get('/courses', [InvationController::class, 'courses'])->name('invitationV2.courses');
+}
+);
 Route::get('/accept-v2/{id}/{course_id}', [InvationController::class, 'second'])->name('invitationV2.second');
 Route::get('/invitation-v2/{id}/{course_id}', [InvationController::class, 'index'])->name('invitationV2.index');
 Route::post('/invitation-v2/reply', [InvationController::class, 'storeReply']);
 Route::get('/files-v2/{id}/{course_id}', [InvationController::class, 'files'])->name('invitationV2.files');
 Route::get('/inviation-v2/{id}/{course_id}', [InvationController::class, 'inviation'])->name('invitationV2.inviation');
 Route::get('/exams-v2/{id}/{course_id}', [InvationController::class, 'third'])->name('invitationV2.third');
-Route::get('/courses', [InvationController::class, 'courses'])->name('invitationV2.courses');
-}
-);
-
 Route::get('/home/{id}/{course_id}', [InvationController::class, 'redirectToLogin'])->name('redirectToLogin');
 Route::post('/send-sms', [InvationController::class, 'sendSms'])->name('sendSms');
 Route::post('/send-otp', [InvationController::class, 'submitOtp'])->name('submitOtp');
