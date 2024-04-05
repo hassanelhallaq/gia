@@ -515,7 +515,6 @@ class AdminController extends Controller
     public function mangersProjects(Request $request)
     {
         $type = 'manger';
-
         $adminManger =  AdminProgram::where('type','manger')->get();
         $admins = Admin::whereIn('id',$adminManger->pluck('admin_id'))->paginate(10);
         return response()->view('dashboard.admin.project-mangment', compact('admins','type'));

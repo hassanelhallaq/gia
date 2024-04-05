@@ -387,7 +387,8 @@ class InvationController extends Controller
         $phone = Auth::user()->phone_number;
         $categories = Category::all();
 
-        return view("invitationV2.candidat",compact('categories','phone'));
+        return $phone;
+        // return view("invitationV2.candidat",compact('categories','phone'));
     }
     public function submitOtp(Request $request)
     {

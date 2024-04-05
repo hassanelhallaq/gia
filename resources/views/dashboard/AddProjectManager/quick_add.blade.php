@@ -27,20 +27,17 @@
             <form role="form" action="" method="post" class="f1">
                 <h5 class=" text-center"> مرحبا محمد الزرو </h5>
                 <p class=" text-center "> يمكنك البدء فى انشاء جهة لانشاء وادارة الدورات الخاصه بك </p>
-                <div class="f1-steps mb-5 mt-2">
-                    <div class="f1-progress">
-                        <div class="f1-progress-line" data-now-value="0" data-number-of-steps="7" style="width: 1%;"></div>
-                    </div>
-                    <div class="f1-step active">
+                <div class="f1-steps text-center d-flex justify-content-between">
+                    <div class="f1-step active col-2 align-items-center"></div>
+                    <div class="f1-step active col-2 align-items-center">
                         <div class="f1-step-icon">1</div>
                         <p> انشاء مشروع </p>
                     </div>
-
-
-                    <div class="f1-step">
+                    <div class="f1-step col-2 align-items-center">
                         <div class="f1-step-icon">2</div>
                         <p> التكليف </p>
                     </div>
+                    <div class="f1-step active co-6 align-items-center"></div>
                 </div>
                 <div class="card p-4">
                     <div class="body-cord">

@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 @section('header')
- <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
+ <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 mb-0 mr-0">
     <div class="left-content mt-2">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb breadcrumb-style1">
@@ -26,61 +26,38 @@
         </div>
     </div>
 </div>
+
+
+
 @endsection
 
 @section('content')
 
 <div class="row">
 
-    <!--open filter Top  -->
-     <div class="col-lg-12">
-         <div class="card mg-b-20">
-             <div class="card-body d-flex p-3">
-                 <div class="form">
-                     <i class="fa fa-search"></i>
-                     <input type="text" class="form-control form-input" id="search-table"
-                         placeholder="بحث">
-                     <span class="right-pan"><i class="bi bi-sliders"></i></span>
-                 </div>
 
-                 {{-- <div class="d-flex">
-                     <p class="mt-2 mr-2 d-flex"> عرض: </p>
-                     <select class="form-control select2-no-search mr-0 table-rows-number">
-                         <option value="all">
-                             الكل
-                         </option>
-                         <option value="1">
-                             1
-                         </option>
-                         <option value="2">
-                             2
-                         </option>
-                         <option value="3">
-                             3
-                         </option>
-                         <option value="10" selected>
-                             10
-                         </option>
-                         <option value="50">
-                             50
-                         </option>
-                         <option value="100">
-                             100
-                         </option>
-                     </select>
-                 </div> --}}
+            <!--open filter Top  -->
+            <div class="col-lg-12">
+                <div class="card mg-b-20">
+                    <div class="card-body d-flex p-3">
+                        <div class="form">
+                            <i class="fa fa-search"></i>
+                            <input type="text" class="form-control form-input" id="search-table" placeholder="بحث">
+                            <span class="right-pan"><i class="bi bi-sliders"></i></span>
+                        </div>
+                        @can('اضافه عميل')
 
-                 <button class="btn btn-danger btn-sm btn-with-icon mr-1 text-white btnSelectDelete"data-target="#modalDelete" data-toggle="modal" style="display: none;">حذف الصفوف المختارة <i class="bi bi-trash tx-12"></i></button>
+                        <div class="mr-auto d-block tx-20">
+                            <a href="{{route('clients.create')}}" class="btn btn-warning-gradient btn-with-icon" type="button" > اضف <i class="bi bi-floppy"></i></a>
 
-                 <div class="mr-auto d-block tx-20">
-                     <a href=""><i class="typcn typcn-calendar-outline"></i></a>
-                     <a href=""><i class="bi bi-grid"></i></a>
-                     <a href=""><i class="bi bi-list bg-black-9 text-white"></i></a>
-                 </div>
-             </div>
-         </div>
-     </div>
-     <!--closed filter Top  -->
+                        </div>
+                        @endcan
+
+                    </div>
+                </div>
+            </div>
+            <!--closed filter Top  -->
+
 
      <!-- table -->
     <div class="col-lg-12">

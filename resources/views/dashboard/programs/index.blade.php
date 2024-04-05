@@ -1,36 +1,29 @@
 @extends('dashboard.layouts.master')
 @section('header')
-<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
-    <div class="left-content mt-2">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb breadcrumb-style1">
-                @if(!Auth::guard('trainer')->check())
-                <li class="breadcrumb-item">
-                    <a href="{{route('admin.dashboard')}}" >الرئيسية</a>
-                </li>
-                @endif
-                <li class="breadcrumb-item">
-                    <a href="{{route('programs.index')}}" class="text-muted">البرامج</a>
-                </li>
+    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 mb-0 mr-0">
+        <div class="left-content mt-2">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-style1">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('admin.dashboard') }}">الرئيسية</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('programs.index') }}" class="text-muted">البرامج</a>
 
-            </ol>
-        </nav>
-    </div>
-    <div class="main-dashboard-header-right">
-        @if(!Auth::guard('trainer')->check())
+                </ol>
+            </nav>
 
-        <div class=" d-flex">
+        </div>
+        <div class=" text-left d-flex">
             <button  class="btn btn-outline-light btn-print"> طباعة <i class="icon ion-ios-print"></i></button>
             <a href="{{route('programs.xlsx')}}" class="btn btn-outline-light mr-1 btn-export"> تصدير <i class="ti-stats-up project"></i></a>
             {{-- @can('اضافه برنامج') --}}
-
             <a class="btn btn-warning-gradient btn-with-icon mr-1" href="{{route('programs.create')}}">  انشاء برنامج <i class="bi bi-plus"></i></a>
             {{-- @endcan --}}
-
         </div>
-        @endif
+
+
     </div>
-</div>
 @endsection
 @section('content')
 
@@ -40,19 +33,19 @@
             <!--open filter Top  -->
             <div class="col-lg-12">
                 <div class="card mg-b-20">
-                    <div class="card-body d-flex p-3">
+                    <div class="card-body d-flex">
                         <form  method="get">
                         <div class="form">
                             <i class="fa fa-search"></i>
                             {{-- <span class="right-pan"><i class="bi bi-sliders"></i></span> --}}
-                            <div class="row row-sm mb-3">
-                                <div class="col-lg-6">
-                                    <div class="form-group has-success mg-b-0">
-                                        <input type="text" class="form-control form-input" name="name" value="{{request()->name}}" id="name" placeholder="بحث">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group has-success mg-b-0 d-flex" st>
+                                        <input type="text" class="form-control form-input" name="name" value="{{request()->name}}" id="name" placeholder="بحث" style="border-radius: 0px">
+                                        <button class="btn btn-outline-light " type="submit"> بحث </button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mg-t-20 mg-lg-t-0">
-                                    <button class="btn btn-outline-light " type="submit"> بحث </button>
                                 </div>
                             </div>
                         </div>
@@ -69,9 +62,9 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab11">
                                 <div class="table-responsive">
-                                    <table class="table table-striped mg-b-0 text-md-nowrap">
-                                        <thead>
-                                            <tr class="tableHead">
+                                    <table class="table table-striped mg-b-0 text-md-nowrap ">
+                                        <thead class="">
+                                            <tr class="tableHead text-center">
                                                 <th><input type="checkbox" class="checkParent"></th>
                                                 <th>#</th>
                                                  <th>
@@ -90,26 +83,22 @@
                                                  <th><i class="far fa-calendar"></i> تاريخ النهاية </th>
 
                                                  <th> الحالة </th>
-                                                 <th><i class="far fa-calendar"></i> المرشحين</th>
+                                                 <th> المرشحين</th>
+                                                 <th> الدورات </th>
 
-                                                 <td class="col-filter">
-                                                    <!-- dropdown-menu -->
-                                                    <button data-toggle="dropdown"
-                                                        class="btn btn-previous p-0"><i
-                                                            class="bi bi-filter-square tx-20"></i></button>
-                                                    <div class="dropdown-menu">
-                                                    </div>
+                                                <td>
+                                                  العمليات
                                                 </td>
                                             </tr>
                                          </thead>
                                         @foreach ($programs as $i => $item)
-                                            <tbody id="table-body">
+                                            <tbody id="table-body text-center">
                                                 <tr>
                                                     <p class="p-5 text-center d-none" id="empty-message">لا توجد بيانات
                                                         لعرضها
                                                     </p>
                                                 </tr>
-                                                <tr class="table-rows">
+                                                <tr class="table-rows text-center">
                                                     <td><input type="checkbox" class="checkChild"></td>
                                                     <td>{{$i + 1}}</td>
                                                      <td scope="row">{{$item->name}} </td>
@@ -136,10 +125,13 @@
                                                      </td>
                                                     <td>
                                                      <a href="{{ route('candidate.show', [$item->id]) }}"><i
-                                                        class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
+                                                        class="far fa-eye text-gray tx-13 ml-4"></i></a>
                                                     </td>
-                                                     <td class="d-flex filter-col-cell">
-                                                        <a href="{{route('program.course',[$item->id])}}"><i class="far fa-eye tx-15"></i></a>                                                        <!-- dropdown-menu -->
+                                                    <td class="d-flex filter-col-cell">
+                                                        <a href="{{route('program.course',[$item->id])}}"><i class="far fa-eye tx-13"></i></a>                                                        <!-- dropdown-menu -->
+
+                                                    </td>
+                                                    <td>
                                                         <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i class="si si-options-vertical text-gray tx-13" ></i></button>
                                                         <div class="dropdown-menu">
                                                             <a href="{{route('programs.edit',[$item->id])}}" class="dropdown-item"> تحرير </a>

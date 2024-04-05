@@ -1,6 +1,22 @@
 @extends('dashboard.layouts.master')
+@section('css')
+<style>
+    .chartTest {
+   margin-bottom: 20px;
+   display: flex;
+   justify-content: space-between;
+}
+.circle {
+   height: 8px;
+   width: 8px;
+   border-radius: 50%;
+   background-color: rgb(46, 211, 85);
+}
+</style>
+
+@endsection
 @section('header')
-    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
+    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 mb-0 mr-0">
         <div class="left-content mt-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1">

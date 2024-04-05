@@ -731,7 +731,7 @@
 
     <!-- قبلي-->
     <!-- Begin Side Drawer before-->
-    {{-- @foreach ($course->attendances as $item)
+    @foreach ($course->attendances as $item)
         <div class="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabindex="-1"
             id="drawerbefore_{{ $item->id }}" aria-labelledby="offcanvasWithBothOptionsLabel">
             <div class="offcanvas-body d-flex align-items-start flex-column mb-3 justify-content-between bg-light p-0">
@@ -828,7 +828,7 @@
 
             </div>
         </div>
-    @endforeach --}}
+    @endforeach
     <!--/Sidebar-right-->
 
     <!--  بعدي-->

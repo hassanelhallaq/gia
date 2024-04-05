@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 @section('header')
-<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
+<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 mb-0 mr-0">
     <div class="left-content mt-2">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb breadcrumb-style1">
@@ -19,39 +19,34 @@
     </div>
 </div>
 @endsection
-<br><br>
-<br>
-<br>
 
 @section('content')
 
         <!-- row -->
         <div class="row row">
 
+
             <!--open filter Top  -->
             <div class="col-lg-12">
                 <div class="card mg-b-20">
                     <div class="card-body d-flex p-3">
-                        <form  method="get">
                         <div class="form">
                             <i class="fa fa-search"></i>
-                            {{-- <span class="right-pan"><i class="bi bi-sliders"></i></span> --}}
-                            <div class="row row-sm mb-3">
-                                <div class="col-lg-6">
-                                    <div class="form-group has-success mg-b-0">
-                                        <input type="text" class="form-control form-input" name="name" value="{{request()->name}}" id="name" placeholder="بحث">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mg-t-20 mg-lg-t-0">
-                                    <button class="btn btn-outline-light " type="submit"> بحث </button>
-                                </div>
-                            </div>
+                            <input type="text" class="form-control form-input" id="search-table" placeholder="بحث">
+                            <span class="right-pan"><i class="bi bi-sliders"></i></span>
                         </div>
-                        </form>
+                        @can('اضافه عميل')
+
+                        <div class="mr-auto d-block tx-20">
+                            <a href="#" class="btn btn-warning-gradient btn-with-icon" type="button" > اضف <i class="bi bi-floppy"></i></a>
+                        </div>
+                        @endcan
+
                     </div>
                 </div>
             </div>
             <!--closed filter Top  -->
+
 
             <!-- table -->
             <div class="col-lg-12">

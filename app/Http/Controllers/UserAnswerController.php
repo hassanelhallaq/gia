@@ -74,7 +74,6 @@ class UserAnswerController extends Controller
         $quiz = QuizCourse::where('course_id', $course->id)->with('quiz')->whereHas('quiz', function ($q) {
             $q->where('type', 'befor');
         })->first();
-        // $questions
         if ($quiz) {
             $quizId = $quiz->quiz_id;
             $responseAnswers = UserAnswer::where('quiz_id', $quiz->quiz_id)->where('attendance_id', $attendanceId)->get();
