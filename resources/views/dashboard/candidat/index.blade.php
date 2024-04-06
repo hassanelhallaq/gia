@@ -114,6 +114,9 @@
                                         <td class="client-name"> {{ $item->job }} </td>
                                         <td class="client-name"> {{ $item->department }} </td>
                                         <td class="client-name"> {{ $item->scound_department }} </td>
+                                        <td class="client-name">
+                                        <td><a href="{{ route('invitationV2.candidat', [$item->id]) }}"
+                                            target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
                                         <td class="d-flex filter-col-cell">
                                             <!-- dropdown-menu -->
                                             <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i

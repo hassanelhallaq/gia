@@ -216,7 +216,7 @@
                 <div class="tab-content" id="pills-tabContent">
                     @foreach ($categories as $category)
                         @php
-                            $candidat = App\Models\Candidat::where('phone_number', $phone)->first();
+                            $candidat = App\Models\Candidat::find($id);
                             $courses = App\Models\Course::where('category_id', $category->id)
                                 ->with('candidat')
                                 ->whereHas('candidat', function ($q) use ($candidat) {
