@@ -13,7 +13,7 @@
 
         <div class=" d-flex">
 
-            <a class="btn btn-warning-gradient btn-with-icon mr-1" href="{{route('addMangement',[$type])}}">  انشاء  <i class="bi bi-plus"></i></a>
+            <a class="btn btn-warning-gradient btn-with-icon mr-1 d-none" href="{{route('addMangement',[$type])}}">  انشاء  <i class="bi bi-plus"></i></a>
 
         </div>
     </div>

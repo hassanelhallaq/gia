@@ -392,7 +392,7 @@
                                     <div class="d-flex">
                                         {{-- <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button> --}}
                                         <button type="button" onclick="performStoreManger()"
-                                            class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
+                                            class="btn  btn-warning-gradient btn-next">حفظ وتسجيل بيانات المستخدم</button>
                                     </div>
                                 </div>
                             </div>
@@ -424,7 +424,7 @@
                                             class="btn btn-warning-gradient form-wizard-previous-btn btn-previous "> السابق
                                         </a>
                                         <button type="button" onclick="performStoreMangerId()"
-                                            class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
+                                            class="btn  btn-warning-gradient btn-next">حفظ وتسجيل بيانات المستخدم</button>
                                     </div>
                                 </div>
                             </div>
@@ -587,7 +587,7 @@
                                 <div class="d-flex">
                                     {{-- <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button> --}}
                                     <button type="button" onclick="performStoreCord()"
-                                        class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
+                                        class="btn  btn-warning-gradient btn-next">حفظ وتسجيل بيانات المستخدم</button>
                                 </div>
                             </div>
                         </fieldset>
@@ -763,7 +763,7 @@
                                 <div class="d-flex">
                                     {{-- <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button> --}}
                                     <button type="button" onclick="performStoreTrainer()"
-                                        class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
+                                        class="btn  btn-warning-gradient btn-next">حفظ وتسجيل بيانات المستخدم</button>
                                 </div>
                             </div>
                         </fieldset>
@@ -923,7 +923,7 @@
                                 <div class="d-flex">
                                     {{-- <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button> --}}
                                     <button type="button" onclick="performStoreCordTrainer()"
-                                        class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
+                                        class="btn  btn-warning-gradient btn-next">حفظ وتسجيل بيانات المستخدم</button>
                                 </div>
                             </div>
                         </fieldset>
@@ -1088,7 +1088,7 @@
                                 <div class="d-flex">
                                     {{-- <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button> --}}
                                     <button type="button" onclick="performStore()"
-                                        class="btn  btn-warning-gradient btn-next"> التوجة للخطوه التالية </button>
+                                        class="btn  btn-warning-gradient btn-next">حفظ وتسجيل بيانات المستخدم</button>
                                 </div>
                             </div>
                         </fieldset>

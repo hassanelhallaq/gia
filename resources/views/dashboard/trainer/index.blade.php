@@ -20,7 +20,7 @@
     <div class="main-dashboard-header-right">
         <div class=" d-flex">
             @can('اضافه مدرب')
-             <button class="btn btn-warning-gradient btn-with-icon"data-target="#modaladd" data-toggle="modal"> اضافة مدرب جديد <i class="bi bi-plus"></i></button>
+             <button class="btn btn-warning-gradient btn-with-icon d-none"data-target="#modaladd" data-toggle="modal"> اضافة مدرب جديد <i class="bi bi-plus"></i></button>
              @endcan
 
         </div>

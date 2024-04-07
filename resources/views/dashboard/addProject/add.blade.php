@@ -65,7 +65,7 @@
                                 <button class="btn btn-outline-warning ml-1 btn-with-icon  "> العودة للرئيسية  </button>
                             </div>
                             <div class="d-flex">
-                                <button type="button" onclick="redirect()" class="btn ml-1 btn-warning-gradient btn-with-icon">  التوجة للخطوه التالية  </button>
+                                <button type="button" onclick="redirect()" class="btn ml-1 btn-warning-gradient btn-with-icon"> حفظ وتسجيل بيانات المستخدم </button>
                                 {{-- <button type="button" class="btn btn-outline-warning btn-next ">   المتابعة لاصدار تكليف </button> --}}
                             </div>
                         </div>

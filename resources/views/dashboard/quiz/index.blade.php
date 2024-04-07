@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 @section('header')
-<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
+<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 mb-0 mr-0">
     <div class="left-content mt-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1">
@@ -16,26 +16,21 @@
                 </ol>
             </nav>
         </div>
-        <div class="main-dashboard-header-right">
-            <div class=" d-flex">
-                {{-- <a href="add_tests.html" class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> اضافة اسئلة <i class="bi bi-plus"></i></a> --}}
-                <button class="btn btn-warning-gradient btn-with-icon btn-md mr-1" data-target="#select2modal"
-                    data-toggle="modal"> اضافة اختبار جديد <i class="bi bi-plus"></i></button>
-            </div>
-        </div>
+        
     </div>
 @endsection
 @section('content')
+<div class="container-fluid mt-3">
         <!-- row -->
         <div class="row table-tabs">
             <!--open filter and Tap <Top>  -->
             <div class="col-lg-12">
                 <div class="card mg-b-20">
-                    <div class="row card-body  p-3">
+                    <div class="row card-body  p-3 d-flex justify-content-between">
                         <div class="col-lg-6 col-sm-12 tab-menu-heading mb-3">
                             <div class="tabs-menu">
                                 <!-- Tabs -->
-                                <ul class="nav panel-tabs mt-2 mt-sm-6">
+                                <ul class="nav panel-tabs">
                                     <li class="ml-3"><a href="#tab11" class="active" data-toggle="tab"> الأختبار القبلي
                                         </a></li>
                                     <li class="ml-3"><a href="#tab12" data-toggle="tab"> الأختبار البعدي </a></li>
@@ -46,6 +41,13 @@
                             </div>
                         </div>
                         <!--input Search -->
+                        <div class="text-left">
+                            <div class=" d-flex">
+                                {{-- <a href="add_tests.html" class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> اضافة اسئلة <i class="bi bi-plus"></i></a> --}}
+                                <button class="btn btn-warning-gradient btn-with-icon btn-md mr-1" data-target="#select2modal"
+                                    data-toggle="modal"> اضافة اختبار جديد <i class="bi bi-plus"></i></button>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -315,6 +317,7 @@
             <!--closed filter bottom  -->
         </div>
         <!-- row closed -->
+</div>
     <div class="modal" id="select2modal">
         <div class="modal-dialog" role="document">
             <div class="modal-content modal-content-demo">
