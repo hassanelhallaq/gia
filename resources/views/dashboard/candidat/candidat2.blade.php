@@ -100,11 +100,11 @@
                                     <td class="client-name">{{{$candidateCourse}}}</td>
                                     <td class="client-name"> {{{$cou->seat_count - $candidateCourse}}} </td>
                                     <td class="client-name"> 0 </td>
-                                    {{-- <td class="d-flex w-200"  width="200" >
+                                    <td class="d-flex w-200"  width="200" >
                                         <a aria-controls="collapseExample" aria-expanded="false" data-toggle="collapse" href="#collapseExample2" role="button"> <i class="ti-arrow-circle-down fa-2x"></i>  </a>
-                                        <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#model_add_candidat2" data-toggle="modal">  اضافة مشترك <i class="bi bi-plus"></i></button>
-                                        @include('dashboard.candidat.model_add_candidat2')
-                                    </td> --}}
+                                        {{-- <button class="btn btn-warning-gradient btn-with-icon btn-sm mr-1" data-target="#model_add_candidat2" data-toggle="modal">  اضافة مشترك <i class="bi bi-plus"></i></button>
+                                        @include('dashboard.candidat.model_add_candidat2') --}}
+                                    </td>
 
                                 </tr>
                                 {{-- row Tap  --}}

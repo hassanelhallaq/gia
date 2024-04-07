@@ -129,7 +129,7 @@
             <div class="nav_training">
                 @foreach ($programs as $program)
                     <div class="active"><a href="#{{ $program->id }}" class="active d-flex" data-toggle="tab">
-                            برنامج التدريب الجماعي
+                            مشروع التدريب الجماعي
                         </a>
                     </div>
                 @endforeach

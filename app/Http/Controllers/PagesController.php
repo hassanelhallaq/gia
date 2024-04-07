@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminProgram;
 use App\Models\Attendance;
 use App\Models\Course;
 use App\Models\Program;
@@ -24,8 +25,30 @@ class PagesController extends Controller
         }
         if (Auth::guard('admin')->check()) {
 
-            $programsActice = Program::where('start', '<=', $now)
-                ->where('end', '>=', $now)->orderBy('created_at', 'desc')->withCount('courses')->get();
+
+                $programsA = Program::orderBy("id", "desc")->when($request->name, function ($q) use ($request) {
+                  $q->where('name', 'like', '%' . $request->name . '%');
+                 });
+                $programAdmin =  AdminProgram::where('admin_id', Auth::user()->id)->first();
+                $programAdminSuper =  AdminProgram::where('admin_id', Auth::user()->id)->where('type', 'admin')->first();
+
+                if ($programAdminSuper &&  Auth::guard('admin')->check() && $programAdminSuper->type == 'admin' ) {
+                    $programsActice = $programsA->withCount('courses')->paginate(10);
+                } elseif (Auth::guard('admin')->check()) {
+                  $programAdmin = AdminProgram::where('admin_id', Auth::user()->id)->get();
+                $programIds = $programAdmin->pluck('program_id')->toArray(); // Get an array of program IDs
+
+                $programsActice = Program::whereIn('id', $programIds)
+                  ->withCount('courses')
+                  ->paginate(10);
+
+                } elseif (Auth::guard('client')->check()) {
+                    $programsActice = $programs->where('client_id', Auth::user()->id)->withCount('courses')->paginate(10);
+                } elseif (Auth::guard('trainer')->check()) {
+                    $programs = $programs->with('courses')->whereHas('courses', function ($q) {
+                        $q->where('trainer_id', Auth::user()->id);
+                    })->withCount('courses')->paginate(10);
+                }
         } elseif (Auth::guard('client')->check()) {
             $programsActice = Program::where('client_id', Auth::user()->id)->where('start', '<=', $now)->withCount('courses')
                 ->where('end', '>=', $now)

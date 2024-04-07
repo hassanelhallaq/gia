@@ -213,9 +213,10 @@ class AdminController extends Controller
             $adminManger->type = 'admin' ;
             $adminManger->save();
             }
+            $role = Role::findById($request->get('role_id'));
+            $admin->assignRole($role->id);
             if ($isSaved) {
-                $role = Role::findById($request->get('role_id'));
-                $admin->assignRole($role->id);
+
                 return response()->json(['icon' => 'success', 'title' => 'admin created successfully'], $isSaved ? 201 : 400);
             } else {
 
@@ -686,7 +687,8 @@ class AdminController extends Controller
             $adminManger->type = $request->type ;
             $adminManger->save();
 
-
+            $role = Role::findById($request->get('role_id'));
+            $admin->assignRole($role->id);
             if ($isSaved) {
 
                 return response()->json(['icon' => 'success', 'title' => 'updated successfully'], $isSaved ? 201 : 400);

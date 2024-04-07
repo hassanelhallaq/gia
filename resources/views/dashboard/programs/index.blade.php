@@ -17,8 +17,8 @@
         <div class=" text-left d-flex">
             <button  class="btn btn-outline-light btn-print"> طباعة <i class="icon ion-ios-print"></i></button>
             <a href="{{route('programs.xlsx')}}" class="btn btn-outline-light mr-1 btn-export"> تصدير <i class="ti-stats-up project"></i></a>
-            {{-- @can('اضافه برنامج') --}}
-            <a class="btn btn-warning-gradient btn-with-icon mr-1" href="{{route('programs.create')}}">  انشاء برنامج <i class="bi bi-plus"></i></a>
+            {{-- @can('اضافه مشروع') --}}
+            <a class="btn btn-warning-gradient btn-with-icon mr-1" href="{{route('programs.create')}}">  انشاء مشروع <i class="bi bi-plus"></i></a>
             {{-- @endcan --}}
         </div>
 
@@ -69,7 +69,7 @@
                                                 <th>#</th>
                                                  <th>
                                                      <i class="typcn typcn-folder"></i>
-                                                     اسم البرنامج
+                                                     اسم المشروع
                                                  </th>
                                                  <th>
                                                      <i class="si si-layers"></i>

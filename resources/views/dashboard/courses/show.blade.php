@@ -18,7 +18,7 @@
                         <a href="{{ route('programs.index') }}"class="text-muted">البرامج</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('program.course', [$course->program->id]) }}" class="text-muted"> برنامج
+                        <a href="{{ route('program.course', [$course->program->id]) }}" class="text-muted"> مشروع
                             {{ $course->program->name }} </a>
                     </li>
                     <li class="breadcrumb-item">

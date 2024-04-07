@@ -90,6 +90,8 @@
                                     <th> المسمى الوظيفي</th>
                                     <th> أسم القسم</th>
                                     <th> القسم الفرعي</th>
+                                    <th>    </th>
+
                                     {{-- <th>  اضافه للدوره </th> --}}
                                     <td class="col-filter">
                                         <!-- dropdown-menu -->
@@ -114,7 +116,7 @@
                                         <td class="client-name"> {{ $item->job }} </td>
                                         <td class="client-name"> {{ $item->department }} </td>
                                         <td class="client-name"> {{ $item->scound_department }} </td>
-                                        <td class="client-name">
+
                                         <td><a href="{{ route('invitationV2.candidat', [$item->id]) }}"
                                             target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
                                         <td class="d-flex filter-col-cell">

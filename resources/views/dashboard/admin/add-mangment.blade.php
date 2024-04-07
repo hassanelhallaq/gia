@@ -10,7 +10,7 @@
                                 <h5 class=" text-center mt-3 mb-5"> نموذج اضافة مدير المشروع </h5>
                                 <div class="row mt-5">
                                     <div class="col-lg-6">
-                                        <label for="fname1" class="wizard-form-text-label">البرنامج
+                                        <label for="fname1" class="wizard-form-text-label">المشروع
                                             *</label>
                                         <select class="form-control select2" id="program_id">
                                             @foreach ($programs as $item)
@@ -172,7 +172,7 @@
                         <fieldset>
 
                             <div class="col-lg-6">
-                                <label for="fname1" class="wizard-form-text-label">البرنامج
+                                <label for="fname1" class="wizard-form-text-label">المشروع
                                     *</label>
                                 <select class="form-control select2" id="program_id">
                                     @foreach ($programs as $item)
@@ -326,7 +326,7 @@
                             <h5 class=" text-center mt-3 mb-5"> نموذج اضافة منسقو التدريب </h5>
                             <div class="row mt-5">
                                 <div class="col-lg-6">
-                                    <label for="fname1" class="wizard-form-text-label">البرنامج
+                                    <label for="fname1" class="wizard-form-text-label">المشروع
                                         *</label>
                                     <select class="form-control select2" id="program_id">
                                         @foreach ($programs as $item)
@@ -486,7 +486,7 @@
                             <h5 class=" text-center mt-3 mb-5"> نموذج اضافة المستشارون </h5>
                             <div class="row mt-5">
                                 <div class="col-lg-6">
-                                    <label for="fname1" class="wizard-form-text-label">البرنامج
+                                    <label for="fname1" class="wizard-form-text-label">المشروع
                                         *</label>
                                     <select class="form-control select2" id="program_id">
                                         @foreach ($programs as $item)

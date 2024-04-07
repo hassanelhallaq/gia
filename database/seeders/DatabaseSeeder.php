@@ -3597,7 +3597,7 @@ class DatabaseSeeder extends Seeder
             array('id' => '3825','name_en' => 'Efate','name_ar' => 'إيفات','name_fr' => 'Efaté','code' => '08','country_id' => '221'),
             array('id' => '3826','name_en' => 'Tafea','name_ar' => 'تافيا','name_fr' => 'Taféa','code' => '15','country_id' => '221'),
             array('id' => '3827','name_en' => 'Ambrym','name_ar' => 'Ambrym','name_fr' => 'Ambrym','code' => '05','country_id' => '221'),
-            array('id' => '3828','name_en' => 'Epi','name_ar' => 'برنامج التحصين الموسع','name_fr' => 'Epi','code' => '09','country_id' => '221'),
+            array('id' => '3828','name_en' => 'Epi','name_ar' => 'مشروع التحصين الموسع','name_fr' => 'Epi','code' => '09','country_id' => '221'),
             array('id' => '3829','name_en' => 'Paama','name_ar' => 'Paama في','name_fr' => 'Paama','code' => '11','country_id' => '221'),
             array('id' => '3832','name_en' => 'Lahij','name_ar' => 'لحج','name_fr' => 'Lahij','code' => '06','country_id' => '224'),
             array('id' => '3833','name_en' => 'Sa\'dah','name_ar' => 'صعدة','name_fr' => 'Sa\'dah','code' => '15','country_id' => '224'),

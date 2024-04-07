@@ -13,7 +13,7 @@
                     {{-- @if ($course)
                     <li class="breadcrumb-item">
 
-                        <a href="{{route('program.course',[$course->program->id])}}" class="text-muted"> برنامج {{$course->program->name}} </a>
+                        <a href="{{route('program.course',[$course->program->id])}}" class="text-muted"> مشروع {{$course->program->name}} </a>
                     </li>
                     @endif --}}
                     <li class="breadcrumb-item">

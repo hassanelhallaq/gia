@@ -16,7 +16,7 @@
             <div class="main-dashboard-header-right">
                 <div class=" d-flex">
                     <a href="{{route('programs.create')}}"
-                        class="btn btn-warning-gradient btn-with-icon mr-1"> انشاء برنامج <i
+                        class="btn btn-warning-gradient btn-with-icon mr-1"> انشاء مشروع <i
                             class="bi bi-plus"></i></a>
                     {{-- <button class="btn btn-warning-gradient btn-with-icon mr-1"data-target="#modaladd"
                         data-toggle="modal"> اضافة مشاركين <i class="bi bi-plus"></i></button> --}}
@@ -287,7 +287,7 @@
                                                 <tr class="list-unstyled">
                                                     <th>
                                                         <i class="typcn typcn-folder"></i>
-                                                        اسم البرنامج
+                                                        اسم المشروع
                                                     </th>
                                                     <th>
                                                         <i class="si si-layers"></i>
@@ -318,7 +318,7 @@
 
 
                                                 <tr>
-                                                    <td scope="row">برنامج {{$item->name}}</td>
+                                                    <td scope="row">مشروع {{$item->name}}</td>
                                                     <td>{{$item->courses_count}}</td>
                                                     <td>{{$item->client->name}}</td>
                                                     <td>{{$item->start}}</td>
@@ -347,7 +347,7 @@
                                                     </th>
                                                     <th>
                                                         <i class="mdi mdi-account-outline"></i>
-                                                        البرنامج
+                                                        المشروع
                                                     </th>
                                                     <th><i class="far fa-calendar"></i> تاريخ البداية </th>
                                                     <th><i class="far fa-calendar"></i> عدد الايام </th>
@@ -384,7 +384,7 @@
                                                 <tr class="list-unstyled">
                                                     <th>
                                                         <i class="typcn typcn-folder"></i>
-                                                        اسم البرنامج
+                                                        اسم المشروع
                                                     </th>
                                                     <th>
                                                         <i class="si si-layers"></i>
@@ -489,7 +489,7 @@
                                     class="fe fe-award ht-50 wd-50 text-center card-chart text-purple bg-purple-transparent brround"></i>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <h5 class="mb-2 tx-16">برنامج {{$item->name}}</h5>
+                                <h5 class="mb-2 tx-16">مشروع {{$item->name}}</h5>
                                 <li class="mdi mdi-dots-vertical"></li>
                             </div>
                             <hr>

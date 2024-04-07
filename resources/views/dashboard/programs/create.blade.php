@@ -26,7 +26,7 @@
                             <div class="row row-sm mb-3">
                                 <div class="col-lg-6">
                                     <div class="form-group has-success mg-b-0">
-                                        <label for="exampleInputEmail1">اسم البرنامج</label>
+                                        <label for="exampleInputEmail1">اسم المشروع</label>
                                         <input class="form-control" required="" id="name" type="text">
                                     </div>
                                 </div>
@@ -223,7 +223,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
-                                    <label for="exampleInputEmail1"> ملف البرنامج </label>
+                                    <label for="exampleInputEmail1"> ملف المشروع </label>
                                     <div class="custom-file">
                                         <input class="custom-file-input" id="file" type="file">
                                         <label class="custom-file-label" for="customFile">Drop files here⇬</label>

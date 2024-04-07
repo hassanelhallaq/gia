@@ -8,7 +8,7 @@
 
         <div class="txt">
             <div class="title">
-                {{ $program->name }} برنامج
+                {{ $program->name }} مشروع
             </div>
             <div class="text">
                 {{ $program->content_two }} </div>

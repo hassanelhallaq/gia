@@ -166,7 +166,7 @@
                                 اهلا بك
                             </span>
                             <span id="profile_name">
-                                {{ Auth::user()->name }}
+
                             </span>
                         </div>
 

@@ -14,7 +14,7 @@
                         <a href="table_program_management.html"class="text-muted"> اسم الاختبار </a>
                     </li>
                     {{-- <li class="breadcrumb-item">
-                    <a href="#" class="text-muted"> برنامج تطوير المهارات الشخصية </a>
+                    <a href="#" class="text-muted"> مشروع تطوير المهارات الشخصية </a>
                 </li> --}}
                 </ol>
             </nav>

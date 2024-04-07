@@ -388,7 +388,7 @@ class InvationController extends Controller
         $categories = Category::all();
 
         // return $phone;
-        return view("invitationV2.candidat",compact('categories'));
+        return view("invitationV2.candidat",compact('categories','id'));
     }
     public function submitOtp(Request $request)
     {

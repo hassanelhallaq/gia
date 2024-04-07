@@ -12,7 +12,7 @@
                     </li>
                     @if ($program)
                         <li class="breadcrumb-item">
-                            <a class="text-muted"> برنامج {{ $program->name }} </a>
+                            <a class="text-muted"> مشروع {{ $program->name }} </a>
                         </li>
                     @endif
                 </ol>

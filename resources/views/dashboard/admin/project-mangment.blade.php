@@ -62,7 +62,7 @@
                                                 <th>#</th>
                                                  <th>
                                                      <i class="typcn typcn-folder"></i>
-                                                     اسم البرنامج
+                                                     اسم المشروع
                                                  </th>
                                                  <th>
                                                      <i class="si si-layers"></i>

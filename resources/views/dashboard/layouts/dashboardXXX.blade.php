@@ -217,7 +217,7 @@
 														<tr class="list-unstyled">
 															<th>
 																<i class="typcn typcn-folder" ></i>
-															اسم البرنامج
+															اسم المشروع
 															</th>
 															<th>
 																<i class="si si-layers"></i>
@@ -241,7 +241,7 @@
 													</thead>
 													<tbody>
 														<tr>
-															<td scope="row">برنامج التدريب الأساسي.</td>
+															<td scope="row">مشروع التدريب الأساسي.</td>
 															<td>3</td>
 															<td>على حسن على</td>
 															<td>12/06/2023</td>
@@ -250,7 +250,7 @@
 															<td><i class="mdi mdi-dots-horizontal text-gray"></i></td>
 														</tr>
 														<tr>
-															<td scope="row">برنامج التدريب الأساسي.</td>
+															<td scope="row">مشروع التدريب الأساسي.</td>
 															<td>3</td>
 															<td>على حسن على</td>
 															<td>12/06/2023</td>
@@ -260,7 +260,7 @@
 
 														</tr>
 														<tr>
-															<td scope="row">برنامج التدريب الأساسي.</td>
+															<td scope="row">مشروع التدريب الأساسي.</td>
 															<td>3</td>
 															<td>على حسن على</td>
 															<td>12/06/2023</td>
@@ -271,7 +271,7 @@
 															<td><i class="mdi mdi-dots-horizontal text-gray"></i></td>
 														</tr>
 														<tr>
-															<td scope="row">برنامج التدريب الأساسي.</td>
+															<td scope="row">مشروع التدريب الأساسي.</td>
 															<td>3</td>
 															<td>على حسن على</td>
 															<td>12/06/2023</td>
@@ -290,7 +290,7 @@
 														<tr class="list-unstyled">
 															<th>
 																<i class="typcn typcn-folder" ></i>
-															اسم البرنامج
+															اسم المشروع
 															</th>
 															<th>
 																<i class="si si-layers"></i>
@@ -364,7 +364,7 @@
 														<tr class="list-unstyled">
 															<th>
 																<i class="typcn typcn-folder" ></i>
-															اسم البرنامج
+															اسم المشروع
 															</th>
 															<th>
 																<i class="si si-layers"></i>
@@ -451,12 +451,12 @@
 										<i class="icon ion-ios-rocket ht-50 wd-50 text-center brround card-chart text-purple  bg-purple-transparent  brround"></i>
 									</div>
 									<div class="d-flex justify-content-between">
-										<h5 class="mb-2 tx-16">برنامج التسويق الرقمي</h5>
+										<h5 class="mb-2 tx-16">مشروع التسويق الرقمي</h5>
 										<li class="mdi mdi-dots-vertical"></li>
 									</div>
 									<hr>
 									<span class="fs-14 text-muted">
-										برنامج التسويق الرقمي هو أكثر البرامج نشاطا حاليا خلال تطبيقنا
+										مشروع التسويق الرقمي هو أكثر البرامج نشاطا حاليا خلال تطبيقنا
                                         الأدراة تسجيل حضور الدورات الرقمية
 									</span>
 								    <hr>
@@ -493,12 +493,12 @@
 										<i class="fe fe-award ht-50 wd-50 text-center card-chart text-purple bg-purple-transparent brround"></i>
 									</div>
 									<div class="d-flex justify-content-between">
-										<h5 class="mb-2 tx-16">برنامج الابتكار وريادة الأعمال</h5>
+										<h5 class="mb-2 tx-16">مشروع الابتكار وريادة الأعمال</h5>
 										<li class="mdi mdi-dots-vertical"></li>
 									</div>
 									<hr>
 									<span class="fs-14 text-muted">
-										برنامج التسويق الرقمي هو أكثر البرامج نشاطا حاليا خلال تطبيقنا
+										مشروع التسويق الرقمي هو أكثر البرامج نشاطا حاليا خلال تطبيقنا
 الادراة تسجيل حضور الدورات الرقمية
 									</span>
 								    <hr>
@@ -535,12 +535,12 @@
 										<i class="cf cf-xrp ht-50 wd-50 text-center brround text-purple bg-purple-transparent card-chart"></i>
 									</div>
 									<div class="d-flex justify-content-between">
-										<h5 class="mb-2 tx-16">برنامج تطوير المهارات الشخصية</h5>
+										<h5 class="mb-2 tx-16">مشروع تطوير المهارات الشخصية</h5>
 										<li class="mdi mdi-dots-vertical"></li>
 									</div>
 									<hr>
 									<span class="fs-14 text-muted">
-										برنامج التسويق الرقمي هو أكثر البرامج نشاطا حاليا خلال تطبيقنا
+										مشروع التسويق الرقمي هو أكثر البرامج نشاطا حاليا خلال تطبيقنا
 الادراة تسجيل حصور الدورات الرقمية.
 									</span>
 								    <hr>

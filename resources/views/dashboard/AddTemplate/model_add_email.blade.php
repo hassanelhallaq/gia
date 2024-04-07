@@ -18,7 +18,7 @@
                             <input class="form-control" required="" type="email">
                         </div>
                         <div class="col-12 mt-3">
-                            <label> اختار البرنامج  </label>
+                            <label> اختار المشروع  </label>
                             <select class="form-control select2" id="">
                                 <option value="">
                                     ----------

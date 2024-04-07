@@ -30,12 +30,12 @@ class ProgramController extends Controller
         $programAdmin =  AdminProgram::where('admin_id', Auth::user()->id)->first();
         $programAdminSuper =  AdminProgram::where('admin_id', Auth::user()->id)->where('type', 'admin')->first();
 
-        if (Auth::guard('admin')->check() && $programAdminSuper->type == 'admin') {
+        if ($programAdminSuper &&  Auth::guard('admin')->check() && $programAdminSuper->type == 'admin' ) {
             $programs = $programs->withCount('courses')->paginate(10);
         } elseif (Auth::guard('admin')->check()) {
 
             $programAdmin =  AdminProgram::where('admin_id', Auth::user()->id)->get();
-            $programs = $programs->where('id', $programAdmin->pluck('program_id'))->withCount('courses')->paginate(10);
+            $programs = $programs->whereIn('id', $programAdmin->pluck('program_id'))->withCount('courses')->paginate(10);
         } elseif (Auth::guard('client')->check()) {
             $programs = $programs->where('client_id', Auth::user()->id)->withCount('courses')->paginate(10);
         } elseif (Auth::guard('trainer')->check()) {

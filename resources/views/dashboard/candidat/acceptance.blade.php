@@ -17,7 +17,7 @@
                     </li>
 
                     {{-- <li class="breadcrumb-item">
-                    <a href="#" class="text-muted"> برنامج تطوير المهارات الشخصية </a>
+                    <a href="#" class="text-muted"> مشروع تطوير المهارات الشخصية </a>
                 </li> --}}
                 </ol>
             </nav>

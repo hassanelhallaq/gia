@@ -226,8 +226,8 @@
                             <div class="row">
                                 <div class="col-4"><label ><input  type="checkbox"> <span> تحرير الاعدادات </span></label></div>
                                 <div class="col-4"><label ><input checked=""  type="checkbox"> <span> اضافة اعضاء </span></label></div>
-                                <div class="col-4"><label ><input  type="checkbox"> <span> اضافة برنامج </span></label></div>
-                                <div class="col-4"><label ><input  checked type="checkbox"> <span> تحرير برنامج </span></label></div>
+                                <div class="col-4"><label ><input  type="checkbox"> <span> اضافة مشروع </span></label></div>
+                                <div class="col-4"><label ><input  checked type="checkbox"> <span> تحرير مشروع </span></label></div>
                                 <div class="col-4"><label ><input  checked type="checkbox"> <span> حذف اعضاء </span></label></div>
                                 <div class="col-4"><label ><input   type="checkbox"> <span> خيارات اخري </span></label></div>
                             </div>
@@ -239,9 +239,9 @@
                                 <div class="col-4"><label ><input checked type="checkbox"> <span class="m-0"> الأطلاع على الدورة </span></label></div>
                                 <div class="col-4"><label ><input checked type="checkbox"> تحرير الإعدادات <span>  </span></label></div>
                                 <div class="col-4"><label ><input  type="checkbox"> <span> الأطلاع على النتائج </span></label></div>
-                                <div class="col-4"><label ><input  type="checkbox"> <span> تحرير برنامج </span></label></div>
-                                <div class="col-4"><label ><input  type="checkbox"> <span> تحرير برنامج </span></label></div>
-                                <div class="col-4"><label ><input  type="checkbox"> <span> تحرير برنامج </span></label></div>
+                                <div class="col-4"><label ><input  type="checkbox"> <span> تحرير مشروع </span></label></div>
+                                <div class="col-4"><label ><input  type="checkbox"> <span> تحرير مشروع </span></label></div>
+                                <div class="col-4"><label ><input  type="checkbox"> <span> تحرير مشروع </span></label></div>
                             </div>
                         </div>
 
@@ -250,8 +250,8 @@
                             <div class="row">
                                 <div class="col-4"><label><input  type="checkbox"> <span> تحرير الاعدادات </span></label></div>
                                 <div class="col-4"><label><input checked=""  type="checkbox"> <span> اضافة اعضاء </span></label></div>
-                                <div class="col-4"><label><input  type="checkbox"> <span> اضافة برنامج </span></label></div>
-                                <div class="col-4"><label><input  type="checkbox"> <span> تحرير برنامج </span></label></div>
+                                <div class="col-4"><label><input  type="checkbox"> <span> اضافة مشروع </span></label></div>
+                                <div class="col-4"><label><input  type="checkbox"> <span> تحرير مشروع </span></label></div>
                                 <div class="col-4"><label><input checked=""  type="checkbox"> <span> حذف اعضاء </span></label></div>
                                 <div class="col-4"><label><input   type="checkbox"> <span> خيارات اخري </span></label></div>
                             </div>

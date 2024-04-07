@@ -23,7 +23,7 @@
                         @can('الأطلاع على البرامج')
 
 
-                        <li class=""><a class="slide-item" href="{{route('programs.index')}}"> البرامج </a></li>
+                        <li class=""><a class="slide-item" href="{{route('programs.index')}}"> مشروع </a></li>
                         @endcan
                         @if(Auth::guard('admin')->check())
 
@@ -46,7 +46,11 @@
                 </li>
                 @endif
                 @if(Auth::guard('admin')->check())
+                @php
+               $programAdminSuper =  App\Models\AdminProgram::where('admin_id', Auth::user()->id)->where('type', 'admin')->first();
 
+                @endphp
+                @if($programAdminSuper)
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide"  href="#"><i class="si si-people tx-22"></i><span class="side-menu__label mr-3">اصحاب المصلحة</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
@@ -85,7 +89,7 @@
                         @endcan
                     </ul>
                 </li>
-
+                @endif
                 @can('الأطلاع على المشاركين')
 
                 <li class="slide">
@@ -115,6 +119,7 @@
                     </ul>
                 </li>
                 @endcan
+                @if($programAdminSuper)
 
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide"  href="#"><i class="si si-people tx-22"></i><span class="side-menu__label mr-3"> اضافة قالب </span><i class="angle fe fe-chevron-down"></i></a>
@@ -122,21 +127,24 @@
                         <li><a class="slide-item" href="{{ route('AddTemplate') }}"> اضافة </a></li>
                     </ul>
                 </li>
-
+                @endcan
 
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="#"><i class="mdi mdi-account-card-details tx-22"></i><span class="side-menu__label mr-3">الدعوات الإلكترونية</span><i class=""></i></a>
 
                 </li>
+                 @if($programAdminSuper)
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="#"><i class="icon ion-ios-stats tx-22"></i><span class="side-menu__label mr-3">التقارير</span><i class=""></i></a>
                 </li>
+                 @endif
             </ul>
             @endif
 
 
             <ul class="side-menu pb-2">
                 @if(Auth::guard('admin')->check())
+                @if($programAdminSuper)
 
                 <li class="slide">
                     <a class="side-menu__item " data-toggle="slide" href="#"><i class="la la-cog tx-22"></i><span class="side-menu__label mr-3"> الإعدادات </span><i class="angle fe fe-chevron-down"></i></a>
@@ -154,7 +162,7 @@
                     </ul>
                 </li>
                 @endif
-
+                @endif
                 <li class="slide">
                     <a class="side-menu__item"  href="{{route('dashboard.auth.logout')}}"><i class="bx bx-log-out tx-22"></i><span class="side-menu__label mr-3">تسجيل الخروج</span></a>
                 </li>

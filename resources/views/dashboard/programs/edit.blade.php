@@ -14,7 +14,7 @@
                         <div class="row row-sm mb-3">
                             <div class="col-lg-6">
                                 <div class="form-group has-success mg-b-0">
-                                    <label for="exampleInputEmail1">اسم البرنامج</label>
+                                    <label for="exampleInputEmail1">اسم المشروع</label>
                                     <input class="form-control" required="" id="name" value="{{ $program->name }}"
                                         type="text">
                                 </div>
@@ -236,7 +236,7 @@
                                 </div> -->
                             </div>
                             <div class="col-lg-3">
-                                <label for="exampleInputEmail1"> ملف البرنامج </label>
+                                <label for="exampleInputEmail1"> ملف المشروع </label>
                                 <div class="custom-file">
                                     <input class="custom-file-input" class="dropify"
                                         data-default-file="{{ asset($program->file) }}" value="{{$program->file}}" id="file" type="file">
@@ -253,7 +253,7 @@
                                 <button class="btn btn-warning-gradient btn-with-icon btn-sm" onclick="update({{$program->id}})" type="button" > حفظ الاعدادات <i class="bi bi-floppy"></i></button>
 
                                 {{-- <a class="btn btn-outline-light btn-with-icon btn-sm mr-1 " id="copyButton"> استنساخ
-                                    البرنامج <i class="far fa-clone"></i></a> --}}
+                                    المشروع <i class="far fa-clone"></i></a> --}}
                             </div>
                          </div>
 
