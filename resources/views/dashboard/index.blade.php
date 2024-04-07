@@ -36,6 +36,9 @@
 
          <!-- container opened -->
              <!-- row -->
+             <div class="row mb-5">
+                <h5 class=" text-center m-auto"> الصفحة الرئيسية  </h5>
+            </div>
             <div class="row row-sm sales-cardSmall">
                 <div class="col-xl-part">
                     <div class="card">
@@ -308,8 +311,7 @@
                                                             <path
                                                                 d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05" />
                                                         </svg>
-                                                        المشاريع
-                                                    </th>
+                                                        استعراض البرنامج                                                    </th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -323,9 +325,7 @@
                                                     <td>{{$item->client->name}}</td>
                                                     <td>{{$item->start}}</td>
                                                     <td>{{$item->end}}</td>
-                                                     <td> <a href="{{route('program.course',[$item->id])}}"><i class="far fa-eye tx-15"></i></a>                                                        <!-- dropdown-menu -->
-</td>
-                                                    <td><i class="mdi mdi-dots-horizontal text-gray"></i></td>
+                                                     <td> <a href="{{route('program.course',[$item->id])}}"><i class="far fa-eye tx-15"></i></a></td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>

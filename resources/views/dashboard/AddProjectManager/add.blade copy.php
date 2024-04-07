@@ -148,7 +148,7 @@
                                 </div>
                                 <div class="d-flex">
                                     <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
-                                    <a class="form-wizard-next-btn btn btn-warning-gradient mr-1 tx-13 text-white pt- pb-"> التوجة للخطوه التالية </a>
+                                    <a class="form-wizard-next-btn btn btn-warning-gradient mr-1 tx-13 text-white pt- pb-">حفظ وتسجيل بيانات المستخدم</a>
                                 </div>
                             </div>
 						</fieldset>
@@ -282,7 +282,7 @@
                                 </div>
                                 <div class="d-flex">
                                     <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
-                                    <a class="form-wizard-next-btn btn btn-warning-gradient mr-1 tx-13 text-white pt- pb-"> التوجة للخطوه التالية </a>
+                                    <a class="form-wizard-next-btn btn btn-warning-gradient mr-1 tx-13 text-white pt- pb-">حفظ وتسجيل بيانات المستخدم</a>
                                 </div>
                             </div>
 
@@ -421,7 +421,7 @@
                                 </div>
                                 <div class="d-flex">
                                     <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
-                                    <a class="form-wizard-next-btn btn btn-warning-gradient mr-1 tx-13 text-white pt- pb-"> التوجة للخطوه التالية </a>
+                                    <a class="form-wizard-next-btn btn btn-warning-gradient mr-1 tx-13 text-white pt- pb-">حفظ وتسجيل بيانات المستخدم</a>
                                 </div>
                             </div>
 
@@ -548,7 +548,7 @@
                                 </div>
                                 <div class="d-flex">
                                     <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
-                                    <a class="form-wizard-next-btn btn btn-warning-gradient mr-1 tx-13 text-white pt- pb-"> التوجة للخطوه التالية </a>
+                                    <a class="form-wizard-next-btn btn btn-warning-gradient mr-1 tx-13 text-white pt- pb-">حفظ وتسجيل بيانات المستخدم</a>
                                 </div>
                             </div>
 
@@ -682,7 +682,7 @@
                                 </div>
                                 <div class="d-flex">
                                     <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
-                                    <a class="form-wizard-next-btn btn btn-warning-gradient mr-1 tx-13 text-white pt- pb-"> التوجة للخطوه التالية </a>
+                                    <a class="form-wizard-next-btn btn btn-warning-gradient mr-1 tx-13 text-white pt- pb-">حفظ وتسجيل بيانات المستخدم</a>
                                 </div>
                             </div>
 
@@ -815,7 +815,7 @@
                                 </div>
                                 <div class="d-flex">
                                     <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
-                                    <a class="form-wizard-next-btn btn btn-warning-gradient mr-1 tx-13 text-white pt- pb-"> التوجة للخطوه التالية </a>
+                                    <a class="form-wizard-next-btn btn btn-warning-gradient mr-1 tx-13 text-white pt- pb-">حفظ وتسجيل بيانات المستخدم</a>
                                 </div>
                             </div>
 
@@ -947,7 +947,7 @@
                                 </div>
                                 <div class="d-flex">
                                     <button class="btn btn-outline-warning ml-1 btn-with-icon  "> حفظ مسودة </button>
-                                    <a class="form-wizard-next-btn btn btn-warning-gradient mr-1 tx-13 text-white pt- pb-"> التوجة للخطوه التالية </a>
+                                    <a class="form-wizard-next-btn btn btn-warning-gradient mr-1 tx-13 text-white pt- pb-">حفظ وتسجيل بيانات المستخدم</a>
                                 </div>
                             </div>
 
