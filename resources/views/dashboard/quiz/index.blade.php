@@ -330,8 +330,8 @@
                                         اختبار قبلي </span></label>
                                 <label class="rdiobox"><input checked="" id="after" name="rdio"
                                         type="radio"> <span> اختبار بعدي </span></label>
-                                <label class="rdiobox"><input id="interactive" name="rdio" type="radio"> <span>
-                                        اختبار تفاعلي </span></label>
+                                {{-- <label class="rdiobox"><input id="interactive" name="rdio" type="radio"> <span>
+                                        اختبار تفاعلي </span></label> --}}
                                  <label class="rdiobox"><input id="rate" name="rate" type="radio"> <span>
                                              تقيم المشاركين </span></label>
                             </div>
@@ -401,8 +401,8 @@
                                         اختبار قبلي </span></label>
                                 <label class="rdiobox"><input @if($quiz->type == 'after') checked @endif  id="after_{{$quiz->id}}" name="rdio"
                                         type="radio"> <span> اختبار بعدي </span></label>
-                                <label class="rdiobox"><input id="interactive_{{$quiz->id}}" @if($quiz->type == 'interactive') checked @endif  name="rdio" type="radio"> <span>
-                                        اختبار تفاعلي </span></label>
+                                {{-- <label class="rdiobox"><input id="interactive_{{$quiz->id}}" @if($quiz->type == 'interactive') checked @endif  name="rdio" type="radio"> <span>
+                                        اختبار تفاعلي </span></label> --}}
                                  <label class="rdiobox"><input id="rate_{{$quiz->id}}" @if($quiz->type == 'rate') checked @endif name="rdio" type="radio"> <span>
                                              تقيم المشاركين </span></label>
                             </div>
@@ -451,7 +451,7 @@
             formData.append('course_id', document.getElementById('course_id').value);
             formData.append('befor', document.getElementById('befor').checked);
             formData.append('after', document.getElementById('after').checked);
-            formData.append('interactive', document.getElementById('interactive').checked);
+            // formData.append('interactive', document.getElementById('interactive').checked);
             formData.append('rate', document.getElementById('rate').checked);
             formData.append('link', document.getElementById('link').value);
             formData.append('how_attend', document.getElementById('how_attend').value);
@@ -463,7 +463,7 @@
             formData.append('name', document.getElementById('name_'+id).value);
              formData.append('befor', document.getElementById('befor_'+id).checked);
             formData.append('after', document.getElementById('after_'+id).checked);
-            formData.append('interactive', document.getElementById('interactive_'+id).checked);
+            // formData.append('interactive', document.getElementById('interactive_'+id).checked);
             formData.append('rate', document.getElementById('rate_'+id).checked);
             formData.append('link', document.getElementById('link_'+id).value);
             formData.append('how_attend', document.getElementById('how_attend_'+id).value);

@@ -42,7 +42,7 @@
                                     تحميل نتائج
                                     الاختبار <i class="bi bi-box-arrow-in-down"></i></a>
                                 <a href="{{ route('attendance.xlsx', [$course->id]) }}"class="mb-2 btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل تقرير المشاركين <i class="bi bi-box-arrow-in-down"></i></a>
-                                <a href="{{ route('quiz.rate.report', [$course->id]) }}"class="mb-2 btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج الاختبار التفاعلي <i class="bi bi-box-arrow-in-down"></i></a>
+                                {{-- <a href="{{ route('quiz.rate.report', [$course->id]) }}"class="mb-2 btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج الاختبار التفاعلي <i class="bi bi-box-arrow-in-down"></i></a> --}}
                                 <a href="{{ route('quiz.after.report', [$course->id]) }}"class="mb-2 btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج  الاختبار البعدي <i class="bi bi-box-arrow-in-down"></i></a>
                                 <a href="{{ route('quiz.befor.report', [$course->id]) }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1"> تحميل نتائج الاختبار القبلي <i class="bi bi-box-arrow-in-down"></i></a>
                             </div>
@@ -140,7 +140,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-part">
+        {{-- <div class="col-xl-part">
             <div class="card">
                 <div class="card-body iconfont text-right d-flex justify-content-between p-2">
                     <div class="d-flex mb-0">
@@ -167,7 +167,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <div class="col-xl-part" >
             <div class="card">

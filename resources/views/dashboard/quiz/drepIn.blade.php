@@ -8,10 +8,10 @@
                         <a href="../index.html">الرئيسية</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="table_program_management.html"class="text-muted">المشاريع</a>
+                        <a href="table_program_management.html"class="text-muted">البرامج</a>
                     </li>
                     {{-- <li class="breadcrumb-item">
-                    <a href="#" class="text-muted"> مشروع تطوير المهارات الشخصية </a>
+                    <a href="#" class="text-muted"> برنامج تطوير المهارات الشخصية </a>
                 </li> --}}
                 </ol>
             </nav>
@@ -96,7 +96,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            {{-- <div class="col-lg-6">
                                 <div class="form-group has-success mg-b-0">
                                     <label for="example"> تفاعلي</label>
                                     <select id="quiz_interactive" name="quiz_interactive_id" class="form-control select2">
@@ -111,7 +111,7 @@
                                     </select>
 
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-lg-6">
                                 <div class="form-group has-success mg-b-0">
                                     <label for="example"> الحاله</label>
