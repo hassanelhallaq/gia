@@ -8,7 +8,7 @@
                         <a href="../index.html">الرئيسية</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('programs.index') }}" class="text-muted">البرامج</a>
+                        <a href="{{ route('programs.index') }}" class="text-muted">المشاريع</a>
                     </li>
                     {{-- @if ($course)
                     <li class="breadcrumb-item">

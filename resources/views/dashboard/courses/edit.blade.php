@@ -8,7 +8,7 @@
                         <a href="../index.html" class="text-muted">الرئيسية</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a>البرامج</a>
+                        <a>المشاريع</a>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="#"> {{ $course->name }}</a>

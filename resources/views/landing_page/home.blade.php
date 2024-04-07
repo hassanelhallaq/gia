@@ -45,7 +45,7 @@
                     </svg>
                 </div>
                 <div class="df f-c">
-                    <p data-translate="training_programs_count">عدد البرامج التدريبية للمشروع</p>
+                    <p data-translate="training_programs_count">عدد المشاريع التدريبية للمشروع</p>
                     <h4>
                         8 برامج
                     </h4>
@@ -270,7 +270,7 @@
                         </svg>
                     </div>
                     <p>
-                        عدد البرامج التدريبية المستهدفة 10 برامج
+                        عدد المشاريع التدريبية المستهدفة 10 برامج
                     </p>
                 </div>
                 <div class="card">

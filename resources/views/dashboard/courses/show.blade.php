@@ -15,7 +15,7 @@
                         <a href="../index.html">الرئيسية</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('programs.index') }}"class="text-muted">البرامج</a>
+                        <a href="{{ route('programs.index') }}"class="text-muted">المشاريع</a>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{ route('program.course', [$course->program->id]) }}" class="text-muted"> مشروع
@@ -706,7 +706,7 @@
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
-                    <h5 class="modal-title"> حذف البرامج </h5><button aria-label="Close" class="close"
+                    <h5 class="modal-title"> حذف المشاريع </h5><button aria-label="Close" class="close"
                         data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <form action="">

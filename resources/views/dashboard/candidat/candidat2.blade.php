@@ -15,7 +15,7 @@
                         <a href="{{ route('admin.dashboard') }}">الرئيسية</a>
                     </li>
                     <li class="breadcrumb-cou">
-                        <a href="{{ route('programs.index') }}"class="text-muted">البرامج</a>
+                        <a href="{{ route('programs.index') }}"class="text-muted">المشاريع</a>
                     </li>
                 </ol>
             </nav>

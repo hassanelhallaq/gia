@@ -24,7 +24,7 @@
                         <a href="../index.html">الرئيسية</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="#"class="text-muted">البرامج</a>
+                        <a href="#"class="text-muted">المشاريع</a>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="#" class="text-muted"> الدورات </a>

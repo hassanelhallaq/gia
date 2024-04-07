@@ -18,12 +18,12 @@
                     @endif
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item" data-toggle="slide" href="#"><i class="typcn typcn-folder tx-22"></i><span class="side-menu__label mr-3">ادارة البرامج</span><i class="angle fe fe-chevron-down"></i></a>
+                    <a class="side-menu__item" data-toggle="slide" href="#"><i class="typcn typcn-folder tx-22"></i><span class="side-menu__label mr-3">ادارة المشاريع</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu  ">
-                        @can('الأطلاع على البرامج')
+                        @can('الأطلاع على المشاريع')
 
 
-                        <li class=""><a class="slide-item" href="{{route('programs.index')}}"> البرامج </a></li>
+                        <li class=""><a class="slide-item" href="{{route('programs.index')}}"> المشاريع </a></li>
                         @endcan
                         @if(Auth::guard('admin')->check())
 
@@ -154,7 +154,7 @@
                         @endcan
 
                         <li><a class="slide-item" href="settings/main_page_settings.html"> اعدادات الشاشة الرئيسية </a></li>
-                        <li><a class="slide-item" href="settings/programmes_settings.html"> اعدادات البرامج </a></li>
+                        <li><a class="slide-item" href="settings/programmes_settings.html"> اعدادات المشاريع </a></li>
                         <li><a class="slide-item" href="settings/courses_settings.html"> اعدادات الدورة </a></li>
                         <li><a class="slide-item" href="Stakeholde_management/customers.html"> اعدادات المستخدمين </a></li>
                         <li><a class="slide-item" href="Stakeholde_management/customers.html"> اعدادات الاختبارات  </a></li>

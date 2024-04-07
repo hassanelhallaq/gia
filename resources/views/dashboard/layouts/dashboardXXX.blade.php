@@ -13,7 +13,7 @@
 											<i class="typcn typcn-book text-warning tx-24"></i>
 										</div>
 										<div class="">
-											<p class="mb-2 tx-12 text-muted">عدد البرامج الكلي</p>
+											<p class="mb-2 tx-12 text-muted">عدد المشاريع الكلي</p>
 											<div class="">
 												<h4 class="mb-1 font-weight-bold">20</h4>
 											</div>
@@ -40,7 +40,7 @@
 											<i class="typcn typcn-book text-warning tx-24"></i>
 										</div>
 										<div class="">
-											<p class="mb-2 tx-12 text-muted">عدد البرامج القائمة</p>
+											<p class="mb-2 tx-12 text-muted">عدد المشاريع القائمة</p>
 											<div class="">
 												<h4 class="mb-1 font-weight-bold">13</h4>
 											</div>
@@ -202,7 +202,7 @@
 									<div class="tabs-menu ">
 										<!-- Tabs -->
 										<ul class="nav panel-tabs">
-											<li class=""><a href="#tab11" class="active d-flex" data-toggle="tab"><i class="text-center text-purple cartTap  bg-purple-transparent  brround">10</i>البرامج القائمة</a></li>
+											<li class=""><a href="#tab11" class="active d-flex" data-toggle="tab"><i class="text-center text-purple cartTap  bg-purple-transparent  brround">10</i>المشاريع القائمة</a></li>
 											<li><a href="#tab12" data-toggle="tab" class="d-flex"><i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i>الدورات القائمة</a></li>
 											<li><a href="#tab13" data-toggle="tab" class="d-flex"><i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i>اخر الدعوات</a></li>
 										</ul>
@@ -456,7 +456,7 @@
 									</div>
 									<hr>
 									<span class="fs-14 text-muted">
-										مشروع التسويق الرقمي هو أكثر البرامج نشاطا حاليا خلال تطبيقنا
+										مشروع التسويق الرقمي هو أكثر المشاريع نشاطا حاليا خلال تطبيقنا
                                         الأدراة تسجيل حضور الدورات الرقمية
 									</span>
 								    <hr>
@@ -498,7 +498,7 @@
 									</div>
 									<hr>
 									<span class="fs-14 text-muted">
-										مشروع التسويق الرقمي هو أكثر البرامج نشاطا حاليا خلال تطبيقنا
+										مشروع التسويق الرقمي هو أكثر المشاريع نشاطا حاليا خلال تطبيقنا
 الادراة تسجيل حضور الدورات الرقمية
 									</span>
 								    <hr>
@@ -540,7 +540,7 @@
 									</div>
 									<hr>
 									<span class="fs-14 text-muted">
-										مشروع التسويق الرقمي هو أكثر البرامج نشاطا حاليا خلال تطبيقنا
+										مشروع التسويق الرقمي هو أكثر المشاريع نشاطا حاليا خلال تطبيقنا
 الادراة تسجيل حصور الدورات الرقمية.
 									</span>
 								    <hr>

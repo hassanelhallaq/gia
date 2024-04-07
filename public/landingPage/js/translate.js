@@ -53,7 +53,7 @@
       location: "Location",
       download_instructions: "Download Instructions File",
       signup: "Sign Up",
-      
+
     },
     ar: {
       home: "الرئيسية",
@@ -87,7 +87,7 @@
       october: "أكتوبر",
       november: "نوفمبر",
       december: "ديسمبر",
-      training_programs_count: "عدد البرامج التدريبية للمشروع",
+      training_programs_count: "عدد المشاريع التدريبية للمشروع",
       project_duration: "مدة المشروع",
       start_date: "تاريخ البدء",
       end_date: "تاريخ الانتهاء",
@@ -120,14 +120,14 @@
       if (element.tagName.toLowerCase() === 'input' && element.hasAttribute('placeholder')) {
         element.setAttribute('placeholder', translations[language][key]);
       } else {
-       
+
         element.textContent = translations[language][key];
       }
     });
   }
 arabic_button  = document.querySelector('#arabic');
 english_button  = document.querySelector('#english');
-arabic_button_mobile  = document.querySelector('#arabicMobile'); 
+arabic_button_mobile  = document.querySelector('#arabicMobile');
 english_button_mobile  = document.querySelector('#englishMobile');
 
 
@@ -148,12 +148,12 @@ english_button_mobile.addEventListener('click',function(){
   localStorage.setItem('language','en');
 });
 document.addEventListener('DOMContentLoaded', function () {
-  
+
   if(localStorage.getItem('language')){
     translate(localStorage.getItem('language'));
   }
 
 })
 
-  
-  
+
+

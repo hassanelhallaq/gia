@@ -62,10 +62,10 @@
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="#"><i
                                 class="typcn typcn-folder tx-22"></i><span class="side-menu__label mr-3">ادارة
-                                البرامج</span><i class="angle fe fe-chevron-down"></i></a>
+                                المشاريع</span><i class="angle fe fe-chevron-down"></i></a>
                         <ul class="slide-menu  ">
                             <li class=""><a class="slide-item"
-                                    href="Program_management/table_program_management.html"> البرامج </a></li>
+                                    href="Program_management/table_program_management.html"> المشاريع </a></li>
                             <li class=""><a class="slide-item" href="Program_management/view_programmes.html">
                                     الدورات التدريبية </a></li>
                         </ul>

@@ -45,7 +45,7 @@
                                     <i class="typcn typcn-book text-warning tx-24"></i>
                                 </div>
                                 <div class="">
-                                    <p class="mb-2 tx-12 text-muted">عدد البرامج الكلي</p>
+                                    <p class="mb-2 tx-12 text-muted">عدد المشاريع الكلي</p>
                                     <div class="">
                                         <h4 class="mb-1 font-weight-bold">{{$programs}}</h4>
                                     </div>
@@ -72,7 +72,7 @@
                                     <i class="typcn typcn-book text-warning tx-24"></i>
                                 </div>
                                 <div class="">
-                                    <p class="mb-2 tx-12 text-muted">عدد البرامج القائمة</p>
+                                    <p class="mb-2 tx-12 text-muted">عدد المشاريع القائمة</p>
                                     <div class="">
                                         <h4 class="mb-1 font-weight-bold">{{$programsActice->count()}}</h4>
                                     </div>
@@ -267,7 +267,7 @@
                                 <!-- Tabs -->
                                 <ul class="nav panel-tabs">
                                     <li class=""><a href="#tab11" class="active d-flex" data-toggle="tab"><i
-                                                class="text-center text-purple cartTap  bg-purple-transparent  brround">10</i>البرامج
+                                                class="text-center text-purple cartTap  bg-purple-transparent  brround">10</i>المشاريع
                                             القائمة</a></li>
                                     <li><a href="#tab12" data-toggle="tab" class="d-flex"><i
                                                 class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i>الدورات
@@ -308,7 +308,7 @@
                                                             <path
                                                                 d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05" />
                                                         </svg>
-                                                        البرامج
+                                                        المشاريع
                                                     </th>
                                                     <th></th>
                                                 </tr>

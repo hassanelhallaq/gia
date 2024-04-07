@@ -8,7 +8,7 @@
                         <a href="../index.html">الرئيسية</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="table_program_management.html"class="text-muted">البرامج</a>
+                        <a href="table_program_management.html"class="text-muted">المشاريع</a>
                     </li>
                     {{-- <li class="breadcrumb-item">
                     <a href="#" class="text-muted"> مشروع تطوير المهارات الشخصية </a>

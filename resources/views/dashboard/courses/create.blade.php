@@ -9,7 +9,7 @@
                         <div class="row row-sm mb-3">
                             <div class="col-lg-6">
                                 <div class="form-group has-success mg-b-0">
-                                    <label for="example"> البرامج </label>
+                                    <label for="example"> المشاريع </label>
                                     <select id="program_id" class="form-control select2">
                                         @foreach ($program as $item)
                                             <option value="{{ $item->id }}">
