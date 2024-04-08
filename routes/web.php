@@ -66,6 +66,8 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client,trainer')->group
         Route::get('/candidat-course/accetptance/{id}', [CandidateCourseController::class, 'acceptance'])->name('candidat.course.accetptance');
         Route::post('/candidat-course/status', [CandidateCourseController::class, 'candStatus'])->name('candidat.course.status');
         Route::resource('save-feedback', FeedBackController::class);
+        Route::get('save-feedback/attend/{id}', [FeedBackController::class, 'feedBackAttend'])->name('feedBackAttend');
+
 
     }
 );
