@@ -16,7 +16,7 @@
                 </ol>
             </nav>
         </div>
-        
+
     </div>
 @endsection
 @section('content')
@@ -335,8 +335,8 @@
                                         type="radio"> <span> اختبار بعدي </span></label>
                                 {{-- <label class="rdiobox"><input id="interactive" name="rdio" type="radio"> <span>
                                         اختبار تفاعلي </span></label> --}}
-                                 <label class="rdiobox"><input id="rate" name="rate" type="radio"> <span>
-                                             تقيم المشاركين </span></label>
+                                 <label class="rdiobox"><input id="rate" name="rdio" type="radio"> <span>
+                                             تقيم الدوره </span></label>
                             </div>
                             <div class="col-12 mt-4">
                                 <label for="example"> اسم الأختبار </label>

@@ -13,6 +13,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CourseFileController;
 use App\Http\Controllers\CourseLinkController;
+use App\Http\Controllers\FeedBackController;
 use App\Http\Controllers\InvationController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PagesController;
@@ -64,6 +65,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client,trainer')->group
         Route::get('/candidat_management/{id}', [CandidatController::class, 'acceptance'])->name('candidat.management');
         Route::get('/candidat-course/accetptance/{id}', [CandidateCourseController::class, 'acceptance'])->name('candidat.course.accetptance');
         Route::post('/candidat-course/status', [CandidateCourseController::class, 'candStatus'])->name('candidat.course.status');
+        Route::resource('save-feedback', FeedBackController::class);
 
     }
 );

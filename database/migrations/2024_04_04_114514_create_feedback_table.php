@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('candidate_courses', function (Blueprint $table) {
-            $table->integer('is_accept')->default(0);
-
+        Schema::create('feed_backs', function (Blueprint $table) {
+            $table->id();
+            $table->string('question');
+            $table->string('answer');
+            $table->foreignId('attendance_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->timestamps();
         });
     }
 
@@ -22,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('candidate_courses', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('candidats');
     }
 };
