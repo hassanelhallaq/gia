@@ -45,7 +45,7 @@
                             </select>
                         </div>
 
-                        <div class="col-12 mb-4">
+                        {{-- <div class="col-12 mb-4">
                             <p class="mg-b-10"> يرجي اختيار مدرب المشروع </p>
                             <select class="form-control select2" id="trainers">
                                 @foreach ($trainers as $item)
@@ -53,8 +53,8 @@
                                 @endforeach
 
                             </select>
-                        </div>
-                        <div class="col-12 mb-4">
+                        </div> --}}
+                        {{-- <div class="col-12 mb-4">
                             <p class="mg-b-10"> يرجي اختيار منسق مدرب المشروع </p>
                             <select class="form-control select2" id="cordTrainner">
                                 @foreach ($cordTrainner as $item)
@@ -62,8 +62,8 @@
                                 @endforeach
 
                             </select>
-                        </div>
-                        <div class="col-12 mb-4">
+                        </div> --}}
+                        {{-- <div class="col-12 mb-4">
                             <p class="mg-b-10"> يرجي اختيار المستشارون المشروع </p>
                             <select class="form-control select2" id="consultants">
                                 @foreach ($consultants as $item)
@@ -71,7 +71,7 @@
                                 @endforeach
 
                             </select>
-                        </div>
+                        </div> --}}
 
 
                 </div>
@@ -101,9 +101,9 @@
         formData.append("_method", "PUT")
         formData.append('mang_select', document.getElementById('mang_select').value);
         formData.append('cord_select', document.getElementById('cord_select').value);
-        formData.append('trainers', document.getElementById('trainers').value);
-        formData.append('consultants', document.getElementById('consultants').value);
-        formData.append('cordTrainner', document.getElementById('cordTrainner').value);
+        // formData.append('trainers', document.getElementById('trainers').value);
+        // formData.append('consultants', document.getElementById('consultants').value);
+        // formData.append('cordTrainner', document.getElementById('cordTrainner').value);
         storeRoute('/dashboard/admin/program/manger/' + id, formData)
     }
 </script>

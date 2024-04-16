@@ -17,9 +17,9 @@
         <div class=" text-left d-flex">
             <button  class="btn btn-outline-light btn-print"> طباعة <i class="icon ion-ios-print"></i></button>
             <a href="{{route('programs.xlsx')}}" class="btn btn-outline-light mr-1 btn-export"> تصدير <i class="ti-stats-up project"></i></a>
-            {{-- @can('اضافه مشروع') --}}
+            @can('اضافه مشروع')
             <a class="btn btn-warning-gradient btn-with-icon mr-1" href="{{route('programs.create')}}">  انشاء مشروع <i class="bi bi-plus"></i></a>
-            {{-- @endcan --}}
+            @endcan
         </div>
 
 
@@ -136,8 +136,9 @@
                                                         <div class="dropdown-menu">
                                                             <a href="{{route('programs.edit',[$item->id])}}" class="dropdown-item"> تحرير </a>
                                                             <a href="{{route('program.mangers',[$item->id])}}" class="dropdown-item"> تحرير المشرفين </a>
-
+                                                            @can('حذف المشروع')
                                                             <button  class="dropdown-item"data-target="#modalDelete" onclick="performDestroy({{ $item->id }} , this)" > حذف </button>
+                                                            @endcan
                                                         </div>
                                                     </td>
                                                 </tr>

@@ -66,7 +66,7 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client,trainer')->group
         Route::get('/candidat-course/accetptance/{id}', [CandidateCourseController::class, 'acceptance'])->name('candidat.course.accetptance');
         Route::post('/candidat-course/status', [CandidateCourseController::class, 'candStatus'])->name('candidat.course.status');
         Route::resource('save-feedback', FeedBackController::class);
-        Route::get('save-feedback/attend/{id}', [FeedBackController::class, 'feedBackAttend'])->name('feedBackAttend');
+        Route::get('feedback/attend/{id}/{course_id}', [FeedBackController::class, 'feedBackAttend'])->name('feedBackAttend');
 
 
     }
@@ -204,10 +204,10 @@ Route::get('/courses', [InvationController::class, 'courses'])->name('invitation
 }
 );
 Route::get('/accept-v2/{id}/{course_id}', [InvationController::class, 'second'])->name('invitationV2.second');
-Route::get('/invitation-v2/{id}/{course_id}', [InvationController::class, 'index'])->name('invitationV2.index');
-Route::post('/invitation-v2/reply', [InvationController::class, 'storeReply']);
+Route::get('/7b201/{id}/{course_id}', [InvationController::class, 'index'])->name('invitationV2.index');
+Route::post('/7b20/reply', [InvationController::class, 'storeReply']);
 Route::get('/files-v2/{id}/{course_id}', [InvationController::class, 'files'])->name('invitationV2.files');
-Route::get('/inviation-v2/{id}/{course_id}', [InvationController::class, 'inviation'])->name('invitationV2.inviation');
+Route::get('/7b20/{id}/{course_id}', [InvationController::class, 'inviation'])->name('invitationV2.inviation');
 Route::get('/exams-v2/{id}/{course_id}', [InvationController::class, 'third'])->name('invitationV2.third');
 Route::get('/home/{id}/{course_id}', [InvationController::class, 'redirectToLogin'])->name('redirectToLogin');
 Route::post('/send-sms', [InvationController::class, 'sendSms'])->name('sendSms');

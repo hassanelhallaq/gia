@@ -76,7 +76,7 @@ class QuizController extends Controller
         } elseif ($request->interactive == 'true') {
             $data['type'] = 'interactive';
         } elseif ($request->rate == 'true') {
-            $data['type'] = 'interateractive';
+            $data['type'] = 'rate';
         }
 
         $quiz = Quiz::create($data);
@@ -541,6 +541,6 @@ class QuizController extends Controller
         }
 
 
-        // Return response
+        return response()->json(['redirect' => route('quizes.index')]);
     }
 }

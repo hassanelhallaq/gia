@@ -29,8 +29,8 @@
         </div>
         <div class="main-dashboard-header-right flex-wrap">
             <div class=" d-flex">
-                 <a href="{{ route('get.rate', [$course->id]) }}"
-                    class="btn btn-outline-light btn-with-icon btn-md ml-2">التقيم <i class="la la-cog"></i></a>
+                 {{-- <a href="{{ route('get.rate', [$course->id]) }}"
+                    class="btn btn-outline-light btn-with-icon btn-md ml-2">التقيم <i class="la la-cog"></i></a> --}}
                     @can('الأطلاع على المشاركين')
                         <a href="{{ route('course.attendance', [$course->id]) }}"class="btn btn-outline-light btn-with-icon btn-sm mr-1"> ادارة المشاركين <i class="la la-cog"></i></a>
                     @endcan
@@ -288,7 +288,7 @@
                                     <th> قبول الدعوه </th>
 
                                     <th> المهنة </th>
-                                    <th> الاختبارات </th>
+                                    {{-- <th> الاختبارات </th> --}}
                                     <th> الحضور </th>
                                     <th> الاكتمال </th>
                                     <th> الدعوه </th>
@@ -317,7 +317,7 @@
                                         <td>{{ $item->id_number }} </td>
                                         <td>{{ $item->is_accepted == 1 ? 'تم القبول' : 'تم الرفض' }} </td>
                                         <td>{{ $item->job }} </td>
-                                        <td class="d-flex">
+                                        {{-- <td class="d-flex">
                                             <span class="ml-3 examBefor" data-bs-toggle="offcanvas"
                                                 data-bs-target="#drawerbefore_{{ $item->id }}"
                                                 aria-controls="offcanvasWithBothOptions"> قبلي</span>
@@ -325,7 +325,7 @@
                                             <span class="ml-3 examBefor" data-bs-toggle="offcanvas"
                                                 data-bs-target="#drawerafter_{{ $item->id }}"
                                                 aria-controls="offcanvasWithBothOptions"> بعدي </span>
-                                        </td>
+                                        </td> --}}
                                         <td>
                                             <span class="ml-2 dropdown">
                                                 {{ $course->duration }} ايام
@@ -398,7 +398,9 @@
                                             <div class="dropdown-menu">
                                                 <a href="#" class="dropdown-item"
                                                     data-target="#modaledit_{{ $item->id }}" data-toggle="modal">
-                                                    تحرير </a>
+                                                     </a>
+                                                    <a href="{{ route('feedBackAttend', [$item->id, 'course_id' => $course->id]) }}"
+                                                        target=”_blank”>بدء التقيم</a>
                                                 <a href="#"
                                                     class="dropdown-item text-danger"data-target="#modalDelete"
                                                     data-toggle="modal"> حذف </a>
@@ -477,8 +479,7 @@
                     <div class="tabs-menu ">
                         <!-- Tabs -->
                         <ul class="nav panel-tabs">
-                            <li><a href="#tab11" data-toggle="tab" class="d-flex active"> الكل <i
-                                        class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a>
+                            <li><a href="#tab11" data-toggle="tab" class="d-flex active"> عرض الجميع  </a>
                             </li>
                             {{-- <li><a href="#tab12" data-toggle="tab" class="d-flex"> اكسل <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li> --}}
                             {{-- <li><a href="#tab13" data-toggle="tab" class="d-flex"> وورد <i class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a></li> --}}
@@ -605,8 +606,7 @@
                     <div class="tabs-menu mb-1">
                         <!-- Tabs -->
                         <ul class="nav panel-tabs">
-                            <li><a href="#tab11" data-toggle="tab" class="d-flex active"> الكل <i
-                                        class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i></a>
+                            <li><a href="#tab11" data-toggle="tab" class="d-flex active"> عرض الجميع  </a>
                             </li>
                         </ul>
                     </div>
@@ -638,7 +638,7 @@
     <!-- Container closed -->
     <!-- main-content closed -->
 
-    @foreach ($course->attendances as $item)
+    {{-- @foreach ($course->attendances as $item)
         <div class="modal" id="modaledit_{{ $item->id }}">
             <div class="modal-dialog " role="document">
                 <div class="modal-content modal-content-demo">
@@ -695,7 +695,7 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
 
     <!-- Message Modal -->
 
@@ -731,7 +731,7 @@
 
     <!-- قبلي-->
     <!-- Begin Side Drawer before-->
-    @foreach ($course->attendances as $item)
+    {{-- @foreach ($course->attendances as $item)
         <div class="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabindex="-1"
             id="drawerbefore_{{ $item->id }}" aria-labelledby="offcanvasWithBothOptionsLabel">
             <div class="offcanvas-body d-flex align-items-start flex-column mb-3 justify-content-between bg-light p-0">
@@ -828,7 +828,7 @@
 
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
     <!--/Sidebar-right-->
 
     <!--  بعدي-->

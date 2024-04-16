@@ -142,7 +142,7 @@
                                                                 <td class="client-name"> {{$candidat->scound_department}} </td>
                                                                 <td class="client-name"> @if($candidat->pivot->is_accept == 1)
                                                                     مقبول
-                                                                    @elseif($candidat->pivot->is_accept == 2)
+                                                                    @elseif($candidat->pivot->is_accept == 0)
                                                                     مرفوض
                                                                     @else
                                                                     استثناء
@@ -150,9 +150,9 @@
                                                                 </td>
                                                                 <td class="">
                                                                     <div class="d-flex">
-                                                                        <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" type="button" onclick="performStoreAccept({{$candidat->id}})"  data-toggle="modal"> قبول </button>
-                                                                        <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" type="button" onclick="performStoreRefused({{$candidat->id}})" data-toggle="modal">   اعتذر </button>
-                                                                        <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" type="button" onclick="performStoreExption({{$candidat->id}})" data-toggle="modal">   قبول باستثناء </button>
+                                                                        <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" type="button" onclick="performStoreAccept({{$candidat->id}},{{$cou->id}})"  data-toggle="modal"> قبول </button>
+                                                                        <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" type="button" onclick="performStoreRefused({{$candidat->id}},{{$cou->id}})" data-toggle="modal">   اعتذر </button>
+                                                                        <button class="btn btn-outline-warning btn-sm mr-1" data-target="#choseAttendType" type="button" onclick="performStoreExption({{$candidat->id}},{{$cou->id}})" data-toggle="modal">   قبول باستثناء </button>
                                                                     </div>
 
                                                                 </td>
@@ -181,21 +181,27 @@
 @endsection
 @section('js')
     <script>
-        function performStoreAccept(id) {
+        function performStoreAccept(id,course_id) {
             let formData = new FormData();
             formData.append('candidate_id', id);
+                        formData.append('course_id', course_id);
+
             formData.append('is_accept', 1);
             storepart('/dashboard/admin/candidat-course/status', formData)
         }
-        function performStoreRefused(id) {
+        function performStoreRefused(id,course_id) {
             let formData = new FormData();
             formData.append('candidate_id', id);
+                                    formData.append('course_id', course_id);
+
             formData.append('is_accept', 0);
             storepart('/dashboard/admin/candidat-course/status', formData)
         }
-        function performStoreExption(id) {
+        function performStoreExption(id,course_id) {
             let formData = new FormData();
             formData.append('candidate_id', id);
+                                    formData.append('course_id', course_id);
+
             formData.append('is_accept', 2);
             storepart('/dashboard/admin/candidat-course/status', formData)
         }

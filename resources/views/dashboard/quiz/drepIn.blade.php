@@ -16,13 +16,7 @@
                 </ol>
             </nav>
         </div>
-        <div class="main-dashboard-header-right">
-            <div class=" d-flex">
-                {{-- <a href="add_tests.html" class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> اضافة اسئلة <i class="bi bi-plus"></i></a> --}}
-                <button class="btn btn-warning-gradient btn-with-icon btn-md mr-1" data-target="#select2modal"
-                    data-toggle="modal"> اضافة اختبار جديد <i class="bi bi-plus"></i></button>
-            </div>
-        </div>
+    
     </div>
 @endsection
 @section('content')
@@ -30,7 +24,8 @@
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form role="form" action="{{ route('deipIn.store', [$id]) }}" method="post" class="f1" id="myForm">
+                    <form role="form" action="{{ route('deipIn.store', [$id]) }}" method="post" class="f1"
+                        id="myForm">
                         @csrf
                         <!-- row -->
                         <div class="row row-sm mb-3">
@@ -40,10 +35,11 @@
                                     <select id="quiz_befor" name="quiz_befor_id" class="form-control select2">
 
                                         @foreach ($quizesBefor as $item)
-                                        <option @foreach ($course->quizes->where('type','befor') as $quiz)
+                                            <option
+                                                @foreach ($course->quizes->where('type', 'befor') as $quiz)
 
                                             @if ($item->id == $quiz->id) selected @endif @endforeach
-                                            value="{{ $item->id }}">
+                                                value="{{ $item->id }}">
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
@@ -51,7 +47,7 @@
 
                                 </div>
                             </div>
-                            <input name="course_id" value="{{$id}}" hidden>
+                            <input name="course_id" value="{{ $id }}" hidden>
                             <div class="col-lg-6">
                                 <div class="form-group has-success mg-b-0">
                                     <label for="example"> الحاله</label>
@@ -71,10 +67,11 @@
                                     <label for="example"> بعدي</label>
                                     <select id="quiz_after" name="quiz_after_id" class="form-control select2">
                                         @foreach ($quizesAfter as $item)
-                                        <option @foreach ($course->quizes->where('type','after') as $quiz)
+                                            <option
+                                                @foreach ($course->quizes->where('type', 'after') as $quiz)
 
                                             @if ($item->id == $quiz->id) selected @endif @endforeach
-                                            value="{{ $item->id }}">
+                                                value="{{ $item->id }}">
                                                 {{ $item->name }}
                                             </option>
                                         @endforeach
@@ -101,7 +98,7 @@
                                     <label for="example"> تفاعلي</label>
                                     <select id="quiz_interactive" name="quiz_interactive_id" class="form-control select2">
                                         @foreach ($quizesInteractive as $item)
-                                            <option @foreach ($course->quizes->where('type','interactive') as $quiz)
+                                            <option @foreach ($course->quizes->where('type', 'interactive') as $quiz)
 
                                                 @if ($item->id == $quiz->id) selected @endif @endforeach
                                                 value="{{ $item->id }}">
@@ -132,12 +129,13 @@
                                     <label for="example"> تقيم</label>
                                     <select id="quiz_rate_id" name="quiz_rate_id" class="form-control select2">
                                         @foreach ($quizesRate as $item)
-                                            <option @foreach ($course->quizes->where('type','rate') as $quiz)
+                                            <option
+                                                @foreach ($course->quizes->where('type', 'rate') as $quiz)
 
                                                 @if ($item->id == $quiz->id) selected @endif @endforeach
                                                 value="{{ $item->id }}">
-                                                    {{ $item->name }}
-                                                </option>
+                                                {{ $item->name }}
+                                            </option>
                                         @endforeach
                                     </select>
 
@@ -170,7 +168,8 @@
                                     <input type="datetime-local" name="datetimes[]" class="datetime">
                                     <button class="remove-item">Remove</button>
                                 </div>
-                                <button type="button" class="btn-warning-gradient btn-with-icon mr-1" id="add-item">Add Item</button>
+                                <button type="button" class="btn-warning-gradient btn-with-icon mr-1" id="add-item">Add
+                                    Item</button>
                             </div>
 
                         </div>
@@ -196,38 +195,39 @@
     </script>
 
     <!-- Include this script in your Blade template -->
-<!-- Include this script in your Blade template -->
-<script>
-    document.getElementById('myForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission
+    <!-- Include this script in your Blade template -->
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
 
-        // Prepare data to send
-        var formData = new FormData(this);
-        var repeaterItems = document.querySelectorAll('#repeater .item');
-        var dropdownsAndDates = [];
+            // Prepare data to send
+            var formData = new FormData(this);
+            var repeaterItems = document.querySelectorAll('#repeater .item');
+            var dropdownsAndDates = [];
 
-        repeaterItems.forEach(function(item) {
-            var dropdown = item.querySelector('select[name="dropdowns[]"]').value;
-            var datetime = item.querySelector('input[name="datetimes[]"]').value;
-            dropdownsAndDates.push({ dropdown: dropdown, datetime: datetime });
+            repeaterItems.forEach(function(item) {
+                var dropdown = item.querySelector('select[name="dropdowns[]"]').value;
+                var datetime = item.querySelector('input[name="datetimes[]"]').value;
+                dropdownsAndDates.push({
+                    dropdown: dropdown,
+                    datetime: datetime
+                });
+            });
+
+            formData.append('dropdownsAndDates', JSON.stringify(dropdownsAndDates));
+            // Send AJAX request
+            fetch(this.getAttribute('action'), {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Log response from server
+                    // Handle response as needed (e.g., show success message)
+                    window.location.href = data.redirect; // Redirect to the returned route
+                })
+                // You can redirect or show a success message here
+                .catch(error => console.error('Error:', error));
         });
-
-        formData.append('dropdownsAndDates', JSON.stringify(dropdownsAndDates));
-
-        // Send AJAX request
-        fetch(this.getAttribute('action'), {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            // Handle response
-            location.reload();
-        }
-            // You can redirect or show a success message here
-        })
-        .catch(error => console.error('Error:', error));
-    });
-</script>
-
-
+    </script>
 @endsection

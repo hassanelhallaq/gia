@@ -14,6 +14,7 @@
                 </div>
             </div>
             <div class="main-dashboard-header-right">
+                @can('اضافه مشروع')
                 <div class=" d-flex">
                     <a href="{{route('programs.create')}}"
                         class="btn btn-warning-gradient btn-with-icon mr-1"> انشاء مشروع <i
@@ -23,6 +24,7 @@
                     <button class="btn btn-warning-gradient btn-icon mr-1"><i
                             class="si si-options-vertical"></i></button>
                 </div>
+                @endcan
             </div>
         </div>
         <!-- /breadcrumb -->
@@ -269,12 +271,15 @@
                             <div class="tabs-menu ">
                                 <!-- Tabs -->
                                 <ul class="nav panel-tabs">
-                                    <li class=""><a href="#tab11" class="active d-flex" data-toggle="tab"><i
-                                                class="text-center text-purple cartTap  bg-purple-transparent  brround">10</i>المشاريع
+                                    <li class=""><a href="#tab11" class="active d-flex" data-toggle="tab">المشاريع
                                             القائمة</a></li>
-                                    <li><a href="#tab12" data-toggle="tab" class="d-flex"><i
-                                                class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i>الدورات
+                                    <li><a href="#tab12" data-toggle="tab" class="d-flex">الدورات
                                             القائمة</a></li>
+                                            <li><a href="#tab14" data-toggle="tab" class="d-flex">الدورات
+                                            المجدوله</a></li>
+
+                                            <li><a href="#tab13" data-toggle="tab" class="d-flex">الدورات
+                                            المنتهيه</a></li>
                                     {{-- <li><a href="#tab13" data-toggle="tab" class="d-flex"><i
                                                 class="text-center text-purple cartTap  bg-purple-transparent  brround">05</i>اخر
                                             الدعوات</a></li> --}}
@@ -287,46 +292,81 @@
                                     <div class="table-responsive">
                                         <table class="table table-striped mg-b-0 text-md-nowrap">
                                             <thead>
-                                                <tr class="list-unstyled">
-                                                    <th>
-                                                        <i class="typcn typcn-folder"></i>
-                                                        اسم المشروع
-                                                    </th>
-                                                    <th>
-                                                        <i class="si si-layers"></i>
-                                                        عدد الدورات
-                                                    </th>
-                                                    <th>
-                                                        <i class="mdi mdi-account-outline"></i>
-                                                        العميل
-                                                    </th>
-                                                    <th><i class="far fa-calendar"></i> تاريخ البداية </th>
-                                                    <th><i class="far fa-calendar"></i> تاريخ النهاية </th>
-                                                    <th>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                            height="16" fill="currentColor" class="bi bi-check-circle"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                            <path
-                                                                d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05" />
-                                                        </svg>
-                                                        استعراض البرنامج                                                    </th>
-                                                    <th></th>
+                                                <tr class="tableHead text-center">
+                                                    <th><input type="checkbox" class="checkParent"></th>
+                                                    <th>#</th>
+                                                     <th>
+                                                         <i class="typcn typcn-folder"></i>
+                                                         اسم المشروع
+                                                     </th>
+                                                     <th>
+                                                         <i class="si si-layers"></i>
+                                                         عدد الدورات
+                                                     </th>
+                                                     <th>
+                                                         <i class="mdi mdi-account-outline"></i>
+                                                         العميل
+                                                     </th>
+                                                     <th><i class="far fa-calendar"></i> تاريخ البداية </th>
+                                                     <th><i class="far fa-calendar"></i> تاريخ النهاية </th>
+
+                                                     <th> الحالة </th>
+                                                     <th> المرشحين</th>
+                                                     <th> الدورات </th>
+
+                                                    <td>
+                                                      العمليات
+                                                    </td>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($programsActice->take(3) as $item)
+                                                @foreach ($programsActice->take(3) as $i => $item)
 
 
-                                                <tr>
-                                                    <td scope="row">مشروع {{$item->name}}</td>
-                                                    <td>{{$item->courses_count}}</td>
-                                                    <td>{{$item->client->name}}</td>
-                                                    <td>{{$item->start}}</td>
-                                                    <td>{{$item->end}}</td>
-                                                     <td> <a href="{{route('program.course',[$item->id])}}"><i class="far fa-eye tx-15"></i></a></td>
-                                                </tr>
+                                                    <tr class="table-rows text-center">
+                                                        <td><input type="checkbox" class="checkChild"></td>
+                                                        <td>{{$i + 1}}</td>
+                                                         <td scope="row">{{$item->name}} </td>
+                                                         <td>{{$item->courses_count}}</td>
+                                                         <td class="client-name">{{$item->client->name ?? ''}}</td>
+                                                         @php
+                                                         $start = Carbon\Carbon::parse($item->start)->format('y-m-d');
+                                                         $end = Carbon\Carbon::parse($item->end)->format('y-m-d');
+                                                        $today = Carbon\Carbon::today()->format('Y-m-d');
+
+                                                         @endphp
+                                                           <td>{{$start }}</td>
+                                                           <td>{{$end }}</td>
+                                                         <td>
+                                                            @if (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($start)) && $item->status != 'active')
+                                                            <span class="tag tag-rounded bg-primary-transparent text-primary">متآخره</span>
+                                                            @elseif(!Carbon\Carbon::parse($today)->gt($end) == 'active')
+                                                            <span class="tag tag-rounded bg-primary-transparent text-primary">فعال</span>
+                                                            @elseif($item->status == 'pending')
+                                                            <span class="tag tag-rounded bg-primary-transparent text-primary">في المعالجة</span>
+                                                            @elseif (Carbon\Carbon::parse($today)->gt($end))
+                                                            <span class="tag tag-rounded bg-primary-transparent text-primary">منتهيه</span>
+                                                            @endif
+                                                         </td>
+                                                        <td>
+                                                         <a href="{{ route('candidate.show', [$item->id]) }}"><i
+                                                            class="far fa-eye text-gray tx-13 ml-4"></i></a>
+                                                        </td>
+                                                        <td class="d-flex filter-col-cell">
+                                                            <a href="{{route('program.course',[$item->id])}}"><i class="far fa-eye tx-13"></i></a>                                                        <!-- dropdown-menu -->
+
+                                                        </td>
+                                                        <td>
+                                                            <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i class="si si-options-vertical text-gray tx-13" ></i></button>
+                                                            <div class="dropdown-menu">
+                                                                <a href="{{route('programs.edit',[$item->id])}}" class="dropdown-item"> تحرير </a>
+                                                                <a href="{{route('program.mangers',[$item->id])}}" class="dropdown-item"> تحرير المشرفين </a>
+                                                                @can('حذف المشروع')
+                                                                <button  class="dropdown-item"data-target="#modalDelete" onclick="performDestroy({{ $item->id }} , this)" > حذف </button>
+                                                                @endcan
+                                                            </div>
+                                                        </td>
+                                                    </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -336,40 +376,115 @@
                                     <div class="table-responsive">
                                         <table class="table table-striped mg-b-0 text-md-nowrap">
                                             <thead>
-                                                <tr class="list-unstyled">
+                                                <tr class="tableHead">
+                                                    <th><input type="checkbox" class="checkParent"></th>
+                                                    <th>#</th>
                                                     <th>
-                                                        <i class="typcn typcn-folder"></i>
-                                                        اسم الدوره
+                                                        اسم الدورة
                                                     </th>
-                                                    <th>
-                                                        <i class="si si-layers"></i>
-                                                        عدد المتقدمين
-                                                    </th>
-                                                    <th>
-                                                        <i class="mdi mdi-account-outline"></i>
-                                                        المشروع
-                                                    </th>
-                                                    <th><i class="far fa-calendar"></i> تاريخ البداية </th>
-                                                    <th><i class="far fa-calendar"></i> عدد الايام </th>
-                                                    <th>
+                                                    <th>الفئة</th>
+                                                    <th> اسم المدرب</th>
+                                                    <th> المستوى </th>
+                                                    <th> تاريخ البداية </th>
+                                                    <th>المدة </th>
+                                                    <th>لغة الدورة</th>
+                                                    <th>الحاله</th>
 
-                                                    </th>
-                                                    <th></th>
+                                                    <th> عدد المسجلين </th>
+                                                    <th> اسم المنسق </th>
+                                                    <th> شهادة </th>
+                                                    <th> نسبة الشهادة </th>
+                                                    {{-- <th> المقاعد المتاحة </th> --}}
+                                                    <th> الاختبار القبلي </th>
+                                                    <th> الاختبار البعدي </th>
+                                                    {{-- <th> تحميل المادة </th>
+                                                        <th> AS </th> --}}
+
+
+                                                    <!-- Filter -->
+                                                    <td class="col-filter">
+                                                        <!-- dropdown-menu -->
+                                                        <button data-toggle="dropdown" class="btn btn-previous p-0"><i
+                                                                class="bi bi-filter-square tx-20"></i></button>
+                                                        <div class="dropdown-menu scrollable-menu" role="menu">
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($events->take(3) as $item)
 
 
-                                                <tr>
-                                                    <td scope="row">{{$item->name}}</td>
-                                                    <td>{{$item->attendances_count}}</td>
-                                                    <td>{{$item->program->name}}</td>
-                                                    <td>{{$item->start}}</td>
-                                                    <td>{{$item->duration}}ايام</td>
+                                                <tr class="table-rows">
+                                                    <td><input type="checkbox" class="checkChild"></td>
+                                                    <td>{{ $i + 1 }}</td>
+                                                    <td scope="row">{{ $item->name }}</td>
+                                                    <td>{{ $item->category->name ?? '' }}</td>
+                                                    <td class="client-name"> {{ $item->trainer->name ?? '' }}</td>
+                                                    <td> {{ $item->level ?? '' }}</td>
+                                                    <td>{{ $item->start }}</td>
+                                                    <td>{{ $item->duration }}ايام</td>
                                                     <td>
+                                                        @if ($item->language == 'arabic')
+                                                            عربي
+                                                        @else
+                                                            انجليزيه
+                                                        @endif
+                                                    </td>
+                                                    @php
+                                                        $start = Carbon\Carbon::parse($item->start)->format('y-m-d');
+                                                        $courseStartDate = \Carbon\Carbon::parse($item->start);
+
+                                                        $end = $courseStartDate->addDays($item->duration)->startOfDay();
+                                                        $today = Carbon\Carbon::today()->format('Y-m-d');
+                                                        $status = Carbon\Carbon::parse($today)->gt($end) ? 'منتهيه' : 'غير منتهيه';
+
+                                                    @endphp
+                                                    <td>
+                                                        @if (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($start)) && $item->status != 'active')
+                                                            <span
+                                                                class="tag tag-rounded bg-primary-transparent text-primary">متآخره</span>
+                                                        @elseif (Carbon\Carbon::parse($start)->gt(Carbon\Carbon::parse($today)))
+                                                            <span
+                                                                class="tag tag-rounded bg-primary-transparent text-primary">مجدوله</span>
+                                                        @elseif($item->status == 'active' && !Carbon\Carbon::parse($today)->gt($end))
+                                                            <span
+                                                                class="tag tag-rounded bg-primary-transparent text-primary">فعال</span>
+                                                        @elseif (Carbon\Carbon::parse($today)->gt($end))
+                                                            <span
+                                                                class="tag tag-rounded bg-primary-transparent text-primary">منتهيه</span>
+                                                        @elseif($item->status == 'Inactive')
+                                                            <span class="tag tag-rounded bg-primary-transparent text-primary">غير
+                                                                فعال</span>
+                                                        @endif
+                                                    </td>
+                                                    <th> # </th>
+                                                    <th>{{ $item->coordinator }} </th>
+                                                    <th>{{ $item->is_certificate == 1 ? 'نعم' : 'لا' }}</th>
+                                                    <th>{{ $item->percentage_certificate }} </th>
+                                                    <th>{{ $item->quizes->where('type', 'befor')->first()->name ?? '' }} </th>
+                                                    <th>{{ $item->quizes->where('type', 'after')->first()->name ?? '' }} </th>
+                                                    {{-- <th> # </th>
+                                                    <th> # </th> --}}
+                                                    <td class="d-flex filter-col-cell">
                                                         <a href="{{ route('courses.show', [$item->id]) }}"><i
-                                                            class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
+                                                                class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
+                                                        <!-- dropdown-menu -->
+                                                        <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i
+                                                                class="si si-options-vertical text-gray tx-12"></i></button>
+                                                        <div class="dropdown-menu">
+                                                            <a href="{{ route('courses.edit', [$item->id]) }}" class="dropdown-item">
+                                                                تحرير </a>
+                                                            <a href="{{ route('drepIn.quiz', [$item->id]) }}" class="dropdown-item">
+                                                                الاختبارات </a>
+                                                            <a href="{{ route('show.candidate', [$item->id]) }}"
+                                                                class="dropdown-item">
+                                                                المرشحين </a>
+                                                            @can('حذف دوره')
+                                                                <button class="dropdown-item"
+                                                                    onclick="performDestroy({{ $item->id }} , this)"> حذف </button>
+                                                            @endcan
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -378,6 +493,247 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="tab13">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped mg-b-0 text-md-nowrap">
+                                            <thead>
+                                                <tr class="tableHead">
+                                                    <th><input type="checkbox" class="checkParent"></th>
+                                                    <th>#</th>
+                                                    <th>
+                                                        اسم الدورة
+                                                    </th>
+                                                    <th>الفئة</th>
+                                                    <th> اسم المدرب</th>
+                                                    <th> المستوى </th>
+                                                    <th> تاريخ البداية </th>
+                                                    <th>المدة </th>
+                                                    <th>لغة الدورة</th>
+                                                    <th>الحاله</th>
+
+                                                    <th> عدد المسجلين </th>
+                                                    <th> اسم المنسق </th>
+                                                    <th> شهادة </th>
+                                                    <th> نسبة الشهادة </th>
+                                                    {{-- <th> المقاعد المتاحة </th> --}}
+                                                    <th> الاختبار القبلي </th>
+                                                    <th> الاختبار البعدي </th>
+                                                    {{-- <th> تحميل المادة </th>
+                                                        <th> AS </th> --}}
+
+
+                                                    <!-- Filter -->
+                                                    <td class="col-filter">
+                                                        <!-- dropdown-menu -->
+                                                        <button data-toggle="dropdown" class="btn btn-previous p-0"><i
+                                                                class="bi bi-filter-square tx-20"></i></button>
+                                                        <div class="dropdown-menu scrollable-menu" role="menu">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($eventsEnd->take(3) as $item)
+
+
+                                                <tr class="table-rows">
+                                                    <td><input type="checkbox" class="checkChild"></td>
+                                                    <td>{{ $i + 1 }}</td>
+                                                    <td scope="row">{{ $item->name }}</td>
+                                                    <td>{{ $item->category->name ?? '' }}</td>
+                                                    <td class="client-name"> {{ $item->trainer->name ?? '' }}</td>
+                                                    <td> {{ $item->level ?? '' }}</td>
+                                                    <td>{{ $item->start }}</td>
+                                                    <td>{{ $item->duration }}ايام</td>
+                                                    <td>
+                                                        @if ($item->language == 'arabic')
+                                                            عربي
+                                                        @else
+                                                            انجليزيه
+                                                        @endif
+                                                    </td>
+                                                    @php
+                                                        $start = Carbon\Carbon::parse($item->start)->format('y-m-d');
+                                                        $courseStartDate = \Carbon\Carbon::parse($item->start);
+
+                                                        $end = $courseStartDate->addDays($item->duration)->startOfDay();
+                                                        $today = Carbon\Carbon::today()->format('Y-m-d');
+                                                        $status = Carbon\Carbon::parse($today)->gt($end) ? 'منتهيه' : 'غير منتهيه';
+
+                                                    @endphp
+                                                    <td>
+                                                        @if (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($start)) && $item->status != 'active')
+                                                            <span
+                                                                class="tag tag-rounded bg-primary-transparent text-primary">متآخره</span>
+                                                        @elseif (Carbon\Carbon::parse($start)->gt(Carbon\Carbon::parse($today)))
+                                                            <span
+                                                                class="tag tag-rounded bg-primary-transparent text-primary">مجدوله</span>
+                                                        @elseif($item->status == 'active' && !Carbon\Carbon::parse($today)->gt($end))
+                                                            <span
+                                                                class="tag tag-rounded bg-primary-transparent text-primary">فعال</span>
+                                                        @elseif (Carbon\Carbon::parse($today)->gt($end))
+                                                            <span
+                                                                class="tag tag-rounded bg-primary-transparent text-primary">منتهيه</span>
+                                                        @elseif($item->status == 'Inactive')
+                                                            <span class="tag tag-rounded bg-primary-transparent text-primary">غير
+                                                                فعال</span>
+                                                        @endif
+                                                    </td>
+                                                    <th> # </th>
+                                                    <th>{{ $item->coordinator }} </th>
+                                                    <th>{{ $item->is_certificate == 1 ? 'نعم' : 'لا' }}</th>
+                                                    <th>{{ $item->percentage_certificate }} </th>
+                                                    <th>{{ $item->quizes->where('type', 'befor')->first()->name ?? '' }} </th>
+                                                    <th>{{ $item->quizes->where('type', 'after')->first()->name ?? '' }} </th>
+                                                    {{-- <th> # </th>
+                                                    <th> # </th> --}}
+                                                    <td class="d-flex filter-col-cell">
+                                                        <a href="{{ route('courses.show', [$item->id]) }}"><i
+                                                                class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
+                                                        <!-- dropdown-menu -->
+                                                        <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i
+                                                                class="si si-options-vertical text-gray tx-12"></i></button>
+                                                        <div class="dropdown-menu">
+                                                            <a href="{{ route('courses.edit', [$item->id]) }}" class="dropdown-item">
+                                                                تحرير </a>
+                                                            <a href="{{ route('drepIn.quiz', [$item->id]) }}" class="dropdown-item">
+                                                                الاختبارات </a>
+                                                            <a href="{{ route('show.candidate', [$item->id]) }}"
+                                                                class="dropdown-item">
+                                                                المرشحين </a>
+                                                            @can('حذف دوره')
+                                                                <button class="dropdown-item"
+                                                                    onclick="performDestroy({{ $item->id }} , this)"> حذف </button>
+                                                            @endcan
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab14">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped mg-b-0 text-md-nowrap">
+                                            <thead>
+                                                <tr class="tableHead">
+                                                    <th><input type="checkbox" class="checkParent"></th>
+                                                    <th>#</th>
+                                                    <th>
+                                                        اسم الدورة
+                                                    </th>
+                                                    <th>الفئة</th>
+                                                    <th> اسم المدرب</th>
+                                                    <th> المستوى </th>
+                                                    <th> تاريخ البداية </th>
+                                                    <th>المدة </th>
+                                                    <th>لغة الدورة</th>
+                                                    <th>الحاله</th>
+
+                                                    <th> عدد المسجلين </th>
+                                                    <th> اسم المنسق </th>
+                                                    <th> شهادة </th>
+                                                    <th> نسبة الشهادة </th>
+                                                    {{-- <th> المقاعد المتاحة </th> --}}
+                                                    <th> الاختبار القبلي </th>
+                                                    <th> الاختبار البعدي </th>
+                                                    {{-- <th> تحميل المادة </th>
+                                                        <th> AS </th> --}}
+
+
+                                                    <!-- Filter -->
+                                                    <td class="col-filter">
+                                                        <!-- dropdown-menu -->
+                                                        <button data-toggle="dropdown" class="btn btn-previous p-0"><i
+                                                                class="bi bi-filter-square tx-20"></i></button>
+                                                        <div class="dropdown-menu scrollable-menu" role="menu">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($coursesScheduled->take(3) as $item)
+
+
+                                                <tr class="table-rows">
+                                                    <td><input type="checkbox" class="checkChild"></td>
+                                                    <td>{{ $i + 1 }}</td>
+                                                    <td scope="row">{{ $item->name }}</td>
+                                                    <td>{{ $item->category->name ?? '' }}</td>
+                                                    <td class="client-name"> {{ $item->trainer->name ?? '' }}</td>
+                                                    <td> {{ $item->level ?? '' }}</td>
+                                                    <td>{{ $item->start }}</td>
+                                                    <td>{{ $item->duration }}ايام</td>
+                                                    <td>
+                                                        @if ($item->language == 'arabic')
+                                                            عربي
+                                                        @else
+                                                            انجليزيه
+                                                        @endif
+                                                    </td>
+                                                    @php
+                                                        $start = Carbon\Carbon::parse($item->start)->format('y-m-d');
+                                                        $courseStartDate = \Carbon\Carbon::parse($item->start);
+
+                                                        $end = $courseStartDate->addDays($item->duration)->startOfDay();
+                                                        $today = Carbon\Carbon::today()->format('Y-m-d');
+                                                        $status = Carbon\Carbon::parse($today)->gt($end) ? 'منتهيه' : 'غير منتهيه';
+
+                                                    @endphp
+                                                    <td>
+                                                        @if (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($start)) && $item->status != 'active')
+                                                            <span
+                                                                class="tag tag-rounded bg-primary-transparent text-primary">متآخره</span>
+                                                        @elseif (Carbon\Carbon::parse($start)->gt(Carbon\Carbon::parse($today)))
+                                                            <span
+                                                                class="tag tag-rounded bg-primary-transparent text-primary">مجدوله</span>
+                                                        @elseif($item->status == 'active' && !Carbon\Carbon::parse($today)->gt($end))
+                                                            <span
+                                                                class="tag tag-rounded bg-primary-transparent text-primary">فعال</span>
+                                                        @elseif (Carbon\Carbon::parse($today)->gt($end))
+                                                            <span
+                                                                class="tag tag-rounded bg-primary-transparent text-primary">منتهيه</span>
+                                                        @elseif($item->status == 'Inactive')
+                                                            <span class="tag tag-rounded bg-primary-transparent text-primary">غير
+                                                                فعال</span>
+                                                        @endif
+                                                    </td>
+                                                    <th> # </th>
+                                                    <th>{{ $item->coordinator }} </th>
+                                                    <th>{{ $item->is_certificate == 1 ? 'نعم' : 'لا' }}</th>
+                                                    <th>{{ $item->percentage_certificate }} </th>
+                                                    <th>{{ $item->quizes->where('type', 'befor')->first()->name ?? '' }} </th>
+                                                    <th>{{ $item->quizes->where('type', 'after')->first()->name ?? '' }} </th>
+                                                    {{-- <th> # </th>
+                                                    <th> # </th> --}}
+                                                    <td class="d-flex filter-col-cell">
+                                                        <a href="{{ route('courses.show', [$item->id]) }}"><i
+                                                                class="far fa-eye text-gray tx-13 ml-4"></i></i></a>
+                                                        <!-- dropdown-menu -->
+                                                        <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i
+                                                                class="si si-options-vertical text-gray tx-12"></i></button>
+                                                        <div class="dropdown-menu">
+                                                            <a href="{{ route('courses.edit', [$item->id]) }}" class="dropdown-item">
+                                                                تحرير </a>
+                                                            <a href="{{ route('drepIn.quiz', [$item->id]) }}" class="dropdown-item">
+                                                                الاختبارات </a>
+                                                            <a href="{{ route('show.candidate', [$item->id]) }}"
+                                                                class="dropdown-item">
+                                                                المرشحين </a>
+                                                            @can('حذف دوره')
+                                                                <button class="dropdown-item"
+                                                                    onclick="performDestroy({{ $item->id }} , this)"> حذف </button>
+                                                            @endcan
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                {{-- <div class="tab-pane" id="tab13">
                                     <div class="table-responsive">
                                         <table class="table table-striped mg-b-0 text-md-nowrap">
                                             <thead>
@@ -466,7 +822,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>

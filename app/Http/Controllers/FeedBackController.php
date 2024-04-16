@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Models\FeedBack;
+use App\Models\FeedBack;
 use App\Models\Attendance;
+use App\Models\AttendanceCourse;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class FeedBackController extends Controller
@@ -25,14 +27,13 @@ class FeedBackController extends Controller
      */
     public function create()
     {
-
     }
-    public function feedBackAttend($id)
+    public function feedBackAttend($id, $courseId)
     {
-        $attendance = Attendance::with('courses')->whereHas('courses',function($q)use($id){
-            $q->where('course_id',$id);
-        })->get();
-        return view('interactive',compact('attendance'));
+        $attendance = Attendance::find($id);
+        $course = Course::find($courseId);
+
+        return view('interactive', compact('attendance', 'courseId', 'course'));
     }
     /**
      * Store a newly created resource in storage.
@@ -42,48 +43,106 @@ class FeedBackController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate the incoming request if needed
 
-        // Validate the incoming request data
-        $validatedData = $request->validate([
-            'punctuality' => 'required',
-            'involvement_in_grpup' => 'required',
-            'initiative' => 'required',
-            'creativity' => 'required',
-            'tact' => 'required',
-            'support' => 'required',
-            'recommendations' => 'required',
-            'ready' => 'required',
-            'benefit' => 'required',
-            'training_benefit' => 'required',
-            'comments' => 'required',
-            'answe_benefit' => 'required',
-            'answe_training_benefit' => 'required',
-            'answe_comments' => 'required',
-        ]);
+        // Extract the feedback data from the request
+        $feedbackData = $request->all();
 
-        // Create a new Feedback instance and fill it with the validated data
-        $feedback = new \App\Models\FeedBack();
-        $feedback->question = $validatedData['punctuality'];
-        $feedback->question = $validatedData['involvement_in_grpup'];
-        $feedback->question = $validatedData['initiative'];
-        $feedback->question = $validatedData['creativity'];
-        $feedback->question = $validatedData['tact'];
-        $feedback->question = $validatedData['support'];
-        $feedback->question = $validatedData['recommendations'];
-        $feedback->question = $validatedData['ready'];
-        $feedback->question = $validatedData['benefit'];
-        $feedback->question = $validatedData['training_benefit'];
-        $feedback->question = $validatedData['comments'];
-        $feedback->answe_benefit = $validatedData['answe_benefit'];
-        $feedback->answe_training_benefit = $validatedData['answe_training_benefit'];
-        $feedback->answe_comments = $validatedData['answe_comments'];
+        // Loop through the feedback data and save each question and answer to the database
+        $feedBack = new FeedBack();
+        $feedBack->question = $request->punctuality;
+        $feedBack->answer = $request->answer_punctuality;
+        $feedBack->attendance_id = $request->attendance_id;
+        $feedBack->course_id = $request->course_id;
+        $feedBack->save();
+        $feedBack = new FeedBack();
 
-        // Save the feedback to the database
-        $feedback->save();
+        $feedBack->question = $request->involvement_in_grpup;
+        $feedBack->answer = $request->answer_exceeds_expectationsـinvolvement_in_grpup;
+        $feedBack->attendance_id = $request->attendance_id;
+        $feedBack->course_id = $request->course_id;
 
-        // Optionally, you can return a response indicating success
-        return response()->json(['message' => 'Feedback saved successfully', 'feedback' => $feedback]);
+        $feedBack->save();
+        $feedBack = new FeedBack();
+
+        $feedBack->question = $request->initiative;
+        $feedBack->answer = $request->answer_could_improve_initiative;
+        $feedBack->attendance_id = $request->attendance_id;
+        $feedBack->course_id = $request->course_id;
+
+        $feedBack->save();
+        $feedBack = new FeedBack();
+
+        $feedBack->question = $request->creativity;
+        $feedBack->answer = $request->answer_could_improve_creativity;
+        $feedBack->attendance_id = $request->attendance_id;
+        $feedBack->course_id = $request->course_id;
+
+        $feedBack->save();
+        $feedBack = new FeedBack();
+
+        $feedBack->question = $request->support;
+        $feedBack->answer = $request->answer_support;
+        $feedBack->attendance_id = $request->attendance_id;
+        $feedBack->course_id = $request->course_id;
+
+        $feedBack->save();
+        $feedBack = new FeedBack();
+
+        $feedBack->question = $request->tact;
+        $feedBack->answer = $request->answer_tact;
+        $feedBack->attendance_id = $request->attendance_id;
+        $feedBack->course_id = $request->course_id;
+
+        $feedBack->save();
+        $feedBack = new FeedBack();
+
+        $feedBack->question = $request->recommendations;
+        $feedBack->answer = $request->answr_could_improve_recommendations;
+        $feedBack->attendance_id = $request->attendance_id;
+        $feedBack->course_id = $request->course_id;
+
+        $feedBack->save();
+        $feedBack = new FeedBack();
+
+        $feedBack->question = $request->ready;
+        $feedBack->answer = $request->answe_could_improve_ready;
+        $feedBack->attendance_id = $request->attendance_id;
+        $feedBack->course_id = $request->course_id;
+
+        $feedBack->save();
+        $feedBack = new FeedBack();
+
+        $feedBack->question = $request->benefit;
+        $feedBack->answer = $request->answe_benefit;
+        $feedBack->attendance_id = $request->attendance_id;
+        $feedBack->course_id = $request->course_id;
+
+        $feedBack->save();
+        $feedBack = new FeedBack();
+
+        $feedBack->question = $request->training_benefit;
+        $feedBack->answer = $request->answe_training_benefit;
+        $feedBack->attendance_id = $request->attendance_id;
+        $feedBack->course_id = $request->course_id;
+
+        $feedBack->save();
+        $feedBack = new FeedBack();
+
+        $feedBack->question = $request->comments;
+        $feedBack->answer = $request->answe_comments;
+        $feedBack->attendance_id = $request->attendance_id;
+        $feedBack->course_id = $request->course_id;
+
+        $feedBack->save();
+
+        $feedBack = FeedBack::where('course_id', $request->course_id)->get();
+        $attendanceIds = $feedBack->pluck('attendance_id')->toArray();
+
+        // Fetch the first AttendanceCourse where attendance_id is not in the array of $attendanceIds
+        $courseAttend = AttendanceCourse::whereNotIn('attendance_id', $attendanceIds)->first();
+
+        // Optionally, return a response indicating success or failure
+        return response()->json(['redirect' => route('feedBackAttend', [$courseAttend->attendance_id, $request->course_id])]);
     }
-
- 
 }

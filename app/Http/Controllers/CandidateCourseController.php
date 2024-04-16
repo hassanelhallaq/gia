@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendance;
 use App\Models\Candidat;
 use App\Models\CandidateCourse;
 use App\Models\Course;
@@ -76,6 +77,16 @@ class CandidateCourseController extends Controller
             $candidat = CandidateCourse::where('candidat_id',$request->candidate_id)->first();
             $candidat->is_accept = $request->is_accept;
             $candidat->update();
+            if($request->is_accept == 1 || $request->is_accept == 0 ){
+                $candidat = Candidat::find($request->candidate_id);
+                $attendance = new Attendance();
+                $attendance->name =$candidat->name;
+                $attendance->phone_number =$candidat->phone_number;
+                $attendance->email =$candidat->email;
+                $attendance->job =$candidat->job;
+                $attendance->save();
+                $attendance->courses()->attach($candidat->course_id);
+            }
 
     }
 }

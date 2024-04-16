@@ -38,7 +38,7 @@
                         @can('اضافه عميل')
 
                         <div class="mr-auto d-block tx-20">
-                            <a href="#" class="btn btn-warning-gradient btn-with-icon" type="button" > اضف <i class="bi bi-floppy"></i></a>
+                            <a href="{{route('addMangement',[$type])}}" class="btn btn-warning-gradient btn-with-icon" type="button" > اضف <i class="bi bi-floppy"></i></a>
                         </div>
                         @endcan
 

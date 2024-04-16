@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->date('start');
+            $table->string('time')->nullable();
             $table->integer('duration');
             $table->integer('trainer_id');
             $table->integer('seat_count');

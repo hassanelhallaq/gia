@@ -26,6 +26,11 @@
         </div>
     </div>
 @endsection
+<br><br>
+<br>
+<br>
+
+
 @section('content')
     <!-- row -->
     <div class="row">
@@ -76,7 +81,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 mg-t-20 mg-lg-t-0">
+                            {{-- <div class="col-lg-6 mg-t-20 mg-lg-t-0">
                                 <label for="example"> التقيم </label>
                                 <div class="webflow-style-input">
                                     <input class="input_no_border readonly" type="text"
@@ -86,7 +91,7 @@
                                         <i class="bi bi-pen edit-button"></i>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <!-- closed row -->
 
@@ -95,8 +100,16 @@
                             <div class="col-lg-6">
                                 <label for="example"> الفئة </label>
                                 <div class="webflow-style-input">
-                                    <input class="form-control" required="" type="text" id="category_id" value="{{ $course->category_id }}">
+                                    <select class="form-control select2" id="category_id">
+                                        @foreach ($categories as $categoty)
+                                        <option @if ($categoty->id == $course->category_id)
+                                            selected
+                                        @endif value="{{$categoty->id}}">
+                                          {{$categoty->name}}
+                                        </option>
+                                        @endforeach
 
+                                    </select>
                                     <div class="d-flex ml-2">
                                         <p class="ml-3"> تحرير </p>
                                         <i class="bi bi-pen edit-buttonSelect"></i>
@@ -104,7 +117,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6">
+                            {{-- <div class="col-lg-6">
                                 <label for="example"> هل يوجد إختبار </label>
                                 <div class="webflow-style-input">
                                     <select class="form-control select2 input_no_border custom-select" id="is_exam" disabled>
@@ -120,7 +133,7 @@
                                         <i class="bi bi-pen edit-buttonSelect"></i>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <!-- closed row -->
 
@@ -137,7 +150,22 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-lg-6 mb-3">
+                                <label for="example">  الوقت </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                        </div>
+                                    </div><input class="form-control fc-datepicker" value="{{ $course->time }}" id="time" placeholder="time" type="text">
 
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="example"> المدة </label>
+                                <input class="form-control"  value="{{ $course->duration }}" id="duration" required="" type="number"
+                                    placeholder="This is input">
+                            </div>
                             <div class="col-lg-6 mb-3">
                                 <label for="example"> هل يوجد شهادة </label>
                                 <div class="webflow-style-input">
@@ -214,7 +242,7 @@
                                     </div>
                                 </div>
                             </div>
-
+{{--
                             <div class="col-lg-6 mb-3">
                                 <label for="example"> الأختبار البعدي </label>
                                 <div class="webflow-style-input">
@@ -236,7 +264,7 @@
                                         <i class="bi bi-box-arrow-in-down"></i>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="col-lg-6 mb-3">
                                 <label for="example"> لغة الدورة </label>
@@ -262,7 +290,7 @@
 
                                 </select>
                             </div>
-                            <div class="col-lg-6 mb-3">
+                            {{-- <div class="col-lg-6 mb-3">
                                 <label for="example"> رقم تواصل مسؤول المشروع </label>
                                 <div class="webflow-style-input">
                                     <input class="input_no_border readonly" id="contact_number" type="text"
@@ -272,8 +300,8 @@
                                         <i class="bi bi-pen edit-button"></i>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 mb-3">
+                            </div> --}}
+                            {{-- <div class="col-lg-6 mb-3">
                                 <label for="example"> رابط التواصل </label>
                                 <div class="webflow-style-input">
                                     <input class="input_no_border readonly" id="contact_link" type="text"
@@ -283,8 +311,8 @@
                                         <i class="bi bi-pen edit-button"></i>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6 mb-3">
+                            </div> --}}
+                            {{-- <div class="col-lg-6 mb-3">
                                 <label for="example"> الاسم الجهة </label>
                                 <div class="webflow-style-input">
                                     <input class="input_no_border readonly" id="direction_name" type="text"
@@ -294,7 +322,7 @@
                                         <i class="bi bi-pen edit-button"></i>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <p class="mg-b-10">شخص التواصل </p>
                                 <select class="form-control select2" name="contact_person[]" multiple id="contact_person">
@@ -306,7 +334,7 @@
                                 </select>
                             </div>
 
-                            <div class="col-lg-6 mb-3">
+                            {{-- <div class="col-lg-6 mb-3">
                                 <label for="example"> تسجيل الحضور </label>
                                 <div class="webflow-style-input">
                                     <input class="input_no_border readonly" type="text" value="another value"
@@ -316,7 +344,7 @@
                                         <i class="bi bi-pen edit-button"></i>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             {{-- <div class="col-lg-6 mb-3">
                                 <label for="example"> Assignment </label>
@@ -348,10 +376,10 @@
                                 <button class="btn btn-warning-gradient btn-with-icon btn-sm" type="button"
                                     onclick="performUpdate({{ $course->id }})"> حفظ الاعدادات <i
                                         class="bi bi-floppy"></i></button>
-                                <button onclick="duplicate({{ $course->id }})" type="button" class="btn btn-outline-light btn-with-icon btn-sm mr-1 " id="copyButton"> استنساخ
-                                    المشروع <i class="far fa-clone"></i></button>
+                                {{-- <button onclick="duplicate({{ $course->id }})" type="button" class="btn btn-outline-light btn-with-icon btn-sm mr-1 " id="copyButton">  نسخ الدورة
+                                      <i class="far fa-clone"></i></button> --}}
                             </div>
-                            <a class="btn btn-danger btn-with-icon btn-sm "> حذف الدورة <i class="bi bi-trash3"></i></a>
+                            {{-- <a class="btn btn-danger btn-with-icon btn-sm "> حذف الدورة <i class="bi bi-trash3"></i></a> --}}
                         </div>
                     </form>
                     <!-- closed form -->
@@ -370,7 +398,7 @@
             formData.append('language', document.getElementById('language').value);
             formData.append('seat_count', document.getElementById('seat_count').value);
             formData.append('coruse_start', document.getElementById('start').value);
-            formData.append('is_exam', document.getElementById('is_exam').value);
+            // formData.append('is_exam', document.getElementById('is_exam').value);
             formData.append('is_certificate', document.getElementById('is_certificate').value);
             formData.append('trainer', document.getElementById('trainer').value);
             formData.append('percentage_certificate', document.getElementById('percentage_certificate').value);
@@ -380,10 +408,10 @@
              formData.append('image_course', document.getElementById('image_course').files[0]);
             formData.append('desc', document.getElementById('desc').value);
             formData.append('location', document.getElementById('location').value);
-            formData.append('link', document.getElementById('link').value);
-             formData.append('contact_number', document.getElementById('contact_number').value);
-            formData.append('contact_link', document.getElementById('contact_link').value);
-            formData.append('direction_name', document.getElementById('direction_name').value);
+            formData.append('duration', document.getElementById('duration').value);
+            formData.append('time', document.getElementById('time').value);
+            // formData.append('contact_link', document.getElementById('contact_link').value);
+            // formData.append('direction_name', document.getElementById('direction_name').value);
             // formData.append('quiz_interactive_id', document.getElementById('quiz_interactive_id').value);
             var contact_person = $('#contact_person').val();
             formData.append('contact_person', JSON.stringify(contact_person));

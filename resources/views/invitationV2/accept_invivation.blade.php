@@ -110,7 +110,7 @@
 
         <div class="container">
             <div class="title flex-g ">
-                {{-- <h3>اسم الدورة:{{ $course->name }}</h3> --}}
+                <h3>اسم الدورة:{{ $course->name }}</h3>
 
             </div>
             <div id="timePlace" class="flex-g g0 ai-c ">
@@ -139,7 +139,7 @@
                         </svg>
 
                     </span>
-                    {{-- <p id="day_content">{{ $course->start }}</p> --}}
+                    <p id="day_content">{{ $course->start }}</p>
                 </div>
                 <div class="df ai-c">
                     <span>
@@ -161,15 +161,15 @@
         </div>
         <div class="slider">
             <h2 id="title_slider"></h2>
-            {{-- <img id="svg-image" src="{{ asset($svgPaths[0]) }}" alt="" height="270"> --}}
+            <img id="svg-image" src="{{ asset($svgPaths[0]) }}" alt="" height="270">
             <div class="navigation">
                 <button class="prev" onclick="prevSlide()">السابق</button>
                 <button class="next active" onclick="nextSlide()">التالي</button>
                 <form class="form">
                     <input name="check" type="checkbox">
                     <label for="check">اوافق على كافة الشروط والأحكام</label>
-                    {{-- <button id="accept" type="button" onclick="performStoreAccept({{ $attendance->id }},{{ request()->course_id }})" class="active" style="display: none;">قبول</button> --}}
-                    {{-- <button id="decline" type="button" onclick="performStoreDecline({{ $attendance->id }},{{ request()->course_id }})" style="display: none;">اعتذار</button> --}}
+                    <button id="accept" type="button" onclick="performStoreAccept({{ $attendance->id }},{{ request()->course_id }})" class="active" style="display: none;">قبول</button>
+                    <button id="decline" type="button" onclick="performStoreDecline({{ $attendance->id }},{{ request()->course_id }})" style="display: none;">اعتذار</button>
                 </form>
             </div>
         </div>
@@ -224,7 +224,7 @@
 
 
 </body>
-{{-- <script>
+<script>
     const titles = @json($titles);
     const svgPaths = @json($svgPaths);
     const totalSlides = titles.length;
@@ -274,7 +274,7 @@
         formData.append('is_accepted', 1);
         formData.append('attendance_id', id);
         formData.append('course_id', course_id);
-        storeRoute('/invitation-v2/reply', formData)
+        storeRoute('/7b20/reply', formData)
     }
 
     function performStoreDecline(id, course_id) {
@@ -282,9 +282,9 @@
         formData.append('is_accepted', 0);
         formData.append('attendance_id', id);
         formData.append('course_id', course_id);
-        storeRoute('/invitation-v2/reply', formData)
+        storeRoute('/7b20/reply', formData)
     }
-</script> --}}
+</script>
 <script src = "{{ asset('crudjs/crud.js') }}" ></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

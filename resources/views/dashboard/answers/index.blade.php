@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class=" mt-3">
+                            {{-- <div class=" mt-3">
                                 <div class="dropdown">
                                     <i aria-expanded="false" aria-haspopup="true" class="mdi mdi-dots-vertical"
                                         data-toggle="dropdown" id="dropdownMenuButton"></i>
@@ -124,7 +124,7 @@
                                         <a class="dropdown-item" href="#">تعديل</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-12">
+                {{-- <div class="col-lg-6 col-sm-12">
                     <div class="card p-0">
 
                         <div class="card-body">
@@ -163,7 +163,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <!-- colse row -->
 

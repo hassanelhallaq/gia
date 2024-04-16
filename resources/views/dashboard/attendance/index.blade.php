@@ -264,6 +264,8 @@
                                                         <a href="#" class="dropdown-item"
                                                             data-target="#modaledit_{{ $item->id }}"
                                                             data-toggle="modal"> تحرير </a>
+
+                                                            
                                                         <button class="dropdown-item"
                                                             onclick="performDestroy({{ $item->id }} , this)"> حذف
                                                         </button>

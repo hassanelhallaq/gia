@@ -115,7 +115,12 @@ class CourseController extends Controller
         $course->seat_count = $request->seat_count;
         $coruseStart = Carbon::parse($request->coruse_start)->format('y-m-d');
         $course->start = $coruseStart;
+
+
         $course->is_exam = $request->is_exam;
+        $course->time = $request->time;
+
+
         $course->desc = $request->desc;
         $course->location = $request->location;
         $course->duration = $request->duration;
@@ -147,7 +152,7 @@ class CourseController extends Controller
     {
         $course = Course::withCount(["attendances" => function ($q) {
             $q->where('is_accepted', 1);
-        }])->with('attendances')->find($id);
+        }])->withCount('attendances')->with('attendances')->find($id);
         $courseAttendancesEmail = Course::withCount("attendancesEmail")->with('attendances')->find($id);
 
         $quizBefor = QuizCourse::where('course_id', $id)->with('quiz')->whereHas('quiz', function ($q) {
@@ -249,6 +254,7 @@ class CourseController extends Controller
         $course->desc = $request->desc;
         $course->location = $request->location;
         $course->rate = $request->link;
+        $course->time = $request->time;
         $course->status_befor = $request->status_befor;
         $course->status_after = $request->status_after;
         $course->percentage_certificate = $request->percentage_certificate;

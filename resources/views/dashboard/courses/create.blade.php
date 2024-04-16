@@ -83,15 +83,15 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-3">
-                                <p class="mg-b-10"> هل يوجد اختبار </p>
-                                <select class="form-control select2" id="is_exam">
-                                    <option value="1">
-                                        نعم
-                                    </option>
-                                    <option value="0">
-                                        لا
-                                    </option>
-                                </select>
+                                <label for="example">  الوقت </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                        </div>
+                                    </div><input class="form-control fc-datepicker" id="time" placeholder="time" type="text">
+
+                                </div>
                             </div>
                         </div>
                         <!-- closed row -->
@@ -217,7 +217,7 @@
             formData.append('language', document.getElementById('language').value);
             formData.append('seat_count', document.getElementById('seat_count').value);
             formData.append('coruse_start', document.getElementById('coruse_start').value);
-            formData.append('is_exam', document.getElementById('is_exam').value);
+            // formData.append('is_exam', document.getElementById('is_exam').value);
             formData.append('duration', document.getElementById('duration').value);
             formData.append('is_certificate', document.getElementById('is_certificate').value);
             formData.append('trainer', document.getElementById('trainer').value);
@@ -226,15 +226,12 @@
             formData.append('coordinator', document.getElementById('coordinator').value);
             formData.append('category_id', document.getElementById('category_id').value);
             formData.append('image_check', document.getElementById('image_check').checked);
-
              formData.append('attendance_questionnaire', document.getElementById('attendance_questionnaire').checked);
              formData.append('program_id', document.getElementById('program_id').value);
              formData.append('image_course', document.getElementById('image_course').files[0]);
              formData.append('location', document.getElementById('location').value);
              formData.append('link', document.getElementById('link').value);
-
-
-
+             formData.append('time', document.getElementById('time').value);
             formData.append('desc', document.getElementById('desc').value);
 
             storeRoute('/dashboard/admin/courses', formData)

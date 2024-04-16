@@ -24,13 +24,13 @@
                     <a href="{{ route('course.xlsx') }}"
                         class="btn btn-outline-light btn-with-icon btn-sm mr-1 btn-export mb-1"> تصدير <i
                             class="ti-stats-up project"></i></a>
-                    <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات صفحة الويب <i
-                            class="icon ion-ios-settings"></i></button>
-                    @if ($program)
+                    {{-- <button class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات صفحة الويب <i
+                            class="icon ion-ios-settings"></i></button> --}}
+                    {{-- @if ($program)
                         <a href="{{ route('programs.edit', [$program->id]) }}"
                             class="btn btn-outline-light btn-with-icon mr-1 mb-1"> اعدادات <i
                                 class="icon ion-ios-settings"></i></a>
-                    @endif
+                    @endif --}}
                     @if ($id)
                         @can('اضافه دوره')
                             <a href="{{ route('program.course.create', [$id]) }}"
@@ -44,11 +44,11 @@
                                 دورة جديدة <i class="bi bi-plus"></i></a>
                         @endcan
                     @endif
-                    @if ($program)
+                    {{-- @if ($program)
                         <a href="{{ route('home', [$program->username]) }}"
                             class="btn btn-warning-gradient btn-with-icon mr-1 mb-1" target=”_blank> عرض صفحة الويب <i
                                 class="icon ion-ios-share-alt"></i></a>
-                    @endif
+                    @endif --}}
                 </div>
             </div>
         @endif
@@ -70,9 +70,10 @@
         <div class="row  sales-cardSmall totalNumberPrograms">
             <div class="col-lg-3 col-sm-12 ">
                 <div class="media m-0 p-0">
-                    <a href="/" class="m-0 p-0"  style="width: 17px !important;">
+                    <a href="/" class="m-0 p-0" style="width: 17px !important;">
                         <div class="card-aside-img pos-relative "style=" margin-left:-19px">
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample69.jpg" alt="img" class=""  style="height: 180px;width:100%;border-radius: 10px; margin-left:-20px">
+                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample69.jpg" alt="img"
+                                class="" style="height: 180px;width:100%;border-radius: 10px; margin-left:-20px">
                             <a class="pos-absolute l-30 t-20 text-white "> فريق ادارة المشاريع </a>
                             <a class="btn btn-warning-light pos-absolute l-20 text-white b-10"
                                 href="{{ route('program.mangers', [$program->id]) }}">تحرير القائمة </a>
@@ -289,10 +290,96 @@
                                         <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
                                             <i class="typcn typcn-group-outline text-warning tx-24"></i>
                                         </div>
+                                        @php
+                                            $totalAfter = 0;
+                                            $totalBefor = 0;
+
+                                            foreach ($courses as $i => $course) {
+                                                foreach ($course->attendances as $i => $attendance) {
+
+                                                    $quizes = App\Models\QuizCourse::where('course_id', $course->id)
+                                                        ->with('quiz')
+                                                        ->whereHas('quiz', function ($q) {
+                                                            $q->where('type', 'befor');
+                                                        })
+                                                        ->get();
+                                                    foreach ($quizes as $i => $quiz) {
+                                                        if ($quiz) {
+                                                            $responseAnswers = App\Models\UserAnswer::where(
+                                                                'quiz_id',
+                                                                $quiz->quiz_id,
+                                                            )
+                                                                ->where('attendance_id', $attendance->id)
+                                                                ->get();
+
+                                                            $responseAnswersTrue = $responseAnswers
+                                                                ->where('is_true', 1)
+                                                                ->count();
+                                                            $questions = App\Models\Question::where(
+                                                                'quiz_id',
+                                                                $quiz->quiz_id,
+                                                            )
+                                                                ->with('userAswes', 'optionTrue')
+                                                                ->get();
+                                                        } else {
+                                                            $responseAnswersTrue = 0;
+                                                        }
+
+                                                        if ($responseAnswersTrue != 0) {
+                                                            $totalBefor +=
+                                                                ($responseAnswersTrue / $questions->count()) * 100;
+                                                        } else {
+                                                            $totalBefor = 0;
+                                                        }
+
+                                                        // quiz after perc
+                                                        $quiz = App\Models\QuizCourse::where('course_id', $course->id)
+                                                            ->with('quiz')
+                                                            ->whereHas('quiz', function ($q) {
+                                                                $q->where('type', 'after');
+                                                            })
+                                                            ->first();
+                                                        if ($quiz) {
+                                                            $responseAnswers = App\Models\UserAnswer::where(
+                                                                'quiz_id',
+                                                                $quiz->quiz_id,
+                                                            )
+                                                                ->where('attendance_id', $attendance->id)
+                                                                ->get();
+                                                            $responseAnswersTrue = $responseAnswers
+                                                                ->where('is_true', 1)
+                                                                ->count();
+                                                            $questions = App\Models\Question::where(
+                                                                'quiz_id',
+                                                                $quiz->quiz_id,
+                                                            )
+                                                                ->with('userAswes', 'optionTrue')
+                                                                ->get();
+                                                        } else {
+                                                            $responseAnswersTrue = 0;
+                                                        }
+
+                                                        if ($responseAnswersTrue != 0) {
+                                                            $totalAfter =
+                                                                ($responseAnswersTrue / $questions->count()) * 100;
+                                                            if ($totalAfter > 100) {
+                                                                $totalAfter += $totalAfter - 100;
+                                                            } else {
+                                                                $totalAfter;
+                                                            }
+                                                        } else {
+                                                            $totalAfter = 0;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        @endphp
                                         <div class="">
-                                            <p class="mb-2 tx-12 text-muted"> نسبة التحسين العامة </p>
+                                            <p class="mb-2 tx-12 text-muted"> نسبة التحسن العامة </p>
                                             <div class="">
-                                                <h6 class="mb-1 ">500</h6>
+                                                <h6 class="mb-1 ">
+                                                   غير محدد
+                                                </h6>
                                             </div>
                                         </div>
                                     </div>
@@ -377,25 +464,27 @@
 
         </div>
 
-         <!--open filter Top  -->
-         <div class="col-lg-12">
+        <!--open filter Top  -->
+        <div class="col-lg-12">
             <div class="card mg-b-20">
                 <div class="card-body d-flex">
-                    <form  method="get">
-                    <div class="form">
-                        <i class="fa fa-search"></i>
-                        {{-- <span class="right-pan"><i class="bi bi-sliders"></i></span> --}}
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group has-success mg-b-0 d-flex" st>
-                                    <input type="text" class="form-control form-input" name="name" value="{{request()->name}}" id="name" placeholder="بحث" style="border-radius: 0px">
-                                    <button class="btn btn-outline-light " type="submit"> بحث </button>
+                    <form method="get">
+                        <div class="form">
+                            <i class="fa fa-search"></i>
+                            {{-- <span class="right-pan"><i class="bi bi-sliders"></i></span> --}}
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group has-success mg-b-0 d-flex" st>
+                                        <input type="text" class="form-control form-input" name="name"
+                                            value="{{ request()->name }}" id="name" placeholder="بحث"
+                                            style="border-radius: 0px">
+                                        <button class="btn btn-outline-light " type="submit"> بحث </button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mg-t-20 mg-lg-t-0">
                                 </div>
                             </div>
-                            <div class="col-lg-6 mg-t-20 mg-lg-t-0">
-                            </div>
                         </div>
-                    </div>
                     </form>
                 </div>
             </div>
@@ -453,7 +542,7 @@
                                         <td><input type="checkbox" class="checkChild"></td>
                                         <td>{{ $i + 1 }}</td>
                                         <td scope="row">{{ $item->name }}</td>
-                                        <td>{{ $item->category_id }}</td>
+                                        <td>{{ $item->category->name ?? '' }}</td>
                                         <td class="client-name"> {{ $item->trainer->name ?? '' }}</td>
                                         <td> {{ $item->level ?? '' }}</td>
                                         <td>{{ $item->start }}</td>
@@ -511,10 +600,13 @@
                                                     تحرير </a>
                                                 <a href="{{ route('drepIn.quiz', [$item->id]) }}" class="dropdown-item">
                                                     الاختبارات </a>
-                                                    <a href="{{ route('show.candidate', [$item->id]) }}" class="dropdown-item">
-                                                        المرشحين </a>
-                                                <button class="dropdown-item"
-                                                    onclick="performDestroy({{ $item->id }} , this)"> حذف </button>
+                                                <a href="{{ route('show.candidate', [$item->id]) }}"
+                                                    class="dropdown-item">
+                                                    المرشحين </a>
+                                                @can('حذف دوره')
+                                                    <button class="dropdown-item"
+                                                        onclick="performDestroy({{ $item->id }} , this)"> حذف </button>
+                                                @endcan
                                             </div>
                                         </td>
                                     </tr>
@@ -543,8 +635,8 @@
         </div>
         <!--closed filter bottom  -->
     </div>
-</div>
-</div>
+    </div>
+    </div>
     <!-- row closed -->
 @endsection
 @section('js')

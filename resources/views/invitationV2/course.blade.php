@@ -56,7 +56,7 @@
         </div>
     </header>
     <section>
-        <img class="back_image" src="{{asset('inv/assets/back.webp')}}" alt="">
+        <img class="back_image" src="{{asset($course->profile ?? 'inv/assets/back.webp')}}" alt="">
 
             <div class="container">
                 <div class="title df jc-sb">
