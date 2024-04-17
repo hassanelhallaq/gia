@@ -1,55 +1,54 @@
 @extends('dashboard.layouts.master')
 @section('header')
-    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 mb-0 mr-0">
-        <div class="left-content mt-2">
+<div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 mb-0 mr-0">
+    <div class="left-content mt-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1">
                     <li class="breadcrumb-item">
-                        <a href="{{ route('admin.dashboard') }}">الرئيسية</a>
+                        <a href="../index.html">الرئيسية</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('programs.index') }}" class="text-muted">المشاريع</a>
-
+                        <a href="table_program_management.html"class="text-muted">المشاريع</a>
+                    </li>
+                    {{-- <li class="breadcrumb-item">
+                    <a href="#" class="text-muted"> مشروع تطوير المهارات الشخصية </a>
+                </li> --}}
                 </ol>
             </nav>
-
         </div>
-        <div class=" text-left d-flex">
-            <button  class="btn btn-outline-light btn-print"> طباعة <i class="icon ion-ios-print"></i></button>
-            <a href="{{route('programs.xlsx')}}" class="btn btn-outline-light mr-1 btn-export"> تصدير <i class="ti-stats-up project"></i></a>
-            @can('اضافه مشروع')
-            <a class="btn btn-warning-gradient btn-with-icon mr-1" href="{{route('programs.create')}}">  انشاء مشروع <i class="bi bi-plus"></i></a>
-            @endcan
-        </div>
-
 
     </div>
 @endsection
 @section('content')
-
+<div class="container-fluid mt-3">
         <!-- row -->
-        <div class="row row">
-
-            <!--open filter Top  -->
+        <div class="row table-tabs">
+            <!--open filter and Tap <Top>  -->
             <div class="col-lg-12">
                 <div class="card mg-b-20">
-                    <div class="card-body d-flex">
-                        <form  method="get">
-                        <div class="form">
-                            <i class="fa fa-search"></i>
-                            {{-- <span class="right-pan"><i class="bi bi-sliders"></i></span> --}}
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group has-success mg-b-0 d-flex" st>
-                                        <input type="text" class="form-control form-input" name="name" value="{{request()->name}}" id="name" placeholder="بحث" style="border-radius: 0px">
-                                        <button class="btn btn-outline-light " type="submit"> بحث </button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mg-t-20 mg-lg-t-0">
-                                </div>
+                    <div class="row card-body  p-3 d-flex justify-content-between">
+                        <div class="col-lg-6 col-sm-12 tab-menu-heading mb-3">
+                            <div class="tabs-menu">
+                                <!-- Tabs -->
+                                <ul class="nav panel-tabs">
+                                    <li class="ml-3"><a href="#tab11" class="active" data-toggle="tab"> الأختبار القبلي
+                                        </a></li>
+                                    <li class="ml-3"><a href="#tab12" data-toggle="tab"> الأختبار البعدي </a></li>
+                                    <li class="ml-3"><a href="#tab13" data-toggle="tab"> الأختبار التفاعلي </a></li>
+                                    <li class="ml-3"><a href="#tab131" data-toggle="tab"> تقييم المشارك</a></li>
+
+                                </ul>
                             </div>
                         </div>
-                        </form>
+                        <!--input Search -->
+                        <div class="text-left">
+                            <div class=" d-flex">
+                                {{-- <a href="add_tests.html" class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> اضافة اسئلة <i class="bi bi-plus"></i></a> --}}
+                                <button class="btn btn-warning-gradient btn-with-icon btn-md mr-1" data-target="#select2modal"
+                                    data-toggle="modal"> اضافة اختبار جديد <i class="bi bi-plus"></i></button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -60,89 +59,239 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="tab-content">
-                            <div class="tab-pane active" id="tab11">
+
+                            <div class="tab-pane active table-container" id="tab11">
                                 <div class="table-responsive">
-                                    <table class="table table-striped mg-b-0 text-md-nowrap ">
-                                        <thead class="">
-                                            <tr class="tableHead text-center">
+                                    <table class="table table-striped mg-b-0 text-md-nowrap">
+                                        <thead>
+                                            <tr>
                                                 <th><input type="checkbox" class="checkParent"></th>
                                                 <th>#</th>
-                                                 <th>
-                                                     <i class="typcn typcn-folder"></i>
-                                                     اسم المشروع
-                                                 </th>
-                                                 <th>
-                                                     <i class="si si-layers"></i>
-                                                     عدد الدورات
-                                                 </th>
-                                                 <th>
-                                                     <i class="mdi mdi-account-outline"></i>
-                                                     العميل
-                                                 </th>
-                                                 <th><i class="far fa-calendar"></i> تاريخ البداية </th>
-                                                 <th><i class="far fa-calendar"></i> تاريخ النهاية </th>
+                                                <th class="tx-15">
+                                                    اسم الأختبار
+                                                </th>
+                                                <th class="tx-5">عدد الدورات المرتبطة </th>
+                                                {{-- <th> نوع السؤال </th> --}}
+                                                {{-- <th>عدد التسجيلات</th>
+                                                <th>حالات مقدمة</th>
+                                                <th>حالات لم تقدم</th>
+                                                <th>الاكتمال</th> --}}
 
-                                                 <th> الحالة </th>
-                                                 <th> المرشحين</th>
-                                                 <th> الدورات </th>
-
-                                                <td>
-                                                  العمليات
-                                                </td>
+                                                <th></th>
                                             </tr>
-                                         </thead>
-                                        @foreach ($programs as $i => $item)
-                                            <tbody id="table-body text-center">
+                                        </thead>
+                                        @foreach ($quizesBefor as $index => $item)
+                                            <tbody class="table-body">
                                                 <tr>
-                                                    <p class="p-5 text-center d-none" id="empty-message">لا توجد بيانات
-                                                        لعرضها
-                                                    </p>
+                                                    <p class="p-5 text-center d-none empty-message"> لايوجد </p>
                                                 </tr>
-                                                <tr class="table-rows text-center">
+                                                <tr class="table-rows">
                                                     <td><input type="checkbox" class="checkChild"></td>
-                                                    <td>{{$i + 1}}</td>
-                                                     <td scope="row">{{$item->name}} </td>
-                                                     <td>{{$item->courses_count}}</td>
-                                                     <td class="client-name">{{$item->client->name ?? ''}}</td>
-                                                     @php
-                                                     $start = Carbon\Carbon::parse($item->start)->format('y-m-d');
-                                                     $end = Carbon\Carbon::parse($item->end)->format('y-m-d');
-                                                    $today = Carbon\Carbon::today()->format('Y-m-d');
-
-                                                     @endphp
-                                                       <td>{{$start }}</td>
-                                                       <td>{{$end }}</td>
-                                                     <td>
-                                                        @if (Carbon\Carbon::parse($today)->gt(Carbon\Carbon::parse($start)) && $item->status != 'active')
-                                                        <span class="tag tag-rounded bg-primary-transparent text-primary">متآخره</span>
-                                                        @elseif(!Carbon\Carbon::parse($today)->gt($end) == 'active')
-                                                        <span class="tag tag-rounded bg-primary-transparent text-primary">فعال</span>
-                                                        @elseif($item->status == 'pending')
-                                                        <span class="tag tag-rounded bg-primary-transparent text-primary">في المعالجة</span>
-                                                        @elseif (Carbon\Carbon::parse($today)->gt($end))
-                                                        <span class="tag tag-rounded bg-primary-transparent text-primary">منتهيه</span>
-                                                        @endif
-                                                     </td>
-                                                    <td>
-                                                     <a href="{{ route('candidate.show', [$item->id]) }}"><i
-                                                        class="far fa-eye text-gray tx-13 ml-4"></i></a>
-                                                    </td>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td scope="row"> {{ $item->name }} </td>
+                                                    <td>{{$item->courses_count}} دورات</td>
+                                                    {{-- <td> اختبار قبلي </td> --}}
+                                                    {{-- <td>12</td>
+                                                    <td>50</td>
+                                                    <td>40</td>
+                                                    <td>90%</td> --}}
                                                     <td class="d-flex filter-col-cell">
-                                                        <a href="{{route('program.course',[$item->id])}}"><i class="far fa-eye tx-13"></i></a>                                                        <!-- dropdown-menu -->
+                                                         <a href="{{route('quizes.show',[$item->id])}}"><i class="far fa-eye tx-14"></i></a>                                                        <!-- dropdown-menu -->
 
-                                                    </td>
-                                                    <td>
-                                                        <button data-toggle="dropdown" class="btn btn-previous btn-sm btn-block"><i class="si si-options-vertical text-gray tx-13" ></i></button>
+                                                        <!-- dropdown-menu -->
+                                                        <button data-toggle="dropdown"
+                                                            class="btn btn-previous btn-sm btn-block"><i
+                                                                class="si si-options-vertical text-gray tx-13"></i></button>
                                                         <div class="dropdown-menu">
-                                                            <a href="{{route('programs.edit',[$item->id])}}" class="dropdown-item"> تحرير </a>
-                                                            <a href="{{route('program.mangers',[$item->id])}}" class="dropdown-item"> تحرير المشرفين </a>
-                                                            @can('حذف المشروع')
-                                                            <button  class="dropdown-item"data-target="#modalDelete" onclick="performDestroy({{ $item->id }} , this)" > حذف </button>
-                                                            @endcan
+                                                            <a href="#" class="dropdown-item" data-target="#modaledit_{{$item->id}}"
+                                                                data-toggle="modal"> تحرير </a>
+                                                                <a href="{{route('duplicate.quiz',[$item->id])}}" class="dropdown-item"
+                                                                > نسخ </a>
+                                                            {{-- <a href="questions_and_tests_management.html"
+                                                                class="dropdown-item"> عرض </a> --}}
+                                                                <button class="dropdown-item"data-target="#modalDelete"
+                                                                onclick="performDestroy({{ $item->id }} , this)"> حذف
+                                                            </button>
                                                         </div>
                                                     </td>
+
                                                 </tr>
-                                             </tbody>
+                                            </tbody>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane table-container" id="tab12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped mg-b-0 text-md-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th><input type="checkbox" class="checkParent"></th>
+                                                <th>#</th>
+                                                <th class="tx-15">
+                                                    اسم الأختبار
+                                                </th>
+                                                <th class="tx-5">عدد الدورات المرتبطة </th>
+                                                {{-- <th> نوع السؤال </th>
+                                                <th>عدد التسجيلات</th>
+                                                <th>حالات مقدمة</th>
+                                                <th>حالات لم تقدم</th>
+                                                <th>الاكتمال</th> --}}
+                                                <th>
+
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        @foreach ($quizesAfter as $index => $item)
+                                            <tbody class="table-body">
+                                                <tr>
+                                                    <p class="p-5 text-center d-none empty-message"> لايوجد </p>
+                                                </tr>
+                                                <tr class="table-rows">
+                                                    <td><input type="checkbox" class="checkChild"></td>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td scope="row"> {{ $item->name }} </td>
+                                                    <td>{{$item->courses_count}} دورات</td>
+                                                    {{-- <td> اختبار بعدي </td> --}}
+                                                    {{-- <td>12</td>
+                                                    <td>50</td>
+                                                    <td>40</td>
+                                                    <td>90%</td> --}}
+                                                    <td class="d-flex filter-col-cell">
+                                                        <!-- dropdown-menu -->
+                                                        <a href="{{route('quizes.show',[$item->id])}}"><i class="far fa-eye tx-14"></i></a>                                                        <!-- dropdown-menu -->
+
+                                                        <button data-toggle="dropdown"
+                                                            class="btn btn-previous btn-sm btn-block"><i
+                                                                class="si si-options-vertical text-gray tx-13"></i></button>
+                                                        <div class="dropdown-menu">
+                                                            <a href="#" class="dropdown-item" data-target="#modaledit_{{$item->id}}"
+                                                                data-toggle="modal"> تحرير </a>
+                                                            {{-- <a href="questions_and_tests_management.html"
+                                                                class="dropdown-item"> عرض </a> --}}
+                                                                <button class="dropdown-item"data-target="#modalDelete"
+                                                                onclick="performDestroy({{ $item->id }} , this)"> حذف
+                                                            </button>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane table-container" id="tab13">
+                                <div class="table-responsive">
+                                    <table class="table table-striped mg-b-0 text-md-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th><input type="checkbox" class="checkParent"></th>
+                                                <th>#</th>
+                                                <th class="tx-15">
+                                                    اسم الأختبار
+                                                </th>
+                                                <th class="tx-5">عدد الدورات المرتبطة </th>
+                                                {{-- <th> نوع السؤال </th>
+                                                <th>عدد التسجيلات</th>
+                                                <th>حالات مقدمة</th>
+                                                <th>حالات لم تقدم</th>
+                                                <th>الاكتمال</th> --}}
+                                                <th>
+
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        @foreach ($quizesInteractive as $index => $item)
+                                            <tbody class="table-body">
+                                                <tr>
+                                                    <p class="p-5 text-center d-none empty-message"> لايوجد </p>
+                                                </tr>
+                                                <tr class="table-rows">
+                                                    <td><input type="checkbox" class="checkChild"></td>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td scope="row"> {{ $item->name }} </td>
+                                                    <td>{{$item->courses_count}} دورات</td>                                                    <td> اختبار تفاعلي </td>
+                                                    {{-- <td>12</td>
+                                                    <td>50</td>
+                                                    <td>40</td>
+                                                    <td>90%</td> --}}
+                                                    <td class="d-flex filter-col-cell">
+                                                        <a href="{{route('quizes.show',[$item->id])}}"><i class="far fa-eye tx-14"></i></a>                                                        <!-- dropdown-menu -->
+                                                        <!-- dropdown-menu -->
+                                                        <button data-toggle="dropdown"
+                                                            class="btn btn-previous btn-sm btn-block"><i
+                                                                class="si si-options-vertical text-gray tx-13"></i></button>
+                                                        <div class="dropdown-menu">
+                                                            <a href="#" class="dropdown-item" data-target="#modaledit_{{$item->id}}"
+                                                                data-toggle="modal"> تحرير </a>
+                                                            {{-- <a href="questions_and_tests_management.html"
+                                                                class="dropdown-item"> عرض </a> --}}
+                                                            <button class="dropdown-item"data-target="#modalDelete"
+                                                                onclick="performDestroy({{ $item->id }} , this)"> حذف
+                                                            </button>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane  table-container" id="tab131">
+                                <div class="table-responsive">
+                                    <table class="table table-striped mg-b-0 text-md-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th><input type="checkbox" class="checkParent"></th>
+                                                <th>#</th>
+                                                <th class="tx-15">
+                                                    اسم الأختبار
+                                                </th>
+                                                <th class="tx-5">عدد الدورات المرتبطة </th>
+                                                {{-- <th> نوع السؤال </th> --}}
+                                                {{-- <th>عدد التسجيلات</th>
+                                                <th>حالات مقدمة</th>
+                                                <th>حالات لم تقدم</th>
+                                                <th>الاكتمال</th> --}}
+
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        @foreach ($rates as $index => $item)
+                                            <tbody class="table-body">
+                                                <tr>
+                                                    <p class="p-5 text-center d-none empty-message"> لايوجد </p>
+                                                </tr>
+                                                <tr class="table-rows">
+                                                    <td><input type="checkbox" class="checkChild"></td>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td scope="row"> {{ $item->name }} </td>
+                                                    <td>{{$item->courses_count}} دورات</td>
+                                                    {{-- <td> اختبار قبلي </td> --}}
+                                                    {{-- <td>12</td>
+                                                    <td>50</td>
+                                                    <td>40</td>
+                                                    <td>90%</td> --}}
+                                                    <td class="d-flex filter-col-cell">
+                                                         <a href="{{route('quizes.show',[$item->id])}}"><i class="far fa-eye tx-14"></i></a>                                                        <!-- dropdown-menu -->
+                                                        <!-- dropdown-menu -->
+                                                        <button data-toggle="dropdown"
+                                                            class="btn btn-previous btn-sm btn-block"><i
+                                                                class="si si-options-vertical text-gray tx-13"></i></button>
+                                                        <div class="dropdown-menu">
+
+                                                                <button class="dropdown-item"data-target="#modalDelete"
+                                                                onclick="performDestroy({{ $item->id }} , this)"> حذف
+                                                            </button>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
                                         @endforeach
                                     </table>
                                 </div>
@@ -159,71 +308,268 @@
                 <div class="card mg-b-20">
                     <div class="card-body d-flex p-3">
                         <ul class="pagination mb-0">
-                           {!! $programs->links() !!}
+
                         </ul>
 
-                        {{-- <div class="mr-auto tx-15 mt-2">
-                            <span id="table-status">1-6 of 100</span>
-                        </div> --}}
                     </div>
                 </div>
             </div>
             <!--closed filter bottom  -->
         </div>
         <!-- row closed -->
+</div>
+    <div class="modal" id="select2modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h5 class="modal-title">اضافة اختبار جديد</h5><button aria-label="Close" class="close"
+                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="">
+                    <div class="modal-body">
+                        <div class="row mg-t-10">
+                            <div class="col  d-flex justify-content-between flex-wrap">
+                                <label class="rdiobox"><input selected name="rdio" id="befor" type="radio"> <span>
+                                        اختبار قبلي </span></label>
+                                <label class="rdiobox"><input checked="" id="after" name="rdio"
+                                        type="radio"> <span> اختبار بعدي </span></label>
+                                {{-- <label class="rdiobox"><input id="interactive" name="rdio" type="radio"> <span>
+                                        اختبار تفاعلي </span></label> --}}
+                                 <label class="rdiobox"><input id="rate" name="rdio" type="radio"> <span>
+                                             تقيم الدوره </span></label>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <label for="example"> اسم الأختبار </label>
+                                <input class="form-control" required="" id="name" type="text">
+                            </div>
 
+                            <div class="col-12 mt-4">
+                                <label for="example"> طريقه التقديم</label>
+                                <select class="form-control select2" id="how_attend">
 
+                                    <option value="questions">
+                                        questions
+                                    </option>
+                                    <option value="link">
+                                        link
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <label for="example"> الرابط</label>
+                                <input class="form-control"  id="link" type="text">
+                            </div>
+                            <div class="col-12 mt-4">
+                                <p class="mg-b-10"> المشروع </p>
+                                <select class="form-control select2" id="program_id">
+                                    <option value="">
+                                    </option>
+                                    @foreach ($programs as $item)
+                                        <option value="{{ $item->id }}">
+                                            {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <p class="mg-b-10"> الدوره </p>
+                                <select class="form-control select2" id="course_id">
+                                    <!-- Cities will be populated dynamically using JavaScript -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="performStore()">
+                            حفظ <i class="bi bi-floppy"></i></button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @foreach ($quizes as $quiz)
+    <div class="modal" id="modaledit_{{$quiz->id}}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h5 class="modal-title">اضافة اختبار جديد</h5><button aria-label="Close" class="close"
+                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="">
+                    <div class="modal-body">
+                        <div class="row mg-t-10">
+                            <div class="col  d-flex justify-content-between flex-wrap">
+                                <label class="rdiobox"><input @if($quiz->type == 'befor') checked @endif name="rdio" id="befor_{{$quiz->id}}" type="radio"> <span>
+                                        اختبار قبلي </span></label>
+                                <label class="rdiobox"><input @if($quiz->type == 'after') checked @endif  id="after_{{$quiz->id}}" name="rdio"
+                                        type="radio"> <span> اختبار بعدي </span></label>
+                                {{-- <label class="rdiobox"><input id="interactive_{{$quiz->id}}" @if($quiz->type == 'interactive') checked @endif  name="rdio" type="radio"> <span>
+                                        اختبار تفاعلي </span></label> --}}
+                                 <label class="rdiobox"><input id="rate_{{$quiz->id}}" @if($quiz->type == 'rate') checked @endif name="rdio" type="radio"> <span>
+                                             تقيم المشاركين </span></label>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <label for="example"> اسم الأختبار </label>
+                                <input class="form-control" required="" value="{{$quiz->name}}" id="name_{{$quiz->id}}" type="text">
+                            </div>
 
+                            <div class="col-12 mt-4">
+                                <label for="example"> طريقه التقديم</label>
+                                <select class="form-control select2" id="how_attend_{{$quiz->id}}">
 
+                                    <option @if ($quiz->how_attend == 'questions') selected @endif
+
+                                     value="questions">
+                                        questions
+                                    </option>
+                                    <option @if ($quiz->how_attend == 'link') selected @endif value="link">
+                                        link
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <label for="example"> الرابط</label>
+                                <input class="form-control"  id="link_{{$quiz->id}}" value="{{$quiz->link}}" type="text">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button class="btn btn-warning-gradient btn-with-icon" type="button" onclick="performUpdate({{$quiz->id}})">
+                            حفظ <i class="bi bi-floppy"></i></button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button"> إلغاء </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endforeach
 @endsection
 @section('js')
-<script src="{{asset('assets/js/xlsx.full.min.js')}}"></script>
-<script src="{{asset('assets/js/table.js')}}"></script>
+    <script>
+        function performStore() {
+            let formData = new FormData();
+            formData.append('name', document.getElementById('name').value);
+            formData.append('course_id', document.getElementById('course_id').value);
+            formData.append('befor', document.getElementById('befor').checked);
+            formData.append('after', document.getElementById('after').checked);
+            // formData.append('interactive', document.getElementById('interactive').checked);
+            formData.append('rate', document.getElementById('rate').checked);
+            formData.append('link', document.getElementById('link').value);
+            formData.append('how_attend', document.getElementById('how_attend').value);
+            storeRoute('/dashboard/admin/quizes', formData)
+        }
+        function performUpdate(id) {
+            let formData = new FormData();
+            formData.append("_method", "PUT")
+            formData.append('name', document.getElementById('name_'+id).value);
+             formData.append('befor', document.getElementById('befor_'+id).checked);
+            formData.append('after', document.getElementById('after_'+id).checked);
+            // formData.append('interactive', document.getElementById('interactive_'+id).checked);
+            formData.append('rate', document.getElementById('rate_'+id).checked);
+            formData.append('link', document.getElementById('link_'+id).value);
+            formData.append('how_attend', document.getElementById('how_attend_'+id).value);
+            storeRoute('/dashboard/admin/quizes/' + id, formData)
+        }
+
+        $(document).ready(function() {
+            // Triggered when the country selection changes
+            $('#program_id').change(function() {
+                // Get the selected country ID
+                var programId = $(this).val();
+
+                // Make an Ajax request to get cities for the selected country
+                $.ajax({
+                    url: '/dashboard/admin/get-courses/' +
+                    programId, // Replace with the actual endpoint on your server
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        // Clear existing options in the city dropdown
+                        $('#course_id').empty();
+
+                        // Populate the city dropdown with the received data
+                        $.each(data, function(key, value) {
+                            $('#course_id').append('<option value="' + value.id + '">' +
+                                value.name + '</option>');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching cities: ' + error);
+                    }
+                });
+            });
+        });
+    </script>
 
 <script>
     $(document).ready(function () {
-    // عند النقر على زر الطباعة
-    $('.btn-print').on('click', function () {
-        // قم بفتح نافذة جديدة لعرض الجدول
-        var printWindow = window.open('', '_blank');
+        // Initially hide the link input
+        $('#link').hide();
 
-        // إضافة الجدول إلى نافذة الطباعة
-        printWindow.document.write('<html><head><title>Print</title></head><body style="direction: rtl;">');
-        printWindow.document.write('<style>table { width: 100%; border-collapse: collapse; } th, td { border: 1px solid #dddddd; text-align: right; padding: 8px; }</style>');
-        printWindow.document.write('<table>');
-
-        // إضافة العنوان (الصف الأول) إلى نافذة الطباعة
-        $('.table-responsive table thead tr').each(function () {
-            printWindow.document.write('<tr>');
-            $(this).find('th').not(':first-child, :last-child').each(function () {
-                printWindow.document.write('<th>' + $(this).text() + '</th>');
-            });
-            printWindow.document.write('</tr>');
+        // On change event for the how_attend select element
+        $('#how_attend').change(function () {
+            // If the selected option is 'questions', hide the link input
+            if ($(this).val() === 'questions') {
+                $('#link').hide();
+            } else {
+                // If the selected option is 'link', show the link input
+                $('#link').show();
+            }
         });
-
-        // إضافة البيانات (الصفوف باستثناء العنوان) إلى نافذة الطباعة
-        $('.table-responsive table tbody tr').each(function () {
-            printWindow.document.write('<tr>');
-            $(this).find('td').not(':first-child, :last-child').each(function () {
-                printWindow.document.write('<td>' + $(this).text() + '</td>');
-            });
-            printWindow.document.write('</tr>');
-        });
-
-        printWindow.document.write('</table></body></html>');
-
-        // أغلق نافذة الطباعة بعد الانتهاء من الطباعة
-        printWindow.document.close();
-        printWindow.print();
     });
-});
 
-    function performDestroy(id, reference) {
+    $(document).ready(function () {
+        // Initially hide the link input
+        $('#link').hide();
 
-        let url = '/dashboard/admin/programs/' + id;
+        // On change event for the how_attend select element
+        $('#how_attend').change(function () {
+            // If the selected option is 'questions', hide the link input
+            if ($(this).val() === 'questions') {
+                $('#link').hide();
+            } else {
+                // If the selected option is 'link', show the link input
+                $('#link').show();
+            }
+        });
+    });
+</script>
 
-        confirmDestroy(url, reference);
+    <script>
+        function performDestroy(id, reference) {
+
+            let url = '/dashboard/admin/quizes/' + id;
+
+            confirmDestroy(url, reference);
+        }
+    </script>
+
+<script>
+    // Function to handle radio button change
+    function handleRadioChange() {
+        // Get the selected radio button
+        var selectedRadio = document.querySelector('input[name="rate"]:checked');
+
+        // Hide all fields initially
+        document.querySelectorAll('.modal-body .row .col').forEach(function(element) {
+            element.style.display = 'none';
+        });
+
+        // Show fields if "rate" radio button is selected
+        if (selectedRadio && selectedRadio.id === 'rate') {
+            document.getElementById('rate').parentNode.parentNode.style.display = 'block';
+        }
     }
+
+    // Add event listeners for radio button change
+    document.querySelectorAll('input[name="rate"]').forEach(function(radio) {
+        radio.addEventListener('change', handleRadioChange);
+    });
+
+    // Initially call handleRadioChange to set the initial state
+    handleRadioChange();
 </script>
 
 @endsection

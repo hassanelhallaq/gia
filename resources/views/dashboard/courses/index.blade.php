@@ -61,18 +61,24 @@
             max-height: 100%;
             overflow-x: hidden;
         }
+        @media (min-width: 992px){
+            .col-lg-9 {
+            flex: 0 0 75%;
+            max-width: 74%;
+        }}
+
+
     </style>
 @endsection
 @section('content')
     <!-- row -->
     <div class="row">
-
         <div class="row  sales-cardSmall totalNumberPrograms">
             <div class="col-lg-3 col-sm-12 ">
                 <div class="media m-0 p-0">
                     <a href="/" class="m-0 p-0" style="width: 17px !important;">
                         <div class="card-aside-img pos-relative "style=" margin-left:-19px">
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample69.jpg" alt="img"
+                            <img src="https://venngage-wordpress.s3.amazonaws.com/uploads/2022/09/business-background-3-1024x585.png" alt="img"
                                 class="" style="height: 180px;width:100%;border-radius: 10px; margin-left:-20px">
                             <a class="pos-absolute l-30 t-20 text-white "> فريق ادارة المشاريع </a>
                             <a class="btn btn-warning-light pos-absolute l-20 text-white b-10"
