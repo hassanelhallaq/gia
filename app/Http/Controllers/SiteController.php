@@ -111,7 +111,10 @@ class SiteController extends Controller
         $quizInteractive = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz', function ($q) {
             $q->where('type', 'interactive');
         })->first();
-        $rates = Rate::where('course_id', $course_id)->get();
+        $ratesQuiz = QuizCourse::where('course_id', $course_id)->with('quiz')->whereHas('quiz', function ($q) {
+            $q->where('type', 'rate');
+        })->first();
+        $rates = Rate::where('quiz_id',$ratesQuiz->quiz_id)->get();
 
         if ($quizInteractive) {
             $quizAttenInteractive = QuizAttendance::where('quiz_id', $quizInteractive->quiz_id)->where('attendance_id', $id)->first();
@@ -144,7 +147,7 @@ class SiteController extends Controller
             $q->where('course_id', $course_id);
         })->first();
         if ($quizRateCheck) {
-            $rates = Rate::where('course_id', $quizRateCheck->quiz_id)->get();
+            $rates = Rate::where('quiz_id',$quizRateCheck->quiz_id)->get();
         } else {
             $rates = [];
         }

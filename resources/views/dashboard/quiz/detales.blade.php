@@ -22,8 +22,11 @@
         <div class="main-dashboard-header-right">
             <div class=" d-flex">
                 <a href="{{route('quiz.view',[$id,'testQuiz'])}}" class="btn btn-warning-gradient btn-with-icon btn-md mr-1"> عرض الاختبار </a>
-                {{-- <button class="btn btn-warning-gradient btn-with-icon btn-md mr-1" data-target="#select2modal"data-toggle="modal"> تحميل QR </button> --}}
+                @if ($quiz->type != 'rate')
                 <a class="btn btn-warning-gradient btn-with-icon btn-md mr-1"  href="{{route('quiz.questions',[$id])}}"> اضافة اسئلة <i class="bi bi-plus"></i></a>
+                @else
+                <a class="btn btn-warning-gradient btn-with-icon btn-md mr-1"  href="{{route('get.rate',[$id])}}"> اضافة اسئلة <i class="bi bi-plus"></i></a>
+                @endif
             </div>
         </div>
     </div>

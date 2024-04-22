@@ -291,6 +291,8 @@
                                     {{-- <th> الاختبارات </th> --}}
                                     <th> الحضور </th>
                                     <th> الاكتمال </th>
+                                    <th> التقيم </th>
+
                                     <th> الدعوه </th>
 
                                     {{-- <th> الشهادة </th> --}}
@@ -381,6 +383,12 @@
                                                 0%
                                             @endif
                                         </td>
+                                        @php
+                                        $rate = App\Models\RateAttendance::where([
+                                                   ['attendance_id', $item->id]
+                                               ])->avg('rate');
+                                @endphp
+                                       <td>{{ number_format($rate, 1) }}
                                         @if($course->program->theme_name == 'A1')
                                         <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $course->id]) }}"
                                                 target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
@@ -401,9 +409,9 @@
                                                      </a>
                                                     <a href="{{ route('feedBackAttend', [$item->id, 'course_id' => $course->id]) }}"
                                                         target=”_blank”>بدء التقيم</a>
-                                                <a href="#"
-                                                    class="dropdown-item text-danger"data-target="#modalDelete"
-                                                    data-toggle="modal"> حذف </a>
+                                                        <button class="dropdown-item"
+                                                        onclick="performDestroy({{ $item->id }} , this)"> حذف
+                                                    </button>
                                             </div>
                                         </td>
                                     </tr>
@@ -1002,6 +1010,14 @@
 
 
             storepart('/dashboard/admin/attendance/' + id, formData)
+        }
+    </script>
+     <script>
+        function performDestroy(id, reference) {
+
+            let url = '/dashboard/admin/attendance/' + id;
+
+            confirmDestroy(url, reference);
         }
     </script>
     <script src="{{ asset('assets/js/chart.flot.js') }}"></script>

@@ -129,6 +129,8 @@
                                                 <th> الحضور </th>
                                             @endif
                                             <th> الاكتمال </th>
+                                            <th> التقيم </th>
+
                                             @if ($id)
                                                 <th> الدعوه </th>
                                             @endif
@@ -227,11 +229,18 @@
 
                                                 <td>
                                                     @if ($attendanceLogin != 0)
-                                                        {{ ($attendanceLogin / $course->duration) * 100 }}%
+                                                        {{ intval(($attendanceLogin / $course->duration) * 100) }}%
                                                     @else
                                                         0%
                                                     @endif
                                                 </td>
+                                                @php
+                                                $rate = App\Models\RateAttendance::where([
+                                                           ['attendance_id', $item->id]
+                                                       ])->avg('rate');
+                                                 @endphp
+                                       <td>{{ number_format($rate, 1) }}
+                                       </td>
                                                 @if ($id)
                                                     @if ($course->program->theme_name == 'A1')
                                                         <td><a href="{{ route('invitation.index', [$item->id, 'course_id' => $course->id]) }}"
@@ -244,6 +253,9 @@
                                                                 target=”_blank”><i class="far fa-eye tx-15"></i></a></td>
                                                     @endif
                                                 @endif
+
+
+
                                                 <td>
                                                     <div class="form-group row">
                                                         <div class="col-3">
@@ -265,7 +277,7 @@
                                                             data-target="#modaledit_{{ $item->id }}"
                                                             data-toggle="modal"> تحرير </a>
 
-                                                            
+
                                                         <button class="dropdown-item"
                                                             onclick="performDestroy({{ $item->id }} , this)"> حذف
                                                         </button>

@@ -458,7 +458,7 @@
                                                                 فعال</span>
                                                         @endif
                                                     </td>
-                                                    <th> # </th>
+                                                    <th>{{ $item->attendances_count }}</th>
                                                     <th>{{ $item->coordinator }} </th>
                                                     <th>{{ $item->is_certificate == 1 ? 'نعم' : 'لا' }}</th>
                                                     <th>{{ $item->percentage_certificate }} </th>
@@ -578,7 +578,7 @@
                                                                 فعال</span>
                                                         @endif
                                                     </td>
-                                                    <th> # </th>
+                                                    <th>{{ $item->attendances_count }}</th>
                                                     <th>{{ $item->coordinator }} </th>
                                                     <th>{{ $item->is_certificate == 1 ? 'نعم' : 'لا' }}</th>
                                                     <th>{{ $item->percentage_certificate }} </th>
@@ -698,7 +698,7 @@
                                                                 فعال</span>
                                                         @endif
                                                     </td>
-                                                    <th> # </th>
+                                                    <th>{{ $item->attendances_count }}</th>
                                                     <th>{{ $item->coordinator }} </th>
                                                     <th>{{ $item->is_certificate == 1 ? 'نعم' : 'لا' }}</th>
                                                     <th>{{ $item->percentage_certificate }} </th>

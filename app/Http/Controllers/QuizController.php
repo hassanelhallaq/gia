@@ -27,7 +27,7 @@ class QuizController extends Controller
         $quizesAfter = Quiz::orderBy("created_at", "desc")->where('type', 'after')->withCount('courses')->paginate(10);
         $quizesInteractive = Quiz::orderBy("created_at", "desc")->where('type', 'interactive')->withCount('courses')->paginate(10);
         $quizes = Quiz::all();
-        $rates = Rate::all();
+        $rates = Quiz::orderBy("created_at", "desc")->where('type', 'rate')->withCount('courses')->paginate(10);
         return view("dashboard.quiz.index", compact("quizesBefor", 'quizesAfter', 'quizesInteractive', 'programs', 'quizes', 'rates'));
     }
     public function drepIn($id)
@@ -99,11 +99,16 @@ class QuizController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+   public function show($id)
     {
-
-        $questions = Question::where('quiz_id', $id)->get();
-        return view('dashboard.quiz.detales', compact('questions', 'id'));
+        $quiz = Quiz::find($id);
+        if ($quiz->type != 'rate') {
+            $questions = Question::where('quiz_id', $id)->get();
+        } else {
+            $questions = Rate::where('quiz_id', $id)->get();
+            return view('dashboard.quiz.detales', compact('questions', 'id','quiz'));
+        }
+        return view('dashboard.quiz.detales', compact('questions', 'id','quiz'));
     }
 
     /**
@@ -446,6 +451,7 @@ class QuizController extends Controller
     }
     public function drepInStore(Request $request, $id)
     {
+        // dd($request->all());
         $course = Course::find($id);
         $course->status_interactive = $request->status_interactive;
         $course->status_befor = $request->status_befor;
@@ -506,6 +512,7 @@ class QuizController extends Controller
         $quizRateCheck = QuizCourse::with('quiz')->whereHas('quiz', function ($q) {
             $q->where('type', 'rate');
         })->where('course_id', $id)->first();
+        // dd($quizRateCheck);
         if ($request->quiz_rate_id) {
             if ($quizRateCheck != null) {
                 $quizRate= $quizRateCheck->delete();
@@ -520,25 +527,13 @@ class QuizController extends Controller
                 $quizRate->save();
             }
         }
-        $dropdownsAndDates = json_decode($request->input('dropdownsAndDates'), true);
-        if ($dropdownsAndDates) {
-            // Process the dropdowns and dates
-            foreach ($dropdownsAndDates as $dropdownAndDate) {
-                $dropdown = $dropdownAndDate['dropdown'];
-                $datetime = $dropdownAndDate['datetime'];
-                // Update the course based on dropdown selection
-                $course = Course::find($id); // Assuming you have a Course model
-                if ($dropdown === 'befor') {
-                    $course->date_befor = $datetime;
-                } elseif ($dropdown === 'after') {
-                    $course->date_after = $datetime;
-                } elseif ($dropdown === 'interactive') {
-                    $course->date_interactive = $datetime;
-                }
+              $course->date_befor = $request->date_befor;
+        // dd($request->all());
+        $course->date_after = $request->date_after;
 
-                $course->save();
-            }
-        }
+        $course->date_interactive = $request->date_interactive;
+
+        $course->update();
 
 
         return response()->json(['redirect' => route('quizes.index')]);

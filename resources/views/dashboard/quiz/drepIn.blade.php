@@ -16,7 +16,7 @@
                 </ol>
             </nav>
         </div>
-    
+
     </div>
 @endsection
 @section('content')
@@ -155,7 +155,27 @@
 
                                 </div>
                             </div>
+                            {{-- @if($quizesBefor->count() != 0 ) --}}
+                            <div class="col-lg-6">
+                                <div class="form-group has-success mg-b-0">
+                                    <label for="example"> تاريخ الاختبار القبلي</label>
+                                    <input type="datetime-local" name="date_befor" id="date_befor" value="{{$course->date_befor}}"  class="datetime form-control fc-datepicker">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group has-success mg-b-0">
+                                    <label for="example"> تاريخ الاختبار البعدي</label>
+                                    <input type="datetime-local" name="date_after" id="date_after" value="{{$course->date_after}}" class="datetime form-control fc-datepicker">
+                                </div>
+                            </div>
 
+                            <div class="col-lg-6">
+                                <div class="form-group has-success mg-b-0">
+                                    <label for="example"> تاريخ  التقيم</label>
+                                    <input type="datetime-local" name="date_interactive" id="date_interactive" value="{{$course->date_interactive}}" class="datetime form-control fc-datepicker">
+                                </div>
+                            </div>
+                            {{-- @else
                             <div id="repeater">
                                 <div class="item">
                                     <select name="dropdowns[]" class="form-control select2">
@@ -171,7 +191,7 @@
                                 <button type="button" class="btn-warning-gradient btn-with-icon mr-1" id="add-item">Add
                                     Item</button>
                             </div>
-
+                            @endif --}}
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -202,19 +222,19 @@
 
             // Prepare data to send
             var formData = new FormData(this);
-            var repeaterItems = document.querySelectorAll('#repeater .item');
-            var dropdownsAndDates = [];
+            // var repeaterItems = document.querySelectorAll('#repeater .item');
+            // var dropdownsAndDates = [];
 
-            repeaterItems.forEach(function(item) {
-                var dropdown = item.querySelector('select[name="dropdowns[]"]').value;
-                var datetime = item.querySelector('input[name="datetimes[]"]').value;
-                dropdownsAndDates.push({
-                    dropdown: dropdown,
-                    datetime: datetime
-                });
-            });
+            // repeaterItems.forEach(function(item) {
+            //     var dropdown = item.querySelector('select[name="dropdowns[]"]').value;
+            //     var datetime = item.querySelector('input[name="datetimes[]"]').value;
+            //     dropdownsAndDates.push({
+            //         dropdown: dropdown,
+            //         datetime: datetime
+            //     });
+            // });
 
-            formData.append('dropdownsAndDates', JSON.stringify(dropdownsAndDates));
+            // formData.append('dropdownsAndDates', JSON.stringify(dropdownsAndDates));
             // Send AJAX request
             fetch(this.getAttribute('action'), {
                     method: 'POST',

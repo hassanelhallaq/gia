@@ -75,8 +75,10 @@
                             <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample69.jpg" alt="img"
                                 class="" style="height: 180px;width:100%;border-radius: 10px; margin-left:-20px">
                             <a class="pos-absolute l-30 t-20 text-white "> فريق ادارة المشاريع </a>
+                            @if ($program)
                             <a class="btn btn-warning-light pos-absolute l-20 text-white b-10"
                                 href="{{ route('program.mangers', [$program->id]) }}">تحرير القائمة </a>
+                                @endif
                         </div>
                     </a>
                     <div class="media-body mr-4"></div>
@@ -102,7 +104,9 @@
                                         <div class="">
                                             <p class="mb-2 tx-12 text-muted">عدد الدورات </p>
                                             <div class="">
+                                                     @if ($program)
                                                 <h6 class="mb-1 font-weight-bold">{{ $program->courses->count() }}</h6>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -128,6 +132,7 @@
                                         <div class="card-chart bg-warning-transparent brround ml-2 mt-0">
                                             <i class="typcn typcn-book text-warning tx-24"></i>
                                         </div>
+                                         @if ($program)
                                         <div class="">
                                             <p class="mb-2 tx-12 text-muted"> الدورات الفعالة </p>
                                             <div class="">
@@ -135,6 +140,7 @@
                                                     {{ $program->courses->where('status', 'active')->count() }}</h6>
                                             </div>
                                         </div>
+                                        @endif
                                     </div>
                                     <div class=" mt-3">
                                         <div class="dropdown">
@@ -581,7 +587,7 @@
                                                     فعال</span>
                                             @endif
                                         </td>
-                                        <th> # </th>
+                                                    <th>{{ $item->attendances_count }}</th>
                                         <th>{{ $item->coordinator }} </th>
                                         <th>{{ $item->is_certificate == 1 ? 'نعم' : 'لا' }}</th>
                                         <th>{{ $item->percentage_certificate }} </th>

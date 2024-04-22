@@ -94,10 +94,10 @@ class CourseController extends Controller
             'language' => 'required',
             'seat_count' => 'required',
             'coruse_start' => 'required',
-            'is_exam' => 'required',
+            // 'is_exam' => 'required',
             'duration' => 'required',
             'is_certificate' => 'required',
-            'trainer' => 'required',
+            // 'trainer' => 'required',
             'percentage_certificate' => 'required',
             'study' => 'required',
             'coordinator' => 'required',
@@ -233,7 +233,7 @@ class CourseController extends Controller
             'language' => 'required',
             'seat_count' => 'required',
             'coruse_start' => 'required',
-            'is_exam' => 'required',
+            // 'is_exam' => 'required',
             'is_certificate' => 'required',
             'trainer' => 'required',
             'percentage_certificate' => 'required',
@@ -352,12 +352,19 @@ class CourseController extends Controller
             }
 
             $lmsg = urlencode($msg);
+            if($course->program->theme_name == 'A1'){
+                $template = route('invitation.index', [$attendance->id, 'course_id' => $request->course_id]);
+            }elseif($course->program->theme_name == 'A2'){
+                $template = route('invitationV2.index', [$attendance->id, 'course_id' => $request->course_id]);
+            }else{
+                $template = route('invitationV2.index', [$attendance->id, 'course_id' => $request->course_id]);
 
+            }
             // Make the HTTP request using Laravel HTTP client
             $response = Http::post('https://www.mora-sa.com/api/v1/sendsms', [
-                'api_key' => "7d937a772bb388922581c724028e3e0146ba57454d",
+                'api_key' => "5a6878787292e3483804d86e76d3d68860afad91dc17b",
                 'username' => "gialearning",
-                'message' => $massege . "\n" . route('invitation.index', [$attendance->id, 'course_id' => $request->course_id]),
+                'message' => $massege . "\n" . $template,
                 'sender' => "GiaLearning",
                 'numbers' => '966'.$phone,
                 'response' => $response,
@@ -372,6 +379,7 @@ class CourseController extends Controller
     public function sendSmsSelected(Request $request)
     {
         $ids = $request->ids;
+        $course = Course::with('attendances')->find($request->course_id);
         $attendances = Attendance::whereIn('id', explode(",", $ids))->where('status', 'active')->get();
         foreach ($attendances as $attendance) {
             $phone = $attendance->phone_number;
@@ -394,12 +402,19 @@ class CourseController extends Controller
             }
 
             $lmsg = urlencode($msg);
+            if($course->program->theme_name == 'A1'){
+                $template = route('invitation.index', [$attendance->id, 'course_id' => $request->course_id]);
+            }elseif($course->program->theme_name == 'A2'){
+                $template = route('invitationV2.index', [$attendance->id, 'course_id' => $request->course_id]);
+            }else{
+                $template = route('invitationV2.index', [$attendance->id, 'course_id' => $request->course_id]);
 
+            }
             // Make the HTTP request using Laravel HTTP client
             $response = Http::post('https://www.mora-sa.com/api/v1/sendsms', [
-                'api_key' => "7d937a772bb3882925821c72408e3e0146ba57454d",
+                'api_key' => "5a67292e389898483804d86e76d3d68860afad91dc17b",
                 'username' => "gialearning",
-                'message' => $massege . "\n" . route('invitation.index', [$attendance->id, 'course_id' => $request->course_id]),
+                'message' => $massege . "\n" . $template,
                 'sender' => "GiaLearning",
                 'numbers' => '966'.$phone,
                 'response' => $response,
