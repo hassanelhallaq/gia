@@ -45,27 +45,22 @@
                         <fieldset>
 
                             <h5 class=" text-center mt-3 mb-5"> نموذج انشاء مشروع </h5>
-                            <div class="row mt-5">
-
-                                <div class="col-6">
-
+                            <div class="row mt-5 border-bottom">
+                                <div class="col-12 mb-2"><h6>الرجاء تحديد نوع القطاع</h6></div>
+                                <div class="col-3">
                                     <label class="wizard-form-text-label mb-5 rdiobox"><input name="rdio"
                                            id="public_sector"
                                             type="radio"> <span> القطاع العام </span></label>
                                 </div>
-                                <div class="col-6 ">
+                                <div class="col-3">
                                     <label class="rdiobox mb-5"><input
                                             name="rdio" id="private_sector" type="radio"> <span> القطاع الخاص
                                         </span></label>
                                 </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-12 mb-2"><h6> الرجاء تحديد نوع التدريب </h6></div>
 
-
-
-
-                                <div class="col-3">
-                                    <label class="rdiobox mb-5"><input checked="" id="tranning" name="rdioType" type="radio">
-                                        <span> التدريب </span></label>
-                                </div>
                                 <div class="col-3">
                                     <label class="rdiobox mb-5"><input checked="" id="tranning_and_colustant" name="rdioType" type="radio">
                                         <span> التدريب والاستشارات </span></label>
@@ -165,15 +160,6 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
-                                    <p class="mg-b-10"> طريقة التسجيل </p>
-                                    <select class="form-control select2" id="attendance_method">
-                                        <option value="من خلال صفحة الهبوط "> من خلال صفحة الهبوط </option>
-                                        <option value="من خلال المنصة فقط "> من خلال المنصة فقط </option>
-                                        <option value="جميع الخيارات "> جميع الخيارات </option>
-
-                                    </select>
-                                </div>
                                 <div class="col-3">
                                     <label class="wizard-form-text-label mb-5 rdiobox"><input name="rdio"
                                         id="coffe_break"    type="radio"> <span> كوفي بريك </span></label>
@@ -186,6 +172,17 @@
                                     <label class="rdiobox mb-5"><input checked="" id="other"  name="rdio" type="radio">
                                         <span> اخري حدد </span></label>
                                 </div>
+
+                                <div class="col-lg-12 mb-2">
+                                    <p class="mg-b-10"> طريقة التسجيل </p>
+                                    <select class="form-control select2" id="attendance_method">
+                                        <option value="من خلال صفحة الهبوط "> من خلال صفحة الهبوط </option>
+                                        <option value="من خلال المنصة فقط "> من خلال المنصة فقط </option>
+                                        <option value="جميع الخيارات "> جميع الخيارات </option>
+
+                                    </select>
+                                </div>
+
 
                                 <div class="col-12 col-sm-12">
                                     <label for="exampleInputEmail1"> إدراج ملف  (صورة / ملف pdf) </label>

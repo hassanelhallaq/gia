@@ -54,7 +54,6 @@ class ProgramController extends Controller
     {
         $clients = Client::all();
         $trainers = Trainer::all();
-
         return view("dashboard.programs.create", compact('clients', 'trainers'));
     }
 

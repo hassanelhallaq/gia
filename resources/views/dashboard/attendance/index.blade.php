@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 @section('header')
-    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 p-2 mr-0">
+    <div class="breadcrumb-header  d-flex justify-content-between bg-white mt-0 mb-0 mr-0">
         <div class="left-content mt-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1">
@@ -68,6 +68,7 @@
     <!-- row -->
     <div class="row">
 
+
         <!--open filter Top  -->
         <div class="col-lg-12">
             <div class="card mg-b-20">
@@ -77,14 +78,11 @@
                             <i class="fa fa-search"></i>
                             {{-- <span class="right-pan"><i class="bi bi-sliders"></i></span> --}}
                             <div class="row row-sm mb-3">
-                                <div class="col-lg-6">
-                                    <div class="form-group has-success mg-b-0">
-                                        <input type="text" class="form-control form-input" name="name_search"
-                                            value="{{ request()->name_search }}" id="name_search" placeholder="بحث">
+                                <div class="col-lg-12">
+                                    <div class="form-group has-success mg-b-0  d-flex">
+                                        <input type="text" class="form-control form-input" name="name_search" value="{{ request()->name_search }}" id="name_search" placeholder="بحث">
+                                        <button class="btn btn-outline-light btn-print" type="submit"> بحث </button>
                                     </div>
-                                </div>
-                                <div class="col-lg-6 mg-t-20 mg-lg-t-0">
-                                    <button class="btn btn-outline-light btn-print" type="submit"> بحث </button>
                                 </div>
                             </div>
                         </div>
