@@ -269,7 +269,7 @@ class QuizController extends Controller
             $attendanceRow["الحصول على الشهاده"] = $certif;
             $attendanceRow["نسبه الاختبار القبلي"] = $totalBefor  . "٪";
             $attendanceRow["نسبه الاختبار البعدي"] = $totalAfter  . "٪";
-            $attendanceRow["نسبه تقيم المدرب"] = $quizAttendInteractiveAvF;
+            $attendanceRow["نسبه تقيم الحدث"] = $quizAttendInteractiveAvF;
             $attendanceRow["نسبه التحسن "] = $totalAfter == 0 ? 0 . '%' : $totalAfter -  $totalBefor . "٪";
 
 
