@@ -36,7 +36,6 @@
                                     <li class="ml-3"><a href="#tab12" data-toggle="tab"> الأختبار البعدي </a></li>
                                     <li class="ml-3"><a href="#tab13" data-toggle="tab"> الأختبار التفاعلي </a></li>
                                     <li class="ml-3"><a href="#tab131" data-toggle="tab"> تقييم المشارك</a></li>
-
                                 </ul>
                             </div>
                         </div>
@@ -277,7 +276,7 @@
                                                     <td>40</td>
                                                     <td>90%</td> --}}
                                                     <td class="d-flex filter-col-cell">
-                                                        
+
                                                          <a href="{{route('quizes.show',[$item->id])}}"><i class="far fa-eye tx-14"></i></a>                                                        <!-- dropdown-menu -->
                                                         <!-- dropdown-menu -->
                                                         <button data-toggle="dropdown"

@@ -138,6 +138,10 @@ Route::prefix('dashboard/admin')->middleware('auth:admin,client')->group(
             return view('dashboard.AddTemplate.index');
         })->name('AddTemplate');
 
+        Route::get('/departments', function () {
+            return view('dashboard.departments.index');
+        })->name('departments');
+
 
     }
 );
